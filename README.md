@@ -1,6 +1,7 @@
 # sproj
 For my senior project my goal is to develop a GameBoy game
-based on [Kobayashi Takiji](https://en.wikipedia.org/wiki/Takiji_Kobayashi)'s novel, *[Kani Kousen]* (https://en.wikipedia.org/wiki/Kani_K%C5%8Dsen) (*蟹工船*) or *The Crab Cannery Ship.* 
+based on [Kobayashi Takiji](https://en.wikipedia.org/wiki/Takiji_Kobayashi)'s
+novel, [*Kani Kousen*](https://en.wikipedia.org/wiki/Kani_K%C5%8Dsen) (*蟹工船*) or *The Crab Cannery Ship.* 
 Given this is a Computer Science and Japanese Language & Literature joint major,
 the primary interest from the aspect of Japanese Language & Lit.
 is looking at the particular ways in which a video game
