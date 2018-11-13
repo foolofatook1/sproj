@@ -20,7 +20,7 @@ void PRINT_MESSAGE(int x, int y, char *c);
 UINT8 collision_check(UINT8* x1, UINT8* y1, UINT8 w1, UINT8 h1,
         UINT8* x2, UINT8* y2, UINT8 w2, UINT8 h2);
 
-#define MAX_ENEMY 2
+#define MAX_ENEMY 4
 
 /* Counter for enemies. Starts at 1 enemy. */
 int enemy_count = 1;

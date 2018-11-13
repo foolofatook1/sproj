@@ -21,7 +21,7 @@ AREA .  .ABS.
 		s__CODE	0200
 		l__HOME	0421
 		l__GSINIT	065F
-		l__DATA	0884
+		l__DATA	0890
 		l__BASE	0FB0
 		l__CODE	15C0
 		s__HOME	17C0
@@ -32,12 +32,12 @@ AREA .  .ABS.
 		s__GSFINAL	31F1
 		.OAM	C000
 		s__DATA	C0A0
-		s__BSS	C924
-		s__HEAP	C9AD
-		s__BSEG	C9AD
-		s__ISEG	C9AD
-		s__XSEG	C9AD
-		s__OVERLAY	C9AD
+		s__BSS	C930
+		s__HEAP	C9B9
+		s__BSEG	C9B9
+		s__ISEG	C9B9
+		s__XSEG	C9B9
+		s__OVERLAY	C9B9
 		.STACK	E000
 		.refresh_OAM	FF80
 AREA _CODE
@@ -257,7 +257,7 @@ AREA _GSFINAL
 AREA _DATA
 	RADIX HEX
 	BASE C0A0
-	SIZE 0884
+	SIZE 0890
 	ATTRIB REL CON
 	GLOBALS
 		_tiles	C0A0
@@ -268,75 +268,75 @@ AREA _DATA
 		_sound_on	C908
 		_enemy_count	C909
 		_enemies	C90B
-		_incr	C913
-		_i	C915
-		_j	C917
-		_t	C919
-		_x	C91B
-		_lives	C91D
-		_player	C91E
-		_velocity	C920
+		_incr	C91B
+		_i	C91D
+		_j	C91F
+		_t	C921
+		_x	C923
+		_lives	C925
+		_player	C926
+		_velocity	C928
 AREA _BSS
 	RADIX HEX
-	BASE C924
+	BASE C930
 	SIZE 0089
 	ATTRIB REL CON
 	GLOBALS
-		__cpu	C924
-		.mode	C925
-		__io_out	C926
-		__io_in	C927
-		__io_status	C928
-		.vbl_done	C929
-		__current_bank	C92A
-		_sys_time	C92B
-		.sys_time	C92B
-		.int_0x40	C92D
-		.int_0x48	C93D
-		.int_0x50	C94D
-		.int_0x58	C95D
-		.int_0x60	C96D
-		.randhi	C97D
-		.randlo	C97E
-		.fg_colour	C982
-		.bg_colour	C983
-		font_current	C995
-		font_first_free_tile	C998
-		font_table	C999
-		.curx	C9AB
-		.cury	C9AC
+		__cpu	C930
+		.mode	C931
+		__io_out	C932
+		__io_in	C933
+		__io_status	C934
+		.vbl_done	C935
+		__current_bank	C936
+		_sys_time	C937
+		.sys_time	C937
+		.int_0x40	C939
+		.int_0x48	C949
+		.int_0x50	C959
+		.int_0x58	C969
+		.int_0x60	C979
+		.randhi	C989
+		.randlo	C98A
+		.fg_colour	C98E
+		.bg_colour	C98F
+		font_current	C9A1
+		font_first_free_tile	C9A4
+		font_table	C9A5
+		.curx	C9B7
+		.cury	C9B8
 AREA _HEAP
 	RADIX HEX
-	BASE C9AD
+	BASE C9B9
 	SIZE 0000
 	ATTRIB REL CON
 	GLOBALS
-		_malloc_heap_start	C9AD
+		_malloc_heap_start	C9B9
 AREA _OVERLAY
 	RADIX HEX
-	BASE C9AD
+	BASE C9B9
 	SIZE 0000
 	ATTRIB REL CON
 AREA _ISEG
 	RADIX HEX
-	BASE C9AD
+	BASE C9B9
 	SIZE 0000
 	ATTRIB REL CON
 AREA _BSEG
 	RADIX HEX
-	BASE C9AD
+	BASE C9B9
 	SIZE 0000
 	ATTRIB REL CON
 AREA _XSEG
 	RADIX HEX
-	BASE C9AD
+	BASE C9B9
 	SIZE 0000
 	ATTRIB REL CON
 MODULES
 	FILE /opt/gbdk/lib/small/asxxxx/gb/crt0.o
 		NAME Runtime
 	FILE main.o
-		NAME lcc185590
+		NAME lcc130130
 LIBRARIES
 	LIBRARY /opt/gbdk/lib/small/asxxxx/gbz80/gbz80.lib
 		MODULE crt0_rle.o

@@ -29,7 +29,6 @@ void check_input(void);
 void update_switches(void);
 
 
-
 int x = 89;
 
 
@@ -331,9 +330,9 @@ void main(void)
      * Move the sprite in the second movable sprite list (1)
      * to the position of X (enemy[0]) and y (enemy[1])
      */
-        for(i = 0; i < enemy_count; ++i)
+        for(i = 0; i <= enemy_count; ++i)
         {
-            enemy_move(i,&enemies[i][0],&enemies[i][1],&player[0], 
+            enemy_move((i+1),&enemies[i][0],&enemies[i][1],&player[0], 
                     &player[1], &velocity[i][0], &velocity[i][1]);
         }
 
