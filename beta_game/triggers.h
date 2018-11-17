@@ -1,5 +1,8 @@
 #include "include.h"
+
 #include "sprites/door_trig.c"
+#include "rooms/room1.c"
+#include "rooms/black.c"
 
 void open_door(void);
 void setup_doors(void);
@@ -67,7 +70,6 @@ void open_door(void)
     move_sprite(2, door[0][0], door[0][1]);
     set_sprite_tile(3,50);
     move_sprite(3, door[1][0], door[1][1]);
-    delay(100);
 }
 
 void scroll_doors(int x, int y)
@@ -88,5 +90,6 @@ int door_collide(void)
 
 void enter_room(void)
 {
-
+   set_bkg_tiles(0,0,40,36,black);
+   set_bkg_tiles(0,10,20,18,room1);
 }

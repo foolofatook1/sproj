@@ -1,6 +1,5 @@
 #include "sprites/wizard.c"
 #include "rooms/castle_town.c"
-#include "rooms/room1.c"
 #include "rooms/the_tiles.c"
 
 #include "triggers.h"
