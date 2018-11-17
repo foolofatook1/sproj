@@ -10,8 +10,6 @@ void display_sprites(void);
 void sprite_walk(void);
 void bkg(void);
 
-UINT8 player[2][2];
-
 UINT8 down = 1;
 UINT8 up = 0;
 UINT8 left = 0;
@@ -63,6 +61,7 @@ void sprite_walk(void)
     if(joypad() & J_DOWN)
     {
         scroll_bkg(0,4);
+        scroll_doors(0,-4);
 
         down = 1;
         up = 0;
@@ -74,6 +73,7 @@ void sprite_walk(void)
     if(joypad() & J_UP)
     {
         scroll_bkg(0,-4);
+        scroll_doors(0,4);
 
         down = 0; 
         up = 1;
@@ -85,6 +85,7 @@ void sprite_walk(void)
     if(joypad() & J_LEFT)
     {
         scroll_bkg(-4,0);
+        scroll_doors(4,0);
 
         down = 0;
         up = 0;
@@ -96,11 +97,19 @@ void sprite_walk(void)
     if(joypad() & J_RIGHT)
     {
         scroll_bkg(4,0);
+        scroll_doors(-4,0);
 
         down = 0; 
         up = 0; 
         left = 0; 
         right = 1;
+    }
+
+    /* we are at a door -> go inside */
+    if(door_collide() == 1)
+    {
+        open_door();
+        enter_room();
     }
 }
 
@@ -166,6 +175,4 @@ void display_sprites(void)
         move_sprite(1, player[1][0], player[1][1]);
         delay(100);
     }
-
-    //open_door();
 }

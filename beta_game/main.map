@@ -21,15 +21,15 @@ AREA .  .ABS.
 		l__HEADER	01E1
 		l__BASE	01FC
 		s__CODE	0200
-		l__CODE	07C2
 		l__GSINIT	0806
-		s__HOME	09C2
+		l__CODE	092C
 		l__DATA	0AE4
-		s__BASE	0B95
-		s__LIT	0D91
-		s__GSINIT	0D91
-		s__GSINITTAIL	1597
-		s__GSFINAL	1598
+		s__HOME	0B2C
+		s__BASE	0CFF
+		s__LIT	0EFB
+		s__GSINIT	0EFB
+		s__GSINITTAIL	1701
+		s__GSFINAL	1702
 		.OAM	C000
 		s__DATA	C0A0
 		s__BSS	CB84
@@ -43,16 +43,18 @@ AREA .  .ABS.
 AREA _CODE
 	RADIX HEX
 	BASE 0200
-	SIZE 07C2
+	SIZE 092C
 	ATTRIB REL CON
 	GLOBALS
 		_setup_doors	0200
 		_open_door	028E
-		_bkg	0478
-		_setup_sprites	04B1
-		_sprite_walk	05A1
-		_display_sprites	0646
-		_main	09AF
+		_scroll_doors	0481
+		_door_collide	0536
+		_bkg	0596
+		_setup_sprites	05CF
+		_sprite_walk	06BF
+		_display_sprites	07B0
+		_main	0B19
 AREA _HEADER
 	RADIX HEX
 	BASE 0000
@@ -62,100 +64,100 @@ AREA _HEADER
 		_exit	01D2
 AREA _HOME
 	RADIX HEX
-	BASE 09C2
+	BASE 0B2C
 	SIZE 01D3
 	ATTRIB REL CON
 	GLOBALS
-		.set_mode	09C2
-		.remove_VBL	09D2
-		.remove_LCD	09D8
-		.remove_TIM	09DE
-		.remove_SIO	09E4
-		.remove_JOY	09EA
-		.add_VBL	09F0
-		.add_LCD	09F6
-		.add_TIM	09FC
-		.add_SIO	0A02
-		.add_JOY	0A08
-		.remove_int	0A0E
-		.add_int	0A2E
-		.wait_vbl_done	0A4A
-		_wait_vbl_done	0A4A
-		_display_off	0A61
-		.display_off	0A61
-		.serial_IO	0A82
-		_mode	0AB1
-		_get_mode	0ABA
-		_enable_interrupts	0ABF
-		_disable_interrupts	0AC1
-		_reset	0AC3
-		.reset	0AC3
-		_set_interrupts	0AC9
-		_remove_VBL	0AD4
-		_remove_LCD	0ADF
-		_remove_TIM	0AEA
-		_remove_SIO	0AF5
-		_remove_JOY	0B00
-		_add_VBL	0B0B
-		_add_LCD	0B16
-		_add_TIM	0B21
-		_add_SIO	0B2C
-		_add_JOY	0B37
-		_clock	0B42
-		__printTStates	0B4B
-		banked_call	0B4C
-		banked_ret	0B65
-		__initrleblock	0B6E
+		.set_mode	0B2C
+		.remove_VBL	0B3C
+		.remove_LCD	0B42
+		.remove_TIM	0B48
+		.remove_SIO	0B4E
+		.remove_JOY	0B54
+		.add_VBL	0B5A
+		.add_LCD	0B60
+		.add_TIM	0B66
+		.add_SIO	0B6C
+		.add_JOY	0B72
+		.remove_int	0B78
+		.add_int	0B98
+		.wait_vbl_done	0BB4
+		_wait_vbl_done	0BB4
+		_display_off	0BCB
+		.display_off	0BCB
+		.serial_IO	0BEC
+		_mode	0C1B
+		_get_mode	0C24
+		_enable_interrupts	0C29
+		_disable_interrupts	0C2B
+		_reset	0C2D
+		.reset	0C2D
+		_set_interrupts	0C33
+		_remove_VBL	0C3E
+		_remove_LCD	0C49
+		_remove_TIM	0C54
+		_remove_SIO	0C5F
+		_remove_JOY	0C6A
+		_add_VBL	0C75
+		_add_LCD	0C80
+		_add_TIM	0C8B
+		_add_SIO	0C96
+		_add_JOY	0CA1
+		_clock	0CAC
+		__printTStates	0CB5
+		banked_call	0CB6
+		banked_ret	0CCF
+		__initrleblock	0CD8
 AREA _BASE
 	RADIX HEX
-	BASE 0B95
+	BASE 0CFF
 	SIZE 01FC
 	ATTRIB REL CON
 	GLOBALS
-		_scroll_bkg	0B95
-		.mv_sprite	0BAB
-		_move_sprite	0BBA
-		_set_win_data	0BC7
-		_set_bkg_data	0BC7
-		_set_sprite_data	0C14
-		.padup	0C43
-		_waitpadup	0C43
-		.jpad	0C53
-		.wait_pad	0C80
-		_joypad	0C87
-		_waitpad	0C8C
-		.set_sprite_tile	0C96
-		_set_sprite_tile	0CA3
-		.delay	0CAE
-		_delay	0CE8
-		.copy_vram	0CF1
-		_get_data	0D00
-		_set_data	0D00
-		_set_bkg_tiles	0D13
-		.set_xy_wtt	0D27
-		.set_xy_btt	0D38
-		.set_xy_tt	0D47
-		_set_tiles	0D78
+		_scroll_bkg	0CFF
+		.mv_sprite	0D15
+		_move_sprite	0D24
+		_set_win_data	0D31
+		_set_bkg_data	0D31
+		_set_sprite_data	0D7E
+		.padup	0DAD
+		_waitpadup	0DAD
+		.jpad	0DBD
+		.wait_pad	0DEA
+		_joypad	0DF1
+		_waitpad	0DF6
+		.set_sprite_tile	0E00
+		_set_sprite_tile	0E0D
+		.delay	0E18
+		_delay	0E52
+		.copy_vram	0E5B
+		_get_data	0E6A
+		_set_data	0E6A
+		_set_bkg_tiles	0E7D
+		.set_xy_wtt	0E91
+		.set_xy_btt	0EA2
+		.set_xy_tt	0EB1
+		_set_tiles	0EE2
 AREA _LIT
 	RADIX HEX
-	BASE 0D91
+	BASE 0EFB
 	SIZE 0000
 	ATTRIB REL CON
 AREA _GSINIT
 	RADIX HEX
-	BASE 0D91
+	BASE 0EFB
 	SIZE 0806
 	ATTRIB REL CON
 	GLOBALS
-		gsinit	0D91
+		gsinit	0EFB
 AREA _GSINITTAIL
 	RADIX HEX
-	BASE 1597
+	BASE 1701
 	SIZE 0001
 	ATTRIB REL CON
 AREA _GSFINAL
 	RADIX HEX
-	BASE 1598
+	BASE 1702
 	SIZE 0000
 	ATTRIB REL CON
 AREA _DATA
@@ -168,9 +170,9 @@ AREA _DATA
 		_castle_town	C2A0
 		_room1	C840
 		_the_tiles	C9A8
-		_door_trig	CA38
-		_door	CB78
-		_player	CB7C
+		_player	CA38
+		_door_trig	CA3C
+		_door	CB7C
 		_down	CB80
 		_up	CB81
 		_left	CB82
@@ -226,7 +228,7 @@ MODULES
 	FILE /opt/gbdk/lib/small/asxxxx/gb/crt0.o
 		NAME Runtime
 	FILE main.o
-		NAME lcc298440
+		NAME lcc323140
 LIBRARIES
 	LIBRARY /opt/gbdk/lib/small/asxxxx/gbz80/gbz80.lib
 		MODULE crt0_rle.o
