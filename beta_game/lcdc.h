@@ -1,15 +1,15 @@
 #include "sprites/wizard.c"
+#include "rooms/castle_town.c"
 #include "rooms/room1.c"
 #include "rooms/the_tiles.c"
 
-void setup_sprite(void);
-void display_sprite(void);
+#include "triggers.h"
+
+void setup_sprites(void);
+void display_sprites(void);
 void sprite_walk(void);
 void bkg(void);
 
-#define STEP 2 /* Size of sprite step. */
-
-/* Sprite Vector 2 for the left half and right half. */
 UINT8 player[2][2];
 
 UINT8 down = 1;
@@ -22,17 +22,17 @@ void bkg(void)
 {
     DISPLAY_ON;
     set_bkg_data(0,10,the_tiles);
-    set_bkg_tiles(0,0,20,18,room1);
+    set_bkg_tiles(0,0,40,36,castle_town);
 }
 
 /* Initialize the sprite. */
-void setup_sprite(void)
+void setup_sprites(void)
 {
     /* Init position */
     player[0][0] = 75;
-    player[0][1] = 75;
+    player[0][1] = 40;
     player[1][0] = 75+8; /* right half */
-    player[1][1] = 75;
+    player[1][1] = 40;
    
     /* Two 8x16 sprites. */
     SPRITES_8x16;
@@ -43,6 +43,8 @@ void setup_sprite(void)
     move_sprite(0, player[0][0], player[0][1]);
     set_sprite_tile(1,2); /* right half */
     move_sprite(1, player[1][0], player[1][1]);
+
+    setup_doors(); /* Display the doors. */
 
     SHOW_SPRITES;
     /**
@@ -60,8 +62,7 @@ void sprite_walk(void)
     /* DOWN */
     if(joypad() & J_DOWN)
     {
-        player[0][1]+=STEP;
-        player[1][1]+=STEP;
+        scroll_bkg(0,4);
 
         down = 1;
         up = 0;
@@ -72,8 +73,7 @@ void sprite_walk(void)
     /* UP */
     if(joypad() & J_UP)
     {
-        player[0][1]-=STEP;
-        player[1][1]-=STEP;
+        scroll_bkg(0,-4);
 
         down = 0; 
         up = 1;
@@ -84,9 +84,8 @@ void sprite_walk(void)
     /* LEFT */
     if(joypad() & J_LEFT)
     {
-        player[0][0]-=STEP;
-        player[1][0]-=STEP;
-    
+        scroll_bkg(-4,0);
+
         down = 0;
         up = 0;
         left = 1;
@@ -96,8 +95,7 @@ void sprite_walk(void)
     /* RIGHT */
     if(joypad() & J_RIGHT)
     {
-        player[0][0]+=STEP;
-        player[1][0]+=STEP;
+        scroll_bkg(4,0);
 
         down = 0; 
         up = 0; 
@@ -107,7 +105,7 @@ void sprite_walk(void)
 }
 
 /* Make the sprite move. */
-void display_sprite(void)
+void display_sprites(void)
 {
     if(up == 1)
     {
@@ -168,4 +166,6 @@ void display_sprite(void)
         move_sprite(1, player[1][0], player[1][1]);
         delay(100);
     }
+
+    //open_door();
 }
