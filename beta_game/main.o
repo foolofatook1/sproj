@@ -1,6 +1,6 @@
 XL
 H 9 areas 20 global symbols
-M lcc5320
+M lcc41360
 S __initrleblock Ref0000
 S _scroll_bkg Ref0000
 S _move_sprite Ref0000

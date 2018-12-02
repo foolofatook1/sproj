@@ -27,16 +27,16 @@ void setup_doors(void)
     /* Init position */
     door[0][0] = 64;
     door[0][1] = 152;
-    door[1][0] = 64+8; /* right half */
+    door[1][0] = 64+8; 
     door[1][1] = 152;
-   
+  
     /* Two 8x16 sprites. */
     set_sprite_data(32, 52, door_trig); /* allocate 32 8x8 blocks */ 
 
-    /* Initialize forward facing sprite */
-    set_sprite_tile(2,32); /* left half */
+    /* door 0 */
+    set_sprite_tile(2,32); 
     move_sprite(2, door[0][0], door[0][1]);
-    set_sprite_tile(3,34); /* right half */
+    set_sprite_tile(3,34); 
     move_sprite(3, door[1][0], door[1][1]);
 }
 
