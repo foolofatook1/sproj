@@ -3,6 +3,7 @@
 #include <gb/gb.h>
 #include <gb/drawing.h>
 
+/* My function for setting up things on the screen. */
 #include "lcdc.h"
 
 void main(void)

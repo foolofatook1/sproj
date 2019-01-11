@@ -1,0 +1,160 @@
+                              1 ;--------------------------------------------------------
+                              2 ; File Created by SDCC : FreeWare ANSI-C Compiler
+                              3 ; Version 2.3.1 Sat Dec  8 13:42:03 2018
+                              4 
+                              5 ;--------------------------------------------------------
+                              6 	.module lcc281830
+                              7 	
+                              8 ;--------------------------------------------------------
+                              9 ; Public variables in this module
+                             10 ;--------------------------------------------------------
+                             11 	.globl _main
+                             12 	.globl _collide_sound
+                             13 ;--------------------------------------------------------
+                             14 ; special function registers
+                             15 ;--------------------------------------------------------
+                             16 ;--------------------------------------------------------
+                             17 ; special function bits 
+                             18 ;--------------------------------------------------------
+                             19 ;--------------------------------------------------------
+                             20 ; internal ram data
+                             21 ;--------------------------------------------------------
+                             22 	.area _DATA
+                             23 ;--------------------------------------------------------
+                             24 ; overlayable items in internal ram 
+                             25 ;--------------------------------------------------------
+                             26 	.area _OVERLAY
+                             27 ;--------------------------------------------------------
+                             28 ; indirectly addressable internal ram data
+                             29 ;--------------------------------------------------------
+                             30 	.area _ISEG
+                             31 ;--------------------------------------------------------
+                             32 ; bit data
+                             33 ;--------------------------------------------------------
+                             34 	.area _BSEG
+                             35 ;--------------------------------------------------------
+                             36 ; external ram data
+                             37 ;--------------------------------------------------------
+                             38 	.area _XSEG
+                             39 ;--------------------------------------------------------
+                             40 ; global & static initialisations
+                             41 ;--------------------------------------------------------
+                             42 	.area _GSINIT
+                             43 	.area _GSFINAL
+                             44 	.area _GSINIT
+                             45 ;--------------------------------------------------------
+                             46 ; Home
+                             47 ;--------------------------------------------------------
+                             48 	.area _HOME
+                             49 	.area _CODE
+                             50 ;--------------------------------------------------------
+                             51 ; code
+                             52 ;--------------------------------------------------------
+                             53 	.area _CODE
+                             54 ;	main.c 11
+                             55 ;	genLabel
+                             56 ;	genFunction
+                             57 ;	---------------------------------
+                             58 ; Function collide_sound
+                             59 ; ---------------------------------
+   0000                      60 ___collide_sound_start:
+   0000                      61 _collide_sound:
+                             62 	
+                             63 ;	main.c 16
+                             64 ;	genAssign
+   0000 01 26 FF             65 	ld	bc,#0xFF26
+                             66 ;	genAssign (pointer)
+   0003 3E 80                67 	ld	a,#0x80
+   0005 02                   68 	ld	(bc),a
+                             69 ;	main.c 17
+                             70 ;	genAssign
+   0006 01 25 FF             71 	ld	bc,#0xFF25
+                             72 ;	genAssign (pointer)
+   0009 3E 11                73 	ld	a,#0x11
+   000B 02                   74 	ld	(bc),a
+                             75 ;	main.c 18
+                             76 ;	genAssign
+   000C 01 24 FF             77 	ld	bc,#0xFF24
+                             78 ;	genAssign (pointer)
+   000F 3E 77                79 	ld	a,#0x77
+   0011 02                   80 	ld	(bc),a
+                             81 ;	main.c 20
+                             82 ;	genAssign
+   0012 01 10 FF             83 	ld	bc,#0xFF10
+                             84 ;	genAssign (pointer)
+   0015 3E F7                85 	ld	a,#0xF7
+   0017 02                   86 	ld	(bc),a
+                             87 ;	main.c 21
+                             88 ;	genAssign
+   0018 01 11 FF             89 	ld	bc,#0xFF11
+                             90 ;	genAssign (pointer)
+   001B 3E 80                91 	ld	a,#0x80
+   001D 02                   92 	ld	(bc),a
+                             93 ;	main.c 22
+                             94 ;	genAssign
+   001E 01 12 FF             95 	ld	bc,#0xFF12
+                             96 ;	genAssign (pointer)
+   0021 3E F0                97 	ld	a,#0xF0
+   0023 02                   98 	ld	(bc),a
+                             99 ;	main.c 23
+                            100 ;	genAssign
+   0024 01 13 FF            101 	ld	bc,#0xFF13
+                            102 ;	genAssign (pointer)
+   0027 3E B8               103 	ld	a,#0xB8
+   0029 02                  104 	ld	(bc),a
+                            105 ;	main.c 24
+                            106 ;	genAssign
+   002A 01 14 FF            107 	ld	bc,#0xFF14
+                            108 ;	genAssign (pointer)
+   002D 3E C1               109 	ld	a,#0xC1
+   002F 02                  110 	ld	(bc),a
+                            111 ;	genLabel
+   0030                     112 00101$:
+                            113 ;	genEndFunction
+                            114 	
+   0030 C9                  115 	ret
+   0031                     116 ___collide_sound_end:
+                            117 ;	main.c 95
+                            118 ;	genLabel
+                            119 ;	genFunction
+                            120 ;	---------------------------------
+                            121 ; Function main
+                            122 ; ---------------------------------
+   0031                     123 ___main_start:
+   0031                     124 _main:
+                            125 	
+                            126 ;	main.c 97
+                            127 ;	genCall
+                            128 ; _saveRegsForCall: sendSetSize: 0 deInUse: 0 bcInUse: 0 deSending: 0
+   0031 CD 00 00            129 	call	_collide_sound
+                            130 ;	genLabel
+   0034                     131 00101$:
+                            132 ;	genEndFunction
+                            133 	
+   0034 C9                  134 	ret
+   0035                     135 ___main_end:
+                            136 	.area _CODE
+ASxxxx Assembler V01.75  (GameBoy Z80-like CPU), page 1.
+
+Symbol Table
+
+  0 ___collide_sound_end               0031 R
+  0 ___collide_sound_start             0000 R
+  0 ___main_end                        0035 R
+  0 ___main_start                      0031 R
+  0 _collide_sound                     0000 GR
+  0 _main                              0031 GR
+
+ASxxxx Assembler V01.75  (GameBoy Z80-like CPU), page 2.
+
+Area Table
+
+   0 _CODE                              size   35   flags 0
+   1 _DATA                              size    0   flags 0
+   2 _OVERLAY                           size    0   flags 0
+   3 _ISEG                              size    0   flags 0
+   4 _BSEG                              size    0   flags 0
+   5 _XSEG                              size    0   flags 0
+   6 _GSINIT                            size    0   flags 0
+   7 _GSFINAL                           size    0   flags 0
+   8 _HOME                              size    0   flags 0

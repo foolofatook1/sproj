@@ -1,0 +1,117 @@
+; no$gmb format .sym file
+; Generated automagically by ASxxxx linker V01.75 (SDK 3.0.0)
+; Area: .  .ABS.
+00:0000 s__HEADER
+00:0000 .init
+00:0200 s__CODE
+00:0428 s__HOME
+00:05FB s__BASE
+00:0780 s__LIT
+00:0780 s__GSINIT
+00:093B s__GSINITTAIL
+00:093C s__GSFINAL
+00:C000 .OAM
+00:C0A0 s__DATA
+00:C6B0 s__BSS
+00:C709 s__HEAP
+00:C709 s__BSEG
+00:C709 s__ISEG
+00:C709 s__XSEG
+00:C709 s__OVERLAY
+00:E000 .STACK
+00:FF80 .refresh_OAM
+; Area: _CODE
+00:0200 _bkg
+00:026C _walk
+00:02C1 _main
+; Area: _HEADER
+00:01D2 _exit
+; Area: _HOME
+00:0428 .set_mode
+00:0438 .remove_VBL
+00:043E .remove_LCD
+00:0444 .remove_TIM
+00:044A .remove_SIO
+00:0450 .remove_JOY
+00:0456 .add_VBL
+00:045C .add_LCD
+00:0462 .add_TIM
+00:0468 .add_SIO
+00:046E .add_JOY
+00:0474 .remove_int
+00:0494 .add_int
+00:04B0 .wait_vbl_done
+00:04B0 _wait_vbl_done
+00:04C7 _display_off
+00:04C7 .display_off
+00:04E8 .serial_IO
+00:0517 _mode
+00:0520 _get_mode
+00:0525 _enable_interrupts
+00:0527 _disable_interrupts
+00:0529 _reset
+00:0529 .reset
+00:052F _set_interrupts
+00:053A _remove_VBL
+00:0545 _remove_LCD
+00:0550 _remove_TIM
+00:055B _remove_SIO
+00:0566 _remove_JOY
+00:0571 _add_VBL
+00:057C _add_LCD
+00:0587 _add_TIM
+00:0592 _add_SIO
+00:059D _add_JOY
+00:05A8 _clock
+00:05B1 __printTStates
+00:05B2 banked_call
+00:05CB banked_ret
+00:05D4 __initrleblock
+; Area: _BASE
+00:05FB _scroll_bkg
+00:0611 .padup
+00:0611 _waitpadup
+00:0621 .jpad
+00:064E .wait_pad
+00:0655 _joypad
+00:065A _waitpad
+00:0664 _set_win_data
+00:0664 _set_bkg_data
+00:06B1 _set_sprite_data
+00:06E0 .copy_vram
+00:06EF _get_data
+00:06EF _set_data
+00:0702 _set_bkg_tiles
+00:0716 .set_xy_wtt
+00:0727 .set_xy_btt
+00:0736 .set_xy_tt
+00:0767 _set_tiles
+; Area: _LIT
+; Area: _GSINIT
+00:0780 gsinit
+; Area: _GSINITTAIL
+; Area: _GSFINAL
+; Area: _DATA
+00:C0A0 _second_map
+00:C640 _second_map_tiles
+; Area: _BSS
+00:C6B0 __cpu
+00:C6B1 .mode
+00:C6B2 __io_out
+00:C6B3 __io_in
+00:C6B4 __io_status
+00:C6B5 .vbl_done
+00:C6B6 __current_bank
+00:C6B7 _sys_time
+00:C6B7 .sys_time
+00:C6B9 .int_0x40
+00:C6C9 .int_0x48
+00:C6D9 .int_0x50
+00:C6E9 .int_0x58
+00:C6F9 .int_0x60
+; Area: _HEAP
+00:C709 _malloc_heap_start
+; Area: _OVERLAY
+; Area: _ISEG
+; Area: _BSEG
+; Area: _XSEG

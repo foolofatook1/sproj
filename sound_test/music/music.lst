@@ -1,0 +1,165 @@
+                              1 ;--------------------------------------------------------
+                              2 ; File Created by SDCC : FreeWare ANSI-C Compiler
+                              3 ; Version 2.3.1 Wed Dec 12 09:31:13 2018
+                              4 
+                              5 ;--------------------------------------------------------
+                              6 	.module lcc116940
+                              7 	
+                              8 ;--------------------------------------------------------
+                              9 ; Public variables in this module
+                             10 ;--------------------------------------------------------
+                             11 	.globl _main
+                             12 	.globl _collide_sound
+                             13 ;--------------------------------------------------------
+                             14 ; special function registers
+                             15 ;--------------------------------------------------------
+                             16 ;--------------------------------------------------------
+                             17 ; special function bits 
+                             18 ;--------------------------------------------------------
+                             19 ;--------------------------------------------------------
+                             20 ; internal ram data
+                             21 ;--------------------------------------------------------
+                             22 	.area _DATA
+                             23 ;--------------------------------------------------------
+                             24 ; overlayable items in internal ram 
+                             25 ;--------------------------------------------------------
+                             26 	.area _OVERLAY
+                             27 ;--------------------------------------------------------
+                             28 ; indirectly addressable internal ram data
+                             29 ;--------------------------------------------------------
+                             30 	.area _ISEG
+                             31 ;--------------------------------------------------------
+                             32 ; bit data
+                             33 ;--------------------------------------------------------
+                             34 	.area _BSEG
+                             35 ;--------------------------------------------------------
+                             36 ; external ram data
+                             37 ;--------------------------------------------------------
+                             38 	.area _XSEG
+                             39 ;--------------------------------------------------------
+                             40 ; global & static initialisations
+                             41 ;--------------------------------------------------------
+                             42 	.area _GSINIT
+                             43 	.area _GSFINAL
+                             44 	.area _GSINIT
+                             45 ;--------------------------------------------------------
+                             46 ; Home
+                             47 ;--------------------------------------------------------
+                             48 	.area _HOME
+                             49 	.area _CODE
+                             50 ;--------------------------------------------------------
+                             51 ; code
+                             52 ;--------------------------------------------------------
+                             53 	.area _CODE
+                             54 ;	music.c 11
+                             55 ;	genLabel
+                             56 ;	genFunction
+                             57 ;	---------------------------------
+                             58 ; Function collide_sound
+                             59 ; ---------------------------------
+   0000                      60 ___collide_sound_start:
+   0000                      61 _collide_sound:
+                             62 	
+                             63 ;	music.c 13
+                             64 ;	genLabel
+   0000                      65 00102$:
+                             66 ;	music.c 15
+                             67 ;	genAssign
+   0000 01 26 FF             68 	ld	bc,#0xFF26
+                             69 ;	genAssign (pointer)
+   0003 3E 80                70 	ld	a,#0x80
+   0005 02                   71 	ld	(bc),a
+                             72 ;	music.c 16
+                             73 ;	genAssign
+   0006 01 25 FF             74 	ld	bc,#0xFF25
+                             75 ;	genAssign (pointer)
+   0009 3E 11                76 	ld	a,#0x11
+   000B 02                   77 	ld	(bc),a
+                             78 ;	music.c 17
+                             79 ;	genAssign
+   000C 01 24 FF             80 	ld	bc,#0xFF24
+                             81 ;	genAssign (pointer)
+   000F 3E 77                82 	ld	a,#0x77
+   0011 02                   83 	ld	(bc),a
+                             84 ;	music.c 20
+                             85 ;	genAssign
+   0012 01 10 FF             86 	ld	bc,#0xFF10
+                             87 ;	genAssign (pointer)
+   0015 3E 00                88 	ld	a,#0x00
+   0017 02                   89 	ld	(bc),a
+                             90 ;	music.c 21
+                             91 ;	genAssign
+   0018 01 11 FF             92 	ld	bc,#0xFF11
+                             93 ;	genAssign (pointer)
+   001B 3E 87                94 	ld	a,#0x87
+   001D 02                   95 	ld	(bc),a
+                             96 ;	music.c 22
+                             97 ;	genAssign
+   001E 01 12 FF             98 	ld	bc,#0xFF12
+                             99 ;	genAssign (pointer)
+   0021 3E F7               100 	ld	a,#0xF7
+   0023 02                  101 	ld	(bc),a
+                            102 ;	music.c 23
+                            103 ;	genAssign
+   0024 01 13 FF            104 	ld	bc,#0xFF13
+                            105 ;	genAssign (pointer)
+   0027 3E B8               106 	ld	a,#0xB8
+   0029 02                  107 	ld	(bc),a
+                            108 ;	music.c 24
+                            109 ;	genAssign
+   002A 01 14 FF            110 	ld	bc,#0xFF14
+                            111 ;	genAssign (pointer)
+   002D 3E B1               112 	ld	a,#0xB1
+   002F 02                  113 	ld	(bc),a
+                            114 ;	genGoto
+   0030 C3 00 00            115 	jp	00102$
+                            116 ;	genLabel
+   0033                     117 00104$:
+                            118 ;	genEndFunction
+                            119 	
+   0033 C9                  120 	ret
+   0034                     121 ___collide_sound_end:
+                            122 ;	music.c 28
+                            123 ;	genLabel
+                            124 ;	genFunction
+                            125 ;	---------------------------------
+                            126 ; Function main
+                            127 ; ---------------------------------
+   0034                     128 ___main_start:
+   0034                     129 _main:
+                            130 	
+                            131 ;	music.c 30
+                            132 ;	genCall
+                            133 ; _saveRegsForCall: sendSetSize: 0 deInUse: 0 bcInUse: 0 deSending: 0
+   0034 CD 00 00            134 	call	_collide_sound
+                            135 ;	genLabel
+   0037                     136 00101$:
+                            137 ;	genEndFunction
+                            138 	
+   0037 C9                  139 	ret
+   0038                     140 ___main_end:
+                            141 	.area _CODE
+ASxxxx Assembler V01.75  (GameBoy Z80-like CPU), page 1.
+
+Symbol Table
+
+  0 ___collide_sound_end               0034 R
+  0 ___collide_sound_start             0000 R
+  0 ___main_end                        0038 R
+  0 ___main_start                      0034 R
+  0 _collide_sound                     0000 GR
+  0 _main                              0034 GR
+
+ASxxxx Assembler V01.75  (GameBoy Z80-like CPU), page 2.
+
+Area Table
+
+   0 _CODE                              size   38   flags 0
+   1 _DATA                              size    0   flags 0
+   2 _OVERLAY                           size    0   flags 0
+   3 _ISEG                              size    0   flags 0
+   4 _BSEG                              size    0   flags 0
+   5 _XSEG                              size    0   flags 0
+   6 _GSINIT                            size    0   flags 0
+   7 _GSFINAL                           size    0   flags 0
+   8 _HOME                              size    0   flags 0

@@ -1,0 +1,938 @@
+                              1 ;--------------------------------------------------------
+                              2 ; File Created by SDCC : FreeWare ANSI-C Compiler
+                              3 ; Version 2.3.1 Tue Dec 25 00:31:31 2018
+                              4 
+                              5 ;--------------------------------------------------------
+                              6 	.module lcc87800
+                              7 	
+                              8 ;--------------------------------------------------------
+                              9 ; Public variables in this module
+                             10 ;--------------------------------------------------------
+                             11 	.globl _main
+                             12 	.globl _walk
+                             13 	.globl _bkg
+                             14 	.globl _second_map_tiles
+                             15 	.globl _second_map
+                             16 ;--------------------------------------------------------
+                             17 ; special function registers
+                             18 ;--------------------------------------------------------
+                             19 ;--------------------------------------------------------
+                             20 ; special function bits 
+                             21 ;--------------------------------------------------------
+                             22 ;--------------------------------------------------------
+                             23 ; internal ram data
+                             24 ;--------------------------------------------------------
+                             25 	.area _DATA
+   0000                      26 _second_map::
+   0000                      27 	.ds 1440
+   05A0                      28 _second_map_tiles::
+   05A0                      29 	.ds 112
+                             30 ;--------------------------------------------------------
+                             31 ; overlayable items in internal ram 
+                             32 ;--------------------------------------------------------
+                             33 	.area _OVERLAY
+                             34 ;--------------------------------------------------------
+                             35 ; indirectly addressable internal ram data
+                             36 ;--------------------------------------------------------
+                             37 	.area _ISEG
+                             38 ;--------------------------------------------------------
+                             39 ; bit data
+                             40 ;--------------------------------------------------------
+                             41 	.area _BSEG
+                             42 ;--------------------------------------------------------
+                             43 ; external ram data
+                             44 ;--------------------------------------------------------
+                             45 	.area _XSEG
+                             46 ;--------------------------------------------------------
+                             47 ; global & static initialisations
+                             48 ;--------------------------------------------------------
+                             49 	.area _GSINIT
+                             50 	.area _GSFINAL
+                             51 	.area _GSINIT
+                             52 ;	main.c 25
+                             53 ;	main.c 140
+                             54 ;	genArrayInit
+                             55 ; _saveRegsForCall: sendSetSize: 0 deInUse: 0 bcInUse: 0 deSending: 0
+   0000 21 00 00             56 	ld	hl,#_second_map
+   0003 CD 00 00             57 	call	__initrleblock
+   0006 E6 00                58 	.db	-26,0x00
+   0008 07                   59 	.db	7
+   0009 01 00 01 00 01 00    60 	.db	0x01, 0x00, 0x01, 0x00, 0x01, 0x00, 0x01
+        01
+   0010 E0 00                61 	.db	-32,0x00
+   0012 F7 01                62 	.db	-9,0x01
+   0014 E9 00                63 	.db	-23,0x00
+   0016 01                   64 	.db	1
+   0017 01                   65 	.db	0x01
+   0018 F9 00                66 	.db	-7,0x00
+   001A F7 01                67 	.db	-9,0x01
+   001C EB 00                68 	.db	-21,0x00
+   001E 03                   69 	.db	3
+   001F 01 01 01             70 	.db	0x01, 0x01, 0x01
+   0022 F9 00                71 	.db	-7,0x00
+   0024 F7 01                72 	.db	-9,0x01
+   0026 EB 00                73 	.db	-21,0x00
+   0028 03                   74 	.db	3
+   0029 01 01 01             75 	.db	0x01, 0x01, 0x01
+   002C F9 00                76 	.db	-7,0x00
+   002E 09                   77 	.db	9
+   002F 01 01 06 01 01 01    78 	.db	0x01, 0x01, 0x06, 0x01, 0x01, 0x01, 0x06, 0x01
+        06 01
+   0037 01                   79 	.db	0x01
+   0038 EC 00                80 	.db	-20,0x00
+   003A FB 01                81 	.db	-5,0x01
+   003C FB 00                82 	.db	-5,0x00
+   003E F5 01                83 	.db	-11,0x01
+   0040 F9 00                84 	.db	-7,0x00
+   0042 04                   85 	.db	4
+   0043 01 01 01 01          86 	.db	0x01, 0x01, 0x01, 0x01
+   0047 FB 00                87 	.db	-5,0x00
+   0049 FA 01                88 	.db	-6,0x01
+   004B 07                   89 	.db	7
+   004C 06 01 01 00 00 00    90 	.db	0x06, 0x01, 0x01, 0x00, 0x00, 0x00, 0x00
+        00
+   0053 F5 01                91 	.db	-11,0x01
+   0055 F9 00                92 	.db	-7,0x00
+   0057 08                   93 	.db	8
+   0058 01 06 01 01 00 00    94 	.db	0x01, 0x06, 0x01, 0x01, 0x00, 0x00, 0x00, 0x00
+        00 00
+   0060 FA 01                95 	.db	-6,0x01
+   0062 08                   96 	.db	8
+   0063 06 01 01 01 00 00    97 	.db	0x06, 0x01, 0x01, 0x01, 0x00, 0x00, 0x00, 0x00
+        00 00
+   006B F5 01                98 	.db	-11,0x01
+   006D F9 00                99 	.db	-7,0x00
+   006F FA 01               100 	.db	-6,0x01
+   0071 01                  101 	.db	1
+   0072 00                  102 	.db	0x00
+   0073 F5 01               103 	.db	-11,0x01
+   0075 04                  104 	.db	4
+   0076 00 00 06 06         105 	.db	0x00, 0x00, 0x06, 0x06
+   007A F5 01               106 	.db	-11,0x01
+   007C 02                  107 	.db	2
+   007D 06 06               108 	.db	0x06, 0x06
+   007F FB 00               109 	.db	-5,0x00
+   0081 F9 01               110 	.db	-7,0x01
+   0083 F4 00               111 	.db	-12,0x00
+   0085 03                  112 	.db	3
+   0086 06 06 06            113 	.db	0x06, 0x06, 0x06
+   0089 FB 01               114 	.db	-5,0x01
+   008B 0D                  115 	.db	13
+   008C 02 04 01 01 01 01   116 	.db	0x02, 0x04, 0x01, 0x01, 0x01, 0x01, 0x06, 0x06
+        06 06
+   0094 06 00 00 00 00      117 	.db	0x06, 0x00, 0x00, 0x00, 0x00
+   0099 F7 01               118 	.db	-9,0x01
+   009B F6 00               119 	.db	-10,0x00
+   009D 03                  120 	.db	3
+   009E 06 06 00            121 	.db	0x06, 0x06, 0x00
+   00A1 FB 01               122 	.db	-5,0x01
+   00A3 09                  123 	.db	9
+   00A4 03 05 01 01 01 01   124 	.db	0x03, 0x05, 0x01, 0x01, 0x01, 0x01, 0x00, 0x06
+        00 06
+   00AC 06                  125 	.db	0x06
+   00AD E9 00               126 	.db	-23,0x00
+   00AF 02                  127 	.db	2
+   00B0 06 06               128 	.db	0x06, 0x06
+   00B2 F3 00               129 	.db	-13,0x00
+   00B4 02                  130 	.db	2
+   00B5 06 06               131 	.db	0x06, 0x06
+   00B7 E9 00               132 	.db	-23,0x00
+   00B9 02                  133 	.db	2
+   00BA 06 06               134 	.db	0x06, 0x06
+   00BC F3 00               135 	.db	-13,0x00
+   00BE 02                  136 	.db	2
+   00BF 06 06               137 	.db	0x06, 0x06
+   00C1 E8 00               138 	.db	-24,0x00
+   00C3 F1 06               139 	.db	-15,0x06
+   00C5 F4 00               140 	.db	-12,0x00
+   00C7 F7 01               141 	.db	-9,0x01
+   00C9 04                  142 	.db	4
+   00CA 00 00 00 00         143 	.db	0x00, 0x00, 0x00, 0x00
+   00CE F1 06               144 	.db	-15,0x06
+   00D0 F4 00               145 	.db	-12,0x00
+   00D2 F7 01               146 	.db	-9,0x01
+   00D4 E1 00               147 	.db	-31,0x00
+   00D6 09                  148 	.db	9
+   00D7 01 01 06 01 01 01   149 	.db	0x01, 0x01, 0x06, 0x01, 0x01, 0x01, 0x06, 0x01
+        06 01
+   00DF 01                  150 	.db	0x01
+   00E0 E1 00               151 	.db	-31,0x00
+   00E2 F7 01               152 	.db	-9,0x01
+   00E4 E1 00               153 	.db	-31,0x00
+   00E6 09                  154 	.db	9
+   00E7 01 01 01 01 02 04   155 	.db	0x01, 0x01, 0x01, 0x01, 0x02, 0x04, 0x01, 0x01
+        01 01
+   00EF 01                  156 	.db	0x01
+   00F0 E1 00               157 	.db	-31,0x00
+   00F2 09                  158 	.db	9
+   00F3 01 01 01 01 03 05   159 	.db	0x01, 0x01, 0x01, 0x01, 0x03, 0x05, 0x01, 0x01
+        01 01
+   00FB 01                  160 	.db	0x01
+   00FC 81 00               161 	.db	-127,0x00
+   00FE 81 00               162 	.db	-127,0x00
+   0100 DE 00               163 	.db	-34,0x00
+   0102 F6 01               164 	.db	-10,0x01
+   0104 E2 00               165 	.db	-30,0x00
+   0106 F6 01               166 	.db	-10,0x01
+   0108 F8 00               167 	.db	-8,0x00
+   010A 01                  168 	.db	1
+   010B 06                  169 	.db	0x06
+   010C EB 00               170 	.db	-21,0x00
+   010E 0A                  171 	.db	10
+   010F 01 01 06 01 01 01   172 	.db	0x01, 0x01, 0x06, 0x01, 0x01, 0x01, 0x01, 0x06
+        01 06
+   0117 01 01               173 	.db	0x01, 0x01
+   0119 F9 00               174 	.db	-7,0x00
+   011B EF 06               175 	.db	-17,0x06
+   011D FA 00               176 	.db	-6,0x00
+   011F F6 01               177 	.db	-10,0x01
+   0121 F9 00               178 	.db	-7,0x00
+   0123 ED 06               179 	.db	-19,0x06
+   0125 04                  180 	.db	4
+   0126 00 00 00 00         181 	.db	0x00, 0x00, 0x00, 0x00
+   012A F6 01               182 	.db	-10,0x01
+   012C FA 00               183 	.db	-6,0x00
+   012E ED 06               184 	.db	-19,0x06
+   0130 FB 00               185 	.db	-5,0x00
+   0132 0A                  186 	.db	10
+   0133 01 01 01 01 02 04   187 	.db	0x01, 0x01, 0x01, 0x01, 0x02, 0x04, 0x01, 0x01
+        01 01
+   013B 01 01               188 	.db	0x01, 0x01
+   013D F9 00               189 	.db	-7,0x00
+   013F F4 06               190 	.db	-12,0x06
+   0141 F5 00               191 	.db	-11,0x00
+   0143 0A                  192 	.db	10
+   0144 01 01 01 01 03 05   193 	.db	0x01, 0x01, 0x01, 0x01, 0x03, 0x05, 0x01, 0x01
+        01 01
+   014C 01 01               194 	.db	0x01, 0x01
+   014E 84 00               195 	.db	-124,0x00
+   0150 00                  196 	.db	0
+                            197 ;	main.c 26
+                            198 ;	main.c 140
+                            199 ;	genArrayInit
+                            200 ; _saveRegsForCall: sendSetSize: 0 deInUse: 0 bcInUse: 0 deSending: 0
+   0151 21 A0 05            201 	ld	hl,#_second_map_tiles
+   0154 CD 00 00            202 	call	__initrleblock
+   0157 60                  203 	.db	96
+   0158 FF 00 FF 00 FF 00   204 	.db	0xFF, 0x00, 0xFF, 0x00, 0xFF, 0x00, 0xFF, 0x00
+        FF 00
+   0160 FF 00 FF 00 FF 00   205 	.db	0xFF, 0x00, 0xFF, 0x00, 0xFF, 0x00, 0xFF, 0x00
+        FF 00
+   0168 FF 08 FF 08 FF FF   206 	.db	0xFF, 0x08, 0xFF, 0x08, 0xFF, 0xFF, 0xFF, 0x20
+        FF 20
+   0170 FF 20 FF FF FF 08   207 	.db	0xFF, 0x20, 0xFF, 0xFF, 0xFF, 0x08, 0xFF, 0x08
+        FF 08
+   0178 FF 00 FF 07 FF 08   208 	.db	0xFF, 0x00, 0xFF, 0x07, 0xFF, 0x08, 0xFF, 0x10
+        FF 10
+   0180 FF 25 FF 2F FF 25   209 	.db	0xFF, 0x25, 0xFF, 0x2F, 0xFF, 0x25, 0xFF, 0x20
+        FF 20
+   0188 FF 20 FF 20 FF 20   210 	.db	0xFF, 0x20, 0xFF, 0x20, 0xFF, 0x20, 0xFF, 0x20
+        FF 20
+   0190 FF 20 FF 20 FF 20   211 	.db	0xFF, 0x20, 0xFF, 0x20, 0xFF, 0x20, 0xFF, 0x20
+        FF 20
+   0198 FF 00 FF E0 FF 10   212 	.db	0xFF, 0x00, 0xFF, 0xE0, 0xFF, 0x10, 0xFF, 0x08
+        FF 08
+   01A0 FF A4 FF F4 FF A4   213 	.db	0xFF, 0xA4, 0xFF, 0xF4, 0xFF, 0xA4, 0xFF, 0x04
+        FF 04
+   01A8 FF 34 FF 34 FF 04   214 	.db	0xFF, 0x34, 0xFF, 0x34, 0xFF, 0x04, 0xFF, 0x04
+        FF 04
+   01B0 FF 04 FF 04 FF 04   215 	.db	0xFF, 0x04, 0xFF, 0x04, 0xFF, 0x04, 0xFF, 0x04
+        FF 04
+   01B8 F0 00               216 	.db	-16,0x00
+   01BA 00                  217 	.db	0
+                            218 ;--------------------------------------------------------
+                            219 ; Home
+                            220 ;--------------------------------------------------------
+                            221 	.area _HOME
+                            222 	.area _CODE
+                            223 ;--------------------------------------------------------
+                            224 ; code
+                            225 ;--------------------------------------------------------
+                            226 	.area _CODE
+                            227 ;	main.c 14
+                            228 ;	genLabel
+                            229 ;	genFunction
+                            230 ;	---------------------------------
+                            231 ; Function bkg
+                            232 ; ---------------------------------
+   0000                     233 ___bkg_start:
+   0000                     234 _bkg:
+   0000 E8 FD               235 	lda	sp,-3(sp)
+                            236 ;	main.c 16
+                            237 ;	genCall
+                            238 ; _saveRegsForCall: sendSetSize: 0 deInUse: 0 bcInUse: 0 deSending: 0
+   0002 CD 00 00            239 	call	_wait_vbl_done
+                            240 ;	main.c 17
+                            241 ;	genCall
+                            242 ; _saveRegsForCall: sendSetSize: 0 deInUse: 0 bcInUse: 0 deSending: 0
+   0005 CD 00 00            243 	call	_disable_interrupts
+                            244 ;	main.c 18
+                            245 ;	genCall
+                            246 ; _saveRegsForCall: sendSetSize: 0 deInUse: 0 bcInUse: 0 deSending: 0
+   0008 CD 00 00            247 	call	_display_off
+                            248 ;	main.c 19
+                            249 ;	genAssign
+   000B 01 40 FF            250 	ld	bc,#0xFF40
+                            251 ;	genAssign
+                            252 ;	AOP_STK for _bkg_sloc0_1_0
+   000E F8 01               253 	lda	hl,1(sp)
+   0010 36 40               254 	ld	(hl),#0x40
+   0012 23                  255 	inc	hl
+   0013 36 FF               256 	ld	(hl),#0xFF
+                            257 ;	genPointerGet
+                            258 ;	AOP_STK for _bkg_sloc0_1_0
+                            259 ;	AOP_STK for _bkg_sloc1_1_0
+   0015 2B                  260 	dec	hl
+   0016 5E                  261 	ld	e,(hl)
+   0017 23                  262 	inc	hl
+   0018 56                  263 	ld	d,(hl)
+   0019 1A                  264 	ld	a,(de)
+   001A 2B                  265 	dec	hl
+   001B 2B                  266 	dec	hl
+                            267 ;	genAnd
+                            268 ;	AOP_STK for _bkg_sloc1_1_0
+   001C 77                  269 	ld      (hl),a
+   001D 7F                  270 	ld      a,a
+   001E E6 FD               271 	and	a,#0xFD
+                            272 ;	genAssign (pointer)
+   0020 02                  273 	ld	(bc),a
+                            274 ;	main.c 20
+                            275 ;	genAssign
+   0021 01 40 FF            276 	ld	bc,#0xFF40
+                            277 ;	genAssign
+                            278 ;	AOP_STK for _bkg_sloc0_1_0
+   0024 23                  279 	inc	hl
+   0025 36 40               280 	ld	(hl),#0x40
+   0027 23                  281 	inc	hl
+   0028 36 FF               282 	ld	(hl),#0xFF
+                            283 ;	genPointerGet
+                            284 ;	AOP_STK for _bkg_sloc0_1_0
+                            285 ;	AOP_STK for _bkg_sloc1_1_0
+   002A 2B                  286 	dec	hl
+   002B 5E                  287 	ld	e,(hl)
+   002C 23                  288 	inc	hl
+   002D 56                  289 	ld	d,(hl)
+   002E 1A                  290 	ld	a,(de)
+   002F 2B                  291 	dec	hl
+   0030 2B                  292 	dec	hl
+                            293 ;	genAnd
+                            294 ;	AOP_STK for _bkg_sloc1_1_0
+   0031 77                  295 	ld      (hl),a
+   0032 7F                  296 	ld      a,a
+   0033 E6 DF               297 	and	a,#0xDF
+                            298 ;	genAssign (pointer)
+   0035 02                  299 	ld	(bc),a
+                            300 ;	main.c 21
+                            301 ;	genAssign
+   0036 01 40 FF            302 	ld	bc,#0xFF40
+                            303 ;	genAssign
+                            304 ;	AOP_STK for _bkg_sloc0_1_0
+   0039 23                  305 	inc	hl
+   003A 36 40               306 	ld	(hl),#0x40
+   003C 23                  307 	inc	hl
+   003D 36 FF               308 	ld	(hl),#0xFF
+                            309 ;	genPointerGet
+                            310 ;	AOP_STK for _bkg_sloc0_1_0
+                            311 ;	AOP_STK for _bkg_sloc1_1_0
+   003F 2B                  312 	dec	hl
+   0040 5E                  313 	ld	e,(hl)
+   0041 23                  314 	inc	hl
+   0042 56                  315 	ld	d,(hl)
+   0043 1A                  316 	ld	a,(de)
+   0044 2B                  317 	dec	hl
+   0045 2B                  318 	dec	hl
+                            319 ;	genAnd
+                            320 ;	AOP_STK for _bkg_sloc1_1_0
+   0046 77                  321 	ld      (hl),a
+   0047 7F                  322 	ld      a,a
+   0048 E6 FE               323 	and	a,#0xFE
+                            324 ;	genAssign (pointer)
+   004A 02                  325 	ld	(bc),a
+                            326 ;	main.c 23
+                            327 ;	genIpush
+                            328 ; _saveRegsForCall: sendSetSize: 0 deInUse: 0 bcInUse: 0 deSending: 0
+   004B 21 A0 05            329 	ld	hl,#_second_map_tiles
+   004E E5                  330 	push	hl
+                            331 ;	genIpush
+   004F 21 00 06            332 	ld	hl,#0x0600
+   0052 E5                  333 	push	hl
+                            334 ;	genCall
+   0053 CD 00 00            335 	call	_set_bkg_data
+   0056 E8 04               336 	lda	sp,4(sp)
+                            337 ;	main.c 24
+                            338 ;	genIpush
+                            339 ; _saveRegsForCall: sendSetSize: 0 deInUse: 0 bcInUse: 0 deSending: 0
+   0058 21 00 00            340 	ld	hl,#_second_map
+   005B E5                  341 	push	hl
+                            342 ;	genIpush
+   005C 21 28 20            343 	ld	hl,#0x2028
+   005F E5                  344 	push	hl
+                            345 ;	genIpush
+   0060 21 00 00            346 	ld	hl,#0x0000
+   0063 E5                  347 	push	hl
+                            348 ;	genCall
+   0064 CD 00 00            349 	call	_set_bkg_tiles
+   0067 E8 06               350 	lda	sp,6(sp)
+                            351 ;	genLabel
+   0069                     352 00101$:
+                            353 ;	genEndFunction
+   0069 E8 03               354 	lda	sp,3(sp)
+   006B C9                  355 	ret
+   006C                     356 ___bkg_end:
+                            357 ;	main.c 28
+                            358 ;	genLabel
+                            359 ;	genFunction
+                            360 ;	---------------------------------
+                            361 ; Function walk
+                            362 ; ---------------------------------
+   006C                     363 ___walk_start:
+   006C                     364 _walk:
+                            365 	
+                            366 ;	main.c 31
+                            367 ;	genCall
+                            368 ; _saveRegsForCall: sendSetSize: 0 deInUse: 0 bcInUse: 0 deSending: 0
+   006C CD 00 00            369 	call	_joypad
+   006F 4B                  370 	ld	c,e
+                            371 ;	genAnd
+   0070 79                  372 	ld	a,c
+   0071 E6 08               373 	and	a,#0x08
+   0073 20 03               374 	jr	nz,00115$
+   0075 C3 81 00            375 	jp	00102$
+   0078                     376 00115$:
+                            377 ;	main.c 32
+                            378 ;	genIpush
+                            379 ; _saveRegsForCall: sendSetSize: 0 deInUse: 0 bcInUse: 0 deSending: 0
+   0078 21 00 01            380 	ld	hl,#0x0100
+   007B E5                  381 	push	hl
+                            382 ;	genCall
+   007C CD 00 00            383 	call	_scroll_bkg
+   007F E8 02               384 	lda	sp,2(sp)
+                            385 ;	genLabel
+   0081                     386 00102$:
+                            387 ;	main.c 35
+                            388 ;	genCall
+                            389 ; _saveRegsForCall: sendSetSize: 0 deInUse: 0 bcInUse: 0 deSending: 0
+   0081 CD 00 00            390 	call	_joypad
+   0084 4B                  391 	ld	c,e
+                            392 ;	genAnd
+   0085 79                  393 	ld	a,c
+   0086 E6 04               394 	and	a,#0x04
+   0088 20 03               395 	jr	nz,00116$
+   008A C3 96 00            396 	jp	00104$
+   008D                     397 00116$:
+                            398 ;	main.c 36
+                            399 ;	genIpush
+                            400 ; _saveRegsForCall: sendSetSize: 0 deInUse: 0 bcInUse: 0 deSending: 0
+   008D 21 00 FF            401 	ld	hl,#0xFF00
+   0090 E5                  402 	push	hl
+                            403 ;	genCall
+   0091 CD 00 00            404 	call	_scroll_bkg
+   0094 E8 02               405 	lda	sp,2(sp)
+                            406 ;	genLabel
+   0096                     407 00104$:
+                            408 ;	main.c 39
+                            409 ;	genCall
+                            410 ; _saveRegsForCall: sendSetSize: 0 deInUse: 0 bcInUse: 0 deSending: 0
+   0096 CD 00 00            411 	call	_joypad
+   0099 4B                  412 	ld	c,e
+                            413 ;	genAnd
+   009A 79                  414 	ld	a,c
+   009B E6 02               415 	and	a,#0x02
+   009D 20 03               416 	jr	nz,00117$
+   009F C3 AB 00            417 	jp	00106$
+   00A2                     418 00117$:
+                            419 ;	main.c 40
+                            420 ;	genIpush
+                            421 ; _saveRegsForCall: sendSetSize: 0 deInUse: 0 bcInUse: 0 deSending: 0
+   00A2 21 FF 00            422 	ld	hl,#0x00FF
+   00A5 E5                  423 	push	hl
+                            424 ;	genCall
+   00A6 CD 00 00            425 	call	_scroll_bkg
+   00A9 E8 02               426 	lda	sp,2(sp)
+                            427 ;	genLabel
+   00AB                     428 00106$:
+                            429 ;	main.c 43
+                            430 ;	genCall
+                            431 ; _saveRegsForCall: sendSetSize: 0 deInUse: 0 bcInUse: 0 deSending: 0
+   00AB CD 00 00            432 	call	_joypad
+   00AE 4B                  433 	ld	c,e
+                            434 ;	genAnd
+   00AF 79                  435 	ld	a,c
+   00B0 E6 01               436 	and	a,#0x01
+   00B2 20 03               437 	jr	nz,00118$
+   00B4 C3 C0 00            438 	jp	00109$
+   00B7                     439 00118$:
+                            440 ;	main.c 44
+                            441 ;	genIpush
+                            442 ; _saveRegsForCall: sendSetSize: 0 deInUse: 0 bcInUse: 0 deSending: 0
+   00B7 21 01 00            443 	ld	hl,#0x0001
+   00BA E5                  444 	push	hl
+                            445 ;	genCall
+   00BB CD 00 00            446 	call	_scroll_bkg
+   00BE E8 02               447 	lda	sp,2(sp)
+                            448 ;	genLabel
+   00C0                     449 00109$:
+                            450 ;	genEndFunction
+                            451 	
+   00C0 C9                  452 	ret
+   00C1                     453 ___walk_end:
+                            454 ;	main.c 48
+                            455 ;	genLabel
+                            456 ;	genFunction
+                            457 ;	---------------------------------
+                            458 ; Function main
+                            459 ; ---------------------------------
+   00C1                     460 ___main_start:
+   00C1                     461 _main:
+   00C1 E8 FA               462 	lda	sp,-6(sp)
+                            463 ;	main.c 50
+                            464 ;	genAssign
+                            465 ;	AOP_STK for _main_scrollX_1_1
+   00C3 F8 05               466 	lda	hl,5(sp)
+   00C5 36 00               467 	ld	(hl),#0x00
+                            468 ;	main.c 52
+                            469 ;	genAssign
+                            470 ;	AOP_STK for _main_x_1_1
+   00C7 2B                  471 	dec	hl
+   00C8 36 00               472 	ld	(hl),#0x00
+                            473 ;	main.c 53
+                            474 ;	genAssign
+                            475 ;	AOP_STK for _main_y_1_1
+   00CA 2B                  476 	dec	hl
+   00CB 36 00               477 	ld	(hl),#0x00
+                            478 ;	main.c 59
+                            479 ;	genCall
+                            480 ; _saveRegsForCall: sendSetSize: 0 deInUse: 0 bcInUse: 0 deSending: 0
+   00CD CD 00 00            481 	call	_wait_vbl_done
+                            482 ;	main.c 60
+                            483 ;	genCall
+                            484 ; _saveRegsForCall: sendSetSize: 0 deInUse: 0 bcInUse: 0 deSending: 0
+   00D0 CD 00 00            485 	call	_disable_interrupts
+                            486 ;	main.c 61
+                            487 ;	genCall
+                            488 ; _saveRegsForCall: sendSetSize: 0 deInUse: 0 bcInUse: 0 deSending: 0
+   00D3 CD 00 00            489 	call	_display_off
+                            490 ;	main.c 62
+                            491 ;	genAssign
+   00D6 06 40               492 	ld	b,#0x40
+   00D8 0E FF               493 	ld	c,#0xFF
+                            494 ;	genAssign
+                            495 ;	AOP_STK for _main_sloc0_1_0
+   00DA F8 01               496 	lda	hl,1(sp)
+   00DC 36 40               497 	ld	(hl),#0x40
+   00DE 23                  498 	inc	hl
+   00DF 36 FF               499 	ld	(hl),#0xFF
+                            500 ;	genPointerGet
+                            501 ;	AOP_STK for _main_sloc0_1_0
+                            502 ;	AOP_STK for _main_sloc1_1_0
+   00E1 2B                  503 	dec	hl
+   00E2 5E                  504 	ld	e,(hl)
+   00E3 23                  505 	inc	hl
+   00E4 56                  506 	ld	d,(hl)
+   00E5 1A                  507 	ld	a,(de)
+   00E6 2B                  508 	dec	hl
+   00E7 2B                  509 	dec	hl
+                            510 ;	genAnd
+                            511 ;	AOP_STK for _main_sloc1_1_0
+   00E8 77                  512 	ld      (hl),a
+                            513 ; Removed redundent load
+   00E9 E6 FD               514 	and	a,#0xFD
+                            515 ;	genAssign (pointer)
+   00EB 58                  516 	ld	e,b
+   00EC 51                  517 	ld	d,c
+   00ED 12                  518 	ld	(de),a
+                            519 ;	main.c 63
+                            520 ;	genAssign
+   00EE 01 40 FF            521 	ld	bc,#0xFF40
+                            522 ;	genAssign
+                            523 ;	AOP_STK for _main_sloc0_1_0
+   00F1 23                  524 	inc	hl
+   00F2 36 40               525 	ld	(hl),#0x40
+   00F4 23                  526 	inc	hl
+   00F5 36 FF               527 	ld	(hl),#0xFF
+                            528 ;	genPointerGet
+                            529 ;	AOP_STK for _main_sloc0_1_0
+                            530 ;	AOP_STK for _main_sloc1_1_0
+   00F7 2B                  531 	dec	hl
+   00F8 5E                  532 	ld	e,(hl)
+   00F9 23                  533 	inc	hl
+   00FA 56                  534 	ld	d,(hl)
+   00FB 1A                  535 	ld	a,(de)
+   00FC 2B                  536 	dec	hl
+   00FD 2B                  537 	dec	hl
+                            538 ;	genAnd
+                            539 ;	AOP_STK for _main_sloc1_1_0
+   00FE 77                  540 	ld      (hl),a
+                            541 ; Removed redundent load
+   00FF E6 DF               542 	and	a,#0xDF
+                            543 ;	genAssign (pointer)
+   0101 02                  544 	ld	(bc),a
+                            545 ;	main.c 64
+                            546 ;	genAssign
+   0102 01 40 FF            547 	ld	bc,#0xFF40
+                            548 ;	genAssign
+                            549 ;	AOP_STK for _main_sloc0_1_0
+   0105 23                  550 	inc	hl
+   0106 36 40               551 	ld	(hl),#0x40
+   0108 23                  552 	inc	hl
+   0109 36 FF               553 	ld	(hl),#0xFF
+                            554 ;	genPointerGet
+                            555 ;	AOP_STK for _main_sloc0_1_0
+                            556 ;	AOP_STK for _main_sloc1_1_0
+   010B 2B                  557 	dec	hl
+   010C 5E                  558 	ld	e,(hl)
+   010D 23                  559 	inc	hl
+   010E 56                  560 	ld	d,(hl)
+   010F 1A                  561 	ld	a,(de)
+   0110 2B                  562 	dec	hl
+   0111 2B                  563 	dec	hl
+                            564 ;	genAnd
+                            565 ;	AOP_STK for _main_sloc1_1_0
+   0112 77                  566 	ld      (hl),a
+                            567 ; Removed redundent load
+   0113 E6 FE               568 	and	a,#0xFE
+                            569 ;	genAssign (pointer)
+   0115 02                  570 	ld	(bc),a
+                            571 ;	main.c 66
+                            572 ;	genIpush
+                            573 ; _saveRegsForCall: sendSetSize: 0 deInUse: 0 bcInUse: 0 deSending: 0
+   0116 21 A0 05            574 	ld	hl,#_second_map_tiles
+   0119 E5                  575 	push	hl
+                            576 ;	genIpush
+   011A 21 00 06            577 	ld	hl,#0x0600
+   011D E5                  578 	push	hl
+                            579 ;	genCall
+   011E CD 00 00            580 	call	_set_bkg_data
+   0121 E8 04               581 	lda	sp,4(sp)
+                            582 ;	main.c 73
+                            583 ;	genIpush
+                            584 ; _saveRegsForCall: sendSetSize: 0 deInUse: 0 bcInUse: 0 deSending: 0
+   0123 21 00 00            585 	ld	hl,#_second_map
+   0126 E5                  586 	push	hl
+                            587 ;	genIpush
+   0127 21 28 84            588 	ld	hl,#0x8428
+   012A E5                  589 	push	hl
+                            590 ;	genIpush
+   012B 21 00 00            591 	ld	hl,#0x0000
+   012E E5                  592 	push	hl
+                            593 ;	genCall
+   012F CD 00 00            594 	call	_set_bkg_tiles
+   0132 E8 06               595 	lda	sp,6(sp)
+                            596 ;	main.c 74
+                            597 ;	genAssign
+   0134 01 40 FF            598 	ld	bc,#0xFF40
+                            599 ;	genAssign
+                            600 ;	AOP_STK for _main_sloc0_1_0
+   0137 F8 01               601 	lda	hl,1(sp)
+   0139 36 40               602 	ld	(hl),#0x40
+   013B 23                  603 	inc	hl
+   013C 36 FF               604 	ld	(hl),#0xFF
+                            605 ;	genPointerGet
+                            606 ;	AOP_STK for _main_sloc0_1_0
+                            607 ;	AOP_STK for _main_sloc1_1_0
+   013E 2B                  608 	dec	hl
+   013F 5E                  609 	ld	e,(hl)
+   0140 23                  610 	inc	hl
+   0141 56                  611 	ld	d,(hl)
+   0142 1A                  612 	ld	a,(de)
+   0143 2B                  613 	dec	hl
+   0144 2B                  614 	dec	hl
+                            615 ;	genOr
+                            616 ;	AOP_STK for _main_sloc1_1_0
+   0145 77                  617 	ld      (hl),a
+                            618 ; Removed redundent load
+   0146 F6 01               619 	or	a,#0x01
+                            620 ;	genAssign (pointer)
+   0148 02                  621 	ld	(bc),a
+                            622 ;	main.c 75
+                            623 ;	genAssign
+   0149 01 40 FF            624 	ld	bc,#0xFF40
+                            625 ;	genAssign
+                            626 ;	AOP_STK for _main_sloc0_1_0
+   014C 23                  627 	inc	hl
+   014D 36 40               628 	ld	(hl),#0x40
+   014F 23                  629 	inc	hl
+   0150 36 FF               630 	ld	(hl),#0xFF
+                            631 ;	genPointerGet
+                            632 ;	AOP_STK for _main_sloc0_1_0
+                            633 ;	AOP_STK for _main_sloc1_1_0
+   0152 2B                  634 	dec	hl
+   0153 5E                  635 	ld	e,(hl)
+   0154 23                  636 	inc	hl
+   0155 56                  637 	ld	d,(hl)
+   0156 1A                  638 	ld	a,(de)
+   0157 2B                  639 	dec	hl
+   0158 2B                  640 	dec	hl
+                            641 ;	genOr
+                            642 ;	AOP_STK for _main_sloc1_1_0
+   0159 77                  643 	ld      (hl),a
+                            644 ; Removed redundent load
+   015A F6 80               645 	or	a,#0x80
+                            646 ;	genAssign (pointer)
+   015C 02                  647 	ld	(bc),a
+                            648 ;	main.c 76
+                            649 ;	genLabel
+   015D                     650 00116$:
+                            651 ;	main.c 78
+                            652 ;	genCall
+                            653 ; _saveRegsForCall: sendSetSize: 0 deInUse: 0 bcInUse: 0 deSending: 0
+   015D CD 00 00            654 	call	_wait_vbl_done
+                            655 ;	main.c 79
+                            656 ;	genCall
+                            657 ; _saveRegsForCall: sendSetSize: 0 deInUse: 0 bcInUse: 0 deSending: 0
+   0160 CD 00 00            658 	call	_joypad
+   0163 4B                  659 	ld	c,e
+                            660 ;	genAssign
+                            661 ;	(registers are the same)
+                            662 ;	main.c 80
+                            663 ;	genAnd
+   0164 79                  664 	ld	a,c
+   0165 E6 02               665 	and	a,#0x02
+   0167 20 03               666 	jr	nz,00129$
+   0169 C3 82 01            667 	jp	00102$
+   016C                     668 00129$:
+                            669 ;	genCmpEq
+                            670 ;	AOP_STK for _main_scrollX_1_1
+                            671 ; genCmpEq: left 1, right 1, result 0
+   016C F8 05               672 	lda	hl,5(sp)
+   016E 7E                  673 	ld	a,(hl)
+   016F B7                  674 	or	a,a
+   0170 CA 82 01            675 	jp	z,00102$
+   0173                     676 00130$:
+                            677 ;	main.c 82
+                            678 ;	genIpush
+                            679 ; _saveRegsForCall: sendSetSize: 0 deInUse: 0 bcInUse: 1 deSending: 0
+   0173 C5                  680 	push	bc
+   0174 21 FF 00            681 	ld	hl,#0x00FF
+   0177 E5                  682 	push	hl
+                            683 ;	genCall
+   0178 CD 00 00            684 	call	_scroll_bkg
+   017B E8 02               685 	lda	sp,2(sp)
+   017D E1                  686 	pop	hl
+   017E 4D                  687 	ld	c,l
+                            688 ;	main.c 83
+                            689 ;	genMinus
+                            690 ;	AOP_STK for _main_x_1_1
+   017F F8 04               691 	lda	hl,4(sp)
+   0181 35                  692 	dec	(hl)
+                            693 ;	genLabel
+   0182                     694 00102$:
+                            695 ;	main.c 85
+                            696 ;	genAnd
+   0182 79                  697 	ld	a,c
+   0183 E6 01               698 	and	a,#0x01
+   0185 20 03               699 	jr	nz,00131$
+   0187 C3 A1 01            700 	jp	00105$
+   018A                     701 00131$:
+                            702 ;	genCmpGt
+                            703 ;	AOP_STK for _main_scrollX_1_1
+   018A 3E 0A               704 	ld	a,#0x0A
+   018C F8 05               705 	lda	hl,5(sp)
+   018E 96                  706 	sub	a,(hl)
+   018F DA A1 01            707 	jp	c,00105$
+                            708 ;	main.c 87
+                            709 ;	genIpush
+                            710 ; _saveRegsForCall: sendSetSize: 0 deInUse: 0 bcInUse: 1 deSending: 0
+   0192 C5                  711 	push	bc
+   0193 21 01 00            712 	ld	hl,#0x0001
+   0196 E5                  713 	push	hl
+                            714 ;	genCall
+   0197 CD 00 00            715 	call	_scroll_bkg
+   019A E8 02               716 	lda	sp,2(sp)
+   019C E1                  717 	pop	hl
+   019D 4D                  718 	ld	c,l
+                            719 ;	main.c 88
+                            720 ;	genPlus
+                            721 ;	AOP_STK for _main_x_1_1
+                            722 ;	genPlusIncr
+   019E F8 04               723 	lda	hl,4(sp)
+   01A0 34                  724 	inc	(hl)
+                            725 ;	genLabel
+   01A1                     726 00105$:
+                            727 ;	main.c 90
+                            728 ;	genAnd
+   01A1 79                  729 	ld	a,c
+   01A2 E6 04               730 	and	a,#0x04
+   01A4 20 03               731 	jr	nz,00132$
+   01A6 C3 B8 01            732 	jp	00108$
+   01A9                     733 00132$:
+                            734 ;	main.c 92
+                            735 ;	genIpush
+                            736 ; _saveRegsForCall: sendSetSize: 0 deInUse: 0 bcInUse: 1 deSending: 0
+   01A9 C5                  737 	push	bc
+   01AA 21 00 FF            738 	ld	hl,#0xFF00
+   01AD E5                  739 	push	hl
+                            740 ;	genCall
+   01AE CD 00 00            741 	call	_scroll_bkg
+   01B1 E8 02               742 	lda	sp,2(sp)
+   01B3 E1                  743 	pop	hl
+   01B4 4D                  744 	ld	c,l
+                            745 ;	main.c 93
+                            746 ;	genMinus
+                            747 ;	AOP_STK for _main_y_1_1
+   01B5 F8 03               748 	lda	hl,3(sp)
+   01B7 35                  749 	dec	(hl)
+                            750 ;	genLabel
+   01B8                     751 00108$:
+                            752 ;	main.c 95
+                            753 ;	genAnd
+   01B8 79                  754 	ld	a,c
+   01B9 E6 08               755 	and	a,#0x08
+   01BB 20 03               756 	jr	nz,00133$
+   01BD C3 CC 01            757 	jp	00110$
+   01C0                     758 00133$:
+                            759 ;	main.c 97
+                            760 ;	genIpush
+                            761 ; _saveRegsForCall: sendSetSize: 0 deInUse: 0 bcInUse: 0 deSending: 0
+   01C0 21 00 01            762 	ld	hl,#0x0100
+   01C3 E5                  763 	push	hl
+                            764 ;	genCall
+   01C4 CD 00 00            765 	call	_scroll_bkg
+   01C7 E8 02               766 	lda	sp,2(sp)
+                            767 ;	main.c 98
+                            768 ;	genPlus
+                            769 ;	AOP_STK for _main_y_1_1
+                            770 ;	genPlusIncr
+   01C9 F8 03               771 	lda	hl,3(sp)
+   01CB 34                  772 	inc	(hl)
+                            773 ;	genLabel
+   01CC                     774 00110$:
+                            775 ;	main.c 100
+                            776 ;	genCmpEq
+                            777 ;	AOP_STK for _main_x_1_1
+                            778 ; genCmpEq: left 1, right 1, result 0
+   01CC F8 04               779 	lda	hl,4(sp)
+   01CE 7E                  780 	ld	a,(hl)
+   01CF FE 08               781 	cp	a,#0x08
+   01D1 C2 F7 01            782 	jp	nz,00112$
+   01D4 18 03               783 	jr	00135$
+   01D6                     784 00134$:
+   01D6 C3 F7 01            785 	jp	00112$
+   01D9                     786 00135$:
+                            787 ;	main.c 102
+                            788 ;	genPlus
+                            789 ;	AOP_STK for _main_scrollX_1_1
+                            790 ;	genPlusIncr
+   01D9 F8 05               791 	lda	hl,5(sp)
+   01DB 34                  792 	inc	(hl)
+                            793 ;	main.c 103
+                            794 ;	genAssign
+                            795 ;	AOP_STK for _main_x_1_1
+   01DC 2B                  796 	dec	hl
+   01DD 36 00               797 	ld	(hl),#0x00
+                            798 ;	main.c 104
+                            799 ;	genPlus
+                            800 ;	AOP_STK for _main_scrollX_1_1
+                            801 ;	Can't optimise plus by inc, falling back to the normal way
+   01DF 11 00 00            802 	ld	de,#_second_map
+   01E2 23                  803 	inc	hl
+   01E3 6E                  804 	ld	l,(hl)
+   01E4 26 00               805 	ld	h,#0x00
+   01E6 19                  806 	add	hl,de
+   01E7 4D                  807 	ld	c,l
+   01E8 44                  808 	ld	b,h
+                            809 ;	genIpush
+                            810 ; _saveRegsForCall: sendSetSize: 0 deInUse: 0 bcInUse: 0 deSending: 0
+   01E9 C5                  811 	push	bc
+                            812 ;	genIpush
+   01EA 21 28 20            813 	ld	hl,#0x2028
+   01ED E5                  814 	push	hl
+                            815 ;	genIpush
+   01EE 21 00 00            816 	ld	hl,#0x0000
+   01F1 E5                  817 	push	hl
+                            818 ;	genCall
+   01F2 CD 00 00            819 	call	_set_bkg_tiles
+   01F5 E8 06               820 	lda	sp,6(sp)
+                            821 ;	genLabel
+   01F7                     822 00112$:
+                            823 ;	main.c 113
+                            824 ;	genCmpEq
+                            825 ;	AOP_STK for _main_x_1_1
+                            826 ; genCmpEq: left 1, right 1, result 0
+   01F7 F8 04               827 	lda	hl,4(sp)
+   01F9 7E                  828 	ld	a,(hl)
+   01FA FE F8               829 	cp	a,#0xF8
+   01FC C2 5D 01            830 	jp	nz,00116$
+   01FF 18 03               831 	jr	00137$
+   0201                     832 00136$:
+   0201 C3 5D 01            833 	jp	00116$
+   0204                     834 00137$:
+                            835 ;	main.c 115
+                            836 ;	genMinus
+                            837 ;	AOP_STK for _main_scrollX_1_1
+   0204 F8 05               838 	lda	hl,5(sp)
+   0206 35                  839 	dec	(hl)
+                            840 ;	main.c 116
+                            841 ;	genAssign
+                            842 ;	AOP_STK for _main_x_1_1
+   0207 2B                  843 	dec	hl
+   0208 36 00               844 	ld	(hl),#0x00
+                            845 ;	main.c 117
+                            846 ;	genPlus
+                            847 ;	AOP_STK for _main_scrollX_1_1
+                            848 ;	Can't optimise plus by inc, falling back to the normal way
+   020A 11 00 00            849 	ld	de,#_second_map
+   020D 23                  850 	inc	hl
+   020E 6E                  851 	ld	l,(hl)
+   020F 26 00               852 	ld	h,#0x00
+   0211 19                  853 	add	hl,de
+   0212 4D                  854 	ld	c,l
+   0213 44                  855 	ld	b,h
+                            856 ;	genIpush
+                            857 ; _saveRegsForCall: sendSetSize: 0 deInUse: 0 bcInUse: 0 deSending: 0
+   0214 C5                  858 	push	bc
+                            859 ;	genIpush
+   0215 21 28 20            860 	ld	hl,#0x2028
+   0218 E5                  861 	push	hl
+                            862 ;	genIpush
+   0219 21 00 00            863 	ld	hl,#0x0000
+   021C E5                  864 	push	hl
+                            865 ;	genCall
+   021D CD 00 00            866 	call	_set_bkg_tiles
+   0220 E8 06               867 	lda	sp,6(sp)
+                            868 ;	genGoto
+   0222 C3 5D 01            869 	jp	00116$
+                            870 ;	genLabel
+   0225                     871 00118$:
+                            872 ;	genEndFunction
+   0225 E8 06               873 	lda	sp,6(sp)
+   0227 C9                  874 	ret
+   0228                     875 ___main_end:
+                            876 	.area _CODE
+ASxxxx Assembler V01.75  (GameBoy Z80-like CPU), page 1.
+
+Symbol Table
+
+  0 ___bkg_end                         006C R
+  0 ___bkg_start                       0000 R
+  0 ___main_end                        0228 R
+  0 ___main_start                      00C1 R
+  0 ___walk_end                        00C1 R
+  0 ___walk_start                      006C R
+    __initrleblock                     **** GX
+  0 _bkg                               0000 GR
+    _disable_interrupts                **** GX
+    _display_off                       **** GX
+    _joypad                            **** GX
+  0 _main                              00C1 GR
+    _scroll_bkg                        **** GX
+  1 _second_map                        0000 GR
+  1 _second_map_tiles                  05A0 GR
+    _set_bkg_data                      **** GX
+    _set_bkg_tiles                     **** GX
+    _wait_vbl_done                     **** GX
+  0 _walk                              006C GR
+
+ASxxxx Assembler V01.75  (GameBoy Z80-like CPU), page 2.
+
+Area Table
+
+   0 _CODE                              size  228   flags 0
+   1 _DATA                              size  610   flags 0
+   2 _OVERLAY                           size    0   flags 0
+   3 _ISEG                              size    0   flags 0
+   4 _BSEG                              size    0   flags 0
+   5 _XSEG                              size    0   flags 0
+   6 _GSINIT                            size  1BB   flags 0
+   7 _GSFINAL                           size    0   flags 0
+   8 _HOME                              size    0   flags 0

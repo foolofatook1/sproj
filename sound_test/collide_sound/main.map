@@ -19,17 +19,17 @@ AREA .  .ABS.
 		l__LIT	0000
 		l__GSINIT	0000
 		l__GSINITTAIL	0001
-		l__CODE	0031
+		l__CODE	0035
 		l__BSS	0059
 		l__HOME	01AC
 		l__HEADER	01E1
 		s__CODE	0200
-		s__HOME	0231
-		s__BASE	03DD
-		s__GSINITTAIL	03DD
-		s__LIT	03DD
-		s__GSINIT	03DD
-		s__GSFINAL	03DE
+		s__HOME	0235
+		s__BASE	03E1
+		s__GSINITTAIL	03E1
+		s__LIT	03E1
+		s__GSINIT	03E1
+		s__GSFINAL	03E2
 		.OAM	C000
 		s__DATA	C0A0
 		s__BSS	C0A0
@@ -43,10 +43,11 @@ AREA .  .ABS.
 AREA _CODE
 	RADIX HEX
 	BASE 0200
-	SIZE 0031
+	SIZE 0035
 	ATTRIB REL CON
 	GLOBALS
-		_main	0200
+		_collide_sound	0200
+		_main	0231
 AREA _HEADER
 	RADIX HEX
 	BASE 0000
@@ -56,74 +57,74 @@ AREA _HEADER
 		_exit	01D2
 AREA _HOME
 	RADIX HEX
-	BASE 0231
+	BASE 0235
 	SIZE 01AC
 	ATTRIB REL CON
 	GLOBALS
-		.set_mode	0231
-		.remove_VBL	0241
-		.remove_LCD	0247
-		.remove_TIM	024D
-		.remove_SIO	0253
-		.remove_JOY	0259
-		.add_VBL	025F
-		.add_LCD	0265
-		.add_TIM	026B
-		.add_SIO	0271
-		.add_JOY	0277
-		.remove_int	027D
-		.add_int	029D
-		.wait_vbl_done	02B9
-		_wait_vbl_done	02B9
-		_display_off	02D0
-		.display_off	02D0
-		.serial_IO	02F1
-		_mode	0320
-		_get_mode	0329
-		_enable_interrupts	032E
-		_disable_interrupts	0330
-		_reset	0332
-		.reset	0332
-		_set_interrupts	0338
-		_remove_VBL	0343
-		_remove_LCD	034E
-		_remove_TIM	0359
-		_remove_SIO	0364
-		_remove_JOY	036F
-		_add_VBL	037A
-		_add_LCD	0385
-		_add_TIM	0390
-		_add_SIO	039B
-		_add_JOY	03A6
-		_clock	03B1
-		__printTStates	03BA
-		banked_call	03BB
-		banked_ret	03D4
+		.set_mode	0235
+		.remove_VBL	0245
+		.remove_LCD	024B
+		.remove_TIM	0251
+		.remove_SIO	0257
+		.remove_JOY	025D
+		.add_VBL	0263
+		.add_LCD	0269
+		.add_TIM	026F
+		.add_SIO	0275
+		.add_JOY	027B
+		.remove_int	0281
+		.add_int	02A1
+		.wait_vbl_done	02BD
+		_wait_vbl_done	02BD
+		_display_off	02D4
+		.display_off	02D4
+		.serial_IO	02F5
+		_mode	0324
+		_get_mode	032D
+		_enable_interrupts	0332
+		_disable_interrupts	0334
+		_reset	0336
+		.reset	0336
+		_set_interrupts	033C
+		_remove_VBL	0347
+		_remove_LCD	0352
+		_remove_TIM	035D
+		_remove_SIO	0368
+		_remove_JOY	0373
+		_add_VBL	037E
+		_add_LCD	0389
+		_add_TIM	0394
+		_add_SIO	039F
+		_add_JOY	03AA
+		_clock	03B5
+		__printTStates	03BE
+		banked_call	03BF
+		banked_ret	03D8
 AREA _BASE
 	RADIX HEX
-	BASE 03DD
+	BASE 03E1
 	SIZE 0000
 	ATTRIB REL CON
 AREA _LIT
 	RADIX HEX
-	BASE 03DD
+	BASE 03E1
 	SIZE 0000
 	ATTRIB REL CON
 AREA _GSINIT
 	RADIX HEX
-	BASE 03DD
+	BASE 03E1
 	SIZE 0000
 	ATTRIB REL CON
 	GLOBALS
-		gsinit	03DD
+		gsinit	03E1
 AREA _GSINITTAIL
 	RADIX HEX
-	BASE 03DD
+	BASE 03E1
 	SIZE 0001
 	ATTRIB REL CON
 AREA _GSFINAL
 	RADIX HEX
-	BASE 03DE
+	BASE 03E2
 	SIZE 0000
 	ATTRIB REL CON
 AREA _DATA
@@ -181,8 +182,8 @@ AREA _XSEG
 MODULES
 	FILE /opt/gbdk/lib/small/asxxxx/gb/crt0.o
 		NAME Runtime
-	FILE music.o
-		NAME lcc17290
+	FILE main.o
+		NAME lcc281830
 USERBASEDEF
 	_CODE=0x0200
 	_DATA=0xC0A0
