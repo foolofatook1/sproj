@@ -217,7 +217,3 @@ TilesEnd:
 Map:
 	INCLUDE "ship.z80"
 MapEnd:
-
-Font:
-	INCLUDE	"font.chr"
-FontEnd:
