@@ -1,7 +1,19 @@
 INCLUDE "gbhw.inc"			
 
+_FONT_TILES		EQU		$9200
+
 ; variable to save the state of the pad
-_PAD	EQU		_RAM
+_PAD			EQU		_RAM
+
+_POINT			EQU		_OAMRAM
+
+; sprite stuffs
+_SPR_X			EQU		_OAMRAM+1
+_SPR_Y			EQU		_OAMRAM+2
+_SPR_NUM		EQU		_OAMRAM+3
+
+SECTION "VBlank", ROM0[$040]
+	reti
 
 ; The program begins here:
 SECTION "top",ROM0[$0100]
@@ -23,6 +35,7 @@ init:
 	; load the pallets
 	ld		a, %11100100		; Palette colors from the darkest to
 	ld		[rBGP], a		; We write this in the background palette register 
+	ld		[rOBP0],a		; sprite palette
 
 	; scroll
 	ld		a, 96			; write 0 records scroll in X and Y
@@ -30,6 +43,8 @@ init:
 	ld		a, 0
 	ld		[rSCY], a		; at the beginning (upper left) of the fund.
 
+	ld		[_POINT], a 	; when POINT is 0 we point to start
+	
 	; We call the routine that turns off the LCD so that we can write to it
 	call		LCD_off		
 
@@ -37,22 +52,38 @@ init:
 	ld		hl, Tiles			
 	ld		de, _VRAM			; address in the video memory 
 	ld		bc, TilesEnd-Tiles	; a counter
-	call	CopyMemory
+	call 	mem_cp
 
 	; We load the map 
 	ld		hl, Map
 	ld		de, _SCRN0		; map 0 
 	ld		bc, 32*32		; a counter
-	call	CopyMemory
+	call	mem_cp
+
+	; sprite stuff
+	ld		de, _OAMRAM
+	ld		bc, 40*4
+	ld		l, 0
+	call	clean_mem
+
+	ld		a, 14			; sprite X and Y pos
+	ld		[_SPR_X], a
+	ld		a, 5			; Y will inc for each down
+	ld		[_SPR_Y], a
+	ld		a, 50			; tile number
+	ld		[_SPR_NUM], a
+
 
 	; configure and activate the display
-	ld  	a, LCDCF_ON|LCDCF_BG8000|LCDCF_BG9800|LCDCF_BGON|LCDCF_OBJ8|LCDCF_OBJON
+	ld 		a, LCDCF_ON|LCDCF_BG8000|LCDCF_BG9800|LCDCF_BGON|LCDCF_OBJ8|LCDCF_OBJON
 	ld  	[rLCDC], a
+
 
 ; an infinite loop to keep rendering the screen
 draw:
 	; read the pad
 	call 	pad
+
 	; just wait for VBlank whenever we make changes to VRAM
 .wait_VBlank:
 	ld		a, [rLY]
@@ -76,18 +107,13 @@ draw:
 	call	nz, down
 
 	; a small delay may be necessary
-	ld		bc, 2000
-.delay
-	dec 	bc
-	ld		a, b
-	or		c
-	jr		z, .end_delay
-	jr		.delay
-.end_delay
-	jr 		draw
+	call 	slow_down
+	jp		draw
+
 
 ; move screen right
 right:
+
 	ld		a, [rSCX]
 	cp		96
 	jr		z, .no_right
@@ -114,30 +140,113 @@ left:
 	
 ; move screen up
 up:
-	ld		a, [rSCY]
+	ld		a, [_POINT]
+	
 	cp		0
-	jr		z, .no_up
-	dec		a
-	ld		[rSCY], a
-	ret
-.no_up
-	ld		a, 0
-	ld		[rSCY], a
-	ret
+	jr		z, quit
+
+	cp		1
+	jr		z, start
+
+	cp		2
+	jr		z, new_game
+
+;	ld		a, [rSCY]
+;	cp		0
+;	jr		z, .no_up
+;	dec		a
+;	ld		[rSCY], a
+;	ret
+;.no_up
+;	ld		a, 0
+;	ld		[rSCY], a
+;	ret
 
 ; move screen down
 down:
-	ld		a, [rSCY]
-	cp		96
-	jr		z, .no_down
-	inc		a
-	ld		[rSCY], a
-	ret
-.no_down
-	ld		a, 96
-	ld		[rSCY], a
+	ld		a, [_POINT]
+	
+	cp		0
+	jr		z, new_game
+
+	cp		1
+	jr		z, quit
+	
+	cp		2
+	jr		z, start
+
+;	ld		a, [rSCY]
+;	cp		96
+;	jr		z, .no_down
+;	inc		a
+;	ld		[rSCY], a
+;	ret
+;.no_down
+;	ld		a, 96
+;	ld		[rSCY], a
+;	ret
+
+;	ld		a, [_POINT]
+;	cp		0
+;	jr		z, new_game
+;	cp		1
+;	jr		z, quit
+;	cp		2
+;	jr		z, start
+
+start:
+.wait_VBlank
+	ld		a, 0
+	ld		[_POINT], a
+
+	call	clean
+	
+	ld		hl, MapStart
+	ld		de, _SCRN0
+	ld		bc, 32*32
+	call	mem_cp
+	call	slow_down
 	ret
 
+
+
+new_game:
+.wait_VBlank
+	ld		a, 1
+	ld		[_POINT], a
+
+	call	clean
+
+	ld		hl, MapNewGame
+	ld		de, _SCRN0
+	ld		bc, 32*32
+	call	mem_cp
+	call	slow_down
+	ret
+
+quit:
+.wait_VBlank
+	ld		a, 2
+	ld		[_POINT], a
+
+	call	clean
+
+	ld		hl, MapQuit
+	ld		de, _SCRN0
+	ld		bc, 32*32
+	call	mem_cp
+	call	slow_down
+	ret
+
+slow_down:
+	ld		de, 6000
+.delay:
+	dec		de
+	ld		a, d
+	or		e
+	jr		z, .end_delay
+.end_delay:
+	ret
 
 ; joypad bits work as follows:
 ; 7 - nada
@@ -159,20 +268,25 @@ pad:
 
 	and		$0F				; and them with the last 4 bits
 	swap	a				; switch lower 4 with upper 4 bits
-;	ld		b, a
+;	ld		b, a			; this may not be needed
 
-;	ld		a, %00010000
-;	ld		[rP1], a
-
-;	ld		a, [rP1]
-
-;	and 	$0F
+;	ld		a, %00010000	; this may not be needed
+;	ld		[rP1], a		; this may not be needed
+;
+;	ld		a, [rP1]		; this may not be needed
+;	ld		a, [rP1]	
+;	ld		a, [rP1]	
+;	ld		a, [rP1]	
+;	ld		a, [rP1]	
+	
+;	and 	$0F 			; this may not be needed
 	or 		b
 
 	cpl
 	ld		[_PAD], a			; then keep the status of the pad in b
-
+	
 	ret
+
 
 ; LCD shutdown routine
 LCD_off:
@@ -189,6 +303,26 @@ LCD_off:
 	ld		[rLCDC],a		; eWe wrote in the LCDC register content A
 	ret					; return
 
+clean:
+.wait_VBlank
+	ld		hl, Map
+	ld		de, _SCRN0
+	ld		bc, 32*32
+	call	mem_cp
+	;call	slow_down
+	ret
+
+clean_mem:
+	ld		a, l
+	ld		[de], a
+	dec		bc
+
+	ld		a, c
+	or		b
+	ret		z
+	inc		de
+	jr		clean_mem
+
 ; memory copy routine
 ; copy a number of bytes from one direction to another
 ; expects the parameters:
@@ -196,7 +330,7 @@ LCD_off:
 ; of - destination address
 ; bc - number of data to be copied
 ; destroys the contents of A
-CopyMemory:
+mem_cp:
 	ld		a, [hl]		; To load the data in
 	ld		[de], a		; copy the data to the destination
 	dec		bc		; least one copy
@@ -207,7 +341,7 @@ CopyMemory:
 	; if not, we still
 	inc		hl
 	inc		de
-	jr		CopyMemory
+	jr		mem_cp
 
 
 Tiles:
@@ -215,5 +349,21 @@ Tiles:
 TilesEnd:
 
 Map:
-	INCLUDE "ship.z80"
+	INCLUDE "open_screen.z80"
 MapEnd:
+
+MapStart:
+	INCLUDE "ship_start.z80"
+MapStartEnd:
+
+MapNewGame:
+	INCLUDE "ship_ng.z80"
+MapNewGameEnd:
+
+MapQuit:
+	INCLUDE "ship_quit.z80"
+MapQuitEnd:
+
+Font:
+	INCLUDE "font.z80"
+EndFont:
