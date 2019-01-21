@@ -1,6 +1,6 @@
 /* background tiles and sprite */
-#include "ship_tiles.c"
-#include "open_screen.c"
+#include "assets/ship_tiles.c"
+#include "assets/open_screen.c"
 
 
 /* functions */
