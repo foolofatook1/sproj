@@ -40,18 +40,18 @@ void start_up(void)
         arrow_y-=8;
         move_sprite(0, arrow_x, arrow_y);
     }
-    
+
     if(joypad() & J_A)
     {
         option = check_pos();
-/*        if(option == START)
-            gprint("starting");
+        /*        if(option == START)
+                  gprint("starting");
 
-        if(option == NEW_GAME)
-            gprint("new game");
+                  if(option == NEW_GAME)
+                  gprint("new game");
 
-        if(option == QUIT)
-            gprint("quit");*/
+                  if(option == QUIT)
+                  gprint("quit");*/
     }
 }
 

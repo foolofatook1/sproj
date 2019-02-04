@@ -1,0 +1,137 @@
+; no$gmb format .sym file
+; Generated automagically by ASxxxx linker V01.75 (SDK 3.0.0)
+; Area: .  .ABS.
+00:0000 s__HEADER
+00:0000 .init
+00:0200 s__CODE
+00:04FC s__HOME
+00:06CF s__BASE
+00:08CB s__LIT
+00:08CB s__GSINIT
+00:1513 s__GSINITTAIL
+00:1514 s__GSFINAL
+00:C000 .OAM
+00:C0A0 s__DATA
+00:D227 s__BSS
+00:D280 s__HEAP
+00:D280 s__BSEG
+00:D280 s__ISEG
+00:D280 s__XSEG
+00:D280 s__OVERLAY
+00:E000 .STACK
+00:FF80 .refresh_OAM
+; Area: _CODE
+00:0200 _opening
+00:021D _start_up
+00:02C2 _check_pos
+00:02FC _setup_sprite
+00:0358 _setup_bkg
+00:03C5 _level_1_bkg_start
+00:04CA _main
+; Area: _HEADER
+00:01D2 _exit
+; Area: _HOME
+00:04FC .set_mode
+00:050C .remove_VBL
+00:0512 .remove_LCD
+00:0518 .remove_TIM
+00:051E .remove_SIO
+00:0524 .remove_JOY
+00:052A .add_VBL
+00:0530 .add_LCD
+00:0536 .add_TIM
+00:053C .add_SIO
+00:0542 .add_JOY
+00:0548 .remove_int
+00:0568 .add_int
+00:0584 .wait_vbl_done
+00:0584 _wait_vbl_done
+00:059B _display_off
+00:059B .display_off
+00:05BC .serial_IO
+00:05EB _mode
+00:05F4 _get_mode
+00:05F9 _enable_interrupts
+00:05FB _disable_interrupts
+00:05FD _reset
+00:05FD .reset
+00:0603 _set_interrupts
+00:060E _remove_VBL
+00:0619 _remove_LCD
+00:0624 _remove_TIM
+00:062F _remove_SIO
+00:063A _remove_JOY
+00:0645 _add_VBL
+00:0650 _add_LCD
+00:065B _add_TIM
+00:0666 _add_SIO
+00:0671 _add_JOY
+00:067C _clock
+00:0685 __printTStates
+00:0686 banked_call
+00:069F banked_ret
+00:06A8 __initrleblock
+; Area: _BASE
+00:06CF _scroll_bkg
+00:06E5 .mv_sprite
+00:06F4 _move_sprite
+00:0701 _set_win_data
+00:0701 _set_bkg_data
+00:074E _set_sprite_data
+00:077D .padup
+00:077D _waitpadup
+00:078D .jpad
+00:07BA .wait_pad
+00:07C1 _joypad
+00:07C6 _waitpad
+00:07D0 .delay
+00:080A _delay
+00:0813 .set_sprite_tile
+00:0820 _set_sprite_tile
+00:082B .copy_vram
+00:083A _get_data
+00:083A _set_data
+00:084D _set_bkg_tiles
+00:0861 .set_xy_wtt
+00:0872 .set_xy_btt
+00:0881 .set_xy_tt
+00:08B2 _set_tiles
+; Area: _LIT
+; Area: _GSINIT
+00:08CB gsinit
+; Area: _GSINITTAIL
+; Area: _GSFINAL
+; Area: _DATA
+00:C0A0 _ship_tiles
+00:C630 _open_screen
+00:CA30 _arrow_x
+00:CA31 _arrow_y
+00:CA32 _option
+00:CA34 _choice
+00:CA36 _level_1_screen_tiles
+00:CCB6 _level_1_screen
+00:CE1E _font
+00:D0FE _chain_border_tiles
+00:D15E _chain_border
+00:D226 _action
+; Area: _BSS
+00:D227 __cpu
+00:D228 .mode
+00:D229 __io_out
+00:D22A __io_in
+00:D22B __io_status
+00:D22C .vbl_done
+00:D22D __current_bank
+00:D22E _sys_time
+00:D22E .sys_time
+00:D230 .int_0x40
+00:D240 .int_0x48
+00:D250 .int_0x50
+00:D260 .int_0x58
+00:D270 .int_0x60
+; Area: _HEAP
+00:D280 _malloc_heap_start
+; Area: _OVERLAY
+; Area: _ISEG
+; Area: _BSEG
+; Area: _XSEG
