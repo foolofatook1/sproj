@@ -21,29 +21,29 @@ AREA .  .ABS.
 		l__HEADER	01E1
 		l__BASE	01FC
 		s__CODE	0200
-		l__CODE	046D
-		s__HOME	066D
-		s__BASE	0840
-		s__LIT	0A3C
-		s__GSINIT	0A3C
-		l__GSINIT	0F5F
-		l__DATA	162C
-		s__GSINITTAIL	199B
-		s__GSFINAL	199C
+		l__CODE	04B7
+		s__HOME	06B7
+		s__BASE	088A
+		s__LIT	0A86
+		s__GSINIT	0A86
+		l__GSINIT	1049
+		s__GSINITTAIL	1ACF
+		s__GSFINAL	1AD0
+		l__DATA	1B00
 		.OAM	C000
 		s__DATA	C0A0
-		s__BSS	D6CC
-		s__HEAP	D725
-		s__BSEG	D725
-		s__ISEG	D725
-		s__XSEG	D725
-		s__OVERLAY	D725
+		s__BSS	DBA0
+		s__HEAP	DBF9
+		s__BSEG	DBF9
+		s__ISEG	DBF9
+		s__XSEG	DBF9
+		s__OVERLAY	DBF9
 		.STACK	E000
 		.refresh_OAM	FF80
 AREA _CODE
 	RADIX HEX
 	BASE 0200
-	SIZE 046D
+	SIZE 04B7
 	ATTRIB REL CON
 	GLOBALS
 		_opening	0200
@@ -53,10 +53,10 @@ AREA _CODE
 		_setup_bkg	0358
 		_level_1_ctrl	03C5
 		_level_1_bkg_start	03D2
-		_joypad_check	04D7
-		_output_text	04E7
-		_level_1_sprite_setup	0570
-		_main	063B
+		_joypad_check	04C2
+		_output_text	04D2
+		_level_1_sprite_setup	05BA
+		_main	0685
 AREA _HEADER
 	RADIX HEX
 	BASE 0000
@@ -66,106 +66,106 @@ AREA _HEADER
 		_exit	01D2
 AREA _HOME
 	RADIX HEX
-	BASE 066D
+	BASE 06B7
 	SIZE 01D3
 	ATTRIB REL CON
 	GLOBALS
-		.set_mode	066D
-		.remove_VBL	067D
-		.remove_LCD	0683
-		.remove_TIM	0689
-		.remove_SIO	068F
-		.remove_JOY	0695
-		.add_VBL	069B
-		.add_LCD	06A1
-		.add_TIM	06A7
-		.add_SIO	06AD
-		.add_JOY	06B3
-		.remove_int	06B9
-		.add_int	06D9
-		.wait_vbl_done	06F5
-		_wait_vbl_done	06F5
-		_display_off	070C
-		.display_off	070C
-		.serial_IO	072D
-		_mode	075C
-		_get_mode	0765
-		_enable_interrupts	076A
-		_disable_interrupts	076C
-		_reset	076E
-		.reset	076E
-		_set_interrupts	0774
-		_remove_VBL	077F
-		_remove_LCD	078A
-		_remove_TIM	0795
-		_remove_SIO	07A0
-		_remove_JOY	07AB
-		_add_VBL	07B6
-		_add_LCD	07C1
-		_add_TIM	07CC
-		_add_SIO	07D7
-		_add_JOY	07E2
-		_clock	07ED
-		__printTStates	07F6
-		banked_call	07F7
-		banked_ret	0810
-		__initrleblock	0819
+		.set_mode	06B7
+		.remove_VBL	06C7
+		.remove_LCD	06CD
+		.remove_TIM	06D3
+		.remove_SIO	06D9
+		.remove_JOY	06DF
+		.add_VBL	06E5
+		.add_LCD	06EB
+		.add_TIM	06F1
+		.add_SIO	06F7
+		.add_JOY	06FD
+		.remove_int	0703
+		.add_int	0723
+		.wait_vbl_done	073F
+		_wait_vbl_done	073F
+		_display_off	0756
+		.display_off	0756
+		.serial_IO	0777
+		_mode	07A6
+		_get_mode	07AF
+		_enable_interrupts	07B4
+		_disable_interrupts	07B6
+		_reset	07B8
+		.reset	07B8
+		_set_interrupts	07BE
+		_remove_VBL	07C9
+		_remove_LCD	07D4
+		_remove_TIM	07DF
+		_remove_SIO	07EA
+		_remove_JOY	07F5
+		_add_VBL	0800
+		_add_LCD	080B
+		_add_TIM	0816
+		_add_SIO	0821
+		_add_JOY	082C
+		_clock	0837
+		__printTStates	0840
+		banked_call	0841
+		banked_ret	085A
+		__initrleblock	0863
 AREA _BASE
 	RADIX HEX
-	BASE 0840
+	BASE 088A
 	SIZE 01FC
 	ATTRIB REL CON
 	GLOBALS
-		_scroll_bkg	0840
-		.mv_sprite	0856
-		_move_sprite	0865
-		_set_win_data	0872
-		_set_bkg_data	0872
-		_set_sprite_data	08BF
-		.padup	08EE
-		_waitpadup	08EE
-		.jpad	08FE
-		.wait_pad	092B
-		_joypad	0932
-		_waitpad	0937
-		.delay	0941
-		_delay	097B
-		.set_sprite_tile	0984
-		_set_sprite_tile	0991
-		.copy_vram	099C
-		_get_data	09AB
-		_set_data	09AB
-		_set_bkg_tiles	09BE
-		.set_xy_wtt	09D2
-		.set_xy_btt	09E3
-		.set_xy_tt	09F2
-		_set_tiles	0A23
+		_scroll_bkg	088A
+		.mv_sprite	08A0
+		_move_sprite	08AF
+		_set_win_data	08BC
+		_set_bkg_data	08BC
+		_set_sprite_data	0909
+		.padup	0938
+		_waitpadup	0938
+		.jpad	0948
+		.wait_pad	0975
+		_joypad	097C
+		_waitpad	0981
+		.delay	098B
+		_delay	09C5
+		.set_sprite_tile	09CE
+		_set_sprite_tile	09DB
+		.copy_vram	09E6
+		_get_data	09F5
+		_set_data	09F5
+		_set_bkg_tiles	0A08
+		.set_xy_wtt	0A1C
+		.set_xy_btt	0A2D
+		.set_xy_tt	0A3C
+		_set_tiles	0A6D
 AREA _LIT
 	RADIX HEX
-	BASE 0A3C
+	BASE 0A86
 	SIZE 0000
 	ATTRIB REL CON
 AREA _GSINIT
 	RADIX HEX
-	BASE 0A3C
-	SIZE 0F5F
+	BASE 0A86
+	SIZE 1049
 	ATTRIB REL CON
 	GLOBALS
-		gsinit	0A3C
+		gsinit	0A86
 AREA _GSINITTAIL
 	RADIX HEX
-	BASE 199B
+	BASE 1ACF
 	SIZE 0001
 	ATTRIB REL CON
 AREA _GSFINAL
 	RADIX HEX
-	BASE 199C
+	BASE 1AD0
 	SIZE 0000
 	ATTRIB REL CON
 AREA _DATA
 	RADIX HEX
 	BASE C0A0
-	SIZE 162C
+	SIZE 1B00
 	ATTRIB REL CON
 	GLOBALS
 		_ship_tiles	C0A0
@@ -180,63 +180,66 @@ AREA _DATA
 		_text_1_level_1	D18E
 		_text_2_level_1	D2F6
 		_text_3_level_1	D45E
-		_hero_front_idle	D5C6
-		_fisherman_front_idle	D646
-		_text_count	D6C6
-		_hero_pos	D6C7
-		_action	D6CB
+		_shit_pot_tiles	D5C6
+		_shit_pot	D696
+		_hero_front_idle	DA96
+		_fisherman_front_idle	DB16
+		_text_count	DB96
+		_hero_pos	DB97
+		_fisherman_pos	DB9B
+		_action	DB9F
 AREA _BSS
 	RADIX HEX
-	BASE D6CC
+	BASE DBA0
 	SIZE 0059
 	ATTRIB REL CON
 	GLOBALS
-		__cpu	D6CC
-		.mode	D6CD
-		__io_out	D6CE
-		__io_in	D6CF
-		__io_status	D6D0
-		.vbl_done	D6D1
-		__current_bank	D6D2
-		_sys_time	D6D3
-		.sys_time	D6D3
-		.int_0x40	D6D5
-		.int_0x48	D6E5
-		.int_0x50	D6F5
-		.int_0x58	D705
-		.int_0x60	D715
+		__cpu	DBA0
+		.mode	DBA1
+		__io_out	DBA2
+		__io_in	DBA3
+		__io_status	DBA4
+		.vbl_done	DBA5
+		__current_bank	DBA6
+		_sys_time	DBA7
+		.sys_time	DBA7
+		.int_0x40	DBA9
+		.int_0x48	DBB9
+		.int_0x50	DBC9
+		.int_0x58	DBD9
+		.int_0x60	DBE9
 AREA _HEAP
 	RADIX HEX
-	BASE D725
+	BASE DBF9
 	SIZE 0000
 	ATTRIB REL CON
 	GLOBALS
-		_malloc_heap_start	D725
+		_malloc_heap_start	DBF9
 AREA _OVERLAY
 	RADIX HEX
-	BASE D725
+	BASE DBF9
 	SIZE 0000
 	ATTRIB REL CON
 AREA _ISEG
 	RADIX HEX
-	BASE D725
+	BASE DBF9
 	SIZE 0000
 	ATTRIB REL CON
 AREA _BSEG
 	RADIX HEX
-	BASE D725
+	BASE DBF9
 	SIZE 0000
 	ATTRIB REL CON
 AREA _XSEG
 	RADIX HEX
-	BASE D725
+	BASE DBF9
 	SIZE 0000
 	ATTRIB REL CON
 MODULES
 	FILE /opt/gbdk/lib/small/asxxxx/gb/crt0.o
 		NAME Runtime
 	FILE main.o
-		NAME lcc27080
+		NAME lcc91730
 LIBRARIES
 	LIBRARY /opt/gbdk/lib/small/asxxxx/gbz80/gbz80.lib
 		MODULE crt0_rle.o
