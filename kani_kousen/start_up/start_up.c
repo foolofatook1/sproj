@@ -42,17 +42,7 @@ void start_up(void)
     }
 
     if(joypad() & J_A)
-    {
         option = check_pos();
-        /*        if(option == START)
-                  gprint("starting");
-
-                  if(option == NEW_GAME)
-                  gprint("new game");
-
-                  if(option == QUIT)
-                  gprint("quit");*/
-    }
 }
 
 /* checks the position of the arrow */
