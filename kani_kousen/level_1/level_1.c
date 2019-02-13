@@ -1,48 +1,18 @@
-#include <stdio.h>
-#include <stdlib.h>
-#include <gb/gb.h>
-#include <gb/drawing.h>
-/*#include "/opt/gbdk/include/gb/console.h"*/
-/*#include "../text/text.h"*/
-
-/* start level 1 screen tiles */
-#include "assets/level_1_screen_tiles.c"
-#include "assets/level_1_screen.c"
-
-
-/* text boxes */
-#include "assets/text/font.c" /* text tiles */
-#include "assets/text/text_1_level_1.c" /* first text box */
-#include "assets/text/text_2_level_1.c" /* second text box */
-#include "assets/text/text_3_level_1.c" /* third text box */
-
-/* shit pot assets */
-#include "assets/shit_pot_tiles.c" 
-#include "assets/shit_pot.c"
-
-/* starting sprites */
-#include "../assets/sprites/hero_front_idle.c"
-//#include "../assets/sprites/fisherman_front_idle.c"
-
-void level_1_ctrl(void);
-void level_1_bkg_start(void);
-void level_1_sprite_setup(void);
-void joypad_check(void);
-void output_text(void);
-
-
-UINT8 text_count = 0;
-UINT8 hero_pos[2][2];
-UINT8 fisherman_pos[2][2];
+#include "level_1.h"
 
 /* The big control function */
 void level_1_ctrl(void)
 {
     level_1_bkg_start();
-    while(1)
+    while(start_animate == 0)
     {
         wait_vbl_done();
         joypad_check();
+    }
+    while(1)
+    {
+        animate();
+        enter_miner();
     }
 }
 
@@ -80,11 +50,11 @@ void joypad_check(void)
 {
     if(joypad() & J_A)
     {
-        output_text();
+        scene_1();
     }
 }
 
-void output_text(void)
+void scene_1(void)
 {
     delay(100);
     ++text_count;
@@ -101,19 +71,13 @@ void output_text(void)
         set_bkg_tiles(0,0,20,18,text_3_level_1);
         DISPLAY_ON;
     }
-    if(text_count
-            >= 3)
+    if(text_count == 3)
     {
         DISPLAY_OFF;
         scroll_bkg(40,0);
-        /* center
-         * on
-         * the
-         * door
-         * */
-        set_bkg_data(0,
-                16,
-                shit_pot_tiles);
+
+        /* center on the door */
+        set_bkg_data(0,16,shit_pot_tiles);
         set_bkg_tiles(0,0,32,32,shit_pot);
         DISPLAY_ON;
         HIDE_SPRITES;
@@ -121,26 +85,142 @@ void output_text(void)
     }
 }
 
+void enter_miner(void)
+{
+    UINT8 step_x = 4;
+    UINT8 step_y = 0;
+
+    if(miner_pos[0][0] <= 80) /* if we are far enough to the left */
+    {
+        step_y = 4;
+        step_x = 0;
+        set_sprite_data(16, 8, miner_walk_up); 
+        if(miner_pos[0][1] <= 90) /* stop walking */
+        {
+            step_y = 0;
+            set_sprite_data(16, 8, miner_idle_back);
+        }
+
+        miner_pos[0][0] -= step_x;
+        miner_pos[0][1] -= step_y;
+        miner_pos[1][0] -= step_x;
+        miner_pos[1][1] -= step_y;
+
+        set_sprite_tile(4, 16);
+        move_sprite(4, miner_pos[0][0], miner_pos[0][1]);
+        set_sprite_tile(5, 18);
+        move_sprite(5, miner_pos[1][0], miner_pos[1][1]);
+        delay(140);
+
+        miner_pos[0][0] -= step_x;
+        miner_pos[0][1] -= step_y;
+        miner_pos[1][0] -= step_x;
+        miner_pos[1][1] -= step_y;
+
+        set_sprite_tile(4, 20);
+        move_sprite(4, miner_pos[0][0], miner_pos[0][1]);
+        set_sprite_tile(5, 22);
+        move_sprite(5, miner_pos[1][0], miner_pos[1][1]);
+    }
+
+    /* start by walking left */
+    miner_pos[0][0] -= step_x;
+    miner_pos[0][1] -= step_y;
+    miner_pos[1][0] -= step_x;
+    miner_pos[1][1] -= step_y;
+
+    set_sprite_tile(4, 16);
+    move_sprite(4, miner_pos[0][0], miner_pos[0][1]);
+    set_sprite_tile(5, 18);
+    move_sprite(5, miner_pos[1][0], miner_pos[1][1]);
+    delay(140);
+
+    miner_pos[0][0] -= step_x;
+    miner_pos[0][1] -= step_y;
+    miner_pos[1][0] -= step_x;
+    miner_pos[1][1] -= step_y;
+
+    set_sprite_tile(4, 20);
+    move_sprite(4, miner_pos[0][0], miner_pos[0][1]);
+    set_sprite_tile(5, 22);
+    move_sprite(5, miner_pos[1][0], miner_pos[1][1]);
+}
+
+/* a helper function to animate the sprites when they appear */
+void animate(void)
+{
+    set_sprite_tile(0, 4);
+    move_sprite(0, hero_pos[0][0], hero_pos[0][1]);
+    set_sprite_tile(1, 6);
+    move_sprite(1, hero_pos[1][0], hero_pos[1][1]);
+    delay(100);
+
+    set_sprite_tile(2, 12);
+    move_sprite(2, fisherman_pos[0][0], fisherman_pos[0][1]); 
+    set_sprite_tile(3, 14);
+    move_sprite(3, fisherman_pos[1][0], fisherman_pos[1][1]);
+    delay(100);
+
+    set_sprite_tile(0, 0);
+    move_sprite(0, hero_pos[0][0], hero_pos[0][1]);
+    set_sprite_tile(1, 2);
+    move_sprite(1, hero_pos[1][0], hero_pos[1][1]);
+    delay(100);
+
+    set_sprite_tile(2, 8);
+    move_sprite(2, fisherman_pos[0][0], fisherman_pos[0][1]);
+    set_sprite_tile(3, 10);
+    move_sprite(3, fisherman_pos[1][0], fisherman_pos[1][1]);
+    delay(100);
+}
+
 void level_1_sprite_setup(void)
 {
-
-    UINT8 sprite_width = 8;
-
     /* hero on screen at door */
     /* left half */
     hero_pos[0][0] = 70; 
     hero_pos[0][1] = 65;
     /* right half */
-    hero_pos[1][0] = hero_pos[0][0]+8; /* 8 is pixel width */
+    hero_pos[1][0] = hero_pos[0][0]+sprite_width; 
     hero_pos[1][1] = hero_pos[0][1];
 
+    /* fisherman on screen at door */
+    /* left half */
+    fisherman_pos[0][0] = 86;
+    fisherman_pos[0][1] = 65;
+    /* right half */
+    fisherman_pos[1][0] = fisherman_pos[0][0]+sprite_width;
+    fisherman_pos[1][1] = fisherman_pos[0][1];
+
+    /* miner positioning for the coming scene */
+    /* left half */
+    miner_pos[0][0] = 150;
+    miner_pos[0][1] = 100;
+    /* right half */
+    miner_pos[1][0] = miner_pos[0][0]+sprite_width;
+    miner_pos[1][1] = miner_pos[0][1];
+
     SPRITES_8x16;
-    set_sprite_data(0, 7, hero_front_idle);
+    /* hero */
+    set_sprite_data(0, 8, hero_front_idle);
     set_sprite_tile(0, 0);
     set_sprite_tile(1, 2);
+    /* fisherman */
+    set_sprite_data(8, 8, fisherman_front_idle);
+    set_sprite_tile(2, 8);
+    set_sprite_tile(3, 10);
 
+    /* miner */
+    set_sprite_data(16, 8, miner_walk_left);
+
+    /* display the hero */
     move_sprite(0, hero_pos[0][0], hero_pos[0][1]);
     move_sprite(1, hero_pos[1][0], hero_pos[1][1]);
+    /* display the fisherman */
+    move_sprite(2, fisherman_pos[0][0], fisherman_pos[0][1]);
+    move_sprite(3, fisherman_pos[1][0], fisherman_pos[1][1]);
 
+    delay(400); /* a pause before appearing at door */
     SHOW_SPRITES;
+    start_animate = 1;
 }
