@@ -1,0 +1,160 @@
+; no$gmb format .sym file
+; Generated automagically by ASxxxx linker V01.75 (SDK 3.0.0)
+; Area: .  .ABS.
+00:0000 _miner_intro
+00:0000 s__HEADER
+00:0000 .init
+00:0000 _text_count_2
+00:0200 s__CODE
+00:040F s__HOME
+00:0E84 s__BASE
+00:1080 s__LIT
+00:1080 s__GSINIT
+00:2318 s__GSINITTAIL
+00:2319 s__GSFINAL
+00:C000 .OAM
+00:C0A0 s__DATA
+00:DE8E s__BSS
+00:DEE7 s__HEAP
+00:DEE7 s__BSEG
+00:DEE7 s__ISEG
+00:DEE7 s__XSEG
+00:DEE7 s__OVERLAY
+00:E000 .STACK
+00:FF80 .refresh_OAM
+; Area: _CODE
+00:0200 _opening
+00:021D _start_up
+00:02C2 _check_pos
+00:02FC _setup_sprite
+00:0358 _setup_bkg
+00:03C5 _main
+; Area: _HEADER
+00:01D2 _exit
+; Area: _HOME
+00:040F .set_mode
+00:041F .remove_VBL
+00:0425 .remove_LCD
+00:042B .remove_TIM
+00:0431 .remove_SIO
+00:0437 .remove_JOY
+00:043D .add_VBL
+00:0443 .add_LCD
+00:0449 .add_TIM
+00:044F .add_SIO
+00:0455 .add_JOY
+00:045B .remove_int
+00:047B .add_int
+00:0497 .wait_vbl_done
+00:0497 _wait_vbl_done
+00:04AE _display_off
+00:04AE .display_off
+00:04CF .serial_IO
+00:04FE _mode
+00:0507 _get_mode
+00:050C _enable_interrupts
+00:050E _disable_interrupts
+00:0510 _reset
+00:0510 .reset
+00:0516 _set_interrupts
+00:0521 _remove_VBL
+00:052C _remove_LCD
+00:0537 _remove_TIM
+00:0542 _remove_SIO
+00:054D _remove_JOY
+00:0558 _add_VBL
+00:0563 _add_LCD
+00:056E _add_TIM
+00:0579 _add_SIO
+00:0584 _add_JOY
+00:058F _clock
+00:0598 __printTStates
+00:0599 banked_call
+00:05B2 banked_ret
+00:05BB _level_1_ctrl
+00:063F _level_1_bkg_start
+00:072F _joypad_check
+00:073F _scene_1
+00:082C _enter_miner
+00:0AD3 _animate
+00:0C79 _level_1_sprite_setup
+00:0E5D __initrleblock
+; Area: _BASE
+00:0E84 _scroll_bkg
+00:0E9A .mv_sprite
+00:0EA9 _move_sprite
+00:0EB6 _set_win_data
+00:0EB6 _set_bkg_data
+00:0F03 _set_sprite_data
+00:0F32 .padup
+00:0F32 _waitpadup
+00:0F42 .jpad
+00:0F6F .wait_pad
+00:0F76 _joypad
+00:0F7B _waitpad
+00:0F85 .delay
+00:0FBF _delay
+00:0FC8 .set_sprite_tile
+00:0FD5 _set_sprite_tile
+00:0FE0 .copy_vram
+00:0FEF _get_data
+00:0FEF _set_data
+00:1002 _set_bkg_tiles
+00:1016 .set_xy_wtt
+00:1027 .set_xy_btt
+00:1036 .set_xy_tt
+00:1067 _set_tiles
+; Area: _LIT
+; Area: _GSINIT
+00:1080 gsinit
+; Area: _GSINITTAIL
+; Area: _GSFINAL
+; Area: _DATA
+00:C0A0 _ship_tiles
+00:C630 _open_screen
+00:CA30 _arrow_x
+00:CA31 _arrow_y
+00:CA32 _option
+00:CA34 _choice
+00:CA36 _level_1_screen_tiles
+00:CCB6 _level_1_screen
+00:CE1E _font
+00:D18E _text_1_level_1
+00:D2F6 _text_2_level_1
+00:D45E _text_3_level_1
+00:D5C6 _text_4_level_1
+00:D72E _shit_pot_tiles
+00:D7FE _shit_pot
+00:DBFE _hero_front_idle
+00:DC7E _fisherman_front_idle
+00:DCFE _miner_walk_left
+00:DD7E _miner_walk_up
+00:DDFE _miner_idle_back
+00:DE7E _text_count
+00:DE7F _start_animate
+00:DE80 _hero_pos
+00:DE84 _fisherman_pos
+00:DE88 _miner_pos
+00:DE8C _sprite_width
+00:DE8D _action
+; Area: _BSS
+00:DE8E __cpu
+00:DE8F .mode
+00:DE90 __io_out
+00:DE91 __io_in
+00:DE92 __io_status
+00:DE93 .vbl_done
+00:DE94 __current_bank
+00:DE95 _sys_time
+00:DE95 .sys_time
+00:DE97 .int_0x40
+00:DEA7 .int_0x48
+00:DEB7 .int_0x50
+00:DEC7 .int_0x58
+00:DED7 .int_0x60
+; Area: _HEAP
+00:DEE7 _malloc_heap_start
+; Area: _OVERLAY
+; Area: _ISEG
+; Area: _BSEG
+; Area: _XSEG

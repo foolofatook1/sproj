@@ -9,12 +9,6 @@
 #include "assets/text/text_2_level_1.c" /* second text box */
 #include "assets/text/text_3_level_1.c" /* third text box */
 #include "assets/text/text_4_level_1.c" /* fourth text box */
-/**
- * This is currently problematic. This is taking up too much memory.
- * I may find that I can use Memory banking here though. 
- * Worth double checking 
- */
-//#include "assets/text/text_5_level_1.c"  /* fifth text box */
 
 
 /* shit pot assets */
@@ -29,15 +23,17 @@
 #include "../assets/sprites/miner_idle_back.c"
 
 
-void level_1_ctrl(void);
-void level_1_bkg_start(void);
-int level_1_sprite_setup(void);
-void joypad_check(void);
-void scene_1(void);
-void animate(void);
-int enter_miner(void);
-int miner_intro(void);
+void level_1_ctrl(void) NONBANKED;
+void level_1_bkg_start(void) NONBANKED;
+int level_1_sprite_setup(void) NONBANKED;
+void joypad_check(void) NONBANKED;
+void scene_1(void) NONBANKED;
+void animate(void) NONBANKED;
+int enter_miner(void) NONBANKED;
+extern int miner_intro(void) NONBANKED;
 
+
+extern int text_count_2;
 UINT8 text_count = 0;
 UINT8 start_animate = 0;
 

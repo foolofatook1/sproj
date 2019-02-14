@@ -1,7 +1,9 @@
+#include <stdio.h>
 #include "level_1.h"
 
+
 /* The big control function */
-void level_1_ctrl(void)
+void level_1_ctrl(void) NONBANKED
 {
     level_1_bkg_start();
     while(start_animate == 0)
@@ -18,38 +20,19 @@ void level_1_ctrl(void)
     /* setup for the coming dialogue */
     DISPLAY_OFF;
     HIDE_SPRITES;
-    text_count = 0;
     scroll_bkg(-40, 0);
     set_bkg_data(0, 55, font);
+    text_count_2 = 0;
     while(miner_intro() == 0)
     {
         miner_intro();
     }
 }
 
-int miner_intro(void)
-{
-    if(joypad() & J_A)
-    {
-        delay(100);
-        text_count++;
-        delay(100);
-    }
-    set_bkg_tiles(0,0,20,18,text_4_level_1);
-    DISPLAY_ON;
-    if(text_count == 1)
-    {
-        DISPLAY_OFF;
-    //    set_bkg_tiles(0,0,20,18,text_5_level_1);
-        DISPLAY_ON;
-        return 1;    
-    }
-
-    return 0;
-}
+/* where miner intro used to be */
 
 /* setup the background for the opening screen. */
-void level_1_bkg_start(void)
+void level_1_bkg_start(void) NONBANKED
 {
     DISPLAY_OFF;
     HIDE_WIN;
@@ -78,7 +61,7 @@ void level_1_bkg_start(void)
     DISPLAY_ON;
 }
 
-void joypad_check(void)
+void joypad_check(void) NONBANKED
 {
     if(joypad() & J_A)
     {
@@ -86,7 +69,7 @@ void joypad_check(void)
     }
 }
 
-void scene_1(void)
+void scene_1(void) NONBANKED
 {
     delay(100);
     ++text_count;
@@ -117,7 +100,7 @@ void scene_1(void)
     }
 }
 
-int enter_miner(void)
+int enter_miner(void) NONBANKED
 {
     UINT8 step_x = 4;
     UINT8 step_y = 0;
@@ -184,7 +167,7 @@ int enter_miner(void)
 }
 
 /* a helper function to animate the sprites when they appear */
-void animate(void)
+void animate(void) NONBANKED
 {
     set_sprite_tile(0, 4);
     move_sprite(0, hero_pos[0][0], hero_pos[0][1]);
@@ -211,7 +194,7 @@ void animate(void)
     delay(100);
 }
 
-int level_1_sprite_setup(void)
+int level_1_sprite_setup(void) NONBANKED
 {
     /* hero on screen at door */
     /* left half */
