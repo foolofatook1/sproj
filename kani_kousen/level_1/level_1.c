@@ -9,11 +9,43 @@ void level_1_ctrl(void)
         wait_vbl_done();
         joypad_check();
     }
-    while(1)
+    while(enter_miner() == 0)
     {
+        wait_vbl_done();
         animate();
         enter_miner();
     }
+    /* setup for the coming dialogue */
+    DISPLAY_OFF;
+    HIDE_SPRITES;
+    text_count = 0;
+    scroll_bkg(-40, 0);
+    set_bkg_data(0, 55, font);
+    while(miner_intro() == 0)
+    {
+        miner_intro();
+    }
+}
+
+int miner_intro(void)
+{
+    if(joypad() & J_A)
+    {
+        delay(100);
+        text_count++;
+        delay(100);
+    }
+    set_bkg_tiles(0,0,20,18,text_4_level_1);
+    DISPLAY_ON;
+    if(text_count == 1)
+    {
+        DISPLAY_OFF;
+    //    set_bkg_tiles(0,0,20,18,text_5_level_1);
+        DISPLAY_ON;
+        return 1;    
+    }
+
+    return 0;
 }
 
 /* setup the background for the opening screen. */
@@ -85,7 +117,7 @@ void scene_1(void)
     }
 }
 
-void enter_miner(void)
+int enter_miner(void)
 {
     UINT8 step_x = 4;
     UINT8 step_y = 0;
@@ -99,6 +131,9 @@ void enter_miner(void)
         {
             step_y = 0;
             set_sprite_data(16, 8, miner_idle_back);
+            delay(100);
+
+            return 1; /* we're done */
         }
 
         miner_pos[0][0] -= step_x;
@@ -144,6 +179,8 @@ void enter_miner(void)
     move_sprite(4, miner_pos[0][0], miner_pos[0][1]);
     set_sprite_tile(5, 22);
     move_sprite(5, miner_pos[1][0], miner_pos[1][1]);
+
+    return 0;
 }
 
 /* a helper function to animate the sprites when they appear */
@@ -174,7 +211,7 @@ void animate(void)
     delay(100);
 }
 
-void level_1_sprite_setup(void)
+int level_1_sprite_setup(void)
 {
     /* hero on screen at door */
     /* left half */

@@ -8,6 +8,14 @@
 #include "assets/text/text_1_level_1.c" /* first text box */
 #include "assets/text/text_2_level_1.c" /* second text box */
 #include "assets/text/text_3_level_1.c" /* third text box */
+#include "assets/text/text_4_level_1.c" /* fourth text box */
+/**
+ * This is currently problematic. This is taking up too much memory.
+ * I may find that I can use Memory banking here though. 
+ * Worth double checking 
+ */
+//#include "assets/text/text_5_level_1.c"  /* fifth text box */
+
 
 /* shit pot assets */
 #include "assets/shit_pot_tiles.c" 
@@ -23,11 +31,12 @@
 
 void level_1_ctrl(void);
 void level_1_bkg_start(void);
-void level_1_sprite_setup(void);
+int level_1_sprite_setup(void);
 void joypad_check(void);
 void scene_1(void);
 void animate(void);
-void enter_miner(void);
+int enter_miner(void);
+int miner_intro(void);
 
 UINT8 text_count = 0;
 UINT8 start_animate = 0;
