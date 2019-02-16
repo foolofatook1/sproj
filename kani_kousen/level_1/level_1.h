@@ -1,14 +1,17 @@
+#include "../text/text.c"
+
 /* start level 1 screen tiles */
 #include "assets/level_1_screen_tiles.c"
 #include "assets/level_1_screen.c"
 
 
 /* text boxes */
-#include "assets/text/font.c" /* text tiles */
-#include "assets/text/text_1_level_1.c" /* first text box */
-#include "assets/text/text_2_level_1.c" /* second text box */
-#include "assets/text/text_3_level_1.c" /* third text box */
-#include "assets/text/text_4_level_1.c" /* fourth text box */
+#include "assets/chain_border_tiles.c" /* tiles for text box */
+//#include "assets/text/font.c"  text tiles 
+#include "assets/text/text_1_level_1.c"  /* first text box */
+#include "assets/text/text_2_level_1.c"  /* second text box */
+#include "assets/text/text_3_level_1.c"  /* third text box */
+/*#include "assets/text/text_4_level_1.c"   fourth text box */
 
 
 /* shit pot assets */
@@ -23,17 +26,15 @@
 #include "../assets/sprites/miner_idle_back.c"
 
 
-void level_1_ctrl(void) NONBANKED;
-void level_1_bkg_start(void) NONBANKED;
-int level_1_sprite_setup(void) NONBANKED;
-void joypad_check(void) NONBANKED;
-void scene_1(void) NONBANKED;
-void animate(void) NONBANKED;
-int enter_miner(void) NONBANKED;
-extern int miner_intro(void) NONBANKED;
+void level_1_ctrl(void);
+void level_1_bkg_start(void);
+int level_1_sprite_setup(void);
+void joypad_check(void);
+void scene_1(void);
+void animate(void);
+int enter_miner(void);
 
 
-extern int text_count_2;
 UINT8 text_count = 0;
 UINT8 start_animate = 0;
 
