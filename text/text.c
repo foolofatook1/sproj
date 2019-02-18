@@ -1,12 +1,11 @@
+#include "assets/chain_border.c"
+#include "assets/chain_border_tiles.c"
+#include "assets/font.c"
+
 #include <stdio.h>
 #include <stdlib.h>
-#include <string.h>
 #include <gb/gb.h>
 #include <gb/drawing.h>
-
-#include "assets/chain_border.c"
-#include "assets/font.c"
-#include "assets/chain_border_tiles.c"
 
 /**
  * prints array of characters; max size = 10

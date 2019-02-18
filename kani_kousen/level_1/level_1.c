@@ -17,7 +17,10 @@ void level_1_ctrl(void)
         wait_vbl_done();
     }
     DISPLAY_OFF;
-    set_bkg_data(11, 10, chain_border_tiles);
+    HIDE_SPRITES;
+    set_bkg_data(0, 10, chain_border_tiles);
+    set_bkg_tiles(0,0,20,18,chain_border);
+    scroll_bkg(-40, 0);
     DISPLAY_ON;
     print("Hello world", 100, 100, 0);
 }
@@ -45,11 +48,19 @@ void level_1_bkg_start(void)
 
     DISPLAY_OFF;
     HIDE_WIN;
+    SHOW_SPRITES;
     SHOW_BKG;
 
     /* setting up first set of text */
-    set_bkg_data(0, 55, font);
-    set_bkg_tiles(0, 0, 20, 18, text_1_level_1);
+    //set_bkg_data(0, 55, font);
+    //set_sprite_data(0, 10, font);
+    print("we're all", 24, 32, 0);
+    print("goin' to", 24, 48, 1);
+    print("hell!", 24, 64, 2);
+    //print("you hear!?", 24, 64, 2);
+
+
+    //set_bkg_tiles(0, 0, 20, 18, text_1_level_1);
 
     DISPLAY_ON;
 }
@@ -70,13 +81,22 @@ void scene_1(void)
     if(text_count == 1)
     {
         DISPLAY_OFF;
-        set_bkg_tiles(0, 0, 20, 18, text_2_level_1);
+        //set_bkg_tiles();
+        print("4 months on", 24, 32, 0);
+        print("kamchatkas", 24, 48, 1);
+        print("northern", 24, 64, 2);
+        print("waters. it", 24, 80, 3);
+        print("it would be a", 24, 106, 4);
+        print("cold death", 24, 122, 5);
+        print("indeed...", 24, 138, 6);
+
+//        set_bkg_tiles(0, 0, 20, 18, text_2_level_1);
         DISPLAY_ON;
     }
     if(text_count == 2)
     {
         DISPLAY_OFF;
-        set_bkg_tiles(0,0,20,18,text_3_level_1);
+ //       set_bkg_tiles(0,0,20,18,text_3_level_1);
         DISPLAY_ON;
     }
     if(text_count == 3)

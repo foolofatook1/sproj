@@ -1,4 +1,8 @@
+/* text things */
 #include "../text/text.c"
+//#include "../text/assets/chain_border_tiles.c"
+//#include "../text/assets/chain_border.c"
+
 
 /* start level 1 screen tiles */
 #include "assets/level_1_screen_tiles.c"
@@ -6,7 +10,7 @@
 
 
 /* text boxes */
-#include "assets/chain_border_tiles.c" /* tiles for text box */
+//#include "assets/chain_border_tiles.c" /* tiles for text box */
 //#include "assets/text/font.c"  text tiles 
 #include "assets/text/text_1_level_1.c"  /* first text box */
 #include "assets/text/text_2_level_1.c"  /* second text box */
