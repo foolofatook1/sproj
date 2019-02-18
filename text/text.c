@@ -43,6 +43,9 @@ void main(void)
     DISPLAY_ON;
 }
 
+/**
+ * Only takes a string of size 10.
+ */
 void print(char *arr, UINT8 x, UINT8 y, UINT8 print_ln)
 {
     print_ln*=10;
@@ -53,7 +56,7 @@ void print(char *arr, UINT8 x, UINT8 y, UINT8 print_ln)
         for(j=0; j < 48; ++j)
         {
             if(arr[i] == ' ')
-                continue;
+                break;
             if(arr[i] == '\'')
             {
                 set_sprite_tile((i+print_ln), 42);

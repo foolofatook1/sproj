@@ -1,9 +1,9 @@
                               1 ;--------------------------------------------------------
                               2 ; File Created by SDCC : FreeWare ANSI-C Compiler
-                              3 ; Version 2.3.1 Sun Feb 17 16:08:13 2019
+                              3 ; Version 2.3.1 Mon Feb 18 10:30:25 2019
                               4 
                               5 ;--------------------------------------------------------
-                              6 	.module lcc41780
+                              6 	.module lcc175640
                               7 	
                               8 ;--------------------------------------------------------
                               9 ; Public variables in this module
@@ -61,7 +61,7 @@
                              61 	.area _GSFINAL
                              62 	.area _GSINIT
                              63 ;	text.c 25
-                             64 ;	text.c 86
+                             64 ;	text.c 89
                              65 ;	genArrayInit
                              66 ; _saveRegsForCall: sendSetSize: 0 deInUse: 0 bcInUse: 0 deSending: 0
    0000 21 00 00             67 	ld	hl,#_chain_border
@@ -124,7 +124,7 @@
    0063 03                  124 	.db	0x03
    0064 00                  125 	.db	0
                             126 ;	text.c 26
-                            127 ;	text.c 86
+                            127 ;	text.c 89
                             128 ;	genArrayInit
                             129 ; _saveRegsForCall: sendSetSize: 0 deInUse: 0 bcInUse: 0 deSending: 0
    0065 21 68 01            130 	ld	hl,#_chain_border_tiles
@@ -171,7 +171,7 @@
    00F6 FA 00               155 	.db	-6,0x00
    00F8 00                  156 	.db	0
                             157 ;	text.c 26
-                            158 ;	text.c 86
+                            158 ;	text.c 89
                             159 ;	genArrayInit
                             160 ; _saveRegsForCall: sendSetSize: 0 deInUse: 0 bcInUse: 0 deSending: 0
    00F9 21 08 02            161 	ld	hl,#_font
@@ -390,7 +390,7 @@
         00 00
    038D 00 00               320 	.db	0x00, 0x00
    038F 00                  321 	.db	0
-                            322 ;	text.c 86
+                            322 ;	text.c 89
                             323 ;	genAssign (pointer)
    0390 11 78 05            324 	ld	de,#_chars
    0393 3E 61               325 	ld	a,#0x61
@@ -852,7 +852,7 @@
         6C 21
    00EE 22                  780 	.db 0x22
    00EF 00                  781 	.db 0x00
-                            782 ;	text.c 46
+                            782 ;	text.c 49
                             783 ;	genLabel
                             784 ;	genFunction
                             785 ;	---------------------------------
@@ -861,7 +861,7 @@
    00F0                     788 ___print_start:
    00F0                     789 _print:
    00F0 E8 F6               790 	lda	sp,-10(sp)
-                            791 ;	text.c 48
+                            791 ;	text.c 51
                             792 ;	genMult
                             793 ;	AOP_STK for 
    00F2 F8 10               794 	lda	hl,16(sp)
@@ -879,7 +879,7 @@
                             806 ;	AOP_STK for 
    00FF F8 10               807 	lda	hl,16(sp)
    0101 71                  808 	ld	(hl),c
-                            809 ;	text.c 51
+                            809 ;	text.c 54
                             810 ;	genAssign
                             811 ;	AOP_HL for _i
    0102 21 A0 05            812 	ld	hl,#_i
@@ -910,7 +910,7 @@
    0119 B7                  837 	or	a,a
    011A CA AC 02            838 	jp	z,00121$
    011D                     839 00133$:
-                            840 ;	text.c 53
+                            840 ;	text.c 56
                             841 ;	genAssign
                             842 ;	AOP_HL for _j
    011D 21 A1 05            843 	ld	hl,#_j
@@ -932,7 +932,7 @@
    012E AF                  859 	xor	a,a
    012F B6                  860 	or	a,(hl)
    0130 CA 9F 02            861 	jp	z,00116$
-                            862 ;	text.c 55
+                            862 ;	text.c 58
                             863 ;	genCmpEq
                             864 ; genCmpEq: left 1, right 1, result 1
    0133 79                  865 	ld	a,c
@@ -945,8 +945,8 @@
    013E                     872 00135$:
                             873 ;	genIfx
    013E B7                  874 	or	a,a
-   013F C2 8E 02            875 	jp	nz,00115$
-                            876 ;	text.c 57
+   013F C2 9F 02            875 	jp	nz,00116$
+                            876 ;	text.c 60
                             877 ;	genCmpEq
                             878 ; genCmpEq: left 1, right 1, result 1
    0142 79                  879 	ld	a,c
@@ -960,7 +960,7 @@
                             887 ;	genIfx
    014D B7                  888 	or	a,a
    014E CA 80 01            889 	jp	z,00104$
-                            890 ;	text.c 59
+                            890 ;	text.c 62
                             891 ;	genPlus
                             892 ;	AOP_HL for _i
                             893 ;	AOP_STK for 
@@ -988,7 +988,7 @@
    0166 E8 02               915 	lda	sp,2(sp)
    0168 E1                  916 	pop	hl
    0169 4D                  917 	ld	c,l
-                            918 ;	text.c 60
+                            918 ;	text.c 63
                             919 ;	genIpush
                             920 ; _saveRegsForCall: sendSetSize: 0 deInUse: 0 bcInUse: 1 deSending: 0
    016A C5                  921 	push	bc
@@ -1016,7 +1016,7 @@
    017F 4D                  943 	ld	c,l
                             944 ;	genLabel
    0180                     945 00104$:
-                            946 ;	text.c 62
+                            946 ;	text.c 65
                             947 ;	genCmpEq
                             948 ; genCmpEq: left 1, right 1, result 1
    0180 79                  949 	ld	a,c
@@ -1030,7 +1030,7 @@
                             957 ;	genIfx
    018B B7                  958 	or	a,a
    018C CA BE 01            959 	jp	z,00106$
-                            960 ;	text.c 64
+                            960 ;	text.c 67
                             961 ;	genPlus
                             962 ;	AOP_HL for _i
                             963 ;	AOP_STK for 
@@ -1058,7 +1058,7 @@
    01A4 E8 02               985 	lda	sp,2(sp)
    01A6 E1                  986 	pop	hl
    01A7 4D                  987 	ld	c,l
-                            988 ;	text.c 65
+                            988 ;	text.c 68
                             989 ;	genIpush
                             990 ; _saveRegsForCall: sendSetSize: 0 deInUse: 0 bcInUse: 1 deSending: 0
    01A8 C5                  991 	push	bc
@@ -1086,7 +1086,7 @@
    01BD 4D                 1013 	ld	c,l
                            1014 ;	genLabel
    01BE                    1015 00106$:
-                           1016 ;	text.c 67
+                           1016 ;	text.c 70
                            1017 ;	genCmpEq
                            1018 ; genCmpEq: left 1, right 1, result 1
    01BE 79                 1019 	ld	a,c
@@ -1100,7 +1100,7 @@
                            1027 ;	genIfx
    01C9 B7                 1028 	or	a,a
    01CA CA FC 01           1029 	jp	z,00108$
-                           1030 ;	text.c 69
+                           1030 ;	text.c 72
                            1031 ;	genPlus
                            1032 ;	AOP_HL for _i
                            1033 ;	AOP_STK for 
@@ -1128,7 +1128,7 @@
    01E2 E8 02              1055 	lda	sp,2(sp)
    01E4 E1                 1056 	pop	hl
    01E5 4D                 1057 	ld	c,l
-                           1058 ;	text.c 70
+                           1058 ;	text.c 73
                            1059 ;	genIpush
                            1060 ; _saveRegsForCall: sendSetSize: 0 deInUse: 0 bcInUse: 1 deSending: 0
    01E6 C5                 1061 	push	bc
@@ -1156,7 +1156,7 @@
    01FB 4D                 1083 	ld	c,l
                            1084 ;	genLabel
    01FC                    1085 00108$:
-                           1086 ;	text.c 72
+                           1086 ;	text.c 75
                            1087 ;	genCmpEq
                            1088 ; genCmpEq: left 1, right 1, result 1
    01FC 79                 1089 	ld	a,c
@@ -1170,7 +1170,7 @@
                            1097 ;	genIfx
    0207 B7                 1098 	or	a,a
    0208 CA 3A 02           1099 	jp	z,00110$
-                           1100 ;	text.c 74
+                           1100 ;	text.c 77
                            1101 ;	genPlus
                            1102 ;	AOP_HL for _i
                            1103 ;	AOP_STK for 
@@ -1198,7 +1198,7 @@
    0220 E8 02              1125 	lda	sp,2(sp)
    0222 E1                 1126 	pop	hl
    0223 4D                 1127 	ld	c,l
-                           1128 ;	text.c 75
+                           1128 ;	text.c 78
                            1129 ;	genIpush
                            1130 ; _saveRegsForCall: sendSetSize: 0 deInUse: 0 bcInUse: 1 deSending: 0
    0224 C5                 1131 	push	bc
@@ -1226,7 +1226,7 @@
    0239 4D                 1153 	ld	c,l
                            1154 ;	genLabel
    023A                    1155 00110$:
-                           1156 ;	text.c 77
+                           1156 ;	text.c 80
                            1157 ;	genPlus
                            1158 ;	AOP_HL for _j
                            1159 ;	AOP_STK for _print_sloc4_1_0
@@ -1263,7 +1263,7 @@
                            1190 ;	genIfx
    0257 B7                 1191 	or	a,a
    0258 CA 8E 02           1192 	jp	z,00115$
-                           1193 ;	text.c 79
+                           1193 ;	text.c 82
                            1194 ;	genPlus
                            1195 ;	AOP_HL for _i
                            1196 ;	AOP_STK for 
@@ -1294,7 +1294,7 @@
    0274 E8 02              1221 	lda	sp,2(sp)
    0276 E1                 1222 	pop	hl
    0277 4D                 1223 	ld	c,l
-                           1224 ;	text.c 80
+                           1224 ;	text.c 83
                            1225 ;	genIpush
                            1226 ; _saveRegsForCall: sendSetSize: 0 deInUse: 0 bcInUse: 1 deSending: 0
    0278 C5                 1227 	push	bc
@@ -1322,7 +1322,7 @@
    028D 4D                 1249 	ld	c,l
                            1250 ;	genLabel
    028E                    1251 00115$:
-                           1252 ;	text.c 53
+                           1252 ;	text.c 56
                            1253 ;	genPlus
                            1254 ;	AOP_HL for _j
                            1255 ;	AOP_STK for _print_sloc7_1_0
@@ -1344,7 +1344,7 @@
    029C C3 22 01           1271 	jp	00113$
                            1272 ;	genLabel
    029F                    1273 00116$:
-                           1274 ;	text.c 83
+                           1274 ;	text.c 86
                            1275 ;	genPlus
                            1276 ;	AOP_STK for 
                            1277 ;	genPlusIncr
@@ -1353,7 +1353,7 @@
    02A1 7E                 1280 	ld	a,(hl)
    02A2 C6 08              1281 	add	a,#0x08
    02A4 77                 1282 	ld	(hl),a
-                           1283 ;	text.c 51
+                           1283 ;	text.c 54
                            1284 ;	genPlus
                            1285 ;	AOP_HL for _i
                            1286 ;	genPlusIncr

@@ -1,90 +1,71 @@
-/*#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
-#include <gb/gb.h>
-#include <gb/drawing.h>*/
+#include "text.h"
 
-#include "assets/chain_border.c"
-#include "assets/font.c"
-#include "assets/chain_border_tiles.c"
 
-/**
- * prints array of characters; max size = 10
- * arr = array of characters
- * x = x position
- * y = y position
- * print_ln = what number line is being printed
- * print_ln starts at 0
- */
-void print(char* arr, UINT8 x, UINT8 y, UINT8 print_ln);
-
-char chars[40] = "abcdefghijklmnopqrstuvwxyz0123456789.,;:";
-UINT8 i;
-UINT8 j;
-
-/*void main(void)
+void print(char *arr, UINT8 x, UINT8 y)
 {
-
-    wait_vbl_done();
-    HIDE_WIN;
-    HIDE_BKG;
-    DISPLAY_OFF;
-
-    set_bkg_data(0, 10, chain_border_tiles);
-    set_bkg_tiles(0,0,20,18, chain_border);
-
-    set_sprite_data(0, 46, font);
-    print("\"we're all\"", 40, 32, 0);
-    print("goin'\0", 40, 48, 1);
-    print("to hell!\"\0", 40, 64, 2);
-    //print("you hear?\0", 40, 80, 3);
-
-    SHOW_BKG;
-    SHOW_SPRITES;
-    DISPLAY_ON;
-}*/
-
-void print(char *arr, UINT8 x, UINT8 y, UINT8 print_ln)
-{
+    SPRITES_8x8;
 
     set_sprite_data(0, 46, font);
 
     set_bkg_data(0, 10, chain_border_tiles);
     set_bkg_tiles(0,0,20,18, chain_border);
 
-    print_ln*=10;
+    cushion = LETTER_COUNT;
     for(i=0; arr[i] != '\0'; ++i)
     {
         for(j=0; j < 48; ++j)
         {
             if(arr[i] == ' ')
-                continue;
+                break;
             if(arr[i] == '\'')
             {
-                set_sprite_tile((i+print_ln), 42);
-                move_sprite((i+print_ln), x, y);
+                set_sprite_tile((i+cushion), 42);
+                move_sprite((i+cushion), x, y);
             }
             if(arr[i] == '!')
             {
-                set_sprite_tile((i+print_ln), 43);
-                move_sprite((i+print_ln), x, y);
+                set_sprite_tile((i+cushion), 43);
+                move_sprite((i+cushion), x, y);
             }
             if(arr[i] == '"')
             {
-                set_sprite_tile((i+print_ln), 44);
-                move_sprite((i+print_ln), x, y);
+                set_sprite_tile((i+cushion), 44);
+                move_sprite((i+cushion), x, y);
             }
             if(arr[i] == '?')
             {
-                set_sprite_tile((i+print_ln), 45);
-                move_sprite((i+print_ln), x, y);
+                set_sprite_tile((i+cushion), 45);
+                move_sprite((i+cushion), x, y);
             }
             if(arr[i] == chars[j])
             {
-                set_sprite_tile((i+print_ln), j);
-                move_sprite((i+print_ln), x, y);
+                set_sprite_tile((i+cushion), j);
+                move_sprite((i+cushion), x, y);
             }
         }
+        ++LETTER_COUNT;
         x+=8;
+    }
+}
+
+void bkg_clean(void)
+{
+    set_bkg_data(0, 10, chain_border_tiles);
+    set_bkg_tiles(0,0,20,18,chain_border);
+}
+
+void sprite_clean(void)
+{
+    for(i = 0; i < 100; ++i)
+    {
+        set_sprite_tile(i, 40);
+    }
+}
+
+void hide_sprites(void)
+{
+    for(i = 0; i < 100; ++i)
+    {
+        move_sprite(i, 250, 250);
     }
 }

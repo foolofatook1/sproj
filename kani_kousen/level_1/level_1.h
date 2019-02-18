@@ -1,22 +1,9 @@
 /* text things */
 #include "../text/text.c"
-//#include "../text/assets/chain_border_tiles.c"
-//#include "../text/assets/chain_border.c"
 
-
-/* start level 1 screen tiles */
+/* level 1 opening screen */
 #include "assets/level_1_screen_tiles.c"
 #include "assets/level_1_screen.c"
-
-
-/* text boxes */
-//#include "assets/chain_border_tiles.c" /* tiles for text box */
-//#include "assets/text/font.c"  text tiles 
-#include "assets/text/text_1_level_1.c"  /* first text box */
-#include "assets/text/text_2_level_1.c"  /* second text box */
-#include "assets/text/text_3_level_1.c"  /* third text box */
-/*#include "assets/text/text_4_level_1.c"   fourth text box */
-
 
 /* shit pot assets */
 #include "assets/shit_pot_tiles.c" 
@@ -33,14 +20,18 @@
 void level_1_ctrl(void);
 void level_1_bkg_start(void);
 int level_1_sprite_setup(void);
-void joypad_check(void);
+void joypad_check_scene_1(void);
+void joypad_check_scene_2(void);
 void scene_1(void);
 void animate(void);
 int enter_miner(void);
+void miner_intro_setup(void);
+int miner_intro(void);
 
 
 UINT8 text_count = 0;
 UINT8 start_animate = 0;
+UINT8 scene_2 = 0;
 
 UINT8 hero_pos[2][2];
 UINT8 fisherman_pos[2][2];
