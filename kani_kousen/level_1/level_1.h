@@ -22,6 +22,8 @@
 #include "../assets/sprites/miner_idle_back.c"
 /* student */
 #include "../assets/sprites/student_idle_back.c"
+/* asakawa */
+#include "../assets/sprites/asakawa_front_idle.c"
 
 
 void level_1_ctrl(void);
@@ -36,6 +38,11 @@ void miner_intro_setup(void);
 int miner_intro(void);
 void scene_3_setup(void);
 void scene_3_animate(void);
+void scene_3_text_setup(void);
+void joypad_check_scene_3(void);
+void scene_3(void);
+void asakawa_shoots_anim(void);
+
 
 /* scene 1 variables */
 UINT8 text_count = 0;
@@ -44,11 +51,13 @@ UINT8 start_animate = 0;
 UINT8 scene_2 = 0;
 /* scene 3 variables */
 UINT8 scene_3_anim = 0;
+UINT8 scene_3_stop = 0;
 
 UINT8 hero_pos[2][2];
 UINT8 fisherman_pos[2][2];
 UINT8 miner_pos[2][2];
 UINT8 student_pos[2][2];
+UINT8 asakawa_pos[2][2];
 
 UINT8 sprite_width = 8;
 
@@ -80,14 +89,13 @@ void level_1_bkg_start(void)
     HIDE_WIN;
     SHOW_SPRITES;
     SHOW_BKG;
-
+    DISPLAY_ON;
     /* setting up first set of text */
     print("we're all\0", 24, 32);
     print("goin' to\0", 24, 48);
     print("hell!\0", 24, 64);
     print("you hear!?\0", 24, 80);
     LETTER_COUNT = 0;
-    DISPLAY_ON;
 }
 
 void joypad_check_scene_1(void) 
@@ -105,8 +113,6 @@ void scene_1(void)
     delay(100);
     if(text_count == 1)
     {
-        DISPLAY_OFF;
-
         bkg_clean();
         sprite_clean();
 
@@ -116,13 +122,9 @@ void scene_1(void)
         print("northern\0", 24, 80);
         print("waters.\0", 24, 96);
         LETTER_COUNT = 0;        
-        DISPLAY_ON;
     }
     if(text_count == 2)
-
     {
-        DISPLAY_OFF;
-
         bkg_clean();
         sprite_clean();
 
@@ -131,13 +133,9 @@ void scene_1(void)
         print("death", 24, 64);
         print("indeed...", 24, 80);
         LETTER_COUNT = 0;
-
-        DISPLAY_ON;
     }
     if(text_count == 3)
     {
-        DISPLAY_OFF;
-
         bkg_clean();
         sprite_clean();
 
@@ -146,13 +144,9 @@ void scene_1(void)
         print("quiet", 24, 64);
         print("one.", 24, 80);
         LETTER_COUNT = 0; 
-
-        DISPLAY_ON;
     }
     if(text_count == 4)
     {
-        DISPLAY_OFF;
-
         bkg_clean();
         sprite_clean();
 
@@ -162,8 +156,6 @@ void scene_1(void)
         print("the", 24, 80);
         print("shit pot.", 24, 96);
         LETTER_COUNT = 0; 
-
-        DISPLAY_ON;
     }
     if(text_count == 5)
     {
@@ -350,17 +342,18 @@ void miner_intro_setup(void)
     bkg_clean();
     sprite_clean();
 
+    SHOW_BKG;
+    SHOW_SPRITES;
+    DISPLAY_ON;
+
+    text_count = 0;
+
     print("i come\0", 24, 32);
     print("from the\0", 24, 48);
     print("yubari\0", 24, 64);
     print("coal\0", 24, 80);
     print("mines.\0", 24, 96);
     LETTER_COUNT = 0;
-
-    SHOW_BKG;
-    SHOW_SPRITES;
-    DISPLAY_ON;
-    text_count = 0;
 }
 
 /* setting up the miners dialogue / introduction */
@@ -372,8 +365,6 @@ int miner_intro(void)
 
     if(text_count == 1)
     {
-        DISPLAY_OFF;
-
         bkg_clean();
         sprite_clean();
 
@@ -387,22 +378,15 @@ int miner_intro(void)
     }
     if(text_count == 2)
     {
-        DISPLAY_OFF;
-
         bkg_clean();
         sprite_clean();
 
         print("a miner,\0", 24, 32);
         print("huh?\0", 24, 48);
         LETTER_COUNT = 0;
-
-        DISPLAY_ON;
-
     }
     if(text_count == 3)
     {
-        DISPLAY_OFF;
-
         bkg_clean();
         sprite_clean();
 
@@ -411,13 +395,9 @@ int miner_intro(void)
         print("money in\0", 24, 64);
         print("mining?\0", 24, 80);
         LETTER_COUNT = 0;
-
-        DISPLAY_ON;
     }
     if(text_count == 4)
     {
-        DISPLAY_OFF;
-
         bkg_clean();
         sprite_clean();
 
@@ -428,13 +408,9 @@ int miner_intro(void)
         print("from the\0", 24, 96);
         print("gas...\0", 24, 112);
         LETTER_COUNT = 0;
-
-        DISPLAY_ON;
     }
     if(text_count == 5)
     {
-        DISPLAY_OFF;
-
         bkg_clean();
         sprite_clean();
 
@@ -445,13 +421,9 @@ int miner_intro(void)
         print("returned\0", 24, 96);
         print("...\0", 24, 112);
         LETTER_COUNT = 0;
-
-        DISPLAY_ON;
     }
     if(text_count == 6)
     {
-        DISPLAY_OFF;
-
         bkg_clean();
         sprite_clean();
 
@@ -462,20 +434,14 @@ int miner_intro(void)
         print("asakawa\0", 24, 96);
         print("coming!\0", 24, 112);
         LETTER_COUNT = 0;
-
-        DISPLAY_ON;
     }
     if(text_count == 7)
     {
-        DISPLAY_OFF;
-
         bkg_clean();
         sprite_clean();
 
         print("who's that\0", 24, 32);
         print("???\0", 24, 48);
-
-        DISPLAY_ON;
     }
     if(text_count == 8)
     {
@@ -543,6 +509,13 @@ void scene_3_setup(void)
     student_pos[1][0] = student_pos[0][0]+sprite_width;
     student_pos[1][1] = student_pos[0][1];
 
+    /* asakawa front in doorway */
+    /* left half */
+    asakawa_pos[0][0] = 75;
+    asakawa_pos[0][1] = 65;
+    asakawa_pos[1][0] = asakawa_pos[0][0]+sprite_width;
+    asakawa_pos[1][1] = asakawa_pos[0][1];
+
     SPRITES_8x16;
     /* hero */
     set_sprite_data(0, 8, hero_idle_back); 
@@ -560,6 +533,10 @@ void scene_3_setup(void)
     set_sprite_data(24, 8, student_idle_back);
     set_sprite_tile(6, 24);
     set_sprite_tile(7, 26);
+    /* asakawa */
+    set_sprite_data(32, 8, asakawa_front_idle);
+    set_sprite_tile(8, 32);
+    set_sprite_tile(9, 34);
 
     /* display the hero */
     move_sprite(0, hero_pos[0][0], hero_pos[0][1]);
@@ -574,11 +551,314 @@ void scene_3_setup(void)
     move_sprite(6, student_pos[0][0], student_pos[0][1]);
     move_sprite(7, student_pos[1][0], student_pos[1][1]);
 
-
     delay(400); /* a pause before appearing at door */
     SHOW_SPRITES;
     SHOW_BKG;
     DISPLAY_ON;
+
+    /* after a little wait, asakawa appears in door way */
+    delay(400);
+    move_sprite(8, asakawa_pos[0][0], asakawa_pos[0][1]);
+    move_sprite(9, asakawa_pos[1][0], asakawa_pos[1][1]);
 }
-/* asakawa appears in door way */
+
+/* brief animation for scene 3 */
+void scene_3_animate(void)
+{
+    ++scene_3_anim;
+    /* hero */
+    set_sprite_tile(0, 4);
+    set_sprite_tile(1, 6);
+    move_sprite(0, hero_pos[0][0], hero_pos[0][1]);
+    move_sprite(1, hero_pos[1][0], hero_pos[1][1]);
+    delay(100);
+    set_sprite_tile(0, 0);
+    set_sprite_tile(1, 2);
+    move_sprite(0, hero_pos[0][0], hero_pos[0][1]);
+    move_sprite(1, hero_pos[1][0], hero_pos[1][1]);
+    delay(100);
+    /* fisherman */
+    set_sprite_tile(2, 12);
+    set_sprite_tile(3, 14);
+    move_sprite(0, hero_pos[0][0], hero_pos[0][1]);
+    move_sprite(1, hero_pos[1][0], hero_pos[1][1]);
+    delay(100);
+    set_sprite_tile(2, 8);
+    set_sprite_tile(3, 10);
+    move_sprite(0, hero_pos[0][0], hero_pos[0][1]);
+    move_sprite(1, hero_pos[1][0], hero_pos[1][1]);
+    delay(100);
+    /* miner */ 
+    set_sprite_tile(4, 20);
+    set_sprite_tile(5, 22);
+    move_sprite(0, hero_pos[0][0], hero_pos[0][1]);
+    move_sprite(1, hero_pos[1][0], hero_pos[1][1]);
+    delay(100);
+    set_sprite_tile(4, 16);
+    set_sprite_tile(5, 18);
+    move_sprite(0, hero_pos[0][0], hero_pos[0][1]);
+    move_sprite(1, hero_pos[1][0], hero_pos[1][1]);
+    delay(100);
+    /* student */ 
+    set_sprite_tile(6, 28);
+    set_sprite_tile(7, 30);
+    move_sprite(0, hero_pos[0][0], hero_pos[0][1]);
+    move_sprite(1, hero_pos[1][0], hero_pos[1][1]);
+    delay(100);
+    set_sprite_tile(6, 24);
+    set_sprite_tile(7, 26);
+    move_sprite(0, hero_pos[0][0], hero_pos[0][1]);
+    move_sprite(1, hero_pos[1][0], hero_pos[1][1]);
+    delay(100);
+    /* asakawa */ 
+    set_sprite_tile(8, 36);
+    set_sprite_tile(9, 38);
+    move_sprite(0, hero_pos[0][0], hero_pos[0][1]);
+    move_sprite(1, hero_pos[1][0], hero_pos[1][1]);
+    delay(400);
+    set_sprite_tile(8, 32);
+    set_sprite_tile(9, 34);
+    move_sprite(0, hero_pos[0][0], hero_pos[0][1]);
+    move_sprite(1, hero_pos[1][0], hero_pos[1][1]);
+    delay(100);
+}
+/* scene_3 dialogue setup first */
+void scene_3_text_setup(void)
+{
+    DISPLAY_OFF;
+    scroll_bkg(-40,0);
+    hide_sprites();
+    bkg_clean();
+    text_count = 0; // just making sure that this is zero
+    DISPLAY_ON;
+
+    print("listen up", 24, 32);
+    print("you", 24, 48);
+    print("maggots!", 24, 64);
+    LETTER_COUNT = 0;
+
+}
+
 /* asakawa give his message */
+void joypad_check_scene_3(void) 
+{
+    if(joypad() & J_A)
+    {
+        scene_3();
+    }
+}
+
+/* asakawa's message */
+void scene_3(void)
+{
+    delay(100);
+    ++text_count;
+    delay(100);
+
+    if(text_count == 1)
+    {
+        bkg_clean();
+        sprite_clean();
+        print("needless", 24, 32);
+        print("to say,", 24, 48);
+        LETTER_COUNT = 0;
+    }
+    if(text_count == 2)
+    {
+        bkg_clean();
+        sprite_clean();
+        print("this ship", 24, 32);
+        print("is not", 24, 48);
+        print("a simple", 24, 64);
+        print("source of", 24, 80);
+        print("income!", 24, 96);
+        LETTER_COUNT = 0;
+    }
+    if(text_count == 3)
+    {
+        bkg_clean();
+        sprite_clean();
+        print("but rather", 24, 32);
+        print("of the", 24, 48);
+        print("utmost", 24, 64);
+        print("concern", 24, 80);
+        LETTER_COUNT = 0;
+    }
+    if(text_count == 4)
+    {
+        bkg_clean();
+        sprite_clean();
+        print("for our", 24, 32);
+        print("nation!", 24, 48);
+        LETTER_COUNT = 0;
+    }
+    if(text_count == 5)
+    {
+        bkg_clean();
+        sprite_clean();
+        print("as", 24, 32);
+        print("peoples", 24, 48);
+        print("of", 24, 64);
+        print("imperial", 24, 80);
+        print("japan,", 24, 96);
+        LETTER_COUNT = 0;
+    }
+    if(text_count == 6)
+    {
+        bkg_clean();
+        sprite_clean();
+        print("we are", 24, 32);
+        print("proud", 24, 48);
+        print("rivals", 24, 64);
+        print("of russia!", 24, 80);
+        LETTER_COUNT = 0;
+    }
+    if(text_count == 7)
+    {
+        bkg_clean();
+        sprite_clean();
+        print("that is", 24, 32);
+        print("why you", 24, 48);
+        print("fisherman", 24, 64);
+        print("are not", 24, 80);
+        LETTER_COUNT = 0;
+    }
+    if(text_count == 8)
+    {
+        bkg_clean();
+        sprite_clean();
+        print("only", 24, 32);
+        print("canning", 24, 48);
+        print("crabs,", 24, 64);
+        LETTER_COUNT = 0;
+    }
+    if(text_count == 9)
+    {
+        bkg_clean();
+        sprite_clean();
+        print("but", 24, 32);
+        print("salmon and", 24, 48);
+        print("tuna", 24, 64);
+        print("as well!", 24, 80);
+        LETTER_COUNT = 0;
+    }
+    if(text_count == 10)
+    {
+        bkg_clean();
+        sprite_clean();
+        print("as a", 24, 32);
+        print("nation of", 24, 48);
+        print("excellence", 24, 64);
+        print("...", 24, 80);
+        LETTER_COUNT = 0;
+    }
+    if(text_count == 11)
+    {
+        bkg_clean();
+        sprite_clean();
+        print("we are", 24, 32);
+        print("unmatched", 24, 48);
+        print("when", 24, 64);
+        print("compared", 24, 80);
+        print("to others!", 24, 96);
+        LETTER_COUNT = 0;
+    }
+    if(text_count == 12)
+    {
+        bkg_clean();
+        sprite_clean();
+        print("from the", 24, 32);
+        print("crowd", 24, 48);
+        print("someone", 24, 64);
+        print("murmurs,", 24, 80);
+        LETTER_COUNT = 0;
+    }
+    if(text_count == 13)
+    {
+        bkg_clean();
+        sprite_clean();
+        print("that's", 24, 32);
+        print("a little", 24, 48);
+        print("exagerated", 24, 64);
+        print("don't you", 24, 80);
+        print("think?", 24, 96);
+        LETTER_COUNT = 0;
+    }
+    if(text_count == 14)
+    {
+        scene_3_setup();
+        //scene_3_animate();
+
+        DISPLAY_OFF;
+        scroll_bkg(-40, 0);
+        bkg_clean();
+        sprite_clean();
+        DISPLAY_ON;
+
+        print("this kind", 24, 32);
+        print("of talk is", 24, 48);
+        print("not", 24, 64);
+        print("tolerable!", 24, 80);
+        LETTER_COUNT = 0;
+    }
+    if(text_count == 15)
+    {
+        bkg_clean();
+        sprite_clean();
+        print("this", 24, 32);
+        print("attitude", 24, 48);
+        print("is not", 24, 64);
+        print("only", 24, 80);
+        print("mutinous,", 24, 96);
+        LETTER_COUNT = 0;
+    }
+    if(text_count == 16)
+    {
+        bkg_clean();
+        sprite_clean();
+        print("but will", 24, 32);
+        print("be", 24, 48);
+        print("considered", 24, 64);
+        print("treason as", 24, 80);
+        print("well!", 24, 96);
+        LETTER_COUNT = 0;
+    }
+    if(text_count == 17)
+    {
+        bkg_clean();
+        sprite_clean();
+        print("this job", 24, 32);
+        print("is within", 24, 48);
+        print("the realm", 24, 64);
+        LETTER_COUNT = 0;
+     }
+     if(text_count == 18)
+     {
+         bkg_clean();
+         sprite_clean();
+         print("of", 24, 32);
+         print("'national", 24, 48);
+         print("policy.'", 24, 64);
+         LETTER_COUNT = 0;
+     }
+}
+
+void asakawa_shoots_anim(void)
+{
+    /* asakawa shooting setup */
+    set_sprite_data(32, 8, asakawa_front_idle);
+    set_sprite_tile(8, 32);
+    set_sprite_tile(9, 34);
+
+    /* asakawa fires gun */ 
+    set_sprite_tile(8, 36);
+    set_sprite_tile(9, 38);
+    move_sprite(0, hero_pos[0][0], hero_pos[0][1]);
+    move_sprite(1, hero_pos[1][0], hero_pos[1][1]);
+    delay(400);
+    set_sprite_tile(8, 32);
+    set_sprite_tile(9, 34);
+    move_sprite(0, hero_pos[0][0], hero_pos[0][1]);
+    move_sprite(1, hero_pos[1][0], hero_pos[1][1]);
+    delay(100);
+}

@@ -23,4 +23,15 @@ void level_1_ctrl(void)
         wait_vbl_done();
     }
     scene_3_setup();
+    while(scene_3_anim < 3)
+    {
+        scene_3_animate();
+        wait_vbl_done();
+    }
+    scene_3_text_setup();
+    while(scene_3_stop == 0)
+    {
+        joypad_check_scene_3();
+        wait_vbl_done();
+    }
 }
