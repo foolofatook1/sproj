@@ -34,4 +34,5 @@ void level_1_ctrl(void)
         joypad_check_scene_3();
         wait_vbl_done();
     }
+    asakawa_battle1_setup();
 }

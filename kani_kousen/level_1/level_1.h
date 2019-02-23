@@ -1,3 +1,9 @@
+/** 
+ * for later:
+ * consider trying to make the text box a small window that
+ * overlaps the bkg. This can be used to make who's in 
+ * dialogue with who more clear.
+ */
 /* text things */
 #include "../text/text.c"
 
@@ -24,7 +30,7 @@
 #include "../assets/sprites/student_idle_back.c"
 /* asakawa */
 #include "../assets/sprites/asakawa_front_idle.c"
-
+#include "../assets/sprites/asakawa_air_shot.c"
 
 void level_1_ctrl(void);
 void level_1_bkg_start(void);
@@ -343,6 +349,10 @@ void miner_intro_setup(void)
     sprite_clean();
 
     SHOW_BKG;
+    /* just adding this for a second */
+    //set_win_data(0, 10, chain_border_tiles);
+    //shet_win_tiles(0, 10, 20, 18, small_chain_border);
+    //SHOW_WIN;
     SHOW_SPRITES;
     DISPLAY_ON;
 
@@ -787,7 +797,7 @@ void scene_3(void)
     if(text_count == 14)
     {
         scene_3_setup();
-        //scene_3_animate();
+        asakawa_shoots_anim();
 
         DISPLAY_OFF;
         scroll_bkg(-40, 0);
@@ -838,27 +848,77 @@ void scene_3(void)
          sprite_clean();
          print("of", 24, 32);
          print("'national", 24, 48);
-         print("policy.'", 24, 64);
+         print("policy!'", 24, 64);
          LETTER_COUNT = 0;
+         delay(500);
+         /* Battle prompt */
+         DISPLAY_OFF;
+         bkg_clean();
+         sprite_clean();
+         print("fight", 64, 32);
+         print("asakawa", 56, 48);
+         LETTER_COUNT = 0;
+         DISPLAY_ON;
+         delay(100);
+         DISPLAY_OFF;
+         delay(100);
+         DISPLAY_ON;
+         delay(100);
+         DISPLAY_OFF;
+         delay(100);
+         DISPLAY_ON;
+         LETTER_COUNT = 0;
+         scene_3_stop = 1;
      }
 }
 
 void asakawa_shoots_anim(void)
 {
     /* asakawa shooting setup */
-    set_sprite_data(32, 8, asakawa_front_idle);
+    set_sprite_data(32, 32, asakawa_air_shot);
     set_sprite_tile(8, 32);
     set_sprite_tile(9, 34);
-
-    /* asakawa fires gun */ 
+    move_sprite(8, asakawa_pos[0][0], asakawa_pos[0][1]);
+    move_sprite(9, asakawa_pos[1][0], asakawa_pos[1][1]);
+    delay(500);
+    /* asakawa reveals gun */
     set_sprite_tile(8, 36);
     set_sprite_tile(9, 38);
-    move_sprite(0, hero_pos[0][0], hero_pos[0][1]);
-    move_sprite(1, hero_pos[1][0], hero_pos[1][1]);
-    delay(400);
-    set_sprite_tile(8, 32);
-    set_sprite_tile(9, 34);
-    move_sprite(0, hero_pos[0][0], hero_pos[0][1]);
-    move_sprite(1, hero_pos[1][0], hero_pos[1][1]);
-    delay(100);
+    move_sprite(8, asakawa_pos[0][0], asakawa_pos[0][1]);
+    move_sprite(9, asakawa_pos[1][0], asakawa_pos[1][1]);
+    delay(500);
+    /* asakawa raises gun */
+    set_sprite_tile(8, 40);
+    set_sprite_tile(9, 42);
+    move_sprite(8, asakawa_pos[0][0], asakawa_pos[0][1]);
+    move_sprite(9, asakawa_pos[1][0], asakawa_pos[1][1]);
+    delay(500);
+    /* gun fires (takes 3 changes) */
+    set_sprite_tile(8, 44);
+    set_sprite_tile(9, 46);
+    move_sprite(8, asakawa_pos[0][0], asakawa_pos[0][1]);
+    move_sprite(9, asakawa_pos[1][0], asakawa_pos[1][1]);
+    delay(300);
+    set_sprite_tile(8, 48);
+    set_sprite_tile(9, 50);
+    move_sprite(8, asakawa_pos[0][0], asakawa_pos[0][1]);
+    move_sprite(9, asakawa_pos[1][0], asakawa_pos[1][1]);
+    delay(300);
+    set_sprite_tile(8, 52);
+    set_sprite_tile(9, 54);
+    move_sprite(8, asakawa_pos[0][0], asakawa_pos[0][1]);
+    move_sprite(9, asakawa_pos[1][0], asakawa_pos[1][1]);
+    delay(300);
+    /* post gun firing */
+    set_sprite_tile(8, 56);
+    set_sprite_tile(9, 58);
+    move_sprite(8, asakawa_pos[0][0], asakawa_pos[0][1]);
+    move_sprite(9, asakawa_pos[1][0], asakawa_pos[1][1]);
+    delay(500); 
+    /* lowers gun */
+    set_sprite_tile(8, 60);
+    set_sprite_tile(9, 62);
+    move_sprite(8, asakawa_pos[0][0], asakawa_pos[0][1]);
+    move_sprite(9, asakawa_pos[1][0], asakawa_pos[1][1]);
+    delay(800);
 }
