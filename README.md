@@ -21,3 +21,15 @@ candidate for a Sci-fi award. Looking into the kind of development tools
 that will come in handy for programming a GameBoy game has also been a part 
 of the research leading up to this point. 
 
+
+## Some notes on things that I should consider moving forward: ##
+
+	* Memory is layed out differently when banking
+		* must do further research into those differences
+	* should also look deeper into the compiling differences 
+	  between when compiling a game with ROM and RAM banks 
+	  as opposed to the normal setup that I've been using thus far.
+
+	* until then, the game can continue to be developed by making
+	  little "games" within, which will then be configured to match
+	  the memory layout later.
