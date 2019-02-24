@@ -10,27 +10,27 @@
  * print_ln = what number line is being printed
  * print_ln starts at 0
  */
-void print(char* arr, UINT8 x, UINT8 y);
+void print(char* arr, UINT8 x, UINT8 y) NONBANKED;
 
 
 /**
  * Clears the bkg and sets up text box for next 
  * set of dialogue. 
  */
-void bkg_clean(void);
+void bkg_clean(void) NONBANKED;
 
 
 /**
  * Clears all the old sprites. 
  */
-void sprite_clean(void);
+void sprite_clean(void) NONBANKED;
 
 
 /**
  * move the screen off screen
  * so they're not in the way.
  */
-void hide_sprites(void);
+void hide_sprites(void) NONBANKED;
 
 
 char chars[40] = "abcdefghijklmnopqrstuvwxyz0123456789.,;:";

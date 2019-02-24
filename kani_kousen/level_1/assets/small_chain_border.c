@@ -20,7 +20,7 @@
 
 #define small_chain_borderWidth 20
 #define small_chain_borderHeight 10
-#define small_chain_borderBank 0
+#define small_chain_borderBank 1
 
 unsigned char small_chain_border[] =
 {

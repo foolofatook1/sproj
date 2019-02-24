@@ -4,6 +4,12 @@
  * overlaps the bkg. This can be used to make who's in 
  * dialogue with who more clear.
  */
+
+
+
+/* giving mem banking a try */
+//#include "asakawa_battle.c"
+
 /* text things */
 #include "../text/text.c"
 
@@ -32,6 +38,8 @@
 #include "../assets/sprites/asakawa_front_idle.c"
 #include "../assets/sprites/asakawa_air_shot.c"
 
+
+
 void level_1_ctrl(void);
 void level_1_bkg_start(void);
 int level_1_sprite_setup(void);
@@ -48,6 +56,7 @@ void scene_3_text_setup(void);
 void joypad_check_scene_3(void);
 void scene_3(void);
 void asakawa_shoots_anim(void);
+void asakawa_battle1_setup(void);
 
 
 /* scene 1 variables */
