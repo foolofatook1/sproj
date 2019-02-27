@@ -1,3 +1,6 @@
+//#include <gb/gb.h>
+//#include <stdio.h>
+
 /* background tiles and sprite */
 #include "assets/ship_tiles.c"
 #include "assets/open_screen.c"
@@ -28,7 +31,7 @@ UINT8 arrow_y = 56;
 
 
 /* option chosen */
-int option;
+UINT8 option;
 
 /* chosen decision */
-int choice = NOTHING;
+UINT8 choice = NOTHING;

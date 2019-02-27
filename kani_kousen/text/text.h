@@ -1,6 +1,10 @@
+//#include <gb/gb.h>
+//#include <stdio.h>
+
 #include "assets/chain_border.c"
 #include "assets/font.c"
 #include "assets/chain_border_tiles.c"
+#include "assets/small_chain_border.c"
 
 /**
  * prints array of characters; max size = 10
@@ -11,6 +15,7 @@
  * print_ln starts at 0
  */
 void print(char* arr, UINT8 x, UINT8 y) NONBANKED;
+void battle_print(char* arr, UINT8 x, UINT8 y) NONBANKED;
 
 
 /**
@@ -18,6 +23,7 @@ void print(char* arr, UINT8 x, UINT8 y) NONBANKED;
  * set of dialogue. 
  */
 void bkg_clean(void) NONBANKED;
+void battle_bkg_clean(void) NONBANKED;
 
 
 /**
@@ -33,7 +39,7 @@ void sprite_clean(void) NONBANKED;
 void hide_sprites(void) NONBANKED;
 
 
-char chars[40] = "abcdefghijklmnopqrstuvwxyz0123456789.,;:";
+char chars[40] = "abcdefghijklmnopqrstuvwxyz0123456789.,;/";
 UINT8 i;
 UINT8 j;
 UINT8 cushion;

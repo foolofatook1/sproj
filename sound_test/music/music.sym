@@ -4,12 +4,12 @@
 00:0000 s__HEADER
 00:0000 .init
 00:0200 s__CODE
-00:0238 s__HOME
-00:03E4 s__BASE
-00:03E4 s__GSINITTAIL
-00:03E4 s__LIT
-00:03E4 s__GSINIT
-00:03E5 s__GSFINAL
+00:0232 s__HOME
+00:03DE s__BASE
+00:03DE s__GSINITTAIL
+00:03DE s__LIT
+00:03DE s__GSINIT
+00:03DF s__GSFINAL
 00:C000 .OAM
 00:C0A0 s__DATA
 00:C0A0 s__BSS
@@ -22,53 +22,53 @@
 00:FF80 .refresh_OAM
 ; Area: _CODE
 00:0200 _collide_sound
-00:0234 _main
+00:022E _main
 ; Area: _HEADER
 00:01D2 _exit
 ; Area: _HOME
-00:0238 .set_mode
-00:0248 .remove_VBL
-00:024E .remove_LCD
-00:0254 .remove_TIM
-00:025A .remove_SIO
-00:0260 .remove_JOY
-00:0266 .add_VBL
-00:026C .add_LCD
-00:0272 .add_TIM
-00:0278 .add_SIO
-00:027E .add_JOY
-00:0284 .remove_int
-00:02A4 .add_int
-00:02C0 .wait_vbl_done
-00:02C0 _wait_vbl_done
-00:02D7 _display_off
-00:02D7 .display_off
-00:02F8 .serial_IO
-00:0327 _mode
-00:0330 _get_mode
-00:0335 _enable_interrupts
-00:0337 _disable_interrupts
-00:0339 _reset
-00:0339 .reset
-00:033F _set_interrupts
-00:034A _remove_VBL
-00:0355 _remove_LCD
-00:0360 _remove_TIM
-00:036B _remove_SIO
-00:0376 _remove_JOY
-00:0381 _add_VBL
-00:038C _add_LCD
-00:0397 _add_TIM
-00:03A2 _add_SIO
-00:03AD _add_JOY
-00:03B8 _clock
-00:03C1 __printTStates
-00:03C2 banked_call
-00:03DB banked_ret
+00:0232 .set_mode
+00:0242 .remove_VBL
+00:0248 .remove_LCD
+00:024E .remove_TIM
+00:0254 .remove_SIO
+00:025A .remove_JOY
+00:0260 .add_VBL
+00:0266 .add_LCD
+00:026C .add_TIM
+00:0272 .add_SIO
+00:0278 .add_JOY
+00:027E .remove_int
+00:029E .add_int
+00:02BA .wait_vbl_done
+00:02BA _wait_vbl_done
+00:02D1 _display_off
+00:02D1 .display_off
+00:02F2 .serial_IO
+00:0321 _mode
+00:032A _get_mode
+00:032F _enable_interrupts
+00:0331 _disable_interrupts
+00:0333 _reset
+00:0333 .reset
+00:0339 _set_interrupts
+00:0344 _remove_VBL
+00:034F _remove_LCD
+00:035A _remove_TIM
+00:0365 _remove_SIO
+00:0370 _remove_JOY
+00:037B _add_VBL
+00:0386 _add_LCD
+00:0391 _add_TIM
+00:039C _add_SIO
+00:03A7 _add_JOY
+00:03B2 _clock
+00:03BB __printTStates
+00:03BC banked_call
+00:03D5 banked_ret
 ; Area: _BASE
 ; Area: _LIT
 ; Area: _GSINIT
-00:03E4 gsinit
+00:03DE gsinit
 ; Area: _GSINITTAIL
 ; Area: _GSFINAL
 ; Area: _DATA

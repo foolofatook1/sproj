@@ -10,8 +10,6 @@ void collide_sound(void);
 
 void collide_sound(void)
 {
-	while(1)
-	{
         NR52_REG = 0x80; /* All sound on/off. */
         NR51_REG = 0x11; /* Selection of Sound output terminal (R/W). */
         NR50_REG = 0x77; /* Channel control / ON-OFF / Volume (R/W). */
@@ -21,8 +19,7 @@ void collide_sound(void)
         NR11_REG = 0x87; /* Sound length/Wave pattern duty (R/W). */
         NR12_REG = 0xf7; /* Envelope (R/W). */
         NR13_REG = 0xb8; /* Frequency lo (W). */
-        NR14_REG = 0xb1; /* Frequency hi (R/W). */
-	}
+        while(1){}
 }
 
 void main(void)

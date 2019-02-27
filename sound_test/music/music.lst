@@ -1,9 +1,9 @@
                               1 ;--------------------------------------------------------
                               2 ; File Created by SDCC : FreeWare ANSI-C Compiler
-                              3 ; Version 2.3.1 Wed Dec 12 09:31:13 2018
+                              3 ; Version 2.3.1 Mon Feb 25 10:40:16 2019
                               4 
                               5 ;--------------------------------------------------------
-                              6 	.module lcc116940
+                              6 	.module lcc176690
                               7 	
                               8 ;--------------------------------------------------------
                               9 ; Public variables in this module
@@ -61,100 +61,94 @@
    0000                      61 _collide_sound:
                              62 	
                              63 ;	music.c 13
-                             64 ;	genLabel
-   0000                      65 00102$:
-                             66 ;	music.c 15
-                             67 ;	genAssign
-   0000 01 26 FF             68 	ld	bc,#0xFF26
-                             69 ;	genAssign (pointer)
-   0003 3E 80                70 	ld	a,#0x80
-   0005 02                   71 	ld	(bc),a
-                             72 ;	music.c 16
-                             73 ;	genAssign
-   0006 01 25 FF             74 	ld	bc,#0xFF25
-                             75 ;	genAssign (pointer)
-   0009 3E 11                76 	ld	a,#0x11
-   000B 02                   77 	ld	(bc),a
-                             78 ;	music.c 17
-                             79 ;	genAssign
-   000C 01 24 FF             80 	ld	bc,#0xFF24
-                             81 ;	genAssign (pointer)
-   000F 3E 77                82 	ld	a,#0x77
-   0011 02                   83 	ld	(bc),a
-                             84 ;	music.c 20
-                             85 ;	genAssign
-   0012 01 10 FF             86 	ld	bc,#0xFF10
-                             87 ;	genAssign (pointer)
-   0015 3E 00                88 	ld	a,#0x00
-   0017 02                   89 	ld	(bc),a
-                             90 ;	music.c 21
-                             91 ;	genAssign
-   0018 01 11 FF             92 	ld	bc,#0xFF11
-                             93 ;	genAssign (pointer)
-   001B 3E 87                94 	ld	a,#0x87
-   001D 02                   95 	ld	(bc),a
-                             96 ;	music.c 22
-                             97 ;	genAssign
-   001E 01 12 FF             98 	ld	bc,#0xFF12
-                             99 ;	genAssign (pointer)
-   0021 3E F7               100 	ld	a,#0xF7
-   0023 02                  101 	ld	(bc),a
-                            102 ;	music.c 23
-                            103 ;	genAssign
-   0024 01 13 FF            104 	ld	bc,#0xFF13
-                            105 ;	genAssign (pointer)
-   0027 3E B8               106 	ld	a,#0xB8
-   0029 02                  107 	ld	(bc),a
-                            108 ;	music.c 24
-                            109 ;	genAssign
-   002A 01 14 FF            110 	ld	bc,#0xFF14
-                            111 ;	genAssign (pointer)
-   002D 3E B1               112 	ld	a,#0xB1
-   002F 02                  113 	ld	(bc),a
-                            114 ;	genGoto
-   0030 C3 00 00            115 	jp	00102$
-                            116 ;	genLabel
-   0033                     117 00104$:
-                            118 ;	genEndFunction
-                            119 	
-   0033 C9                  120 	ret
-   0034                     121 ___collide_sound_end:
-                            122 ;	music.c 28
-                            123 ;	genLabel
-                            124 ;	genFunction
-                            125 ;	---------------------------------
-                            126 ; Function main
-                            127 ; ---------------------------------
-   0034                     128 ___main_start:
-   0034                     129 _main:
-                            130 	
-                            131 ;	music.c 30
-                            132 ;	genCall
-                            133 ; _saveRegsForCall: sendSetSize: 0 deInUse: 0 bcInUse: 0 deSending: 0
-   0034 CD 00 00            134 	call	_collide_sound
-                            135 ;	genLabel
-   0037                     136 00101$:
-                            137 ;	genEndFunction
-                            138 	
-   0037 C9                  139 	ret
-   0038                     140 ___main_end:
-                            141 	.area _CODE
+                             64 ;	genAssign
+   0000 01 26 FF             65 	ld	bc,#0xFF26
+                             66 ;	genAssign (pointer)
+   0003 3E 80                67 	ld	a,#0x80
+   0005 02                   68 	ld	(bc),a
+                             69 ;	music.c 14
+                             70 ;	genAssign
+   0006 01 25 FF             71 	ld	bc,#0xFF25
+                             72 ;	genAssign (pointer)
+   0009 3E 11                73 	ld	a,#0x11
+   000B 02                   74 	ld	(bc),a
+                             75 ;	music.c 15
+                             76 ;	genAssign
+   000C 01 24 FF             77 	ld	bc,#0xFF24
+                             78 ;	genAssign (pointer)
+   000F 3E 77                79 	ld	a,#0x77
+   0011 02                   80 	ld	(bc),a
+                             81 ;	music.c 18
+                             82 ;	genAssign
+   0012 01 10 FF             83 	ld	bc,#0xFF10
+                             84 ;	genAssign (pointer)
+   0015 3E 00                85 	ld	a,#0x00
+   0017 02                   86 	ld	(bc),a
+                             87 ;	music.c 19
+                             88 ;	genAssign
+   0018 01 11 FF             89 	ld	bc,#0xFF11
+                             90 ;	genAssign (pointer)
+   001B 3E 87                91 	ld	a,#0x87
+   001D 02                   92 	ld	(bc),a
+                             93 ;	music.c 20
+                             94 ;	genAssign
+   001E 01 12 FF             95 	ld	bc,#0xFF12
+                             96 ;	genAssign (pointer)
+   0021 3E F7                97 	ld	a,#0xF7
+   0023 02                   98 	ld	(bc),a
+                             99 ;	music.c 21
+                            100 ;	genAssign
+   0024 01 13 FF            101 	ld	bc,#0xFF13
+                            102 ;	genAssign (pointer)
+   0027 3E B8               103 	ld	a,#0xB8
+   0029 02                  104 	ld	(bc),a
+                            105 ;	music.c 22
+                            106 ;	genLabel
+   002A                     107 00102$:
+                            108 ;	genGoto
+   002A C3 2A 00            109 	jp	00102$
+                            110 ;	genLabel
+   002D                     111 00104$:
+                            112 ;	genEndFunction
+                            113 	
+   002D C9                  114 	ret
+   002E                     115 ___collide_sound_end:
+                            116 ;	music.c 25
+                            117 ;	genLabel
+                            118 ;	genFunction
+                            119 ;	---------------------------------
+                            120 ; Function main
+                            121 ; ---------------------------------
+   002E                     122 ___main_start:
+   002E                     123 _main:
+                            124 	
+                            125 ;	music.c 27
+                            126 ;	genCall
+                            127 ; _saveRegsForCall: sendSetSize: 0 deInUse: 0 bcInUse: 0 deSending: 0
+   002E CD 00 00            128 	call	_collide_sound
+                            129 ;	genLabel
+   0031                     130 00101$:
+                            131 ;	genEndFunction
+                            132 	
+   0031 C9                  133 	ret
+   0032                     134 ___main_end:
+                            135 	.area _CODE
 ASxxxx Assembler V01.75  (GameBoy Z80-like CPU), page 1.
 
 Symbol Table
 
-  0 ___collide_sound_end               0034 R
+  0 ___collide_sound_end               002E R
   0 ___collide_sound_start             0000 R
-  0 ___main_end                        0038 R
-  0 ___main_start                      0034 R
+  0 ___main_end                        0032 R
+  0 ___main_start                      002E R
   0 _collide_sound                     0000 GR
-  0 _main                              0034 GR
+  0 _main                              002E GR
 
 ASxxxx Assembler V01.75  (GameBoy Z80-like CPU), page 2.
 
 Area Table
 
-   0 _CODE                              size   38   flags 0
+   0 _CODE                              size   32   flags 0
    1 _DATA                              size    0   flags 0
    2 _OVERLAY                           size    0   flags 0
    3 _ISEG                              size    0   flags 0

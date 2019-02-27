@@ -1,0 +1,37 @@
+/opt/gbdk/bin/lcc -Wa-l -Wl-m -Wl-j -DUSE_SFT_FOR_REG -c -o main.o main.c 
+/opt/gbdk/bin/lcc -Wa-l -Wl-m -Wl-j -DUSE_SFR_FOR_REG -o main.gb main.o level_1/level_1.o start_up/start_up.o text/text.o
+Multiple definition of _scene_3_anim
+Multiple definition of _i
+Multiple definition of _j
+Multiple definition of _shit_pot_tiles
+Multiple definition of _shit_pot
+Multiple definition of _fisherman_idle_back
+Multiple definition of _start_animate
+Multiple definition of _miner_walk_up
+Multiple definition of _fisherman_pos
+Multiple definition of _hero_front_idle
+Multiple definition of _miner_walk_left
+Multiple definition of _student_idle_back
+Multiple definition of _font
+Multiple definition of _student_pos
+Multiple definition of _cushion
+Multiple definition of _fisherman_front_idle
+Multiple definition of _scene_3_stop
+Multiple definition of _level_1_screen_tiles
+Multiple definition of _level_1_screen
+Multiple definition of _miner_idle_back
+Multiple definition of _asakawa_pos
+Multiple definition of _miner_pos
+Multiple definition of _text_count
+Multiple definition of _chars
+Multiple definition of _asakawa_air_shot
+Multiple definition of _sprite_width
+Multiple definition of _LETTER_COUNT
+Multiple definition of _hero_idle_back
+Multiple definition of _asakawa_front_idle
+Multiple definition of _scene_2
+Multiple definition of _hero_pos
+Multiple definition of _chain_border
+Multiple definition of _chain_border_tiles
+Makefile:2: recipe for target 'all' failed
+make: *** [all] Error 1
