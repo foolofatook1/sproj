@@ -1,10 +1,10 @@
-//#include <gb/gb.h>
-//#include <stdio.h>
+#include <gb/gb.h>
+#include <stdio.h>
 
 #include "assets/chain_border.c"
 #include "assets/font.c"
 #include "assets/chain_border_tiles.c"
-#include "assets/small_chain_border.c"
+ #include "assets/small_chain_border.c"  // dash this out to play pt. 1
 
 /**
  * prints array of characters; max size = 10
@@ -15,7 +15,7 @@
  * print_ln starts at 0
  */
 void print(char* arr, UINT8 x, UINT8 y) NONBANKED;
-void battle_print(char* arr, UINT8 x, UINT8 y) NONBANKED;
+void battle_print(char* arr, UINT8 x, UINT8 y) NONBANKED; // dash for pt.1
 
 
 /**
@@ -23,7 +23,7 @@ void battle_print(char* arr, UINT8 x, UINT8 y) NONBANKED;
  * set of dialogue. 
  */
 void bkg_clean(void) NONBANKED;
-void battle_bkg_clean(void) NONBANKED;
+void battle_bkg_clean(void) NONBANKED; // dash for pt. 1
 
 
 /**

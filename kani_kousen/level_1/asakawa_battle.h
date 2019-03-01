@@ -7,6 +7,9 @@
 /* bkg */
 #include "../text/text.c"
 
+/* battle stuffs */
+#include "battle.h"
+
 
 void asakawa_battle_ctrl(void);
 void battle_menu(void);
@@ -16,9 +19,10 @@ void asakawa_battle_check(void);
 void show_sprites(void);
 void battle_nav(void);
 void fight_opt(void);
+void item_opt(void);
 void run(void);
 void show_items(void);
-void show_fighter(void);
+void show_fighter_stats(void);
 void back(void);
 
 

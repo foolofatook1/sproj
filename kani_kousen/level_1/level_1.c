@@ -4,7 +4,7 @@
 void level_1_ctrl(void) 
 {
 
-    SWITCH_ROM_MBC1(0);
+//    SWITCH_ROM_MBC1(0);
     level_1_bkg_start();
     while(start_animate == 0)
     {
@@ -35,7 +35,7 @@ void level_1_ctrl(void)
         joypad_check_scene_3();
         wait_vbl_done();
     }
-    SWITCH_ROM_MBC1(1);
+    //SWITCH_ROM_MBC1(1);
 //    asakawa_battle1_setup();
 
 }

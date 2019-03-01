@@ -6,7 +6,10 @@ void asakawa_battle_ctrl(void)
     {
         wait_vbl_done();
         asakawa_battle_check();
-        //show_sprites();
+        /*while(state == FIGHTING)
+        {
+            //show_sprites();
+        }*/
     }
 }
 
@@ -14,9 +17,37 @@ void battle_nav(void)
 {
     if(arrow_y == 32)
     {
-        fight_opt();
         state = FIGHT_OPT;
+        fight_opt();
     }
+    /*if(arrow_y == 48)
+    {
+        fight();
+        state = FIGHTING;
+    }*/
+    if(arrow_y == 64)
+    {
+        state = RUN;
+        run();
+    }
+    if(arrow_y == 80)
+    {
+        state = ITEM_OPT;
+        item_opt();
+    }
+}
+
+void run(void)
+{
+    sprite_clean();
+    battle_bkg_clean();
+    battle_print("you", 18, 32);
+    battle_print("can't", 18, 48);
+    battle_print("escape!", 18, 64); 
+    show_fighter_stats();
+    LETTER_COUNT = 0;
+    delay(300);
+    back();
 }
 
 void back(void)
@@ -34,8 +65,22 @@ void fight_opt(void)
     battle_bkg_clean();
     battle_print(">", 18, 32);
     battle_print(" punch", 18, 32);
-    show_fighter();
+    battle_print("a select", 16, 130);
+    battle_print("b back", 16, 142);
+    show_fighter_stats();
     LETTER_COUNT = 0;
+}
+
+void item_opt(void)
+{
+    sprite_clean();
+    battle_bkg_clean();
+    battle_print(" empty", 18, 32);
+    battle_print("a select", 16, 130);
+    battle_print("b back", 16, 142);
+    show_fighter_stats();
+    LETTER_COUNT = 0;
+
 }
 
 void battle_menu(void)
@@ -52,10 +97,10 @@ void battle_menu(void)
     battle_print(" defend", 18, 48);
     battle_print(" run", 18, 64);
     battle_print(" item", 18, 80);
-    show_fighter();
+    show_fighter_stats();
 }
 
-void show_fighter(void)
+void show_fighter_stats(void)
 {
     /* HP */
     battle_print("hero", 88, 40);
@@ -117,7 +162,13 @@ void asakawa_battle_check(void)
     SPRITES_8x8;
 
     if(joypad() & J_A)
-        battle_nav();
+    {
+        if(state == FIGHT_OPT)
+            sprite_setup(8, hero_idle_back);//, 8, asakawa_front_idle);
+            //fight();
+        else
+            battle_nav();
+    }
 
     if(joypad() & J_B)
         back();
@@ -148,27 +199,30 @@ void show_sprites(void)
     hero_pos[1][0] = hero_pos[0][0]+SPRITE_WIDTH;
     hero_pos[1][1] = hero_pos[0][1];
 
-    set_sprite_data(46, 8, hero_idle_back);
-    set_sprite_tile(LETTER_COUNT+1, 46);
-    set_sprite_tile(LETTER_COUNT+2, 48);
+                  //46
+    set_sprite_data(0, 8, hero_idle_back);
+    set_sprite_tile(0, 0);//LETTER_COUNT+1, 46);
+    set_sprite_tile(1, 2);//LETTER_COUNT+2, 48);
     /* asakawa */
     asakawa_pos[0][0] = 80;
     asakawa_pos[0][1] = 40;
     asakawa_pos[1][0] = asakawa_pos[0][0]+SPRITE_WIDTH;
     asakawa_pos[1][1] = asakawa_pos[0][1];
 
-    set_sprite_data(54, 8, asakawa_front_idle);
-    set_sprite_tile(LETTER_COUNT+3, 54);
-    set_sprite_tile(LETTER_COUNT+4, 56);
+                // 54
+    set_sprite_data(8, 8, asakawa_front_idle);
+    set_sprite_tile(2, 8);//LETTER_COUNT+3, 54);
+    set_sprite_tile(3, 10);//LETTER_COUNT+4, 56);
 
 
     /* display sprites */
     /* hero */
-    move_sprite(LETTER_COUNT+1, hero_pos[0][0], hero_pos[0][1]);
-    move_sprite(LETTER_COUNT+2, hero_pos[1][0], hero_pos[1][1]);
+              //LETTER_COUNT+x
+    move_sprite(0, hero_pos[0][0], hero_pos[0][1]);
+    move_sprite(1, hero_pos[1][0], hero_pos[1][1]);
     /* asakawa */
-    move_sprite(LETTER_COUNT+3, asakawa_pos[0][0], asakawa_pos[0][1]);
-    move_sprite(LETTER_COUNT+4, asakawa_pos[1][0], asakawa_pos[1][1]);
+    move_sprite(2, asakawa_pos[0][0], asakawa_pos[0][1]);
+    move_sprite(3, asakawa_pos[1][0], asakawa_pos[1][1]);
 }
 
 void main(void)

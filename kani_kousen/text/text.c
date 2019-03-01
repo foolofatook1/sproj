@@ -132,5 +132,3 @@ void battle_bkg_clean(void)
     set_bkg_data(0, 10, chain_border_tiles);
     set_bkg_tiles(0,0,20,18,small_chain_border);
 }
-
-

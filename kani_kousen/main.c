@@ -10,8 +10,8 @@ UINT8 action;
 
 void main(void)
 {
-    ENABLE_RAM_MBC1;
-    SWITCH_4_32_MODE_MBC1;
+ //   ENABLE_RAM_MBC1;
+  //  SWITCH_4_32_MODE_MBC1;
 
     /* this poses the OPTIONS: START, NEW GAME, and QUIT. */
     opening();
