@@ -1,15 +1,17 @@
-#include <gb/gb.h>
-#include <stdio.h> 
+//#include <gb/gb.h>
+//#include <stdio.h> 
 /* sprites */
-#include "../assets/sprites/hero_idle_back.c"
-#include "../assets/sprites/asakawa_front_idle.c"
+//#include "../assets/sprites/hero_back_idle.c"
+//#include "../../assets/sprites/asakawa_front_idle.c"
+//#include "../../assets/sprites/student_idle_back.c"
+//#include "../assets/sprites/miner_idle_back.c"
+//#include "../assets/sprites/wtf.c"
 
 /* bkg */
-#include "../text/text.c"
+//#include "../text/text.c"
 
-/* battle stuffs */
+/* battle functions */
 #include "battle.h"
-
 
 void asakawa_battle_ctrl(void);
 void battle_menu(void);

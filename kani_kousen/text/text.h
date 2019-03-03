@@ -4,7 +4,7 @@
 #include "assets/chain_border.c"
 #include "assets/font.c"
 #include "assets/chain_border_tiles.c"
- #include "assets/small_chain_border.c"  // dash this out to play pt. 1
+#include "assets/small_chain_border.c"  // dash this out to play pt. 1
 
 /**
  * prints array of characters; max size = 10

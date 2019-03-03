@@ -164,8 +164,38 @@ void asakawa_battle_check(void)
     if(joypad() & J_A)
     {
         if(state == FIGHT_OPT)
-            sprite_setup(8, hero_idle_back);//, 8, asakawa_front_idle);
-            //fight();
+        {
+
+            sprite_clean();
+
+            set_bkg_data(0,4, blank_screen_tiles);
+            set_bkg_tiles(0,0,20,18,blank_screen);
+
+            set_sprite_data(0, 8, hero_back_idle);
+            set_sprite_data(8, 8, asakawa_front_idle);
+
+            /* hero */
+            set_sprite_tile(0, 0);
+            set_sprite_tile(1, 1);
+            set_sprite_tile(2, 2);
+            set_sprite_tile(3, 3);
+
+            move_sprite(0, 72, 72);
+            move_sprite(1, 72, 80);
+            move_sprite(2, 84, 72);
+            move_sprite(3, 84, 80);
+
+            /* asakawa */
+            set_sprite_tile(4, 8);
+            set_sprite_tile(5, 9);
+            set_sprite_tile(6, 10);
+            set_sprite_tile(7, 11);
+
+            move_sprite(4, 80, 40);
+            move_sprite(5, 80, 48);
+            move_sprite(6, 84, 40);
+            move_sprite(7, 84, 48);
+        }
         else
             battle_nav();
     }
@@ -200,7 +230,7 @@ void show_sprites(void)
     hero_pos[1][1] = hero_pos[0][1];
 
                   //46
-    set_sprite_data(0, 8, hero_idle_back);
+    set_sprite_data(0, 8, hero_back_idle);
     set_sprite_tile(0, 0);//LETTER_COUNT+1, 46);
     set_sprite_tile(1, 2);//LETTER_COUNT+2, 48);
     /* asakawa */

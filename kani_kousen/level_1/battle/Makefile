@@ -1,5 +1,5 @@
 all:
-	lcc -Wa-l -Wl-m -Wl-j -DUSE_SFT_FOR_REG -c -o battle.o battle.c ../text/text.o
+	lcc -Wa-l -Wl-m -Wl-j -DUSE_SFT_FOR_REG -c -o battle.o battle.c ../../text/text.o
 	lcc -Wa-l -Wl-m -Wl-j -DUSE_SFT_FOR_REG -c -o asakawa_battle.o asakawa_battle.c 
 	lcc -Wa-l -Wl-m -Wl-j -DUSE_SFR_FOR_REG -o asakawa_battle.gb asakawa_battle.o battle.o
 
@@ -7,4 +7,4 @@ clean:
 	rm *.o *.gb *.sym *.map *.lst
 
 play:
-	wine ../../bgb/bgb.exe asakawa_battle.gb
+	wine ../../../bgb/bgb.exe asakawa_battle.gb
