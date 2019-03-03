@@ -20,11 +20,11 @@ void battle_nav(void)
         state = FIGHT_OPT;
         fight_opt();
     }
-    /*if(arrow_y == 48)
+    if(arrow_y == 48)
     {
-        fight();
+        choice = DEFEND;
         state = FIGHTING;
-    }*/
+    }
     if(arrow_y == 64)
     {
         state = RUN;
@@ -105,7 +105,10 @@ void show_fighter_stats(void)
     /* HP */
     battle_print("hero", 88, 40);
     battle_print("hp", 88, 56);
-    battle_print("10/10", 120, 56);
+
+    itoa(HERO_HP, h_hp);
+    battle_print(h_hp, 120, 56);
+    battle_print("/10", 136, 56);
     LETTER_COUNT = 0;
 }
 
@@ -165,36 +168,9 @@ void asakawa_battle_check(void)
     {
         if(state == FIGHT_OPT)
         {
-
-            sprite_clean();
-
-            set_bkg_data(0,4, blank_screen_tiles);
-            set_bkg_tiles(0,0,20,18,blank_screen);
-
-            set_sprite_data(0, 8, hero_back_idle);
-            set_sprite_data(8, 8, asakawa_front_idle);
-
-            /* hero */
-            set_sprite_tile(0, 0);
-            set_sprite_tile(1, 1);
-            set_sprite_tile(2, 2);
-            set_sprite_tile(3, 3);
-
-            move_sprite(0, 72, 72);
-            move_sprite(1, 72, 80);
-            move_sprite(2, 84, 72);
-            move_sprite(3, 84, 80);
-
-            /* asakawa */
-            set_sprite_tile(4, 8);
-            set_sprite_tile(5, 9);
-            set_sprite_tile(6, 10);
-            set_sprite_tile(7, 11);
-
-            move_sprite(4, 80, 40);
-            move_sprite(5, 80, 48);
-            move_sprite(6, 84, 40);
-            move_sprite(7, 84, 48);
+            hero_fight_anim();
+            //choice_handler(arrow_y);
+            //sprite_setup(8, hero_back_idle, 8, asakawa_front_idle);
         }
         else
             battle_nav();

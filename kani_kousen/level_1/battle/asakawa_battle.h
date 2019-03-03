@@ -1,15 +1,3 @@
-//#include <gb/gb.h>
-//#include <stdio.h> 
-/* sprites */
-//#include "../assets/sprites/hero_back_idle.c"
-//#include "../../assets/sprites/asakawa_front_idle.c"
-//#include "../../assets/sprites/student_idle_back.c"
-//#include "../assets/sprites/miner_idle_back.c"
-//#include "../assets/sprites/wtf.c"
-
-/* bkg */
-//#include "../text/text.c"
-
 /* battle functions */
 #include "battle.h"
 
