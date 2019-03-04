@@ -6,10 +6,15 @@ void asakawa_battle_ctrl(void)
     {
         wait_vbl_done();
         asakawa_battle_check();
-        /*while(state == FIGHTING)
+        while(state == FIGHTING)
         {
-            //show_sprites();
-        }*/
+            //choice_handler(arrow_y);
+            //hero_fight(ASAKAWA_HP);
+            npc_fight(&HERO_HP);
+            delay(400);
+            state = BATTLE_OPT; /* return the state back to normal */
+            battle_menu();
+        }
     }
 }
 
@@ -168,9 +173,7 @@ void asakawa_battle_check(void)
     {
         if(state == FIGHT_OPT)
         {
-            hero_fight_anim();
-            //choice_handler(arrow_y);
-            //sprite_setup(8, hero_back_idle, 8, asakawa_front_idle);
+            state = FIGHTING;
         }
         else
             battle_nav();

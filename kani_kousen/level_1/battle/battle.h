@@ -12,13 +12,15 @@
 #include "../assets/blank_screen_tiles.c"
 
 //void fight_ctrl(void);
-void npc_fight(UINT8);
+void npc_fight(UINT8*);
 
-void hero_fight(UINT8);
+void hero_fight(UINT8*);
 void hero_fight_anim(void);
 
 void sprite_setup(UINT8, unsigned char*, UINT8, unsigned char*);
 void choice_handler(UINT8);
+
+void clear_screen(void);
 
 UINT8 ASAKAWA_HP = 100;
 

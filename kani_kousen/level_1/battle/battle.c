@@ -14,12 +14,55 @@ void choice_handler(UINT8 arrow_y)
         choice = PUNCH;
 }
 
-void hero_fight(UINT8 enemy_hp)
+void hero_fight(UINT8* enemy_hp)
 {
+    UBYTE hero_acc = 0; //UBYTE
+    UWORD seed;
+    seed = DIV_REG;
+    seed |= (UWORD)DIV_REG << 8;
+
+    initarand(seed);
+
+    /* hero's accuracy */
+    hero_acc = rand() & 1;
+
     if(choice == PUNCH)
     {
-        hero_fight_anim();
-        enemy_hp -= PUNCH;
+        if(hero_acc == 1)
+        {
+            hero_fight_anim();
+            for(a = 0; a < 6; ++a)
+            {
+                delay(100);
+                DISPLAY_OFF;
+                delay(100);
+                DISPLAY_ON;
+            }
+            DISPLAY_OFF;
+            sprite_clean();
+            print("hit!", 72, 80);
+            clear_screen();
+            *enemy_hp -= PUNCH;
+            DISPLAY_ON;
+            choice = 0;
+        }
+        else
+        {
+            hero_fight_anim();
+            for(a = 0; a < 6; ++a)
+            {
+                delay(100);
+                DISPLAY_OFF;
+                delay(100);
+                DISPLAY_ON;
+            }
+            DISPLAY_OFF;
+            sprite_clean();
+            print("miss!", 64, 80);
+            clear_screen();
+            DISPLAY_ON;
+            choice = 0;
+        }
     }
 
     /*   if(choice == DEFEND)
@@ -64,6 +107,14 @@ void hero_fight_anim(void)
     }
 }
 
+
+void clear_screen(void)
+{
+    /* clear the bkg */
+    set_bkg_data(0,4, blank_screen_tiles);
+    set_bkg_tiles(0,0,20,18,blank_screen);
+}
+
 /**
  * hnb    -- hero number of tiles
  * enb    -- enemy number of tiles
@@ -73,10 +124,7 @@ void sprite_setup(UINT8 hnb, unsigned char *hero_data,
         UINT8 enb, unsigned char *enemy_data)
 {
     sprite_clean();
-
-    /* clear the bkg */
-    set_bkg_data(0,4, blank_screen_tiles);
-    set_bkg_tiles(0,0,20,18,blank_screen);
+    clear_screen();
 
     /* setup sprites */
     set_sprite_data(0, 8, enemy_data);
@@ -105,7 +153,7 @@ void sprite_setup(UINT8 hnb, unsigned char *hero_data,
     move_sprite(7, 84, 80);
 }
 
-void npc_fight(UINT8 hero_hp)
+void npc_fight(UINT8 *hero_hp)
 {
 
     /** 
@@ -126,15 +174,50 @@ void npc_fight(UINT8 hero_hp)
     /* enemies accuracy */
     npc_acc = rand() & 1;
 
-    hero_hp -= SHOOT;
-    /* prints randomly generated number 
-       itoa(npc_act, a);
-       itoa(npc_acc, b);
+    if(npc_act == 1 && npc_acc == 1)
+    {
+    //    asakawa_shoot_anim();
 
-       battle_bkg_clean();
-       sprite_clean();
-       battle_print(a, 16, 32);
-       battle_print(b, 16, 48);
-       LETTER_COUNT = 0;*/
+        *hero_hp -= SHOOT;
+        for(a = 0; a < 6; ++a)
+        {
+            delay(100);
+            DISPLAY_OFF;
+            delay(100);
+            DISPLAY_ON;
+        }
+        DISPLAY_OFF;
+        sprite_clean();
+        print("hit!", 72, 80);
+        clear_screen();
+        hero_hp -= PUNCH;
+        DISPLAY_ON;
+    }
+    if(npc_act == 1 && npc_acc == 0)
+    {
+     //   asakawa_shoot_anim();
+        for(a = 0; a < 6; ++a)
+        {
+            delay(100);
+            DISPLAY_OFF;
+            delay(100);
+            DISPLAY_ON;
+        }
+        DISPLAY_OFF;
+        sprite_clean();
+        print("miss!", 64, 80);
+        clear_screen();
+        DISPLAY_ON;
+     }
 
-}
+
+        /* prints randomly generated number 
+           itoa(npc_act, a);
+           itoa(npc_acc, b);
+
+           battle_bkg_clean();
+           sprite_clean();
+           battle_print(a, 16, 32);
+           battle_print(b, 16, 48);
+           LETTER_COUNT = 0;*/
+    }
