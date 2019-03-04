@@ -501,7 +501,7 @@ void scene_3_setup(void)
 
     SPRITES_8x16;
     /* hero */
-    set_sprite_data(0, 8, hero_idle_back); 
+    set_sprite_data(0, 8, hero_back_idle); 
     set_sprite_tile(0, 0);
     set_sprite_tile(1, 2);
     /* fisherman */

@@ -39,8 +39,8 @@ void sprite_clean(void) NONBANKED;
 void hide_sprites(void) NONBANKED;
 
 
-char chars[40] = "abcdefghijklmnopqrstuvwxyz0123456789.,;/";
-UINT8 i;
-UINT8 j;
-UINT8 cushion;
-UINT8 LETTER_COUNT = 0;
+extern char *chars;
+extern UINT8 i;
+extern UINT8 j;
+extern UINT8 cushion;
+extern UINT8 LETTER_COUNT;

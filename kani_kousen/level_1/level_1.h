@@ -24,7 +24,7 @@
 /* starting sprites */
 /* hero */
 #include "../assets/sprites/hero_front_idle.c"
-#include "../assets/sprites/hero_idle_back.c"
+#include "../assets/sprites/hero_back_idle.c"
 /* fisherman */
 #include "../assets/sprites/fisherman_front_idle.c"
 #include "../assets/sprites/fisherman_idle_back.c"

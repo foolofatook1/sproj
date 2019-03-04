@@ -1,5 +1,11 @@
 #include "text.h"
 
+char chars[40] = "abcdefghijklmnopqrstuvwxyz0123456789.,;/";
+UINT8 i;
+UINT8 j;
+UINT8 cushion;
+UINT8 LETTER_COUNT = 0;
+
 void print(char *arr, UINT8 x, UINT8 y)
 {
     SPRITES_8x8;

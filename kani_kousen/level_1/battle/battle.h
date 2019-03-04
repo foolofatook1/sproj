@@ -4,7 +4,8 @@
 #include <rand.h>
 #include <gb/drawing.h>
 
-#include "../../text/text.c"
+//#include "../../text/text.c"
+#include "../../text/text.h"
 
 #include "../../assets/sprites/asakawa_front_idle.c"
 #include "../../assets/sprites/hero_back_idle.c"

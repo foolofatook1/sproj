@@ -1,0 +1,2444 @@
+                              1 ;--------------------------------------------------------
+                              2 ; File Created by SDCC : FreeWare ANSI-C Compiler
+                              3 ; Version 2.3.1 Mon Mar  4 10:47:52 2019
+                              4 
+                              5 ;--------------------------------------------------------
+                              6 	.module lcc193000
+                              7 	
+                              8 ;--------------------------------------------------------
+                              9 ; Public variables in this module
+                             10 ;--------------------------------------------------------
+                             11 	.globl _a
+                             12 	.globl _y
+                             13 	.globl _enemy_choice
+                             14 	.globl _choice
+                             15 	.globl _h_hp
+                             16 	.globl _HERO_HP
+                             17 	.globl _ASAKAWA_HP
+                             18 	.globl _blank_screen_tiles
+                             19 	.globl _blank_screen
+                             20 	.globl _hero_back_idle
+                             21 	.globl _asakawa_front_idle
+                             22 	.globl _small_chain_border
+                             23 	.globl _chain_border_tiles
+                             24 	.globl _font
+                             25 	.globl _chain_border
+                             26 	.globl _choice_handler
+                             27 	.globl _hero_fight
+                             28 	.globl _hero_defend_anim
+                             29 	.globl _hero_fight_anim
+                             30 	.globl _clear_screen
+                             31 	.globl _sprite_setup
+                             32 	.globl _npc_fight
+                             33 ;--------------------------------------------------------
+                             34 ; special function registers
+                             35 ;--------------------------------------------------------
+                             36 ;--------------------------------------------------------
+                             37 ; special function bits 
+                             38 ;--------------------------------------------------------
+                             39 ;--------------------------------------------------------
+                             40 ; internal ram data
+                             41 ;--------------------------------------------------------
+                             42 	.area _DATA
+   0000                      43 _chain_border::
+   0000                      44 	.ds 360
+   0168                      45 _font::
+   0168                      46 	.ds 736
+   0448                      47 _chain_border_tiles::
+   0448                      48 	.ds 160
+   04E8                      49 _small_chain_border::
+   04E8                      50 	.ds 360
+   0650                      51 _asakawa_front_idle::
+   0650                      52 	.ds 128
+   06D0                      53 _hero_back_idle::
+   06D0                      54 	.ds 128
+   0750                      55 _blank_screen::
+   0750                      56 	.ds 360
+   08B8                      57 _blank_screen_tiles::
+   08B8                      58 	.ds 64
+   08F8                      59 _ASAKAWA_HP::
+   08F8                      60 	.ds 1
+   08F9                      61 _HERO_HP::
+   08F9                      62 	.ds 1
+   08FA                      63 _h_hp::
+   08FA                      64 	.ds 8
+   0902                      65 _choice::
+   0902                      66 	.ds 1
+   0903                      67 _enemy_choice::
+   0903                      68 	.ds 1
+   0904                      69 _y::
+   0904                      70 	.ds 1
+   0905                      71 _a::
+   0905                      72 	.ds 1
+                             73 ;--------------------------------------------------------
+                             74 ; overlayable items in internal ram 
+                             75 ;--------------------------------------------------------
+                             76 	.area _OVERLAY
+                             77 ;--------------------------------------------------------
+                             78 ; indirectly addressable internal ram data
+                             79 ;--------------------------------------------------------
+                             80 	.area _ISEG
+                             81 ;--------------------------------------------------------
+                             82 ; bit data
+                             83 ;--------------------------------------------------------
+                             84 	.area _BSEG
+                             85 ;--------------------------------------------------------
+                             86 ; external ram data
+                             87 ;--------------------------------------------------------
+                             88 	.area _XSEG
+                             89 ;--------------------------------------------------------
+                             90 ; global & static initialisations
+                             91 ;--------------------------------------------------------
+                             92 	.area _GSINIT
+                             93 	.area _GSFINAL
+                             94 	.area _GSINIT
+                             95 ;	battle.c 25
+                             96 ;	battle.c 244
+                             97 ;	genArrayInit
+                             98 ; _saveRegsForCall: sendSetSize: 0 deInUse: 0 bcInUse: 0 deSending: 0
+   0000 21 00 00             99 	ld	hl,#_chain_border
+   0003 CD 00 00            100 	call	__initrleblock
+   0006 01                  101 	.db	1
+   0007 04                  102 	.db	0x04
+   0008 EE 06               103 	.db	-18,0x06
+   000A 02                  104 	.db	2
+   000B 02 01               105 	.db	0x02, 0x01
+   000D EE 00               106 	.db	-18,0x00
+   000F 02                  107 	.db	2
+   0010 01 01               108 	.db	0x01, 0x01
+   0012 EE 00               109 	.db	-18,0x00
+   0014 02                  110 	.db	2
+   0015 01 01               111 	.db	0x01, 0x01
+   0017 EE 00               112 	.db	-18,0x00
+   0019 02                  113 	.db	2
+   001A 01 01               114 	.db	0x01, 0x01
+   001C EE 00               115 	.db	-18,0x00
+   001E 02                  116 	.db	2
+   001F 01 01               117 	.db	0x01, 0x01
+   0021 EE 00               118 	.db	-18,0x00
+   0023 02                  119 	.db	2
+   0024 01 01               120 	.db	0x01, 0x01
+   0026 EE 00               121 	.db	-18,0x00
+   0028 02                  122 	.db	2
+   0029 01 01               123 	.db	0x01, 0x01
+   002B EE 00               124 	.db	-18,0x00
+   002D 02                  125 	.db	2
+   002E 01 01               126 	.db	0x01, 0x01
+   0030 EE 00               127 	.db	-18,0x00
+   0032 02                  128 	.db	2
+   0033 01 01               129 	.db	0x01, 0x01
+   0035 EE 00               130 	.db	-18,0x00
+   0037 02                  131 	.db	2
+   0038 01 01               132 	.db	0x01, 0x01
+   003A EE 00               133 	.db	-18,0x00
+   003C 02                  134 	.db	2
+   003D 01 01               135 	.db	0x01, 0x01
+   003F EE 00               136 	.db	-18,0x00
+   0041 02                  137 	.db	2
+   0042 01 01               138 	.db	0x01, 0x01
+   0044 EE 00               139 	.db	-18,0x00
+   0046 02                  140 	.db	2
+   0047 01 01               141 	.db	0x01, 0x01
+   0049 EE 00               142 	.db	-18,0x00
+   004B 02                  143 	.db	2
+   004C 01 01               144 	.db	0x01, 0x01
+   004E EE 00               145 	.db	-18,0x00
+   0050 02                  146 	.db	2
+   0051 01 01               147 	.db	0x01, 0x01
+   0053 F1 00               148 	.db	-15,0x00
+   0055 05                  149 	.db	5
+   0056 07 08 09 01 01      150 	.db	0x07, 0x08, 0x09, 0x01, 0x01
+   005B EE 00               151 	.db	-18,0x00
+   005D 02                  152 	.db	2
+   005E 01 05               153 	.db	0x01, 0x05
+   0060 EE 06               154 	.db	-18,0x06
+   0062 01                  155 	.db	1
+   0063 03                  156 	.db	0x03
+   0064 00                  157 	.db	0
+                            158 ;	battle.c 26
+                            159 ;	battle.c 244
+                            160 ;	genArrayInit
+                            161 ; _saveRegsForCall: sendSetSize: 0 deInUse: 0 bcInUse: 0 deSending: 0
+   0065 21 68 01            162 	ld	hl,#_font
+   0068 CD 00 00            163 	call	__initrleblock
+   006B 0A                  164 	.db	10
+   006C 1C 1C 22 22 43 43   165 	.db	0x1C, 0x1C, 0x22, 0x22, 0x43, 0x43, 0x43, 0x43
+        43 43
+   0074 7F 7F               166 	.db	0x7F, 0x7F
+   0076 FA 43               167 	.db	-6,0x43
+   0078 08                  168 	.db	8
+   0079 7E 7E 63 63 63 63   169 	.db	0x7E, 0x7E, 0x63, 0x63, 0x63, 0x63, 0x7E, 0x7E
+        7E 7E
+   0081 FA 63               170 	.db	-6,0x63
+   0083 06                  171 	.db	6
+   0084 7E 7E 3E 3E 63 63   172 	.db	0x7E, 0x7E, 0x3E, 0x3E, 0x63, 0x63
+   008A F8 60               173 	.db	-8,0x60
+   008C 06                  174 	.db	6
+   008D 63 63 3E 3E 7E 7E   175 	.db	0x63, 0x63, 0x3E, 0x3E, 0x7E, 0x7E
+   0093 F4 47               176 	.db	-12,0x47
+   0095 0A                  177 	.db	10
+   0096 7E 7E 7F 7F 60 60   178 	.db	0x7E, 0x7E, 0x7F, 0x7F, 0x60, 0x60, 0x60, 0x60
+        60 60
+   009E 7E 7E               179 	.db	0x7E, 0x7E
+   00A0 FA 60               180 	.db	-6,0x60
+   00A2 0A                  181 	.db	10
+   00A3 7F 7F 7F 7F 60 60   182 	.db	0x7F, 0x7F, 0x7F, 0x7F, 0x60, 0x60, 0x60, 0x60
+        60 60
+   00AB 7E 7E               183 	.db	0x7E, 0x7E
+   00AD F8 60               184 	.db	-8,0x60
+   00AF 10                  185 	.db	16
+   00B0 3E 3E 63 63 60 60   186 	.db	0x3E, 0x3E, 0x63, 0x63, 0x60, 0x60, 0x60, 0x60
+        60 60
+   00B8 67 67 63 63 63 63   187 	.db	0x67, 0x67, 0x63, 0x63, 0x63, 0x63, 0x3F, 0x3F
+        3F 3F
+   00C0 FA 43               188 	.db	-6,0x43
+   00C2 02                  189 	.db	2
+   00C3 7F 7F               190 	.db	0x7F, 0x7F
+   00C5 F8 43               191 	.db	-8,0x43
+   00C7 02                  192 	.db	2
+   00C8 3C 3C               193 	.db	0x3C, 0x3C
+   00CA F4 18               194 	.db	-12,0x18
+   00CC 04                  195 	.db	4
+   00CD 3C 3C 0F 0F         196 	.db	0x3C, 0x3C, 0x0F, 0x0F
+   00D1 F8 06               197 	.db	-8,0x06
+   00D3 16                  198 	.db	22
+   00D4 36 36 36 36 1C 1C   199 	.db	0x36, 0x36, 0x36, 0x36, 0x1C, 0x1C, 0x66, 0x66
+        66 66
+   00DC 6C 6C 78 78 70 70   200 	.db	0x6C, 0x6C, 0x78, 0x78, 0x70, 0x70, 0x78, 0x78
+        78 78
+   00E4 6C 6C 66 66 63 63   201 	.db	0x6C, 0x6C, 0x66, 0x66, 0x63, 0x63
+   00EA F2 60               202 	.db	-14,0x60
+   00EC 0A                  203 	.db	10
+   00ED 7F 7F 63 63 77 77   204 	.db	0x7F, 0x7F, 0x63, 0x63, 0x77, 0x77, 0x7F, 0x7F
+        7F 7F
+   00F5 6B 6B               205 	.db	0x6B, 0x6B
+   00F7 F8 63               206 	.db	-8,0x63
+   00F9 12                  207 	.db	18
+   00FA 43 43 63 63 73 73   208 	.db	0x43, 0x43, 0x63, 0x63, 0x73, 0x73, 0x7B, 0x7B
+        7B 7B
+   0102 5F 5F 4F 4F 47 47   209 	.db	0x5F, 0x5F, 0x4F, 0x4F, 0x47, 0x47, 0x43, 0x43
+        43 43
+   010A 3E 3E               210 	.db	0x3E, 0x3E
+   010C F4 63               211 	.db	-12,0x63
+   010E 04                  212 	.db	4
+   010F 3E 3E 7E 7E         213 	.db	0x3E, 0x3E, 0x7E, 0x7E
+   0113 FA 63               214 	.db	-6,0x63
+   0115 02                  215 	.db	2
+   0116 7E 7E               216 	.db	0x7E, 0x7E
+   0118 FA 60               217 	.db	-6,0x60
+   011A 02                  218 	.db	2
+   011B 3E 3E               219 	.db	0x3E, 0x3E
+   011D F8 61               220 	.db	-8,0x61
+   011F 08                  221 	.db	8
+   0120 65 65 62 62 3D 3D   222 	.db	0x65, 0x65, 0x62, 0x62, 0x3D, 0x3D, 0x7E, 0x7E
+        7E 7E
+   0128 FA 63               223 	.db	-6,0x63
+   012A 1A                  224 	.db	26
+   012B 7E 7E 64 64 66 66   225 	.db	0x7E, 0x7E, 0x64, 0x64, 0x66, 0x66, 0x63, 0x63
+        63 63
+   0133 3E 3E 60 60 60 60   226 	.db	0x3E, 0x3E, 0x60, 0x60, 0x60, 0x60, 0x3E, 0x3E
+        3E 3E
+   013B 07 07 07 07 67 67   227 	.db	0x07, 0x07, 0x07, 0x07, 0x67, 0x67, 0x3E, 0x3E
+        3E 3E
+   0143 7E 7E               228 	.db	0x7E, 0x7E
+   0145 F2 18               229 	.db	-14,0x18
+   0147 F4 43               230 	.db	-12,0x43
+   0149 04                  231 	.db	4
+   014A 47 47 3E 3E         232 	.db	0x47, 0x47, 0x3E, 0x3E
+   014E F4 43               233 	.db	-12,0x43
+   0150 04                  234 	.db	4
+   0151 26 26 1C 1C         235 	.db	0x26, 0x26, 0x1C, 0x1C
+   0155 F8 63               236 	.db	-8,0x63
+   0157 1E                  237 	.db	30
+   0158 6B 6B 7F 7F 77 77   238 	.db	0x6B, 0x6B, 0x7F, 0x7F, 0x77, 0x77, 0x63, 0x63
+        63 63
+   0160 83 83 46 46 2C 2C   239 	.db	0x83, 0x83, 0x46, 0x46, 0x2C, 0x2C, 0x18, 0x18
+        18 18
+   0168 38 38 64 64 C2 C2   240 	.db	0x38, 0x38, 0x64, 0x64, 0xC2, 0xC2, 0x81, 0x81
+        81 81
+   0170 66 66 66 66 3C 3C   241 	.db	0x66, 0x66, 0x66, 0x66, 0x3C, 0x3C
+   0176 F6 18               242 	.db	-10,0x18
+   0178 24                  243 	.db	36
+   0179 7F 7F 03 03 07 07   244 	.db	0x7F, 0x7F, 0x03, 0x03, 0x07, 0x07, 0x0E, 0x0E
+        0E 0E
+   0181 1C 1C 38 38 7F 7F   245 	.db	0x1C, 0x1C, 0x38, 0x38, 0x7F, 0x7F, 0x7F, 0x7F
+        7F 7F
+   0189 3C 3C 66 66 66 66   246 	.db	0x3C, 0x3C, 0x66, 0x66, 0x66, 0x66, 0x6E, 0x6E
+        6E 6E
+   0191 76 76 66 66 66 66   247 	.db	0x76, 0x76, 0x66, 0x66, 0x66, 0x66, 0x3C, 0x3C
+        3C 3C
+   0199 18 18 38 38         248 	.db	0x18, 0x18, 0x38, 0x38
+   019D F6 18               249 	.db	-10,0x18
+   019F 26                  250 	.db	38
+   01A0 3C 3C 3C 3C 4E 4E   251 	.db	0x3C, 0x3C, 0x3C, 0x3C, 0x4E, 0x4E, 0x0E, 0x0E
+        0E 0E
+   01A8 0C 0C 38 38 70 70   252 	.db	0x0C, 0x0C, 0x38, 0x38, 0x70, 0x70, 0x7E, 0x7E
+        7E 7E
+   01B0 7E 7E 7C 7C 0E 0E   253 	.db	0x7E, 0x7E, 0x7C, 0x7C, 0x0E, 0x0E, 0x0E, 0x0E
+        0E 0E
+   01B8 3C 3C 0C 0C 0E 0E   254 	.db	0x3C, 0x3C, 0x0C, 0x0C, 0x0E, 0x0E, 0x0E, 0x0E
+        0E 0E
+   01C0 7C 7C 3C 3C 6C 6C   255 	.db	0x7C, 0x7C, 0x3C, 0x3C, 0x6C, 0x6C
+   01C6 FA 4C               256 	.db	-6,0x4C
+   01C8 1E                  257 	.db	30
+   01C9 7E 7E 0C 0C 0C 0C   258 	.db	0x7E, 0x7E, 0x0C, 0x0C, 0x0C, 0x0C, 0x7C, 0x7C
+        7C 7C
+   01D1 60 60 60 60 7C 7C   259 	.db	0x60, 0x60, 0x60, 0x60, 0x7C, 0x7C, 0x0E, 0x0E
+        0E 0E
+   01D9 0E 0E 4E 4E 3C 3C   260 	.db	0x0E, 0x0E, 0x4E, 0x4E, 0x3C, 0x3C, 0x3C, 0x3C
+        3C 3C
+   01E1 60 60 60 60 7C 7C   261 	.db	0x60, 0x60, 0x60, 0x60, 0x7C, 0x7C
+   01E7 FA 66               262 	.db	-6,0x66
+   01E9 0E                  263 	.db	14
+   01EA 3C 3C 7E 7E 06 06   264 	.db	0x3C, 0x3C, 0x7E, 0x7E, 0x06, 0x06, 0x06, 0x06
+        06 06
+   01F2 0C 0C 0C 0C 1C 1C   265 	.db	0x0C, 0x0C, 0x0C, 0x0C, 0x1C, 0x1C
+   01F8 FA 3C               266 	.db	-6,0x3C
+   01FA 06                  267 	.db	6
+   01FB 4E 4E 4E 4E 3C 3C   268 	.db	0x4E, 0x4E, 0x4E, 0x4E, 0x3C, 0x3C
+   0201 FA 4E               269 	.db	-6,0x4E
+   0203 0A                  270 	.db	10
+   0204 3C 3C 3C 3C 4E 4E   271 	.db	0x3C, 0x3C, 0x3C, 0x3C, 0x4E, 0x4E, 0x4E, 0x4E
+        4E 4E
+   020C 3E 3E               272 	.db	0x3E, 0x3E
+   020E FA 0E               273 	.db	-6,0x0E
+   0210 02                  274 	.db	2
+   0211 38 38               275 	.db	0x38, 0x38
+   0213 F4 00               276 	.db	-12,0x00
+   0215 04                  277 	.db	4
+   0216 18 18 18 18         278 	.db	0x18, 0x18, 0x18, 0x18
+   021A F8 00               279 	.db	-8,0x00
+   021C 28                  280 	.db	40
+   021D 18 18 18 18 08 08   281 	.db	0x18, 0x18, 0x18, 0x18, 0x08, 0x08, 0x10, 0x10
+        10 10
+   0225 00 00 18 18 18 18   282 	.db	0x00, 0x00, 0x18, 0x18, 0x18, 0x18, 0x00, 0x00
+        00 00
+   022D 18 18 18 18 08 08   283 	.db	0x18, 0x18, 0x18, 0x18, 0x08, 0x08, 0x10, 0x10
+        10 10
+   0235 01 01 03 03 06 06   284 	.db	0x01, 0x01, 0x03, 0x03, 0x06, 0x06, 0x0C, 0x0C
+        0C 0C
+   023D 18 18 30 30 60 60   285 	.db	0x18, 0x18, 0x30, 0x30, 0x60, 0x60, 0x40, 0x40
+        40 40
+   0245 EE 00               286 	.db	-18,0x00
+   0247 14                  287 	.db	20
+   0248 C0 C0 F0 F0 FC FC   288 	.db	0xC0, 0xC0, 0xF0, 0xF0, 0xFC, 0xFC, 0xFC, 0xFC
+        FC FC
+   0250 F0 F0 C0 C0 00 00   289 	.db	0xF0, 0xF0, 0xC0, 0xC0, 0x00, 0x00, 0x0C, 0x0C
+        0C 0C
+   0258 0C 0C 04 04         290 	.db	0x0C, 0x0C, 0x04, 0x04
+   025C F4 00               291 	.db	-12,0x00
+   025E F6 18               292 	.db	-10,0x18
+   0260 0A                  293 	.db	10
+   0261 00 00 18 18 36 36   294 	.db	0x00, 0x00, 0x18, 0x18, 0x36, 0x36, 0x36, 0x36
+        36 36
+   0269 12 12               295 	.db	0x12, 0x12
+   026B F6 00               296 	.db	-10,0x00
+   026D 10                  297 	.db	16
+   026E 3C 3C 46 46 06 06   298 	.db	0x3C, 0x3C, 0x46, 0x46, 0x06, 0x06, 0x06, 0x06
+        06 06
+   0276 1C 1C 18 18 00 00   299 	.db	0x1C, 0x1C, 0x18, 0x18, 0x00, 0x00, 0x18, 0x18
+        18 18
+   027E 00                  300 	.db	0
+                            301 ;	battle.c 26
+                            302 ;	battle.c 244
+                            303 ;	genArrayInit
+                            304 ; _saveRegsForCall: sendSetSize: 0 deInUse: 0 bcInUse: 0 deSending: 0
+   027F 21 48 04            305 	ld	hl,#_chain_border_tiles
+   0282 CD 00 00            306 	call	__initrleblock
+   0285 F0 00               307 	.db	-16,0x00
+   0287 7F                  308 	.db	127
+   0288 18 18 7E 7E DB DB   309 	.db	0x18, 0x18, 0x7E, 0x7E, 0xDB, 0xDB, 0xC3, 0xC3
+        C3 C3
+   0290 C3 C3 DB DB 7E 7E   310 	.db	0xC3, 0xC3, 0xDB, 0xDB, 0x7E, 0x7E, 0x18, 0x18
+        18 18
+   0298 3C 3C 7E 7E 43 43   311 	.db	0x3C, 0x3C, 0x7E, 0x7E, 0x43, 0x43, 0xE3, 0xE3
+        E3 E3
+   02A0 E3 E3 5B 5B 7E 7E   312 	.db	0xE3, 0xE3, 0x5B, 0x5B, 0x7E, 0x7E, 0x18, 0x18
+        18 18
+   02A8 18 18 7E 7E 5B 5B   313 	.db	0x18, 0x18, 0x7E, 0x7E, 0x5B, 0x5B, 0xE3, 0xE3
+        E3 E3
+   02B0 E3 E3 43 43 7E 7E   314 	.db	0xE3, 0xE3, 0x43, 0x43, 0x7E, 0x7E, 0x3C, 0x3C
+        3C 3C
+   02B8 3C 3C 7E 7E C2 C2   315 	.db	0x3C, 0x3C, 0x7E, 0x7E, 0xC2, 0xC2, 0xC7, 0xC7
+        C7 C7
+   02C0 C7 C7 DA DA 7E 7E   316 	.db	0xC7, 0xC7, 0xDA, 0xDA, 0x7E, 0x7E, 0x18, 0x18
+        18 18
+   02C8 18 18 7E 7E DA DA   317 	.db	0x18, 0x18, 0x7E, 0x7E, 0xDA, 0xDA, 0xC7, 0xC7
+        C7 C7
+   02D0 C7 C7 C2 C2 7E 7E   318 	.db	0xC7, 0xC7, 0xC2, 0xC2, 0x7E, 0x7E, 0x3C, 0x3C
+        3C 3C
+   02D8 3C 3C 7E 7E 42 42   319 	.db	0x3C, 0x3C, 0x7E, 0x7E, 0x42, 0x42, 0xE7, 0xE7
+        E7 E7
+   02E0 E7 E7 42 42 7E 7E   320 	.db	0xE7, 0xE7, 0x42, 0x42, 0x7E, 0x7E, 0x3C, 0x3C
+        3C 3C
+   02E8 7E 7E 81 81 99 99   321 	.db	0x7E, 0x7E, 0x81, 0x81, 0x99, 0x99, 0xA5, 0xA5
+        A5 A5
+   02F0 BD BD A5 A5 81 81   322 	.db	0xBD, 0xBD, 0xA5, 0xA5, 0x81, 0x81, 0x7E, 0x7E
+        7E 7E
+   02F8 04 04 06 06 7D 7D   323 	.db	0x04, 0x04, 0x06, 0x06, 0x7D, 0x7D, 0x40, 0x40
+        40 40
+   0300 40 40 7D 7D 06 06   324 	.db	0x40, 0x40, 0x7D, 0x7D, 0x06, 0x06, 0x04
+        04
+   0307 01                  325 	.db	1
+   0308 04                  326 	.db	0x04
+   0309 FA 00               327 	.db	-6,0x00
+   030B 04                  328 	.db	4
+   030C 80 80 80 80         329 	.db	0x80, 0x80, 0x80, 0x80
+   0310 FA 00               330 	.db	-6,0x00
+   0312 00                  331 	.db	0
+                            332 ;	battle.c 25
+                            333 ;	battle.c 244
+                            334 ;	genArrayInit
+                            335 ; _saveRegsForCall: sendSetSize: 0 deInUse: 0 bcInUse: 0 deSending: 0
+   0313 21 E8 04            336 	ld	hl,#_small_chain_border
+   0316 CD 00 00            337 	call	__initrleblock
+   0319 01                  338 	.db	1
+   031A 04                  339 	.db	0x04
+   031B F8 06               340 	.db	-8,0x06
+   031D 01                  341 	.db	1
+   031E 02                  342 	.db	0x02
+   031F F7 06               343 	.db	-9,0x06
+   0321 02                  344 	.db	2
+   0322 02 01               345 	.db	0x02, 0x01
+   0324 F8 00               346 	.db	-8,0x00
+   0326 01                  347 	.db	1
+   0327 01                  348 	.db	0x01
+   0328 F7 00               349 	.db	-9,0x00
+   032A 02                  350 	.db	2
+   032B 01 01               351 	.db	0x01, 0x01
+   032D F8 00               352 	.db	-8,0x00
+   032F 01                  353 	.db	1
+   0330 01                  354 	.db	0x01
+   0331 F7 00               355 	.db	-9,0x00
+   0333 02                  356 	.db	2
+   0334 01 01               357 	.db	0x01, 0x01
+   0336 F8 00               358 	.db	-8,0x00
+   0338 01                  359 	.db	1
+   0339 01                  360 	.db	0x01
+   033A F7 00               361 	.db	-9,0x00
+   033C 02                  362 	.db	2
+   033D 01 01               363 	.db	0x01, 0x01
+   033F F8 00               364 	.db	-8,0x00
+   0341 01                  365 	.db	1
+   0342 01                  366 	.db	0x01
+   0343 F7 00               367 	.db	-9,0x00
+   0345 02                  368 	.db	2
+   0346 01 01               369 	.db	0x01, 0x01
+   0348 F8 00               370 	.db	-8,0x00
+   034A 01                  371 	.db	1
+   034B 01                  372 	.db	0x01
+   034C F7 00               373 	.db	-9,0x00
+   034E 02                  374 	.db	2
+   034F 01 01               375 	.db	0x01, 0x01
+   0351 F8 00               376 	.db	-8,0x00
+   0353 01                  377 	.db	1
+   0354 01                  378 	.db	0x01
+   0355 F7 00               379 	.db	-9,0x00
+   0357 02                  380 	.db	2
+   0358 01 01               381 	.db	0x01, 0x01
+   035A F8 00               382 	.db	-8,0x00
+   035C 01                  383 	.db	1
+   035D 01                  384 	.db	0x01
+   035E F7 00               385 	.db	-9,0x00
+   0360 02                  386 	.db	2
+   0361 01 01               387 	.db	0x01, 0x01
+   0363 F8 00               388 	.db	-8,0x00
+   0365 01                  389 	.db	1
+   0366 01                  390 	.db	0x01
+   0367 F7 00               391 	.db	-9,0x00
+   0369 02                  392 	.db	2
+   036A 01 01               393 	.db	0x01, 0x01
+   036C F8 00               394 	.db	-8,0x00
+   036E 01                  395 	.db	1
+   036F 01                  396 	.db	0x01
+   0370 F7 00               397 	.db	-9,0x00
+   0372 02                  398 	.db	2
+   0373 01 01               399 	.db	0x01, 0x01
+   0375 F8 00               400 	.db	-8,0x00
+   0377 01                  401 	.db	1
+   0378 01                  402 	.db	0x01
+   0379 F7 00               403 	.db	-9,0x00
+   037B 02                  404 	.db	2
+   037C 01 01               405 	.db	0x01, 0x01
+   037E F8 00               406 	.db	-8,0x00
+   0380 01                  407 	.db	1
+   0381 01                  408 	.db	0x01
+   0382 F7 00               409 	.db	-9,0x00
+   0384 02                  410 	.db	2
+   0385 01 01               411 	.db	0x01, 0x01
+   0387 F8 00               412 	.db	-8,0x00
+   0389 01                  413 	.db	1
+   038A 01                  414 	.db	0x01
+   038B F7 00               415 	.db	-9,0x00
+   038D 02                  416 	.db	2
+   038E 01 01               417 	.db	0x01, 0x01
+   0390 F8 00               418 	.db	-8,0x00
+   0392 01                  419 	.db	1
+   0393 01                  420 	.db	0x01
+   0394 F7 00               421 	.db	-9,0x00
+   0396 02                  422 	.db	2
+   0397 01 01               423 	.db	0x01, 0x01
+   0399 F8 00               424 	.db	-8,0x00
+   039B 01                  425 	.db	1
+   039C 01                  426 	.db	0x01
+   039D F7 00               427 	.db	-9,0x00
+   039F 02                  428 	.db	2
+   03A0 01 01               429 	.db	0x01, 0x01
+   03A2 F8 00               430 	.db	-8,0x00
+   03A4 01                  431 	.db	1
+   03A5 01                  432 	.db	0x01
+   03A6 F7 00               433 	.db	-9,0x00
+   03A8 02                  434 	.db	2
+   03A9 01 01               435 	.db	0x01, 0x01
+   03AB F8 00               436 	.db	-8,0x00
+   03AD 01                  437 	.db	1
+   03AE 01                  438 	.db	0x01
+   03AF F7 00               439 	.db	-9,0x00
+   03B1 02                  440 	.db	2
+   03B2 01 05               441 	.db	0x01, 0x05
+   03B4 F8 06               442 	.db	-8,0x06
+   03B6 01                  443 	.db	1
+   03B7 03                  444 	.db	0x03
+   03B8 F7 06               445 	.db	-9,0x06
+   03BA 01                  446 	.db	1
+   03BB 03                  447 	.db	0x03
+   03BC 00                  448 	.db	0
+                            449 ;	battle.c 26
+                            450 ;	battle.c 244
+                            451 ;	genArrayInit
+                            452 ; _saveRegsForCall: sendSetSize: 0 deInUse: 0 bcInUse: 0 deSending: 0
+   03BD 21 50 06            453 	ld	hl,#_asakawa_front_idle
+   03C0 CD 00 00            454 	call	__initrleblock
+   03C3 7F                  455 	.db	127
+   03C4 0F 0F 1F 1F 1F 11   456 	.db	0x0F, 0x0F, 0x1F, 0x1F, 0x1F, 0x11, 0x1F, 0x04
+        1F 04
+   03CC 1F 00 0F 00 0F 00   457 	.db	0x1F, 0x00, 0x0F, 0x00, 0x0F, 0x00, 0x03, 0x03
+        03 03
+   03D4 01 1D 00 1F 00 1F   458 	.db	0x01, 0x1D, 0x00, 0x1F, 0x00, 0x1F, 0x00, 0x1F
+        00 1F
+   03DC 30 0F 30 0F 00 0F   459 	.db	0x30, 0x0F, 0x30, 0x0F, 0x00, 0x0F, 0x1F, 0x1F
+        1F 1F
+   03E4 F0 F1 F8 FB F8 8A   460 	.db	0xF0, 0xF1, 0xF8, 0xFB, 0xF8, 0x8A, 0xF8, 0x21
+        F8 21
+   03EC F8 01 02 FC F0 00   461 	.db	0xF8, 0x01, 0x02, 0xFC, 0xF0, 0x00, 0xC0, 0xC0
+        C0 C0
+   03F4 80 B8 00 F8 00 F8   462 	.db	0x80, 0xB8, 0x00, 0xF8, 0x00, 0xF8, 0x00, 0xF8
+        00 F8
+   03FC 0C F0 0C F0 00 F0   463 	.db	0x0C, 0xF0, 0x0C, 0xF0, 0x00, 0xF0, 0xF8, 0xF8
+        F8 F8
+   0404 0F 8F 1F DF 1F 51   464 	.db	0x0F, 0x8F, 0x1F, 0xDF, 0x1F, 0x51, 0x1F, 0x84
+        1F 84
+   040C 1F 80 40 3F 0F 00   465 	.db	0x1F, 0x80, 0x40, 0x3F, 0x0F, 0x00, 0x03, 0x1F
+        03 1F
+   0414 01 1D 00 1F 00 1F   466 	.db	0x01, 0x1D, 0x00, 0x1F, 0x00, 0x1F, 0x30, 0x0F
+        30 0F
+   041C 30 0F 00 0F 00 0F   467 	.db	0x30, 0x0F, 0x00, 0x0F, 0x00, 0x0F, 0x1F, 0x1F
+        1F 1F
+   0424 F0 F0 F8 F8 F8 88   468 	.db	0xF0, 0xF0, 0xF8, 0xF8, 0xF8, 0x88, 0xF8, 0x20
+        F8 20
+   042C F8 00 F0 00 F0 00   469 	.db	0xF8, 0x00, 0xF0, 0x00, 0xF0, 0x00, 0xC0, 0xF8
+        C0 F8
+   0434 80 B8 00 F8 00 F8   470 	.db	0x80, 0xB8, 0x00, 0xF8, 0x00, 0xF8, 0x0C, 0xF0
+        0C F0
+   043C 0C F0 00 F0 00 F0   471 	.db	0x0C, 0xF0, 0x00, 0xF0, 0x00, 0xF0, 0xF8
+        F8
+   0443 01                  472 	.db	1
+   0444 F8                  473 	.db	0xF8
+   0445 00                  474 	.db	0
+                            475 ;	battle.c 26
+                            476 ;	battle.c 244
+                            477 ;	genArrayInit
+                            478 ; _saveRegsForCall: sendSetSize: 0 deInUse: 0 bcInUse: 0 deSending: 0
+   0446 21 D0 06            479 	ld	hl,#_hero_back_idle
+   0449 CD 00 00            480 	call	__initrleblock
+   044C FB 0F               481 	.db	-5,0x0F
+   044E 01                  482 	.db	1
+   044F 00                  483 	.db	0x00
+   0450 FA 0F               484 	.db	-6,0x0F
+   0452 14                  485 	.db	20
+   0453 07 07 1F 00 1F 00   486 	.db	0x07, 0x07, 0x1F, 0x00, 0x1F, 0x00, 0x0F, 0x10
+        0F 10
+   045B 0F 10 0F 10 0F 3F   487 	.db	0x0F, 0x10, 0x0F, 0x10, 0x0F, 0x3F, 0x0F, 0x30
+        0F 30
+   0463 0F 00 1F 1F         488 	.db	0x0F, 0x00, 0x1F, 0x1F
+   0467 FB F0               489 	.db	-5,0xF0
+   0469 01                  490 	.db	1
+   046A 00                  491 	.db	0x00
+   046B FA F0               492 	.db	-6,0xF0
+   046D 14                  493 	.db	20
+   046E E0 E0 F8 00 F8 00   494 	.db	0xE0, 0xE0, 0xF8, 0x00, 0xF8, 0x00, 0xF0, 0x08
+        F0 08
+   0476 F0 08 F0 08 F8 FC   495 	.db	0xF0, 0x08, 0xF0, 0x08, 0xF8, 0xFC, 0xF0, 0x1C
+        F0 1C
+   047E F0 00 F8 F8         496 	.db	0xF0, 0x00, 0xF8, 0xF8
+   0482 FB 0F               497 	.db	-5,0x0F
+   0484 01                  498 	.db	1
+   0485 00                  499 	.db	0x00
+   0486 FA 0F               500 	.db	-6,0x0F
+   0488 14                  501 	.db	20
+   0489 1F 07 1F 00 0F 10   502 	.db	0x1F, 0x07, 0x1F, 0x00, 0x0F, 0x10, 0x0F, 0x10
+        0F 10
+   0491 0F 10 0F 3F 0F 30   503 	.db	0x0F, 0x10, 0x0F, 0x3F, 0x0F, 0x30, 0x0F, 0x00
+        0F 00
+   0499 0F 00 1F 1F         504 	.db	0x0F, 0x00, 0x1F, 0x1F
+   049D FB F0               505 	.db	-5,0xF0
+   049F 01                  506 	.db	1
+   04A0 00                  507 	.db	0x00
+   04A1 FA F0               508 	.db	-6,0xF0
+   04A3 14                  509 	.db	20
+   04A4 F8 E0 F8 00 F0 08   510 	.db	0xF8, 0xE0, 0xF8, 0x00, 0xF0, 0x08, 0xF0, 0x08
+        F0 08
+   04AC F0 08 F8 FC F0 1C   511 	.db	0xF0, 0x08, 0xF8, 0xFC, 0xF0, 0x1C, 0xF0, 0x00
+        F0 00
+   04B4 F0 00 F8 F8         512 	.db	0xF0, 0x00, 0xF8, 0xF8
+   04B8 00                  513 	.db	0
+                            514 ;	battle.c 25
+                            515 ;	battle.c 244
+                            516 ;	genArrayInit
+                            517 ; _saveRegsForCall: sendSetSize: 0 deInUse: 0 bcInUse: 0 deSending: 0
+   04B9 21 50 07            518 	ld	hl,#_blank_screen
+   04BC CD 00 00            519 	call	__initrleblock
+   04BF 81 00               520 	.db	-127,0x00
+   04C1 81 00               521 	.db	-127,0x00
+   04C3 96 00               522 	.db	-106,0x00
+   04C5 00                  523 	.db	0
+                            524 ;	battle.c 26
+                            525 ;	battle.c 244
+                            526 ;	genArrayInit
+                            527 ; _saveRegsForCall: sendSetSize: 0 deInUse: 0 bcInUse: 0 deSending: 0
+   04C6 21 B8 08            528 	ld	hl,#_blank_screen_tiles
+   04C9 CD 00 00            529 	call	__initrleblock
+   04CC F0 00               530 	.db	-16,0x00
+   04CE 1F                  531 	.db	31
+   04CF FF 00 FF 00 FF 00   532 	.db	0xFF, 0x00, 0xFF, 0x00, 0xFF, 0x00, 0xFF, 0x00
+        FF 00
+   04D7 FF 00 FF 00 FF 00   533 	.db	0xFF, 0x00, 0xFF, 0x00, 0xFF, 0x00, 0xFF, 0x00
+        FF 00
+   04DF 00 FF 00 FF 00 FF   534 	.db	0x00, 0xFF, 0x00, 0xFF, 0x00, 0xFF, 0x00, 0xFF
+        00 FF
+   04E7 00 FF 00 FF 00 FF   535 	.db	0x00, 0xFF, 0x00, 0xFF, 0x00, 0xFF, 0x00
+        00
+   04EE EF FF               536 	.db	-17,0xFF
+   04F0 00                  537 	.db	0
+                            538 ;	battle.c 27
+                            539 ;	genAssign
+                            540 ;	AOP_HL for _ASAKAWA_HP
+   04F1 21 F8 08            541 	ld	hl,#_ASAKAWA_HP
+   04F4 36 64               542 	ld	(hl),#0x64
+                            543 ;	battle.c 29
+                            544 ;	genAssign
+                            545 ;	AOP_HL for _HERO_HP
+   04F6 21 F9 08            546 	ld	hl,#_HERO_HP
+   04F9 36 0A               547 	ld	(hl),#0x0A
+                            548 ;	battle.c 38
+                            549 ;	genAssign
+                            550 ;	AOP_HL for _choice
+   04FB 21 02 09            551 	ld	hl,#_choice
+   04FE 36 00               552 	ld	(hl),#0x00
+                            553 ;	battle.c 39
+                            554 ;	genAssign
+                            555 ;	AOP_HL for _enemy_choice
+   0500 21 03 09            556 	ld	hl,#_enemy_choice
+   0503 36 00               557 	ld	(hl),#0x00
+                            558 ;	battle.c 42
+                            559 ;	genAssign
+                            560 ;	AOP_HL for _y
+   0505 21 04 09            561 	ld	hl,#_y
+   0508 36 48               562 	ld	(hl),#0x48
+                            563 ;	battle.c 44
+                            564 ;	genAssign
+                            565 ;	AOP_HL for _a
+   050A 21 05 09            566 	ld	hl,#_a
+   050D 36 00               567 	ld	(hl),#0x00
+                            568 ;--------------------------------------------------------
+                            569 ; Home
+                            570 ;--------------------------------------------------------
+                            571 	.area _HOME
+                            572 	.area _CODE
+                            573 ;--------------------------------------------------------
+                            574 ; code
+                            575 ;--------------------------------------------------------
+                            576 	.area _CODE
+                            577 ;	battle.c 11
+                            578 ;	genLabel
+                            579 ;	genFunction
+                            580 ;	---------------------------------
+                            581 ; Function choice_handler
+                            582 ; ---------------------------------
+   0000                     583 ___choice_handler_start:
+   0000                     584 _choice_handler:
+                            585 	
+                            586 ;	battle.c 13
+                            587 ;	genCmpEq
+                            588 ;	AOP_STK for 
+                            589 ; genCmpEq: left 1, right 1, result 0
+   0000 F8 02               590 	lda	hl,2(sp)
+   0002 7E                  591 	ld	a,(hl)
+   0003 FE 20               592 	cp	a,#0x20
+   0005 C2 12 00            593 	jp	nz,00103$
+   0008 18 03               594 	jr	00107$
+   000A                     595 00106$:
+   000A C3 12 00            596 	jp	00103$
+   000D                     597 00107$:
+                            598 ;	battle.c 14
+                            599 ;	genAssign
+                            600 ;	AOP_HL for _choice
+   000D 21 02 09            601 	ld	hl,#_choice
+   0010 36 01               602 	ld	(hl),#0x01
+                            603 ;	genLabel
+   0012                     604 00103$:
+                            605 ;	genEndFunction
+                            606 	
+   0012 C9                  607 	ret
+   0013                     608 ___choice_handler_end:
+                            609 ;	battle.c 17
+                            610 ;	genLabel
+                            611 ;	genFunction
+                            612 ;	---------------------------------
+                            613 ; Function hero_fight
+                            614 ; ---------------------------------
+   0013                     615 ___hero_fight_start:
+   0013                     616 _hero_fight:
+   0013 E8 FB               617 	lda	sp,-5(sp)
+                            618 ;	battle.c 19
+                            619 ;	genCmpEq
+                            620 ;	AOP_HL for _choice
+                            621 ; genCmpEq: left 1, right 1, result 0
+   0015 21 02 09            622 	ld	hl,#_choice
+   0018 7E                  623 	ld	a,(hl)
+   0019 FE 01               624 	cp	a,#0x01
+   001B C2 43 01            625 	jp	nz,00105$
+   001E 18 03               626 	jr	00126$
+   0020                     627 00125$:
+   0020 C3 43 01            628 	jp	00105$
+   0023                     629 00126$:
+                            630 ;	battle.c 23
+                            631 ;	genAssign
+   0023 01 04 FF            632 	ld	bc,#0xFF04
+                            633 ;	genPointerGet
+   0026 0A                  634 	ld	a,(bc)
+   0027 4F                  635 	ld	c,a
+                            636 ;	genCast
+                            637 ;	AOP_STK for _hero_fight_seed_2_2
+   0028 F8 03               638 	lda	hl,3(sp)
+   002A 71                  639 	ld	(hl),c
+   002B 23                  640 	inc	hl
+   002C 36 00               641 	ld	(hl),#0x00
+                            642 ;	battle.c 24
+                            643 ;	genAssign
+   002E 01 04 FF            644 	ld	bc,#0xFF04
+                            645 ;	genPointerGet
+   0031 0A                  646 	ld	a,(bc)
+   0032 4F                  647 	ld	c,a
+                            648 ;	genCast
+                            649 ; Removed redundent load
+   0033 06 00               650 	ld	b,#0x00
+                            651 ;	genLeftShift
+   0035 41                  652 	ld	b,c
+   0036 0E 00               653 	ld	c,#0x00
+                            654 ;	genOr
+                            655 ;	AOP_STK for _hero_fight_seed_2_2
+   0038 2B                  656 	dec	hl
+   0039 7E                  657 	ld	a,(hl)
+   003A B1                  658 	or	a,c
+   003B 22                  659 	ld	(hl+),a
+   003C 7E                  660 	ld	a,(hl)
+   003D B0                  661 	or	a,b
+                            662 ;	battle.c 26
+                            663 ;	genIpush
+                            664 ; _saveRegsForCall: sendSetSize: 0 deInUse: 0 bcInUse: 0 deSending: 0
+                            665 ;	AOP_STK for _hero_fight_seed_2_2
+   003E 32                  666 	ld      (hl-),a
+   003F 2A                  667 	ld	a,(hl+)
+   0040 66                  668 	ld	h,(hl)
+   0041 6F                  669 	ld	l,a
+   0042 E5                  670 	push	hl
+                            671 ;	genCall
+   0043 CD 00 00            672 	call	_initarand
+   0046 E8 02               673 	lda	sp,2(sp)
+                            674 ;	battle.c 29
+                            675 ;	genCall
+                            676 ; _saveRegsForCall: sendSetSize: 0 deInUse: 0 bcInUse: 0 deSending: 0
+   0048 CD 00 00            677 	call	_rand
+   004B 4B                  678 	ld	c,e
+                            679 ;	genAnd
+   004C 79                  680 	ld	a,c
+   004D E6 01               681 	and	a,#0x01
+                            682 ;	battle.c 31
+                            683 ;	genCmpEq
+                            684 ; genCmpEq: left 1, right 1, result 0
+   004F 4F                  685 	ld	c,a
+   0050 FE 01               686 	cp	a,#0x01
+   0052 C2 D6 00            687 	jp	nz,00102$
+   0055 18 03               688 	jr	00128$
+   0057                     689 00127$:
+   0057 C3 D6 00            690 	jp	00102$
+   005A                     691 00128$:
+                            692 ;	battle.c 33
+                            693 ;	genCall
+                            694 ; _saveRegsForCall: sendSetSize: 0 deInUse: 0 bcInUse: 0 deSending: 0
+   005A CD 4D 02            695 	call	_hero_fight_anim
+                            696 ;	battle.c 34
+                            697 ;	genAssign
+                            698 ;	AOP_HL for _a
+   005D 21 05 09            699 	ld	hl,#_a
+   0060 36 00               700 	ld	(hl),#0x00
+                            701 ;	genLabel
+   0062                     702 00108$:
+                            703 ;	genCmpLt
+                            704 ;	AOP_HL for _a
+   0062 21 05 09            705 	ld	hl,#_a
+   0065 7E                  706 	ld	a,(hl)
+   0066 FE 06               707 	cp	#0x06
+   0068 D2 9C 00            708 	jp	nc,00111$
+                            709 ;	battle.c 36
+                            710 ;	genIpush
+                            711 ; _saveRegsForCall: sendSetSize: 0 deInUse: 0 bcInUse: 0 deSending: 0
+   006B 21 64 00            712 	ld	hl,#0x0064
+   006E E5                  713 	push	hl
+                            714 ;	genCall
+   006F CD 00 00            715 	call	_delay
+   0072 E8 02               716 	lda	sp,2(sp)
+                            717 ;	battle.c 37
+                            718 ;	genCall
+                            719 ; _saveRegsForCall: sendSetSize: 0 deInUse: 0 bcInUse: 0 deSending: 0
+   0074 CD 00 00            720 	call	_display_off
+                            721 ;	battle.c 38
+                            722 ;	genIpush
+                            723 ; _saveRegsForCall: sendSetSize: 0 deInUse: 0 bcInUse: 0 deSending: 0
+   0077 21 64 00            724 	ld	hl,#0x0064
+   007A E5                  725 	push	hl
+                            726 ;	genCall
+   007B CD 00 00            727 	call	_delay
+   007E E8 02               728 	lda	sp,2(sp)
+                            729 ;	battle.c 39
+                            730 ;	genAssign
+   0080 01 40 FF            731 	ld	bc,#0xFF40
+                            732 ;	genAssign
+                            733 ;	AOP_STK for _hero_fight_sloc0_1_0
+   0083 F8 01               734 	lda	hl,1(sp)
+   0085 36 40               735 	ld	(hl),#0x40
+   0087 23                  736 	inc	hl
+   0088 36 FF               737 	ld	(hl),#0xFF
+                            738 ;	genPointerGet
+                            739 ;	AOP_STK for _hero_fight_sloc0_1_0
+                            740 ;	AOP_STK for _hero_fight_sloc1_1_0
+   008A 2B                  741 	dec	hl
+   008B 5E                  742 	ld	e,(hl)
+   008C 23                  743 	inc	hl
+   008D 56                  744 	ld	d,(hl)
+   008E 1A                  745 	ld	a,(de)
+   008F 2B                  746 	dec	hl
+   0090 2B                  747 	dec	hl
+                            748 ;	genOr
+                            749 ;	AOP_STK for _hero_fight_sloc1_1_0
+   0091 77                  750 	ld      (hl),a
+                            751 ; Removed redundent load
+   0092 F6 80               752 	or	a,#0x80
+                            753 ;	genAssign (pointer)
+   0094 02                  754 	ld	(bc),a
+                            755 ;	battle.c 34
+                            756 ;	genPlus
+                            757 ;	AOP_HL for _a
+                            758 ;	genPlusIncr
+   0095 21 05 09            759 	ld	hl,#_a
+   0098 34                  760 	inc	(hl)
+                            761 ;	genGoto
+   0099 C3 62 00            762 	jp	00108$
+                            763 ;	genLabel
+   009C                     764 00111$:
+                            765 ;	battle.c 41
+                            766 ;	genCall
+                            767 ; _saveRegsForCall: sendSetSize: 0 deInUse: 0 bcInUse: 0 deSending: 0
+   009C CD 00 00            768 	call	_display_off
+                            769 ;	battle.c 42
+                            770 ;	genCall
+                            771 ; _saveRegsForCall: sendSetSize: 0 deInUse: 0 bcInUse: 0 deSending: 0
+   009F CD 00 00            772 	call	_sprite_clean
+                            773 ;	battle.c 43
+                            774 ;	genIpush
+                            775 ; _saveRegsForCall: sendSetSize: 0 deInUse: 0 bcInUse: 0 deSending: 0
+   00A2 21 48 50            776 	ld	hl,#0x5048
+   00A5 E5                  777 	push	hl
+                            778 ;	genIpush
+   00A6 21 63 01            779 	ld	hl,#__str_0
+   00A9 E5                  780 	push	hl
+                            781 ;	genCall
+   00AA CD 00 00            782 	call	_print
+   00AD E8 04               783 	lda	sp,4(sp)
+                            784 ;	battle.c 44
+                            785 ;	genCall
+                            786 ; _saveRegsForCall: sendSetSize: 0 deInUse: 0 bcInUse: 0 deSending: 0
+   00AF CD 91 03            787 	call	_clear_screen
+                            788 ;	battle.c 45
+                            789 ;	genAssign
+                            790 ;	AOP_STK for 
+   00B2 F8 07               791 	lda	hl,7(sp)
+   00B4 4E                  792 	ld	c,(hl)
+   00B5 23                  793 	inc	hl
+   00B6 46                  794 	ld	b,(hl)
+                            795 ;	genPointerGet
+                            796 ;	AOP_STK for _hero_fight_sloc1_1_0
+   00B7 0A                  797 	ld	a,(bc)
+   00B8 F8 00               798 	lda	hl,0(sp)
+                            799 ;	genMinus
+                            800 ;	AOP_STK for _hero_fight_sloc1_1_0
+                            801 ;	AOP_STK for _hero_fight_sloc0_1_0
+   00BA 77                  802 	ld      (hl),a
+                            803 ; Removed redundent load
+   00BB C6 FF               804 	add	a,#0xFF
+   00BD 23                  805 	inc	hl
+                            806 ;	genAssign (pointer)
+                            807 ;	AOP_STK for _hero_fight_sloc0_1_0
+   00BE 77                  808 	ld      (hl),a
+                            809 ; Removed redundent load
+   00BF 02                  810 	ld	(bc),a
+                            811 ;	battle.c 46
+                            812 ;	genAssign
+   00C0 01 40 FF            813 	ld	bc,#0xFF40
+                            814 ;	genAssign
+                            815 ;	AOP_STK for _hero_fight_sloc0_1_0
+   00C3 36 40               816 	ld	(hl),#0x40
+   00C5 23                  817 	inc	hl
+   00C6 36 FF               818 	ld	(hl),#0xFF
+                            819 ;	genPointerGet
+                            820 ;	AOP_STK for _hero_fight_sloc0_1_0
+                            821 ;	AOP_STK for _hero_fight_sloc1_1_0
+   00C8 2B                  822 	dec	hl
+   00C9 5E                  823 	ld	e,(hl)
+   00CA 23                  824 	inc	hl
+   00CB 56                  825 	ld	d,(hl)
+   00CC 1A                  826 	ld	a,(de)
+   00CD 2B                  827 	dec	hl
+   00CE 2B                  828 	dec	hl
+                            829 ;	genOr
+                            830 ;	AOP_STK for _hero_fight_sloc1_1_0
+   00CF 77                  831 	ld      (hl),a
+                            832 ; Removed redundent load
+   00D0 F6 80               833 	or	a,#0x80
+                            834 ;	genAssign (pointer)
+   00D2 02                  835 	ld	(bc),a
+                            836 ;	genGoto
+   00D3 C3 43 01            837 	jp	00105$
+                            838 ;	genLabel
+   00D6                     839 00102$:
+                            840 ;	battle.c 50
+                            841 ;	genCall
+                            842 ; _saveRegsForCall: sendSetSize: 0 deInUse: 0 bcInUse: 0 deSending: 0
+   00D6 CD 4D 02            843 	call	_hero_fight_anim
+                            844 ;	battle.c 51
+                            845 ;	genAssign
+                            846 ;	AOP_HL for _a
+   00D9 21 05 09            847 	ld	hl,#_a
+   00DC 36 00               848 	ld	(hl),#0x00
+                            849 ;	genLabel
+   00DE                     850 00112$:
+                            851 ;	genCmpLt
+                            852 ;	AOP_HL for _a
+   00DE 21 05 09            853 	ld	hl,#_a
+   00E1 7E                  854 	ld	a,(hl)
+   00E2 FE 06               855 	cp	#0x06
+   00E4 D2 18 01            856 	jp	nc,00115$
+                            857 ;	battle.c 53
+                            858 ;	genIpush
+                            859 ; _saveRegsForCall: sendSetSize: 0 deInUse: 0 bcInUse: 0 deSending: 0
+   00E7 21 64 00            860 	ld	hl,#0x0064
+   00EA E5                  861 	push	hl
+                            862 ;	genCall
+   00EB CD 00 00            863 	call	_delay
+   00EE E8 02               864 	lda	sp,2(sp)
+                            865 ;	battle.c 54
+                            866 ;	genCall
+                            867 ; _saveRegsForCall: sendSetSize: 0 deInUse: 0 bcInUse: 0 deSending: 0
+   00F0 CD 00 00            868 	call	_display_off
+                            869 ;	battle.c 55
+                            870 ;	genIpush
+                            871 ; _saveRegsForCall: sendSetSize: 0 deInUse: 0 bcInUse: 0 deSending: 0
+   00F3 21 64 00            872 	ld	hl,#0x0064
+   00F6 E5                  873 	push	hl
+                            874 ;	genCall
+   00F7 CD 00 00            875 	call	_delay
+   00FA E8 02               876 	lda	sp,2(sp)
+                            877 ;	battle.c 56
+                            878 ;	genAssign
+   00FC 01 40 FF            879 	ld	bc,#0xFF40
+                            880 ;	genAssign
+                            881 ;	AOP_STK for _hero_fight_sloc0_1_0
+   00FF F8 01               882 	lda	hl,1(sp)
+   0101 36 40               883 	ld	(hl),#0x40
+   0103 23                  884 	inc	hl
+   0104 36 FF               885 	ld	(hl),#0xFF
+                            886 ;	genPointerGet
+                            887 ;	AOP_STK for _hero_fight_sloc0_1_0
+                            888 ;	AOP_STK for _hero_fight_sloc1_1_0
+   0106 2B                  889 	dec	hl
+   0107 5E                  890 	ld	e,(hl)
+   0108 23                  891 	inc	hl
+   0109 56                  892 	ld	d,(hl)
+   010A 1A                  893 	ld	a,(de)
+   010B 2B                  894 	dec	hl
+   010C 2B                  895 	dec	hl
+                            896 ;	genOr
+                            897 ;	AOP_STK for _hero_fight_sloc1_1_0
+   010D 77                  898 	ld      (hl),a
+                            899 ; Removed redundent load
+   010E F6 80               900 	or	a,#0x80
+                            901 ;	genAssign (pointer)
+   0110 02                  902 	ld	(bc),a
+                            903 ;	battle.c 51
+                            904 ;	genPlus
+                            905 ;	AOP_HL for _a
+                            906 ;	genPlusIncr
+   0111 21 05 09            907 	ld	hl,#_a
+   0114 34                  908 	inc	(hl)
+                            909 ;	genGoto
+   0115 C3 DE 00            910 	jp	00112$
+                            911 ;	genLabel
+   0118                     912 00115$:
+                            913 ;	battle.c 58
+                            914 ;	genCall
+                            915 ; _saveRegsForCall: sendSetSize: 0 deInUse: 0 bcInUse: 0 deSending: 0
+   0118 CD 00 00            916 	call	_display_off
+                            917 ;	battle.c 59
+                            918 ;	genCall
+                            919 ; _saveRegsForCall: sendSetSize: 0 deInUse: 0 bcInUse: 0 deSending: 0
+   011B CD 00 00            920 	call	_sprite_clean
+                            921 ;	battle.c 60
+                            922 ;	genIpush
+                            923 ; _saveRegsForCall: sendSetSize: 0 deInUse: 0 bcInUse: 0 deSending: 0
+   011E 21 40 50            924 	ld	hl,#0x5040
+   0121 E5                  925 	push	hl
+                            926 ;	genIpush
+   0122 21 68 01            927 	ld	hl,#__str_1
+   0125 E5                  928 	push	hl
+                            929 ;	genCall
+   0126 CD 00 00            930 	call	_print
+   0129 E8 04               931 	lda	sp,4(sp)
+                            932 ;	battle.c 61
+                            933 ;	genCall
+                            934 ; _saveRegsForCall: sendSetSize: 0 deInUse: 0 bcInUse: 0 deSending: 0
+   012B CD 91 03            935 	call	_clear_screen
+                            936 ;	battle.c 62
+                            937 ;	genAssign
+   012E 01 40 FF            938 	ld	bc,#0xFF40
+                            939 ;	genAssign
+                            940 ;	AOP_STK for _hero_fight_sloc0_1_0
+   0131 F8 01               941 	lda	hl,1(sp)
+   0133 36 40               942 	ld	(hl),#0x40
+   0135 23                  943 	inc	hl
+   0136 36 FF               944 	ld	(hl),#0xFF
+                            945 ;	genPointerGet
+                            946 ;	AOP_STK for _hero_fight_sloc0_1_0
+                            947 ;	AOP_STK for _hero_fight_sloc1_1_0
+   0138 2B                  948 	dec	hl
+   0139 5E                  949 	ld	e,(hl)
+   013A 23                  950 	inc	hl
+   013B 56                  951 	ld	d,(hl)
+   013C 1A                  952 	ld	a,(de)
+   013D 2B                  953 	dec	hl
+   013E 2B                  954 	dec	hl
+                            955 ;	genOr
+                            956 ;	AOP_STK for _hero_fight_sloc1_1_0
+   013F 77                  957 	ld      (hl),a
+                            958 ; Removed redundent load
+   0140 F6 80               959 	or	a,#0x80
+                            960 ;	genAssign (pointer)
+   0142 02                  961 	ld	(bc),a
+                            962 ;	genLabel
+   0143                     963 00105$:
+                            964 ;	battle.c 66
+                            965 ;	genCmpEq
+                            966 ;	AOP_HL for _choice
+                            967 ; genCmpEq: left 1, right 1, result 0
+   0143 21 02 09            968 	ld	hl,#_choice
+   0146 7E                  969 	ld	a,(hl)
+   0147 FE 02               970 	cp	a,#0x02
+   0149 C2 60 01            971 	jp	nz,00116$
+   014C 18 03               972 	jr	00130$
+   014E                     973 00129$:
+   014E C3 60 01            974 	jp	00116$
+   0151                     975 00130$:
+                            976 ;	battle.c 68
+                            977 ;	genCall
+                            978 ; _saveRegsForCall: sendSetSize: 0 deInUse: 0 bcInUse: 0 deSending: 0
+   0151 CD 6E 01            979 	call	_hero_defend_anim
+                            980 ;	battle.c 69
+                            981 ;	genAssign
+                            982 ;	AOP_STK for 
+   0154 F8 09               983 	lda	hl,9(sp)
+   0156 4E                  984 	ld	c,(hl)
+   0157 23                  985 	inc	hl
+   0158 46                  986 	ld	b,(hl)
+                            987 ;	genPointerGet
+                            988 ;	AOP_STK for _hero_fight_sloc1_1_0
+   0159 0A                  989 	ld	a,(bc)
+   015A F8 00               990 	lda	hl,0(sp)
+                            991 ;	genPlus
+                            992 ;	AOP_STK for _hero_fight_sloc1_1_0
+                            993 ;	genPlusIncr
+                            994 ;	Can't optimise plus by inc, falling back to the normal way
+   015C 77                  995 	ld      (hl),a
+                            996 ; Removed redundent load
+   015D C6 02               997 	add	a,#0x02
+                            998 ;	genAssign (pointer)
+   015F 02                  999 	ld	(bc),a
+                           1000 ;	genLabel
+   0160                    1001 00116$:
+                           1002 ;	genEndFunction
+   0160 E8 05              1003 	lda	sp,5(sp)
+   0162 C9                 1004 	ret
+   0163                    1005 ___hero_fight_end:
+   0163                    1006 __str_0:
+   0163 68 69 74 21        1007 	.ascii "hit!"
+   0167 00                 1008 	.db 0x00
+   0168                    1009 __str_1:
+   0168 6D 69 73 73 21     1010 	.ascii "miss!"
+   016D 00                 1011 	.db 0x00
+                           1012 ;	battle.c 74
+                           1013 ;	genLabel
+                           1014 ;	genFunction
+                           1015 ;	---------------------------------
+                           1016 ; Function hero_defend_anim
+                           1017 ; ---------------------------------
+   016E                    1018 ___hero_defend_anim_start:
+   016E                    1019 _hero_defend_anim:
+   016E E8 FF              1020 	lda	sp,-1(sp)
+                           1021 ;	battle.c 76
+                           1022 ;	genIpush
+                           1023 ; _saveRegsForCall: sendSetSize: 0 deInUse: 0 bcInUse: 0 deSending: 0
+   0170 21 50 06           1024 	ld	hl,#_asakawa_front_idle
+   0173 E5                 1025 	push	hl
+                           1026 ;	genIpush
+   0174 3E 08              1027 	ld	a,#0x08
+   0176 F5                 1028 	push	af
+   0177 33                 1029 	inc	sp
+                           1030 ;	genIpush
+   0178 21 D0 06           1031 	ld	hl,#_hero_back_idle
+   017B E5                 1032 	push	hl
+                           1033 ;	genIpush
+   017C 3E 08              1034 	ld	a,#0x08
+   017E F5                 1035 	push	af
+   017F 33                 1036 	inc	sp
+                           1037 ;	genCall
+   0180 CD B0 03           1038 	call	_sprite_setup
+   0183 E8 06              1039 	lda	sp,6(sp)
+                           1040 ;	battle.c 77
+                           1041 ;	genAssign
+                           1042 ;	AOP_HL for _a
+   0185 21 05 09           1043 	ld	hl,#_a
+   0188 36 00              1044 	ld	(hl),#0x00
+                           1045 ;	genLabel
+   018A                    1046 00101$:
+                           1047 ;	genCmpLt
+                           1048 ;	AOP_HL for _a
+   018A 21 05 09           1049 	ld	hl,#_a
+   018D 7E                 1050 	ld	a,(hl)
+   018E FE 15              1051 	cp	#0x15
+   0190 D2 45 02           1052 	jp	nc,00104$
+                           1053 ;	battle.c 79
+                           1054 ;	genIpush
+                           1055 ; _saveRegsForCall: sendSetSize: 0 deInUse: 0 bcInUse: 0 deSending: 0
+   0193 21 64 00           1056 	ld	hl,#0x0064
+   0196 E5                 1057 	push	hl
+                           1058 ;	genCall
+   0197 CD 00 00           1059 	call	_delay
+   019A E8 02              1060 	lda	sp,2(sp)
+                           1061 ;	battle.c 80
+                           1062 ;	genAnd
+                           1063 ;	AOP_HL for _a
+   019C 21 05 09           1064 	ld	hl,#_a
+   019F 7E                 1065 	ld	a,(hl)
+   01A0 E6 04              1066 	and	a,#0x04
+                           1067 ;	genPlus
+                           1068 ;	genPlusIncr
+                           1069 ;	Can't optimise plus by inc, falling back to the normal way
+   01A2 4F                 1070 	ld	c,a
+   01A3 C6 08              1071 	add	a,#0x08
+   01A5 47                 1072 	ld	b,a
+                           1073 ;	genIpush
+                           1074 ; _saveRegsForCall: sendSetSize: 0 deInUse: 0 bcInUse: 1 deSending: 0
+   01A6 C5                 1075 	push	bc
+   01A7 78                 1076 	ld	a,b
+   01A8 F5                 1077 	push	af
+   01A9 33                 1078 	inc	sp
+                           1079 ;	genIpush
+   01AA 3E 04              1080 	ld	a,#0x04
+   01AC F5                 1081 	push	af
+   01AD 33                 1082 	inc	sp
+                           1083 ;	genCall
+   01AE CD 00 00           1084 	call	_set_sprite_tile
+   01B1 E8 02              1085 	lda	sp,2(sp)
+   01B3 E1                 1086 	pop	hl
+   01B4 4D                 1087 	ld	c,l
+                           1088 ;	battle.c 81
+                           1089 ;	genIpush
+                           1090 ; _saveRegsForCall: sendSetSize: 0 deInUse: 0 bcInUse: 1 deSending: 0
+   01B5 C5                 1091 	push	bc
+                           1092 ;	AOP_HL for _y
+   01B6 21 04 09           1093 	ld	hl,#_y
+   01B9 7E                 1094 	ld	a,(hl)
+   01BA F5                 1095 	push	af
+   01BB 33                 1096 	inc	sp
+                           1097 ;	genIpush
+   01BC 21 04 4D           1098 	ld	hl,#0x4D04
+   01BF E5                 1099 	push	hl
+                           1100 ;	genCall
+   01C0 CD 00 00           1101 	call	_move_sprite
+   01C3 E8 03              1102 	lda	sp,3(sp)
+   01C5 E1                 1103 	pop	hl
+   01C6 4D                 1104 	ld	c,l
+                           1105 ;	battle.c 82
+                           1106 ;	genPlus
+                           1107 ;	genPlusIncr
+                           1108 ;	Can't optimise plus by inc, falling back to the normal way
+   01C7 79                 1109 	ld	a,c
+   01C8 C6 09              1110 	add	a,#0x09
+   01CA 47                 1111 	ld	b,a
+                           1112 ;	genIpush
+                           1113 ; _saveRegsForCall: sendSetSize: 0 deInUse: 0 bcInUse: 1 deSending: 0
+   01CB C5                 1114 	push	bc
+   01CC 78                 1115 	ld	a,b
+   01CD F5                 1116 	push	af
+   01CE 33                 1117 	inc	sp
+                           1118 ;	genIpush
+   01CF 3E 05              1119 	ld	a,#0x05
+   01D1 F5                 1120 	push	af
+   01D2 33                 1121 	inc	sp
+                           1122 ;	genCall
+   01D3 CD 00 00           1123 	call	_set_sprite_tile
+   01D6 E8 02              1124 	lda	sp,2(sp)
+   01D8 E1                 1125 	pop	hl
+   01D9 4D                 1126 	ld	c,l
+                           1127 ;	battle.c 83
+                           1128 ;	genPlus
+                           1129 ;	AOP_HL for _y
+                           1130 ;	genPlusIncr
+                           1131 ;	Can't optimise plus by inc, falling back to the normal way
+   01DA 21 04 09           1132 	ld	hl,#_y
+   01DD 7E                 1133 	ld	a,(hl)
+   01DE C6 08              1134 	add	a,#0x08
+   01E0 47                 1135 	ld	b,a
+                           1136 ;	genIpush
+                           1137 ; _saveRegsForCall: sendSetSize: 0 deInUse: 0 bcInUse: 1 deSending: 0
+   01E1 C5                 1138 	push	bc
+   01E2 78                 1139 	ld	a,b
+   01E3 F5                 1140 	push	af
+   01E4 33                 1141 	inc	sp
+                           1142 ;	genIpush
+   01E5 21 05 4D           1143 	ld	hl,#0x4D05
+   01E8 E5                 1144 	push	hl
+                           1145 ;	genCall
+   01E9 CD 00 00           1146 	call	_move_sprite
+   01EC E8 03              1147 	lda	sp,3(sp)
+   01EE C1                 1148 	pop	bc
+                           1149 ;	battle.c 84
+                           1150 ;	genPlus
+                           1151 ;	AOP_STK for _hero_defend_anim_sloc0_1_0
+                           1152 ;	genPlusIncr
+                           1153 ;	Can't optimise plus by inc, falling back to the normal way
+   01EF 79                 1154 	ld	a,c
+   01F0 C6 0A              1155 	add	a,#0x0A
+   01F2 F8 00              1156 	lda	hl,0(sp)
+   01F4 77                 1157 	ld	(hl),a
+                           1158 ;	genIpush
+                           1159 ; _saveRegsForCall: sendSetSize: 0 deInUse: 0 bcInUse: 1 deSending: 0
+   01F5 C5                 1160 	push	bc
+                           1161 ;	AOP_STK for _hero_defend_anim_sloc0_1_0
+   01F6 7E                 1162 	ld	a,(hl)
+   01F7 F5                 1163 	push	af
+   01F8 33                 1164 	inc	sp
+                           1165 ;	genIpush
+   01F9 3E 06              1166 	ld	a,#0x06
+   01FB F5                 1167 	push	af
+   01FC 33                 1168 	inc	sp
+                           1169 ;	genCall
+   01FD CD 00 00           1170 	call	_set_sprite_tile
+   0200 E8 02              1171 	lda	sp,2(sp)
+   0202 C1                 1172 	pop	bc
+                           1173 ;	battle.c 85
+                           1174 ;	genIpush
+                           1175 ; _saveRegsForCall: sendSetSize: 0 deInUse: 0 bcInUse: 1 deSending: 0
+   0203 C5                 1176 	push	bc
+                           1177 ;	AOP_HL for _y
+   0204 21 04 09           1178 	ld	hl,#_y
+   0207 7E                 1179 	ld	a,(hl)
+   0208 F5                 1180 	push	af
+   0209 33                 1181 	inc	sp
+                           1182 ;	genIpush
+   020A 21 06 54           1183 	ld	hl,#0x5406
+   020D E5                 1184 	push	hl
+                           1185 ;	genCall
+   020E CD 00 00           1186 	call	_move_sprite
+   0211 E8 03              1187 	lda	sp,3(sp)
+   0213 C1                 1188 	pop	bc
+                           1189 ;	battle.c 86
+                           1190 ;	genPlus
+                           1191 ;	genPlusIncr
+                           1192 ;	Can't optimise plus by inc, falling back to the normal way
+   0214 79                 1193 	ld	a,c
+   0215 C6 0B              1194 	add	a,#0x0B
+   0217 4F                 1195 	ld	c,a
+                           1196 ;	genIpush
+                           1197 ; _saveRegsForCall: sendSetSize: 0 deInUse: 0 bcInUse: 1 deSending: 0
+   0218 C5                 1198 	push	bc
+   0219 79                 1199 	ld	a,c
+   021A F5                 1200 	push	af
+   021B 33                 1201 	inc	sp
+                           1202 ;	genIpush
+   021C 3E 07              1203 	ld	a,#0x07
+   021E F5                 1204 	push	af
+   021F 33                 1205 	inc	sp
+                           1206 ;	genCall
+   0220 CD 00 00           1207 	call	_set_sprite_tile
+   0223 E8 02              1208 	lda	sp,2(sp)
+   0225 E1                 1209 	pop	hl
+   0226 44                 1210 	ld	b,h
+                           1211 ;	battle.c 87
+                           1212 ;	genIpush
+                           1213 ; _saveRegsForCall: sendSetSize: 0 deInUse: 0 bcInUse: 0 deSending: 0
+   0227 78                 1214 	ld	a,b
+   0228 F5                 1215 	push	af
+   0229 33                 1216 	inc	sp
+                           1217 ;	genIpush
+   022A 21 07 54           1218 	ld	hl,#0x5407
+   022D E5                 1219 	push	hl
+                           1220 ;	genCall
+   022E CD 00 00           1221 	call	_move_sprite
+   0231 E8 03              1222 	lda	sp,3(sp)
+                           1223 ;	battle.c 88
+                           1224 ;	genIpush
+                           1225 ; _saveRegsForCall: sendSetSize: 0 deInUse: 0 bcInUse: 0 deSending: 0
+   0233 21 64 00           1226 	ld	hl,#0x0064
+   0236 E5                 1227 	push	hl
+                           1228 ;	genCall
+   0237 CD 00 00           1229 	call	_delay
+   023A E8 02              1230 	lda	sp,2(sp)
+                           1231 ;	battle.c 77
+                           1232 ;	genPlus
+                           1233 ;	AOP_HL for _a
+                           1234 ;	genPlusIncr
+   023C 21 05 09           1235 	ld	hl,#_a
+   023F 34                 1236 	inc	(hl)
+   0240 34                 1237 	inc	(hl)
+   0241 34                 1238 	inc	(hl)
+                           1239 ;	genGoto
+   0242 C3 8A 01           1240 	jp	00101$
+                           1241 ;	genLabel
+   0245                    1242 00104$:
+                           1243 ;	battle.c 90
+                           1244 ;	genAssign
+                           1245 ;	AOP_HL for _y
+   0245 21 04 09           1246 	ld	hl,#_y
+   0248 36 48              1247 	ld	(hl),#0x48
+                           1248 ;	genLabel
+   024A                    1249 00105$:
+                           1250 ;	genEndFunction
+   024A E8 01              1251 	lda	sp,1(sp)
+   024C C9                 1252 	ret
+   024D                    1253 ___hero_defend_anim_end:
+                           1254 ;	battle.c 93
+                           1255 ;	genLabel
+                           1256 ;	genFunction
+                           1257 ;	---------------------------------
+                           1258 ; Function hero_fight_anim
+                           1259 ; ---------------------------------
+   024D                    1260 ___hero_fight_anim_start:
+   024D                    1261 _hero_fight_anim:
+   024D E8 FF              1262 	lda	sp,-1(sp)
+                           1263 ;	battle.c 95
+                           1264 ;	genIpush
+                           1265 ; _saveRegsForCall: sendSetSize: 0 deInUse: 0 bcInUse: 0 deSending: 0
+   024F 21 50 06           1266 	ld	hl,#_asakawa_front_idle
+   0252 E5                 1267 	push	hl
+                           1268 ;	genIpush
+   0253 3E 08              1269 	ld	a,#0x08
+   0255 F5                 1270 	push	af
+   0256 33                 1271 	inc	sp
+                           1272 ;	genIpush
+   0257 21 D0 06           1273 	ld	hl,#_hero_back_idle
+   025A E5                 1274 	push	hl
+                           1275 ;	genIpush
+   025B 3E 08              1276 	ld	a,#0x08
+   025D F5                 1277 	push	af
+   025E 33                 1278 	inc	sp
+                           1279 ;	genCall
+   025F CD B0 03           1280 	call	_sprite_setup
+   0262 E8 06              1281 	lda	sp,6(sp)
+                           1282 ;	battle.c 97
+                           1283 ;	genLabel
+   0264                    1284 00101$:
+                           1285 ;	genCmpGt
+                           1286 ;	AOP_HL for _y
+   0264 3E 3A              1287 	ld	a,#0x3A
+   0266 21 04 09           1288 	ld	hl,#_y
+   0269 96                 1289 	sub	a,(hl)
+   026A D2 C9 02           1290 	jp	nc,00103$
+                           1291 ;	battle.c 99
+                           1292 ;	genIpush
+                           1293 ; _saveRegsForCall: sendSetSize: 0 deInUse: 0 bcInUse: 0 deSending: 0
+   026D 21 64 00           1294 	ld	hl,#0x0064
+   0270 E5                 1295 	push	hl
+                           1296 ;	genCall
+   0271 CD 00 00           1297 	call	_delay
+   0274 E8 02              1298 	lda	sp,2(sp)
+                           1299 ;	battle.c 100
+                           1300 ;	genIpush
+                           1301 ; _saveRegsForCall: sendSetSize: 0 deInUse: 0 bcInUse: 0 deSending: 0
+                           1302 ;	AOP_HL for _y
+   0276 21 04 09           1303 	ld	hl,#_y
+   0279 7E                 1304 	ld	a,(hl)
+   027A F5                 1305 	push	af
+   027B 33                 1306 	inc	sp
+                           1307 ;	genIpush
+   027C 21 04 4D           1308 	ld	hl,#0x4D04
+   027F E5                 1309 	push	hl
+                           1310 ;	genCall
+   0280 CD 00 00           1311 	call	_move_sprite
+   0283 E8 03              1312 	lda	sp,3(sp)
+                           1313 ;	battle.c 101
+                           1314 ;	genPlus
+                           1315 ;	AOP_HL for _y
+                           1316 ;	genPlusIncr
+                           1317 ;	Can't optimise plus by inc, falling back to the normal way
+   0285 21 04 09           1318 	ld	hl,#_y
+   0288 7E                 1319 	ld	a,(hl)
+   0289 C6 08              1320 	add	a,#0x08
+   028B 4F                 1321 	ld	c,a
+                           1322 ;	genIpush
+                           1323 ; _saveRegsForCall: sendSetSize: 0 deInUse: 0 bcInUse: 1 deSending: 0
+   028C C5                 1324 	push	bc
+   028D 79                 1325 	ld	a,c
+   028E F5                 1326 	push	af
+   028F 33                 1327 	inc	sp
+                           1328 ;	genIpush
+   0290 21 05 4D           1329 	ld	hl,#0x4D05
+   0293 E5                 1330 	push	hl
+                           1331 ;	genCall
+   0294 CD 00 00           1332 	call	_move_sprite
+   0297 E8 03              1333 	lda	sp,3(sp)
+   0299 E1                 1334 	pop	hl
+   029A 4D                 1335 	ld	c,l
+                           1336 ;	battle.c 102
+                           1337 ;	genIpush
+                           1338 ; _saveRegsForCall: sendSetSize: 0 deInUse: 0 bcInUse: 1 deSending: 0
+   029B C5                 1339 	push	bc
+                           1340 ;	AOP_HL for _y
+   029C 21 04 09           1341 	ld	hl,#_y
+   029F 7E                 1342 	ld	a,(hl)
+   02A0 F5                 1343 	push	af
+   02A1 33                 1344 	inc	sp
+                           1345 ;	genIpush
+   02A2 21 06 54           1346 	ld	hl,#0x5406
+   02A5 E5                 1347 	push	hl
+                           1348 ;	genCall
+   02A6 CD 00 00           1349 	call	_move_sprite
+   02A9 E8 03              1350 	lda	sp,3(sp)
+   02AB E1                 1351 	pop	hl
+   02AC 4D                 1352 	ld	c,l
+                           1353 ;	battle.c 103
+                           1354 ;	genIpush
+                           1355 ; _saveRegsForCall: sendSetSize: 0 deInUse: 0 bcInUse: 0 deSending: 0
+   02AD 79                 1356 	ld	a,c
+   02AE F5                 1357 	push	af
+   02AF 33                 1358 	inc	sp
+                           1359 ;	genIpush
+   02B0 21 07 54           1360 	ld	hl,#0x5407
+   02B3 E5                 1361 	push	hl
+                           1362 ;	genCall
+   02B4 CD 00 00           1363 	call	_move_sprite
+   02B7 E8 03              1364 	lda	sp,3(sp)
+                           1365 ;	battle.c 104
+                           1366 ;	genIpush
+                           1367 ; _saveRegsForCall: sendSetSize: 0 deInUse: 0 bcInUse: 0 deSending: 0
+   02B9 21 64 00           1368 	ld	hl,#0x0064
+   02BC E5                 1369 	push	hl
+                           1370 ;	genCall
+   02BD CD 00 00           1371 	call	_delay
+   02C0 E8 02              1372 	lda	sp,2(sp)
+                           1373 ;	battle.c 105
+                           1374 ;	genMinus
+                           1375 ;	AOP_HL for _y
+   02C2 21 04 09           1376 	ld	hl,#_y
+   02C5 35                 1377 	dec	(hl)
+                           1378 ;	genGoto
+   02C6 C3 64 02           1379 	jp	00101$
+                           1380 ;	genLabel
+   02C9                    1381 00103$:
+                           1382 ;	battle.c 112
+                           1383 ;	genAssign
+                           1384 ;	AOP_HL for _a
+   02C9 21 05 09           1385 	ld	hl,#_a
+   02CC 36 00              1386 	ld	(hl),#0x00
+                           1387 ;	genLabel
+   02CE                    1388 00104$:
+                           1389 ;	genCmpLt
+                           1390 ;	AOP_HL for _a
+   02CE 21 05 09           1391 	ld	hl,#_a
+   02D1 7E                 1392 	ld	a,(hl)
+   02D2 FE 15              1393 	cp	#0x15
+   02D4 D2 89 03           1394 	jp	nc,00107$
+                           1395 ;	battle.c 114
+                           1396 ;	genIpush
+                           1397 ; _saveRegsForCall: sendSetSize: 0 deInUse: 0 bcInUse: 0 deSending: 0
+   02D7 21 64 00           1398 	ld	hl,#0x0064
+   02DA E5                 1399 	push	hl
+                           1400 ;	genCall
+   02DB CD 00 00           1401 	call	_delay
+   02DE E8 02              1402 	lda	sp,2(sp)
+                           1403 ;	battle.c 115
+                           1404 ;	genAnd
+                           1405 ;	AOP_HL for _a
+   02E0 21 05 09           1406 	ld	hl,#_a
+   02E3 7E                 1407 	ld	a,(hl)
+   02E4 E6 04              1408 	and	a,#0x04
+                           1409 ;	genPlus
+                           1410 ;	genPlusIncr
+                           1411 ;	Can't optimise plus by inc, falling back to the normal way
+   02E6 4F                 1412 	ld	c,a
+   02E7 C6 08              1413 	add	a,#0x08
+   02E9 47                 1414 	ld	b,a
+                           1415 ;	genIpush
+                           1416 ; _saveRegsForCall: sendSetSize: 0 deInUse: 0 bcInUse: 1 deSending: 0
+   02EA C5                 1417 	push	bc
+   02EB 78                 1418 	ld	a,b
+   02EC F5                 1419 	push	af
+   02ED 33                 1420 	inc	sp
+                           1421 ;	genIpush
+   02EE 3E 04              1422 	ld	a,#0x04
+   02F0 F5                 1423 	push	af
+   02F1 33                 1424 	inc	sp
+                           1425 ;	genCall
+   02F2 CD 00 00           1426 	call	_set_sprite_tile
+   02F5 E8 02              1427 	lda	sp,2(sp)
+   02F7 E1                 1428 	pop	hl
+   02F8 4D                 1429 	ld	c,l
+                           1430 ;	battle.c 116
+                           1431 ;	genIpush
+                           1432 ; _saveRegsForCall: sendSetSize: 0 deInUse: 0 bcInUse: 1 deSending: 0
+   02F9 C5                 1433 	push	bc
+                           1434 ;	AOP_HL for _y
+   02FA 21 04 09           1435 	ld	hl,#_y
+   02FD 7E                 1436 	ld	a,(hl)
+   02FE F5                 1437 	push	af
+   02FF 33                 1438 	inc	sp
+                           1439 ;	genIpush
+   0300 21 04 4D           1440 	ld	hl,#0x4D04
+   0303 E5                 1441 	push	hl
+                           1442 ;	genCall
+   0304 CD 00 00           1443 	call	_move_sprite
+   0307 E8 03              1444 	lda	sp,3(sp)
+   0309 E1                 1445 	pop	hl
+   030A 4D                 1446 	ld	c,l
+                           1447 ;	battle.c 117
+                           1448 ;	genPlus
+                           1449 ;	genPlusIncr
+                           1450 ;	Can't optimise plus by inc, falling back to the normal way
+   030B 79                 1451 	ld	a,c
+   030C C6 09              1452 	add	a,#0x09
+   030E 47                 1453 	ld	b,a
+                           1454 ;	genIpush
+                           1455 ; _saveRegsForCall: sendSetSize: 0 deInUse: 0 bcInUse: 1 deSending: 0
+   030F C5                 1456 	push	bc
+   0310 78                 1457 	ld	a,b
+   0311 F5                 1458 	push	af
+   0312 33                 1459 	inc	sp
+                           1460 ;	genIpush
+   0313 3E 05              1461 	ld	a,#0x05
+   0315 F5                 1462 	push	af
+   0316 33                 1463 	inc	sp
+                           1464 ;	genCall
+   0317 CD 00 00           1465 	call	_set_sprite_tile
+   031A E8 02              1466 	lda	sp,2(sp)
+   031C E1                 1467 	pop	hl
+   031D 4D                 1468 	ld	c,l
+                           1469 ;	battle.c 118
+                           1470 ;	genPlus
+                           1471 ;	AOP_HL for _y
+                           1472 ;	genPlusIncr
+                           1473 ;	Can't optimise plus by inc, falling back to the normal way
+   031E 21 04 09           1474 	ld	hl,#_y
+   0321 7E                 1475 	ld	a,(hl)
+   0322 C6 08              1476 	add	a,#0x08
+   0324 47                 1477 	ld	b,a
+                           1478 ;	genIpush
+                           1479 ; _saveRegsForCall: sendSetSize: 0 deInUse: 0 bcInUse: 1 deSending: 0
+   0325 C5                 1480 	push	bc
+   0326 78                 1481 	ld	a,b
+   0327 F5                 1482 	push	af
+   0328 33                 1483 	inc	sp
+                           1484 ;	genIpush
+   0329 21 05 4D           1485 	ld	hl,#0x4D05
+   032C E5                 1486 	push	hl
+                           1487 ;	genCall
+   032D CD 00 00           1488 	call	_move_sprite
+   0330 E8 03              1489 	lda	sp,3(sp)
+   0332 C1                 1490 	pop	bc
+                           1491 ;	battle.c 119
+                           1492 ;	genPlus
+                           1493 ;	AOP_STK for _hero_fight_anim_sloc0_1_0
+                           1494 ;	genPlusIncr
+                           1495 ;	Can't optimise plus by inc, falling back to the normal way
+   0333 79                 1496 	ld	a,c
+   0334 C6 0A              1497 	add	a,#0x0A
+   0336 F8 00              1498 	lda	hl,0(sp)
+   0338 77                 1499 	ld	(hl),a
+                           1500 ;	genIpush
+                           1501 ; _saveRegsForCall: sendSetSize: 0 deInUse: 0 bcInUse: 1 deSending: 0
+   0339 C5                 1502 	push	bc
+                           1503 ;	AOP_STK for _hero_fight_anim_sloc0_1_0
+   033A 7E                 1504 	ld	a,(hl)
+   033B F5                 1505 	push	af
+   033C 33                 1506 	inc	sp
+                           1507 ;	genIpush
+   033D 3E 06              1508 	ld	a,#0x06
+   033F F5                 1509 	push	af
+   0340 33                 1510 	inc	sp
+                           1511 ;	genCall
+   0341 CD 00 00           1512 	call	_set_sprite_tile
+   0344 E8 02              1513 	lda	sp,2(sp)
+   0346 C1                 1514 	pop	bc
+                           1515 ;	battle.c 120
+                           1516 ;	genIpush
+                           1517 ; _saveRegsForCall: sendSetSize: 0 deInUse: 0 bcInUse: 1 deSending: 0
+   0347 C5                 1518 	push	bc
+                           1519 ;	AOP_HL for _y
+   0348 21 04 09           1520 	ld	hl,#_y
+   034B 7E                 1521 	ld	a,(hl)
+   034C F5                 1522 	push	af
+   034D 33                 1523 	inc	sp
+                           1524 ;	genIpush
+   034E 21 06 54           1525 	ld	hl,#0x5406
+   0351 E5                 1526 	push	hl
+                           1527 ;	genCall
+   0352 CD 00 00           1528 	call	_move_sprite
+   0355 E8 03              1529 	lda	sp,3(sp)
+   0357 C1                 1530 	pop	bc
+                           1531 ;	battle.c 121
+                           1532 ;	genPlus
+                           1533 ;	genPlusIncr
+                           1534 ;	Can't optimise plus by inc, falling back to the normal way
+   0358 79                 1535 	ld	a,c
+   0359 C6 0B              1536 	add	a,#0x0B
+   035B 4F                 1537 	ld	c,a
+                           1538 ;	genIpush
+                           1539 ; _saveRegsForCall: sendSetSize: 0 deInUse: 0 bcInUse: 1 deSending: 0
+   035C C5                 1540 	push	bc
+   035D 79                 1541 	ld	a,c
+   035E F5                 1542 	push	af
+   035F 33                 1543 	inc	sp
+                           1544 ;	genIpush
+   0360 3E 07              1545 	ld	a,#0x07
+   0362 F5                 1546 	push	af
+   0363 33                 1547 	inc	sp
+                           1548 ;	genCall
+   0364 CD 00 00           1549 	call	_set_sprite_tile
+   0367 E8 02              1550 	lda	sp,2(sp)
+   0369 E1                 1551 	pop	hl
+   036A 44                 1552 	ld	b,h
+                           1553 ;	battle.c 122
+                           1554 ;	genIpush
+                           1555 ; _saveRegsForCall: sendSetSize: 0 deInUse: 0 bcInUse: 0 deSending: 0
+   036B 78                 1556 	ld	a,b
+   036C F5                 1557 	push	af
+   036D 33                 1558 	inc	sp
+                           1559 ;	genIpush
+   036E 21 07 54           1560 	ld	hl,#0x5407
+   0371 E5                 1561 	push	hl
+                           1562 ;	genCall
+   0372 CD 00 00           1563 	call	_move_sprite
+   0375 E8 03              1564 	lda	sp,3(sp)
+                           1565 ;	battle.c 123
+                           1566 ;	genIpush
+                           1567 ; _saveRegsForCall: sendSetSize: 0 deInUse: 0 bcInUse: 0 deSending: 0
+   0377 21 64 00           1568 	ld	hl,#0x0064
+   037A E5                 1569 	push	hl
+                           1570 ;	genCall
+   037B CD 00 00           1571 	call	_delay
+   037E E8 02              1572 	lda	sp,2(sp)
+                           1573 ;	battle.c 112
+                           1574 ;	genPlus
+                           1575 ;	AOP_HL for _a
+                           1576 ;	genPlusIncr
+   0380 21 05 09           1577 	ld	hl,#_a
+   0383 34                 1578 	inc	(hl)
+   0384 34                 1579 	inc	(hl)
+   0385 34                 1580 	inc	(hl)
+                           1581 ;	genGoto
+   0386 C3 CE 02           1582 	jp	00104$
+                           1583 ;	genLabel
+   0389                    1584 00107$:
+                           1585 ;	battle.c 125
+                           1586 ;	genAssign
+                           1587 ;	AOP_HL for _y
+   0389 21 04 09           1588 	ld	hl,#_y
+   038C 36 48              1589 	ld	(hl),#0x48
+                           1590 ;	genLabel
+   038E                    1591 00108$:
+                           1592 ;	genEndFunction
+   038E E8 01              1593 	lda	sp,1(sp)
+   0390 C9                 1594 	ret
+   0391                    1595 ___hero_fight_anim_end:
+                           1596 ;	battle.c 129
+                           1597 ;	genLabel
+                           1598 ;	genFunction
+                           1599 ;	---------------------------------
+                           1600 ; Function clear_screen
+                           1601 ; ---------------------------------
+   0391                    1602 ___clear_screen_start:
+   0391                    1603 _clear_screen:
+                           1604 	
+                           1605 ;	battle.c 132
+                           1606 ;	genIpush
+                           1607 ; _saveRegsForCall: sendSetSize: 0 deInUse: 0 bcInUse: 0 deSending: 0
+   0391 21 B8 08           1608 	ld	hl,#_blank_screen_tiles
+   0394 E5                 1609 	push	hl
+                           1610 ;	genIpush
+   0395 21 00 04           1611 	ld	hl,#0x0400
+   0398 E5                 1612 	push	hl
+                           1613 ;	genCall
+   0399 CD 00 00           1614 	call	_set_bkg_data
+   039C E8 04              1615 	lda	sp,4(sp)
+                           1616 ;	battle.c 133
+                           1617 ;	genIpush
+                           1618 ; _saveRegsForCall: sendSetSize: 0 deInUse: 0 bcInUse: 0 deSending: 0
+   039E 21 50 07           1619 	ld	hl,#_blank_screen
+   03A1 E5                 1620 	push	hl
+                           1621 ;	genIpush
+   03A2 21 14 12           1622 	ld	hl,#0x1214
+   03A5 E5                 1623 	push	hl
+                           1624 ;	genIpush
+   03A6 21 00 00           1625 	ld	hl,#0x0000
+   03A9 E5                 1626 	push	hl
+                           1627 ;	genCall
+   03AA CD 00 00           1628 	call	_set_bkg_tiles
+   03AD E8 06              1629 	lda	sp,6(sp)
+                           1630 ;	genLabel
+   03AF                    1631 00101$:
+                           1632 ;	genEndFunction
+                           1633 	
+   03AF C9                 1634 	ret
+   03B0                    1635 ___clear_screen_end:
+                           1636 ;	battle.c 141
+                           1637 ;	genLabel
+                           1638 ;	genFunction
+                           1639 ;	---------------------------------
+                           1640 ; Function sprite_setup
+                           1641 ; ---------------------------------
+   03B0                    1642 ___sprite_setup_start:
+   03B0                    1643 _sprite_setup:
+                           1644 	
+                           1645 ;	battle.c 144
+                           1646 ;	genCall
+                           1647 ; _saveRegsForCall: sendSetSize: 0 deInUse: 0 bcInUse: 0 deSending: 0
+   03B0 CD 00 00           1648 	call	_sprite_clean
+                           1649 ;	battle.c 145
+                           1650 ;	genCall
+                           1651 ; _saveRegsForCall: sendSetSize: 0 deInUse: 0 bcInUse: 0 deSending: 0
+   03B3 CD 91 03           1652 	call	_clear_screen
+                           1653 ;	battle.c 148
+                           1654 ;	genIpush
+                           1655 ; _saveRegsForCall: sendSetSize: 0 deInUse: 0 bcInUse: 0 deSending: 0
+                           1656 ;	AOP_STK for 
+   03B6 F8 06              1657 	lda	hl,6(sp)
+   03B8 2A                 1658 	ld	a,(hl+)
+   03B9 66                 1659 	ld	h,(hl)
+   03BA 6F                 1660 	ld	l,a
+   03BB E5                 1661 	push	hl
+                           1662 ;	genIpush
+   03BC 21 00 08           1663 	ld	hl,#0x0800
+   03BF E5                 1664 	push	hl
+                           1665 ;	genCall
+   03C0 CD 00 00           1666 	call	_set_sprite_data
+   03C3 E8 04              1667 	lda	sp,4(sp)
+                           1668 ;	battle.c 149
+                           1669 ;	genIpush
+                           1670 ; _saveRegsForCall: sendSetSize: 0 deInUse: 0 bcInUse: 0 deSending: 0
+                           1671 ;	AOP_STK for 
+   03C5 F8 03              1672 	lda	hl,3(sp)
+   03C7 2A                 1673 	ld	a,(hl+)
+   03C8 66                 1674 	ld	h,(hl)
+   03C9 6F                 1675 	ld	l,a
+   03CA E5                 1676 	push	hl
+                           1677 ;	genIpush
+                           1678 ;	AOP_STK for 
+   03CB F8 07              1679 	lda	hl,7(sp)
+   03CD 7E                 1680 	ld	a,(hl)
+   03CE F5                 1681 	push	af
+   03CF 33                 1682 	inc	sp
+                           1683 ;	genIpush
+                           1684 ;	AOP_STK for 
+   03D0 F8 05              1685 	lda	hl,5(sp)
+   03D2 7E                 1686 	ld	a,(hl)
+   03D3 F5                 1687 	push	af
+   03D4 33                 1688 	inc	sp
+                           1689 ;	genCall
+   03D5 CD 00 00           1690 	call	_set_sprite_data
+   03D8 E8 04              1691 	lda	sp,4(sp)
+                           1692 ;	battle.c 152
+                           1693 ;	genIpush
+                           1694 ; _saveRegsForCall: sendSetSize: 0 deInUse: 0 bcInUse: 0 deSending: 0
+   03DA 21 00 00           1695 	ld	hl,#0x0000
+   03DD E5                 1696 	push	hl
+                           1697 ;	genCall
+   03DE CD 00 00           1698 	call	_set_sprite_tile
+   03E1 E8 02              1699 	lda	sp,2(sp)
+                           1700 ;	battle.c 153
+                           1701 ;	genIpush
+                           1702 ; _saveRegsForCall: sendSetSize: 0 deInUse: 0 bcInUse: 0 deSending: 0
+   03E3 21 01 01           1703 	ld	hl,#0x0101
+   03E6 E5                 1704 	push	hl
+                           1705 ;	genCall
+   03E7 CD 00 00           1706 	call	_set_sprite_tile
+   03EA E8 02              1707 	lda	sp,2(sp)
+                           1708 ;	battle.c 154
+                           1709 ;	genIpush
+                           1710 ; _saveRegsForCall: sendSetSize: 0 deInUse: 0 bcInUse: 0 deSending: 0
+   03EC 21 02 02           1711 	ld	hl,#0x0202
+   03EF E5                 1712 	push	hl
+                           1713 ;	genCall
+   03F0 CD 00 00           1714 	call	_set_sprite_tile
+   03F3 E8 02              1715 	lda	sp,2(sp)
+                           1716 ;	battle.c 155
+                           1717 ;	genIpush
+                           1718 ; _saveRegsForCall: sendSetSize: 0 deInUse: 0 bcInUse: 0 deSending: 0
+   03F5 21 03 03           1719 	ld	hl,#0x0303
+   03F8 E5                 1720 	push	hl
+                           1721 ;	genCall
+   03F9 CD 00 00           1722 	call	_set_sprite_tile
+   03FC E8 02              1723 	lda	sp,2(sp)
+                           1724 ;	battle.c 157
+                           1725 ;	genIpush
+                           1726 ; _saveRegsForCall: sendSetSize: 0 deInUse: 0 bcInUse: 0 deSending: 0
+   03FE 21 4D 28           1727 	ld	hl,#0x284D
+   0401 E5                 1728 	push	hl
+                           1729 ;	genIpush
+   0402 3E 00              1730 	ld	a,#0x00
+   0404 F5                 1731 	push	af
+   0405 33                 1732 	inc	sp
+                           1733 ;	genCall
+   0406 CD 00 00           1734 	call	_move_sprite
+   0409 E8 03              1735 	lda	sp,3(sp)
+                           1736 ;	battle.c 158
+                           1737 ;	genIpush
+                           1738 ; _saveRegsForCall: sendSetSize: 0 deInUse: 0 bcInUse: 0 deSending: 0
+   040B 21 4D 30           1739 	ld	hl,#0x304D
+   040E E5                 1740 	push	hl
+                           1741 ;	genIpush
+   040F 3E 01              1742 	ld	a,#0x01
+   0411 F5                 1743 	push	af
+   0412 33                 1744 	inc	sp
+                           1745 ;	genCall
+   0413 CD 00 00           1746 	call	_move_sprite
+   0416 E8 03              1747 	lda	sp,3(sp)
+                           1748 ;	battle.c 159
+                           1749 ;	genIpush
+                           1750 ; _saveRegsForCall: sendSetSize: 0 deInUse: 0 bcInUse: 0 deSending: 0
+   0418 21 54 28           1751 	ld	hl,#0x2854
+   041B E5                 1752 	push	hl
+                           1753 ;	genIpush
+   041C 3E 02              1754 	ld	a,#0x02
+   041E F5                 1755 	push	af
+   041F 33                 1756 	inc	sp
+                           1757 ;	genCall
+   0420 CD 00 00           1758 	call	_move_sprite
+   0423 E8 03              1759 	lda	sp,3(sp)
+                           1760 ;	battle.c 160
+                           1761 ;	genIpush
+                           1762 ; _saveRegsForCall: sendSetSize: 0 deInUse: 0 bcInUse: 0 deSending: 0
+   0425 21 54 30           1763 	ld	hl,#0x3054
+   0428 E5                 1764 	push	hl
+                           1765 ;	genIpush
+   0429 3E 03              1766 	ld	a,#0x03
+   042B F5                 1767 	push	af
+   042C 33                 1768 	inc	sp
+                           1769 ;	genCall
+   042D CD 00 00           1770 	call	_move_sprite
+   0430 E8 03              1771 	lda	sp,3(sp)
+                           1772 ;	battle.c 163
+                           1773 ;	genIpush
+                           1774 ; _saveRegsForCall: sendSetSize: 0 deInUse: 0 bcInUse: 0 deSending: 0
+   0432 21 04 08           1775 	ld	hl,#0x0804
+   0435 E5                 1776 	push	hl
+                           1777 ;	genCall
+   0436 CD 00 00           1778 	call	_set_sprite_tile
+   0439 E8 02              1779 	lda	sp,2(sp)
+                           1780 ;	battle.c 164
+                           1781 ;	genIpush
+                           1782 ; _saveRegsForCall: sendSetSize: 0 deInUse: 0 bcInUse: 0 deSending: 0
+   043B 21 05 09           1783 	ld	hl,#0x0905
+   043E E5                 1784 	push	hl
+                           1785 ;	genCall
+   043F CD 00 00           1786 	call	_set_sprite_tile
+   0442 E8 02              1787 	lda	sp,2(sp)
+                           1788 ;	battle.c 165
+                           1789 ;	genIpush
+                           1790 ; _saveRegsForCall: sendSetSize: 0 deInUse: 0 bcInUse: 0 deSending: 0
+   0444 21 06 0A           1791 	ld	hl,#0x0A06
+   0447 E5                 1792 	push	hl
+                           1793 ;	genCall
+   0448 CD 00 00           1794 	call	_set_sprite_tile
+   044B E8 02              1795 	lda	sp,2(sp)
+                           1796 ;	battle.c 166
+                           1797 ;	genIpush
+                           1798 ; _saveRegsForCall: sendSetSize: 0 deInUse: 0 bcInUse: 0 deSending: 0
+   044D 21 07 0B           1799 	ld	hl,#0x0B07
+   0450 E5                 1800 	push	hl
+                           1801 ;	genCall
+   0451 CD 00 00           1802 	call	_set_sprite_tile
+   0454 E8 02              1803 	lda	sp,2(sp)
+                           1804 ;	battle.c 168
+                           1805 ;	genIpush
+                           1806 ; _saveRegsForCall: sendSetSize: 0 deInUse: 0 bcInUse: 0 deSending: 0
+   0456 21 4D 48           1807 	ld	hl,#0x484D
+   0459 E5                 1808 	push	hl
+                           1809 ;	genIpush
+   045A 3E 04              1810 	ld	a,#0x04
+   045C F5                 1811 	push	af
+   045D 33                 1812 	inc	sp
+                           1813 ;	genCall
+   045E CD 00 00           1814 	call	_move_sprite
+   0461 E8 03              1815 	lda	sp,3(sp)
+                           1816 ;	battle.c 169
+                           1817 ;	genIpush
+                           1818 ; _saveRegsForCall: sendSetSize: 0 deInUse: 0 bcInUse: 0 deSending: 0
+   0463 21 4D 50           1819 	ld	hl,#0x504D
+   0466 E5                 1820 	push	hl
+                           1821 ;	genIpush
+   0467 3E 05              1822 	ld	a,#0x05
+   0469 F5                 1823 	push	af
+   046A 33                 1824 	inc	sp
+                           1825 ;	genCall
+   046B CD 00 00           1826 	call	_move_sprite
+   046E E8 03              1827 	lda	sp,3(sp)
+                           1828 ;	battle.c 170
+                           1829 ;	genIpush
+                           1830 ; _saveRegsForCall: sendSetSize: 0 deInUse: 0 bcInUse: 0 deSending: 0
+   0470 21 54 48           1831 	ld	hl,#0x4854
+   0473 E5                 1832 	push	hl
+                           1833 ;	genIpush
+   0474 3E 06              1834 	ld	a,#0x06
+   0476 F5                 1835 	push	af
+   0477 33                 1836 	inc	sp
+                           1837 ;	genCall
+   0478 CD 00 00           1838 	call	_move_sprite
+   047B E8 03              1839 	lda	sp,3(sp)
+                           1840 ;	battle.c 171
+                           1841 ;	genIpush
+                           1842 ; _saveRegsForCall: sendSetSize: 0 deInUse: 0 bcInUse: 0 deSending: 0
+   047D 21 54 50           1843 	ld	hl,#0x5054
+   0480 E5                 1844 	push	hl
+                           1845 ;	genIpush
+   0481 3E 07              1846 	ld	a,#0x07
+   0483 F5                 1847 	push	af
+   0484 33                 1848 	inc	sp
+                           1849 ;	genCall
+   0485 CD 00 00           1850 	call	_move_sprite
+   0488 E8 03              1851 	lda	sp,3(sp)
+                           1852 ;	genLabel
+   048A                    1853 00101$:
+                           1854 ;	genEndFunction
+                           1855 	
+   048A C9                 1856 	ret
+   048B                    1857 ___sprite_setup_end:
+                           1858 ;	battle.c 174
+                           1859 ;	genLabel
+                           1860 ;	genFunction
+                           1861 ;	---------------------------------
+                           1862 ; Function npc_fight
+                           1863 ; ---------------------------------
+   048B                    1864 ___npc_fight_start:
+   048B                    1865 _npc_fight:
+   048B E8 F8              1866 	lda	sp,-8(sp)
+                           1867 ;	battle.c 185
+                           1868 ;	genAssign
+   048D 01 04 FF           1869 	ld	bc,#0xFF04
+                           1870 ;	genPointerGet
+   0490 0A                 1871 	ld	a,(bc)
+   0491 4F                 1872 	ld	c,a
+                           1873 ;	genCast
+                           1874 ;	AOP_STK for _npc_fight_seed_1_1
+   0492 F8 06              1875 	lda	hl,6(sp)
+   0494 71                 1876 	ld	(hl),c
+   0495 23                 1877 	inc	hl
+   0496 36 00              1878 	ld	(hl),#0x00
+                           1879 ;	battle.c 186
+                           1880 ;	genAssign
+   0498 01 04 FF           1881 	ld	bc,#0xFF04
+                           1882 ;	genPointerGet
+   049B 0A                 1883 	ld	a,(bc)
+   049C 4F                 1884 	ld	c,a
+                           1885 ;	genCast
+                           1886 ; Removed redundent load
+   049D 06 00              1887 	ld	b,#0x00
+                           1888 ;	genLeftShift
+   049F 41                 1889 	ld	b,c
+   04A0 0E 00              1890 	ld	c,#0x00
+                           1891 ;	genOr
+                           1892 ;	AOP_STK for _npc_fight_seed_1_1
+   04A2 2B                 1893 	dec	hl
+   04A3 7E                 1894 	ld	a,(hl)
+   04A4 B1                 1895 	or	a,c
+   04A5 22                 1896 	ld	(hl+),a
+   04A6 7E                 1897 	ld	a,(hl)
+   04A7 B0                 1898 	or	a,b
+                           1899 ;	battle.c 188
+                           1900 ;	genIpush
+                           1901 ; _saveRegsForCall: sendSetSize: 0 deInUse: 0 bcInUse: 0 deSending: 0
+                           1902 ;	AOP_STK for _npc_fight_seed_1_1
+   04A8 32                 1903 	ld      (hl-),a
+   04A9 2A                 1904 	ld	a,(hl+)
+   04AA 66                 1905 	ld	h,(hl)
+   04AB 6F                 1906 	ld	l,a
+   04AC E5                 1907 	push	hl
+                           1908 ;	genCall
+   04AD CD 00 00           1909 	call	_initarand
+   04B0 E8 02              1910 	lda	sp,2(sp)
+                           1911 ;	battle.c 191
+                           1912 ;	genCall
+                           1913 ; _saveRegsForCall: sendSetSize: 0 deInUse: 0 bcInUse: 0 deSending: 0
+   04B2 CD 00 00           1914 	call	_rand
+   04B5 4B                 1915 	ld	c,e
+                           1916 ;	genAnd
+   04B6 79                 1917 	ld	a,c
+   04B7 E6 01              1918 	and	a,#0x01
+   04B9 4F                 1919 	ld	c,a
+                           1920 ;	battle.c 193
+                           1921 ;	genCall
+                           1922 ; _saveRegsForCall: sendSetSize: 0 deInUse: 0 bcInUse: 1 deSending: 0
+   04BA C5                 1923 	push	bc
+   04BB CD 00 00           1924 	call	_rand
+   04BE 43                 1925 	ld	b,e
+   04BF E1                 1926 	pop	hl
+   04C0 4D                 1927 	ld	c,l
+                           1928 ;	genAnd
+   04C1 78                 1929 	ld	a,b
+   04C2 E6 01              1930 	and	a,#0x01
+   04C4 47                 1931 	ld	b,a
+                           1932 ;	battle.c 195
+                           1933 ;	genCmpEq
+                           1934 ; genCmpEq: left 1, right 1, result 1
+   04C5 79                 1935 	ld	a,c
+   04C6 FE 01              1936 	cp	a,#0x01
+   04C8 C2 CF 04           1937 	jp	nz,00125$
+   04CB 3E 01              1938 	ld	a,#0x01
+   04CD 18 01              1939 	jr	00126$
+   04CF                    1940 00125$:
+   04CF AF                 1941 	xor	a,a
+   04D0                    1942 00126$:
+   04D0 4F                 1943 	ld	c,a
+                           1944 ;	genIfx
+   04D1 AF                 1945 	xor	a,a
+   04D2 B1                 1946 	or	a,c
+   04D3 CA 86 05           1947 	jp	z,00102$
+                           1948 ;	genCmpEq
+                           1949 ; genCmpEq: left 1, right 1, result 0
+   04D6 78                 1950 	ld	a,b
+   04D7 FE 01              1951 	cp	a,#0x01
+   04D9 C2 86 05           1952 	jp	nz,00102$
+   04DC 18 03              1953 	jr	00128$
+   04DE                    1954 00127$:
+   04DE C3 86 05           1955 	jp	00102$
+   04E1                    1956 00128$:
+                           1957 ;	battle.c 199
+                           1958 ;	genAssign
+                           1959 ;	AOP_STK for 
+                           1960 ;	AOP_STK for _npc_fight_sloc0_1_0
+   04E1 F8 0A              1961 	lda	hl,10(sp)
+   04E3 2A                 1962 	ld	a,(hl+)
+   04E4 5E                 1963 	ld	e,(hl)
+   04E5 F8 04              1964 	lda	hl,4(sp)
+   04E7 22                 1965 	ld	(hl+),a
+   04E8 73                 1966 	ld	(hl),e
+                           1967 ;	genPointerGet
+                           1968 ;	AOP_STK for _npc_fight_sloc0_1_0
+                           1969 ;	AOP_STK for _npc_fight_sloc1_1_0
+   04E9 2B                 1970 	dec	hl
+   04EA 5E                 1971 	ld	e,(hl)
+   04EB 23                 1972 	inc	hl
+   04EC 56                 1973 	ld	d,(hl)
+   04ED 1A                 1974 	ld	a,(de)
+   04EE 2B                 1975 	dec	hl
+   04EF 2B                 1976 	dec	hl
+                           1977 ;	genMinus
+                           1978 ;	AOP_STK for _npc_fight_sloc1_1_0
+                           1979 ;	AOP_STK for _npc_fight_sloc2_1_0
+   04F0 77                 1980 	ld      (hl),a
+                           1981 ; Removed redundent load
+   04F1 C6 FB              1982 	add	a,#0xFB
+   04F3 2B                 1983 	dec	hl
+                           1984 ;	genAssign (pointer)
+                           1985 ;	AOP_STK for _npc_fight_sloc0_1_0
+                           1986 ;	AOP_STK for _npc_fight_sloc2_1_0
+   04F4 22                 1987 	ld	(hl+),a
+   04F5 23                 1988 	inc	hl
+   04F6 5E                 1989 	ld	e,(hl)
+   04F7 23                 1990 	inc	hl
+   04F8 56                 1991 	ld	d,(hl)
+   04F9 F8 02              1992 	lda	hl,2(sp)
+   04FB 7E                 1993 	ld	a,(hl)
+   04FC 12                 1994 	ld	(de),a
+                           1995 ;	battle.c 200
+                           1996 ;	genAssign
+                           1997 ;	AOP_HL for _a
+   04FD 21 05 09           1998 	ld	hl,#_a
+   0500 36 00              1999 	ld	(hl),#0x00
+                           2000 ;	genLabel
+   0502                    2001 00107$:
+                           2002 ;	genCmpLt
+                           2003 ;	AOP_HL for _a
+   0502 21 05 09           2004 	ld	hl,#_a
+   0505 7E                 2005 	ld	a,(hl)
+   0506 FE 06              2006 	cp	#0x06
+   0508 D2 4A 05           2007 	jp	nc,00110$
+                           2008 ;	battle.c 202
+                           2009 ;	genIpush
+                           2010 ; _saveRegsForCall: sendSetSize: 0 deInUse: 0 bcInUse: 1 deSending: 0
+   050B C5                 2011 	push	bc
+   050C 21 64 00           2012 	ld	hl,#0x0064
+   050F E5                 2013 	push	hl
+                           2014 ;	genCall
+   0510 CD 00 00           2015 	call	_delay
+   0513 E8 02              2016 	lda	sp,2(sp)
+   0515 C1                 2017 	pop	bc
+                           2018 ;	battle.c 203
+                           2019 ;	genCall
+                           2020 ; _saveRegsForCall: sendSetSize: 0 deInUse: 0 bcInUse: 1 deSending: 0
+   0516 C5                 2021 	push	bc
+   0517 CD 00 00           2022 	call	_display_off
+   051A C1                 2023 	pop	bc
+                           2024 ;	battle.c 204
+                           2025 ;	genIpush
+                           2026 ; _saveRegsForCall: sendSetSize: 0 deInUse: 0 bcInUse: 1 deSending: 0
+   051B C5                 2027 	push	bc
+   051C 21 64 00           2028 	ld	hl,#0x0064
+   051F E5                 2029 	push	hl
+                           2030 ;	genCall
+   0520 CD 00 00           2031 	call	_delay
+   0523 E8 02              2032 	lda	sp,2(sp)
+   0525 C1                 2033 	pop	bc
+                           2034 ;	battle.c 205
+                           2035 ;	genAssign
+                           2036 ;	AOP_STK for _npc_fight_sloc0_1_0
+   0526 F8 04              2037 	lda	hl,4(sp)
+   0528 36 40              2038 	ld	(hl),#0x40
+   052A 23                 2039 	inc	hl
+   052B 36 FF              2040 	ld	(hl),#0xFF
+                           2041 ;	genAssign
+                           2042 ;	AOP_STK for _npc_fight_sloc3_1_0
+   052D F8 00              2043 	lda	hl,0(sp)
+   052F 36 40              2044 	ld	(hl),#0x40
+   0531 23                 2045 	inc	hl
+   0532 36 FF              2046 	ld	(hl),#0xFF
+                           2047 ;	genPointerGet
+                           2048 ;	AOP_STK for _npc_fight_sloc3_1_0
+                           2049 ;	AOP_STK for _npc_fight_sloc2_1_0
+   0534 2B                 2050 	dec	hl
+   0535 5E                 2051 	ld	e,(hl)
+   0536 23                 2052 	inc	hl
+   0537 56                 2053 	ld	d,(hl)
+   0538 1A                 2054 	ld	a,(de)
+   0539 23                 2055 	inc	hl
+                           2056 ;	genOr
+                           2057 ;	AOP_STK for _npc_fight_sloc2_1_0
+   053A 77                 2058 	ld      (hl),a
+                           2059 ; Removed redundent load
+   053B F6 80              2060 	or	a,#0x80
+                           2061 ;	genAssign (pointer)
+                           2062 ;	AOP_STK for _npc_fight_sloc0_1_0
+   053D 23                 2063 	inc	hl
+   053E 23                 2064 	inc	hl
+   053F 5E                 2065 	ld	e,(hl)
+   0540 23                 2066 	inc	hl
+   0541 56                 2067 	ld	d,(hl)
+   0542 12                 2068 	ld	(de),a
+                           2069 ;	battle.c 200
+                           2070 ;	genPlus
+                           2071 ;	AOP_HL for _a
+                           2072 ;	genPlusIncr
+   0543 21 05 09           2073 	ld	hl,#_a
+   0546 34                 2074 	inc	(hl)
+                           2075 ;	genGoto
+   0547 C3 02 05           2076 	jp	00107$
+                           2077 ;	genLabel
+   054A                    2078 00110$:
+                           2079 ;	battle.c 207
+                           2080 ;	genCall
+                           2081 ; _saveRegsForCall: sendSetSize: 0 deInUse: 0 bcInUse: 1 deSending: 0
+   054A C5                 2082 	push	bc
+   054B CD 00 00           2083 	call	_display_off
+   054E C1                 2084 	pop	bc
+                           2085 ;	battle.c 208
+                           2086 ;	genCall
+                           2087 ; _saveRegsForCall: sendSetSize: 0 deInUse: 0 bcInUse: 1 deSending: 0
+   054F C5                 2088 	push	bc
+   0550 CD 00 00           2089 	call	_sprite_clean
+   0553 C1                 2090 	pop	bc
+                           2091 ;	battle.c 209
+                           2092 ;	genIpush
+                           2093 ; _saveRegsForCall: sendSetSize: 0 deInUse: 0 bcInUse: 1 deSending: 0
+   0554 C5                 2094 	push	bc
+   0555 21 48 50           2095 	ld	hl,#0x5048
+   0558 E5                 2096 	push	hl
+                           2097 ;	genIpush
+   0559 21 00 06           2098 	ld	hl,#__str_2
+   055C E5                 2099 	push	hl
+                           2100 ;	genCall
+   055D CD 00 00           2101 	call	_print
+   0560 E8 04              2102 	lda	sp,4(sp)
+   0562 C1                 2103 	pop	bc
+                           2104 ;	battle.c 210
+                           2105 ;	genCall
+                           2106 ; _saveRegsForCall: sendSetSize: 0 deInUse: 0 bcInUse: 1 deSending: 0
+   0563 C5                 2107 	push	bc
+   0564 CD 91 03           2108 	call	_clear_screen
+   0567 C1                 2109 	pop	bc
+                           2110 ;	battle.c 211
+                           2111 ;	genAssign
+                           2112 ;	AOP_STK for _npc_fight_sloc3_1_0
+   0568 F8 00              2113 	lda	hl,0(sp)
+   056A 36 40              2114 	ld	(hl),#0x40
+   056C 23                 2115 	inc	hl
+   056D 36 FF              2116 	ld	(hl),#0xFF
+                           2117 ;	genAssign
+                           2118 ;	AOP_STK for _npc_fight_sloc0_1_0
+   056F F8 04              2119 	lda	hl,4(sp)
+   0571 36 40              2120 	ld	(hl),#0x40
+   0573 23                 2121 	inc	hl
+   0574 36 FF              2122 	ld	(hl),#0xFF
+                           2123 ;	genPointerGet
+                           2124 ;	AOP_STK for _npc_fight_sloc0_1_0
+                           2125 ;	AOP_STK for _npc_fight_sloc2_1_0
+   0576 2B                 2126 	dec	hl
+   0577 5E                 2127 	ld	e,(hl)
+   0578 23                 2128 	inc	hl
+   0579 56                 2129 	ld	d,(hl)
+   057A 1A                 2130 	ld	a,(de)
+   057B F8 02              2131 	lda	hl,2(sp)
+                           2132 ;	genOr
+                           2133 ;	AOP_STK for _npc_fight_sloc2_1_0
+   057D 77                 2134 	ld      (hl),a
+                           2135 ; Removed redundent load
+   057E F6 80              2136 	or	a,#0x80
+                           2137 ;	genAssign (pointer)
+                           2138 ;	AOP_STK for _npc_fight_sloc3_1_0
+   0580 2B                 2139 	dec	hl
+   0581 2B                 2140 	dec	hl
+   0582 5E                 2141 	ld	e,(hl)
+   0583 23                 2142 	inc	hl
+   0584 56                 2143 	ld	d,(hl)
+   0585 12                 2144 	ld	(de),a
+                           2145 ;	genLabel
+   0586                    2146 00102$:
+                           2147 ;	battle.c 213
+                           2148 ;	genIfx
+   0586 AF                 2149 	xor	a,a
+   0587 B1                 2150 	or	a,c
+   0588 CA FD 05           2151 	jp	z,00115$
+                           2152 ;	genCmpEq
+                           2153 ; genCmpEq: left 1, right 1, result 0
+   058B 78                 2154 	ld	a,b
+   058C B7                 2155 	or	a,a
+   058D C2 FD 05           2156 	jp	nz,00115$
+   0590 18 03              2157 	jr	00130$
+   0592                    2158 00129$:
+   0592 C3 FD 05           2159 	jp	00115$
+   0595                    2160 00130$:
+                           2161 ;	battle.c 216
+                           2162 ;	genAssign
+                           2163 ;	AOP_HL for _a
+   0595 21 05 09           2164 	ld	hl,#_a
+   0598 36 00              2165 	ld	(hl),#0x00
+                           2166 ;	genLabel
+   059A                    2167 00111$:
+                           2168 ;	genCmpLt
+                           2169 ;	AOP_HL for _a
+   059A 21 05 09           2170 	ld	hl,#_a
+   059D 7E                 2171 	ld	a,(hl)
+   059E FE 06              2172 	cp	#0x06
+   05A0 D2 D3 05           2173 	jp	nc,00114$
+                           2174 ;	battle.c 218
+                           2175 ;	genIpush
+                           2176 ; _saveRegsForCall: sendSetSize: 0 deInUse: 0 bcInUse: 0 deSending: 0
+   05A3 21 64 00           2177 	ld	hl,#0x0064
+   05A6 E5                 2178 	push	hl
+                           2179 ;	genCall
+   05A7 CD 00 00           2180 	call	_delay
+   05AA E8 02              2181 	lda	sp,2(sp)
+                           2182 ;	battle.c 219
+                           2183 ;	genCall
+                           2184 ; _saveRegsForCall: sendSetSize: 0 deInUse: 0 bcInUse: 0 deSending: 0
+   05AC CD 00 00           2185 	call	_display_off
+                           2186 ;	battle.c 220
+                           2187 ;	genIpush
+                           2188 ; _saveRegsForCall: sendSetSize: 0 deInUse: 0 bcInUse: 0 deSending: 0
+   05AF 21 64 00           2189 	ld	hl,#0x0064
+   05B2 E5                 2190 	push	hl
+                           2191 ;	genCall
+   05B3 CD 00 00           2192 	call	_delay
+   05B6 E8 02              2193 	lda	sp,2(sp)
+                           2194 ;	battle.c 221
+                           2195 ;	genAssign
+   05B8 01 40 FF           2196 	ld	bc,#0xFF40
+                           2197 ;	genAssign
+                           2198 ;	AOP_STK for _npc_fight_sloc3_1_0
+   05BB F8 00              2199 	lda	hl,0(sp)
+   05BD 36 40              2200 	ld	(hl),#0x40
+   05BF 23                 2201 	inc	hl
+   05C0 36 FF              2202 	ld	(hl),#0xFF
+                           2203 ;	genPointerGet
+                           2204 ;	AOP_STK for _npc_fight_sloc3_1_0
+                           2205 ;	AOP_STK for _npc_fight_sloc2_1_0
+   05C2 2B                 2206 	dec	hl
+   05C3 5E                 2207 	ld	e,(hl)
+   05C4 23                 2208 	inc	hl
+   05C5 56                 2209 	ld	d,(hl)
+   05C6 1A                 2210 	ld	a,(de)
+   05C7 23                 2211 	inc	hl
+                           2212 ;	genOr
+                           2213 ;	AOP_STK for _npc_fight_sloc2_1_0
+   05C8 77                 2214 	ld      (hl),a
+                           2215 ; Removed redundent load
+   05C9 F6 80              2216 	or	a,#0x80
+                           2217 ;	genAssign (pointer)
+   05CB 02                 2218 	ld	(bc),a
+                           2219 ;	battle.c 216
+                           2220 ;	genPlus
+                           2221 ;	AOP_HL for _a
+                           2222 ;	genPlusIncr
+   05CC 21 05 09           2223 	ld	hl,#_a
+   05CF 34                 2224 	inc	(hl)
+                           2225 ;	genGoto
+   05D0 C3 9A 05           2226 	jp	00111$
+                           2227 ;	genLabel
+   05D3                    2228 00114$:
+                           2229 ;	battle.c 223
+                           2230 ;	genCall
+                           2231 ; _saveRegsForCall: sendSetSize: 0 deInUse: 0 bcInUse: 0 deSending: 0
+   05D3 CD 00 00           2232 	call	_display_off
+                           2233 ;	battle.c 224
+                           2234 ;	genCall
+                           2235 ; _saveRegsForCall: sendSetSize: 0 deInUse: 0 bcInUse: 0 deSending: 0
+   05D6 CD 00 00           2236 	call	_sprite_clean
+                           2237 ;	battle.c 225
+                           2238 ;	genIpush
+                           2239 ; _saveRegsForCall: sendSetSize: 0 deInUse: 0 bcInUse: 0 deSending: 0
+   05D9 21 40 50           2240 	ld	hl,#0x5040
+   05DC E5                 2241 	push	hl
+                           2242 ;	genIpush
+   05DD 21 05 06           2243 	ld	hl,#__str_3
+   05E0 E5                 2244 	push	hl
+                           2245 ;	genCall
+   05E1 CD 00 00           2246 	call	_print
+   05E4 E8 04              2247 	lda	sp,4(sp)
+                           2248 ;	battle.c 226
+                           2249 ;	genCall
+                           2250 ; _saveRegsForCall: sendSetSize: 0 deInUse: 0 bcInUse: 0 deSending: 0
+   05E6 CD 91 03           2251 	call	_clear_screen
+                           2252 ;	battle.c 227
+                           2253 ;	genAssign
+   05E9 01 40 FF           2254 	ld	bc,#0xFF40
+                           2255 ;	genAssign
+                           2256 ;	AOP_STK for _npc_fight_sloc3_1_0
+   05EC F8 00              2257 	lda	hl,0(sp)
+   05EE 36 40              2258 	ld	(hl),#0x40
+   05F0 23                 2259 	inc	hl
+   05F1 36 FF              2260 	ld	(hl),#0xFF
+                           2261 ;	genPointerGet
+                           2262 ;	AOP_STK for _npc_fight_sloc3_1_0
+                           2263 ;	AOP_STK for _npc_fight_sloc2_1_0
+   05F3 2B                 2264 	dec	hl
+   05F4 5E                 2265 	ld	e,(hl)
+   05F5 23                 2266 	inc	hl
+   05F6 56                 2267 	ld	d,(hl)
+   05F7 1A                 2268 	ld	a,(de)
+   05F8 23                 2269 	inc	hl
+                           2270 ;	genOr
+                           2271 ;	AOP_STK for _npc_fight_sloc2_1_0
+   05F9 77                 2272 	ld      (hl),a
+                           2273 ; Removed redundent load
+   05FA F6 80              2274 	or	a,#0x80
+                           2275 ;	genAssign (pointer)
+   05FC 02                 2276 	ld	(bc),a
+                           2277 ;	genLabel
+   05FD                    2278 00115$:
+                           2279 ;	genEndFunction
+   05FD E8 08              2280 	lda	sp,8(sp)
+   05FF C9                 2281 	ret
+   0600                    2282 ___npc_fight_end:
+   0600                    2283 __str_2:
+   0600 68 69 74 21        2284 	.ascii "hit!"
+   0604 00                 2285 	.db 0x00
+   0605                    2286 __str_3:
+   0605 6D 69 73 73 21     2287 	.ascii "miss!"
+   060A 00                 2288 	.db 0x00
+                           2289 	.area _CODE
+ASxxxx Assembler V01.75  (GameBoy Z80-like CPU), page 1.
+
+Symbol Table
+
+  1 _ASAKAWA_HP                        08F8 GR
+  1 _HERO_HP                           08F9 GR
+  0 ___choice_handler_end              0013 R
+  0 ___choice_handler_start            0000 R
+  0 ___clear_screen_end                03B0 R
+  0 ___clear_screen_start              0391 R
+  0 ___hero_defend_anim_end            024D R
+  0 ___hero_defend_anim_start          016E R
+  0 ___hero_fight_anim_end             0391 R
+  0 ___hero_fight_anim_start           024D R
+  0 ___hero_fight_end                  0163 R
+  0 ___hero_fight_start                0013 R
+  0 ___npc_fight_end                   0600 R
+  0 ___npc_fight_start                 048B R
+  0 ___sprite_setup_end                048B R
+  0 ___sprite_setup_start              03B0 R
+    __initrleblock                     **** GX
+  0 __str_0                            0163 R
+  0 __str_1                            0168 R
+  0 __str_2                            0600 R
+  0 __str_3                            0605 R
+  1 _a                                 0905 GR
+  1 _asakawa_front_idle                0650 GR
+  1 _blank_screen                      0750 GR
+  1 _blank_screen_tiles                08B8 GR
+  1 _chain_border                      0000 GR
+  1 _chain_border_tiles                0448 GR
+  1 _choice                            0902 GR
+  0 _choice_handler                    0000 GR
+  0 _clear_screen                      0391 GR
+    _delay                             **** GX
+    _display_off                       **** GX
+  1 _enemy_choice                      0903 GR
+  1 _font                              0168 GR
+  1 _h_hp                              08FA GR
+  1 _hero_back_idle                    06D0 GR
+  0 _hero_defend_anim                  016E GR
+  0 _hero_fight                        0013 GR
+  0 _hero_fight_anim                   024D GR
+    _initarand                         **** GX
+    _move_sprite                       **** GX
+  0 _npc_fight                         048B GR
+    _print                             **** GX
+    _rand                              **** GX
+    _set_bkg_data                      **** GX
+    _set_bkg_tiles                     **** GX
+    _set_sprite_data                   **** GX
+    _set_sprite_tile                   **** GX
+  1 _small_chain_border                04E8 GR
+    _sprite_clean                      **** GX
+  0 _sprite_setup                      03B0 GR
+  1 _y                                 0904 GR
+
+ASxxxx Assembler V01.75  (GameBoy Z80-like CPU), page 2.
+
+Area Table
+
+   0 _CODE                              size  60B   flags 0
+   1 _DATA                              size  906   flags 0
+   2 _OVERLAY                           size    0   flags 0
+   3 _ISEG                              size    0   flags 0
+   4 _BSEG                              size    0   flags 0
+   5 _XSEG                              size    0   flags 0
+   6 _GSINIT                            size  50F   flags 0
+   7 _GSFINAL                           size    0   flags 0
+   8 _HOME                              size    0   flags 0

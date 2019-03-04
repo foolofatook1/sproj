@@ -1,0 +1,2513 @@
+                              1 ;--------------------------------------------------------
+                              2 ; File Created by SDCC : FreeWare ANSI-C Compiler
+                              3 ; Version 2.3.1 Mon Mar  4 10:47:52 2019
+                              4 
+                              5 ;--------------------------------------------------------
+                              6 	.module lcc193040
+                              7 	
+                              8 ;--------------------------------------------------------
+                              9 ; Public variables in this module
+                             10 ;--------------------------------------------------------
+                             11 	.globl _main
+                             12 	.globl _battle_toggle_down
+                             13 	.globl _state
+                             14 	.globl _arrow_y
+                             15 	.globl _arrow_x
+                             16 	.globl _asakawa_pos
+                             17 	.globl _hero_pos
+                             18 	.globl _a
+                             19 	.globl _y
+                             20 	.globl _enemy_choice
+                             21 	.globl _choice
+                             22 	.globl _h_hp
+                             23 	.globl _HERO_HP
+                             24 	.globl _ASAKAWA_HP
+                             25 	.globl _blank_screen_tiles
+                             26 	.globl _blank_screen
+                             27 	.globl _hero_back_idle
+                             28 	.globl _asakawa_front_idle
+                             29 	.globl _small_chain_border
+                             30 	.globl _chain_border_tiles
+                             31 	.globl _font
+                             32 	.globl _chain_border
+                             33 	.globl _asakawa_battle_ctrl
+                             34 	.globl _battle_nav
+                             35 	.globl _run
+                             36 	.globl _back
+                             37 	.globl _fight_opt
+                             38 	.globl _item_opt
+                             39 	.globl _battle_menu
+                             40 	.globl _show_fighter_stats
+                             41 	.globl _battle_toggle_up
+                             42 	.globl _asakawa_battle_check
+                             43 	.globl _show_sprites
+                             44 ;--------------------------------------------------------
+                             45 ; special function registers
+                             46 ;--------------------------------------------------------
+                             47 ;--------------------------------------------------------
+                             48 ; special function bits 
+                             49 ;--------------------------------------------------------
+                             50 ;--------------------------------------------------------
+                             51 ; internal ram data
+                             52 ;--------------------------------------------------------
+                             53 	.area _DATA
+   0000                      54 _chain_border::
+   0000                      55 	.ds 360
+   0168                      56 _font::
+   0168                      57 	.ds 736
+   0448                      58 _chain_border_tiles::
+   0448                      59 	.ds 160
+   04E8                      60 _small_chain_border::
+   04E8                      61 	.ds 360
+   0650                      62 _asakawa_front_idle::
+   0650                      63 	.ds 128
+   06D0                      64 _hero_back_idle::
+   06D0                      65 	.ds 128
+   0750                      66 _blank_screen::
+   0750                      67 	.ds 360
+   08B8                      68 _blank_screen_tiles::
+   08B8                      69 	.ds 64
+   08F8                      70 _ASAKAWA_HP::
+   08F8                      71 	.ds 1
+   08F9                      72 _HERO_HP::
+   08F9                      73 	.ds 1
+   08FA                      74 _h_hp::
+   08FA                      75 	.ds 8
+   0902                      76 _choice::
+   0902                      77 	.ds 1
+   0903                      78 _enemy_choice::
+   0903                      79 	.ds 1
+   0904                      80 _y::
+   0904                      81 	.ds 1
+   0905                      82 _a::
+   0905                      83 	.ds 1
+   0906                      84 _hero_pos::
+   0906                      85 	.ds 4
+   090A                      86 _asakawa_pos::
+   090A                      87 	.ds 4
+   090E                      88 _arrow_x::
+   090E                      89 	.ds 1
+   090F                      90 _arrow_y::
+   090F                      91 	.ds 1
+   0910                      92 _state::
+   0910                      93 	.ds 1
+                             94 ;--------------------------------------------------------
+                             95 ; overlayable items in internal ram 
+                             96 ;--------------------------------------------------------
+                             97 	.area _OVERLAY
+                             98 ;--------------------------------------------------------
+                             99 ; indirectly addressable internal ram data
+                            100 ;--------------------------------------------------------
+                            101 	.area _ISEG
+                            102 ;--------------------------------------------------------
+                            103 ; bit data
+                            104 ;--------------------------------------------------------
+                            105 	.area _BSEG
+                            106 ;--------------------------------------------------------
+                            107 ; external ram data
+                            108 ;--------------------------------------------------------
+                            109 	.area _XSEG
+                            110 ;--------------------------------------------------------
+                            111 ; global & static initialisations
+                            112 ;--------------------------------------------------------
+                            113 	.area _GSINIT
+                            114 	.area _GSFINAL
+                            115 	.area _GSINIT
+                            116 ;	asakawa_battle.c 25
+                            117 ;	asakawa_battle.c 252
+                            118 ;	genArrayInit
+                            119 ; _saveRegsForCall: sendSetSize: 0 deInUse: 0 bcInUse: 0 deSending: 0
+   0000 21 00 00            120 	ld	hl,#_chain_border
+   0003 CD 00 00            121 	call	__initrleblock
+   0006 01                  122 	.db	1
+   0007 04                  123 	.db	0x04
+   0008 EE 06               124 	.db	-18,0x06
+   000A 02                  125 	.db	2
+   000B 02 01               126 	.db	0x02, 0x01
+   000D EE 00               127 	.db	-18,0x00
+   000F 02                  128 	.db	2
+   0010 01 01               129 	.db	0x01, 0x01
+   0012 EE 00               130 	.db	-18,0x00
+   0014 02                  131 	.db	2
+   0015 01 01               132 	.db	0x01, 0x01
+   0017 EE 00               133 	.db	-18,0x00
+   0019 02                  134 	.db	2
+   001A 01 01               135 	.db	0x01, 0x01
+   001C EE 00               136 	.db	-18,0x00
+   001E 02                  137 	.db	2
+   001F 01 01               138 	.db	0x01, 0x01
+   0021 EE 00               139 	.db	-18,0x00
+   0023 02                  140 	.db	2
+   0024 01 01               141 	.db	0x01, 0x01
+   0026 EE 00               142 	.db	-18,0x00
+   0028 02                  143 	.db	2
+   0029 01 01               144 	.db	0x01, 0x01
+   002B EE 00               145 	.db	-18,0x00
+   002D 02                  146 	.db	2
+   002E 01 01               147 	.db	0x01, 0x01
+   0030 EE 00               148 	.db	-18,0x00
+   0032 02                  149 	.db	2
+   0033 01 01               150 	.db	0x01, 0x01
+   0035 EE 00               151 	.db	-18,0x00
+   0037 02                  152 	.db	2
+   0038 01 01               153 	.db	0x01, 0x01
+   003A EE 00               154 	.db	-18,0x00
+   003C 02                  155 	.db	2
+   003D 01 01               156 	.db	0x01, 0x01
+   003F EE 00               157 	.db	-18,0x00
+   0041 02                  158 	.db	2
+   0042 01 01               159 	.db	0x01, 0x01
+   0044 EE 00               160 	.db	-18,0x00
+   0046 02                  161 	.db	2
+   0047 01 01               162 	.db	0x01, 0x01
+   0049 EE 00               163 	.db	-18,0x00
+   004B 02                  164 	.db	2
+   004C 01 01               165 	.db	0x01, 0x01
+   004E EE 00               166 	.db	-18,0x00
+   0050 02                  167 	.db	2
+   0051 01 01               168 	.db	0x01, 0x01
+   0053 F1 00               169 	.db	-15,0x00
+   0055 05                  170 	.db	5
+   0056 07 08 09 01 01      171 	.db	0x07, 0x08, 0x09, 0x01, 0x01
+   005B EE 00               172 	.db	-18,0x00
+   005D 02                  173 	.db	2
+   005E 01 05               174 	.db	0x01, 0x05
+   0060 EE 06               175 	.db	-18,0x06
+   0062 01                  176 	.db	1
+   0063 03                  177 	.db	0x03
+   0064 00                  178 	.db	0
+                            179 ;	asakawa_battle.c 26
+                            180 ;	asakawa_battle.c 252
+                            181 ;	genArrayInit
+                            182 ; _saveRegsForCall: sendSetSize: 0 deInUse: 0 bcInUse: 0 deSending: 0
+   0065 21 68 01            183 	ld	hl,#_font
+   0068 CD 00 00            184 	call	__initrleblock
+   006B 0A                  185 	.db	10
+   006C 1C 1C 22 22 43 43   186 	.db	0x1C, 0x1C, 0x22, 0x22, 0x43, 0x43, 0x43, 0x43
+        43 43
+   0074 7F 7F               187 	.db	0x7F, 0x7F
+   0076 FA 43               188 	.db	-6,0x43
+   0078 08                  189 	.db	8
+   0079 7E 7E 63 63 63 63   190 	.db	0x7E, 0x7E, 0x63, 0x63, 0x63, 0x63, 0x7E, 0x7E
+        7E 7E
+   0081 FA 63               191 	.db	-6,0x63
+   0083 06                  192 	.db	6
+   0084 7E 7E 3E 3E 63 63   193 	.db	0x7E, 0x7E, 0x3E, 0x3E, 0x63, 0x63
+   008A F8 60               194 	.db	-8,0x60
+   008C 06                  195 	.db	6
+   008D 63 63 3E 3E 7E 7E   196 	.db	0x63, 0x63, 0x3E, 0x3E, 0x7E, 0x7E
+   0093 F4 47               197 	.db	-12,0x47
+   0095 0A                  198 	.db	10
+   0096 7E 7E 7F 7F 60 60   199 	.db	0x7E, 0x7E, 0x7F, 0x7F, 0x60, 0x60, 0x60, 0x60
+        60 60
+   009E 7E 7E               200 	.db	0x7E, 0x7E
+   00A0 FA 60               201 	.db	-6,0x60
+   00A2 0A                  202 	.db	10
+   00A3 7F 7F 7F 7F 60 60   203 	.db	0x7F, 0x7F, 0x7F, 0x7F, 0x60, 0x60, 0x60, 0x60
+        60 60
+   00AB 7E 7E               204 	.db	0x7E, 0x7E
+   00AD F8 60               205 	.db	-8,0x60
+   00AF 10                  206 	.db	16
+   00B0 3E 3E 63 63 60 60   207 	.db	0x3E, 0x3E, 0x63, 0x63, 0x60, 0x60, 0x60, 0x60
+        60 60
+   00B8 67 67 63 63 63 63   208 	.db	0x67, 0x67, 0x63, 0x63, 0x63, 0x63, 0x3F, 0x3F
+        3F 3F
+   00C0 FA 43               209 	.db	-6,0x43
+   00C2 02                  210 	.db	2
+   00C3 7F 7F               211 	.db	0x7F, 0x7F
+   00C5 F8 43               212 	.db	-8,0x43
+   00C7 02                  213 	.db	2
+   00C8 3C 3C               214 	.db	0x3C, 0x3C
+   00CA F4 18               215 	.db	-12,0x18
+   00CC 04                  216 	.db	4
+   00CD 3C 3C 0F 0F         217 	.db	0x3C, 0x3C, 0x0F, 0x0F
+   00D1 F8 06               218 	.db	-8,0x06
+   00D3 16                  219 	.db	22
+   00D4 36 36 36 36 1C 1C   220 	.db	0x36, 0x36, 0x36, 0x36, 0x1C, 0x1C, 0x66, 0x66
+        66 66
+   00DC 6C 6C 78 78 70 70   221 	.db	0x6C, 0x6C, 0x78, 0x78, 0x70, 0x70, 0x78, 0x78
+        78 78
+   00E4 6C 6C 66 66 63 63   222 	.db	0x6C, 0x6C, 0x66, 0x66, 0x63, 0x63
+   00EA F2 60               223 	.db	-14,0x60
+   00EC 0A                  224 	.db	10
+   00ED 7F 7F 63 63 77 77   225 	.db	0x7F, 0x7F, 0x63, 0x63, 0x77, 0x77, 0x7F, 0x7F
+        7F 7F
+   00F5 6B 6B               226 	.db	0x6B, 0x6B
+   00F7 F8 63               227 	.db	-8,0x63
+   00F9 12                  228 	.db	18
+   00FA 43 43 63 63 73 73   229 	.db	0x43, 0x43, 0x63, 0x63, 0x73, 0x73, 0x7B, 0x7B
+        7B 7B
+   0102 5F 5F 4F 4F 47 47   230 	.db	0x5F, 0x5F, 0x4F, 0x4F, 0x47, 0x47, 0x43, 0x43
+        43 43
+   010A 3E 3E               231 	.db	0x3E, 0x3E
+   010C F4 63               232 	.db	-12,0x63
+   010E 04                  233 	.db	4
+   010F 3E 3E 7E 7E         234 	.db	0x3E, 0x3E, 0x7E, 0x7E
+   0113 FA 63               235 	.db	-6,0x63
+   0115 02                  236 	.db	2
+   0116 7E 7E               237 	.db	0x7E, 0x7E
+   0118 FA 60               238 	.db	-6,0x60
+   011A 02                  239 	.db	2
+   011B 3E 3E               240 	.db	0x3E, 0x3E
+   011D F8 61               241 	.db	-8,0x61
+   011F 08                  242 	.db	8
+   0120 65 65 62 62 3D 3D   243 	.db	0x65, 0x65, 0x62, 0x62, 0x3D, 0x3D, 0x7E, 0x7E
+        7E 7E
+   0128 FA 63               244 	.db	-6,0x63
+   012A 1A                  245 	.db	26
+   012B 7E 7E 64 64 66 66   246 	.db	0x7E, 0x7E, 0x64, 0x64, 0x66, 0x66, 0x63, 0x63
+        63 63
+   0133 3E 3E 60 60 60 60   247 	.db	0x3E, 0x3E, 0x60, 0x60, 0x60, 0x60, 0x3E, 0x3E
+        3E 3E
+   013B 07 07 07 07 67 67   248 	.db	0x07, 0x07, 0x07, 0x07, 0x67, 0x67, 0x3E, 0x3E
+        3E 3E
+   0143 7E 7E               249 	.db	0x7E, 0x7E
+   0145 F2 18               250 	.db	-14,0x18
+   0147 F4 43               251 	.db	-12,0x43
+   0149 04                  252 	.db	4
+   014A 47 47 3E 3E         253 	.db	0x47, 0x47, 0x3E, 0x3E
+   014E F4 43               254 	.db	-12,0x43
+   0150 04                  255 	.db	4
+   0151 26 26 1C 1C         256 	.db	0x26, 0x26, 0x1C, 0x1C
+   0155 F8 63               257 	.db	-8,0x63
+   0157 1E                  258 	.db	30
+   0158 6B 6B 7F 7F 77 77   259 	.db	0x6B, 0x6B, 0x7F, 0x7F, 0x77, 0x77, 0x63, 0x63
+        63 63
+   0160 83 83 46 46 2C 2C   260 	.db	0x83, 0x83, 0x46, 0x46, 0x2C, 0x2C, 0x18, 0x18
+        18 18
+   0168 38 38 64 64 C2 C2   261 	.db	0x38, 0x38, 0x64, 0x64, 0xC2, 0xC2, 0x81, 0x81
+        81 81
+   0170 66 66 66 66 3C 3C   262 	.db	0x66, 0x66, 0x66, 0x66, 0x3C, 0x3C
+   0176 F6 18               263 	.db	-10,0x18
+   0178 24                  264 	.db	36
+   0179 7F 7F 03 03 07 07   265 	.db	0x7F, 0x7F, 0x03, 0x03, 0x07, 0x07, 0x0E, 0x0E
+        0E 0E
+   0181 1C 1C 38 38 7F 7F   266 	.db	0x1C, 0x1C, 0x38, 0x38, 0x7F, 0x7F, 0x7F, 0x7F
+        7F 7F
+   0189 3C 3C 66 66 66 66   267 	.db	0x3C, 0x3C, 0x66, 0x66, 0x66, 0x66, 0x6E, 0x6E
+        6E 6E
+   0191 76 76 66 66 66 66   268 	.db	0x76, 0x76, 0x66, 0x66, 0x66, 0x66, 0x3C, 0x3C
+        3C 3C
+   0199 18 18 38 38         269 	.db	0x18, 0x18, 0x38, 0x38
+   019D F6 18               270 	.db	-10,0x18
+   019F 26                  271 	.db	38
+   01A0 3C 3C 3C 3C 4E 4E   272 	.db	0x3C, 0x3C, 0x3C, 0x3C, 0x4E, 0x4E, 0x0E, 0x0E
+        0E 0E
+   01A8 0C 0C 38 38 70 70   273 	.db	0x0C, 0x0C, 0x38, 0x38, 0x70, 0x70, 0x7E, 0x7E
+        7E 7E
+   01B0 7E 7E 7C 7C 0E 0E   274 	.db	0x7E, 0x7E, 0x7C, 0x7C, 0x0E, 0x0E, 0x0E, 0x0E
+        0E 0E
+   01B8 3C 3C 0C 0C 0E 0E   275 	.db	0x3C, 0x3C, 0x0C, 0x0C, 0x0E, 0x0E, 0x0E, 0x0E
+        0E 0E
+   01C0 7C 7C 3C 3C 6C 6C   276 	.db	0x7C, 0x7C, 0x3C, 0x3C, 0x6C, 0x6C
+   01C6 FA 4C               277 	.db	-6,0x4C
+   01C8 1E                  278 	.db	30
+   01C9 7E 7E 0C 0C 0C 0C   279 	.db	0x7E, 0x7E, 0x0C, 0x0C, 0x0C, 0x0C, 0x7C, 0x7C
+        7C 7C
+   01D1 60 60 60 60 7C 7C   280 	.db	0x60, 0x60, 0x60, 0x60, 0x7C, 0x7C, 0x0E, 0x0E
+        0E 0E
+   01D9 0E 0E 4E 4E 3C 3C   281 	.db	0x0E, 0x0E, 0x4E, 0x4E, 0x3C, 0x3C, 0x3C, 0x3C
+        3C 3C
+   01E1 60 60 60 60 7C 7C   282 	.db	0x60, 0x60, 0x60, 0x60, 0x7C, 0x7C
+   01E7 FA 66               283 	.db	-6,0x66
+   01E9 0E                  284 	.db	14
+   01EA 3C 3C 7E 7E 06 06   285 	.db	0x3C, 0x3C, 0x7E, 0x7E, 0x06, 0x06, 0x06, 0x06
+        06 06
+   01F2 0C 0C 0C 0C 1C 1C   286 	.db	0x0C, 0x0C, 0x0C, 0x0C, 0x1C, 0x1C
+   01F8 FA 3C               287 	.db	-6,0x3C
+   01FA 06                  288 	.db	6
+   01FB 4E 4E 4E 4E 3C 3C   289 	.db	0x4E, 0x4E, 0x4E, 0x4E, 0x3C, 0x3C
+   0201 FA 4E               290 	.db	-6,0x4E
+   0203 0A                  291 	.db	10
+   0204 3C 3C 3C 3C 4E 4E   292 	.db	0x3C, 0x3C, 0x3C, 0x3C, 0x4E, 0x4E, 0x4E, 0x4E
+        4E 4E
+   020C 3E 3E               293 	.db	0x3E, 0x3E
+   020E FA 0E               294 	.db	-6,0x0E
+   0210 02                  295 	.db	2
+   0211 38 38               296 	.db	0x38, 0x38
+   0213 F4 00               297 	.db	-12,0x00
+   0215 04                  298 	.db	4
+   0216 18 18 18 18         299 	.db	0x18, 0x18, 0x18, 0x18
+   021A F8 00               300 	.db	-8,0x00
+   021C 28                  301 	.db	40
+   021D 18 18 18 18 08 08   302 	.db	0x18, 0x18, 0x18, 0x18, 0x08, 0x08, 0x10, 0x10
+        10 10
+   0225 00 00 18 18 18 18   303 	.db	0x00, 0x00, 0x18, 0x18, 0x18, 0x18, 0x00, 0x00
+        00 00
+   022D 18 18 18 18 08 08   304 	.db	0x18, 0x18, 0x18, 0x18, 0x08, 0x08, 0x10, 0x10
+        10 10
+   0235 01 01 03 03 06 06   305 	.db	0x01, 0x01, 0x03, 0x03, 0x06, 0x06, 0x0C, 0x0C
+        0C 0C
+   023D 18 18 30 30 60 60   306 	.db	0x18, 0x18, 0x30, 0x30, 0x60, 0x60, 0x40, 0x40
+        40 40
+   0245 EE 00               307 	.db	-18,0x00
+   0247 14                  308 	.db	20
+   0248 C0 C0 F0 F0 FC FC   309 	.db	0xC0, 0xC0, 0xF0, 0xF0, 0xFC, 0xFC, 0xFC, 0xFC
+        FC FC
+   0250 F0 F0 C0 C0 00 00   310 	.db	0xF0, 0xF0, 0xC0, 0xC0, 0x00, 0x00, 0x0C, 0x0C
+        0C 0C
+   0258 0C 0C 04 04         311 	.db	0x0C, 0x0C, 0x04, 0x04
+   025C F4 00               312 	.db	-12,0x00
+   025E F6 18               313 	.db	-10,0x18
+   0260 0A                  314 	.db	10
+   0261 00 00 18 18 36 36   315 	.db	0x00, 0x00, 0x18, 0x18, 0x36, 0x36, 0x36, 0x36
+        36 36
+   0269 12 12               316 	.db	0x12, 0x12
+   026B F6 00               317 	.db	-10,0x00
+   026D 10                  318 	.db	16
+   026E 3C 3C 46 46 06 06   319 	.db	0x3C, 0x3C, 0x46, 0x46, 0x06, 0x06, 0x06, 0x06
+        06 06
+   0276 1C 1C 18 18 00 00   320 	.db	0x1C, 0x1C, 0x18, 0x18, 0x00, 0x00, 0x18, 0x18
+        18 18
+   027E 00                  321 	.db	0
+                            322 ;	asakawa_battle.c 26
+                            323 ;	asakawa_battle.c 252
+                            324 ;	genArrayInit
+                            325 ; _saveRegsForCall: sendSetSize: 0 deInUse: 0 bcInUse: 0 deSending: 0
+   027F 21 48 04            326 	ld	hl,#_chain_border_tiles
+   0282 CD 00 00            327 	call	__initrleblock
+   0285 F0 00               328 	.db	-16,0x00
+   0287 7F                  329 	.db	127
+   0288 18 18 7E 7E DB DB   330 	.db	0x18, 0x18, 0x7E, 0x7E, 0xDB, 0xDB, 0xC3, 0xC3
+        C3 C3
+   0290 C3 C3 DB DB 7E 7E   331 	.db	0xC3, 0xC3, 0xDB, 0xDB, 0x7E, 0x7E, 0x18, 0x18
+        18 18
+   0298 3C 3C 7E 7E 43 43   332 	.db	0x3C, 0x3C, 0x7E, 0x7E, 0x43, 0x43, 0xE3, 0xE3
+        E3 E3
+   02A0 E3 E3 5B 5B 7E 7E   333 	.db	0xE3, 0xE3, 0x5B, 0x5B, 0x7E, 0x7E, 0x18, 0x18
+        18 18
+   02A8 18 18 7E 7E 5B 5B   334 	.db	0x18, 0x18, 0x7E, 0x7E, 0x5B, 0x5B, 0xE3, 0xE3
+        E3 E3
+   02B0 E3 E3 43 43 7E 7E   335 	.db	0xE3, 0xE3, 0x43, 0x43, 0x7E, 0x7E, 0x3C, 0x3C
+        3C 3C
+   02B8 3C 3C 7E 7E C2 C2   336 	.db	0x3C, 0x3C, 0x7E, 0x7E, 0xC2, 0xC2, 0xC7, 0xC7
+        C7 C7
+   02C0 C7 C7 DA DA 7E 7E   337 	.db	0xC7, 0xC7, 0xDA, 0xDA, 0x7E, 0x7E, 0x18, 0x18
+        18 18
+   02C8 18 18 7E 7E DA DA   338 	.db	0x18, 0x18, 0x7E, 0x7E, 0xDA, 0xDA, 0xC7, 0xC7
+        C7 C7
+   02D0 C7 C7 C2 C2 7E 7E   339 	.db	0xC7, 0xC7, 0xC2, 0xC2, 0x7E, 0x7E, 0x3C, 0x3C
+        3C 3C
+   02D8 3C 3C 7E 7E 42 42   340 	.db	0x3C, 0x3C, 0x7E, 0x7E, 0x42, 0x42, 0xE7, 0xE7
+        E7 E7
+   02E0 E7 E7 42 42 7E 7E   341 	.db	0xE7, 0xE7, 0x42, 0x42, 0x7E, 0x7E, 0x3C, 0x3C
+        3C 3C
+   02E8 7E 7E 81 81 99 99   342 	.db	0x7E, 0x7E, 0x81, 0x81, 0x99, 0x99, 0xA5, 0xA5
+        A5 A5
+   02F0 BD BD A5 A5 81 81   343 	.db	0xBD, 0xBD, 0xA5, 0xA5, 0x81, 0x81, 0x7E, 0x7E
+        7E 7E
+   02F8 04 04 06 06 7D 7D   344 	.db	0x04, 0x04, 0x06, 0x06, 0x7D, 0x7D, 0x40, 0x40
+        40 40
+   0300 40 40 7D 7D 06 06   345 	.db	0x40, 0x40, 0x7D, 0x7D, 0x06, 0x06, 0x04
+        04
+   0307 01                  346 	.db	1
+   0308 04                  347 	.db	0x04
+   0309 FA 00               348 	.db	-6,0x00
+   030B 04                  349 	.db	4
+   030C 80 80 80 80         350 	.db	0x80, 0x80, 0x80, 0x80
+   0310 FA 00               351 	.db	-6,0x00
+   0312 00                  352 	.db	0
+                            353 ;	asakawa_battle.c 25
+                            354 ;	asakawa_battle.c 252
+                            355 ;	genArrayInit
+                            356 ; _saveRegsForCall: sendSetSize: 0 deInUse: 0 bcInUse: 0 deSending: 0
+   0313 21 E8 04            357 	ld	hl,#_small_chain_border
+   0316 CD 00 00            358 	call	__initrleblock
+   0319 01                  359 	.db	1
+   031A 04                  360 	.db	0x04
+   031B F8 06               361 	.db	-8,0x06
+   031D 01                  362 	.db	1
+   031E 02                  363 	.db	0x02
+   031F F7 06               364 	.db	-9,0x06
+   0321 02                  365 	.db	2
+   0322 02 01               366 	.db	0x02, 0x01
+   0324 F8 00               367 	.db	-8,0x00
+   0326 01                  368 	.db	1
+   0327 01                  369 	.db	0x01
+   0328 F7 00               370 	.db	-9,0x00
+   032A 02                  371 	.db	2
+   032B 01 01               372 	.db	0x01, 0x01
+   032D F8 00               373 	.db	-8,0x00
+   032F 01                  374 	.db	1
+   0330 01                  375 	.db	0x01
+   0331 F7 00               376 	.db	-9,0x00
+   0333 02                  377 	.db	2
+   0334 01 01               378 	.db	0x01, 0x01
+   0336 F8 00               379 	.db	-8,0x00
+   0338 01                  380 	.db	1
+   0339 01                  381 	.db	0x01
+   033A F7 00               382 	.db	-9,0x00
+   033C 02                  383 	.db	2
+   033D 01 01               384 	.db	0x01, 0x01
+   033F F8 00               385 	.db	-8,0x00
+   0341 01                  386 	.db	1
+   0342 01                  387 	.db	0x01
+   0343 F7 00               388 	.db	-9,0x00
+   0345 02                  389 	.db	2
+   0346 01 01               390 	.db	0x01, 0x01
+   0348 F8 00               391 	.db	-8,0x00
+   034A 01                  392 	.db	1
+   034B 01                  393 	.db	0x01
+   034C F7 00               394 	.db	-9,0x00
+   034E 02                  395 	.db	2
+   034F 01 01               396 	.db	0x01, 0x01
+   0351 F8 00               397 	.db	-8,0x00
+   0353 01                  398 	.db	1
+   0354 01                  399 	.db	0x01
+   0355 F7 00               400 	.db	-9,0x00
+   0357 02                  401 	.db	2
+   0358 01 01               402 	.db	0x01, 0x01
+   035A F8 00               403 	.db	-8,0x00
+   035C 01                  404 	.db	1
+   035D 01                  405 	.db	0x01
+   035E F7 00               406 	.db	-9,0x00
+   0360 02                  407 	.db	2
+   0361 01 01               408 	.db	0x01, 0x01
+   0363 F8 00               409 	.db	-8,0x00
+   0365 01                  410 	.db	1
+   0366 01                  411 	.db	0x01
+   0367 F7 00               412 	.db	-9,0x00
+   0369 02                  413 	.db	2
+   036A 01 01               414 	.db	0x01, 0x01
+   036C F8 00               415 	.db	-8,0x00
+   036E 01                  416 	.db	1
+   036F 01                  417 	.db	0x01
+   0370 F7 00               418 	.db	-9,0x00
+   0372 02                  419 	.db	2
+   0373 01 01               420 	.db	0x01, 0x01
+   0375 F8 00               421 	.db	-8,0x00
+   0377 01                  422 	.db	1
+   0378 01                  423 	.db	0x01
+   0379 F7 00               424 	.db	-9,0x00
+   037B 02                  425 	.db	2
+   037C 01 01               426 	.db	0x01, 0x01
+   037E F8 00               427 	.db	-8,0x00
+   0380 01                  428 	.db	1
+   0381 01                  429 	.db	0x01
+   0382 F7 00               430 	.db	-9,0x00
+   0384 02                  431 	.db	2
+   0385 01 01               432 	.db	0x01, 0x01
+   0387 F8 00               433 	.db	-8,0x00
+   0389 01                  434 	.db	1
+   038A 01                  435 	.db	0x01
+   038B F7 00               436 	.db	-9,0x00
+   038D 02                  437 	.db	2
+   038E 01 01               438 	.db	0x01, 0x01
+   0390 F8 00               439 	.db	-8,0x00
+   0392 01                  440 	.db	1
+   0393 01                  441 	.db	0x01
+   0394 F7 00               442 	.db	-9,0x00
+   0396 02                  443 	.db	2
+   0397 01 01               444 	.db	0x01, 0x01
+   0399 F8 00               445 	.db	-8,0x00
+   039B 01                  446 	.db	1
+   039C 01                  447 	.db	0x01
+   039D F7 00               448 	.db	-9,0x00
+   039F 02                  449 	.db	2
+   03A0 01 01               450 	.db	0x01, 0x01
+   03A2 F8 00               451 	.db	-8,0x00
+   03A4 01                  452 	.db	1
+   03A5 01                  453 	.db	0x01
+   03A6 F7 00               454 	.db	-9,0x00
+   03A8 02                  455 	.db	2
+   03A9 01 01               456 	.db	0x01, 0x01
+   03AB F8 00               457 	.db	-8,0x00
+   03AD 01                  458 	.db	1
+   03AE 01                  459 	.db	0x01
+   03AF F7 00               460 	.db	-9,0x00
+   03B1 02                  461 	.db	2
+   03B2 01 05               462 	.db	0x01, 0x05
+   03B4 F8 06               463 	.db	-8,0x06
+   03B6 01                  464 	.db	1
+   03B7 03                  465 	.db	0x03
+   03B8 F7 06               466 	.db	-9,0x06
+   03BA 01                  467 	.db	1
+   03BB 03                  468 	.db	0x03
+   03BC 00                  469 	.db	0
+                            470 ;	asakawa_battle.c 26
+                            471 ;	asakawa_battle.c 252
+                            472 ;	genArrayInit
+                            473 ; _saveRegsForCall: sendSetSize: 0 deInUse: 0 bcInUse: 0 deSending: 0
+   03BD 21 50 06            474 	ld	hl,#_asakawa_front_idle
+   03C0 CD 00 00            475 	call	__initrleblock
+   03C3 7F                  476 	.db	127
+   03C4 0F 0F 1F 1F 1F 11   477 	.db	0x0F, 0x0F, 0x1F, 0x1F, 0x1F, 0x11, 0x1F, 0x04
+        1F 04
+   03CC 1F 00 0F 00 0F 00   478 	.db	0x1F, 0x00, 0x0F, 0x00, 0x0F, 0x00, 0x03, 0x03
+        03 03
+   03D4 01 1D 00 1F 00 1F   479 	.db	0x01, 0x1D, 0x00, 0x1F, 0x00, 0x1F, 0x00, 0x1F
+        00 1F
+   03DC 30 0F 30 0F 00 0F   480 	.db	0x30, 0x0F, 0x30, 0x0F, 0x00, 0x0F, 0x1F, 0x1F
+        1F 1F
+   03E4 F0 F1 F8 FB F8 8A   481 	.db	0xF0, 0xF1, 0xF8, 0xFB, 0xF8, 0x8A, 0xF8, 0x21
+        F8 21
+   03EC F8 01 02 FC F0 00   482 	.db	0xF8, 0x01, 0x02, 0xFC, 0xF0, 0x00, 0xC0, 0xC0
+        C0 C0
+   03F4 80 B8 00 F8 00 F8   483 	.db	0x80, 0xB8, 0x00, 0xF8, 0x00, 0xF8, 0x00, 0xF8
+        00 F8
+   03FC 0C F0 0C F0 00 F0   484 	.db	0x0C, 0xF0, 0x0C, 0xF0, 0x00, 0xF0, 0xF8, 0xF8
+        F8 F8
+   0404 0F 8F 1F DF 1F 51   485 	.db	0x0F, 0x8F, 0x1F, 0xDF, 0x1F, 0x51, 0x1F, 0x84
+        1F 84
+   040C 1F 80 40 3F 0F 00   486 	.db	0x1F, 0x80, 0x40, 0x3F, 0x0F, 0x00, 0x03, 0x1F
+        03 1F
+   0414 01 1D 00 1F 00 1F   487 	.db	0x01, 0x1D, 0x00, 0x1F, 0x00, 0x1F, 0x30, 0x0F
+        30 0F
+   041C 30 0F 00 0F 00 0F   488 	.db	0x30, 0x0F, 0x00, 0x0F, 0x00, 0x0F, 0x1F, 0x1F
+        1F 1F
+   0424 F0 F0 F8 F8 F8 88   489 	.db	0xF0, 0xF0, 0xF8, 0xF8, 0xF8, 0x88, 0xF8, 0x20
+        F8 20
+   042C F8 00 F0 00 F0 00   490 	.db	0xF8, 0x00, 0xF0, 0x00, 0xF0, 0x00, 0xC0, 0xF8
+        C0 F8
+   0434 80 B8 00 F8 00 F8   491 	.db	0x80, 0xB8, 0x00, 0xF8, 0x00, 0xF8, 0x0C, 0xF0
+        0C F0
+   043C 0C F0 00 F0 00 F0   492 	.db	0x0C, 0xF0, 0x00, 0xF0, 0x00, 0xF0, 0xF8
+        F8
+   0443 01                  493 	.db	1
+   0444 F8                  494 	.db	0xF8
+   0445 00                  495 	.db	0
+                            496 ;	asakawa_battle.c 26
+                            497 ;	asakawa_battle.c 252
+                            498 ;	genArrayInit
+                            499 ; _saveRegsForCall: sendSetSize: 0 deInUse: 0 bcInUse: 0 deSending: 0
+   0446 21 D0 06            500 	ld	hl,#_hero_back_idle
+   0449 CD 00 00            501 	call	__initrleblock
+   044C FB 0F               502 	.db	-5,0x0F
+   044E 01                  503 	.db	1
+   044F 00                  504 	.db	0x00
+   0450 FA 0F               505 	.db	-6,0x0F
+   0452 14                  506 	.db	20
+   0453 07 07 1F 00 1F 00   507 	.db	0x07, 0x07, 0x1F, 0x00, 0x1F, 0x00, 0x0F, 0x10
+        0F 10
+   045B 0F 10 0F 10 0F 3F   508 	.db	0x0F, 0x10, 0x0F, 0x10, 0x0F, 0x3F, 0x0F, 0x30
+        0F 30
+   0463 0F 00 1F 1F         509 	.db	0x0F, 0x00, 0x1F, 0x1F
+   0467 FB F0               510 	.db	-5,0xF0
+   0469 01                  511 	.db	1
+   046A 00                  512 	.db	0x00
+   046B FA F0               513 	.db	-6,0xF0
+   046D 14                  514 	.db	20
+   046E E0 E0 F8 00 F8 00   515 	.db	0xE0, 0xE0, 0xF8, 0x00, 0xF8, 0x00, 0xF0, 0x08
+        F0 08
+   0476 F0 08 F0 08 F8 FC   516 	.db	0xF0, 0x08, 0xF0, 0x08, 0xF8, 0xFC, 0xF0, 0x1C
+        F0 1C
+   047E F0 00 F8 F8         517 	.db	0xF0, 0x00, 0xF8, 0xF8
+   0482 FB 0F               518 	.db	-5,0x0F
+   0484 01                  519 	.db	1
+   0485 00                  520 	.db	0x00
+   0486 FA 0F               521 	.db	-6,0x0F
+   0488 14                  522 	.db	20
+   0489 1F 07 1F 00 0F 10   523 	.db	0x1F, 0x07, 0x1F, 0x00, 0x0F, 0x10, 0x0F, 0x10
+        0F 10
+   0491 0F 10 0F 3F 0F 30   524 	.db	0x0F, 0x10, 0x0F, 0x3F, 0x0F, 0x30, 0x0F, 0x00
+        0F 00
+   0499 0F 00 1F 1F         525 	.db	0x0F, 0x00, 0x1F, 0x1F
+   049D FB F0               526 	.db	-5,0xF0
+   049F 01                  527 	.db	1
+   04A0 00                  528 	.db	0x00
+   04A1 FA F0               529 	.db	-6,0xF0
+   04A3 14                  530 	.db	20
+   04A4 F8 E0 F8 00 F0 08   531 	.db	0xF8, 0xE0, 0xF8, 0x00, 0xF0, 0x08, 0xF0, 0x08
+        F0 08
+   04AC F0 08 F8 FC F0 1C   532 	.db	0xF0, 0x08, 0xF8, 0xFC, 0xF0, 0x1C, 0xF0, 0x00
+        F0 00
+   04B4 F0 00 F8 F8         533 	.db	0xF0, 0x00, 0xF8, 0xF8
+   04B8 00                  534 	.db	0
+                            535 ;	asakawa_battle.c 25
+                            536 ;	asakawa_battle.c 252
+                            537 ;	genArrayInit
+                            538 ; _saveRegsForCall: sendSetSize: 0 deInUse: 0 bcInUse: 0 deSending: 0
+   04B9 21 50 07            539 	ld	hl,#_blank_screen
+   04BC CD 00 00            540 	call	__initrleblock
+   04BF 81 00               541 	.db	-127,0x00
+   04C1 81 00               542 	.db	-127,0x00
+   04C3 96 00               543 	.db	-106,0x00
+   04C5 00                  544 	.db	0
+                            545 ;	asakawa_battle.c 26
+                            546 ;	asakawa_battle.c 252
+                            547 ;	genArrayInit
+                            548 ; _saveRegsForCall: sendSetSize: 0 deInUse: 0 bcInUse: 0 deSending: 0
+   04C6 21 B8 08            549 	ld	hl,#_blank_screen_tiles
+   04C9 CD 00 00            550 	call	__initrleblock
+   04CC F0 00               551 	.db	-16,0x00
+   04CE 1F                  552 	.db	31
+   04CF FF 00 FF 00 FF 00   553 	.db	0xFF, 0x00, 0xFF, 0x00, 0xFF, 0x00, 0xFF, 0x00
+        FF 00
+   04D7 FF 00 FF 00 FF 00   554 	.db	0xFF, 0x00, 0xFF, 0x00, 0xFF, 0x00, 0xFF, 0x00
+        FF 00
+   04DF 00 FF 00 FF 00 FF   555 	.db	0x00, 0xFF, 0x00, 0xFF, 0x00, 0xFF, 0x00, 0xFF
+        00 FF
+   04E7 00 FF 00 FF 00 FF   556 	.db	0x00, 0xFF, 0x00, 0xFF, 0x00, 0xFF, 0x00
+        00
+   04EE EF FF               557 	.db	-17,0xFF
+   04F0 00                  558 	.db	0
+                            559 ;	asakawa_battle.c 27
+                            560 ;	genAssign
+                            561 ;	AOP_HL for _ASAKAWA_HP
+   04F1 21 F8 08            562 	ld	hl,#_ASAKAWA_HP
+   04F4 36 64               563 	ld	(hl),#0x64
+                            564 ;	asakawa_battle.c 29
+                            565 ;	genAssign
+                            566 ;	AOP_HL for _HERO_HP
+   04F6 21 F9 08            567 	ld	hl,#_HERO_HP
+   04F9 36 0A               568 	ld	(hl),#0x0A
+                            569 ;	asakawa_battle.c 38
+                            570 ;	genAssign
+                            571 ;	AOP_HL for _choice
+   04FB 21 02 09            572 	ld	hl,#_choice
+   04FE 36 00               573 	ld	(hl),#0x00
+                            574 ;	asakawa_battle.c 39
+                            575 ;	genAssign
+                            576 ;	AOP_HL for _enemy_choice
+   0500 21 03 09            577 	ld	hl,#_enemy_choice
+   0503 36 00               578 	ld	(hl),#0x00
+                            579 ;	asakawa_battle.c 42
+                            580 ;	genAssign
+                            581 ;	AOP_HL for _y
+   0505 21 04 09            582 	ld	hl,#_y
+   0508 36 48               583 	ld	(hl),#0x48
+                            584 ;	asakawa_battle.c 44
+                            585 ;	genAssign
+                            586 ;	AOP_HL for _a
+   050A 21 05 09            587 	ld	hl,#_a
+   050D 36 00               588 	ld	(hl),#0x00
+                            589 ;	asakawa_battle.c 31
+                            590 ;	genAssign
+                            591 ;	AOP_HL for _arrow_x
+   050F 21 0E 09            592 	ld	hl,#_arrow_x
+   0512 36 12               593 	ld	(hl),#0x12
+                            594 ;	asakawa_battle.c 32
+                            595 ;	genAssign
+                            596 ;	AOP_HL for _arrow_y
+   0514 21 0F 09            597 	ld	hl,#_arrow_y
+   0517 36 20               598 	ld	(hl),#0x20
+                            599 ;	asakawa_battle.c 34
+                            600 ;	genAssign
+                            601 ;	AOP_HL for _state
+   0519 21 10 09            602 	ld	hl,#_state
+   051C 36 00               603 	ld	(hl),#0x00
+                            604 ;--------------------------------------------------------
+                            605 ; Home
+                            606 ;--------------------------------------------------------
+                            607 	.area _HOME
+                            608 	.area _CODE
+                            609 ;--------------------------------------------------------
+                            610 ; code
+                            611 ;--------------------------------------------------------
+                            612 	.area _CODE
+                            613 ;	asakawa_battle.c 3
+                            614 ;	genLabel
+                            615 ;	genFunction
+                            616 ;	---------------------------------
+                            617 ; Function asakawa_battle_ctrl
+                            618 ; ---------------------------------
+   0000                     619 ___asakawa_battle_ctrl_start:
+   0000                     620 _asakawa_battle_ctrl:
+                            621 	
+                            622 ;	asakawa_battle.c 5
+                            623 ;	genLabel
+   0000                     624 00105$:
+                            625 ;	asakawa_battle.c 7
+                            626 ;	genCall
+                            627 ; _saveRegsForCall: sendSetSize: 0 deInUse: 0 bcInUse: 0 deSending: 0
+   0000 CD 00 00            628 	call	_wait_vbl_done
+                            629 ;	asakawa_battle.c 8
+                            630 ;	genCall
+                            631 ; _saveRegsForCall: sendSetSize: 0 deInUse: 0 bcInUse: 0 deSending: 0
+   0003 CD 92 03            632 	call	_asakawa_battle_check
+                            633 ;	asakawa_battle.c 9
+                            634 ;	genLabel
+   0006                     635 00101$:
+                            636 ;	genCmpEq
+                            637 ;	AOP_HL for _state
+                            638 ; genCmpEq: left 1, right 1, result 0
+   0006 21 10 09            639 	ld	hl,#_state
+   0009 7E                  640 	ld	a,(hl)
+   000A FE 04               641 	cp	a,#0x04
+   000C C2 00 00            642 	jp	nz,00105$
+   000F 18 03               643 	jr	00113$
+   0011                     644 00112$:
+   0011 C3 00 00            645 	jp	00105$
+   0014                     646 00113$:
+                            647 ;	asakawa_battle.c 12
+                            648 ;	genIpush
+                            649 ; _saveRegsForCall: sendSetSize: 0 deInUse: 0 bcInUse: 0 deSending: 0
+   0014 21 F9 08            650 	ld	hl,#_HERO_HP
+   0017 E5                  651 	push	hl
+                            652 ;	genIpush
+   0018 21 F8 08            653 	ld	hl,#_ASAKAWA_HP
+   001B E5                  654 	push	hl
+                            655 ;	genCall
+   001C CD 00 00            656 	call	_hero_fight
+   001F E8 04               657 	lda	sp,4(sp)
+                            658 ;	asakawa_battle.c 14
+                            659 ;	genIpush
+                            660 ; _saveRegsForCall: sendSetSize: 0 deInUse: 0 bcInUse: 0 deSending: 0
+   0021 21 90 01            661 	ld	hl,#0x0190
+   0024 E5                  662 	push	hl
+                            663 ;	genCall
+   0025 CD 00 00            664 	call	_delay
+   0028 E8 02               665 	lda	sp,2(sp)
+                            666 ;	asakawa_battle.c 15
+                            667 ;	genAssign
+                            668 ;	AOP_HL for _state
+   002A 21 10 09            669 	ld	hl,#_state
+   002D 36 00               670 	ld	(hl),#0x00
+                            671 ;	asakawa_battle.c 16
+                            672 ;	genCall
+                            673 ; _saveRegsForCall: sendSetSize: 0 deInUse: 0 bcInUse: 0 deSending: 0
+   002F CD A5 01            674 	call	_battle_menu
+                            675 ;	asakawa_battle.c 17
+                            676 ;	genAssign
+                            677 ;	AOP_HL for _choice
+   0032 21 02 09            678 	ld	hl,#_choice
+   0035 36 00               679 	ld	(hl),#0x00
+                            680 ;	genGoto
+   0037 C3 06 00            681 	jp	00101$
+                            682 ;	genLabel
+   003A                     683 00107$:
+                            684 ;	genEndFunction
+                            685 	
+   003A C9                  686 	ret
+   003B                     687 ___asakawa_battle_ctrl_end:
+                            688 ;	asakawa_battle.c 22
+                            689 ;	genLabel
+                            690 ;	genFunction
+                            691 ;	---------------------------------
+                            692 ; Function battle_nav
+                            693 ; ---------------------------------
+   003B                     694 ___battle_nav_start:
+   003B                     695 _battle_nav:
+                            696 	
+                            697 ;	asakawa_battle.c 24
+                            698 ;	genCmpEq
+                            699 ;	AOP_HL for _arrow_y
+                            700 ; genCmpEq: left 1, right 1, result 0
+   003B 21 0F 09            701 	ld	hl,#_arrow_y
+   003E 7E                  702 	ld	a,(hl)
+   003F FE 20               703 	cp	a,#0x20
+   0041 C2 51 00            704 	jp	nz,00102$
+   0044 18 03               705 	jr	00116$
+   0046                     706 00115$:
+   0046 C3 51 00            707 	jp	00102$
+   0049                     708 00116$:
+                            709 ;	asakawa_battle.c 26
+                            710 ;	genAssign
+                            711 ;	AOP_HL for _state
+   0049 21 10 09            712 	ld	hl,#_state
+   004C 36 01               713 	ld	(hl),#0x01
+                            714 ;	asakawa_battle.c 27
+                            715 ;	genCall
+                            716 ; _saveRegsForCall: sendSetSize: 0 deInUse: 0 bcInUse: 0 deSending: 0
+   004E CD FC 00            717 	call	_fight_opt
+                            718 ;	genLabel
+   0051                     719 00102$:
+                            720 ;	asakawa_battle.c 29
+                            721 ;	genCmpEq
+                            722 ;	AOP_HL for _arrow_y
+                            723 ; genCmpEq: left 1, right 1, result 0
+   0051 21 0F 09            724 	ld	hl,#_arrow_y
+   0054 7E                  725 	ld	a,(hl)
+   0055 FE 30               726 	cp	a,#0x30
+   0057 C2 69 00            727 	jp	nz,00104$
+   005A 18 03               728 	jr	00118$
+   005C                     729 00117$:
+   005C C3 69 00            730 	jp	00104$
+   005F                     731 00118$:
+                            732 ;	asakawa_battle.c 31
+                            733 ;	genAssign
+                            734 ;	AOP_HL for _choice
+   005F 21 02 09            735 	ld	hl,#_choice
+   0062 36 02               736 	ld	(hl),#0x02
+                            737 ;	asakawa_battle.c 32
+                            738 ;	genAssign
+                            739 ;	AOP_HL for _state
+   0064 21 10 09            740 	ld	hl,#_state
+   0067 36 04               741 	ld	(hl),#0x04
+                            742 ;	genLabel
+   0069                     743 00104$:
+                            744 ;	asakawa_battle.c 34
+                            745 ;	genCmpEq
+                            746 ;	AOP_HL for _arrow_y
+                            747 ; genCmpEq: left 1, right 1, result 0
+   0069 21 0F 09            748 	ld	hl,#_arrow_y
+   006C 7E                  749 	ld	a,(hl)
+   006D FE 40               750 	cp	a,#0x40
+   006F C2 7F 00            751 	jp	nz,00106$
+   0072 18 03               752 	jr	00120$
+   0074                     753 00119$:
+   0074 C3 7F 00            754 	jp	00106$
+   0077                     755 00120$:
+                            756 ;	asakawa_battle.c 36
+                            757 ;	genAssign
+                            758 ;	AOP_HL for _state
+   0077 21 10 09            759 	ld	hl,#_state
+   007A 36 02               760 	ld	(hl),#0x02
+                            761 ;	asakawa_battle.c 37
+                            762 ;	genCall
+                            763 ; _saveRegsForCall: sendSetSize: 0 deInUse: 0 bcInUse: 0 deSending: 0
+   007C CD 96 00            764 	call	_run
+                            765 ;	genLabel
+   007F                     766 00106$:
+                            767 ;	asakawa_battle.c 39
+                            768 ;	genCmpEq
+                            769 ;	AOP_HL for _arrow_y
+                            770 ; genCmpEq: left 1, right 1, result 0
+   007F 21 0F 09            771 	ld	hl,#_arrow_y
+   0082 7E                  772 	ld	a,(hl)
+   0083 FE 50               773 	cp	a,#0x50
+   0085 C2 95 00            774 	jp	nz,00109$
+   0088 18 03               775 	jr	00122$
+   008A                     776 00121$:
+   008A C3 95 00            777 	jp	00109$
+   008D                     778 00122$:
+                            779 ;	asakawa_battle.c 41
+                            780 ;	genAssign
+                            781 ;	AOP_HL for _state
+   008D 21 10 09            782 	ld	hl,#_state
+   0090 36 03               783 	ld	(hl),#0x03
+                            784 ;	asakawa_battle.c 42
+                            785 ;	genCall
+                            786 ; _saveRegsForCall: sendSetSize: 0 deInUse: 0 bcInUse: 0 deSending: 0
+   0092 CD 58 01            787 	call	_item_opt
+                            788 ;	genLabel
+   0095                     789 00109$:
+                            790 ;	genEndFunction
+                            791 	
+   0095 C9                  792 	ret
+   0096                     793 ___battle_nav_end:
+                            794 ;	asakawa_battle.c 46
+                            795 ;	genLabel
+                            796 ;	genFunction
+                            797 ;	---------------------------------
+                            798 ; Function run
+                            799 ; ---------------------------------
+   0096                     800 ___run_start:
+   0096                     801 _run:
+                            802 	
+                            803 ;	asakawa_battle.c 48
+                            804 ;	genCall
+                            805 ; _saveRegsForCall: sendSetSize: 0 deInUse: 0 bcInUse: 0 deSending: 0
+   0096 CD 00 00            806 	call	_sprite_clean
+                            807 ;	asakawa_battle.c 49
+                            808 ;	genCall
+                            809 ; _saveRegsForCall: sendSetSize: 0 deInUse: 0 bcInUse: 0 deSending: 0
+   0099 CD 00 00            810 	call	_battle_bkg_clean
+                            811 ;	asakawa_battle.c 50
+                            812 ;	genIpush
+                            813 ; _saveRegsForCall: sendSetSize: 0 deInUse: 0 bcInUse: 0 deSending: 0
+   009C 21 12 20            814 	ld	hl,#0x2012
+   009F E5                  815 	push	hl
+                            816 ;	genIpush
+   00A0 21 D8 00            817 	ld	hl,#__str_0
+   00A3 E5                  818 	push	hl
+                            819 ;	genCall
+   00A4 CD 00 00            820 	call	_battle_print
+   00A7 E8 04               821 	lda	sp,4(sp)
+                            822 ;	asakawa_battle.c 51
+                            823 ;	genIpush
+                            824 ; _saveRegsForCall: sendSetSize: 0 deInUse: 0 bcInUse: 0 deSending: 0
+   00A9 21 12 30            825 	ld	hl,#0x3012
+   00AC E5                  826 	push	hl
+                            827 ;	genIpush
+   00AD 21 DC 00            828 	ld	hl,#__str_1
+   00B0 E5                  829 	push	hl
+                            830 ;	genCall
+   00B1 CD 00 00            831 	call	_battle_print
+   00B4 E8 04               832 	lda	sp,4(sp)
+                            833 ;	asakawa_battle.c 52
+                            834 ;	genIpush
+                            835 ; _saveRegsForCall: sendSetSize: 0 deInUse: 0 bcInUse: 0 deSending: 0
+   00B6 21 12 40            836 	ld	hl,#0x4012
+   00B9 E5                  837 	push	hl
+                            838 ;	genIpush
+   00BA 21 E2 00            839 	ld	hl,#__str_2
+   00BD E5                  840 	push	hl
+                            841 ;	genCall
+   00BE CD 00 00            842 	call	_battle_print
+   00C1 E8 04               843 	lda	sp,4(sp)
+                            844 ;	asakawa_battle.c 53
+                            845 ;	genCall
+                            846 ; _saveRegsForCall: sendSetSize: 0 deInUse: 0 bcInUse: 0 deSending: 0
+   00C3 CD 32 02            847 	call	_show_fighter_stats
+                            848 ;	asakawa_battle.c 54
+                            849 ;	genAssign
+                            850 ;	AOP_HL for _LETTER_COUNT
+   00C6 21 00 00            851 	ld	hl,#_LETTER_COUNT
+   00C9 36 00               852 	ld	(hl),#0x00
+                            853 ;	asakawa_battle.c 55
+                            854 ;	genIpush
+                            855 ; _saveRegsForCall: sendSetSize: 0 deInUse: 0 bcInUse: 0 deSending: 0
+   00CB 21 2C 01            856 	ld	hl,#0x012C
+   00CE E5                  857 	push	hl
+                            858 ;	genCall
+   00CF CD 00 00            859 	call	_delay
+   00D2 E8 02               860 	lda	sp,2(sp)
+                            861 ;	asakawa_battle.c 56
+                            862 ;	genCall
+                            863 ; _saveRegsForCall: sendSetSize: 0 deInUse: 0 bcInUse: 0 deSending: 0
+   00D4 CD EA 00            864 	call	_back
+                            865 ;	genLabel
+   00D7                     866 00101$:
+                            867 ;	genEndFunction
+                            868 	
+   00D7 C9                  869 	ret
+   00D8                     870 ___run_end:
+   00D8                     871 __str_0:
+   00D8 79 6F 75            872 	.ascii "you"
+   00DB 00                  873 	.db 0x00
+   00DC                     874 __str_1:
+   00DC 63 61 6E 27 74      875 	.ascii "can't"
+   00E1 00                  876 	.db 0x00
+   00E2                     877 __str_2:
+   00E2 65 73 63 61 70 65   878 	.ascii "escape!"
+        21
+   00E9 00                  879 	.db 0x00
+                            880 ;	asakawa_battle.c 59
+                            881 ;	genLabel
+                            882 ;	genFunction
+                            883 ;	---------------------------------
+                            884 ; Function back
+                            885 ; ---------------------------------
+   00EA                     886 ___back_start:
+   00EA                     887 _back:
+                            888 	
+                            889 ;	asakawa_battle.c 61
+                            890 ;	genCmpLt
+                            891 ;	AOP_HL for _state
+   00EA 21 10 09            892 	ld	hl,#_state
+   00ED 7E                  893 	ld	a,(hl)
+   00EE FE 04               894 	cp	#0x04
+   00F0 D2 FB 00            895 	jp	nc,00103$
+                            896 ;	asakawa_battle.c 63
+                            897 ;	genCall
+                            898 ; _saveRegsForCall: sendSetSize: 0 deInUse: 0 bcInUse: 0 deSending: 0
+   00F3 CD A5 01            899 	call	_battle_menu
+                            900 ;	asakawa_battle.c 64
+                            901 ;	genAssign
+                            902 ;	AOP_HL for _state
+   00F6 21 10 09            903 	ld	hl,#_state
+   00F9 36 00               904 	ld	(hl),#0x00
+                            905 ;	genLabel
+   00FB                     906 00103$:
+                            907 ;	genEndFunction
+                            908 	
+   00FB C9                  909 	ret
+   00FC                     910 ___back_end:
+                            911 ;	asakawa_battle.c 68
+                            912 ;	genLabel
+                            913 ;	genFunction
+                            914 ;	---------------------------------
+                            915 ; Function fight_opt
+                            916 ; ---------------------------------
+   00FC                     917 ___fight_opt_start:
+   00FC                     918 _fight_opt:
+                            919 	
+                            920 ;	asakawa_battle.c 70
+                            921 ;	genCall
+                            922 ; _saveRegsForCall: sendSetSize: 0 deInUse: 0 bcInUse: 0 deSending: 0
+   00FC CD 00 00            923 	call	_sprite_clean
+                            924 ;	asakawa_battle.c 71
+                            925 ;	genCall
+                            926 ; _saveRegsForCall: sendSetSize: 0 deInUse: 0 bcInUse: 0 deSending: 0
+   00FF CD 00 00            927 	call	_battle_bkg_clean
+                            928 ;	asakawa_battle.c 72
+                            929 ;	genIpush
+                            930 ; _saveRegsForCall: sendSetSize: 0 deInUse: 0 bcInUse: 0 deSending: 0
+   0102 21 12 20            931 	ld	hl,#0x2012
+   0105 E5                  932 	push	hl
+                            933 ;	genIpush
+   0106 21 3F 01            934 	ld	hl,#__str_3
+   0109 E5                  935 	push	hl
+                            936 ;	genCall
+   010A CD 00 00            937 	call	_battle_print
+   010D E8 04               938 	lda	sp,4(sp)
+                            939 ;	asakawa_battle.c 73
+                            940 ;	genIpush
+                            941 ; _saveRegsForCall: sendSetSize: 0 deInUse: 0 bcInUse: 0 deSending: 0
+   010F 21 12 20            942 	ld	hl,#0x2012
+   0112 E5                  943 	push	hl
+                            944 ;	genIpush
+   0113 21 41 01            945 	ld	hl,#__str_4
+   0116 E5                  946 	push	hl
+                            947 ;	genCall
+   0117 CD 00 00            948 	call	_battle_print
+   011A E8 04               949 	lda	sp,4(sp)
+                            950 ;	asakawa_battle.c 74
+                            951 ;	genIpush
+                            952 ; _saveRegsForCall: sendSetSize: 0 deInUse: 0 bcInUse: 0 deSending: 0
+   011C 21 10 82            953 	ld	hl,#0x8210
+   011F E5                  954 	push	hl
+                            955 ;	genIpush
+   0120 21 48 01            956 	ld	hl,#__str_5
+   0123 E5                  957 	push	hl
+                            958 ;	genCall
+   0124 CD 00 00            959 	call	_battle_print
+   0127 E8 04               960 	lda	sp,4(sp)
+                            961 ;	asakawa_battle.c 75
+                            962 ;	genIpush
+                            963 ; _saveRegsForCall: sendSetSize: 0 deInUse: 0 bcInUse: 0 deSending: 0
+   0129 21 10 8E            964 	ld	hl,#0x8E10
+   012C E5                  965 	push	hl
+                            966 ;	genIpush
+   012D 21 51 01            967 	ld	hl,#__str_6
+   0130 E5                  968 	push	hl
+                            969 ;	genCall
+   0131 CD 00 00            970 	call	_battle_print
+   0134 E8 04               971 	lda	sp,4(sp)
+                            972 ;	asakawa_battle.c 76
+                            973 ;	genCall
+                            974 ; _saveRegsForCall: sendSetSize: 0 deInUse: 0 bcInUse: 0 deSending: 0
+   0136 CD 32 02            975 	call	_show_fighter_stats
+                            976 ;	asakawa_battle.c 77
+                            977 ;	genAssign
+                            978 ;	AOP_HL for _LETTER_COUNT
+   0139 21 00 00            979 	ld	hl,#_LETTER_COUNT
+   013C 36 00               980 	ld	(hl),#0x00
+                            981 ;	genLabel
+   013E                     982 00101$:
+                            983 ;	genEndFunction
+                            984 	
+   013E C9                  985 	ret
+   013F                     986 ___fight_opt_end:
+   013F                     987 __str_3:
+   013F 3E                  988 	.ascii ">"
+   0140 00                  989 	.db 0x00
+   0141                     990 __str_4:
+   0141 20 70 75 6E 63 68   991 	.ascii " punch"
+   0147 00                  992 	.db 0x00
+   0148                     993 __str_5:
+   0148 61 20 73 65 6C 65   994 	.ascii "a select"
+        63 74
+   0150 00                  995 	.db 0x00
+   0151                     996 __str_6:
+   0151 62 20 62 61 63 6B   997 	.ascii "b back"
+   0157 00                  998 	.db 0x00
+                            999 ;	asakawa_battle.c 80
+                           1000 ;	genLabel
+                           1001 ;	genFunction
+                           1002 ;	---------------------------------
+                           1003 ; Function item_opt
+                           1004 ; ---------------------------------
+   0158                    1005 ___item_opt_start:
+   0158                    1006 _item_opt:
+                           1007 	
+                           1008 ;	asakawa_battle.c 82
+                           1009 ;	genCall
+                           1010 ; _saveRegsForCall: sendSetSize: 0 deInUse: 0 bcInUse: 0 deSending: 0
+   0158 CD 00 00           1011 	call	_sprite_clean
+                           1012 ;	asakawa_battle.c 83
+                           1013 ;	genCall
+                           1014 ; _saveRegsForCall: sendSetSize: 0 deInUse: 0 bcInUse: 0 deSending: 0
+   015B CD 00 00           1015 	call	_battle_bkg_clean
+                           1016 ;	asakawa_battle.c 84
+                           1017 ;	genIpush
+                           1018 ; _saveRegsForCall: sendSetSize: 0 deInUse: 0 bcInUse: 0 deSending: 0
+   015E 21 12 20           1019 	ld	hl,#0x2012
+   0161 E5                 1020 	push	hl
+                           1021 ;	genIpush
+   0162 21 8E 01           1022 	ld	hl,#__str_7
+   0165 E5                 1023 	push	hl
+                           1024 ;	genCall
+   0166 CD 00 00           1025 	call	_battle_print
+   0169 E8 04              1026 	lda	sp,4(sp)
+                           1027 ;	asakawa_battle.c 85
+                           1028 ;	genIpush
+                           1029 ; _saveRegsForCall: sendSetSize: 0 deInUse: 0 bcInUse: 0 deSending: 0
+   016B 21 10 82           1030 	ld	hl,#0x8210
+   016E E5                 1031 	push	hl
+                           1032 ;	genIpush
+   016F 21 95 01           1033 	ld	hl,#__str_8
+   0172 E5                 1034 	push	hl
+                           1035 ;	genCall
+   0173 CD 00 00           1036 	call	_battle_print
+   0176 E8 04              1037 	lda	sp,4(sp)
+                           1038 ;	asakawa_battle.c 86
+                           1039 ;	genIpush
+                           1040 ; _saveRegsForCall: sendSetSize: 0 deInUse: 0 bcInUse: 0 deSending: 0
+   0178 21 10 8E           1041 	ld	hl,#0x8E10
+   017B E5                 1042 	push	hl
+                           1043 ;	genIpush
+   017C 21 9E 01           1044 	ld	hl,#__str_9
+   017F E5                 1045 	push	hl
+                           1046 ;	genCall
+   0180 CD 00 00           1047 	call	_battle_print
+   0183 E8 04              1048 	lda	sp,4(sp)
+                           1049 ;	asakawa_battle.c 87
+                           1050 ;	genCall
+                           1051 ; _saveRegsForCall: sendSetSize: 0 deInUse: 0 bcInUse: 0 deSending: 0
+   0185 CD 32 02           1052 	call	_show_fighter_stats
+                           1053 ;	asakawa_battle.c 88
+                           1054 ;	genAssign
+                           1055 ;	AOP_HL for _LETTER_COUNT
+   0188 21 00 00           1056 	ld	hl,#_LETTER_COUNT
+   018B 36 00              1057 	ld	(hl),#0x00
+                           1058 ;	genLabel
+   018D                    1059 00101$:
+                           1060 ;	genEndFunction
+                           1061 	
+   018D C9                 1062 	ret
+   018E                    1063 ___item_opt_end:
+   018E                    1064 __str_7:
+   018E 20 65 6D 70 74 79  1065 	.ascii " empty"
+   0194 00                 1066 	.db 0x00
+   0195                    1067 __str_8:
+   0195 61 20 73 65 6C 65  1068 	.ascii "a select"
+        63 74
+   019D 00                 1069 	.db 0x00
+   019E                    1070 __str_9:
+   019E 62 20 62 61 63 6B  1071 	.ascii "b back"
+   01A4 00                 1072 	.db 0x00
+                           1073 ;	asakawa_battle.c 92
+                           1074 ;	genLabel
+                           1075 ;	genFunction
+                           1076 ;	---------------------------------
+                           1077 ; Function battle_menu
+                           1078 ; ---------------------------------
+   01A5                    1079 ___battle_menu_start:
+   01A5                    1080 _battle_menu:
+                           1081 	
+                           1082 ;	asakawa_battle.c 95
+                           1083 ;	genIpush
+                           1084 ; _saveRegsForCall: sendSetSize: 0 deInUse: 0 bcInUse: 0 deSending: 0
+   01A5 21 48 04           1085 	ld	hl,#_chain_border_tiles
+   01A8 E5                 1086 	push	hl
+                           1087 ;	genIpush
+   01A9 21 00 0A           1088 	ld	hl,#0x0A00
+   01AC E5                 1089 	push	hl
+                           1090 ;	genCall
+   01AD CD 00 00           1091 	call	_set_bkg_data
+   01B0 E8 04              1092 	lda	sp,4(sp)
+                           1093 ;	asakawa_battle.c 96
+                           1094 ;	genIpush
+                           1095 ; _saveRegsForCall: sendSetSize: 0 deInUse: 0 bcInUse: 0 deSending: 0
+   01B2 21 E8 04           1096 	ld	hl,#_small_chain_border
+   01B5 E5                 1097 	push	hl
+                           1098 ;	genIpush
+   01B6 21 14 12           1099 	ld	hl,#0x1214
+   01B9 E5                 1100 	push	hl
+                           1101 ;	genIpush
+   01BA 21 00 00           1102 	ld	hl,#0x0000
+   01BD E5                 1103 	push	hl
+                           1104 ;	genCall
+   01BE CD 00 00           1105 	call	_set_bkg_tiles
+   01C1 E8 06              1106 	lda	sp,6(sp)
+                           1107 ;	asakawa_battle.c 98
+                           1108 ;	genCall
+                           1109 ; _saveRegsForCall: sendSetSize: 0 deInUse: 0 bcInUse: 0 deSending: 0
+   01C3 CD 00 00           1110 	call	_sprite_clean
+                           1111 ;	asakawa_battle.c 99
+                           1112 ;	genCall
+                           1113 ; _saveRegsForCall: sendSetSize: 0 deInUse: 0 bcInUse: 0 deSending: 0
+   01C6 CD 00 00           1114 	call	_hide_sprites
+                           1115 ;	asakawa_battle.c 101
+                           1116 ;	genIpush
+                           1117 ; _saveRegsForCall: sendSetSize: 0 deInUse: 0 bcInUse: 0 deSending: 0
+                           1118 ;	AOP_HL for _arrow_y
+   01C9 21 0F 09           1119 	ld	hl,#_arrow_y
+   01CC 7E                 1120 	ld	a,(hl)
+   01CD F5                 1121 	push	af
+   01CE 33                 1122 	inc	sp
+                           1123 ;	genIpush
+                           1124 ;	AOP_HL for _arrow_x
+   01CF 21 0E 09           1125 	ld	hl,#_arrow_x
+   01D2 7E                 1126 	ld	a,(hl)
+   01D3 F5                 1127 	push	af
+   01D4 33                 1128 	inc	sp
+                           1129 ;	genIpush
+   01D5 21 16 02           1130 	ld	hl,#__str_10
+   01D8 E5                 1131 	push	hl
+                           1132 ;	genCall
+   01D9 CD 00 00           1133 	call	_battle_print
+   01DC E8 04              1134 	lda	sp,4(sp)
+                           1135 ;	asakawa_battle.c 102
+                           1136 ;	genIpush
+                           1137 ; _saveRegsForCall: sendSetSize: 0 deInUse: 0 bcInUse: 0 deSending: 0
+   01DE 21 12 20           1138 	ld	hl,#0x2012
+   01E1 E5                 1139 	push	hl
+                           1140 ;	genIpush
+   01E2 21 18 02           1141 	ld	hl,#__str_11
+   01E5 E5                 1142 	push	hl
+                           1143 ;	genCall
+   01E6 CD 00 00           1144 	call	_battle_print
+   01E9 E8 04              1145 	lda	sp,4(sp)
+                           1146 ;	asakawa_battle.c 103
+                           1147 ;	genIpush
+                           1148 ; _saveRegsForCall: sendSetSize: 0 deInUse: 0 bcInUse: 0 deSending: 0
+   01EB 21 12 30           1149 	ld	hl,#0x3012
+   01EE E5                 1150 	push	hl
+                           1151 ;	genIpush
+   01EF 21 1F 02           1152 	ld	hl,#__str_12
+   01F2 E5                 1153 	push	hl
+                           1154 ;	genCall
+   01F3 CD 00 00           1155 	call	_battle_print
+   01F6 E8 04              1156 	lda	sp,4(sp)
+                           1157 ;	asakawa_battle.c 104
+                           1158 ;	genIpush
+                           1159 ; _saveRegsForCall: sendSetSize: 0 deInUse: 0 bcInUse: 0 deSending: 0
+   01F8 21 12 40           1160 	ld	hl,#0x4012
+   01FB E5                 1161 	push	hl
+                           1162 ;	genIpush
+   01FC 21 27 02           1163 	ld	hl,#__str_13
+   01FF E5                 1164 	push	hl
+                           1165 ;	genCall
+   0200 CD 00 00           1166 	call	_battle_print
+   0203 E8 04              1167 	lda	sp,4(sp)
+                           1168 ;	asakawa_battle.c 105
+                           1169 ;	genIpush
+                           1170 ; _saveRegsForCall: sendSetSize: 0 deInUse: 0 bcInUse: 0 deSending: 0
+   0205 21 12 50           1171 	ld	hl,#0x5012
+   0208 E5                 1172 	push	hl
+                           1173 ;	genIpush
+   0209 21 2C 02           1174 	ld	hl,#__str_14
+   020C E5                 1175 	push	hl
+                           1176 ;	genCall
+   020D CD 00 00           1177 	call	_battle_print
+   0210 E8 04              1178 	lda	sp,4(sp)
+                           1179 ;	asakawa_battle.c 106
+                           1180 ;	genCall
+                           1181 ; _saveRegsForCall: sendSetSize: 0 deInUse: 0 bcInUse: 0 deSending: 0
+   0212 CD 32 02           1182 	call	_show_fighter_stats
+                           1183 ;	genLabel
+   0215                    1184 00101$:
+                           1185 ;	genEndFunction
+                           1186 	
+   0215 C9                 1187 	ret
+   0216                    1188 ___battle_menu_end:
+   0216                    1189 __str_10:
+   0216 3E                 1190 	.ascii ">"
+   0217 00                 1191 	.db 0x00
+   0218                    1192 __str_11:
+   0218 20 66 69 67 68 74  1193 	.ascii " fight"
+   021E 00                 1194 	.db 0x00
+   021F                    1195 __str_12:
+   021F 20 64 65 66 65 6E  1196 	.ascii " defend"
+        64
+   0226 00                 1197 	.db 0x00
+   0227                    1198 __str_13:
+   0227 20 72 75 6E        1199 	.ascii " run"
+   022B 00                 1200 	.db 0x00
+   022C                    1201 __str_14:
+   022C 20 69 74 65 6D     1202 	.ascii " item"
+   0231 00                 1203 	.db 0x00
+                           1204 ;	asakawa_battle.c 109
+                           1205 ;	genLabel
+                           1206 ;	genFunction
+                           1207 ;	---------------------------------
+                           1208 ; Function show_fighter_stats
+                           1209 ; ---------------------------------
+   0232                    1210 ___show_fighter_stats_start:
+   0232                    1211 _show_fighter_stats:
+                           1212 	
+                           1213 ;	asakawa_battle.c 112
+                           1214 ;	genIpush
+                           1215 ; _saveRegsForCall: sendSetSize: 0 deInUse: 0 bcInUse: 0 deSending: 0
+   0232 21 58 28           1216 	ld	hl,#0x2858
+   0235 E5                 1217 	push	hl
+                           1218 ;	genIpush
+   0236 21 7E 02           1219 	ld	hl,#__str_15
+   0239 E5                 1220 	push	hl
+                           1221 ;	genCall
+   023A CD 00 00           1222 	call	_battle_print
+   023D E8 04              1223 	lda	sp,4(sp)
+                           1224 ;	asakawa_battle.c 113
+                           1225 ;	genIpush
+                           1226 ; _saveRegsForCall: sendSetSize: 0 deInUse: 0 bcInUse: 0 deSending: 0
+   023F 21 58 38           1227 	ld	hl,#0x3858
+   0242 E5                 1228 	push	hl
+                           1229 ;	genIpush
+   0243 21 83 02           1230 	ld	hl,#__str_16
+   0246 E5                 1231 	push	hl
+                           1232 ;	genCall
+   0247 CD 00 00           1233 	call	_battle_print
+   024A E8 04              1234 	lda	sp,4(sp)
+                           1235 ;	asakawa_battle.c 115
+                           1236 ;	genCast
+                           1237 ;	AOP_HL for _HERO_HP
+   024C 21 F9 08           1238 	ld	hl,#_HERO_HP
+   024F 4E                 1239 	ld	c,(hl)
+   0250 7E                 1240 	ld	a,(hl)
+   0251 17                 1241 	rla	
+   0252 9F                 1242 	sbc	a,a
+   0253 47                 1243 	ld	b,a
+                           1244 ;	genIpush
+                           1245 ; _saveRegsForCall: sendSetSize: 0 deInUse: 0 bcInUse: 0 deSending: 0
+   0254 21 FA 08           1246 	ld	hl,#_h_hp
+   0257 E5                 1247 	push	hl
+                           1248 ;	genIpush
+   0258 C5                 1249 	push	bc
+                           1250 ;	genCall
+   0259 CD 00 00           1251 	call	_itoa
+   025C E8 04              1252 	lda	sp,4(sp)
+                           1253 ;	asakawa_battle.c 116
+                           1254 ;	genIpush
+                           1255 ; _saveRegsForCall: sendSetSize: 0 deInUse: 0 bcInUse: 0 deSending: 0
+   025E 21 78 38           1256 	ld	hl,#0x3878
+   0261 E5                 1257 	push	hl
+                           1258 ;	genIpush
+   0262 21 FA 08           1259 	ld	hl,#_h_hp
+   0265 E5                 1260 	push	hl
+                           1261 ;	genCall
+   0266 CD 00 00           1262 	call	_battle_print
+   0269 E8 04              1263 	lda	sp,4(sp)
+                           1264 ;	asakawa_battle.c 117
+                           1265 ;	genIpush
+                           1266 ; _saveRegsForCall: sendSetSize: 0 deInUse: 0 bcInUse: 0 deSending: 0
+   026B 21 88 38           1267 	ld	hl,#0x3888
+   026E E5                 1268 	push	hl
+                           1269 ;	genIpush
+   026F 21 86 02           1270 	ld	hl,#__str_17
+   0272 E5                 1271 	push	hl
+                           1272 ;	genCall
+   0273 CD 00 00           1273 	call	_battle_print
+   0276 E8 04              1274 	lda	sp,4(sp)
+                           1275 ;	asakawa_battle.c 118
+                           1276 ;	genAssign
+                           1277 ;	AOP_HL for _LETTER_COUNT
+   0278 21 00 00           1278 	ld	hl,#_LETTER_COUNT
+   027B 36 00              1279 	ld	(hl),#0x00
+                           1280 ;	genLabel
+   027D                    1281 00101$:
+                           1282 ;	genEndFunction
+                           1283 	
+   027D C9                 1284 	ret
+   027E                    1285 ___show_fighter_stats_end:
+   027E                    1286 __str_15:
+   027E 68 65 72 6F        1287 	.ascii "hero"
+   0282 00                 1288 	.db 0x00
+   0283                    1289 __str_16:
+   0283 68 70              1290 	.ascii "hp"
+   0285 00                 1291 	.db 0x00
+   0286                    1292 __str_17:
+   0286 2F 31 30           1293 	.ascii "/10"
+   0289 00                 1294 	.db 0x00
+                           1295 ;	asakawa_battle.c 121
+                           1296 ;	genLabel
+                           1297 ;	genFunction
+                           1298 ;	---------------------------------
+                           1299 ; Function battle_toggle_up
+                           1300 ; ---------------------------------
+   028A                    1301 ___battle_toggle_up_start:
+   028A                    1302 _battle_toggle_up:
+                           1303 	
+                           1304 ;	asakawa_battle.c 124
+                           1305 ;	genCmpEq
+                           1306 ;	AOP_HL for _arrow_y
+                           1307 ; genCmpEq: left 1, right 1, result 0
+   028A 21 0F 09           1308 	ld	hl,#_arrow_y
+   028D 7E                 1309 	ld	a,(hl)
+   028E FE 20              1310 	cp	a,#0x20
+   0290 C2 D2 02           1311 	jp	nz,00102$
+   0293 18 03              1312 	jr	00108$
+   0295                    1313 00107$:
+   0295 C3 D2 02           1314 	jp	00102$
+   0298                    1315 00108$:
+                           1316 ;	asakawa_battle.c 126
+                           1317 ;	genAssign
+                           1318 ;	AOP_HL for _arrow_y
+   0298 21 0F 09           1319 	ld	hl,#_arrow_y
+   029B 36 50              1320 	ld	(hl),#0x50
+                           1321 ;	asakawa_battle.c 127
+                           1322 ;	genCall
+                           1323 ; _saveRegsForCall: sendSetSize: 0 deInUse: 0 bcInUse: 0 deSending: 0
+   029D CD 00 00           1324 	call	_battle_bkg_clean
+                           1325 ;	asakawa_battle.c 128
+                           1326 ;	genIpush
+                           1327 ; _saveRegsForCall: sendSetSize: 0 deInUse: 0 bcInUse: 0 deSending: 0
+   02A0 21 64 00           1328 	ld	hl,#0x0064
+   02A3 E5                 1329 	push	hl
+                           1330 ;	genCall
+   02A4 CD 00 00           1331 	call	_delay
+   02A7 E8 02              1332 	lda	sp,2(sp)
+                           1333 ;	asakawa_battle.c 129
+                           1334 ;	genCall
+                           1335 ; _saveRegsForCall: sendSetSize: 0 deInUse: 0 bcInUse: 0 deSending: 0
+   02A9 CD 00 00           1336 	call	_battle_bkg_clean
+                           1337 ;	asakawa_battle.c 130
+                           1338 ;	genIpush
+                           1339 ; _saveRegsForCall: sendSetSize: 0 deInUse: 0 bcInUse: 0 deSending: 0
+                           1340 ;	AOP_HL for _arrow_y
+   02AC 21 0F 09           1341 	ld	hl,#_arrow_y
+   02AF 7E                 1342 	ld	a,(hl)
+   02B0 F5                 1343 	push	af
+   02B1 33                 1344 	inc	sp
+                           1345 ;	genIpush
+                           1346 ;	AOP_HL for _arrow_x
+   02B2 21 0E 09           1347 	ld	hl,#_arrow_x
+   02B5 7E                 1348 	ld	a,(hl)
+   02B6 F5                 1349 	push	af
+   02B7 33                 1350 	inc	sp
+                           1351 ;	genIpush
+   02B8 21 0A 03           1352 	ld	hl,#__str_18
+   02BB E5                 1353 	push	hl
+                           1354 ;	genCall
+   02BC CD 00 00           1355 	call	_battle_print
+   02BF E8 04              1356 	lda	sp,4(sp)
+                           1357 ;	asakawa_battle.c 131
+                           1358 ;	genAssign
+                           1359 ;	AOP_HL for _LETTER_COUNT
+   02C1 21 00 00           1360 	ld	hl,#_LETTER_COUNT
+   02C4 36 00              1361 	ld	(hl),#0x00
+                           1362 ;	asakawa_battle.c 132
+                           1363 ;	genIpush
+                           1364 ; _saveRegsForCall: sendSetSize: 0 deInUse: 0 bcInUse: 0 deSending: 0
+   02C6 21 64 00           1365 	ld	hl,#0x0064
+   02C9 E5                 1366 	push	hl
+                           1367 ;	genCall
+   02CA CD 00 00           1368 	call	_delay
+   02CD E8 02              1369 	lda	sp,2(sp)
+                           1370 ;	genGoto
+   02CF C3 09 03           1371 	jp	00104$
+                           1372 ;	genLabel
+   02D2                    1373 00102$:
+                           1374 ;	asakawa_battle.c 136
+                           1375 ;	genCall
+                           1376 ; _saveRegsForCall: sendSetSize: 0 deInUse: 0 bcInUse: 0 deSending: 0
+   02D2 CD 00 00           1377 	call	_battle_bkg_clean
+                           1378 ;	asakawa_battle.c 137
+                           1379 ;	genIpush
+                           1380 ; _saveRegsForCall: sendSetSize: 0 deInUse: 0 bcInUse: 0 deSending: 0
+   02D5 21 64 00           1381 	ld	hl,#0x0064
+   02D8 E5                 1382 	push	hl
+                           1383 ;	genCall
+   02D9 CD 00 00           1384 	call	_delay
+   02DC E8 02              1385 	lda	sp,2(sp)
+                           1386 ;	asakawa_battle.c 138
+                           1387 ;	genCall
+                           1388 ; _saveRegsForCall: sendSetSize: 0 deInUse: 0 bcInUse: 0 deSending: 0
+   02DE CD 00 00           1389 	call	_battle_bkg_clean
+                           1390 ;	asakawa_battle.c 139
+                           1391 ;	genMinus
+                           1392 ;	AOP_HL for _arrow_y
+   02E1 21 0F 09           1393 	ld	hl,#_arrow_y
+   02E4 7E                 1394 	ld	a,(hl)
+   02E5 C6 F0              1395 	add	a,#0xF0
+   02E7 4F                 1396 	ld	c,a
+                           1397 ;	genAssign
+                           1398 ;	AOP_HL for _arrow_y
+   02E8 71                 1399 	ld	(hl),c
+                           1400 ;	genIpush
+                           1401 ; _saveRegsForCall: sendSetSize: 0 deInUse: 0 bcInUse: 0 deSending: 0
+   02E9 79                 1402 	ld	a,c
+   02EA F5                 1403 	push	af
+   02EB 33                 1404 	inc	sp
+                           1405 ;	genIpush
+                           1406 ;	AOP_HL for _arrow_x
+   02EC 21 0E 09           1407 	ld	hl,#_arrow_x
+   02EF 7E                 1408 	ld	a,(hl)
+   02F0 F5                 1409 	push	af
+   02F1 33                 1410 	inc	sp
+                           1411 ;	genIpush
+   02F2 21 0C 03           1412 	ld	hl,#__str_19
+   02F5 E5                 1413 	push	hl
+                           1414 ;	genCall
+   02F6 CD 00 00           1415 	call	_battle_print
+   02F9 E8 04              1416 	lda	sp,4(sp)
+                           1417 ;	asakawa_battle.c 140
+                           1418 ;	genAssign
+                           1419 ;	AOP_HL for _LETTER_COUNT
+   02FB 21 00 00           1420 	ld	hl,#_LETTER_COUNT
+   02FE 36 00              1421 	ld	(hl),#0x00
+                           1422 ;	asakawa_battle.c 141
+                           1423 ;	genIpush
+                           1424 ; _saveRegsForCall: sendSetSize: 0 deInUse: 0 bcInUse: 0 deSending: 0
+   0300 21 64 00           1425 	ld	hl,#0x0064
+   0303 E5                 1426 	push	hl
+                           1427 ;	genCall
+   0304 CD 00 00           1428 	call	_delay
+   0307 E8 02              1429 	lda	sp,2(sp)
+                           1430 ;	genLabel
+   0309                    1431 00104$:
+                           1432 ;	genEndFunction
+                           1433 	
+   0309 C9                 1434 	ret
+   030A                    1435 ___battle_toggle_up_end:
+   030A                    1436 __str_18:
+   030A 3E                 1437 	.ascii ">"
+   030B 00                 1438 	.db 0x00
+   030C                    1439 __str_19:
+   030C 3E                 1440 	.ascii ">"
+   030D 00                 1441 	.db 0x00
+                           1442 ;	asakawa_battle.c 145
+                           1443 ;	genLabel
+                           1444 ;	genFunction
+                           1445 ;	---------------------------------
+                           1446 ; Function battle_toggle_down
+                           1447 ; ---------------------------------
+   030E                    1448 ___battle_toggle_down_start:
+   030E                    1449 _battle_toggle_down:
+                           1450 	
+                           1451 ;	asakawa_battle.c 148
+                           1452 ;	genCmpEq
+                           1453 ;	AOP_HL for _arrow_y
+                           1454 ; genCmpEq: left 1, right 1, result 0
+   030E 21 0F 09           1455 	ld	hl,#_arrow_y
+   0311 7E                 1456 	ld	a,(hl)
+   0312 FE 50              1457 	cp	a,#0x50
+   0314 C2 56 03           1458 	jp	nz,00102$
+   0317 18 03              1459 	jr	00108$
+   0319                    1460 00107$:
+   0319 C3 56 03           1461 	jp	00102$
+   031C                    1462 00108$:
+                           1463 ;	asakawa_battle.c 150
+                           1464 ;	genAssign
+                           1465 ;	AOP_HL for _arrow_y
+   031C 21 0F 09           1466 	ld	hl,#_arrow_y
+   031F 36 20              1467 	ld	(hl),#0x20
+                           1468 ;	asakawa_battle.c 151
+                           1469 ;	genCall
+                           1470 ; _saveRegsForCall: sendSetSize: 0 deInUse: 0 bcInUse: 0 deSending: 0
+   0321 CD 00 00           1471 	call	_battle_bkg_clean
+                           1472 ;	asakawa_battle.c 152
+                           1473 ;	genIpush
+                           1474 ; _saveRegsForCall: sendSetSize: 0 deInUse: 0 bcInUse: 0 deSending: 0
+   0324 21 64 00           1475 	ld	hl,#0x0064
+   0327 E5                 1476 	push	hl
+                           1477 ;	genCall
+   0328 CD 00 00           1478 	call	_delay
+   032B E8 02              1479 	lda	sp,2(sp)
+                           1480 ;	asakawa_battle.c 153
+                           1481 ;	genCall
+                           1482 ; _saveRegsForCall: sendSetSize: 0 deInUse: 0 bcInUse: 0 deSending: 0
+   032D CD 00 00           1483 	call	_battle_bkg_clean
+                           1484 ;	asakawa_battle.c 154
+                           1485 ;	genIpush
+                           1486 ; _saveRegsForCall: sendSetSize: 0 deInUse: 0 bcInUse: 0 deSending: 0
+                           1487 ;	AOP_HL for _arrow_y
+   0330 21 0F 09           1488 	ld	hl,#_arrow_y
+   0333 7E                 1489 	ld	a,(hl)
+   0334 F5                 1490 	push	af
+   0335 33                 1491 	inc	sp
+                           1492 ;	genIpush
+                           1493 ;	AOP_HL for _arrow_x
+   0336 21 0E 09           1494 	ld	hl,#_arrow_x
+   0339 7E                 1495 	ld	a,(hl)
+   033A F5                 1496 	push	af
+   033B 33                 1497 	inc	sp
+                           1498 ;	genIpush
+   033C 21 8E 03           1499 	ld	hl,#__str_20
+   033F E5                 1500 	push	hl
+                           1501 ;	genCall
+   0340 CD 00 00           1502 	call	_battle_print
+   0343 E8 04              1503 	lda	sp,4(sp)
+                           1504 ;	asakawa_battle.c 155
+                           1505 ;	genAssign
+                           1506 ;	AOP_HL for _LETTER_COUNT
+   0345 21 00 00           1507 	ld	hl,#_LETTER_COUNT
+   0348 36 00              1508 	ld	(hl),#0x00
+                           1509 ;	asakawa_battle.c 156
+                           1510 ;	genIpush
+                           1511 ; _saveRegsForCall: sendSetSize: 0 deInUse: 0 bcInUse: 0 deSending: 0
+   034A 21 64 00           1512 	ld	hl,#0x0064
+   034D E5                 1513 	push	hl
+                           1514 ;	genCall
+   034E CD 00 00           1515 	call	_delay
+   0351 E8 02              1516 	lda	sp,2(sp)
+                           1517 ;	genGoto
+   0353 C3 8D 03           1518 	jp	00104$
+                           1519 ;	genLabel
+   0356                    1520 00102$:
+                           1521 ;	asakawa_battle.c 160
+                           1522 ;	genCall
+                           1523 ; _saveRegsForCall: sendSetSize: 0 deInUse: 0 bcInUse: 0 deSending: 0
+   0356 CD 00 00           1524 	call	_battle_bkg_clean
+                           1525 ;	asakawa_battle.c 161
+                           1526 ;	genIpush
+                           1527 ; _saveRegsForCall: sendSetSize: 0 deInUse: 0 bcInUse: 0 deSending: 0
+   0359 21 64 00           1528 	ld	hl,#0x0064
+   035C E5                 1529 	push	hl
+                           1530 ;	genCall
+   035D CD 00 00           1531 	call	_delay
+   0360 E8 02              1532 	lda	sp,2(sp)
+                           1533 ;	asakawa_battle.c 162
+                           1534 ;	genCall
+                           1535 ; _saveRegsForCall: sendSetSize: 0 deInUse: 0 bcInUse: 0 deSending: 0
+   0362 CD 00 00           1536 	call	_battle_bkg_clean
+                           1537 ;	asakawa_battle.c 163
+                           1538 ;	genPlus
+                           1539 ;	AOP_HL for _arrow_y
+                           1540 ;	genPlusIncr
+                           1541 ;	Can't optimise plus by inc, falling back to the normal way
+   0365 21 0F 09           1542 	ld	hl,#_arrow_y
+   0368 7E                 1543 	ld	a,(hl)
+   0369 C6 10              1544 	add	a,#0x10
+   036B 4F                 1545 	ld	c,a
+                           1546 ;	genAssign
+                           1547 ;	AOP_HL for _arrow_y
+   036C 71                 1548 	ld	(hl),c
+                           1549 ;	genIpush
+                           1550 ; _saveRegsForCall: sendSetSize: 0 deInUse: 0 bcInUse: 0 deSending: 0
+   036D 79                 1551 	ld	a,c
+   036E F5                 1552 	push	af
+   036F 33                 1553 	inc	sp
+                           1554 ;	genIpush
+                           1555 ;	AOP_HL for _arrow_x
+   0370 21 0E 09           1556 	ld	hl,#_arrow_x
+   0373 7E                 1557 	ld	a,(hl)
+   0374 F5                 1558 	push	af
+   0375 33                 1559 	inc	sp
+                           1560 ;	genIpush
+   0376 21 90 03           1561 	ld	hl,#__str_21
+   0379 E5                 1562 	push	hl
+                           1563 ;	genCall
+   037A CD 00 00           1564 	call	_battle_print
+   037D E8 04              1565 	lda	sp,4(sp)
+                           1566 ;	asakawa_battle.c 164
+                           1567 ;	genAssign
+                           1568 ;	AOP_HL for _LETTER_COUNT
+   037F 21 00 00           1569 	ld	hl,#_LETTER_COUNT
+   0382 36 00              1570 	ld	(hl),#0x00
+                           1571 ;	asakawa_battle.c 165
+                           1572 ;	genIpush
+                           1573 ; _saveRegsForCall: sendSetSize: 0 deInUse: 0 bcInUse: 0 deSending: 0
+   0384 21 64 00           1574 	ld	hl,#0x0064
+   0387 E5                 1575 	push	hl
+                           1576 ;	genCall
+   0388 CD 00 00           1577 	call	_delay
+   038B E8 02              1578 	lda	sp,2(sp)
+                           1579 ;	genLabel
+   038D                    1580 00104$:
+                           1581 ;	genEndFunction
+                           1582 	
+   038D C9                 1583 	ret
+   038E                    1584 ___battle_toggle_down_end:
+   038E                    1585 __str_20:
+   038E 3E                 1586 	.ascii ">"
+   038F 00                 1587 	.db 0x00
+   0390                    1588 __str_21:
+   0390 3E                 1589 	.ascii ">"
+   0391 00                 1590 	.db 0x00
+                           1591 ;	asakawa_battle.c 169
+                           1592 ;	genLabel
+                           1593 ;	genFunction
+                           1594 ;	---------------------------------
+                           1595 ; Function asakawa_battle_check
+                           1596 ; ---------------------------------
+   0392                    1597 ___asakawa_battle_check_start:
+   0392                    1598 _asakawa_battle_check:
+   0392 E8 FD              1599 	lda	sp,-3(sp)
+                           1600 ;	asakawa_battle.c 171
+                           1601 ;	genAssign
+   0394 01 40 FF           1602 	ld	bc,#0xFF40
+                           1603 ;	genAssign
+                           1604 ;	AOP_STK for _asakawa_battle_check_sloc0_1_0
+   0397 F8 01              1605 	lda	hl,1(sp)
+   0399 36 40              1606 	ld	(hl),#0x40
+   039B 23                 1607 	inc	hl
+   039C 36 FF              1608 	ld	(hl),#0xFF
+                           1609 ;	genPointerGet
+                           1610 ;	AOP_STK for _asakawa_battle_check_sloc0_1_0
+                           1611 ;	AOP_STK for _asakawa_battle_check_sloc1_1_0
+   039E 2B                 1612 	dec	hl
+   039F 5E                 1613 	ld	e,(hl)
+   03A0 23                 1614 	inc	hl
+   03A1 56                 1615 	ld	d,(hl)
+   03A2 1A                 1616 	ld	a,(de)
+   03A3 2B                 1617 	dec	hl
+   03A4 2B                 1618 	dec	hl
+                           1619 ;	genAnd
+                           1620 ;	AOP_STK for _asakawa_battle_check_sloc1_1_0
+   03A5 77                 1621 	ld      (hl),a
+                           1622 ; Removed redundent load
+   03A6 E6 FB              1623 	and	a,#0xFB
+                           1624 ;	genAssign (pointer)
+   03A8 02                 1625 	ld	(bc),a
+                           1626 ;	asakawa_battle.c 173
+                           1627 ;	genCall
+                           1628 ; _saveRegsForCall: sendSetSize: 0 deInUse: 0 bcInUse: 0 deSending: 0
+   03A9 CD 00 00           1629 	call	_joypad
+   03AC 4B                 1630 	ld	c,e
+                           1631 ;	genAnd
+   03AD 79                 1632 	ld	a,c
+   03AE E6 10              1633 	and	a,#0x10
+   03B0 20 03              1634 	jr	nz,00123$
+   03B2 C3 CE 03           1635 	jp	00105$
+   03B5                    1636 00123$:
+                           1637 ;	asakawa_battle.c 175
+                           1638 ;	genCmpEq
+                           1639 ;	AOP_HL for _state
+                           1640 ; genCmpEq: left 1, right 1, result 0
+   03B5 21 10 09           1641 	ld	hl,#_state
+   03B8 7E                 1642 	ld	a,(hl)
+   03B9 FE 01              1643 	cp	a,#0x01
+   03BB C2 CB 03           1644 	jp	nz,00102$
+   03BE 18 03              1645 	jr	00125$
+   03C0                    1646 00124$:
+   03C0 C3 CB 03           1647 	jp	00102$
+   03C3                    1648 00125$:
+                           1649 ;	asakawa_battle.c 176
+                           1650 ;	genAssign
+                           1651 ;	AOP_HL for _state
+   03C3 21 10 09           1652 	ld	hl,#_state
+   03C6 36 04              1653 	ld	(hl),#0x04
+                           1654 ;	genGoto
+   03C8 C3 CE 03           1655 	jp	00105$
+                           1656 ;	genLabel
+   03CB                    1657 00102$:
+                           1658 ;	asakawa_battle.c 178
+                           1659 ;	genCall
+                           1660 ; _saveRegsForCall: sendSetSize: 0 deInUse: 0 bcInUse: 0 deSending: 0
+   03CB CD 3B 00           1661 	call	_battle_nav
+                           1662 ;	genLabel
+   03CE                    1663 00105$:
+                           1664 ;	asakawa_battle.c 181
+                           1665 ;	genCall
+                           1666 ; _saveRegsForCall: sendSetSize: 0 deInUse: 0 bcInUse: 0 deSending: 0
+   03CE CD 00 00           1667 	call	_joypad
+   03D1 4B                 1668 	ld	c,e
+                           1669 ;	genAnd
+   03D2 79                 1670 	ld	a,c
+   03D3 E6 20              1671 	and	a,#0x20
+   03D5 20 03              1672 	jr	nz,00126$
+   03D7 C3 DD 03           1673 	jp	00107$
+   03DA                    1674 00126$:
+                           1675 ;	asakawa_battle.c 182
+                           1676 ;	genCall
+                           1677 ; _saveRegsForCall: sendSetSize: 0 deInUse: 0 bcInUse: 0 deSending: 0
+   03DA CD EA 00           1678 	call	_back
+                           1679 ;	genLabel
+   03DD                    1680 00107$:
+                           1681 ;	asakawa_battle.c 185
+                           1682 ;	genCall
+                           1683 ; _saveRegsForCall: sendSetSize: 0 deInUse: 0 bcInUse: 0 deSending: 0
+   03DD CD 00 00           1684 	call	_joypad
+   03E0 4B                 1685 	ld	c,e
+                           1686 ;	genAnd
+   03E1 79                 1687 	ld	a,c
+   03E2 E6 08              1688 	and	a,#0x08
+   03E4 20 03              1689 	jr	nz,00127$
+   03E6 C3 F9 03           1690 	jp	00109$
+   03E9                    1691 00127$:
+                           1692 ;	genCmpEq
+                           1693 ;	AOP_HL for _state
+                           1694 ; genCmpEq: left 1, right 1, result 0
+   03E9 21 10 09           1695 	ld	hl,#_state
+   03EC 7E                 1696 	ld	a,(hl)
+   03ED B7                 1697 	or	a,a
+   03EE C2 F9 03           1698 	jp	nz,00109$
+   03F1 18 03              1699 	jr	00129$
+   03F3                    1700 00128$:
+   03F3 C3 F9 03           1701 	jp	00109$
+   03F6                    1702 00129$:
+                           1703 ;	asakawa_battle.c 186
+                           1704 ;	genCall
+                           1705 ; _saveRegsForCall: sendSetSize: 0 deInUse: 0 bcInUse: 0 deSending: 0
+   03F6 CD 0E 03           1706 	call	_battle_toggle_down
+                           1707 ;	genLabel
+   03F9                    1708 00109$:
+                           1709 ;	asakawa_battle.c 191
+                           1710 ;	genCall
+                           1711 ; _saveRegsForCall: sendSetSize: 0 deInUse: 0 bcInUse: 0 deSending: 0
+   03F9 CD 00 00           1712 	call	_joypad
+   03FC 4B                 1713 	ld	c,e
+                           1714 ;	genAnd
+   03FD 79                 1715 	ld	a,c
+   03FE E6 04              1716 	and	a,#0x04
+   0400 20 03              1717 	jr	nz,00130$
+   0402 C3 15 04           1718 	jp	00114$
+   0405                    1719 00130$:
+                           1720 ;	genCmpEq
+                           1721 ;	AOP_HL for _state
+                           1722 ; genCmpEq: left 1, right 1, result 0
+   0405 21 10 09           1723 	ld	hl,#_state
+   0408 7E                 1724 	ld	a,(hl)
+   0409 B7                 1725 	or	a,a
+   040A C2 15 04           1726 	jp	nz,00114$
+   040D 18 03              1727 	jr	00132$
+   040F                    1728 00131$:
+   040F C3 15 04           1729 	jp	00114$
+   0412                    1730 00132$:
+                           1731 ;	asakawa_battle.c 192
+                           1732 ;	genCall
+                           1733 ; _saveRegsForCall: sendSetSize: 0 deInUse: 0 bcInUse: 0 deSending: 0
+   0412 CD 8A 02           1734 	call	_battle_toggle_up
+                           1735 ;	genLabel
+   0415                    1736 00114$:
+                           1737 ;	genEndFunction
+   0415 E8 03              1738 	lda	sp,3(sp)
+   0417 C9                 1739 	ret
+   0418                    1740 ___asakawa_battle_check_end:
+                           1741 ;	asakawa_battle.c 199
+                           1742 ;	genLabel
+                           1743 ;	genFunction
+                           1744 ;	---------------------------------
+                           1745 ; Function show_sprites
+                           1746 ; ---------------------------------
+   0418                    1747 ___show_sprites_start:
+   0418                    1748 _show_sprites:
+   0418 E8 F8              1749 	lda	sp,-8(sp)
+                           1750 ;	asakawa_battle.c 201
+                           1751 ;	genAssign
+   041A 01 40 FF           1752 	ld	bc,#0xFF40
+                           1753 ;	genAssign
+                           1754 ;	AOP_STK for _show_sprites_sloc0_1_0
+   041D F8 06              1755 	lda	hl,6(sp)
+   041F 36 40              1756 	ld	(hl),#0x40
+   0421 23                 1757 	inc	hl
+   0422 36 FF              1758 	ld	(hl),#0xFF
+                           1759 ;	genPointerGet
+                           1760 ;	AOP_STK for _show_sprites_sloc0_1_0
+                           1761 ;	AOP_STK for _show_sprites_sloc1_1_0
+   0424 2B                 1762 	dec	hl
+   0425 5E                 1763 	ld	e,(hl)
+   0426 23                 1764 	inc	hl
+   0427 56                 1765 	ld	d,(hl)
+   0428 1A                 1766 	ld	a,(de)
+   0429 2B                 1767 	dec	hl
+   042A 2B                 1768 	dec	hl
+                           1769 ;	genOr
+                           1770 ;	AOP_STK for _show_sprites_sloc1_1_0
+   042B 77                 1771 	ld      (hl),a
+   042C 7F                 1772 	ld      a,a
+   042D F6 04              1773 	or	a,#0x04
+                           1774 ;	genAssign (pointer)
+   042F 02                 1775 	ld	(bc),a
+                           1776 ;	asakawa_battle.c 205
+                           1777 ;	genAssign (pointer)
+   0430 11 06 09           1778 	ld	de,#_hero_pos
+   0433 3E 50              1779 	ld	a,#0x50
+   0435 12                 1780 	ld	(de),a
+                           1781 ;	asakawa_battle.c 206
+                           1782 ;	genPlus
+                           1783 ;	genPlusIncr
+   0436 01 07 09           1784 	ld	bc,#_hero_pos + 1
+                           1785 ;	genAssign (pointer)
+   0439 3E 48              1786 	ld	a,#0x48
+   043B 02                 1787 	ld	(bc),a
+                           1788 ;	asakawa_battle.c 207
+                           1789 ;	genPlus
+                           1790 ;	AOP_STK for _show_sprites_sloc0_1_0
+                           1791 ;	genPlusIncr
+                           1792 ;	Can't optimise plus by inc, falling back to the normal way
+   043C 11 06 09           1793 	ld	de,#_hero_pos
+   043F 21 02 00           1794 	ld	hl,#0x0002
+   0442 19                 1795 	add	hl,de
+   0443 7D                 1796 	ld	a,l
+   0444 54                 1797 	ld	d,h
+   0445 F8 06              1798 	lda	hl,6(sp)
+   0447 22                 1799 	ld	(hl+),a
+   0448 72                 1800 	ld	(hl),d
+                           1801 ;	genPointerGet
+                           1802 ;	AOP_STK for _show_sprites_sloc1_1_0
+   0449 11 06 09           1803 	ld	de,#_hero_pos
+   044C 1A                 1804 	ld	a,(de)
+   044D 2B                 1805 	dec	hl
+   044E 2B                 1806 	dec	hl
+                           1807 ;	genPlus
+                           1808 ;	AOP_STK for _show_sprites_sloc1_1_0
+                           1809 ;	AOP_STK for _show_sprites_sloc2_1_0
+                           1810 ;	genPlusIncr
+                           1811 ;	Can't optimise plus by inc, falling back to the normal way
+   044F 77                 1812 	ld      (hl),a
+   0450 7F                 1813 	ld      a,a
+   0451 C6 08              1814 	add	a,#0x08
+   0453 2B                 1815 	dec	hl
+                           1816 ;	genAssign (pointer)
+                           1817 ;	AOP_STK for _show_sprites_sloc0_1_0
+                           1818 ;	AOP_STK for _show_sprites_sloc2_1_0
+   0454 22                 1819 	ld	(hl+),a
+   0455 23                 1820 	inc	hl
+   0456 5E                 1821 	ld	e,(hl)
+   0457 23                 1822 	inc	hl
+   0458 56                 1823 	ld	d,(hl)
+   0459 F8 04              1824 	lda	hl,4(sp)
+   045B 7E                 1825 	ld	a,(hl)
+   045C 12                 1826 	ld	(de),a
+                           1827 ;	asakawa_battle.c 208
+                           1828 ;	genPlus
+                           1829 ;	AOP_STK for _show_sprites_sloc0_1_0
+                           1830 ;	genPlusIncr
+                           1831 ;	Can't optimise plus by inc, falling back to the normal way
+   045D 11 06 09           1832 	ld	de,#_hero_pos
+   0460 21 03 00           1833 	ld	hl,#0x0003
+   0463 19                 1834 	add	hl,de
+   0464 7D                 1835 	ld	a,l
+   0465 54                 1836 	ld	d,h
+   0466 F8 06              1837 	lda	hl,6(sp)
+   0468 22                 1838 	ld	(hl+),a
+   0469 72                 1839 	ld	(hl),d
+                           1840 ;	genPointerGet
+                           1841 ;	AOP_STK for _show_sprites_sloc1_1_0
+   046A 0A                 1842 	ld	a,(bc)
+   046B 2B                 1843 	dec	hl
+   046C 2B                 1844 	dec	hl
+                           1845 ;	genAssign (pointer)
+                           1846 ;	AOP_STK for _show_sprites_sloc0_1_0
+                           1847 ;	AOP_STK for _show_sprites_sloc1_1_0
+   046D 22                 1848 	ld	(hl+),a
+   046E 5E                 1849 	ld	e,(hl)
+   046F 23                 1850 	inc	hl
+   0470 56                 1851 	ld	d,(hl)
+   0471 2B                 1852 	dec	hl
+   0472 2B                 1853 	dec	hl
+   0473 7E                 1854 	ld	a,(hl)
+   0474 12                 1855 	ld	(de),a
+                           1856 ;	asakawa_battle.c 211
+                           1857 ;	genIpush
+                           1858 ; _saveRegsForCall: sendSetSize: 0 deInUse: 0 bcInUse: 1 deSending: 0
+   0475 C5                 1859 	push	bc
+   0476 21 D0 06           1860 	ld	hl,#_hero_back_idle
+   0479 E5                 1861 	push	hl
+                           1862 ;	genIpush
+   047A 21 00 08           1863 	ld	hl,#0x0800
+   047D E5                 1864 	push	hl
+                           1865 ;	genCall
+   047E CD 00 00           1866 	call	_set_sprite_data
+   0481 E8 04              1867 	lda	sp,4(sp)
+   0483 C1                 1868 	pop	bc
+                           1869 ;	asakawa_battle.c 212
+                           1870 ;	genIpush
+                           1871 ; _saveRegsForCall: sendSetSize: 0 deInUse: 0 bcInUse: 1 deSending: 0
+   0484 C5                 1872 	push	bc
+   0485 21 00 00           1873 	ld	hl,#0x0000
+   0488 E5                 1874 	push	hl
+                           1875 ;	genCall
+   0489 CD 00 00           1876 	call	_set_sprite_tile
+   048C E8 02              1877 	lda	sp,2(sp)
+   048E C1                 1878 	pop	bc
+                           1879 ;	asakawa_battle.c 213
+                           1880 ;	genIpush
+                           1881 ; _saveRegsForCall: sendSetSize: 0 deInUse: 0 bcInUse: 1 deSending: 0
+   048F C5                 1882 	push	bc
+   0490 21 01 02           1883 	ld	hl,#0x0201
+   0493 E5                 1884 	push	hl
+                           1885 ;	genCall
+   0494 CD 00 00           1886 	call	_set_sprite_tile
+   0497 E8 02              1887 	lda	sp,2(sp)
+   0499 C1                 1888 	pop	bc
+                           1889 ;	asakawa_battle.c 215
+                           1890 ;	genAssign (pointer)
+   049A 11 0A 09           1891 	ld	de,#_asakawa_pos
+   049D 3E 50              1892 	ld	a,#0x50
+   049F 12                 1893 	ld	(de),a
+                           1894 ;	asakawa_battle.c 216
+                           1895 ;	genPlus
+                           1896 ;	AOP_STK for _show_sprites_sloc0_1_0
+                           1897 ;	genPlusIncr
+                           1898 ;	Can't optimise plus by inc, falling back to the normal way
+   04A0 11 0A 09           1899 	ld	de,#_asakawa_pos
+   04A3 21 01 00           1900 	ld	hl,#0x0001
+   04A6 19                 1901 	add	hl,de
+   04A7 7D                 1902 	ld	a,l
+   04A8 54                 1903 	ld	d,h
+   04A9 F8 06              1904 	lda	hl,6(sp)
+   04AB 22                 1905 	ld	(hl+),a
+   04AC 72                 1906 	ld	(hl),d
+                           1907 ;	genAssign (pointer)
+                           1908 ;	AOP_STK for _show_sprites_sloc0_1_0
+   04AD 2B                 1909 	dec	hl
+   04AE 5E                 1910 	ld	e,(hl)
+   04AF 23                 1911 	inc	hl
+   04B0 56                 1912 	ld	d,(hl)
+   04B1 3E 28              1913 	ld	a,#0x28
+   04B3 12                 1914 	ld	(de),a
+                           1915 ;	asakawa_battle.c 217
+                           1916 ;	genPlus
+                           1917 ;	AOP_STK for _show_sprites_sloc3_1_0
+                           1918 ;	genPlusIncr
+                           1919 ;	Can't optimise plus by inc, falling back to the normal way
+   04B4 11 0A 09           1920 	ld	de,#_asakawa_pos
+   04B7 21 02 00           1921 	ld	hl,#0x0002
+   04BA 19                 1922 	add	hl,de
+   04BB 7D                 1923 	ld	a,l
+   04BC 54                 1924 	ld	d,h
+   04BD F8 02              1925 	lda	hl,2(sp)
+   04BF 22                 1926 	ld	(hl+),a
+   04C0 72                 1927 	ld	(hl),d
+                           1928 ;	genPointerGet
+                           1929 ;	AOP_STK for _show_sprites_sloc4_1_0
+   04C1 11 0A 09           1930 	ld	de,#_asakawa_pos
+   04C4 1A                 1931 	ld	a,(de)
+   04C5 2B                 1932 	dec	hl
+   04C6 2B                 1933 	dec	hl
+                           1934 ;	genPlus
+                           1935 ;	AOP_STK for _show_sprites_sloc4_1_0
+                           1936 ;	AOP_STK for _show_sprites_sloc5_1_0
+                           1937 ;	genPlusIncr
+                           1938 ;	Can't optimise plus by inc, falling back to the normal way
+   04C7 77                 1939 	ld      (hl),a
+   04C8 7F                 1940 	ld      a,a
+   04C9 C6 08              1941 	add	a,#0x08
+   04CB 2B                 1942 	dec	hl
+                           1943 ;	genAssign (pointer)
+                           1944 ;	AOP_STK for _show_sprites_sloc3_1_0
+                           1945 ;	AOP_STK for _show_sprites_sloc5_1_0
+   04CC 22                 1946 	ld	(hl+),a
+   04CD 23                 1947 	inc	hl
+   04CE 5E                 1948 	ld	e,(hl)
+   04CF 23                 1949 	inc	hl
+   04D0 56                 1950 	ld	d,(hl)
+   04D1 F8 00              1951 	lda	hl,0(sp)
+   04D3 7E                 1952 	ld	a,(hl)
+   04D4 12                 1953 	ld	(de),a
+                           1954 ;	asakawa_battle.c 218
+                           1955 ;	genPlus
+                           1956 ;	AOP_STK for _show_sprites_sloc3_1_0
+                           1957 ;	genPlusIncr
+                           1958 ;	Can't optimise plus by inc, falling back to the normal way
+   04D5 11 0A 09           1959 	ld	de,#_asakawa_pos
+   04D8 21 03 00           1960 	ld	hl,#0x0003
+   04DB 19                 1961 	add	hl,de
+   04DC 7D                 1962 	ld	a,l
+   04DD 54                 1963 	ld	d,h
+   04DE F8 02              1964 	lda	hl,2(sp)
+   04E0 22                 1965 	ld	(hl+),a
+   04E1 72                 1966 	ld	(hl),d
+                           1967 ;	genPointerGet
+                           1968 ;	AOP_STK for _show_sprites_sloc0_1_0
+                           1969 ;	AOP_STK for _show_sprites_sloc4_1_0
+   04E2 F8 06              1970 	lda	hl,6(sp)
+   04E4 5E                 1971 	ld	e,(hl)
+   04E5 23                 1972 	inc	hl
+   04E6 56                 1973 	ld	d,(hl)
+   04E7 1A                 1974 	ld	a,(de)
+   04E8 F8 01              1975 	lda	hl,1(sp)
+                           1976 ;	genAssign (pointer)
+                           1977 ;	AOP_STK for _show_sprites_sloc3_1_0
+                           1978 ;	AOP_STK for _show_sprites_sloc4_1_0
+   04EA 22                 1979 	ld	(hl+),a
+   04EB 5E                 1980 	ld	e,(hl)
+   04EC 23                 1981 	inc	hl
+   04ED 56                 1982 	ld	d,(hl)
+   04EE 2B                 1983 	dec	hl
+   04EF 2B                 1984 	dec	hl
+   04F0 7E                 1985 	ld	a,(hl)
+   04F1 12                 1986 	ld	(de),a
+                           1987 ;	asakawa_battle.c 221
+                           1988 ;	genIpush
+                           1989 ; _saveRegsForCall: sendSetSize: 0 deInUse: 0 bcInUse: 1 deSending: 0
+   04F2 C5                 1990 	push	bc
+   04F3 21 50 06           1991 	ld	hl,#_asakawa_front_idle
+   04F6 E5                 1992 	push	hl
+                           1993 ;	genIpush
+   04F7 21 08 08           1994 	ld	hl,#0x0808
+   04FA E5                 1995 	push	hl
+                           1996 ;	genCall
+   04FB CD 00 00           1997 	call	_set_sprite_data
+   04FE E8 04              1998 	lda	sp,4(sp)
+   0500 C1                 1999 	pop	bc
+                           2000 ;	asakawa_battle.c 222
+                           2001 ;	genIpush
+                           2002 ; _saveRegsForCall: sendSetSize: 0 deInUse: 0 bcInUse: 1 deSending: 0
+   0501 C5                 2003 	push	bc
+   0502 21 02 08           2004 	ld	hl,#0x0802
+   0505 E5                 2005 	push	hl
+                           2006 ;	genCall
+   0506 CD 00 00           2007 	call	_set_sprite_tile
+   0509 E8 02              2008 	lda	sp,2(sp)
+   050B C1                 2009 	pop	bc
+                           2010 ;	asakawa_battle.c 223
+                           2011 ;	genIpush
+                           2012 ; _saveRegsForCall: sendSetSize: 0 deInUse: 0 bcInUse: 1 deSending: 0
+   050C C5                 2013 	push	bc
+   050D 21 03 0A           2014 	ld	hl,#0x0A03
+   0510 E5                 2015 	push	hl
+                           2016 ;	genCall
+   0511 CD 00 00           2017 	call	_set_sprite_tile
+   0514 E8 02              2018 	lda	sp,2(sp)
+   0516 C1                 2019 	pop	bc
+                           2020 ;	asakawa_battle.c 229
+                           2021 ;	genPointerGet
+   0517 0A                 2022 	ld	a,(bc)
+   0518 4F                 2023 	ld	c,a
+                           2024 ;	genPointerGet
+   0519 11 06 09           2025 	ld	de,#_hero_pos
+   051C 1A                 2026 	ld	a,(de)
+   051D 47                 2027 	ld	b,a
+                           2028 ;	genIpush
+                           2029 ; _saveRegsForCall: sendSetSize: 0 deInUse: 0 bcInUse: 0 deSending: 0
+   051E 79                 2030 	ld	a,c
+   051F F5                 2031 	push	af
+   0520 33                 2032 	inc	sp
+                           2033 ;	genIpush
+   0521 78                 2034 	ld	a,b
+   0522 F5                 2035 	push	af
+   0523 33                 2036 	inc	sp
+                           2037 ;	genIpush
+   0524 3E 00              2038 	ld	a,#0x00
+   0526 F5                 2039 	push	af
+   0527 33                 2040 	inc	sp
+                           2041 ;	genCall
+   0528 CD 00 00           2042 	call	_move_sprite
+   052B E8 03              2043 	lda	sp,3(sp)
+                           2044 ;	asakawa_battle.c 230
+                           2045 ;	genIpush
+                           2046 ; _saveRegsForCall: sendSetSize: 0 deInUse: 0 bcInUse: 0 deSending: 0
+                           2047 ;	AOP_STK for _show_sprites_sloc1_1_0
+   052D F8 05              2048 	lda	hl,5(sp)
+   052F 7E                 2049 	ld	a,(hl)
+   0530 F5                 2050 	push	af
+   0531 33                 2051 	inc	sp
+                           2052 ;	genIpush
+                           2053 ;	AOP_STK for _show_sprites_sloc2_1_0
+   0532 2B                 2054 	dec	hl
+   0533 7E                 2055 	ld	a,(hl)
+   0534 F5                 2056 	push	af
+   0535 33                 2057 	inc	sp
+                           2058 ;	genIpush
+   0536 3E 01              2059 	ld	a,#0x01
+   0538 F5                 2060 	push	af
+   0539 33                 2061 	inc	sp
+                           2062 ;	genCall
+   053A CD 00 00           2063 	call	_move_sprite
+   053D E8 03              2064 	lda	sp,3(sp)
+                           2065 ;	asakawa_battle.c 232
+                           2066 ;	genPointerGet
+                           2067 ;	AOP_STK for _show_sprites_sloc0_1_0
+   053F F8 06              2068 	lda	hl,6(sp)
+   0541 5E                 2069 	ld	e,(hl)
+   0542 23                 2070 	inc	hl
+   0543 56                 2071 	ld	d,(hl)
+   0544 1A                 2072 	ld	a,(de)
+   0545 4F                 2073 	ld	c,a
+                           2074 ;	genPointerGet
+   0546 11 0A 09           2075 	ld	de,#_asakawa_pos
+   0549 1A                 2076 	ld	a,(de)
+   054A 47                 2077 	ld	b,a
+                           2078 ;	genIpush
+                           2079 ; _saveRegsForCall: sendSetSize: 0 deInUse: 0 bcInUse: 0 deSending: 0
+   054B 79                 2080 	ld	a,c
+   054C F5                 2081 	push	af
+   054D 33                 2082 	inc	sp
+                           2083 ;	genIpush
+   054E 78                 2084 	ld	a,b
+   054F F5                 2085 	push	af
+   0550 33                 2086 	inc	sp
+                           2087 ;	genIpush
+   0551 3E 02              2088 	ld	a,#0x02
+   0553 F5                 2089 	push	af
+   0554 33                 2090 	inc	sp
+                           2091 ;	genCall
+   0555 CD 00 00           2092 	call	_move_sprite
+   0558 E8 03              2093 	lda	sp,3(sp)
+                           2094 ;	asakawa_battle.c 233
+                           2095 ;	genIpush
+                           2096 ; _saveRegsForCall: sendSetSize: 0 deInUse: 0 bcInUse: 0 deSending: 0
+                           2097 ;	AOP_STK for _show_sprites_sloc4_1_0
+   055A F8 01              2098 	lda	hl,1(sp)
+   055C 7E                 2099 	ld	a,(hl)
+   055D F5                 2100 	push	af
+   055E 33                 2101 	inc	sp
+                           2102 ;	genIpush
+                           2103 ;	AOP_STK for _show_sprites_sloc5_1_0
+   055F 2B                 2104 	dec	hl
+   0560 7E                 2105 	ld	a,(hl)
+   0561 F5                 2106 	push	af
+   0562 33                 2107 	inc	sp
+                           2108 ;	genIpush
+   0563 3E 03              2109 	ld	a,#0x03
+   0565 F5                 2110 	push	af
+   0566 33                 2111 	inc	sp
+                           2112 ;	genCall
+   0567 CD 00 00           2113 	call	_move_sprite
+   056A E8 03              2114 	lda	sp,3(sp)
+                           2115 ;	genLabel
+   056C                    2116 00101$:
+                           2117 ;	genEndFunction
+   056C E8 08              2118 	lda	sp,8(sp)
+   056E C9                 2119 	ret
+   056F                    2120 ___show_sprites_end:
+                           2121 ;	asakawa_battle.c 236
+                           2122 ;	genLabel
+                           2123 ;	genFunction
+                           2124 ;	---------------------------------
+                           2125 ; Function main
+                           2126 ; ---------------------------------
+   056F                    2127 ___main_start:
+   056F                    2128 _main:
+   056F E8 FD              2129 	lda	sp,-3(sp)
+                           2130 ;	asakawa_battle.c 238
+                           2131 ;	genCall
+                           2132 ; _saveRegsForCall: sendSetSize: 0 deInUse: 0 bcInUse: 0 deSending: 0
+   0571 CD 00 00           2133 	call	_wait_vbl_done
+                           2134 ;	asakawa_battle.c 240
+                           2135 ;	genCall
+                           2136 ; _saveRegsForCall: sendSetSize: 0 deInUse: 0 bcInUse: 0 deSending: 0
+   0574 CD 00 00           2137 	call	_display_off
+                           2138 ;	asakawa_battle.c 241
+                           2139 ;	genAssign
+   0577 01 40 FF           2140 	ld	bc,#0xFF40
+                           2141 ;	genAssign
+                           2142 ;	AOP_STK for _main_sloc0_1_0
+   057A F8 01              2143 	lda	hl,1(sp)
+   057C 36 40              2144 	ld	(hl),#0x40
+   057E 23                 2145 	inc	hl
+   057F 36 FF              2146 	ld	(hl),#0xFF
+                           2147 ;	genPointerGet
+                           2148 ;	AOP_STK for _main_sloc0_1_0
+                           2149 ;	AOP_STK for _main_sloc1_1_0
+   0581 2B                 2150 	dec	hl
+   0582 5E                 2151 	ld	e,(hl)
+   0583 23                 2152 	inc	hl
+   0584 56                 2153 	ld	d,(hl)
+   0585 1A                 2154 	ld	a,(de)
+   0586 2B                 2155 	dec	hl
+   0587 2B                 2156 	dec	hl
+                           2157 ;	genAnd
+                           2158 ;	AOP_STK for _main_sloc1_1_0
+   0588 77                 2159 	ld      (hl),a
+   0589 7F                 2160 	ld      a,a
+   058A E6 FE              2161 	and	a,#0xFE
+                           2162 ;	genAssign (pointer)
+   058C 02                 2163 	ld	(bc),a
+                           2164 ;	asakawa_battle.c 242
+                           2165 ;	genAssign
+   058D 01 40 FF           2166 	ld	bc,#0xFF40
+                           2167 ;	genAssign
+                           2168 ;	AOP_STK for _main_sloc0_1_0
+   0590 23                 2169 	inc	hl
+   0591 36 40              2170 	ld	(hl),#0x40
+   0593 23                 2171 	inc	hl
+   0594 36 FF              2172 	ld	(hl),#0xFF
+                           2173 ;	genPointerGet
+                           2174 ;	AOP_STK for _main_sloc0_1_0
+                           2175 ;	AOP_STK for _main_sloc1_1_0
+   0596 2B                 2176 	dec	hl
+   0597 5E                 2177 	ld	e,(hl)
+   0598 23                 2178 	inc	hl
+   0599 56                 2179 	ld	d,(hl)
+   059A 1A                 2180 	ld	a,(de)
+   059B 2B                 2181 	dec	hl
+   059C 2B                 2182 	dec	hl
+                           2183 ;	genAnd
+                           2184 ;	AOP_STK for _main_sloc1_1_0
+   059D 77                 2185 	ld      (hl),a
+   059E 7F                 2186 	ld      a,a
+   059F E6 FD              2187 	and	a,#0xFD
+                           2188 ;	genAssign (pointer)
+   05A1 02                 2189 	ld	(bc),a
+                           2190 ;	asakawa_battle.c 243
+                           2191 ;	genAssign
+   05A2 01 40 FF           2192 	ld	bc,#0xFF40
+                           2193 ;	genAssign
+                           2194 ;	AOP_STK for _main_sloc0_1_0
+   05A5 23                 2195 	inc	hl
+   05A6 36 40              2196 	ld	(hl),#0x40
+   05A8 23                 2197 	inc	hl
+   05A9 36 FF              2198 	ld	(hl),#0xFF
+                           2199 ;	genPointerGet
+                           2200 ;	AOP_STK for _main_sloc0_1_0
+                           2201 ;	AOP_STK for _main_sloc1_1_0
+   05AB 2B                 2202 	dec	hl
+   05AC 5E                 2203 	ld	e,(hl)
+   05AD 23                 2204 	inc	hl
+   05AE 56                 2205 	ld	d,(hl)
+   05AF 1A                 2206 	ld	a,(de)
+   05B0 2B                 2207 	dec	hl
+   05B1 2B                 2208 	dec	hl
+                           2209 ;	genAnd
+                           2210 ;	AOP_STK for _main_sloc1_1_0
+   05B2 77                 2211 	ld      (hl),a
+   05B3 7F                 2212 	ld      a,a
+   05B4 E6 DF              2213 	and	a,#0xDF
+                           2214 ;	genAssign (pointer)
+   05B6 02                 2215 	ld	(bc),a
+                           2216 ;	asakawa_battle.c 245
+                           2217 ;	genCall
+                           2218 ; _saveRegsForCall: sendSetSize: 0 deInUse: 0 bcInUse: 0 deSending: 0
+   05B7 CD A5 01           2219 	call	_battle_menu
+                           2220 ;	asakawa_battle.c 247
+                           2221 ;	genAssign
+   05BA 01 40 FF           2222 	ld	bc,#0xFF40
+                           2223 ;	genAssign
+                           2224 ;	AOP_STK for _main_sloc0_1_0
+   05BD F8 01              2225 	lda	hl,1(sp)
+   05BF 36 40              2226 	ld	(hl),#0x40
+   05C1 23                 2227 	inc	hl
+   05C2 36 FF              2228 	ld	(hl),#0xFF
+                           2229 ;	genPointerGet
+                           2230 ;	AOP_STK for _main_sloc0_1_0
+                           2231 ;	AOP_STK for _main_sloc1_1_0
+   05C4 2B                 2232 	dec	hl
+   05C5 5E                 2233 	ld	e,(hl)
+   05C6 23                 2234 	inc	hl
+   05C7 56                 2235 	ld	d,(hl)
+   05C8 1A                 2236 	ld	a,(de)
+   05C9 2B                 2237 	dec	hl
+   05CA 2B                 2238 	dec	hl
+                           2239 ;	genOr
+                           2240 ;	AOP_STK for _main_sloc1_1_0
+   05CB 77                 2241 	ld      (hl),a
+   05CC 7F                 2242 	ld      a,a
+   05CD F6 01              2243 	or	a,#0x01
+                           2244 ;	genAssign (pointer)
+   05CF 02                 2245 	ld	(bc),a
+                           2246 ;	asakawa_battle.c 248
+                           2247 ;	genAssign
+   05D0 01 40 FF           2248 	ld	bc,#0xFF40
+                           2249 ;	genAssign
+                           2250 ;	AOP_STK for _main_sloc0_1_0
+   05D3 23                 2251 	inc	hl
+   05D4 36 40              2252 	ld	(hl),#0x40
+   05D6 23                 2253 	inc	hl
+   05D7 36 FF              2254 	ld	(hl),#0xFF
+                           2255 ;	genPointerGet
+                           2256 ;	AOP_STK for _main_sloc0_1_0
+                           2257 ;	AOP_STK for _main_sloc1_1_0
+   05D9 2B                 2258 	dec	hl
+   05DA 5E                 2259 	ld	e,(hl)
+   05DB 23                 2260 	inc	hl
+   05DC 56                 2261 	ld	d,(hl)
+   05DD 1A                 2262 	ld	a,(de)
+   05DE 2B                 2263 	dec	hl
+   05DF 2B                 2264 	dec	hl
+                           2265 ;	genOr
+                           2266 ;	AOP_STK for _main_sloc1_1_0
+   05E0 77                 2267 	ld      (hl),a
+   05E1 7F                 2268 	ld      a,a
+   05E2 F6 02              2269 	or	a,#0x02
+                           2270 ;	genAssign (pointer)
+   05E4 02                 2271 	ld	(bc),a
+                           2272 ;	asakawa_battle.c 249
+                           2273 ;	genAssign
+   05E5 01 40 FF           2274 	ld	bc,#0xFF40
+                           2275 ;	genAssign
+                           2276 ;	AOP_STK for _main_sloc0_1_0
+   05E8 23                 2277 	inc	hl
+   05E9 36 40              2278 	ld	(hl),#0x40
+   05EB 23                 2279 	inc	hl
+   05EC 36 FF              2280 	ld	(hl),#0xFF
+                           2281 ;	genPointerGet
+                           2282 ;	AOP_STK for _main_sloc0_1_0
+                           2283 ;	AOP_STK for _main_sloc1_1_0
+   05EE 2B                 2284 	dec	hl
+   05EF 5E                 2285 	ld	e,(hl)
+   05F0 23                 2286 	inc	hl
+   05F1 56                 2287 	ld	d,(hl)
+   05F2 1A                 2288 	ld	a,(de)
+   05F3 2B                 2289 	dec	hl
+   05F4 2B                 2290 	dec	hl
+                           2291 ;	genOr
+                           2292 ;	AOP_STK for _main_sloc1_1_0
+   05F5 77                 2293 	ld      (hl),a
+   05F6 7F                 2294 	ld      a,a
+   05F7 F6 80              2295 	or	a,#0x80
+                           2296 ;	genAssign (pointer)
+   05F9 02                 2297 	ld	(bc),a
+                           2298 ;	asakawa_battle.c 250
+                           2299 ;	genCall
+                           2300 ; _saveRegsForCall: sendSetSize: 0 deInUse: 0 bcInUse: 0 deSending: 0
+   05FA CD 00 00           2301 	call	_asakawa_battle_ctrl
+                           2302 ;	genLabel
+   05FD                    2303 00101$:
+                           2304 ;	genEndFunction
+   05FD E8 03              2305 	lda	sp,3(sp)
+   05FF C9                 2306 	ret
+   0600                    2307 ___main_end:
+                           2308 	.area _CODE
+ASxxxx Assembler V01.75  (GameBoy Z80-like CPU), page 1.
+
+Symbol Table
+
+  1 _ASAKAWA_HP                        08F8 GR
+  1 _HERO_HP                           08F9 GR
+    _LETTER_COUNT                      **** GX
+  0 ___asakawa_battle_check_end        0418 R
+  0 ___asakawa_battle_check_start      0392 R
+  0 ___asakawa_battle_ctrl_end         003B R
+  0 ___asakawa_battle_ctrl_start       0000 R
+  0 ___back_end                        00FC R
+  0 ___back_start                      00EA R
+  0 ___battle_menu_end                 0216 R
+  0 ___battle_menu_start               01A5 R
+  0 ___battle_nav_end                  0096 R
+  0 ___battle_nav_start                003B R
+  0 ___battle_toggle_down_end          038E R
+  0 ___battle_toggle_down_start        030E R
+  0 ___battle_toggle_up_end            030A R
+  0 ___battle_toggle_up_start          028A R
+  0 ___fight_opt_end                   013F R
+  0 ___fight_opt_start                 00FC R
+  0 ___item_opt_end                    018E R
+  0 ___item_opt_start                  0158 R
+  0 ___main_end                        0600 R
+  0 ___main_start                      056F R
+  0 ___run_end                         00D8 R
+  0 ___run_start                       0096 R
+  0 ___show_fighter_stats_end          027E R
+  0 ___show_fighter_stats_start        0232 R
+  0 ___show_sprites_end                056F R
+  0 ___show_sprites_start              0418 R
+    __initrleblock                     **** GX
+  0 __str_0                            00D8 R
+  0 __str_1                            00DC R
+  0 __str_10                           0216 R
+  0 __str_11                           0218 R
+  0 __str_12                           021F R
+  0 __str_13                           0227 R
+  0 __str_14                           022C R
+  0 __str_15                           027E R
+  0 __str_16                           0283 R
+  0 __str_17                           0286 R
+  0 __str_18                           030A R
+  0 __str_19                           030C R
+  0 __str_2                            00E2 R
+  0 __str_20                           038E R
+  0 __str_21                           0390 R
+  0 __str_3                            013F R
+  0 __str_4                            0141 R
+  0 __str_5                            0148 R
+  0 __str_6                            0151 R
+  0 __str_7                            018E R
+  0 __str_8                            0195 R
+  0 __str_9                            019E R
+  1 _a                                 0905 GR
+  1 _arrow_x                           090E GR
+  1 _arrow_y                           090F GR
+  0 _asakawa_battle_check              0392 GR
+  0 _asakawa_battle_ctrl               0000 GR
+  1 _asakawa_front_idle                0650 GR
+  1 _asakawa_pos                       090A GR
+  0 _back                              00EA GR
+    _battle_bkg_clean                  **** GX
+  0 _battle_menu                       01A5 GR
+  0 _battle_nav                        003B GR
+    _battle_print                      **** GX
+  0 _battle_toggle_down                030E GR
+  0 _battle_toggle_up                  028A GR
+  1 _blank_screen                      0750 GR
+  1 _blank_screen_tiles                08B8 GR
+  1 _chain_border                      0000 GR
+  1 _chain_border_tiles                0448 GR
+  1 _choice                            0902 GR
+    _delay                             **** GX
+    _display_off                       **** GX
+  1 _enemy_choice                      0903 GR
+  0 _fight_opt                         00FC GR
+  1 _font                              0168 GR
+  1 _h_hp                              08FA GR
+  1 _hero_back_idle                    06D0 GR
+    _hero_fight                        **** GX
+  1 _hero_pos                          0906 GR
+    _hide_sprites                      **** GX
+  0 _item_opt                          0158 GR
+    _itoa                              **** GX
+    _joypad                            **** GX
+  0 _main                              056F GR
+    _move_sprite                       **** GX
+  0 _run                               0096 GR
+    _set_bkg_data                      **** GX
+    _set_bkg_tiles                     **** GX
+    _set_sprite_data                   **** GX
+    _set_sprite_tile                   **** GX
+  0 _show_fighter_stats                0232 GR
+  0 _show_sprites                      0418 GR
+  1 _small_chain_border                04E8 GR
+    _sprite_clean                      **** GX
+  1 _state                             0910 GR
+    _wait_vbl_done                     **** GX
+  1 _y                                 0904 GR
+
+ASxxxx Assembler V01.75  (GameBoy Z80-like CPU), page 2.
+
+Area Table
+
+   0 _CODE                              size  600   flags 0
+   1 _DATA                              size  911   flags 0
+   2 _OVERLAY                           size    0   flags 0
+   3 _ISEG                              size    0   flags 0
+   4 _BSEG                              size    0   flags 0
+   5 _XSEG                              size    0   flags 0
+   6 _GSINIT                            size  51E   flags 0
+   7 _GSFINAL                           size    0   flags 0
+   8 _HOME                              size    0   flags 0

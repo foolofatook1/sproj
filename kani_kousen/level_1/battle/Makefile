@@ -1,7 +1,7 @@
 all:
-	lcc -Wa-l -Wl-m -Wl-j -DUSE_SFT_FOR_REG -c -o battle.o battle.c ../../text/text.o
-	lcc -Wa-l -Wl-m -Wl-j -DUSE_SFT_FOR_REG -c -o asakawa_battle.o asakawa_battle.c 
-	lcc -Wa-l -Wl-m -Wl-j -DUSE_SFR_FOR_REG -o asakawa_battle.gb asakawa_battle.o battle.o
+	lcc -Wa-l -Wl-m -c -o battle.o battle.c 
+	lcc -Wa-l -Wl-m -c -o asakawa_battle.o asakawa_battle.c 
+	lcc -Wa-l -Wl-m -o asakawa_battle.gb asakawa_battle.o battle.o ../../text/text.o
 
 clean:
 	rm *.o *.gb *.sym *.map *.lst
