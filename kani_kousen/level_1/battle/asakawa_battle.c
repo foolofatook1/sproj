@@ -9,11 +9,12 @@ void asakawa_battle_ctrl(void)
         while(state == FIGHTING)
         {
             //choice_handler(arrow_y);
-            //hero_fight(ASAKAWA_HP);
-            npc_fight(&HERO_HP);
+            hero_fight(&ASAKAWA_HP, &HERO_HP);
+//            npc_fight(&HERO_HP);
             delay(400);
             state = BATTLE_OPT; /* return the state back to normal */
             battle_menu();
+            choice = 0;
         }
     }
 }
@@ -172,9 +173,7 @@ void asakawa_battle_check(void)
     if(joypad() & J_A)
     {
         if(state == FIGHT_OPT)
-        {
             state = FIGHTING;
-        }
         else
             battle_nav();
     }
