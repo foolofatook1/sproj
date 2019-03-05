@@ -1,4 +1,14 @@
 #include "battle.h"
+/*
+UINT8 ASAKAWA_HP = 100;
+UINT8 HERO_HP = 10;
+UWORD h_hp[4];
+UINT8 choice = 0;
+UINT8 enemy_choice = 0;
+ a stepping variable for character animations 
+UINT8 y = 72;
+ another animation counter 
+UINT8 a = 0;*/
 
 /*void fight_ctrl(void)
   {
@@ -6,6 +16,17 @@
   {
   }
   }*/
+
+
+//UWORD h_hp[4];
+
+UINT8 choice = 0;
+UINT8 enemy_choice;
+
+/* a stepping variable for character animations */
+UINT8 y = 72;
+/* another animation counter */
+UINT8 a = 0;
 
 
 void choice_handler(UINT8 arrow_y)

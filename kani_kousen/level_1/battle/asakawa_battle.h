@@ -24,11 +24,7 @@ void back(void);
 #define ITEM_OPT    3
 #define FIGHTING    4
 
+extern UINT8 arrow_x;
+extern UINT8 arrow_y;
 
-UINT8 hero_pos[2][2];
-UINT8 asakawa_pos[2][2];
-
-UINT8 arrow_x = 18;
-UINT8 arrow_y = 32;
-
-UINT8 state = BATTLE_OPT;
+extern UINT8 state;

@@ -1,5 +1,16 @@
 #include "start_up.h"
 
+/* arrow sprite coordinates */
+UINT8 arrow_x = 72;
+UINT8 arrow_y = 56;
+
+
+/* option chosen */
+UINT8 option;
+
+/* chosen decision */
+UINT8 choice = NOTHING;
+
 void opening(void)
 {
     //option = NOTHING; 

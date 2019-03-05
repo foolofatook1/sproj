@@ -1,12 +1,17 @@
+#include "start_up/start_up.h"
+#include "level_1/level_1.h"
+
+#ifndef GBDK_INCLUDE
+#define GBDK_INCLUDE
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <gb/gb.h>
 #include <gb/drawing.h>
 
-#include "start_up/start_up.c"
-#include "level_1/level_1.c"
+#endif
 
-UINT8 action;
+//UINT8 action;
 
 void main(void)
 {

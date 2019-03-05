@@ -1,0 +1,131 @@
+                              1 ;--------------------------------------------------------
+                              2 ; File Created by SDCC : FreeWare ANSI-C Compiler
+                              3 ; Version 2.3.1 Mon Mar  4 15:06:17 2019
+                              4 
+                              5 ;--------------------------------------------------------
+                              6 	.module lcc278650
+                              7 	
+                              8 ;--------------------------------------------------------
+                              9 ; Public variables in this module
+                             10 ;--------------------------------------------------------
+                             11 	.globl _shit_pot_tiles
+                             12 ;--------------------------------------------------------
+                             13 ; special function registers
+                             14 ;--------------------------------------------------------
+                             15 ;--------------------------------------------------------
+                             16 ; special function bits 
+                             17 ;--------------------------------------------------------
+                             18 ;--------------------------------------------------------
+                             19 ; internal ram data
+                             20 ;--------------------------------------------------------
+                             21 	.area _DATA
+   0000                      22 _shit_pot_tiles::
+   0000                      23 	.ds 208
+                             24 ;--------------------------------------------------------
+                             25 ; overlayable items in internal ram 
+                             26 ;--------------------------------------------------------
+                             27 	.area _OVERLAY
+                             28 ;--------------------------------------------------------
+                             29 ; indirectly addressable internal ram data
+                             30 ;--------------------------------------------------------
+                             31 	.area _ISEG
+                             32 ;--------------------------------------------------------
+                             33 ; bit data
+                             34 ;--------------------------------------------------------
+                             35 	.area _BSEG
+                             36 ;--------------------------------------------------------
+                             37 ; external ram data
+                             38 ;--------------------------------------------------------
+                             39 	.area _XSEG
+                             40 ;--------------------------------------------------------
+                             41 ; global & static initialisations
+                             42 ;--------------------------------------------------------
+                             43 	.area _GSINIT
+                             44 	.area _GSFINAL
+                             45 	.area _GSINIT
+                             46 ;	shit_pot_tiles.c 26
+                             47 ;	shit_pot_tiles.c 55
+                             48 ;	genArrayInit
+                             49 ; _saveRegsForCall: sendSetSize: 0 deInUse: 0 bcInUse: 0 deSending: 0
+   0000 21 00 00             50 	ld	hl,#_shit_pot_tiles
+   0003 CD 00 00             51 	call	__initrleblock
+   0006 7F                   52 	.db	127
+   0007 00 FF 73 8C 7E 81    53 	.db	0x00, 0xFF, 0x73, 0x8C, 0x7E, 0x81, 0x41, 0xBE
+        41 BE
+   000F 7C 83 17 E8 6F 90    54 	.db	0x7C, 0x83, 0x17, 0xE8, 0x6F, 0x90, 0x00, 0xFF
+        00 FF
+   0017 3F C0 9F 60 E1 1E    55 	.db	0x3F, 0xC0, 0x9F, 0x60, 0xE1, 0x1E, 0x1F, 0xE0
+        1F E0
+   001F E8 17 BE 41 C3 3C    56 	.db	0xE8, 0x17, 0xBE, 0x41, 0xC3, 0x3C, 0x00, 0xFF
+        00 FF
+   0027 00 FF DF 20 21 DE    57 	.db	0x00, 0xFF, 0xDF, 0x20, 0x21, 0xDE, 0xFE, 0x01
+        FE 01
+   002F 39 C6 94 6B FB 04    58 	.db	0x39, 0xC6, 0x94, 0x6B, 0xFB, 0x04, 0x00, 0xFF
+        00 FF
+   0037 7F 80 42 BD 7F 80    59 	.db	0x7F, 0x80, 0x42, 0xBD, 0x7F, 0x80, 0x78, 0x87
+        78 87
+   003F 0F F0 73 8C 78 87    60 	.db	0x0F, 0xF0, 0x73, 0x8C, 0x78, 0x87, 0x00, 0xFF
+        00 FF
+   0047 00 FF 5D A2 66 99    61 	.db	0x00, 0xFF, 0x5D, 0xA2, 0x66, 0x99, 0x79, 0x86
+        79 86
+   004F 00 FF 3F C0 63 9C    62 	.db	0x00, 0xFF, 0x3F, 0xC0, 0x63, 0x9C, 0x00, 0xFF
+        00 FF
+   0057 FC 03 26 D9 91 6E    63 	.db	0xFC, 0x03, 0x26, 0xD9, 0x91, 0x6E, 0xC7, 0x38
+        C7 38
+   005F B6 49 DC 23 D1 2E    64 	.db	0xB6, 0x49, 0xDC, 0x23, 0xD1, 0x2E, 0x00, 0xFF
+        00 FF
+   0067 00 FF 7E 81 B0 4F    65 	.db	0x00, 0xFF, 0x7E, 0x81, 0xB0, 0x4F, 0xE6, 0x19
+        E6 19
+   006F 48 B7 3A C5 EE 11    66 	.db	0x48, 0xB7, 0x3A, 0xC5, 0xEE, 0x11, 0x00, 0xFF
+        00 FF
+   0077 7F 80 70 8F 07 F8    67 	.db	0x7F, 0x80, 0x70, 0x8F, 0x07, 0xF8, 0x79, 0x86
+        79 86
+   007F 63 9C 1C E3 76 89    68 	.db	0x63, 0x9C, 0x1C, 0xE3, 0x76, 0x89, 0x00
+        00
+   0086 EF FF                69 	.db	-17,0xFF
+   0088 1F                   70 	.db	31
+   0089 00 FF 00 FF 00 FF    71 	.db	0x00, 0xFF, 0x00, 0xFF, 0x00, 0xFF, 0x00, 0xFF
+        00 FF
+   0091 00 FF 00 FF 00 FF    72 	.db	0x00, 0xFF, 0x00, 0xFF, 0x00, 0xFF, 0x00, 0xFF
+        00 FF
+   0099 FF 00 FF 00 FF 00    73 	.db	0xFF, 0x00, 0xFF, 0x00, 0xFF, 0x00, 0xFF, 0x00
+        FF 00
+   00A1 FF 00 FF 00 FF 00    74 	.db	0xFF, 0x00, 0xFF, 0x00, 0xFF, 0x00, 0xFF
+        FF
+   00A8 EF 00                75 	.db	-17,0x00
+   00AA 10                   76 	.db	16
+   00AB FF 00 DF 20 5E A1    77 	.db	0xFF, 0x00, 0xDF, 0x20, 0x5E, 0xA1, 0x4A, 0xB5
+        4A B5
+   00B3 00 FF B6 49 54 AB    78 	.db	0x00, 0xFF, 0xB6, 0x49, 0x54, 0xAB, 0x01, 0xFE
+        01 FE
+   00BB 00                   79 	.db	0
+                             80 ;--------------------------------------------------------
+                             81 ; Home
+                             82 ;--------------------------------------------------------
+                             83 	.area _HOME
+                             84 	.area _CODE
+                             85 ;--------------------------------------------------------
+                             86 ; code
+                             87 ;--------------------------------------------------------
+                             88 	.area _CODE
+                             89 	.area _CODE
+ASxxxx Assembler V01.75  (GameBoy Z80-like CPU), page 1.
+
+Symbol Table
+
+    __initrleblock                     **** GX
+  1 _shit_pot_tiles                    0000 GR
+
+ASxxxx Assembler V01.75  (GameBoy Z80-like CPU), page 2.
+
+Area Table
+
+   0 _CODE                              size    0   flags 0
+   1 _DATA                              size   D0   flags 0
+   2 _OVERLAY                           size    0   flags 0
+   3 _ISEG                              size    0   flags 0
+   4 _BSEG                              size    0   flags 0
+   5 _XSEG                              size    0   flags 0
+   6 _GSINIT                            size   BC   flags 0
+   7 _GSFINAL                           size    0   flags 0
+   8 _HOME                              size    0   flags 0

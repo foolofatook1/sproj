@@ -4,39 +4,48 @@
  * overlaps the bkg. This can be used to make who's in 
  * dialogue with who more clear.
  */
-//#include <gb/gb.h>
-//#include <stdio.h>
+
+/* text things */
+#include "../text/text.h"
+
+#ifndef GBDK_INCLUDE
+#define GBDK_INCLUDE
+
+#include <stdio.h>
+#include <stdlib.h>
+#include <gb/gb.h>
+#include <gb/drawing.h>
+
+#endif
 
 /* giving mem banking a try */
 //#include "asakawa_battle.c"
 
-/* text things */
-#include "../text/text.c"
 
 /* level 1 opening screen */
-#include "assets/level_1_screen_tiles.c"
-#include "assets/level_1_screen.c"
+#include "assets/level_1_screen_tiles.h"
+#include "assets/level_1_screen.h"
 
 /* shit pot assets */
-#include "assets/shit_pot_tiles.c" 
-#include "assets/shit_pot.c"
+#include "assets/shit_pot_tiles.h" 
+#include "assets/shit_pot.h"
 
 /* starting sprites */
 /* hero */
-#include "../assets/sprites/hero_front_idle.c"
-#include "../assets/sprites/hero_back_idle.c"
+#include "../assets/sprites/hero_front_idle.h"
+#include "../assets/sprites/hero_back_idle.h"
 /* fisherman */
-#include "../assets/sprites/fisherman_front_idle.c"
-#include "../assets/sprites/fisherman_idle_back.c"
+#include "../assets/sprites/fisherman_front_idle.h"
+#include "../assets/sprites/fisherman_idle_back.h"
 /* miner */
-#include "../assets/sprites/miner_walk_left.c"
-#include "../assets/sprites/miner_walk_up.c"
-#include "../assets/sprites/miner_idle_back.c"
+#include "../assets/sprites/miner_walk_left.h"
+#include "../assets/sprites/miner_walk_up.h"
+#include "../assets/sprites/miner_idle_back.h"
 /* student */
-#include "../assets/sprites/student_idle_back.c"
+#include "../assets/sprites/student_idle_back.h"
 /* asakawa */
-#include "../assets/sprites/asakawa_front_idle.c"
-#include "../assets/sprites/asakawa_air_shot.c"
+#include "../assets/sprites/asakawa_front_idle.h"
+#include "../assets/sprites/asakawa_air_shot.h"
 
 
 
@@ -60,18 +69,18 @@ void asakawa_battle1_setup(void);
 
 
 /* scene 1 variables */
-UINT8 text_count = 0;
+extern UINT8 text_count;
 /* scene 2 variables */
-UINT8 start_animate = 0;
-UINT8 scene_2 = 0;
+extern UINT8 start_animate;
+extern UINT8 scene_2;
 /* scene 3 variables */
-UINT8 scene_3_anim = 0;
-UINT8 scene_3_stop = 0;
+extern UINT8 scene_3_anim;
+extern UINT8 scene_3_stop;
 
-UINT8 hero_pos[2][2];
-UINT8 fisherman_pos[2][2];
-UINT8 miner_pos[2][2];
-UINT8 student_pos[2][2];
-UINT8 asakawa_pos[2][2];
+extern UINT8 **hero_pos;
+extern UINT8 **fisherman_pos;
+extern UINT8 **miner_pos;
+extern UINT8 **student_pos;
+extern UINT8 **asakawa_pos;
 
-UINT8 sprite_width = 8;
+extern UINT8 sprite_width;

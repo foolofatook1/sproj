@@ -1,5 +1,22 @@
 #include "level_1.h"
 
+/* scene 1 variables */
+UINT8 text_count = 0;
+/* scene 2 variables */
+UINT8 start_animate = 0;
+UINT8 scene_2 = 0;
+/* scene 3 variables */
+UINT8 scene_3_anim = 0;
+UINT8 scene_3_stop = 0;
+
+UINT8 hero_pos[2][2];
+UINT8 fisherman_pos[2][2];
+UINT8 miner_pos[2][2];
+UINT8 student_pos[2][2];
+UINT8 asakawa_pos[2][2];
+
+UINT8 sprite_width = 8;
+
 /* The big control function */
 void level_1_ctrl(void) 
 {

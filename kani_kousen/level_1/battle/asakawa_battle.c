@@ -1,5 +1,10 @@
 #include "asakawa_battle.h"
 
+UINT8 arrow_x = 18;
+UINT8 arrow_y = 32;
+
+UINT8 state = BATTLE_OPT;
+
 void asakawa_battle_ctrl(void)
 {
     while(1)
@@ -8,13 +13,17 @@ void asakawa_battle_ctrl(void)
         asakawa_battle_check();
         while(state == FIGHTING)
         {
-            //choice_handler(arrow_y);
-            hero_fight(&ASAKAWA_HP, &HERO_HP);
-//            npc_fight(&HERO_HP);
+            choice_handler(arrow_y);
+//            hero_fight(&ASAKAWA_HP, &HERO_HP);
+            npc_fight(&HERO_HP);
             delay(400);
-            state = BATTLE_OPT; /* return the state back to normal */
+            /* basically does back but only when everything is done */
+            DISPLAY_OFF;
             battle_menu();
+            state = BATTLE_OPT;
             choice = 0;
+            DISPLAY_ON;
+            battle_menu();
         }
     }
 }
@@ -62,6 +71,7 @@ void back(void)
     {
         battle_menu();
         state = BATTLE_OPT;
+        choice = 0;
     }
 }
 
@@ -124,18 +134,14 @@ void battle_toggle_up(void)
     if(arrow_y == 32)
     {
         arrow_y = 80;
-        battle_bkg_clean();
         delay(100);
-        battle_bkg_clean();
         battle_print(">", arrow_x, arrow_y);
         LETTER_COUNT = 0;
         delay(100);
     }
     else
     {
-        battle_bkg_clean();
         delay(100);
-        battle_bkg_clean();
         battle_print(">", arrow_x, arrow_y-=16);
         LETTER_COUNT = 0;
         delay(100);
@@ -148,18 +154,14 @@ void battle_toggle_down(void)
     if(arrow_y == 80)
     {
         arrow_y = 32;
-        battle_bkg_clean();
         delay(100);
-        battle_bkg_clean();
         battle_print(">", arrow_x, arrow_y);
         LETTER_COUNT = 0;
         delay(100);
     }
     else
     {
-        battle_bkg_clean();
         delay(100);
-        battle_bkg_clean();
         battle_print(">", arrow_x, arrow_y+=16);
         LETTER_COUNT = 0;
         delay(100);
@@ -196,46 +198,12 @@ void asakawa_battle_check(void)
 
 }
 
-void show_sprites(void)
-{
-    SPRITES_8x16;
-
-    /* setup sprites */
-    /* hero */
-    hero_pos[0][0] = 80;
-    hero_pos[0][1] = 72;
-    hero_pos[1][0] = hero_pos[0][0]+SPRITE_WIDTH;
-    hero_pos[1][1] = hero_pos[0][1];
-
-                  //46
-    set_sprite_data(0, 8, hero_back_idle);
-    set_sprite_tile(0, 0);//LETTER_COUNT+1, 46);
-    set_sprite_tile(1, 2);//LETTER_COUNT+2, 48);
-    /* asakawa */
-    asakawa_pos[0][0] = 80;
-    asakawa_pos[0][1] = 40;
-    asakawa_pos[1][0] = asakawa_pos[0][0]+SPRITE_WIDTH;
-    asakawa_pos[1][1] = asakawa_pos[0][1];
-
-                // 54
-    set_sprite_data(8, 8, asakawa_front_idle);
-    set_sprite_tile(2, 8);//LETTER_COUNT+3, 54);
-    set_sprite_tile(3, 10);//LETTER_COUNT+4, 56);
-
-
-    /* display sprites */
-    /* hero */
-              //LETTER_COUNT+x
-    move_sprite(0, hero_pos[0][0], hero_pos[0][1]);
-    move_sprite(1, hero_pos[1][0], hero_pos[1][1]);
-    /* asakawa */
-    move_sprite(2, asakawa_pos[0][0], asakawa_pos[0][1]);
-    move_sprite(3, asakawa_pos[1][0], asakawa_pos[1][1]);
-}
-
 void main(void)
 {
     wait_vbl_done();
+
+    ENABLE_RAM_MBC1;
+    SWITCH_4_32_MODE_MBC1;
 
     DISPLAY_OFF;
     HIDE_BKG;

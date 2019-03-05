@@ -4,7 +4,6 @@
 #include <rand.h>
 #include <gb/drawing.h>
 
-//#include "../../text/text.c"
 #include "../../text/text.h"
 
 #include "../../assets/sprites/asakawa_front_idle.c"
@@ -24,21 +23,22 @@ void choice_handler(UINT8);
 
 void clear_screen(void);
 
-UINT8 ASAKAWA_HP = 100;
-
-UINT8 HERO_HP = 10;
-UWORD h_hp[4];
-
 #define PUNCH 1
 #define DEFEND 2 
 #define SHOOT 5
 
 #define PUNCH_LOC 32
 
-UINT8 choice = 0;
-UINT8 enemy_choice = 0;
+/* what do i do about this stuff? */
+UINT8 ASAKAWA_HP = 100;
+UINT8 HERO_HP = 10;
+
+UWORD h_hp[4];
+
+extern UINT8 choice;
+extern UINT8 enemy_choice;
 
 /* a stepping variable for character animations */
-UINT8 y = 72;
+extern UINT8 y;
 /* another animation counter */
-UINT8 a = 0;
+extern UINT8 a;

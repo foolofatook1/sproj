@@ -1,5 +1,12 @@
-//#include <gb/gb.h>
-//#include <stdio.h>
+#ifndef GBDK_INCLUDE
+#define GBDK_INCLUDE
+
+#include <stdio.h>
+#include <stdlib.h>
+#include <gb/gb.h>
+#include <gb/drawing.h>
+
+#endif
 
 /* background tiles and sprite */
 #include "assets/ship_tiles.c"
@@ -26,12 +33,12 @@ void opening(void);
 #define QUIT		3
 
 /* arrow sprite coordinates */
-UINT8 arrow_x = 72;
-UINT8 arrow_y = 56;
+extern UINT8 arrow_x;
+extern UINT8 arrow_y;
 
 
 /* option chosen */
-UINT8 option;
+extern UINT8 option;
 
 /* chosen decision */
-UINT8 choice = NOTHING;
+extern UINT8 choice;

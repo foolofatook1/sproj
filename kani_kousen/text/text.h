@@ -1,10 +1,25 @@
-#include <gb/gb.h>
+#ifndef GBDK_INCLUDE
+#define GBDK_INCLUDE
+
 #include <stdio.h>
+#include <stdlib.h>
+#include <gb/gb.h>
+#include <gb/drawing.h>
+
+#endif
+
+#ifndef TEXT_ASSETS_INCLUDE
+#define TEXT_ASSETS_INCLUDE
 
 #include "assets/chain_border.c"
 #include "assets/font.c"
 #include "assets/chain_border_tiles.c"
 #include "assets/small_chain_border.c"  // dash this out to play pt. 1
+
+#endif
+
+#ifndef TEXT_INCLUDE
+#define TEXT_INCLUDE
 
 /**
  * prints array of characters; max size = 10
@@ -44,3 +59,5 @@ extern UINT8 i;
 extern UINT8 j;
 extern UINT8 cushion;
 extern UINT8 LETTER_COUNT;
+
+#endif

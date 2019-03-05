@@ -1,5 +1,5 @@
 all:
-	/opt/gbdk/bin/lcc -Wa-l -Wl-m -c -o text.o text.c
+	lcc -Wa-l -Wl-m -c -o text.o text.c
 
 clean:
 	rm *.o *.lst
