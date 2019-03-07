@@ -1,0 +1,443 @@
+                              1 ;--------------------------------------------------------
+                              2 ; File Created by SDCC : FreeWare ANSI-C Compiler
+                              3 ; Version 2.3.1 Wed Mar  6 20:37:57 2019
+                              4 
+                              5 ;--------------------------------------------------------
+                              6 	.module lcc293020
+                              7 	
+                              8 ;--------------------------------------------------------
+                              9 ; Public variables in this module
+                             10 ;--------------------------------------------------------
+                             11 	.globl _main
+                             12 	.globl _n
+                             13 	.globl _m
+                             14 	.globl _battle_menu
+                             15 ;--------------------------------------------------------
+                             16 ; special function registers
+                             17 ;--------------------------------------------------------
+                             18 ;--------------------------------------------------------
+                             19 ; special function bits 
+                             20 ;--------------------------------------------------------
+                             21 ;--------------------------------------------------------
+                             22 ; internal ram data
+                             23 ;--------------------------------------------------------
+                             24 	.area _DATA
+   0000                      25 _m::
+   0000                      26 	.ds 1
+   0001                      27 _n::
+   0001                      28 	.ds 2
+                             29 ;--------------------------------------------------------
+                             30 ; overlayable items in internal ram 
+                             31 ;--------------------------------------------------------
+                             32 	.area _OVERLAY
+                             33 ;--------------------------------------------------------
+                             34 ; indirectly addressable internal ram data
+                             35 ;--------------------------------------------------------
+                             36 	.area _ISEG
+                             37 ;--------------------------------------------------------
+                             38 ; bit data
+                             39 ;--------------------------------------------------------
+                             40 	.area _BSEG
+                             41 ;--------------------------------------------------------
+                             42 ; external ram data
+                             43 ;--------------------------------------------------------
+                             44 	.area _XSEG
+                             45 ;--------------------------------------------------------
+                             46 ; global & static initialisations
+                             47 ;--------------------------------------------------------
+                             48 	.area _GSINIT
+                             49 	.area _GSFINAL
+                             50 	.area _GSINIT
+                             51 ;--------------------------------------------------------
+                             52 ; Home
+                             53 ;--------------------------------------------------------
+                             54 	.area _HOME
+                             55 ;	banks.c 41
+                             56 ;	genLabel
+                             57 ;	genFunction
+                             58 ;	---------------------------------
+                             59 ; Function battle_menu
+                             60 ; ---------------------------------
+   0000                      61 ___battle_menu_start:
+   0000                      62 _battle_menu:
+                             63 	
+                             64 ;	banks.c 44
+                             65 ;	genIpush
+                             66 ; _saveRegsForCall: sendSetSize: 0 deInUse: 0 bcInUse: 0 deSending: 0
+   0000 21 00 00             67 	ld	hl,#_chain_border_tiles
+   0003 E5                   68 	push	hl
+                             69 ;	genIpush
+   0004 21 00 0A             70 	ld	hl,#0x0A00
+   0007 E5                   71 	push	hl
+                             72 ;	genCall
+   0008 CD 00 00             73 	call	_set_bkg_data
+   000B E8 04                74 	lda	sp,4(sp)
+                             75 ;	banks.c 45
+                             76 ;	genIpush
+                             77 ; _saveRegsForCall: sendSetSize: 0 deInUse: 0 bcInUse: 0 deSending: 0
+   000D 21 00 00             78 	ld	hl,#_small_chain_border
+   0010 E5                   79 	push	hl
+                             80 ;	genIpush
+   0011 21 14 12             81 	ld	hl,#0x1214
+   0014 E5                   82 	push	hl
+                             83 ;	genIpush
+   0015 21 00 00             84 	ld	hl,#0x0000
+   0018 E5                   85 	push	hl
+                             86 ;	genCall
+   0019 CD 00 00             87 	call	_set_bkg_tiles
+   001C E8 06                88 	lda	sp,6(sp)
+                             89 ;	banks.c 47
+                             90 ;	genCall
+                             91 ; _saveRegsForCall: sendSetSize: 0 deInUse: 0 bcInUse: 0 deSending: 0
+   001E CD 00 00             92 	call	_sprite_clean
+                             93 ;	banks.c 48
+                             94 ;	genCall
+                             95 ; _saveRegsForCall: sendSetSize: 0 deInUse: 0 bcInUse: 0 deSending: 0
+   0021 CD 00 00             96 	call	_hide_sprites
+                             97 ;	banks.c 50
+                             98 ;	genIpush
+                             99 ; _saveRegsForCall: sendSetSize: 0 deInUse: 0 bcInUse: 0 deSending: 0
+   0024 21 12 20            100 	ld	hl,#0x2012
+   0027 E5                  101 	push	hl
+                            102 ;	genIpush
+   0028 21 59 00            103 	ld	hl,#__str_0
+   002B E5                  104 	push	hl
+                            105 ;	genCall
+   002C CD 00 00            106 	call	_battle_print
+   002F E8 04               107 	lda	sp,4(sp)
+                            108 ;	banks.c 51
+                            109 ;	genIpush
+                            110 ; _saveRegsForCall: sendSetSize: 0 deInUse: 0 bcInUse: 0 deSending: 0
+   0031 21 12 30            111 	ld	hl,#0x3012
+   0034 E5                  112 	push	hl
+                            113 ;	genIpush
+   0035 21 60 00            114 	ld	hl,#__str_1
+   0038 E5                  115 	push	hl
+                            116 ;	genCall
+   0039 CD 00 00            117 	call	_battle_print
+   003C E8 04               118 	lda	sp,4(sp)
+                            119 ;	banks.c 52
+                            120 ;	genIpush
+                            121 ; _saveRegsForCall: sendSetSize: 0 deInUse: 0 bcInUse: 0 deSending: 0
+   003E 21 12 40            122 	ld	hl,#0x4012
+   0041 E5                  123 	push	hl
+                            124 ;	genIpush
+   0042 21 68 00            125 	ld	hl,#__str_2
+   0045 E5                  126 	push	hl
+                            127 ;	genCall
+   0046 CD 00 00            128 	call	_battle_print
+   0049 E8 04               129 	lda	sp,4(sp)
+                            130 ;	banks.c 53
+                            131 ;	genIpush
+                            132 ; _saveRegsForCall: sendSetSize: 0 deInUse: 0 bcInUse: 0 deSending: 0
+   004B 21 12 50            133 	ld	hl,#0x5012
+   004E E5                  134 	push	hl
+                            135 ;	genIpush
+   004F 21 6D 00            136 	ld	hl,#__str_3
+   0052 E5                  137 	push	hl
+                            138 ;	genCall
+   0053 CD 00 00            139 	call	_battle_print
+   0056 E8 04               140 	lda	sp,4(sp)
+                            141 ;	genLabel
+   0058                     142 00101$:
+                            143 ;	genEndFunction
+                            144 	
+   0058 C9                  145 	ret
+   0059                     146 ___battle_menu_end:
+   0059                     147 __str_0:
+   0059 20 66 69 67 68 74   148 	.ascii " fight"
+   005F 00                  149 	.db 0x00
+   0060                     150 __str_1:
+   0060 20 64 65 66 65 6E   151 	.ascii " defend"
+        64
+   0067 00                  152 	.db 0x00
+   0068                     153 __str_2:
+   0068 20 72 75 6E         154 	.ascii " run"
+   006C 00                  155 	.db 0x00
+   006D                     156 __str_3:
+   006D 20 69 74 65 6D      157 	.ascii " item"
+   0072 00                  158 	.db 0x00
+                            159 	.area _CODE
+                            160 ;--------------------------------------------------------
+                            161 ; code
+                            162 ;--------------------------------------------------------
+                            163 	.area _CODE
+                            164 ;	banks.c 9
+                            165 ;	genLabel
+                            166 ;	genFunction
+                            167 ;	---------------------------------
+                            168 ; Function main
+                            169 ; ---------------------------------
+   0000                     170 ___main_start:
+   0000                     171 _main:
+   0000 E8 FD               172 	lda	sp,-3(sp)
+                            173 ;	banks.c 11
+                            174 ;	genCall
+                            175 ; _saveRegsForCall: sendSetSize: 0 deInUse: 0 bcInUse: 0 deSending: 0
+   0002 CD 00 00            176 	call	_wait_vbl_done
+                            177 ;	banks.c 13
+                            178 ;	genAssign
+   0005 01 00 00            179 	ld	bc,#0x0000
+                            180 ;	genAssign (pointer)
+   0008 3E 0A               181 	ld	a,#0x0A
+   000A 02                  182 	ld	(bc),a
+                            183 ;	banks.c 14
+                            184 ;	genAssign
+   000B 01 00 60            185 	ld	bc,#0x6000
+                            186 ;	genAssign (pointer)
+   000E 3E 01               187 	ld	a,#0x01
+   0010 02                  188 	ld	(bc),a
+                            189 ;	banks.c 16
+                            190 ;	genCall
+                            191 ; _saveRegsForCall: sendSetSize: 0 deInUse: 0 bcInUse: 0 deSending: 0
+   0011 CD 00 00            192 	call	_display_off
+                            193 ;	banks.c 17
+                            194 ;	genAssign
+   0014 01 40 FF            195 	ld	bc,#0xFF40
+                            196 ;	genAssign
+                            197 ;	AOP_STK for _main_sloc0_1_0
+   0017 F8 01               198 	lda	hl,1(sp)
+   0019 36 40               199 	ld	(hl),#0x40
+   001B 23                  200 	inc	hl
+   001C 36 FF               201 	ld	(hl),#0xFF
+                            202 ;	genPointerGet
+                            203 ;	AOP_STK for _main_sloc0_1_0
+                            204 ;	AOP_STK for _main_sloc1_1_0
+   001E 2B                  205 	dec	hl
+   001F 5E                  206 	ld	e,(hl)
+   0020 23                  207 	inc	hl
+   0021 56                  208 	ld	d,(hl)
+   0022 1A                  209 	ld	a,(de)
+   0023 2B                  210 	dec	hl
+   0024 2B                  211 	dec	hl
+                            212 ;	genAnd
+                            213 ;	AOP_STK for _main_sloc1_1_0
+   0025 77                  214 	ld      (hl),a
+   0026 7F                  215 	ld      a,a
+   0027 E6 FE               216 	and	a,#0xFE
+                            217 ;	genAssign (pointer)
+   0029 02                  218 	ld	(bc),a
+                            219 ;	banks.c 18
+                            220 ;	genAssign
+   002A 01 40 FF            221 	ld	bc,#0xFF40
+                            222 ;	genAssign
+                            223 ;	AOP_STK for _main_sloc0_1_0
+   002D 23                  224 	inc	hl
+   002E 36 40               225 	ld	(hl),#0x40
+   0030 23                  226 	inc	hl
+   0031 36 FF               227 	ld	(hl),#0xFF
+                            228 ;	genPointerGet
+                            229 ;	AOP_STK for _main_sloc0_1_0
+                            230 ;	AOP_STK for _main_sloc1_1_0
+   0033 2B                  231 	dec	hl
+   0034 5E                  232 	ld	e,(hl)
+   0035 23                  233 	inc	hl
+   0036 56                  234 	ld	d,(hl)
+   0037 1A                  235 	ld	a,(de)
+   0038 2B                  236 	dec	hl
+   0039 2B                  237 	dec	hl
+                            238 ;	genAnd
+                            239 ;	AOP_STK for _main_sloc1_1_0
+   003A 77                  240 	ld      (hl),a
+   003B 7F                  241 	ld      a,a
+   003C E6 FD               242 	and	a,#0xFD
+                            243 ;	genAssign (pointer)
+   003E 02                  244 	ld	(bc),a
+                            245 ;	banks.c 19
+                            246 ;	genAssign
+   003F 01 40 FF            247 	ld	bc,#0xFF40
+                            248 ;	genAssign
+                            249 ;	AOP_STK for _main_sloc0_1_0
+   0042 23                  250 	inc	hl
+   0043 36 40               251 	ld	(hl),#0x40
+   0045 23                  252 	inc	hl
+   0046 36 FF               253 	ld	(hl),#0xFF
+                            254 ;	genPointerGet
+                            255 ;	AOP_STK for _main_sloc0_1_0
+                            256 ;	AOP_STK for _main_sloc1_1_0
+   0048 2B                  257 	dec	hl
+   0049 5E                  258 	ld	e,(hl)
+   004A 23                  259 	inc	hl
+   004B 56                  260 	ld	d,(hl)
+   004C 1A                  261 	ld	a,(de)
+   004D 2B                  262 	dec	hl
+   004E 2B                  263 	dec	hl
+                            264 ;	genAnd
+                            265 ;	AOP_STK for _main_sloc1_1_0
+   004F 77                  266 	ld      (hl),a
+   0050 7F                  267 	ld      a,a
+   0051 E6 DF               268 	and	a,#0xDF
+                            269 ;	genAssign (pointer)
+   0053 02                  270 	ld	(bc),a
+                            271 ;	banks.c 22
+                            272 ;	genAssign
+   0054 01 40 FF            273 	ld	bc,#0xFF40
+                            274 ;	genAssign
+                            275 ;	AOP_STK for _main_sloc0_1_0
+   0057 23                  276 	inc	hl
+   0058 36 40               277 	ld	(hl),#0x40
+   005A 23                  278 	inc	hl
+   005B 36 FF               279 	ld	(hl),#0xFF
+                            280 ;	genPointerGet
+                            281 ;	AOP_STK for _main_sloc0_1_0
+                            282 ;	AOP_STK for _main_sloc1_1_0
+   005D 2B                  283 	dec	hl
+   005E 5E                  284 	ld	e,(hl)
+   005F 23                  285 	inc	hl
+   0060 56                  286 	ld	d,(hl)
+   0061 1A                  287 	ld	a,(de)
+   0062 2B                  288 	dec	hl
+   0063 2B                  289 	dec	hl
+                            290 ;	genOr
+                            291 ;	AOP_STK for _main_sloc1_1_0
+   0064 77                  292 	ld      (hl),a
+   0065 7F                  293 	ld      a,a
+   0066 F6 01               294 	or	a,#0x01
+                            295 ;	genAssign (pointer)
+   0068 02                  296 	ld	(bc),a
+                            297 ;	banks.c 23
+                            298 ;	genAssign
+   0069 01 40 FF            299 	ld	bc,#0xFF40
+                            300 ;	genAssign
+                            301 ;	AOP_STK for _main_sloc0_1_0
+   006C 23                  302 	inc	hl
+   006D 36 40               303 	ld	(hl),#0x40
+   006F 23                  304 	inc	hl
+   0070 36 FF               305 	ld	(hl),#0xFF
+                            306 ;	genPointerGet
+                            307 ;	AOP_STK for _main_sloc0_1_0
+                            308 ;	AOP_STK for _main_sloc1_1_0
+   0072 2B                  309 	dec	hl
+   0073 5E                  310 	ld	e,(hl)
+   0074 23                  311 	inc	hl
+   0075 56                  312 	ld	d,(hl)
+   0076 1A                  313 	ld	a,(de)
+   0077 2B                  314 	dec	hl
+   0078 2B                  315 	dec	hl
+                            316 ;	genOr
+                            317 ;	AOP_STK for _main_sloc1_1_0
+   0079 77                  318 	ld      (hl),a
+   007A 7F                  319 	ld      a,a
+   007B F6 02               320 	or	a,#0x02
+                            321 ;	genAssign (pointer)
+   007D 02                  322 	ld	(bc),a
+                            323 ;	banks.c 24
+                            324 ;	genAssign
+   007E 01 40 FF            325 	ld	bc,#0xFF40
+                            326 ;	genAssign
+                            327 ;	AOP_STK for _main_sloc0_1_0
+   0081 23                  328 	inc	hl
+   0082 36 40               329 	ld	(hl),#0x40
+   0084 23                  330 	inc	hl
+   0085 36 FF               331 	ld	(hl),#0xFF
+                            332 ;	genPointerGet
+                            333 ;	AOP_STK for _main_sloc0_1_0
+                            334 ;	AOP_STK for _main_sloc1_1_0
+   0087 2B                  335 	dec	hl
+   0088 5E                  336 	ld	e,(hl)
+   0089 23                  337 	inc	hl
+   008A 56                  338 	ld	d,(hl)
+   008B 1A                  339 	ld	a,(de)
+   008C 2B                  340 	dec	hl
+   008D 2B                  341 	dec	hl
+                            342 ;	genOr
+                            343 ;	AOP_STK for _main_sloc1_1_0
+   008E 77                  344 	ld      (hl),a
+   008F 7F                  345 	ld      a,a
+   0090 F6 80               346 	or	a,#0x80
+                            347 ;	genAssign (pointer)
+   0092 02                  348 	ld	(bc),a
+                            349 ;	banks.c 30
+                            350 ;	genIpush
+                            351 ; _saveRegsForCall: sendSetSize: 0 deInUse: 0 bcInUse: 0 deSending: 0
+   0093 21 E8 03            352 	ld	hl,#0x03E8
+   0096 E5                  353 	push	hl
+                            354 ;	genCall
+   0097 CD 00 00            355 	call	_delay
+   009A E8 02               356 	lda	sp,2(sp)
+                            357 ;	banks.c 31
+                            358 ;	genAssign
+   009C 01 00 40            359 	ld	bc,#0x4000
+                            360 ;	genAssign (pointer)
+   009F 3E 02               361 	ld	a,#0x02
+   00A1 02                  362 	ld	(bc),a
+                            363 ;	banks.c 33
+                            364 ;	genIpush
+                            365 ; _saveRegsForCall: sendSetSize: 0 deInUse: 0 bcInUse: 0 deSending: 0
+   00A2 21 00 00            366 	ld	hl,#_chain_border_tiles
+   00A5 E5                  367 	push	hl
+                            368 ;	genIpush
+   00A6 21 00 0A            369 	ld	hl,#0x0A00
+   00A9 E5                  370 	push	hl
+                            371 ;	genCall
+   00AA CD 00 00            372 	call	_set_bkg_data
+   00AD E8 04               373 	lda	sp,4(sp)
+                            374 ;	banks.c 34
+                            375 ;	genIpush
+                            376 ; _saveRegsForCall: sendSetSize: 0 deInUse: 0 bcInUse: 0 deSending: 0
+   00AF 21 00 00            377 	ld	hl,#_small_chain_border
+   00B2 E5                  378 	push	hl
+                            379 ;	genIpush
+   00B3 21 14 12            380 	ld	hl,#0x1214
+   00B6 E5                  381 	push	hl
+                            382 ;	genIpush
+   00B7 21 00 00            383 	ld	hl,#0x0000
+   00BA E5                  384 	push	hl
+                            385 ;	genCall
+   00BB CD 00 00            386 	call	_set_bkg_tiles
+   00BE E8 06               387 	lda	sp,6(sp)
+                            388 ;	banks.c 36
+                            389 ;	genIpush
+                            390 ; _saveRegsForCall: sendSetSize: 0 deInUse: 0 bcInUse: 0 deSending: 0
+   00C0 21 E8 03            391 	ld	hl,#0x03E8
+   00C3 E5                  392 	push	hl
+                            393 ;	genCall
+   00C4 CD 00 00            394 	call	_delay
+   00C7 E8 02               395 	lda	sp,2(sp)
+                            396 ;	genLabel
+   00C9                     397 00101$:
+                            398 ;	genEndFunction
+   00C9 E8 03               399 	lda	sp,3(sp)
+   00CB C9                  400 	ret
+   00CC                     401 ___main_end:
+                            402 	.area _CODE
+ASxxxx Assembler V01.75  (GameBoy Z80-like CPU), page 1.
+
+Symbol Table
+
+  8 ___battle_menu_end                 0059 R
+  8 ___battle_menu_start               0000 R
+  0 ___main_end                        00CC R
+  0 ___main_start                      0000 R
+  8 __str_0                            0059 R
+  8 __str_1                            0060 R
+  8 __str_2                            0068 R
+  8 __str_3                            006D R
+  8 _battle_menu                       0000 GR
+    _battle_print                      **** GX
+    _chain_border_tiles                **** GX
+    _delay                             **** GX
+    _display_off                       **** GX
+    _hide_sprites                      **** GX
+  1 _m                                 0000 GR
+  0 _main                              0000 GR
+  1 _n                                 0001 GR
+    _set_bkg_data                      **** GX
+    _set_bkg_tiles                     **** GX
+    _small_chain_border                **** GX
+    _sprite_clean                      **** GX
+    _wait_vbl_done                     **** GX
+
+ASxxxx Assembler V01.75  (GameBoy Z80-like CPU), page 2.
+
+Area Table
+
+   0 _CODE                              size   CC   flags 0
+   1 _DATA                              size    3   flags 0
+   2 _OVERLAY                           size    0   flags 0
+   3 _ISEG                              size    0   flags 0
+   4 _BSEG                              size    0   flags 0
+   5 _XSEG                              size    0   flags 0
+   6 _GSINIT                            size    0   flags 0
+   7 _GSFINAL                           size    0   flags 0
+   8 _HOME                              size   73   flags 0

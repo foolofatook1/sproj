@@ -12,16 +12,17 @@
 #include "../assets/blank_screen_tiles.c"
 
 //void fight_ctrl(void);
-void npc_fight(UINT8*);//,UINT8*);
+void npc_fight(UINT8*) NONBANKED;//,UINT8*);
 
-void hero_fight(UINT8*, UINT8*);
-void hero_fight_anim(void);
-void hero_defend_anim(void);
+void hero_fight(UINT8*, UINT8*) NONBANKED;
+void hero_fight_anim(void) NONBANKED;
+void hero_defend_anim(void) NONBANKED;
 
-void sprite_setup(UINT8, unsigned char*, UINT8, unsigned char*);
-void choice_handler(UINT8);
+void sprite_setup(UINT8, unsigned char*, 
+                  UINT8, unsigned char*) NONBANKED;
+void choice_handler(UINT8) NONBANKED;
 
-void clear_screen(void);
+void clear_screen(void) NONBANKED;
 
 #define PUNCH 1
 #define DEFEND 2 

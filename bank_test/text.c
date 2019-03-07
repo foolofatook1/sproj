@@ -67,8 +67,7 @@ void bkg_clean(void) NONBANKED
 void sprite_clean(void) NONBANKED
 {
     for(i = 0; i < 100; ++i)
-    {
-        set_sprite_tile(i, 40);
+    { set_sprite_tile(i, 40);
     }
 }
 
@@ -81,7 +80,7 @@ void hide_sprites(void) NONBANKED
 }
 
 /* special text settings for battles */
-/*void battle_print(char *arr, UINT8 x, UINT8 y) NONBANKED
+void battle_print(char *arr, UINT8 x, UINT8 y) NONBANKED
 {
     SPRITES_8x8;
 
@@ -133,8 +132,9 @@ void hide_sprites(void) NONBANKED
     }
 }
 
-void battle_bkg_clean(void) NONBANKED
+void battle_bkg_clean(void)
 {
     set_bkg_data(0, 10, chain_border_tiles);
     set_bkg_tiles(0,0,20,18,small_chain_border);
-}*/
+    print("hello", 24, 32);
+}

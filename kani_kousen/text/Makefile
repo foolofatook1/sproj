@@ -1,5 +1,5 @@
 all:
-	lcc -Wa-l -Wl-m -c -o text.o text.c
+	lcc -Wa-l -Wl-m -Wl-j -c -o text.o text.c
 
 clean:
 	rm *.o *.lst

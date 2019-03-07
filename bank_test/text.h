@@ -14,7 +14,7 @@
 #include "assets/chain_border.h"
 #include "assets/font.h"
 #include "assets/chain_border_tiles.h"
-//#include "assets/small_chain_border.c"  // dash this out to play pt. 1
+#include "assets/small_chain_border.h"  // dash this out to play pt. 1
 
 #endif
 
@@ -30,15 +30,15 @@
  * print_ln starts at 0
  */
 void print(char* arr, UINT8 x, UINT8 y) NONBANKED;
-//void battle_print(char* arr, UINT8 x, UINT8 y) NONBANKED; // dash for pt.1
+void battle_print(char* arr, UINT8 x, UINT8 y) NONBANKED; // dash for pt.1
 
 
 /**
  * Clears the bkg and sets up text box for next 
  * set of dialogue. 
  */
-void bkg_clean(void) NONBANKED;
-//void battle_bkg_clean(void) NONBANKED; // dash for pt. 1
+void bkg_clean(void);
+void battle_bkg_clean(void) NONBANKED; // dash for pt. 1
 
 
 /**

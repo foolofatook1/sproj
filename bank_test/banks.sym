@@ -1,0 +1,134 @@
+; no$gmb format .sym file
+; Generated automagically by ASxxxx linker V01.75 (SDK 3.0.0)
+; Area: .  .ABS.
+00:0000 s__HEADER
+00:0000 .init
+00:0200 s__CODE
+00:02CC s__HOME
+00:09F2 s__BASE
+00:0B85 s__LIT
+00:0B85 s__GSINIT
+00:0FC7 s__GSINITTAIL
+00:0FC8 s__GSFINAL
+01:4000 s__CODE_2
+00:A000 s__DATA_2
+00:C000 .OAM
+00:C0A0 s__DATA
+00:C0A3 s__BSS
+00:C0FC s__HEAP
+00:C0FC s__BSEG
+00:C0FC s__ISEG
+00:C0FC s__XSEG
+00:C0FC s__OVERLAY
+00:E000 .STACK
+00:FF80 .refresh_OAM
+; Area: _CODE
+00:0200 _main
+; Area: _HEADER
+00:01D2 _exit
+; Area: _HOME
+00:02CC .set_mode
+00:02DC .remove_VBL
+00:02E2 .remove_LCD
+00:02E8 .remove_TIM
+00:02EE .remove_SIO
+00:02F4 .remove_JOY
+00:02FA .add_VBL
+00:0300 .add_LCD
+00:0306 .add_TIM
+00:030C .add_SIO
+00:0312 .add_JOY
+00:0318 .remove_int
+00:0338 .add_int
+00:0354 .wait_vbl_done
+00:0354 _wait_vbl_done
+00:036B _display_off
+00:036B .display_off
+00:038C .serial_IO
+00:03BB _mode
+00:03C4 _get_mode
+00:03C9 _enable_interrupts
+00:03CB _disable_interrupts
+00:03CD _reset
+00:03CD .reset
+00:03D3 _set_interrupts
+00:03DE _remove_VBL
+00:03E9 _remove_LCD
+00:03F4 _remove_TIM
+00:03FF _remove_SIO
+00:040A _remove_JOY
+00:0415 _add_VBL
+00:0420 _add_LCD
+00:042B _add_TIM
+00:0436 _add_SIO
+00:0441 _add_JOY
+00:044C _clock
+00:0455 __printTStates
+00:0456 banked_call
+00:046F banked_ret
+00:0478 _battle_menu
+00:04EB _print
+00:0728 _bkg_clean
+00:0747 _sprite_clean
+00:0769 _hide_sprites
+00:078E _battle_print
+00:09CB __initrleblock
+; Area: _BASE
+00:09F2 .mv_sprite
+00:0A01 _move_sprite
+00:0A0E _set_win_data
+00:0A0E _set_bkg_data
+00:0A5B _set_sprite_data
+00:0A8A .set_sprite_tile
+00:0A97 _set_sprite_tile
+00:0AA2 .delay
+00:0ADC _delay
+00:0AE5 .copy_vram
+00:0AF4 _get_data
+00:0AF4 _set_data
+00:0B07 _set_bkg_tiles
+00:0B1B .set_xy_wtt
+00:0B2C .set_xy_btt
+00:0B3B .set_xy_tt
+00:0B6C _set_tiles
+; Area: _LIT
+; Area: _GSINIT
+00:0B85 gsinit
+; Area: _GSINITTAIL
+; Area: _GSFINAL
+; Area: _DATA
+00:C0A0 _m
+00:C0A1 _n
+; Area: _BSS
+00:C0A3 __cpu
+00:C0A4 .mode
+00:C0A5 __io_out
+00:C0A6 __io_in
+00:C0A7 __io_status
+00:C0A8 .vbl_done
+00:C0A9 __current_bank
+00:C0AA _sys_time
+00:C0AA .sys_time
+00:C0AC .int_0x40
+00:C0BC .int_0x48
+00:C0CC .int_0x50
+00:C0DC .int_0x58
+00:C0EC .int_0x60
+; Area: _HEAP
+00:C0FC _malloc_heap_start
+; Area: _OVERLAY
+; Area: _ISEG
+; Area: _BSEG
+; Area: _XSEG
+; Area: _DATA_2
+00:A000 _chars
+00:A028 _i
+00:A029 _j
+00:A02A _cushion
+00:A02B _LETTER_COUNT
+00:A02C _chain_border
+00:A194 _chain_border_tiles
+00:A234 _small_chain_border
+00:A39C _font
+; Area: _CODE_2
+01:4000 _battle_bkg_clean

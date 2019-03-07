@@ -20,6 +20,8 @@ UINT8 a = 0;*/
 
 //UWORD h_hp[4];
 
+UINT8 arrow_x = 18;
+UINT8 arrow_y = 32;
 UINT8 choice = 0;
 UINT8 enemy_choice;
 
@@ -29,13 +31,13 @@ UINT8 y = 72;
 UINT8 a = 0;
 
 
-void choice_handler(UINT8 arrow_y)
+void choice_handler(UINT8 arrow_y) NONBANKED
 {
     if(arrow_y == PUNCH_LOC)
         choice = PUNCH;
 }
 
-void hero_fight(UINT8 *enemy_hp, UINT8 *hero_hp)
+void hero_fight(UINT8 *enemy_hp, UINT8 *hero_hp) NONBANKED
 {
     if(choice == PUNCH)
     {
@@ -92,7 +94,7 @@ void hero_fight(UINT8 *enemy_hp, UINT8 *hero_hp)
 
 }
 
-void hero_defend_anim(void)
+void hero_defend_anim(void) NONBANKED
 {
     sprite_setup(8, hero_back_idle, 8, asakawa_front_idle);
     for(a = 0; a < 21; a+=3)
@@ -111,7 +113,7 @@ void hero_defend_anim(void)
     y = 72;
 }
 
-void hero_fight_anim(void)
+void hero_fight_anim(void) NONBANKED
 {
     sprite_setup(8, hero_back_idle, 8, asakawa_front_idle);
 
@@ -147,7 +149,7 @@ void hero_fight_anim(void)
 }
 
 
-void clear_screen(void)
+void clear_screen(void) NONBANKED
 {
     /* clear the bkg */
     set_bkg_data(0,4, blank_screen_tiles);
@@ -160,7 +162,7 @@ void clear_screen(void)
  * x_data -- sprite sheet
  */
 void sprite_setup(UINT8 hnb, unsigned char *hero_data,
-        UINT8 enb, unsigned char *enemy_data)
+        UINT8 enb, unsigned char *enemy_data) NONBANKED
 {
     sprite_clean();
     clear_screen();
@@ -192,7 +194,7 @@ void sprite_setup(UINT8 hnb, unsigned char *hero_data,
     move_sprite(7, 84, 80);
 }
 
-void npc_fight(UINT8 *hero_hp)//, UINT8 *enemy_hp)
+void npc_fight(UINT8 *hero_hp)/*, UINT8 *enemy_hp)*/ NONBANKED
 {
 
     /** 

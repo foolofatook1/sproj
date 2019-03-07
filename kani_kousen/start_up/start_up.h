@@ -9,8 +9,8 @@
 #endif
 
 /* background tiles and sprite */
-#include "assets/ship_tiles.c"
-#include "assets/open_screen.c"
+#include "assets/ship_tiles.h"
+#include "assets/open_screen.h"
 
 
 /* functions */

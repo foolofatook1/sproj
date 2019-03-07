@@ -1,0 +1,10 @@
+all:
+	lcc -Wa-l -Wl-m -c -o battle.o battle.c 
+	lcc -Wa-l -Wl-m -c -o asakawa_battle.o asakawa_battle.c 
+	lcc -Wa-l -Wl-m -o asakawa_battle.gb asakawa_battle.o battle.o ../../text/text.o
+
+clean:
+	rm *.o *.gb *.map *.lst
+
+play:
+	wine ../../../bgb/bgb.exe asakawa_battle.gb
