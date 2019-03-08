@@ -86,6 +86,10 @@ void level_1_bkg_start(void)
     SHOW_SPRITES;
     SHOW_BKG;
     DISPLAY_ON;
+
+    set_bkg_data(0, 10, chain_border_tiles);
+    set_bkg_tiles(0,0,20,18, chain_border);
+
     /* setting up first set of text */
     print("we're all\0", 24, 32);
     print("goin' to\0", 24, 48);

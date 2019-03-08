@@ -59,5 +59,8 @@ extern UINT8 i;
 extern UINT8 j;
 extern UINT8 cushion;
 extern UINT8 LETTER_COUNT;
+extern UINT8 arrow_x;
+extern UINT8 arrow_y;
+
 
 #endif

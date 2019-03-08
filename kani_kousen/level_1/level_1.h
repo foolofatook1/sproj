@@ -21,8 +21,8 @@
 /* giving mem banking a try */
 //#include "asakawa_battle.c"
 
-#ifndef LEVEL_1_INCLUDE
-#define LEVEL_1_INCLUDE
+#ifndef LEVEL_1_ASSETS
+#define LEVEL_1_ASSETS
 
 /* level 1 opening screen */
 #include "assets/level_1_screen_tiles.h"
@@ -48,6 +48,11 @@
 /* asakawa */
 #include "../assets/sprites/asakawa_front_idle.h"
 #include "../assets/sprites/asakawa_air_shot.h"
+
+#endif
+
+#ifndef LEVEL_1_INCLUDE
+#define LEVEL_1_INCLUDE
 
 void level_1_ctrl(void);
 void level_1_bkg_start(void);

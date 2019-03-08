@@ -29,29 +29,30 @@
  * print_ln = what number line is being printed
  * print_ln starts at 0
  */
-void print(char* arr, UINT8 x, UINT8 y) NONBANKED;
-void battle_print(char* arr, UINT8 x, UINT8 y) NONBANKED; // dash for pt.1
+extern void printh(void);
+extern void print(char* arr, UINT8 x, UINT8 y);
+extern void battle_print(char* arr, UINT8 x, UINT8 y) NONBANKED; // dash for pt.1
 
 
 /**
  * Clears the bkg and sets up text box for next 
  * set of dialogue. 
  */
-void bkg_clean(void);
-void battle_bkg_clean(void) NONBANKED; // dash for pt. 1
+extern void bkg_clean(void);
+extern void battle_bkg_clean(void) NONBANKED; // dash for pt. 1
 
 
 /**
  * Clears all the old sprites. 
  */
-void sprite_clean(void) NONBANKED;
+extern void sprite_clean(void);
 
 
 /**
  * move the screen off screen
  * so they're not in the way.
  */
-void hide_sprites(void) NONBANKED;
+extern void hide_sprites(void);
 
 
 extern char *chars;
@@ -59,5 +60,9 @@ extern UINT8 i;
 extern UINT8 j;
 extern UINT8 cushion;
 extern UINT8 LETTER_COUNT;
+extern UINT8 c;
+
+extern UINT8 arrow_x;
+extern UINT8 arrow_y;
 
 #endif

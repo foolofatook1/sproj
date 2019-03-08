@@ -15,23 +15,10 @@ clean:
 #		RAM bank 2 : -Wf-ba2
 #
 text.o: text.c
-	$(CC) -Wf-bo2 -Wf-ba2 -c -o $@ $<
+	$(CC) -DUSE_SFT_FOR_REG -c -o $@ $<
 
-###
-# We also want our assets in bank 2 :p
-#
-assets/chain_border.o: assets/chain_border.c
-	$(CC) -Wf-bo2 -Wf-ba2 -c -o $@ $<
-
-assets/chain_border_tiles.o: assets/chain_border_tiles.c
-	$(CC) -Wf-bo2 -Wf-ba2 -c -o $@ $<
-
-assets/small_chain_border.o: assets/small_chain_border.c
-	$(CC) -Wf-bo2 -Wf-ba2 -c -o $@ $<
-
-assets/font.o: assets/font.c
-	$(CC) -Wf-bo2 -Wf-ba2 -c -o $@ $<
-
+bank2.o: bank2.c
+	$(CC) -DUSE_SFT_FOR_REG -Wf-bo2 -Wf-ba2 -c -o $@ $<
 
 ###
 # And include text file now
@@ -42,8 +29,8 @@ assets/font.o: assets/font.c
 #	4 ROM banks  : -Wl-yo4
 #	4 RAM banks  : -Wl-ya4
 #
-banks.gb: banks.o text.o assets/chain_border.o assets/chain_border_tiles.o assets/small_chain_border.o assets/font.o
-	$(CC) -Wl-yt2 -Wl-yo4 -Wl-ya4 -o $@ banks.o text.o assets/chain_border.o assets/chain_border_tiles.o assets/small_chain_border.o assets/font.o
+banks.gb: banks.o text.o bank2.o
+	$(CC) -DUSE_SFT_FOR_REG -Wl-yt2 -Wl-yo4 -Wl-ya4 -o $@ banks.o text.o bank2.o
 
 play:
 	../bgb/*.exe *.gb

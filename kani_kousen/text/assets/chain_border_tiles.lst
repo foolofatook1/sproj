@@ -1,9 +1,9 @@
                               1 ;--------------------------------------------------------
                               2 ; File Created by SDCC : FreeWare ANSI-C Compiler
-                              3 ; Version 2.3.1 Wed Mar  6 20:37:57 2019
+                              3 ; Version 2.3.1 Thu Mar  7 14:51:58 2019
                               4 
                               5 ;--------------------------------------------------------
-                              6 	.module lcc293140
+                              6 	.module lcc34810
                               7 	
                               8 ;--------------------------------------------------------
                               9 ; Public variables in this module
@@ -18,7 +18,7 @@
                              18 ;--------------------------------------------------------
                              19 ; internal ram data
                              20 ;--------------------------------------------------------
-                             21 	.area _DATA_2
+                             21 	.area _DATA
    0000                      22 _chain_border_tiles::
    0000                      23 	.ds 160
                              24 ;--------------------------------------------------------
@@ -43,8 +43,8 @@
                              43 	.area _GSINIT
                              44 	.area _GSFINAL
                              45 	.area _GSINIT
-                             46 ;	assets/chain_border_tiles.c 26
-                             47 ;	assets/chain_border_tiles.c 49
+                             46 ;	text/assets/chain_border_tiles.c 26
+                             47 ;	text/assets/chain_border_tiles.c 49
                              48 ;	genArrayInit
                              49 ; _saveRegsForCall: sendSetSize: 0 deInUse: 0 bcInUse: 0 deSending: 0
    0000 21 00 00             50 	ld	hl,#_chain_border_tiles
@@ -94,12 +94,12 @@
                              78 ; Home
                              79 ;--------------------------------------------------------
                              80 	.area _HOME
-                             81 	.area _CODE_2
+                             81 	.area _CODE
                              82 ;--------------------------------------------------------
                              83 ; code
                              84 ;--------------------------------------------------------
-                             85 	.area _CODE_2
-                             86 	.area _CODE_2
+                             85 	.area _CODE
+                             86 	.area _CODE
 ASxxxx Assembler V01.75  (GameBoy Z80-like CPU), page 1.
 
 Symbol Table
@@ -112,7 +112,7 @@ Symbol Table
 Area Table
 
    0 _CODE                              size    0   flags 0
-   1 _DATA_2                            size   A0   flags 0
+   1 _DATA                              size   A0   flags 0
    2 _OVERLAY                           size    0   flags 0
    3 _ISEG                              size    0   flags 0
    4 _BSEG                              size    0   flags 0
@@ -120,4 +120,3 @@ Area Table
    6 _GSINIT                            size   94   flags 0
    7 _GSFINAL                           size    0   flags 0
    8 _HOME                              size    0   flags 0
-   9 _CODE_2                            size    0   flags 0

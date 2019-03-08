@@ -1,9 +1,15 @@
 #include "start_up.h"
 
-/* arrow sprite coordinates */
-UINT8 arrow_x = 72;
-UINT8 arrow_y = 56;
+/* positions of the arrow */
+UINT8 START_POS = 56;
+UINT8 NEW_GAME_POS = 64;
+UINT8 QUIT_POS = 72;
 
+/* actions that can be taken and returned */
+UINT8 NOTHING = 0;
+UINT8 START = 1;
+UINT8 NEW_GAME = 2;
+UINT8 QUIT = 3;
 
 /* option chosen */
 UINT8 option;
@@ -34,22 +40,30 @@ void start_up(void)
     {
         if(arrow_y > NEW_GAME_POS)
         {
-            arrow_y = 48; /* actual location of START */
-            move_sprite(0, arrow_x, arrow_y);
+            sprite_clean();
+            arrow_y = 48;
+            print(">", arrow_x, arrow_y);
+            LETTER_COUNT = 0;
         }
+        sprite_clean();
         arrow_y+=8;
-        move_sprite(0, arrow_x, arrow_y);
+        print(">", arrow_x, arrow_y);
+        LETTER_COUNT = 0;
     }
 
     if(joypad() & J_UP)
     {
         if(arrow_y < NEW_GAME_POS)
         {
+            sprite_clean();
             arrow_y = 80; /* actual location of QUIT */
-            move_sprite(0, arrow_x, arrow_y);
+            print(">", arrow_x, arrow_y);
+            LETTER_COUNT = 0;
         }
+        sprite_clean();
         arrow_y-=8;
-        move_sprite(0, arrow_x, arrow_y);
+        print(">", arrow_x, arrow_y);
+        LETTER_COUNT = 0;
     }
 
     if(joypad() & J_A)
@@ -70,11 +84,9 @@ int check_pos(void)
 /* setup the sprites. In this case. the arrow. */
 void setup_sprite(void)
 {
-    SPRITES_8x8;
-    set_sprite_data(0, 89, ship_tiles);
 
-    set_sprite_tile(0,80);
-    move_sprite(0, arrow_x, arrow_y);
+    print(">", arrow_x, arrow_y);
+    LETTER_COUNT = 0;
 
     SHOW_SPRITES;
 }
@@ -83,12 +95,14 @@ void setup_sprite(void)
 void setup_bkg(void)
 {
     HIDE_WIN;
-    SHOW_BKG;
+    HIDE_BKG;
 
     /* setup bkg */
     set_bkg_data(0, 89, ship_tiles);
     set_bkg_tiles(0,0,32,32,open_screen);
     scroll_bkg(96,0);
+
+    SHOW_BKG;
 
     DISPLAY_ON;
 }

@@ -1,9 +1,9 @@
 XL
-H A areas 2 global symbols
-M lcc293140
+H 9 areas 2 global symbols
+M lcc34810
 S __initrleblock Ref0000
 A _CODE size 0 flags 0
-A _DATA_2 size A0 flags 0
+A _DATA size A0 flags 0
 S _chain_border_tiles Def0000
 A _OVERLAY size 0 flags 0
 A _ISEG size 0 flags 0
@@ -12,7 +12,6 @@ A _XSEG size 0 flags 0
 A _GSINIT size 94 flags 0
 A _GSFINAL size 0 flags 0
 A _HOME size 0 flags 0
-A _CODE_2 size 0 flags 0
 T 00 00 21 00 00 CD 00 00 F0 00 7F 18 18 7E 7E DB
 R 00 00 06 00 00 03 01 00 02 06 00 00
 T 0E 00 DB C3 C3 C3 C3 DB DB 7E 7E 18 18 3C 3C 7E

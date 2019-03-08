@@ -6,14 +6,17 @@ UINT8 j;
 UINT8 cushion;
 UINT8 LETTER_COUNT = 0;
 
+UINT8 arrow_x = 72;
+UINT8 arrow_y = 56;
+
 void print(char *arr, UINT8 x, UINT8 y) NONBANKED
 {
     SPRITES_8x8;
 
     set_sprite_data(0, 46, font);
 
-    set_bkg_data(0, 10, chain_border_tiles);
-    set_bkg_tiles(0,0,20,18, chain_border);
+    //set_bkg_data(0, 10, chain_border_tiles);
+    //set_bkg_tiles(0,0,20,18, chain_border);
 
     cushion = LETTER_COUNT;
     for(i=0; arr[i] != '\0'; ++i)

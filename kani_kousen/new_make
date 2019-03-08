@@ -11,13 +11,13 @@ text/text.o: text/text.c
 	$(CC) -c -o $(@) $<
 
 level_1/level_1.o: level_1/level_1.c 
-	$(CC) -c -o $@ $<
+	$(CC) -Wf-bo1 -Wf-ba1 -c -o $@ $<
 
 start_up/start_up.o: start_up/start_up.c
-	$(CC) -c -o $@ $<
+	$(CC) -Wf-bo2 -Wf-ba2 -c -o $@ $<
 
 main.gb: main.o text/text.o level_1/level_1.o start_up/start_up.o 
-	$(CC) -o $@ main.o text/text.o level_1/level_1.o start_up/start_up.o 
+	$(CC) -Wl-yt2 -Wl-yo4 -Wl-ya4 -o $@ main.o text/text.o level_1/level_1.o start_up/start_up.o 
 
 play:
 	../bgb/*.exe *.gb

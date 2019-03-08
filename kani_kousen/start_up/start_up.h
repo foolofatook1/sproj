@@ -8,29 +8,39 @@
 
 #endif
 
+
+#include "../text/text.h"
+
+#ifndef START_UP_ASSETS
+#define START_UP_ASSETS
+
 /* background tiles and sprite */
 #include "assets/ship_tiles.h"
 #include "assets/open_screen.h"
 
+#endif
+
+#ifndef START_UP_INCLUDE
+#define START_UP_INCLUDE
 
 /* functions */
-void setup_sprite(void);
-void setup_bkg(void);
+extern void setup_sprite(void);
+extern void setup_bkg(void);
 //void start_up(void);
-void start_up(void);
-int check_pos(void);
-void opening(void);
+extern void start_up(void);
+extern int check_pos(void);
+extern void opening(void);
 
 /* positions of the arrow */
-#define START_POS 56
-#define NEW_GAME_POS 64
-#define QUIT_POS 72
+extern UINT8 START_POS;
+extern UINT8 NEW_GAME_POS;
+extern UINT8 QUIT_POS;
 
 /* actions that can be taken and returned */
-#define NOTHING 	0
-#define START		1
-#define	NEW_GAME 	2
-#define QUIT		3
+extern UINT8 NOTHING;
+extern UINT8 START;
+extern UINT8 NEW_GAME;
+extern UINT8 QUIT;
 
 /* arrow sprite coordinates */
 extern UINT8 arrow_x;
@@ -42,3 +52,5 @@ extern UINT8 option;
 
 /* chosen decision */
 extern UINT8 choice;
+
+#endif
