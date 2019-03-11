@@ -8,21 +8,9 @@
 
 #endif
 
-/**
- * Things needed for start_up
- */
-#ifndef START_UP_ASSETS
-#define START_UP_ASSETS
-
-#include "start_up/assets/ship_tiles.c"
-#include "start_up/assets/open_screen.c"
-
-#endif
-
 #ifndef START_UP_INCLUDE
 #define START_UP_INCLUDE
 
-extern void setup_sprite(void);
 extern void setup_bkg(void);
 extern void start_up(void);
 extern int check_pos(void);
@@ -35,9 +23,8 @@ extern UINT8 START;
 extern UINT8 NEW_GAME;
 extern UINT8 QUIT;
 
-
-extern UINT8 xx;
-extern UINT8 yy;
+extern UINT8 arrow_x;
+extern UINT8 arrow_y;
 extern UINT8 option;
 extern UINT8 choice;
 
@@ -49,19 +36,21 @@ extern UINT8 choice;
 #ifndef TEXT_ASSETS
 #define TEXT_ASSETS
 
-#include "text/assets/chain_border.c"
-#include "text/assets/font.c"
-#include "text/assets/chain_border_tiles.c"
+#include "text/assets/chain_border_tiles.h"
+#include "text/assets/chain_border.h"
+#include "text/assets/font.h"
+#include "text/assets/blank_screen.h"
+#include "text/assets/blank_screen_tiles.h"
 
 #endif
 
 #ifndef TEXT_INCLUDE
 #define TEXT_INCLUDE
 
-extern void print(char* arr, UINT8 x, UINT8 y) NONBANKED;
-extern void bkg_clean(void) NONBANKED;
-extern void sprite_clean(void) NONBANKED;
-extern void hide_sprites(void) NONBANKED;
+extern void print(char* arr, UINT8 x, UINT8 y);
+extern void bkg_clean(void);
+extern void sprite_clean(void);
+extern void hide_sprites(void);
 extern char *chars;
 extern UINT8 i;
 extern UINT8 j;
@@ -77,20 +66,17 @@ extern UINT8 LETTER_COUNT;
 #ifndef LEVEL_1_ASSETS
 #define LEVEL_1_ASSETS
 
-#include "level_1/assets/level_1_screen_tiles.c"
-#include "level_1/assets/level_1_screen.c"
-#include "level_1/assets/shit_pot_tiles.c" 
-#include "level_1/assets/shit_pot.c"
-#include "assets/sprites/hero_front_idle.c"
-#include "assets/sprites/hero_back_idle.c"
-#include "assets/sprites/fisherman_front_idle.c"
-#include "assets/sprites/fisherman_idle_back.c"
-#include "assets/sprites/miner_walk_left.c"
-#include "assets/sprites/miner_walk_up.c"
-#include "assets/sprites/miner_idle_back.c"
-#include "assets/sprites/student_idle_back.c"
-#include "assets/sprites/asakawa_front_idle.c"
-#include "assets/sprites/asakawa_air_shot.c"
+#include "level_1/assets/shit_pot.h"
+#include "assets/sprites/hero_front_idle.h"
+#include "assets/sprites/hero_back_idle.h"
+#include "assets/sprites/fisherman_front_idle.h"
+#include "assets/sprites/fisherman_idle_back.h"
+#include "assets/sprites/miner_walk_left.h"
+#include "assets/sprites/miner_walk_up.h"
+#include "assets/sprites/miner_idle_back.h"
+#include "assets/sprites/student_idle_back.h"
+#include "assets/sprites/asakawa_front_idle.h"
+#include "assets/sprites/asakawa_air_shot.h"
 
 #endif
 
@@ -127,7 +113,3 @@ extern UINT8 **asakawa_pos;
 extern UINT8 sprite_width;
 
 #endif 
-
-//#include "start_up/start_up.h"
-//#include "text/text.h"
-//#include "level_1/level_1.h"

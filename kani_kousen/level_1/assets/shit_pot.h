@@ -7,8 +7,8 @@
  Info:
    Section       : 
    Bank          : 0
-   Map size      : 32 x 32
-   Tile set      : Z:\home\d1x13\Desktop\gbtd\palattes\shit_pot_floor_tiles.gbr
+   Map size      : 20 x 18
+   Tile set      : Z:\home\d1x13\Desktop\gbtd\palattes\blank_screen_tiles.gbr
    Plane count   : 1 plane (8 bits)
    Plane order   : Tiles are continues
    Tile offset   : 0
@@ -18,8 +18,8 @@
 
 */
 
-#define shit_potWidth 32
-#define shit_potHeight 32
+#define shit_potWidth 20
+#define shit_potHeight 18
 #define shit_potBank 0
 
 extern unsigned char shit_pot[];

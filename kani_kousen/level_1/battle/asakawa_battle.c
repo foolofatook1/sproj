@@ -1,8 +1,5 @@
 #include "asakawa_battle.h"
 
-UINT8 arrow_x = 18;
-UINT8 arrow_y = 32;
-
 UINT8 state = BATTLE_OPT;
 
 void asakawa_battle_ctrl(void)
@@ -15,8 +12,6 @@ void asakawa_battle_ctrl(void)
         {
             choice_handler(arrow_y);
             //            hero_fight(&ASAKAWA_HP, &HERO_HP);
-            SWITCH_RAM_MBC1(2);
-            SWITCH_ROM_MBC1(2);
             npc_fight(&HERO_HP);
             delay(400);
             /* basically does back but only when everything is done */

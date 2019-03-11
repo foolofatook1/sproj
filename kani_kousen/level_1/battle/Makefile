@@ -1,4 +1,4 @@
-CC = lcc -Wa-l -Wl-m -Wl-j 
+CC = lcc -Wa-l -Wl-m -Wl-j -DUSE_SFT_FOR_REG
 
 BINS = asakawa_battle.gb
 
@@ -15,10 +15,10 @@ clean:
 #		RAM bank 2 : -Wf-ba2
 #
 battle.o: battle.c
-	$(CC) -Wf-bo2 -c -o $@ $<
+	$(CC) -Wf-bo2 -Wf-ba2 -c -o $@ $<
 
 ../../text/text.o: ../../text/text.c
-	$(CC) -Wf-bo2 -c -o $@ $<
+	$(CC) -c -o $@ $<
 
 # Lets link them now for the main thing
 #	ROM+MBC1+RAM : -Wl-yt2
@@ -26,7 +26,7 @@ battle.o: battle.c
 #	4 RAM banks  : -Wl-ya4
 #
 asakawa_battle.gb: asakawa_battle.o ../../text/text.o battle.o
-	$(CC) -Wl-yt2 -Wl-yo4 -Wl-ya4 -o $@ asakawa_battle.o ../../text/text.o battle.o ../../text/assets/chain_border.o ../../text/assets/small_chain_border.o ../../text/assets/chain_border_tiles.o ../../text/assets/font.o
+	$(CC) -Wl-yt2 -Wl-yo4 -Wl-ya4 -o $@ asakawa_battle.o ../../text/text.o battle.o 
 
 play:
 	../../../bgb/*.exe *.gb

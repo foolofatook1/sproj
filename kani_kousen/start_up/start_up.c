@@ -1,9 +1,9 @@
 #include "start_up.h"
 
 /* positions of the arrow */
-UINT8 START_POS = 56;
-UINT8 NEW_GAME_POS = 64;
-UINT8 QUIT_POS = 72;
+UINT8 START_POS = 72;
+UINT8 NEW_GAME_POS = 80;
+UINT8 QUIT_POS = 88;
 
 /* actions that can be taken and returned */
 UINT8 NOTHING = 0;
@@ -21,7 +21,7 @@ void opening(void)
 {
     //option = NOTHING; 
 
-    setup_sprite();
+    //setup_sprite();
     setup_bkg();
     while(option == NOTHING)
     {
@@ -34,18 +34,14 @@ void opening(void)
 void start_up(void)
 {
     delay(100);
-
-
     if(joypad() & J_DOWN)
     {
-        if(arrow_y > NEW_GAME_POS)
+        if(arrow_y > QUIT_POS-8)
         {
-            sprite_clean();
-            arrow_y = 48;
+            arrow_y = START_POS-8;
             print(">", arrow_x, arrow_y);
             LETTER_COUNT = 0;
         }
-        sprite_clean();
         arrow_y+=8;
         print(">", arrow_x, arrow_y);
         LETTER_COUNT = 0;
@@ -53,14 +49,12 @@ void start_up(void)
 
     if(joypad() & J_UP)
     {
-        if(arrow_y < NEW_GAME_POS)
+        if(arrow_y < START_POS+8)
         {
-            sprite_clean();
-            arrow_y = 80; /* actual location of QUIT */
+            arrow_y = QUIT_POS+8; /* actual location of QUIT */
             print(">", arrow_x, arrow_y);
             LETTER_COUNT = 0;
         }
-        sprite_clean();
         arrow_y-=8;
         print(">", arrow_x, arrow_y);
         LETTER_COUNT = 0;
@@ -81,28 +75,22 @@ int check_pos(void)
         return QUIT;
 }
 
-/* setup the sprites. In this case. the arrow. */
-void setup_sprite(void)
-{
-
-    print(">", arrow_x, arrow_y);
-    LETTER_COUNT = 0;
-
-    SHOW_SPRITES;
-}
-
 /* setup the background for the opening screen. */
 void setup_bkg(void)
 {
     HIDE_WIN;
     HIDE_BKG;
 
+    set_bkg_data(0,4,blank_screen_tiles); 
+    set_bkg_tiles(0,0,20,18,blank_screen);
+
     /* setup bkg */
-    set_bkg_data(0, 89, ship_tiles);
-    set_bkg_tiles(0,0,32,32,open_screen);
-    scroll_bkg(96,0);
+    print(">start", 72, 72);
+    print(" new game", 72, 80);
+    print(" quit", 72, 88);
+    LETTER_COUNT = 0;
 
     SHOW_BKG;
-
+    SHOW_SPRITES;
     DISPLAY_ON;
 }

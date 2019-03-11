@@ -1,5 +1,15 @@
+#ifndef GBDK_INCLUDE
+#define GBDK_INCLUDe
+
+#include <gb/gb.h>
+#include <stdio.h>
+
+#endif
+
 /* battle functions */
 #include "battle.h"
+
+#include "../../text/text.h"
 
 void asakawa_battle_ctrl(void);
 void battle_menu(void);

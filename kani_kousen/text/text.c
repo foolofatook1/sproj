@@ -7,16 +7,13 @@ UINT8 cushion;
 UINT8 LETTER_COUNT = 0;
 
 UINT8 arrow_x = 72;
-UINT8 arrow_y = 56;
+UINT8 arrow_y = 72;
 
-void print(char *arr, UINT8 x, UINT8 y) NONBANKED
+void print(char *arr, UINT8 x, UINT8 y) 
 {
     SPRITES_8x8;
 
     set_sprite_data(0, 46, font);
-
-    //set_bkg_data(0, 10, chain_border_tiles);
-    //set_bkg_tiles(0,0,20,18, chain_border);
 
     cushion = LETTER_COUNT;
     for(i=0; arr[i] != '\0'; ++i)
@@ -61,13 +58,13 @@ void print(char *arr, UINT8 x, UINT8 y) NONBANKED
     }
 }
 
-void bkg_clean(void) NONBANKED
+void bkg_clean(void)
 {
     set_bkg_data(0, 10, chain_border_tiles);
     set_bkg_tiles(0,0,20,18,chain_border);
 }
 
-void sprite_clean(void) NONBANKED
+void sprite_clean(void) 
 {
     for(i = 0; i < 100; ++i)
     {

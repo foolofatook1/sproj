@@ -20,8 +20,7 @@ UINT8 sprite_width = 8;
 /* The big control function */
 void level_1_ctrl(void) 
 {
-
-//    SWITCH_ROM_MBC1(0);
+    wait_vbl_done();
     level_1_bkg_start();
     while(start_animate == 0)
     {
@@ -53,7 +52,7 @@ void level_1_ctrl(void)
         wait_vbl_done();
     }
     //SWITCH_ROM_MBC1(1);
-//    asakawa_battle1_setup();
+//    asakawa_battle1_setup();*/
 
 }
 
@@ -70,32 +69,34 @@ void level_1_bkg_start(void)
 
     HIDE_SPRITES;
 
-    /* setup bkg */
-    set_bkg_data(0, 40, level_1_screen_tiles);
-    set_bkg_tiles(0,0,20,18,level_1_screen);
-
-    scroll_bkg(-96,0);
+    /* opening screen */
+    sprite_clean();
+    print("chapter 1", 48, 64);
+    print("welcome to", 44, 80);
+    print("hell", 68, 96);
+    LETTER_COUNT = 0;
 
     SHOW_BKG;
+    SHOW_SPRITES;
     DISPLAY_ON;
 
     delay(1000);
 
     DISPLAY_OFF;
     HIDE_WIN;
-    SHOW_SPRITES;
-    SHOW_BKG;
-    DISPLAY_ON;
-
-    set_bkg_data(0, 10, chain_border_tiles);
-    set_bkg_tiles(0,0,20,18, chain_border);
+    HIDE_BKG;
 
     /* setting up first set of text */
-    print("we're all\0", 24, 32);
-    print("goin' to\0", 24, 48);
-    print("hell!\0", 24, 64);
-    print("you hear!?\0", 24, 80);
+    bkg_clean();
+    sprite_clean();
+    print("we're all", 24, 32);
+    print("goin' to", 24, 48);
+    print("hell!", 24, 64);
+    print("you hear!?", 24, 80);
     LETTER_COUNT = 0;
+
+    SHOW_BKG;
+    DISPLAY_ON;
 }
 
 void joypad_check_scene_1(void) 
@@ -115,7 +116,6 @@ void scene_1(void)
     {
         bkg_clean();
         sprite_clean();
-
         print("4 months\0", 24, 32);
         print("on\0", 24, 48);
         print("kamchatkas\0", 24, 64);
@@ -160,11 +160,10 @@ void scene_1(void)
     if(text_count == 5)
     {
         DISPLAY_OFF;
-        scroll_bkg(40,0);
 
         /* center on the door */
-        set_bkg_data(0,16,shit_pot_tiles);
-        set_bkg_tiles(0,0,32,32,shit_pot);
+        set_bkg_data(0,4,blank_screen_tiles);
+        set_bkg_tiles(0,0,20,18,shit_pot);
         DISPLAY_ON;
         HIDE_SPRITES;/* this turns sprites off */
         hide_sprites();/* this moves them to lower corner of screen */
@@ -337,8 +336,6 @@ void miner_intro_setup(void)
     HIDE_WIN;
     HIDE_BKG;
 
-    scroll_bkg(-40,0);
-
     bkg_clean();
     sprite_clean();
 
@@ -352,11 +349,11 @@ void miner_intro_setup(void)
 
     text_count = 0;
 
-    print("i come\0", 24, 32);
-    print("from the\0", 24, 48);
-    print("yubari\0", 24, 64);
-    print("coal\0", 24, 80);
-    print("mines.\0", 24, 96);
+    print("i come", 24, 32);
+    print("from the", 24, 48);
+    print("yubari", 24, 64);
+    print("coal", 24, 80);
+    print("mines.", 24, 96);
     LETTER_COUNT = 0;
 }
 
@@ -372,10 +369,10 @@ int miner_intro(void)
         bkg_clean();
         sprite_clean();
 
-        print("worked\0", 24, 32);
-        print("there for\0", 24, 48);
-        print("seven\0", 24, 64);
-        print("years.\0", 24, 80);
+        print("worked", 24, 32);
+        print("there for", 24, 48);
+        print("seven", 24, 64);
+        print("years.", 24, 80);
         LETTER_COUNT = 0;
 
         DISPLAY_ON;
@@ -385,8 +382,8 @@ int miner_intro(void)
         bkg_clean();
         sprite_clean();
 
-        print("a miner,\0", 24, 32);
-        print("huh?\0", 24, 48);
+        print("a miner,", 24, 32);
+        print("huh?", 24, 48);
         LETTER_COUNT = 0;
     }
     if(text_count == 3)
@@ -394,10 +391,10 @@ int miner_intro(void)
         bkg_clean();
         sprite_clean();
 
-        print("must've\0", 24, 32);
-        print("been no\0", 24, 48);
-        print("money in\0", 24, 64);
-        print("mining?\0", 24, 80);
+        print("must've", 24, 32);
+        print("been no", 24, 48);
+        print("money in", 24, 64);
+        print("mining?", 24, 80);
         LETTER_COUNT = 0;
     }
     if(text_count == 4)
@@ -471,12 +468,9 @@ void scene_3_setup(void)
     HIDE_SPRITES;
     DISPLAY_OFF;
 
-    /* scroll the screen back after dialogue */
-    scroll_bkg(40, 0);
-
     /* set bkg up */
-    set_bkg_data(0,16,shit_pot_tiles);
-    set_bkg_tiles(0,0,32,32,shit_pot);
+    set_bkg_data(0,4,blank_screen_tiles);
+    set_bkg_tiles(0,0,20,18,shit_pot);
 
     /* hide unused sprites first */
     hide_sprites();
@@ -630,7 +624,6 @@ void scene_3_animate(void)
 void scene_3_text_setup(void)
 {
     DISPLAY_OFF;
-    scroll_bkg(-40,0);
     hide_sprites();
     bkg_clean();
     text_count = 0; // just making sure that this is zero
@@ -794,7 +787,6 @@ void scene_3(void)
         asakawa_shoots_anim();
 
         DISPLAY_OFF;
-        scroll_bkg(-40, 0);
         bkg_clean();
         sprite_clean();
         DISPLAY_ON;

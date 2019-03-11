@@ -24,12 +24,7 @@
 #ifndef LEVEL_1_ASSETS
 #define LEVEL_1_ASSETS
 
-/* level 1 opening screen */
-#include "assets/level_1_screen_tiles.h"
-#include "assets/level_1_screen.h"
-
 /* shit pot assets */
-#include "assets/shit_pot_tiles.h" 
 #include "assets/shit_pot.h"
 
 /* starting sprites */

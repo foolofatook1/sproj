@@ -11,22 +11,20 @@
 
 #include "../text/text.h"
 
-#ifndef START_UP_ASSETS
+/*#ifndef START_UP_ASSETS
 #define START_UP_ASSETS
 
-/* background tiles and sprite */
-#include "assets/ship_tiles.h"
-#include "assets/open_screen.h"
+ background tiles and sprite 
+#include "../text/assets/blank_screen_tiles.h"
+#include "../text/assets/blank_screen.h"
 
-#endif
+#endif*/
 
 #ifndef START_UP_INCLUDE
 #define START_UP_INCLUDE
 
 /* functions */
-extern void setup_sprite(void);
 extern void setup_bkg(void);
-//void start_up(void);
 extern void start_up(void);
 extern int check_pos(void);
 extern void opening(void);

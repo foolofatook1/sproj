@@ -14,7 +14,9 @@
 #include "assets/chain_border.h"
 #include "assets/font.h"
 #include "assets/chain_border_tiles.h"
-//#include "assets/small_chain_border.c"  // dash this out to play pt. 1
+#include "assets/blank_screen_tiles.h"
+#include "assets/blank_screen.h"
+//#include "assets/small_chain_border.h"  // dash this out to play pt. 1
 
 #endif
 
@@ -29,29 +31,29 @@
  * print_ln = what number line is being printed
  * print_ln starts at 0
  */
-void print(char* arr, UINT8 x, UINT8 y) NONBANKED;
-//void battle_print(char* arr, UINT8 x, UINT8 y) NONBANKED; // dash for pt.1
+void print(char* arr, UINT8 x, UINT8 y);
+//void battle_print(char* arr, UINT8 x, UINT8 y); // dash for pt.1
 
 
 /**
  * Clears the bkg and sets up text box for next 
  * set of dialogue. 
  */
-void bkg_clean(void) NONBANKED;
-//void battle_bkg_clean(void) NONBANKED; // dash for pt. 1
+void bkg_clean(void); 
+void battle_bkg_clean(void); // dash for pt. 1
 
 
 /**
  * Clears all the old sprites. 
  */
-void sprite_clean(void) NONBANKED;
+void sprite_clean(void);
 
 
 /**
  * move the screen off screen
  * so they're not in the way.
  */
-void hide_sprites(void) NONBANKED;
+void hide_sprites(void);
 
 
 extern char *chars;

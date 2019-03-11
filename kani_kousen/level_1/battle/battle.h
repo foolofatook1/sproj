@@ -1,8 +1,13 @@
+#ifndef GBDK_INCLUDE
+#define GBDK_INCLUDE
+
 #include <gb/gb.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <rand.h>
 #include <gb/drawing.h>
+
+#endif
 
 #include "../../text/text.h"
 
@@ -12,29 +17,29 @@
 #include "../assets/blank_screen_tiles.c"
 
 //void fight_ctrl(void);
-void npc_fight(UINT8*) NONBANKED;//,UINT8*);
+extern void npc_fight(UINT8*);
 
-void hero_fight(UINT8*, UINT8*) NONBANKED;
-void hero_fight_anim(void) NONBANKED;
-void hero_defend_anim(void) NONBANKED;
+extern void hero_fight(UINT8*, UINT8*);
+extern void hero_fight_anim(void);
+extern void hero_defend_anim(void);
 
-void sprite_setup(UINT8, unsigned char*, 
-                  UINT8, unsigned char*) NONBANKED;
-void choice_handler(UINT8) NONBANKED;
+extern void sprite_setup(UINT8, unsigned char*, 
+                  UINT8, unsigned char*);
+extern void choice_handler(UINT8);
 
-void clear_screen(void) NONBANKED;
+extern void clear_screen(void);
 
-#define PUNCH 1
-#define DEFEND 2 
-#define SHOOT 5
+extern UINT8 PUNCH;
+extern UINT8 DEFEND;
+extern UINT8 SHOOT;
 
-#define PUNCH_LOC 32
+extern UINT8 PUNCH_LOC;
 
 /* what do i do about this stuff? */
-UINT8 ASAKAWA_HP = 100;
-UINT8 HERO_HP = 10;
+extern UINT8 ASAKAWA_HP;
+extern UINT8 HERO_HP;
 
-UWORD h_hp[4];
+extern UWORD *h_hp;
 
 extern UINT8 choice;
 extern UINT8 enemy_choice;
