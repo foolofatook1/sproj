@@ -6,6 +6,8 @@ UINT8 i;
 UINT8 j;
 UINT8 cushion;
 UINT8 LETTER_COUNT = 0;
+/* MAX number of sprites that can be on screen at once */
+UINT8 MAX_SPRITES = 40; 
 
 UINT8 arrow_x = 72;
 UINT8 arrow_y = 72;
@@ -67,7 +69,7 @@ void bkg_clean(void)
 
 void sprite_clean(void) 
 {
-    for(i = 0; i < LETTER_COUNT; ++i)
+    for(i = 0; i < MAX_SPRITES; ++i)
     {
         set_sprite_tile(i, 40);
     }
@@ -75,7 +77,7 @@ void sprite_clean(void)
 
 void hide_sprites(void) NONBANKED
 {
-    for(i = 0; i < 100; ++i)
+    for(i = 0; i < MAX_SPRITES; ++i)
     {
         move_sprite(i, 250, 250);
     }

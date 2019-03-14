@@ -51,4 +51,6 @@ extern UINT8 LETTER_COUNT;
 extern UINT8 arrow_x;
 extern UINT8 arrow_y;
 
+extern UINT8 MAX_SPRITES;
+
 #endif /* TEXT_INCLUDE */

@@ -160,7 +160,9 @@ void scene_1(void)
         set_bkg_tiles(0,0,20,18,shit_pot);
         DISPLAY_ON;
         HIDE_SPRITES;/* this turns sprites off */
-        hide_sprites();/* this moves them to lower corner of screen */
+        sprite_clean();
+        hide_sprites();
+        LETTER_COUNT = 0;
         level_1_sprite_setup();
     }
 }
@@ -331,8 +333,6 @@ void miner_intro_setup(void)
     HIDE_BKG;
 
     bkg_clean();
-    sprite_clean();
-    LETTER_COUNT = 0;
     
     SHOW_BKG;
     SHOW_SPRITES;
@@ -340,6 +340,8 @@ void miner_intro_setup(void)
 
     text_count = 0;
 
+    sprite_clean();
+    LETTER_COUNT = 0;
     print("i come\0", 24, 32);
     print("from the\0", 24, 48);
     print("yubari\0", 24, 64);
