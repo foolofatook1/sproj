@@ -1,4 +1,5 @@
 #include "start_up.h"
+#include "../text/text.h"
 
 /* positions of the arrow */
 UINT8 START_POS = 72;
@@ -39,12 +40,10 @@ void start_up(void)
         if(arrow_y > QUIT_POS-8)
         {
             arrow_y = START_POS-8;
-            print(">", arrow_x, arrow_y);
-            LETTER_COUNT = 0;
+            print(">\0", arrow_x, arrow_y);
         }
         arrow_y+=8;
-        print(">", arrow_x, arrow_y);
-        LETTER_COUNT = 0;
+        print(">\0", arrow_x, arrow_y);
     }
 
     if(joypad() & J_UP)
@@ -52,11 +51,10 @@ void start_up(void)
         if(arrow_y < START_POS+8)
         {
             arrow_y = QUIT_POS+8; /* actual location of QUIT */
-            print(">", arrow_x, arrow_y);
-            LETTER_COUNT = 0;
+            print(">\0", arrow_x, arrow_y);
         }
         arrow_y-=8;
-        print(">", arrow_x, arrow_y);
+        print(">\0", arrow_x, arrow_y);
         LETTER_COUNT = 0;
     }
 
@@ -85,10 +83,9 @@ void setup_bkg(void)
     set_bkg_tiles(0,0,20,18,blank_screen);
 
     /* setup bkg */
-    print(">start", 72, 72);
-    print(" new game", 72, 80);
-    print(" quit", 72, 88);
-    LETTER_COUNT = 0;
+    print(">start\0", 72, 72);
+    print(" new game\0", 72, 80);
+    print(" quit\0", 72, 88);
 
     SHOW_BKG;
     SHOW_SPRITES;

@@ -6,23 +6,11 @@
  */
 
 /* text things */
-#include "../text/text.h"
-
-#ifndef GBDK_INCLUDE
-#define GBDK_INCLUDE
+#ifndef LEVEL_1_INCLUDE
+#define LEVEL_1_INCLUDE
 
 #include <stdio.h>
-#include <stdlib.h>
 #include <gb/gb.h>
-#include <gb/drawing.h>
-
-#endif
-
-/* giving mem banking a try */
-//#include "asakawa_battle.c"
-
-#ifndef LEVEL_1_ASSETS
-#define LEVEL_1_ASSETS
 
 /* shit pot assets */
 #include "assets/shit_pot.h"
@@ -43,11 +31,6 @@
 /* asakawa */
 #include "../assets/sprites/asakawa_front_idle.h"
 #include "../assets/sprites/asakawa_air_shot.h"
-
-#endif
-
-#ifndef LEVEL_1_INCLUDE
-#define LEVEL_1_INCLUDE
 
 void level_1_ctrl(void);
 void level_1_bkg_start(void);
@@ -85,4 +68,4 @@ extern UINT8 **asakawa_pos;
 
 extern UINT8 sprite_width;
 
-#endif
+#endif /* LEVEL_1_INCLUDE */

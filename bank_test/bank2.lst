@@ -1,0 +1,162 @@
+                              1 ;--------------------------------------------------------
+                              2 ; File Created by SDCC : FreeWare ANSI-C Compiler
+                              3 ; Version 2.3.1 Mon Mar 11 10:29:22 2019
+                              4 
+                              5 ;--------------------------------------------------------
+                              6 	.module lcc191670
+                              7 	
+                              8 ;--------------------------------------------------------
+                              9 ; Public variables in this module
+                             10 ;--------------------------------------------------------
+                             11 	.globl _hello
+                             12 ;--------------------------------------------------------
+                             13 ; special function registers
+                             14 ;--------------------------------------------------------
+                             15 ;--------------------------------------------------------
+                             16 ; special function bits 
+                             17 ;--------------------------------------------------------
+                             18 ;--------------------------------------------------------
+                             19 ; internal ram data
+                             20 ;--------------------------------------------------------
+                             21 	.area _DATA_2
+                             22 ;--------------------------------------------------------
+                             23 ; overlayable items in internal ram 
+                             24 ;--------------------------------------------------------
+                             25 	.area _OVERLAY
+                             26 ;--------------------------------------------------------
+                             27 ; indirectly addressable internal ram data
+                             28 ;--------------------------------------------------------
+                             29 	.area _ISEG
+                             30 ;--------------------------------------------------------
+                             31 ; bit data
+                             32 ;--------------------------------------------------------
+                             33 	.area _BSEG
+                             34 ;--------------------------------------------------------
+                             35 ; external ram data
+                             36 ;--------------------------------------------------------
+                             37 	.area _XSEG
+                             38 ;--------------------------------------------------------
+                             39 ; global & static initialisations
+                             40 ;--------------------------------------------------------
+                             41 	.area _GSINIT
+                             42 	.area _GSFINAL
+                             43 	.area _GSINIT
+                             44 ;--------------------------------------------------------
+                             45 ; Home
+                             46 ;--------------------------------------------------------
+                             47 	.area _HOME
+                             48 	.area _CODE_2
+                             49 ;--------------------------------------------------------
+                             50 ; code
+                             51 ;--------------------------------------------------------
+                             52 	.area _CODE_2
+                             53 ;	bank2.c 3
+                             54 ;	genLabel
+                             55 ;	genFunction
+                             56 ;	---------------------------------
+                             57 ; Function hello
+                             58 ; ---------------------------------
+   0000                      59 ___hello_start:
+   0000                      60 _hello:
+                             61 	
+                             62 ;	bank2.c 5
+                             63 ;	genLabel
+   0000                      64 00104$:
+                             65 ;	bank2.c 7
+                             66 ;	genIpush
+                             67 ; _saveRegsForCall: sendSetSize: 0 deInUse: 0 bcInUse: 0 deSending: 0
+                             68 ;	AOP_HL for _arrow_y
+   0000 21 00 00             69 	ld	hl,#_arrow_y
+   0003 7E                   70 	ld	a,(hl)
+   0004 F5                   71 	push	af
+   0005 33                   72 	inc	sp
+                             73 ;	genIpush
+                             74 ;	AOP_HL for _arrow_x
+   0006 21 00 00             75 	ld	hl,#_arrow_x
+   0009 7E                   76 	ld	a,(hl)
+   000A F5                   77 	push	af
+   000B 33                   78 	inc	sp
+                             79 ;	genIpush
+   000C 21 3A 00             80 	ld	hl,#__str_0
+   000F E5                   81 	push	hl
+                             82 ;	genCall
+   0010 CD 00 00             83 	call	_print
+   0013 E8 04                84 	lda	sp,4(sp)
+                             85 ;	bank2.c 8
+                             86 ;	genPlus
+                             87 ;	AOP_HL for _arrow_y
+                             88 ;	genPlusIncr
+                             89 ;	Can't optimise plus by inc, falling back to the normal way
+   0015 21 00 00             90 	ld	hl,#_arrow_y
+   0018 7E                   91 	ld	a,(hl)
+   0019 C6 10                92 	add	a,#0x10
+   001B 77                   93 	ld	(hl),a
+                             94 ;	bank2.c 9
+                             95 ;	genIpush
+                             96 ; _saveRegsForCall: sendSetSize: 0 deInUse: 0 bcInUse: 0 deSending: 0
+   001C 21 F4 01             97 	ld	hl,#0x01F4
+   001F E5                   98 	push	hl
+                             99 ;	genCall
+   0020 CD 00 00            100 	call	_delay
+   0023 E8 02               101 	lda	sp,2(sp)
+                            102 ;	bank2.c 10
+                            103 ;	genCall
+                            104 ; _saveRegsForCall: sendSetSize: 0 deInUse: 0 bcInUse: 0 deSending: 0
+   0025 CD 00 00            105 	call	_bkg_clean
+                            106 ;	bank2.c 11
+                            107 ;	genCall
+                            108 ; _saveRegsForCall: sendSetSize: 0 deInUse: 0 bcInUse: 0 deSending: 0
+   0028 CD 00 00            109 	call	_sprite_clean
+                            110 ;	bank2.c 12
+                            111 ;	genCmpLt
+                            112 ;	AOP_HL for _arrow_y
+   002B 21 00 00            113 	ld	hl,#_arrow_y
+   002E 7E                  114 	ld	a,(hl)
+   002F FE 86               115 	cp	#0x86
+   0031 DA 00 00            116 	jp	c,00104$
+                            117 ;	bank2.c 13
+                            118 ;	genAssign
+                            119 ;	AOP_HL for _arrow_y
+   0034 36 20               120 	ld	(hl),#0x20
+                            121 ;	genGoto
+   0036 C3 00 00            122 	jp	00104$
+                            123 ;	genLabel
+   0039                     124 00106$:
+                            125 ;	genEndFunction
+                            126 	
+   0039 C9                  127 	ret
+   003A                     128 ___hello_end:
+   003A                     129 __str_0:
+   003A 68 65 6C 6C 6F 20   130 	.ascii "hello world"
+        77 6F 72 6C 64
+   0045 00                  131 	.db 0x00
+                            132 	.area _CODE_2
+ASxxxx Assembler V01.75  (GameBoy Z80-like CPU), page 1.
+
+Symbol Table
+
+  9 ___hello_end                       003A R
+  9 ___hello_start                     0000 R
+  9 __str_0                            003A R
+    _arrow_x                           **** GX
+    _arrow_y                           **** GX
+    _bkg_clean                         **** GX
+    _delay                             **** GX
+  9 _hello                             0000 GR
+    _print                             **** GX
+    _sprite_clean                      **** GX
+
+ASxxxx Assembler V01.75  (GameBoy Z80-like CPU), page 2.
+
+Area Table
+
+   0 _CODE                              size    0   flags 0
+   1 _DATA_2                            size    0   flags 0
+   2 _OVERLAY                           size    0   flags 0
+   3 _ISEG                              size    0   flags 0
+   4 _BSEG                              size    0   flags 0
+   5 _XSEG                              size    0   flags 0
+   6 _GSINIT                            size    0   flags 0
+   7 _GSFINAL                           size    0   flags 0
+   8 _HOME                              size    0   flags 0
+   9 _CODE_2                            size   46   flags 0

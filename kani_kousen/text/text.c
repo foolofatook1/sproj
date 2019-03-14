@@ -1,5 +1,6 @@
 #include "text.h"
 
+
 char chars[40] = "abcdefghijklmnopqrstuvwxyz0123456789.,;/";
 UINT8 i;
 UINT8 j;
@@ -66,7 +67,7 @@ void bkg_clean(void)
 
 void sprite_clean(void) 
 {
-    for(i = 0; i < 100; ++i)
+    for(i = 0; i < LETTER_COUNT; ++i)
     {
         set_sprite_tile(i, 40);
     }

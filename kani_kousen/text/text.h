@@ -1,15 +1,8 @@
-#ifndef GBDK_INCLUDE
-#define GBDK_INCLUDE
+#ifndef TEXT_INCLUDE
+#define TEXT_INCLUDE
 
 #include <stdio.h>
-#include <stdlib.h>
 #include <gb/gb.h>
-#include <gb/drawing.h>
-
-#endif
-
-#ifndef TEXT_ASSETS_INCLUDE
-#define TEXT_ASSETS_INCLUDE
 
 #include "assets/chain_border.h"
 #include "assets/font.h"
@@ -17,11 +10,6 @@
 #include "assets/blank_screen_tiles.h"
 #include "assets/blank_screen.h"
 //#include "assets/small_chain_border.h"  // dash this out to play pt. 1
-
-#endif
-
-#ifndef TEXT_INCLUDE
-#define TEXT_INCLUDE
 
 /**
  * prints array of characters; max size = 10
@@ -55,7 +43,6 @@ void sprite_clean(void);
  */
 void hide_sprites(void);
 
-
 extern char *chars;
 extern UINT8 i;
 extern UINT8 j;
@@ -64,5 +51,4 @@ extern UINT8 LETTER_COUNT;
 extern UINT8 arrow_x;
 extern UINT8 arrow_y;
 
-
-#endif
+#endif /* TEXT_INCLUDE */

@@ -1,0 +1,32 @@
+XL
+H A areas 7 global symbols
+M lcc191670
+S _print Ref0000
+S _sprite_clean Ref0000
+S _arrow_x Ref0000
+S _arrow_y Ref0000
+S _delay Ref0000
+S _bkg_clean Ref0000
+A _CODE size 0 flags 0
+A _DATA_2 size 0 flags 0
+A _OVERLAY size 0 flags 0
+A _ISEG size 0 flags 0
+A _BSEG size 0 flags 0
+A _XSEG size 0 flags 0
+A _GSINIT size 0 flags 0
+A _GSFINAL size 0 flags 0
+A _HOME size 0 flags 0
+A _CODE_2 size 46 flags 0
+S _hello Def0000
+T 00 00 21 00 00 7E F5 33 21 00 00 7E F5 33 21
+R 00 00 09 00 02 03 03 00 02 09 02 00
+T 0D 00 3A 00 E5 CD 00 00 E8 04 21 00 00 7E C6 10
+R 00 00 09 00 00 02 09 00 02 06 00 00 02 0B 03 00
+T 1B 00 77 21 F4 01 E5 CD 00 00 E8 02 CD 00 00 CD
+R 00 00 09 00 02 08 04 00 02 0D 05 00
+T 29 00 00 00 21 00 00 7E FE 86 DA 00 00 36 20 C3
+R 00 00 09 00 02 02 01 00 02 05 03 00 00 0B 09 00
+T 37 00 00 00 C9 68 65 6C 6C 6F 20 77 6F 72 6C 64
+R 00 00 09 00 00 02 09 00
+T 45 00 00
+R 00 00 09 00

@@ -1,3 +1,8 @@
+
+#include "text/text.h"
+#include "level_1/level_1.h"
+#include "start_up/start_up.h"
+
 #ifndef GBDK_INCLUDE
 #define GBDK_INCLUDE
 
@@ -11,10 +16,10 @@
 #ifndef START_UP_INCLUDE
 #define START_UP_INCLUDE
 
-extern void setup_bkg(void);
-extern void start_up(void);
-extern int check_pos(void);
-extern void opening(void);
+void setup_bkg(void);
+void start_up(void);
+int check_pos(void);
+void opening(void);
 extern UINT8 START_POS;
 extern UINT8 NEW_GAME_POS;
 extern UINT8 QUIT_POS;
@@ -47,11 +52,11 @@ extern UINT8 choice;
 #ifndef TEXT_INCLUDE
 #define TEXT_INCLUDE
 
-extern void print(char* arr, UINT8 x, UINT8 y);
-extern void bkg_clean(void);
-extern void sprite_clean(void);
-extern void hide_sprites(void);
-extern char *chars;
+void print(char* arr, UINT8 x, UINT8 y);
+void bkg_clean(void);
+void sprite_clean(void);
+void hide_sprites(void);
+char *chars;
 extern UINT8 i;
 extern UINT8 j;
 extern UINT8 cushion;
@@ -83,23 +88,23 @@ extern UINT8 LETTER_COUNT;
 #ifndef LEVEL_1_INCLUDE
 #define LEVEL_1_INCLUDE
 
-extern void level_1_ctrl(void);
-extern void level_1_bkg_start(void);
-extern int level_1_sprite_setup(void);
-extern void joypad_check_scene_1(void);
-extern void joypad_check_scene_2(void);
-extern void scene_1(void);
-extern void animate(void);
-extern int enter_miner(void);
-extern void miner_intro_setup(void);
-extern int miner_intro(void);
-extern void scene_3_setup(void);
-extern void scene_3_animate(void);
-extern void scene_3_text_setup(void);
-extern void joypad_check_scene_3(void);
-extern void scene_3(void);
-extern void asakawa_shoots_anim(void);
-extern void asakawa_battle1_setup(void);
+void level_1_ctrl(void);
+void level_1_bkg_start(void);
+int level_1_sprite_setup(void);
+void joypad_check_scene_1(void);
+void joypad_check_scene_2(void);
+void scene_1(void);
+void animate(void);
+int enter_miner(void);
+void miner_intro_setup(void);
+int miner_intro(void);
+void scene_3_setup(void);
+void scene_3_animate(void);
+void scene_3_text_setup(void);
+void joypad_check_scene_3(void);
+void scene_3(void);
+void asakawa_shoots_anim(void);
+void asakawa_battle1_setup(void);
 extern UINT8 text_count;
 extern UINT8 start_animate;
 extern UINT8 scene_2;
