@@ -21,9 +21,8 @@ extern UINT8 NEW_GAME;
 extern UINT8 QUIT;
 
 /* arrow sprite coordinates */
-extern UINT8 arrow_x;
-extern UINT8 arrow_y;
-
+//extern UINT8 arrow_x;
+//extern UINT8 arrow_y;
 
 /* option chosen */
 extern UINT8 option;

@@ -6,18 +6,27 @@
 #include "../../assets/sprites/asakawa_front_idle.h"
 #include "../../assets/sprites/hero_back_idle.h"
 
+void battle_menu(void);
+void battle_toggle_up(void);
+void battle_doggle_down(void);
+void battle_nav(void);
+void fight_opt(void);
+void item_opt(void);
+void run(void);
+void back(void);
+
 //void fight_ctrl(void);
-extern void npc_fight(UINT8*);
+void npc_fight(UINT8*);
 
-extern void hero_fight(UINT8*, UINT8*);
-extern void hero_fight_anim(void);
-extern void hero_defend_anim(void);
+void hero_fight(UINT8*, UINT8*);
+void hero_fight_anim(void);
+void hero_defend_anim(void);
 
-extern void sprite_setup(UINT8, unsigned char*, 
+void sprite_setup(UINT8, unsigned char*, 
                   UINT8, unsigned char*);
-extern void choice_handler(UINT8);
+void choice_handler(UINT8);
 
-extern void clear_screen(void);
+void clear_screen(void);
 
 extern UINT8 PUNCH;
 extern UINT8 DEFEND;

@@ -20,9 +20,9 @@ UINT8 choice = NOTHING;
 
 void opening(void)
 {
-    //option = NOTHING; 
-
-    //setup_sprite();
+    arrow_x = 72;
+    arrow_y = 72;
+    
     setup_bkg();
     while(option == NOTHING)
     {
@@ -34,16 +34,17 @@ void opening(void)
 /* toggle between start, new game and quit */
 void start_up(void)
 {
+    /* sprite 0 is the '>' */
     delay(100);
     if(joypad() & J_DOWN)
     {
         if(arrow_y > QUIT_POS-8)
         {
             arrow_y = START_POS-8;
-            print(">\0", arrow_x, arrow_y);
+            move_sprite(0, arrow_x, arrow_y);
         }
         arrow_y+=8;
-        print(">\0", arrow_x, arrow_y);
+        move_sprite(0, arrow_x, arrow_y);
     }
 
     if(joypad() & J_UP)
@@ -51,11 +52,10 @@ void start_up(void)
         if(arrow_y < START_POS+8)
         {
             arrow_y = QUIT_POS+8; /* actual location of QUIT */
-            print(">\0", arrow_x, arrow_y);
+            move_sprite(0, arrow_x, arrow_y);
         }
         arrow_y-=8;
-        print(">\0", arrow_x, arrow_y);
-        LETTER_COUNT = 0;
+        move_sprite(0, arrow_x, arrow_y);
     }
 
     if(joypad() & J_A)

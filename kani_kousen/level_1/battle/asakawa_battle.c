@@ -3,7 +3,15 @@
 #include "battle.h"
 #include "asakawa_battle.h"
 
-UINT8 state = BATTLE_OPT;
+UINT8 SPRITE_WIDTH = 8;
+
+UINT8 BATTLE_CHOICE = 0;
+UINT8 FIGHT_CHOICE = 1;
+UINT8 RUN_CHOICE = 2;
+UINT8 ITEM_CHOICE = 3;
+UINT8 FIGHTING = 4;
+
+UINT8 STATE = BATTLE_CHOICE;
 
 void asakawa_battle_ctrl(void)
 {
@@ -11,7 +19,7 @@ void asakawa_battle_ctrl(void)
     {
         wait_vbl_done();
         asakawa_battle_check();
-        while(state == FIGHTING)
+        while(STATE == FIGHTING)
         {
             choice_handler(arrow_y);
             //            hero_fight(&ASAKAWA_HP, &HERO_HP);
@@ -20,100 +28,12 @@ void asakawa_battle_ctrl(void)
             /* basically does back but only when everything is done */
             DISPLAY_OFF;
             battle_menu();
-            state = BATTLE_OPT;
+            STATE = BATTLE_CHOICE;
             choice = 0;
             DISPLAY_ON;
             battle_menu();
         }
     }
-}
-
-void battle_nav(void)
-{
-    if(arrow_y == 32)
-    {
-        state = FIGHT_OPT;
-        fight_opt();
-    }
-    if(arrow_y == 48)
-    {
-        choice = DEFEND;
-        state = FIGHTING;
-    }
-    if(arrow_y == 64)
-    {
-        state = RUN;
-        run();
-    }
-    if(arrow_y == 80)
-    {
-        state = ITEM_OPT;
-        item_opt();
-    }
-}
-
-void run(void)
-{
-    sprite_clean();
-    battle_bkg_clean();
-    battle_print("you", 18, 32);
-    battle_print("can't", 18, 48);
-    battle_print("escape!", 18, 64); 
-    show_fighter_stats();
-    LETTER_COUNT = 0;
-    delay(300);
-    back();
-}
-
-void back(void)
-{
-    if(state < FIGHTING)
-    {
-        battle_menu();
-        state = BATTLE_OPT;
-        choice = 0;
-    }
-}
-
-void fight_opt(void)
-{
-    sprite_clean();
-    battle_bkg_clean();
-    battle_print(">", 18, 32);
-    battle_print(" punch", 18, 32);
-    battle_print("a select", 16, 130);
-    battle_print("b back", 16, 142);
-    show_fighter_stats();
-    LETTER_COUNT = 0;
-}
-
-void item_opt(void)
-{
-    sprite_clean();
-    battle_bkg_clean();
-    battle_print(" empty", 18, 32);
-    battle_print("a select", 16, 130);
-    battle_print("b back", 16, 142);
-    show_fighter_stats();
-    LETTER_COUNT = 0;
-
-}
-
-void battle_menu(void)
-{
-    /* setup the bkg */
-    set_bkg_data(0,10, chain_border_tiles);
-    set_bkg_tiles(0,0,20,18,small_chain_border);
-
-    sprite_clean();
-    hide_sprites();
-    /* selection menu */
-    battle_print(">", arrow_x, arrow_y);
-    battle_print(" fight", 18, 32);
-    battle_print(" defend", 18, 48);
-    battle_print(" run", 18, 64);
-    battle_print(" item", 18, 80);
-    show_fighter_stats();
 }
 
 void show_fighter_stats(void)
@@ -128,54 +48,14 @@ void show_fighter_stats(void)
     LETTER_COUNT = 0;
 }
 
-void battle_toggle_up(void)
-{
-    /* if at top && up */
-    if(arrow_y == 32)
-    {
-        arrow_y = 80;
-        delay(100);
-        battle_print(">", arrow_x, arrow_y);
-        LETTER_COUNT = 0;
-        delay(100);
-    }
-    else
-    {
-        delay(100);
-        battle_print(">", arrow_x, arrow_y-=16);
-        LETTER_COUNT = 0;
-        delay(100);
-    }
-}
-
-void battle_toggle_down(void)
-{
-    /* if at bottom && down */
-    if(arrow_y == 80)
-    {
-        arrow_y = 32;
-        delay(100);
-        battle_print(">", arrow_x, arrow_y);
-        LETTER_COUNT = 0;
-        delay(100);
-    }
-    else
-    {
-        delay(100);
-        battle_print(">", arrow_x, arrow_y+=16);
-        LETTER_COUNT = 0;
-        delay(100);
-    }
-}
-
 void asakawa_battle_check(void)
 {
     SPRITES_8x8;
 
     if(joypad() & J_A)
     {
-        if(state == FIGHT_OPT)
-            state = FIGHTING;
+        if(STATE == FIGHT_CHOICE)
+            STATE = FIGHTING;
         else
             battle_nav();
     }
@@ -184,13 +64,13 @@ void asakawa_battle_check(void)
         back();
 
     /* toggle down options */
-    if(joypad() & J_DOWN && state == BATTLE_OPT)
+    if(joypad() & J_DOWN && STATE == BATTLE_CHOICE)
         battle_toggle_down();
     /*if(joypad() & J_DOWN && state == FIGHT_OPT)
       if(joypad() & J_DOWN && state == ITEM_OPT)*/
 
     /* toggle up options */
-    if(joypad() & J_UP && state == BATTLE_OPT)
+    if(joypad() & J_UP && STATE == BATTLE_CHOICE)
         battle_toggle_up();
     /*    if(joypad() & J_DOWN && state == FIGHT_OPT)
           if(joypad() & J_DOWN && state == ITEM_OPT)*/

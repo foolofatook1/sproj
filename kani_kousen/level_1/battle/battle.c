@@ -1,5 +1,6 @@
 #include <rand.h>
 #include <gb/drawing.h>
+#include "asakawa_battle.h"
 #include "battle.h"
 #include "../../text/text.h"
 
@@ -14,8 +15,7 @@ UINT8 HERO_HP = 10;
 UWORD h_hp[4];
 UINT8 choice = 0;
 UINT8 enemy_choice;
-UINT8 arrow_x = 24;
-UINT8 arrow_y = 32;
+
 
 /* a stepping variable for character animations */
 UINT8 y = 72;
@@ -23,13 +23,144 @@ UINT8 y = 72;
 UINT8 a = 0;
 
 
-void choice_handler(UINT8 arrow_y) NONBANKED
+
+void battle_nav(void)
+{
+    if(arrow_y == 32)
+    {
+        STATE = FIGHT_CHOICE;
+        fight_opt();
+    }
+    if(arrow_y == 48)
+    {
+        choice = DEFEND;
+        STATE = FIGHTING;
+    }
+    if(arrow_y == 64)
+    {
+        STATE = RUN_CHOICE;
+        run();
+    }
+    if(arrow_y == 80)
+    {
+        STATE = ITEM_CHOICE;
+        item_opt();
+    }
+}
+
+void run(void)
+{
+    sprite_clean();
+    battle_bkg_clean();
+    battle_print("you", 18, 32);
+    battle_print("can't", 18, 48);
+    battle_print("escape!", 18, 64); 
+    show_fighter_stats();
+    LETTER_COUNT = 0;
+    delay(300);
+    back();
+}
+
+void back(void)
+{
+    if(STATE < FIGHTING)
+    {
+        battle_menu();
+        STATE = BATTLE_CHOICE;
+        choice = 0;
+    }
+}
+
+void fight_opt(void)
+{
+    sprite_clean();
+    battle_bkg_clean();
+    battle_print(">", 18, 32);
+    battle_print(" punch", 18, 32);
+    battle_print("a select", 16, 130);
+    battle_print("b back", 16, 142);
+    show_fighter_stats();
+    LETTER_COUNT = 0;
+}
+
+void item_opt(void)
+{
+    sprite_clean();
+    battle_bkg_clean();
+    battle_print(" empty", 18, 32);
+    battle_print("a select", 16, 130);
+    battle_print("b back", 16, 142);
+    show_fighter_stats();
+    LETTER_COUNT = 0;
+
+}
+
+void battle_menu(void)
+{
+
+    arrow_x = 20;
+    arrow_y = 32;
+
+    /* setup the bkg */
+    set_bkg_data(0,10, chain_border_tiles);
+    set_bkg_tiles(0,0,20,18,small_chain_border);
+
+    sprite_clean();
+    hide_sprites();
+    /* selection menu */
+    battle_print(">", arrow_x, arrow_y);
+    battle_print(" fight", 18, 32);
+    battle_print(" defend", 18, 48);
+    battle_print(" run", 18, 64);
+    battle_print(" item", 18, 80);
+    show_fighter_stats();
+}
+
+void battle_toggle_up(void)
+{
+    /* if at top && up */
+    if(arrow_y == 32)
+    {
+        arrow_y = 96;
+        delay(100);
+        move_sprite(0, arrow_x, arrow_y-=16);
+        delay(100);
+    }
+    else
+    {
+        delay(100);
+        move_sprite(0, arrow_x, arrow_y-=16);
+        delay(100);
+    }
+}
+
+void battle_toggle_down(void)
+{
+    /* if at bottom && down */
+    if(arrow_y == 80)
+    {
+        arrow_y = 32;
+        delay(100);
+        move_sprite(0, arrow_x, arrow_y);
+        delay(100);
+    }
+    else
+    {
+        delay(100);
+        move_sprite(0, arrow_x, arrow_y+=16);
+        delay(100);
+    }
+}
+
+
+
+void choice_handler(UINT8 arrow_y) 
 {
     if(arrow_y == PUNCH_LOC)
         choice = PUNCH;
 }
 
-void hero_fight(UINT8 *enemy_hp, UINT8 *hero_hp) NONBANKED
+void hero_fight(UINT8 *enemy_hp, UINT8 *hero_hp) 
 {
     if(choice == PUNCH)
     {
@@ -86,7 +217,7 @@ void hero_fight(UINT8 *enemy_hp, UINT8 *hero_hp) NONBANKED
 
 }
 
-void hero_defend_anim(void) NONBANKED
+void hero_defend_anim(void) 
 {
     sprite_setup(8, hero_back_idle, 8, asakawa_front_idle);
     for(a = 0; a < 21; a+=3)
@@ -105,7 +236,7 @@ void hero_defend_anim(void) NONBANKED
     y = 72;
 }
 
-void hero_fight_anim(void) NONBANKED
+void hero_fight_anim(void) 
 {
     sprite_setup(8, hero_back_idle, 8, asakawa_front_idle);
 
@@ -141,7 +272,7 @@ void hero_fight_anim(void) NONBANKED
 }
 
 
-void clear_screen(void) NONBANKED
+void clear_screen(void) 
 {
     /* clear the bkg */
     set_bkg_data(0,4, blank_screen_tiles);
@@ -154,7 +285,7 @@ void clear_screen(void) NONBANKED
  * x_data -- sprite sheet
  */
 void sprite_setup(UINT8 hnb, unsigned char *hero_data,
-        UINT8 enb, unsigned char *enemy_data) NONBANKED
+        UINT8 enb, unsigned char *enemy_data) 
 {
     sprite_clean();
     clear_screen();
@@ -186,7 +317,7 @@ void sprite_setup(UINT8 hnb, unsigned char *hero_data,
     move_sprite(7, 84, 80);
 }
 
-void npc_fight(UINT8 *hero_hp)/*, UINT8 *enemy_hp)*/ NONBANKED
+void npc_fight(UINT8 *hero_hp)/*, UINT8 *enemy_hp)*/ 
 {
 
     /** 

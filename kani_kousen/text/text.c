@@ -9,8 +9,9 @@ UINT8 LETTER_COUNT = 0;
 /* MAX number of sprites that can be on screen at once */
 UINT8 MAX_SPRITES = 40; 
 
-UINT8 arrow_x = 72;
-UINT8 arrow_y = 72;
+/* hide arrow off screen */
+UINT8 arrow_x = 200; 
+UINT8 arrow_y = 200;
 
 void print(char *arr, UINT8 x, UINT8 y) 
 {
