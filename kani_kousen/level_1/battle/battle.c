@@ -1,5 +1,7 @@
 #include <rand.h>
 #include <gb/drawing.h>
+#include <stdlib.h>
+#include <stdio.h>
 #include "asakawa_battle.h"
 #include "battle.h"
 #include "../../text/text.h"
@@ -17,7 +19,6 @@ UINT8 enemy_choice;
 UINT8 y = 72;
 /* another animation counter */
 UINT8 a = 0;
-
 
 void battle_nav(void)
 {
@@ -324,8 +325,8 @@ void npc_fight(UINT8 *hero_hp)/*, UINT8 *enemy_hp)*/
      * out asakawa's action and accuracy
      */
     UBYTE npc_act, npc_acc = 0; //UBYTE
-    //UWORD a[4];
-    //UWORD b[4];
+    UWORD npc_action[4];
+    UWORD npc_accuracy[4];
     UWORD seed;
     seed = DIV_REG;
     seed |= (UWORD)DIV_REG << 8;
@@ -333,11 +334,20 @@ void npc_fight(UINT8 *hero_hp)/*, UINT8 *enemy_hp)*/
     initarand(seed);
 
     /* enemies action */
-    npc_act = rand() & 1;
+    npc_act = rand()%5;
+    itoa(npc_act, npc_action);
     /* enemies accuracy */
-    npc_acc = rand() & 1;
+    npc_acc = rand()%5;
+    itoa(npc_acc, npc_accuracy);
+   /* delay(1000);
+    sprite_clean();
+    LETTER_COUNT = 0;
+    battle_print(npc_action, 24, 32);
+    battle_print(npc_accuracy, 24, 48);
+    delay(1000);*/
 
-    if(npc_act == 1 && npc_acc == 1)
+
+    if(npc_act >= 1 && npc_acc >= 1)
     {
         //    asakawa_shoot_anim();
 
