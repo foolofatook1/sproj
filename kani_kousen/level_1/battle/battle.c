@@ -10,18 +10,13 @@ UINT8 SHOOT = 5;
 
 UINT8 PUNCH_LOC = 32;
 
-UINT8 ASAKAWA_HP = 100;
-UINT8 HERO_HP = 10;
-UWORD h_hp[4];
 UINT8 choice = 0;
 UINT8 enemy_choice;
-
 
 /* a stepping variable for character animations */
 UINT8 y = 72;
 /* another animation counter */
 UINT8 a = 0;
-
 
 
 void battle_nav(void)
@@ -51,12 +46,12 @@ void battle_nav(void)
 void run(void)
 {
     sprite_clean();
+    LETTER_COUNT = 0;
     battle_bkg_clean();
     battle_print("you", 18, 32);
     battle_print("can't", 18, 48);
     battle_print("escape!", 18, 64); 
     show_fighter_stats();
-    LETTER_COUNT = 0;
     delay(300);
     back();
 }
@@ -74,24 +69,24 @@ void back(void)
 void fight_opt(void)
 {
     sprite_clean();
+    LETTER_COUNT = 0;
     battle_bkg_clean();
     battle_print(">", 18, 32);
     battle_print(" punch", 18, 32);
     battle_print("a select", 16, 130);
     battle_print("b back", 16, 142);
     show_fighter_stats();
-    LETTER_COUNT = 0;
 }
 
 void item_opt(void)
 {
     sprite_clean();
+    LETTER_COUNT = 0;
     battle_bkg_clean();
     battle_print(" empty", 18, 32);
     battle_print("a select", 16, 130);
     battle_print("b back", 16, 142);
     show_fighter_stats();
-    LETTER_COUNT = 0;
 
 }
 
@@ -106,6 +101,7 @@ void battle_menu(void)
     set_bkg_tiles(0,0,20,18,small_chain_border);
 
     sprite_clean();
+    LETTER_COUNT = 0;
     hide_sprites();
     /* selection menu */
     battle_print(">", arrow_x, arrow_y);
@@ -186,6 +182,7 @@ void hero_fight(UINT8 *enemy_hp, UINT8 *hero_hp)
             }
             DISPLAY_OFF;
             sprite_clean();
+            LETTER_COUNT = 0;
             print("hit!", 72, 80);
             clear_screen();
             *enemy_hp -= PUNCH;
@@ -203,6 +200,7 @@ void hero_fight(UINT8 *enemy_hp, UINT8 *hero_hp)
             }
             DISPLAY_OFF;
             sprite_clean();
+            LETTER_COUNT = 0;
             print("miss!", 64, 80);
             clear_screen();
             DISPLAY_ON;
@@ -288,6 +286,7 @@ void sprite_setup(UINT8 hnb, unsigned char *hero_data,
         UINT8 enb, unsigned char *enemy_data) 
 {
     sprite_clean();
+    LETTER_COUNT = 0;
     clear_screen();
 
     /* setup sprites */
@@ -352,6 +351,7 @@ void npc_fight(UINT8 *hero_hp)/*, UINT8 *enemy_hp)*/
         }
         DISPLAY_OFF;
         sprite_clean();
+        LETTER_COUNT = 0;
         print("hit!", 72, 80);
         clear_screen();
         DISPLAY_ON;
@@ -368,6 +368,7 @@ void npc_fight(UINT8 *hero_hp)/*, UINT8 *enemy_hp)*/
         }
         DISPLAY_OFF;
         sprite_clean();
+        LETTER_COUNT = 0;
         print("miss!", 64, 80);
         clear_screen();
         DISPLAY_ON;

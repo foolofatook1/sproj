@@ -8,7 +8,7 @@
 
 void battle_menu(void);
 void battle_toggle_up(void);
-void battle_doggle_down(void);
+void battle_toggle_down(void);
 void battle_nav(void);
 void fight_opt(void);
 void item_opt(void);

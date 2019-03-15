@@ -1,3 +1,4 @@
+#include <stdio.h>
 #include <stdlib.h>
 #include "../../text/text.h"
 #include "battle.h"
@@ -12,6 +13,11 @@ UINT8 ITEM_CHOICE = 3;
 UINT8 FIGHTING = 4;
 
 UINT8 STATE = BATTLE_CHOICE;
+
+/* hp settings for this level */
+UINT8 ASAKAWA_HP = 100;
+UINT8 HERO_HP = 10;
+UWORD h_hp[4];
 
 void asakawa_battle_ctrl(void)
 {
@@ -39,13 +45,16 @@ void asakawa_battle_ctrl(void)
 void show_fighter_stats(void)
 {
     /* HP */
-    battle_print("hero", 88, 40);
-    battle_print("hp", 88, 56);
+    battle_print("hero\0", 88, 40);
+    battle_print("hp\0", 88, 56);
 
     itoa(HERO_HP, h_hp);
-    battle_print(h_hp, 120, 56);
-    battle_print("/10", 136, 56);
-    LETTER_COUNT = 0;
+    battle_print(h_hp, 96, 72);//h_hp, 100, 56);//120, 56);
+    battle_print("/10\0", 122, 72);// 136, 56);
+    /**
+     * if you're experiencing problems, 
+     * try cleaning sprites and setting LETTER_COUNT to 0. 
+     */
 }
 
 void asakawa_battle_check(void)
