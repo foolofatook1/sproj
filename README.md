@@ -33,3 +33,30 @@ of the research leading up to this point.
 	* until then, the game can continue to be developed by making
 	  little "games" within, which will then be configured to match
 	  the memory layout later.
+
+
+## Installing and Downloading Beta Game ##
+I've just decided that if one *truly* feels compelled to download a copy of this
+game in its current form, I may as well let them. Here's how it's done:
+
+**Step 1: Download the ZIP**
+At the top of the page you will see a bar that shows # of commits, # of branches,
+# of releases, and # of contributors. Beneathe this bar is a green button which reads:
+"Clone or download." Click that, and choose: "Download ZIP". 
+
+**Step 2: Unzip the ZIP**
+Depending on your operating system this may work differently, but it should be pretty
+simple to unzip (decompress) the file, which should be in your Downloads folder.
+In linux it's a command like:
+	cd ~/Downloads; unzip *.zip
+
+**Step 3: Make the game**
+Here's where it gets tricky. You'll want to install gbdk into your computer, which can be 
+done <a href=https://sourceforge.net/projects/gbdk/files/>here</a>. You'll have to do this 
+fully before you can proceed any further, but if this is done properly. You will then be able
+to go to the location ~/Downloadsproj/kani_kousen, and run the game by typing the following in
+your console:
+	make; make play
+
+**Note to reader:**
+Notable that this way of making the game might only work in linux. Sorry.
