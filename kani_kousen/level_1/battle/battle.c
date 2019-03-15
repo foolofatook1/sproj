@@ -1,4 +1,7 @@
+#include <rand.h>
+#include <gb/drawing.h>
 #include "battle.h"
+#include "../../text/text.h"
 
 UINT8 PUNCH = 1;
 UINT8 DEFEND = 2;
@@ -11,6 +14,8 @@ UINT8 HERO_HP = 10;
 UWORD h_hp[4];
 UINT8 choice = 0;
 UINT8 enemy_choice;
+UINT8 arrow_x = 24;
+UINT8 arrow_y = 32;
 
 /* a stepping variable for character animations */
 UINT8 y = 72;

@@ -1,15 +1,7 @@
-#ifndef GBDK_INCLUDE
-#define GBDK_INCLUDe
+#ifndef ASAKAWA_BATTLE_INCLUDE
+#define ASAKAWA_BATTLE_INCLUDE
 
 #include <gb/gb.h>
-#include <stdio.h>
-
-#endif
-
-/* battle functions */
-#include "battle.h"
-
-#include "../../text/text.h"
 
 void asakawa_battle_ctrl(void);
 void battle_menu(void);
@@ -34,7 +26,6 @@ void back(void);
 #define ITEM_OPT    3
 #define FIGHTING    4
 
-extern UINT8 arrow_x;
-extern UINT8 arrow_y;
-
 extern UINT8 state;
+
+#endif

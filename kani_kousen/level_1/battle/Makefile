@@ -1,32 +1,21 @@
 CC = lcc -Wa-l -Wl-m -Wl-j -DUSE_SFT_FOR_REG
 
+TEXT_INCLUDE = ../../text/assets/small_chain_border.o ../../text/assets/chain_border.o ../../text/assets/chain_border_tiles.o ../../text/assets/font.o ../../text/assets/blank_screen_tiles.o ../../text/assets/blank_screen.o ../../text/text.o
+
+BATTLE_INCLUDE = ../../assets/sprites/asakawa_front_idle.o ../../assets/sprites/hero_back_idle.o battle.o
+
 BINS = asakawa_battle.gb
 
 all: $(BINS)
 
 clean:
-	rm -f ../../text/*.o *.o ../../text/*.lst *.lst *.map *.gb *~ *.rel *.cdb *.ihx *.lnk *.sym *.asm
-############################################################
-# Lets just start by trying to compile to a single memory 
-# bank for the battle stuff.
-#
-#	This is going to bank 2 (ROM+RAM)
-#		ROM bank 2 : -Wf-bo2
-#		RAM bank 2 : -Wf-ba2
-#
-battle.o: battle.c
-	$(CC) -Wf-bo2 -Wf-ba2 -c -o $@ $<
+	rm -f $(TEXT_INCLUDE) ../../text/assets/*.lst ../../text/assets/.*.swp ../../text/assets/*.map ../../text/*.lst ../../text/*.map ../../text/.*.swp $(BATTLE_INCLUDE) ../../assets/sprites/*.lst ../../assets/sprites/.*.swp ../../asssets/sprites/*.map *.map *.lst .*.swp *.gb *.sym *.o
 
-../../text/text.o: ../../text/text.c
+%.o : %.c
 	$(CC) -c -o $@ $<
 
-# Lets link them now for the main thing
-#	ROM+MBC1+RAM : -Wl-yt2
-#	4 ROM banks  : -Wl-yo4
-#	4 RAM banks  : -Wl-ya4
-#
-asakawa_battle.gb: asakawa_battle.o ../../text/text.o battle.o
-	$(CC) -Wl-yt2 -Wl-yo4 -Wl-ya4 -o $@ asakawa_battle.o ../../text/text.o battle.o 
+asakawa_battle.gb: asakawa_battle.o $(TEXT_INCLUDE) $(BATTLE_INCLUDE)
+	$(CC) -o $@ asakawa_battle.o $(TEXT_INCLUDE) $(BATTLE_INCLUDE)
 
 play:
 	../../../bgb/*.exe *.gb

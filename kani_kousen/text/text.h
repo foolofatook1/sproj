@@ -1,7 +1,6 @@
 #ifndef TEXT_INCLUDE
 #define TEXT_INCLUDE
 
-#include <stdio.h>
 #include <gb/gb.h>
 
 #include "assets/chain_border.h"
@@ -9,7 +8,7 @@
 #include "assets/chain_border_tiles.h"
 #include "assets/blank_screen_tiles.h"
 #include "assets/blank_screen.h"
-//#include "assets/small_chain_border.h"  // dash this out to play pt. 1
+#include "assets/small_chain_border.h"  // dash this out to play pt. 1
 
 /**
  * prints array of characters; max size = 10
@@ -20,7 +19,7 @@
  * print_ln starts at 0
  */
 void print(char* arr, UINT8 x, UINT8 y);
-//void battle_print(char* arr, UINT8 x, UINT8 y); // dash for pt.1
+void battle_print(char* arr, UINT8 x, UINT8 y); // dash for pt.1
 
 
 /**

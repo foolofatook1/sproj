@@ -84,7 +84,7 @@ void hide_sprites(void) NONBANKED
 }
 
 /* special text settings for battles */
-/*void battle_print(char *arr, UINT8 x, UINT8 y) NONBANKED
+void battle_print(char *arr, UINT8 x, UINT8 y) NONBANKED
 {
     SPRITES_8x8;
 
@@ -140,4 +140,4 @@ void battle_bkg_clean(void) NONBANKED
 {
     set_bkg_data(0, 10, chain_border_tiles);
     set_bkg_tiles(0,0,20,18,small_chain_border);
-}*/
+}

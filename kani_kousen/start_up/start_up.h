@@ -1,7 +1,6 @@
 #ifndef START_UP_INCLUDE
 #define START_UP_INCLUDE
 
-#include <stdio.h>
 #include <gb/gb.h>
 
 /* functions */

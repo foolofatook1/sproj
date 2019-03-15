@@ -1,3 +1,6 @@
+#include <stdlib.h>
+#include "../../text/text.h"
+#include "battle.h"
 #include "asakawa_battle.h"
 
 UINT8 state = BATTLE_OPT;
@@ -51,7 +54,6 @@ void battle_nav(void)
 
 void run(void)
 {
-    SWITCH_ROM_MBC1(2);
     sprite_clean();
     battle_bkg_clean();
     battle_print("you", 18, 32);
@@ -75,7 +77,6 @@ void back(void)
 
 void fight_opt(void)
 {
-    SWITCH_ROM_MBC1(2);
     sprite_clean();
     battle_bkg_clean();
     battle_print(">", 18, 32);
@@ -88,7 +89,6 @@ void fight_opt(void)
 
 void item_opt(void)
 {
-    SWITCH_ROM_MBC1(2);
     sprite_clean();
     battle_bkg_clean();
     battle_print(" empty", 18, 32);
@@ -105,7 +105,6 @@ void battle_menu(void)
     set_bkg_data(0,10, chain_border_tiles);
     set_bkg_tiles(0,0,20,18,small_chain_border);
 
-    SWITCH_ROM_MBC1(2);
     sprite_clean();
     hide_sprites();
     /* selection menu */
@@ -119,7 +118,6 @@ void battle_menu(void)
 
 void show_fighter_stats(void)
 {
-    SWITCH_ROM_MBC1(2);
     /* HP */
     battle_print("hero", 88, 40);
     battle_print("hp", 88, 56);
@@ -137,7 +135,6 @@ void battle_toggle_up(void)
     {
         arrow_y = 80;
         delay(100);
-        SWITCH_ROM_MBC1(2);
         battle_print(">", arrow_x, arrow_y);
         LETTER_COUNT = 0;
         delay(100);
@@ -145,7 +142,6 @@ void battle_toggle_up(void)
     else
     {
         delay(100);
-        SWITCH_ROM_MBC1(2);
         battle_print(">", arrow_x, arrow_y-=16);
         LETTER_COUNT = 0;
         delay(100);
@@ -159,7 +155,6 @@ void battle_toggle_down(void)
     {
         arrow_y = 32;
         delay(100);
-        SWITCH_ROM_MBC1(2);
         battle_print(">", arrow_x, arrow_y);
         LETTER_COUNT = 0;
         delay(100);
@@ -167,7 +162,6 @@ void battle_toggle_down(void)
     else
     {
         delay(100);
-        SWITCH_ROM_MBC1(2);
         battle_print(">", arrow_x, arrow_y+=16);
         LETTER_COUNT = 0;
         delay(100);

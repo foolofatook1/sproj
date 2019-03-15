@@ -1,20 +1,10 @@
-#ifndef GBDK_INCLUDE
-#define GBDK_INCLUDE
+#ifndef BATTLE_INCLUDE
+#define BATTLE_INCLUDE
 
 #include <gb/gb.h>
-#include <stdio.h>
-#include <stdlib.h>
-#include <rand.h>
-#include <gb/drawing.h>
 
-#endif
-
-#include "../../text/text.h"
-
-#include "../../assets/sprites/asakawa_front_idle.c"
-#include "../../assets/sprites/hero_back_idle.c"
-#include "../assets/blank_screen.c"
-#include "../assets/blank_screen_tiles.c"
+#include "../../assets/sprites/asakawa_front_idle.h"
+#include "../../assets/sprites/hero_back_idle.h"
 
 //void fight_ctrl(void);
 extern void npc_fight(UINT8*);
@@ -48,3 +38,8 @@ extern UINT8 enemy_choice;
 extern UINT8 y;
 /* another animation counter */
 extern UINT8 a;
+
+extern UINT8 arrow_x;
+extern UINT8 arrow_y;
+
+#endif

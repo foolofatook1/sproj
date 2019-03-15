@@ -9,7 +9,6 @@
 #ifndef LEVEL_1_INCLUDE
 #define LEVEL_1_INCLUDE
 
-#include <stdio.h>
 #include <gb/gb.h>
 
 /* shit pot assets */
