@@ -40,8 +40,8 @@ I've just decided that if one *truly* feels compelled to download a copy of this
 game in its current form, I may as well let them. Here's how it's done:
 
 **Step 1: Download the ZIP**
-At the top of the page you will see a bar that shows # of commits, # of branches,
-# of releases, and # of contributors. Beneathe this bar is a green button which reads:
+At the top of the page you will see a bar that shows \# of commits, \# of branches,
+\# of releases, and # of contributors. Beneathe this bar is a green button which reads:
 "Clone or download." Click that, and choose: "Download ZIP". 
 
 **Step 2: Unzip the ZIP**
