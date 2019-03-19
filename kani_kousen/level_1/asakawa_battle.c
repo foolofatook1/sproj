@@ -1,8 +1,9 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include "../../text/text.h"
-#include "battle.h"
+#include "../text/text.h"
+#include "../battle/battle.h"
 #include "asakawa_battle.h"
+#include "../start_up/start_up.h"
 
 UINT8 SPRITE_WIDTH = 8;
 
@@ -28,8 +29,7 @@ void asakawa_battle_ctrl(void)
         while(STATE == FIGHTING)
         {
             choice_handler(arrow_y);
-            //            hero_fight(&ASAKAWA_HP, &HERO_HP);
-            npc_fight(&HERO_HP);
+            fight(&HERO_HP, &ASAKAWA_HP);
             delay(400);
             /* basically does back but only when everything is done */
             DISPLAY_OFF;
@@ -86,7 +86,7 @@ void asakawa_battle_check(void)
 
 
 }
-
+/*
 void main(void)
 {
     wait_vbl_done();
@@ -105,4 +105,4 @@ void main(void)
     SHOW_SPRITES;
     DISPLAY_ON;
     asakawa_battle_ctrl();
-}
+}*/

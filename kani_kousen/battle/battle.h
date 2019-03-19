@@ -3,8 +3,8 @@
 
 #include <gb/gb.h>
 
-#include "../../assets/sprites/asakawa_front_idle.h"
-#include "../../assets/sprites/hero_back_idle.h"
+#include "../assets/sprites/asakawa_front_idle.h"
+#include "../assets/sprites/hero_back_idle.h"
 
 void battle_menu(void);
 void battle_toggle_up(void);
@@ -16,11 +16,15 @@ void run(void);
 void back(void);
 
 //void fight_ctrl(void);
-void npc_fight(UINT8*);
+void fight_config(void);
+void fight(UINT8*, UINT8*);
+void npc_fight(void);
 
-void hero_fight(UINT8*, UINT8*);
+void hero_fight(UINT8*);
 void hero_fight_anim(void);
 void hero_defend_anim(void);
+
+void damage(UINT8*);
 
 void sprite_setup(UINT8, unsigned char*, 
                   UINT8, unsigned char*);
@@ -40,8 +44,10 @@ extern UINT8 HERO_HP;
 
 extern UWORD *h_hp;
 
-extern UINT8 choice;
+//extern UINT8 choice;
 extern UINT8 enemy_choice;
+
+extern UWORD seed;
 
 /* a stepping variable for character animations */
 extern UINT8 y;
@@ -51,4 +57,10 @@ extern UINT8 a;
 extern UINT8 arrow_x;
 extern UINT8 arrow_y;
 
-#endif
+extern UBYTE npc_act;
+extern UBYTE npc_acc;
+
+extern UBYTE hero_acc;
+
+extern UBYTE first_fighter;
+#endif /* BATTLE_INCLUDE */

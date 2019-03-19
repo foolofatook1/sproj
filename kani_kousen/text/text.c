@@ -1,7 +1,7 @@
 #include "text.h"
 
 
-char chars[40] = "abcdefghijklmnopqrstuvwxyz0123456789.,;/";
+char chars[40] = "abcdefghijklmnopqrstuvwxyz0123456789.,:/";
 UINT8 i;
 UINT8 j;
 UINT8 cushion;

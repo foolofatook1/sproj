@@ -2,9 +2,11 @@
 #include <gb/drawing.h>
 #include <stdlib.h>
 #include <stdio.h>
-#include "asakawa_battle.h"
+#include <rand.h>
+#include "../level_1/asakawa_battle.h"
 #include "battle.h"
-#include "../../text/text.h"
+#include "../text/text.h"
+#include "../start_up/start_up.h"
 
 UINT8 PUNCH = 1;
 UINT8 DEFEND = 2;
@@ -14,6 +16,10 @@ UINT8 PUNCH_LOC = 32;
 
 UINT8 choice = 0;
 UINT8 enemy_choice;
+
+UWORD seed;
+
+UBYTE npc_act, npc_acc, hero_acc, first_fighter = 0; //UBYTE
 
 /* a stepping variable for character animations */
 UINT8 y = 72;
@@ -96,7 +102,6 @@ void battle_menu(void)
 
     arrow_x = 20;
     arrow_y = 32;
-
     /* setup the bkg */
     set_bkg_data(0,10, chain_border_tiles);
     set_bkg_tiles(0,0,20,18,small_chain_border);
@@ -149,28 +154,17 @@ void battle_toggle_down(void)
     }
 }
 
-
-
 void choice_handler(UINT8 arrow_y) 
 {
     if(arrow_y == PUNCH_LOC)
         choice = PUNCH;
 }
 
-void hero_fight(UINT8 *enemy_hp, UINT8 *hero_hp) 
+void hero_fight(UINT8 *enemy_hp)
 {
     if(choice == PUNCH)
     {
-        UBYTE hero_acc = 0; //UBYTE
-        UWORD seed;
-        seed = DIV_REG;
-        seed |= (UWORD)DIV_REG << 8;
-
-        initarand(seed);
-
-        /* hero's accuracy */
-        hero_acc = rand() & 1;
-
+        /* figher chooses punch and hits */
         if(hero_acc == 1)
         {
             hero_fight_anim();
@@ -185,10 +179,12 @@ void hero_fight(UINT8 *enemy_hp, UINT8 *hero_hp)
             sprite_clean();
             LETTER_COUNT = 0;
             print("hit!", 72, 80);
+            delay(500);
             clear_screen();
             *enemy_hp -= PUNCH;
             DISPLAY_ON;
         }
+        /* fighter chooses punch and misses */
         else
         {
             hero_fight_anim();
@@ -203,17 +199,17 @@ void hero_fight(UINT8 *enemy_hp, UINT8 *hero_hp)
             sprite_clean();
             LETTER_COUNT = 0;
             print("miss!", 64, 80);
+            delay(500);
             clear_screen();
             DISPLAY_ON;
         }
     }
 
+    /* fighter defends */
     if(choice == DEFEND)
     {
         hero_defend_anim();
-        *hero_hp += DEFEND;
     }
-
 }
 
 void hero_defend_anim(void) 
@@ -270,7 +266,6 @@ void hero_fight_anim(void)
     y = 72; // reset y
 }
 
-
 void clear_screen(void) 
 {
     /* clear the bkg */
@@ -317,41 +312,17 @@ void sprite_setup(UINT8 hnb, unsigned char *hero_data,
     move_sprite(7, 84, 80);
 }
 
-void npc_fight(UINT8 *hero_hp)/*, UINT8 *enemy_hp)*/ 
+/**
+ * Note to self: npc_fight does not ever defend...
+ */
+void npc_fight(void)
 {
-
-    /** 
-     * generate random number to find 
-     * out asakawa's action and accuracy
-     */
-    UBYTE npc_act, npc_acc = 0; //UBYTE
-    UWORD npc_action[4];
-    UWORD npc_accuracy[4];
-    UWORD seed;
-    seed = DIV_REG;
-    seed |= (UWORD)DIV_REG << 8;
-
-    initarand(seed);
-
-    /* enemies action */
-    npc_act = rand()%5;
-    itoa(npc_act, npc_action);
-    /* enemies accuracy */
-    npc_acc = rand()%5;
-    itoa(npc_acc, npc_accuracy);
-   /* delay(1000);
-    sprite_clean();
-    LETTER_COUNT = 0;
-    battle_print(npc_action, 24, 32);
-    battle_print(npc_accuracy, 24, 48);
-    delay(1000);*/
-
-
+    /* Asakawa shoots and hits */
     if(npc_act >= 1 && npc_acc >= 1)
     {
-        //    asakawa_shoot_anim();
+        //asakawa_shoot_anim();
 
-        *hero_hp -= SHOOT;
+        //*fighter_hp -= SHOOT;
         for(a = 0; a < 6; ++a)
         {
             delay(100);
@@ -365,8 +336,10 @@ void npc_fight(UINT8 *hero_hp)/*, UINT8 *enemy_hp)*/
         print("hit!", 72, 80);
         clear_screen();
         DISPLAY_ON;
+        delay(500);
     }
-    if(npc_act == 1 && npc_acc == 0)
+    /* Asakawa shoots and misses */
+    if(npc_act < 1 && npc_acc < 1)
     {
         //   asakawa_shoot_anim();
         for(a = 0; a < 6; ++a)
@@ -382,19 +355,92 @@ void npc_fight(UINT8 *hero_hp)/*, UINT8 *enemy_hp)*/
         print("miss!", 64, 80);
         clear_screen();
         DISPLAY_ON;
+        delay(500);
     }
-    //if(npc_act == 0) 
-    //{
+}
+
+/**
+ * fight helper function. 
+ * makes number decision before appearance.
+ */
+void fight_config(void)
+{
+    /** 
+     * generate random number to find 
+     * out asakawa's action and accuracy
+     */
+    seed = DIV_REG;
+    seed |= (UWORD)DIV_REG << 8;
+    initarand(seed);
+    /* enemies action */
+    npc_act = rand()%5;
+    /* enemies accuracy */
+    npc_acc = rand()%5;
+    /* hero's accuracy */
+    hero_acc = rand() & 1;
+    /* enemies action */
+    first_fighter = rand()%5;
+}
 
 
+/* checking to see if you're dead */
+void damage(UINT8 *fighter_hp)
+{
+    if(choice == DEFEND && npc_acc >= 1 && npc_act >= 1)
+    {
+        for(i = (SHOOT-DEFEND); i > 0; --i)
+        {
+            --(*fighter_hp);
+            if((*fighter_hp) == 0)
+            {
+                delay(1000);
+                sprite_clean();
+                LETTER_COUNT = 0;
+                clear_screen();
+                print("you die", 24, 32);
+                delay(1000);
+             }
+        }
+    }
+    else if(npc_acc >= 1 && npc_act >= 1 && choice == PUNCH)
+    {
+        for(i = SHOOT; i > 0; --i)
+        {
+            --(*fighter_hp);
+            if((*fighter_hp) == 0)
+            {
+                delay(1000);
+                sprite_clean();
+                LETTER_COUNT = 0;
+                clear_screen();
+                print("you die", 24, 32);
+                delay(1000);
+            }
+        }
+    }
 
-    /* prints randomly generated number 
-       itoa(npc_act, a);
-       itoa(npc_acc, b);
+}
 
-       battle_bkg_clean();
-       sprite_clean();
-       battle_print(a, 16, 32);
-       battle_print(b, 16, 48);
-       LETTER_COUNT = 0;*/
+/**
+ * make decision on randomly generated numbers.
+ */
+void fight(UINT8 *fighter_hp, UINT8 *enemy_hp)
+{
+    fight_config();
+    if(first_fighter >= 1)
+    {
+        npc_fight();
+        damage(fighter_hp);
+        hero_fight(enemy_hp);
+    }
+    else
+    {
+        hero_fight(enemy_hp);
+        npc_fight();
+        damage(fighter_hp);
+    }
+    npc_act = 0;
+    npc_acc = 0;
+    hero_acc = 0;
+    first_fighter = 0;
 }
