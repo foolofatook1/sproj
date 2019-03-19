@@ -14,7 +14,7 @@ UINT8 SHOOT = 5;
 
 UINT8 PUNCH_LOC = 32;
 
-UINT8 choice = 0;
+//UINT8 choice = 0;
 UINT8 enemy_choice;
 
 UWORD seed;
@@ -443,4 +443,19 @@ void fight(UINT8 *fighter_hp, UINT8 *enemy_hp)
     npc_acc = 0;
     hero_acc = 0;
     first_fighter = 0;
+}
+
+void show_fighter_stats(void)
+{
+    /* HP */
+    battle_print("hero\0", 88, 40);
+    battle_print("hp\0", 88, 56);
+
+    itoa(HERO_HP, h_hp);
+    battle_print(h_hp, 96, 72);//h_hp, 100, 56);//120, 56);
+    battle_print("/10\0", 122, 72);// 136, 56);
+    /**
+     * if you're experiencing problems, 
+     * try cleaning sprites and setting LETTER_COUNT to 0. 
+     */
 }

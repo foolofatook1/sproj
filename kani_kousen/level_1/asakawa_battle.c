@@ -5,8 +5,6 @@
 #include "asakawa_battle.h"
 #include "../start_up/start_up.h"
 
-UINT8 SPRITE_WIDTH = 8;
-
 UINT8 BATTLE_CHOICE = 0;
 UINT8 FIGHT_CHOICE = 1;
 UINT8 RUN_CHOICE = 2;
@@ -22,6 +20,7 @@ UWORD h_hp[4];
 
 void asakawa_battle_ctrl(void)
 {
+    choice = 0;
     while(1)
     {
         wait_vbl_done();
@@ -40,21 +39,6 @@ void asakawa_battle_ctrl(void)
             battle_menu();
         }
     }
-}
-
-void show_fighter_stats(void)
-{
-    /* HP */
-    battle_print("hero\0", 88, 40);
-    battle_print("hp\0", 88, 56);
-
-    itoa(HERO_HP, h_hp);
-    battle_print(h_hp, 96, 72);//h_hp, 100, 56);//120, 56);
-    battle_print("/10\0", 122, 72);// 136, 56);
-    /**
-     * if you're experiencing problems, 
-     * try cleaning sprites and setting LETTER_COUNT to 0. 
-     */
 }
 
 void asakawa_battle_check(void)

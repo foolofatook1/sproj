@@ -6,6 +6,8 @@
 #include "../assets/sprites/asakawa_front_idle.h"
 #include "../assets/sprites/hero_back_idle.h"
 
+void show_fighter_stats(void);
+
 void battle_menu(void);
 void battle_toggle_up(void);
 void battle_toggle_down(void);
@@ -63,4 +65,12 @@ extern UBYTE npc_acc;
 extern UBYTE hero_acc;
 
 extern UBYTE first_fighter;
+
+extern UINT8 BATTLE_CHOICE;
+extern UINT8 FIGHT_CHOICE;
+extern UINT8 RUN_CHOICE;
+extern UINT8 ITEM_CHOICE;
+extern UINT8 FIGHTING;
+
+extern UINT8 STATE;
 #endif /* BATTLE_INCLUDE */

@@ -1,5 +1,5 @@
 #include "level_1.h"
-//#include "asakawa_battle.h"
+#include "asakawa_battle.h"
 //#include "../battle/battle.h"
 #include "../text/text.h"
 

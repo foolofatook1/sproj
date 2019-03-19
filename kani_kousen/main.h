@@ -1,6 +1,6 @@
 #include "text/text.h"
-//#include "battle/battle.h"
-//#include "level_1/asakawa_battle.h"
+#include "battle/battle.h"
+#include "level_1/asakawa_battle.h"
 #include "level_1/level_1.h"
 #include "start_up/start_up.h"
 
@@ -108,7 +108,7 @@ extern UINT8 sprite_width;
 
 #endif /* LEVEL_1_INCLUDE */
 
-/*#ifndef BATTLE_INCLUDE
+#ifndef BATTLE_INCLUDE
 #define BATTLE_INCLUDE
 
 #include "../assets/sprites/asakawa_front_idle.h"
@@ -139,16 +139,16 @@ extern UINT8 PUNCH;
 extern UINT8 DEFEND;
 extern UINT8 SHOOT;
 extern UINT8 PUNCH_LOC;
- what do i do about this stuff? 
+/* what do i do about this stuff? */
 extern UINT8 ASAKAWA_HP;
 extern UINT8 HERO_HP;
 extern UWORD *h_hp;
 //extern UINT8 choice;
 extern UINT8 enemy_choice;
 extern UWORD seed;
- a stepping variable for character animations 
+/* a stepping variable for character animations */
 extern UINT8 y;
- another animation counter 
+/* another animation counter */
 extern UINT8 a;
 extern UINT8 arrow_x;
 extern UINT8 arrow_y;
@@ -157,4 +157,4 @@ extern UBYTE npc_acc;
 extern UBYTE hero_acc;
 extern UBYTE first_fighter;
 
-#endif  BATTLE_INCLUDE */
+#endif /* BATTLE_INCLUDE */
