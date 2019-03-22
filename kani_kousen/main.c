@@ -8,6 +8,10 @@ void main(void)
     {
         level_1_ctrl();
     }
+    if(option == GAME_OVER)
+    {
+        game_over_screen();
+    }
     if(option == QUIT)            /* Do you not want to play at all? */
     {
         display_off();

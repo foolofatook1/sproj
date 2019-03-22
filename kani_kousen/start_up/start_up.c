@@ -5,6 +5,7 @@
 UINT8 START_POS = 72;
 UINT8 NEW_GAME_POS = 80;
 UINT8 QUIT_POS = 88;
+UINT8 GAME_OVER = 0;
 
 /* actions that can be taken and returned */
 UINT8 NOTHING = 0;

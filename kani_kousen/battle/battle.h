@@ -11,13 +11,13 @@ void show_fighter_stats(void);
 void battle_menu(void);
 void battle_toggle_up(void);
 void battle_toggle_down(void);
+void battle_toggle_ctrl(void);
 void battle_nav(void);
 void fight_opt(void);
 void item_opt(void);
 void run(void);
 void back(void);
 
-//void fight_ctrl(void);
 void fight_config(void);
 void fight(UINT8*, UINT8*);
 void npc_fight(void);
@@ -33,6 +33,8 @@ void sprite_setup(UINT8, unsigned char*,
 void choice_handler(UINT8);
 
 void clear_screen(void);
+
+void game_over_screen(void);
 
 extern UINT8 PUNCH;
 extern UINT8 DEFEND;
@@ -71,6 +73,7 @@ extern UINT8 FIGHT_CHOICE;
 extern UINT8 RUN_CHOICE;
 extern UINT8 ITEM_CHOICE;
 extern UINT8 FIGHTING;
+extern UINT8 DEAD;
 
 extern UINT8 STATE;
 #endif /* BATTLE_INCLUDE */

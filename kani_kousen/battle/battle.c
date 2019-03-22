@@ -8,13 +8,19 @@
 #include "../text/text.h"
 #include "../start_up/start_up.h"
 
+UINT8 BATTLE_CHOICE = 0;
+UINT8 FIGHT_CHOICE = 1;
+UINT8 RUN_CHOICE = 2;
+UINT8 ITEM_CHOICE = 3;
+UINT8 FIGHTING = 4;
+UINT8 DEAD = 5;
+
 UINT8 PUNCH = 1;
 UINT8 DEFEND = 2;
 UINT8 SHOOT = 5;
 
 UINT8 PUNCH_LOC = 32;
 
-//UINT8 choice = 0;
 UINT8 enemy_choice;
 
 UWORD seed;
@@ -25,6 +31,8 @@ UBYTE npc_act, npc_acc, hero_acc, first_fighter = 0; //UBYTE
 UINT8 y = 72;
 /* another animation counter */
 UINT8 a = 0;
+
+UWORD h_hp[4];
 
 void battle_nav(void)
 {
@@ -154,6 +162,30 @@ void battle_toggle_down(void)
     }
 }
 
+void battle_toggle_ctrl(void)
+{
+    SPRITES_8x8;
+    
+    if(joypad() & J_A)
+    {
+        if(STATE == FIGHT_CHOICE)
+            STATE = FIGHTING;
+        else
+            battle_nav();
+    }
+
+    if(joypad() & J_B)
+        back();
+
+    /* toggle down options */
+    if(joypad() & J_DOWN && STATE == BATTLE_CHOICE)
+        battle_toggle_down();
+
+    /* toggle up options */
+    if(joypad() & J_UP && STATE == BATTLE_CHOICE)
+        battle_toggle_up();
+}
+
 void choice_handler(UINT8 arrow_y) 
 {
     if(arrow_y == PUNCH_LOC)
@@ -270,7 +302,15 @@ void clear_screen(void)
 {
     /* clear the bkg */
     set_bkg_data(0,4, blank_screen_tiles);
+    //for(i = 0; i < 350; ++i)
+     //   blank_screen[i] = (blank_screen[i] | 0xFF);
     set_bkg_tiles(0,0,20,18,blank_screen);
+    /**
+     * Going to quickly try and see if I 
+     * can make clear_screen() black instead 
+     * of white without actually changing the 
+     * tile setup.
+     */
 }
 
 /**
@@ -393,12 +433,8 @@ void damage(UINT8 *fighter_hp)
             --(*fighter_hp);
             if((*fighter_hp) == 0)
             {
-                delay(1000);
-                sprite_clean();
-                LETTER_COUNT = 0;
-                clear_screen();
-                print("you die", 24, 32);
-                delay(1000);
+                option = GAME_OVER;
+                STATE = DEAD;
              }
         }
     }
@@ -409,12 +445,8 @@ void damage(UINT8 *fighter_hp)
             --(*fighter_hp);
             if((*fighter_hp) == 0)
             {
-                delay(1000);
-                sprite_clean();
-                LETTER_COUNT = 0;
-                clear_screen();
-                print("you die", 24, 32);
-                delay(1000);
+                option = GAME_OVER;
+                STATE = DEAD;
             }
         }
     }
@@ -431,7 +463,8 @@ void fight(UINT8 *fighter_hp, UINT8 *enemy_hp)
     {
         npc_fight();
         damage(fighter_hp);
-        hero_fight(enemy_hp);
+        if(STATE != DEAD)
+            hero_fight(enemy_hp);
     }
     else
     {
@@ -452,10 +485,18 @@ void show_fighter_stats(void)
     battle_print("hp\0", 88, 56);
 
     itoa(HERO_HP, h_hp);
-    battle_print(h_hp, 96, 72);//h_hp, 100, 56);//120, 56);
-    battle_print("/10\0", 122, 72);// 136, 56);
+    battle_print(h_hp, 96, 72);
+    battle_print("/10\0", 122, 72);
     /**
      * if you're experiencing problems, 
      * try cleaning sprites and setting LETTER_COUNT to 0. 
      */
+}
+
+void game_over_screen(void)
+{
+    sprite_clean();
+    LETTER_COUNT = 0;
+    clear_screen();
+    print("game over", 44, 72);
 }

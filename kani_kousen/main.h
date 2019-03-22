@@ -26,6 +26,7 @@ extern UINT8 NOTHING;
 extern UINT8 START;
 extern UINT8 NEW_GAME;
 extern UINT8 QUIT;
+extern UINT8 GAME_OVER;
 
 extern UINT8 arrow_x;
 extern UINT8 arrow_y;
@@ -61,7 +62,6 @@ extern UINT8 LETTER_COUNT;
 /**
  * Things needed for level_1
  */
-
 #ifndef LEVEL_1_INLCUDE
 #define LEVEL_1_INCLUDE
 
@@ -108,21 +108,29 @@ extern UINT8 sprite_width;
 
 #endif /* LEVEL_1_INCLUDE */
 
+#ifndef ASAKAWA_BATTLE_INCLUDE
+#define ASAKAWA_BATTLE_INCLUDE
+
+void asakawa_battle_ctrl(void);
+
+#endif /* ASAKAKAWA_BATTLE_INCLUDE */
+
 #ifndef BATTLE_INCLUDE
 #define BATTLE_INCLUDE
 
 #include "../assets/sprites/asakawa_front_idle.h"
 #include "../assets/sprites/hero_back_idle.h"
 
+void show_fighter_stats(void);
 void battle_menu(void);
 void battle_toggle_up(void);
 void battle_toggle_down(void);
+void battle_toggle_ctrl(void);
 void battle_nav(void);
 void fight_opt(void);
 void item_opt(void);
 void run(void);
 void back(void);
-//void fight_ctrl(void);
 void fight_config(void);
 void fight(UINT8*, UINT8*);
 void npc_fight(void);
@@ -131,9 +139,9 @@ void hero_fight_anim(void);
 void hero_defend_anim(void);
 void damage(UINT8*);
 void sprite_setup(UINT8, unsigned char*, 
-                  UINT8, unsigned char*);
 void choice_handler(UINT8);
 void clear_screen(void);
+void game_over_screen(void);
 
 extern UINT8 PUNCH;
 extern UINT8 DEFEND;
@@ -143,7 +151,6 @@ extern UINT8 PUNCH_LOC;
 extern UINT8 ASAKAWA_HP;
 extern UINT8 HERO_HP;
 extern UWORD *h_hp;
-//extern UINT8 choice;
 extern UINT8 enemy_choice;
 extern UWORD seed;
 /* a stepping variable for character animations */
@@ -156,5 +163,12 @@ extern UBYTE npc_act;
 extern UBYTE npc_acc;
 extern UBYTE hero_acc;
 extern UBYTE first_fighter;
+extern UINT8 BATTLE_CHOICE;
+extern UINT8 FIGHT_CHOICE;
+extern UINT8 RUN_CHOICE;
+extern UINT8 ITEM_CHOICE;
+extern UINT8 FIGHTING;
+extern UINT8 DEAD;
+extern UINT8 STATE;
 
 #endif /* BATTLE_INCLUDE */

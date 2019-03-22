@@ -1,6 +1,5 @@
 #include "level_1.h"
 #include "asakawa_battle.h"
-//#include "../battle/battle.h"
 #include "../text/text.h"
 
 /* scene 1 variables */
@@ -58,8 +57,7 @@ void level_1_ctrl(void)
         joypad_check_scene_3();
         wait_vbl_done();
     }
-//    battle_menu();
- //   asakawa_battle_ctrl();
+    asakawa_battle_ctrl();
 }
 
 /**
@@ -340,7 +338,7 @@ void miner_intro_setup(void)
     HIDE_BKG;
 
     bkg_clean();
-    
+
     SHOW_BKG;
     SHOW_SPRITES;
     DISPLAY_ON;
@@ -844,39 +842,40 @@ void scene_3(void)
         print("this job\0", 24, 48);
         print("is within\0", 24, 64);
         print("the realm\0", 24, 80);
-     }
-     if(text_count == 18)
-     {
-         bkg_clean();
-         sprite_clean();
-         LETTER_COUNT = 0;
-         print("asakawa:\0", 24, 32);
-         print("of\0", 24, 48);
-         print("'national\0", 24, 64);
-         print("policy!'\0", 24, 80);
-         delay(1000);
-         /* Battle prompt */
-         DISPLAY_OFF;
-         bkg_clean();
-         sprite_clean();
-         LETTER_COUNT = 0;
-         print("fight\0", 64, 32);
-         print("asakawa\0", 56, 48);
-         
-         DISPLAY_ON;
-         delay(100);
-         DISPLAY_OFF;
-         delay(100);
-         DISPLAY_ON;
-         delay(100);
-         DISPLAY_OFF;
-         delay(100);
-         DISPLAY_ON;
+    }
+    if(text_count == 18)
+    {
+        bkg_clean();
+        sprite_clean();
+        LETTER_COUNT = 0;
+        print("asakawa:\0", 24, 32);
+        print("of\0", 24, 48);
+        print("'national\0", 24, 64);
+        print("policy!'\0", 24, 80);
+        delay(1000);
+        /* Battle prompt */
+        DISPLAY_OFF;
+        set_bkg_data(0,4, blank_screen_tiles);
+        set_bkg_tiles(0,0,20,18,blank_screen);
+        sprite_clean();
+        LETTER_COUNT = 0;
+        print("fight\0", 64, 32);
+        print("asakawa\0", 56, 48);
 
-         sprite_clean();
-         LETTER_COUNT = 0;
-         scene_3_stop = 1;
-     }
+        DISPLAY_ON;
+        delay(100);
+        DISPLAY_OFF;
+        delay(100);
+        DISPLAY_ON;
+        delay(100);
+        DISPLAY_OFF;
+        delay(100);
+        DISPLAY_ON;
+        delay(300);
+        sprite_clean();
+        LETTER_COUNT = 0;
+        scene_3_stop = 1;
+    }
 }
 
 void asakawa_shoots_anim(void)
