@@ -40,20 +40,24 @@ I've just decided that if one *truly* feels compelled to download a copy of this
 game in its current form, I may as well let them. Here's how it's done:
 
 **Step 1: Download the ZIP**
+
 There is a file on this page called 'kani_kousen_dwnld.zip'; go to this page, and click 'View Raw'
 
 **Step 2: Unzip the ZIP**
+
 Depending on your operating system this may work differently, but it should be pretty
 simple to unzip (decompress or extract) the file, which should be in your Downloads folder.
 In linux it's a command like:
 	cd ~/Downloads; unzip *.zip
 
 **Step 3: Download and emulator**
+
 You'll want to download an emulator to play the gameboy game on your
-computer. I would recommend bgb, which you can find [*here*](http://bgb.bircd.org/). 
+computer. I would recommend bgb, which you can find [here](http://bgb.bircd.org/). 
 There are many other options as well, you can find those options 
-[*here*](https://github.com/gbdev/awesome-gbdev#emulators). 
+[here](https://github.com/gbdev/awesome-gbdev#emulators). 
 
 **Step 4: Enjoy!**
+
 Regardless of what emulator you choose, read its documentation to figure out how to 
 properly Download it, and play games on it. 
