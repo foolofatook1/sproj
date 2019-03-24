@@ -26,7 +26,7 @@ UINT8 anim_2 = 34;
 void level_1_ctrl(void) 
 {
     wait_vbl_done();
-    level_1_bkg_start();
+/*    level_1_bkg_start();
     while(start_animate == 0)
     {
         joypad_check_scene_1();
@@ -56,7 +56,7 @@ void level_1_ctrl(void)
     {
         joypad_check_scene_3();
         wait_vbl_done();
-    }
+    }*/
     asakawa_battle_ctrl();
 }
 
@@ -886,8 +886,6 @@ void asakawa_shoots_anim(void)
     {
         set_sprite_tile(8, anim_1+=4);
         set_sprite_tile(9, anim_2+=4);
-        move_sprite(8, asakawa_pos[0][0], asakawa_pos[0][1]);
-        move_sprite(9, asakawa_pos[1][0], asakawa_pos[1][1]);
         delay(500);
     }
     delay(800);

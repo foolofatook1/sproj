@@ -136,6 +136,7 @@ void fight(UINT8*, UINT8*);
 void npc_fight(void);
 void hero_fight(UINT8*);
 void hero_fight_anim(void);
+void enemy_fight_anim(void);
 void hero_defend_anim(void);
 void damage(UINT8*);
 void sprite_setup(UINT8, unsigned char*, 

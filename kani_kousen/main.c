@@ -2,6 +2,7 @@
 
 void main(void)
 {
+    wait_vbl_done();
     /* this poses the OPTIONS: START, NEW GAME, and QUIT. */
     opening();
     if(option == START)           /* Did you choose START? */

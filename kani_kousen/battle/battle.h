@@ -5,6 +5,7 @@
 
 #include "../assets/sprites/asakawa_front_idle.h"
 #include "../assets/sprites/hero_back_idle.h"
+#include "../assets/sprites/asakawa_air_shot.h"
 
 void show_fighter_stats(void);
 
@@ -24,6 +25,7 @@ void npc_fight(void);
 
 void hero_fight(UINT8*);
 void hero_fight_anim(void);
+void enemy_fight_anim(void);
 void hero_defend_anim(void);
 
 void damage(UINT8*);

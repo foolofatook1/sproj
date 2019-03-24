@@ -266,44 +266,53 @@ void hero_defend_anim(void)
 void hero_fight_anim(void) 
 {
     sprite_setup(8, hero_back_idle, 8, asakawa_front_idle);
-
-    while(y > 58)
-    {
-        delay(100);
-        move_sprite(4, 77, y);
-        move_sprite(5, 77, y+8);
-        move_sprite(6, 84, y);
-        move_sprite(7, 84, y+8);
-        delay(100);
-        --y;
-    }
-    /**
-     * 0000 0100 & 0001 0010 = 0000 0000 
-     * 0000 0100 & 0000 0110 = 0000 0100
-     * sprites second imgs are 4 apart.
-     */
+    delay(300);
+    /* essentially hiding one sprite */
+    for(i = 4; i < 8; ++i)
+        move_sprite(i, 200, 200);
+    
+    delay(300);
+    move_sprite(4, 77, 58);
+    move_sprite(5, 77, 66);
+    move_sprite(6, 84, 58);
+    move_sprite(7, 84, 66);
     for(a = 0; a < 21; a+=3)
     {
         delay(100);
         set_sprite_tile(4, (8+(a&0x4)));
-        move_sprite(4, 77, y);
         set_sprite_tile(5, (9+(a&0x4)));
-        move_sprite(5, 77, y+8);
         set_sprite_tile(6, (10+(a&0x4)));
-        move_sprite(6, 84, y);
         set_sprite_tile(7, (11+(a&0x4)));
-        move_sprite(7, 84, y+8);
-        delay(100);
     }
-    y = 72; // reset y
+}
+
+void enemy_fight_anim(void)
+{
+    sprite_setup(8, hero_back_idle, 8, asakawa_front_idle);
+    delay(300);
+    /* essentially hiding one sprite */
+    for(i = 0; i < 4; ++i)
+        move_sprite(i, 200, 200);
+    
+    delay(300);
+    move_sprite(0, 77, 52);
+    move_sprite(1, 77, 60);
+    move_sprite(2, 84, 52);
+    move_sprite(3, 84, 60);
+    for(a = 0; a < 21; a+=3)
+    {
+        delay(100);
+        set_sprite_tile(0, (0+(a&0x4)));
+        set_sprite_tile(1, (1+(a&0x4)));
+        set_sprite_tile(2, (2+(a&0x4)));
+        set_sprite_tile(3, (3+(a&0x4)));
+    }
 }
 
 void clear_screen(void) 
 {
     /* clear the bkg */
     set_bkg_data(0,4, blank_screen_tiles);
-    //for(i = 0; i < 350; ++i)
-     //   blank_screen[i] = (blank_screen[i] | 0xFF);
     set_bkg_tiles(0,0,20,18,blank_screen);
     /**
      * Going to quickly try and see if I 
@@ -319,7 +328,7 @@ void clear_screen(void)
  * x_data -- sprite sheet
  */
 void sprite_setup(UINT8 hnb, unsigned char *hero_data,
-        UINT8 enb, unsigned char *enemy_data) 
+                  UINT8 enb, unsigned char *enemy_data) 
 {
     sprite_clean();
     LETTER_COUNT = 0;
@@ -360,9 +369,7 @@ void npc_fight(void)
     /* Asakawa shoots and hits */
     if(npc_act >= 1 && npc_acc >= 1)
     {
-        //asakawa_shoot_anim();
-
-        //*fighter_hp -= SHOOT;
+        enemy_fight_anim();
         for(a = 0; a < 6; ++a)
         {
             delay(100);
@@ -381,7 +388,7 @@ void npc_fight(void)
     /* Asakawa shoots and misses */
     if(npc_act < 1 && npc_acc < 1)
     {
-        //   asakawa_shoot_anim();
+        enemy_fight_anim();
         for(a = 0; a < 6; ++a)
         {
             delay(100);
