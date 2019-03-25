@@ -13,7 +13,6 @@ UINT8 HERO_HP = 10;
 
 void asakawa_battle_ctrl(void)
 {
-    //clear_screen();
     choice = 0;
     sprite_clean();
     LETTER_COUNT = 0;
@@ -40,4 +39,5 @@ void asakawa_battle_ctrl(void)
             }
         }
     }
+    option = LEVEL_2;
 }

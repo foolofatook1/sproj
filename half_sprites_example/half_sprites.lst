@@ -1,0 +1,424 @@
+                              1 ;--------------------------------------------------------
+                              2 ; File Created by SDCC : FreeWare ANSI-C Compiler
+                              3 ; Version 2.3.1 Sun Mar 24 21:19:47 2019
+                              4 
+                              5 ;--------------------------------------------------------
+                              6 	.module lcc187030
+                              7 	
+                              8 ;--------------------------------------------------------
+                              9 ; Public variables in this module
+                             10 ;--------------------------------------------------------
+                             11 	.globl _main
+                             12 ;--------------------------------------------------------
+                             13 ; special function registers
+                             14 ;--------------------------------------------------------
+                             15 ;--------------------------------------------------------
+                             16 ; special function bits 
+                             17 ;--------------------------------------------------------
+                             18 ;--------------------------------------------------------
+                             19 ; internal ram data
+                             20 ;--------------------------------------------------------
+                             21 	.area _DATA
+                             22 ;--------------------------------------------------------
+                             23 ; overlayable items in internal ram 
+                             24 ;--------------------------------------------------------
+                             25 	.area _OVERLAY
+                             26 ;--------------------------------------------------------
+                             27 ; indirectly addressable internal ram data
+                             28 ;--------------------------------------------------------
+                             29 	.area _ISEG
+                             30 ;--------------------------------------------------------
+                             31 ; bit data
+                             32 ;--------------------------------------------------------
+                             33 	.area _BSEG
+                             34 ;--------------------------------------------------------
+                             35 ; external ram data
+                             36 ;--------------------------------------------------------
+                             37 	.area _XSEG
+                             38 ;--------------------------------------------------------
+                             39 ; global & static initialisations
+                             40 ;--------------------------------------------------------
+                             41 	.area _GSINIT
+                             42 	.area _GSFINAL
+                             43 	.area _GSINIT
+                             44 ;--------------------------------------------------------
+                             45 ; Home
+                             46 ;--------------------------------------------------------
+                             47 	.area _HOME
+                             48 	.area _CODE
+                             49 ;--------------------------------------------------------
+                             50 ; code
+                             51 ;--------------------------------------------------------
+                             52 	.area _CODE
+                             53 ;	half_sprites.c 4
+                             54 ;	genLabel
+                             55 ;	genFunction
+                             56 ;	---------------------------------
+                             57 ; Function main
+                             58 ; ---------------------------------
+   0000                      59 ___main_start:
+   0000                      60 _main:
+   0000 E8 FD                61 	lda	sp,-3(sp)
+                             62 ;	half_sprites.c 6
+                             63 ;	genCall
+                             64 ; _saveRegsForCall: sendSetSize: 0 deInUse: 0 bcInUse: 0 deSending: 0
+   0002 CD 00 00             65 	call	_wait_vbl_done
+                             66 ;	half_sprites.c 7
+                             67 ;	genAssign
+   0005 01 40 FF             68 	ld	bc,#0xFF40
+                             69 ;	genAssign
+                             70 ;	AOP_STK for _main_sloc0_1_0
+   0008 F8 01                71 	lda	hl,1(sp)
+   000A 36 40                72 	ld	(hl),#0x40
+   000C 23                   73 	inc	hl
+   000D 36 FF                74 	ld	(hl),#0xFF
+                             75 ;	genPointerGet
+                             76 ;	AOP_STK for _main_sloc0_1_0
+                             77 ;	AOP_STK for _main_sloc1_1_0
+   000F 2B                   78 	dec	hl
+   0010 5E                   79 	ld	e,(hl)
+   0011 23                   80 	inc	hl
+   0012 56                   81 	ld	d,(hl)
+   0013 1A                   82 	ld	a,(de)
+   0014 2B                   83 	dec	hl
+   0015 2B                   84 	dec	hl
+                             85 ;	genOr
+                             86 ;	AOP_STK for _main_sloc1_1_0
+   0016 77                   87 	ld      (hl),a
+   0017 7F                   88 	ld      a,a
+   0018 F6 80                89 	or	a,#0x80
+                             90 ;	genAssign (pointer)
+   001A 02                   91 	ld	(bc),a
+                             92 ;	half_sprites.c 8
+                             93 ;	genAssign
+   001B 01 40 FF             94 	ld	bc,#0xFF40
+                             95 ;	genAssign
+                             96 ;	AOP_STK for _main_sloc0_1_0
+   001E 23                   97 	inc	hl
+   001F 36 40                98 	ld	(hl),#0x40
+   0021 23                   99 	inc	hl
+   0022 36 FF               100 	ld	(hl),#0xFF
+                            101 ;	genPointerGet
+                            102 ;	AOP_STK for _main_sloc0_1_0
+                            103 ;	AOP_STK for _main_sloc1_1_0
+   0024 2B                  104 	dec	hl
+   0025 5E                  105 	ld	e,(hl)
+   0026 23                  106 	inc	hl
+   0027 56                  107 	ld	d,(hl)
+   0028 1A                  108 	ld	a,(de)
+   0029 2B                  109 	dec	hl
+   002A 2B                  110 	dec	hl
+                            111 ;	genOr
+                            112 ;	AOP_STK for _main_sloc1_1_0
+   002B 77                  113 	ld      (hl),a
+   002C 7F                  114 	ld      a,a
+   002D F6 02               115 	or	a,#0x02
+                            116 ;	genAssign (pointer)
+   002F 02                  117 	ld	(bc),a
+                            118 ;	half_sprites.c 9
+                            119 ;	genIpush
+                            120 ; _saveRegsForCall: sendSetSize: 0 deInUse: 0 bcInUse: 0 deSending: 0
+   0030 21 00 00            121 	ld	hl,#_miner_walk_up
+   0033 E5                  122 	push	hl
+                            123 ;	genIpush
+   0034 21 00 04            124 	ld	hl,#0x0400
+   0037 E5                  125 	push	hl
+                            126 ;	genCall
+   0038 CD 00 00            127 	call	_set_sprite_data
+   003B E8 04               128 	lda	sp,4(sp)
+                            129 ;	half_sprites.c 10
+                            130 ;	genIpush
+                            131 ; _saveRegsForCall: sendSetSize: 0 deInUse: 0 bcInUse: 0 deSending: 0
+   003D 21 00 00            132 	ld	hl,#0x0000
+   0040 E5                  133 	push	hl
+                            134 ;	genCall
+   0041 CD 00 00            135 	call	_set_sprite_tile
+   0044 E8 02               136 	lda	sp,2(sp)
+                            137 ;	half_sprites.c 11
+                            138 ;	genIpush
+                            139 ; _saveRegsForCall: sendSetSize: 0 deInUse: 0 bcInUse: 0 deSending: 0
+   0046 21 01 01            140 	ld	hl,#0x0101
+   0049 E5                  141 	push	hl
+                            142 ;	genCall
+   004A CD 00 00            143 	call	_set_sprite_tile
+   004D E8 02               144 	lda	sp,2(sp)
+                            145 ;	half_sprites.c 12
+                            146 ;	genIpush
+                            147 ; _saveRegsForCall: sendSetSize: 0 deInUse: 0 bcInUse: 0 deSending: 0
+   004F 21 02 02            148 	ld	hl,#0x0202
+   0052 E5                  149 	push	hl
+                            150 ;	genCall
+   0053 CD 00 00            151 	call	_set_sprite_tile
+   0056 E8 02               152 	lda	sp,2(sp)
+                            153 ;	half_sprites.c 13
+                            154 ;	genIpush
+                            155 ; _saveRegsForCall: sendSetSize: 0 deInUse: 0 bcInUse: 0 deSending: 0
+   0058 21 03 03            156 	ld	hl,#0x0303
+   005B E5                  157 	push	hl
+                            158 ;	genCall
+   005C CD 00 00            159 	call	_set_sprite_tile
+   005F E8 02               160 	lda	sp,2(sp)
+                            161 ;	half_sprites.c 14
+                            162 ;	genIpush
+                            163 ; _saveRegsForCall: sendSetSize: 0 deInUse: 0 bcInUse: 0 deSending: 0
+   0061 21 50 4B            164 	ld	hl,#0x4B50
+   0064 E5                  165 	push	hl
+                            166 ;	genIpush
+   0065 3E 00               167 	ld	a,#0x00
+   0067 F5                  168 	push	af
+   0068 33                  169 	inc	sp
+                            170 ;	genCall
+   0069 CD 00 00            171 	call	_move_sprite
+   006C E8 03               172 	lda	sp,3(sp)
+                            173 ;	half_sprites.c 15
+                            174 ;	genIpush
+                            175 ; _saveRegsForCall: sendSetSize: 0 deInUse: 0 bcInUse: 0 deSending: 0
+   006E 21 50 53            176 	ld	hl,#0x5350
+   0071 E5                  177 	push	hl
+                            178 ;	genIpush
+   0072 3E 01               179 	ld	a,#0x01
+   0074 F5                  180 	push	af
+   0075 33                  181 	inc	sp
+                            182 ;	genCall
+   0076 CD 00 00            183 	call	_move_sprite
+   0079 E8 03               184 	lda	sp,3(sp)
+                            185 ;	half_sprites.c 16
+                            186 ;	genIpush
+                            187 ; _saveRegsForCall: sendSetSize: 0 deInUse: 0 bcInUse: 0 deSending: 0
+   007B 21 58 4B            188 	ld	hl,#0x4B58
+   007E E5                  189 	push	hl
+                            190 ;	genIpush
+   007F 3E 02               191 	ld	a,#0x02
+   0081 F5                  192 	push	af
+   0082 33                  193 	inc	sp
+                            194 ;	genCall
+   0083 CD 00 00            195 	call	_move_sprite
+   0086 E8 03               196 	lda	sp,3(sp)
+                            197 ;	half_sprites.c 17
+                            198 ;	genIpush
+                            199 ; _saveRegsForCall: sendSetSize: 0 deInUse: 0 bcInUse: 0 deSending: 0
+   0088 21 58 53            200 	ld	hl,#0x5358
+   008B E5                  201 	push	hl
+                            202 ;	genIpush
+   008C 3E 03               203 	ld	a,#0x03
+   008E F5                  204 	push	af
+   008F 33                  205 	inc	sp
+                            206 ;	genCall
+   0090 CD 00 00            207 	call	_move_sprite
+   0093 E8 03               208 	lda	sp,3(sp)
+                            209 ;	half_sprites.c 18
+                            210 ;	genLabel
+   0095                     211 00102$:
+                            212 ;	half_sprites.c 20
+                            213 ;	genIpush
+                            214 ; _saveRegsForCall: sendSetSize: 0 deInUse: 0 bcInUse: 0 deSending: 0
+   0095 21 C8 00            215 	ld	hl,#0x00C8
+   0098 E5                  216 	push	hl
+                            217 ;	genCall
+   0099 CD 00 00            218 	call	_delay
+   009C E8 02               219 	lda	sp,2(sp)
+                            220 ;	half_sprites.c 21
+                            221 ;	genIpush
+                            222 ; _saveRegsForCall: sendSetSize: 0 deInUse: 0 bcInUse: 0 deSending: 0
+   009E 21 00 20            223 	ld	hl,#0x2000
+   00A1 E5                  224 	push	hl
+                            225 ;	genCall
+   00A2 CD 00 00            226 	call	_set_sprite_prop
+   00A5 E8 02               227 	lda	sp,2(sp)
+                            228 ;	half_sprites.c 22
+                            229 ;	genIpush
+                            230 ; _saveRegsForCall: sendSetSize: 0 deInUse: 0 bcInUse: 0 deSending: 0
+   00A7 21 01 20            231 	ld	hl,#0x2001
+   00AA E5                  232 	push	hl
+                            233 ;	genCall
+   00AB CD 00 00            234 	call	_set_sprite_prop
+   00AE E8 02               235 	lda	sp,2(sp)
+                            236 ;	half_sprites.c 23
+                            237 ;	genIpush
+                            238 ; _saveRegsForCall: sendSetSize: 0 deInUse: 0 bcInUse: 0 deSending: 0
+   00B0 21 02 20            239 	ld	hl,#0x2002
+   00B3 E5                  240 	push	hl
+                            241 ;	genCall
+   00B4 CD 00 00            242 	call	_set_sprite_prop
+   00B7 E8 02               243 	lda	sp,2(sp)
+                            244 ;	half_sprites.c 24
+                            245 ;	genIpush
+                            246 ; _saveRegsForCall: sendSetSize: 0 deInUse: 0 bcInUse: 0 deSending: 0
+   00B9 21 03 20            247 	ld	hl,#0x2003
+   00BC E5                  248 	push	hl
+                            249 ;	genCall
+   00BD CD 00 00            250 	call	_set_sprite_prop
+   00C0 E8 02               251 	lda	sp,2(sp)
+                            252 ;	half_sprites.c 25
+                            253 ;	genIpush
+                            254 ; _saveRegsForCall: sendSetSize: 0 deInUse: 0 bcInUse: 0 deSending: 0
+   00C2 21 58 4B            255 	ld	hl,#0x4B58
+   00C5 E5                  256 	push	hl
+                            257 ;	genIpush
+   00C6 3E 00               258 	ld	a,#0x00
+   00C8 F5                  259 	push	af
+   00C9 33                  260 	inc	sp
+                            261 ;	genCall
+   00CA CD 00 00            262 	call	_move_sprite
+   00CD E8 03               263 	lda	sp,3(sp)
+                            264 ;	half_sprites.c 26
+                            265 ;	genIpush
+                            266 ; _saveRegsForCall: sendSetSize: 0 deInUse: 0 bcInUse: 0 deSending: 0
+   00CF 21 58 53            267 	ld	hl,#0x5358
+   00D2 E5                  268 	push	hl
+                            269 ;	genIpush
+   00D3 3E 01               270 	ld	a,#0x01
+   00D5 F5                  271 	push	af
+   00D6 33                  272 	inc	sp
+                            273 ;	genCall
+   00D7 CD 00 00            274 	call	_move_sprite
+   00DA E8 03               275 	lda	sp,3(sp)
+                            276 ;	half_sprites.c 27
+                            277 ;	genIpush
+                            278 ; _saveRegsForCall: sendSetSize: 0 deInUse: 0 bcInUse: 0 deSending: 0
+   00DC 21 50 4B            279 	ld	hl,#0x4B50
+   00DF E5                  280 	push	hl
+                            281 ;	genIpush
+   00E0 3E 02               282 	ld	a,#0x02
+   00E2 F5                  283 	push	af
+   00E3 33                  284 	inc	sp
+                            285 ;	genCall
+   00E4 CD 00 00            286 	call	_move_sprite
+   00E7 E8 03               287 	lda	sp,3(sp)
+                            288 ;	half_sprites.c 28
+                            289 ;	genIpush
+                            290 ; _saveRegsForCall: sendSetSize: 0 deInUse: 0 bcInUse: 0 deSending: 0
+   00E9 21 50 53            291 	ld	hl,#0x5350
+   00EC E5                  292 	push	hl
+                            293 ;	genIpush
+   00ED 3E 03               294 	ld	a,#0x03
+   00EF F5                  295 	push	af
+   00F0 33                  296 	inc	sp
+                            297 ;	genCall
+   00F1 CD 00 00            298 	call	_move_sprite
+   00F4 E8 03               299 	lda	sp,3(sp)
+                            300 ;	half_sprites.c 29
+                            301 ;	genIpush
+                            302 ; _saveRegsForCall: sendSetSize: 0 deInUse: 0 bcInUse: 0 deSending: 0
+   00F6 21 C8 00            303 	ld	hl,#0x00C8
+   00F9 E5                  304 	push	hl
+                            305 ;	genCall
+   00FA CD 00 00            306 	call	_delay
+   00FD E8 02               307 	lda	sp,2(sp)
+                            308 ;	half_sprites.c 30
+                            309 ;	genIpush
+                            310 ; _saveRegsForCall: sendSetSize: 0 deInUse: 0 bcInUse: 0 deSending: 0
+   00FF 21 00 00            311 	ld	hl,#0x0000
+   0102 E5                  312 	push	hl
+                            313 ;	genCall
+   0103 CD 00 00            314 	call	_set_sprite_prop
+   0106 E8 02               315 	lda	sp,2(sp)
+                            316 ;	half_sprites.c 31
+                            317 ;	genIpush
+                            318 ; _saveRegsForCall: sendSetSize: 0 deInUse: 0 bcInUse: 0 deSending: 0
+   0108 21 01 00            319 	ld	hl,#0x0001
+   010B E5                  320 	push	hl
+                            321 ;	genCall
+   010C CD 00 00            322 	call	_set_sprite_prop
+   010F E8 02               323 	lda	sp,2(sp)
+                            324 ;	half_sprites.c 32
+                            325 ;	genIpush
+                            326 ; _saveRegsForCall: sendSetSize: 0 deInUse: 0 bcInUse: 0 deSending: 0
+   0111 21 02 00            327 	ld	hl,#0x0002
+   0114 E5                  328 	push	hl
+                            329 ;	genCall
+   0115 CD 00 00            330 	call	_set_sprite_prop
+   0118 E8 02               331 	lda	sp,2(sp)
+                            332 ;	half_sprites.c 33
+                            333 ;	genIpush
+                            334 ; _saveRegsForCall: sendSetSize: 0 deInUse: 0 bcInUse: 0 deSending: 0
+   011A 21 03 00            335 	ld	hl,#0x0003
+   011D E5                  336 	push	hl
+                            337 ;	genCall
+   011E CD 00 00            338 	call	_set_sprite_prop
+   0121 E8 02               339 	lda	sp,2(sp)
+                            340 ;	half_sprites.c 34
+                            341 ;	genIpush
+                            342 ; _saveRegsForCall: sendSetSize: 0 deInUse: 0 bcInUse: 0 deSending: 0
+   0123 21 50 4B            343 	ld	hl,#0x4B50
+   0126 E5                  344 	push	hl
+                            345 ;	genIpush
+   0127 3E 00               346 	ld	a,#0x00
+   0129 F5                  347 	push	af
+   012A 33                  348 	inc	sp
+                            349 ;	genCall
+   012B CD 00 00            350 	call	_move_sprite
+   012E E8 03               351 	lda	sp,3(sp)
+                            352 ;	half_sprites.c 35
+                            353 ;	genIpush
+                            354 ; _saveRegsForCall: sendSetSize: 0 deInUse: 0 bcInUse: 0 deSending: 0
+   0130 21 50 53            355 	ld	hl,#0x5350
+   0133 E5                  356 	push	hl
+                            357 ;	genIpush
+   0134 3E 01               358 	ld	a,#0x01
+   0136 F5                  359 	push	af
+   0137 33                  360 	inc	sp
+                            361 ;	genCall
+   0138 CD 00 00            362 	call	_move_sprite
+   013B E8 03               363 	lda	sp,3(sp)
+                            364 ;	half_sprites.c 36
+                            365 ;	genIpush
+                            366 ; _saveRegsForCall: sendSetSize: 0 deInUse: 0 bcInUse: 0 deSending: 0
+   013D 21 58 4B            367 	ld	hl,#0x4B58
+   0140 E5                  368 	push	hl
+                            369 ;	genIpush
+   0141 3E 02               370 	ld	a,#0x02
+   0143 F5                  371 	push	af
+   0144 33                  372 	inc	sp
+                            373 ;	genCall
+   0145 CD 00 00            374 	call	_move_sprite
+   0148 E8 03               375 	lda	sp,3(sp)
+                            376 ;	half_sprites.c 37
+                            377 ;	genIpush
+                            378 ; _saveRegsForCall: sendSetSize: 0 deInUse: 0 bcInUse: 0 deSending: 0
+   014A 21 58 53            379 	ld	hl,#0x5358
+   014D E5                  380 	push	hl
+                            381 ;	genIpush
+   014E 3E 03               382 	ld	a,#0x03
+   0150 F5                  383 	push	af
+   0151 33                  384 	inc	sp
+                            385 ;	genCall
+   0152 CD 00 00            386 	call	_move_sprite
+   0155 E8 03               387 	lda	sp,3(sp)
+                            388 ;	genGoto
+   0157 C3 95 00            389 	jp	00102$
+                            390 ;	genLabel
+   015A                     391 00104$:
+                            392 ;	genEndFunction
+   015A E8 03               393 	lda	sp,3(sp)
+   015C C9                  394 	ret
+   015D                     395 ___main_end:
+                            396 	.area _CODE
+ASxxxx Assembler V01.75  (GameBoy Z80-like CPU), page 1.
+
+Symbol Table
+
+  0 ___main_end                        015D R
+  0 ___main_start                      0000 R
+    _delay                             **** GX
+  0 _main                              0000 GR
+    _miner_walk_up                     **** GX
+    _move_sprite                       **** GX
+    _set_sprite_data                   **** GX
+    _set_sprite_prop                   **** GX
+    _set_sprite_tile                   **** GX
+    _wait_vbl_done                     **** GX
+
+ASxxxx Assembler V01.75  (GameBoy Z80-like CPU), page 2.
+
+Area Table
+
+   0 _CODE                              size  15D   flags 0
+   1 _DATA                              size    0   flags 0
+   2 _OVERLAY                           size    0   flags 0
+   3 _ISEG                              size    0   flags 0
+   4 _BSEG                              size    0   flags 0
+   5 _XSEG                              size    0   flags 0
+   6 _GSINIT                            size    0   flags 0
+   7 _GSFINAL                           size    0   flags 0
+   8 _HOME                              size    0   flags 0

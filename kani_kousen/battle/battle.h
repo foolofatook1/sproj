@@ -25,8 +25,9 @@ void npc_fight(void);
 
 void hero_fight(UINT8*);
 void hero_fight_anim(void);
-void enemy_fight_anim(void);
 void hero_defend_anim(void);
+void enemy_fight_anim(void);
+void enemy_defend_anim(void);
 
 void damage(UINT8*);
 
@@ -57,6 +58,7 @@ extern UWORD seed;
 
 /* a stepping variable for character animations */
 extern UINT8 y;
+extern UINT8 enemy_y;
 /* another animation counter */
 extern UINT8 a;
 

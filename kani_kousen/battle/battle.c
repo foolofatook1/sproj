@@ -29,6 +29,7 @@ UBYTE npc_act, npc_acc, hero_acc, first_fighter = 0; //UBYTE
 
 /* a stepping variable for character animations */
 UINT8 y = 72;
+UINT8 enemy_y = 40;
 /* another animation counter */
 UINT8 a = 0;
 
@@ -165,7 +166,7 @@ void battle_toggle_down(void)
 void battle_toggle_ctrl(void)
 {
     SPRITES_8x8;
-    
+
     if(joypad() & J_A)
     {
         if(STATE == FIGHT_CHOICE)
@@ -263,6 +264,35 @@ void hero_defend_anim(void)
     y = 72;
 }
 
+void enemy_defend_anim(void)
+{
+    /* enemy */ 
+    set_sprite_tile(0, 0);
+    set_sprite_tile(1, 1);
+    set_sprite_tile(2, 2);
+    set_sprite_tile(3, 3);
+
+    move_sprite(0, 77, 40); // top left of the head
+    move_sprite(1, 77, 48); // bottom left of body
+    move_sprite(2, 84, 40); // top right of head
+    move_sprite(3, 84, 48); // bottom right of body
+    sprite_setup(8, hero_back_idle, 8, asakawa_front_idle);
+    for(a = 0; a < 21; a+=3)
+    {
+        delay(100);
+        set_sprite_tile(0, (0+(a&0x4)));
+        move_sprite(0, 77, y);
+        set_sprite_tile(1, (1+(a&0x4)));
+        move_sprite(1, 77, y+8);
+        set_sprite_tile(2, (2+(a&0x4)));
+        move_sprite(2, 84, y);
+        set_sprite_tile(3, (3+(a&0x4)));
+        move_sprite(3, 84, y+8);
+        delay(100);
+    }
+    enemy_y = 40;
+}
+
 void hero_fight_anim(void) 
 {
     sprite_setup(8, hero_back_idle, 8, asakawa_front_idle);
@@ -270,7 +300,7 @@ void hero_fight_anim(void)
     /* essentially hiding one sprite */
     for(i = 4; i < 8; ++i)
         move_sprite(i, 200, 200);
-    
+
     delay(300);
     move_sprite(4, 77, 58);
     move_sprite(5, 77, 66);
@@ -293,7 +323,7 @@ void enemy_fight_anim(void)
     /* essentially hiding one sprite */
     for(i = 0; i < 4; ++i)
         move_sprite(i, 200, 200);
-    
+
     delay(300);
     move_sprite(0, 77, 52);
     move_sprite(1, 77, 60);
@@ -328,7 +358,7 @@ void clear_screen(void)
  * x_data -- sprite sheet
  */
 void sprite_setup(UINT8 hnb, unsigned char *hero_data,
-                  UINT8 enb, unsigned char *enemy_data) 
+        UINT8 enb, unsigned char *enemy_data) 
 {
     sprite_clean();
     LETTER_COUNT = 0;
@@ -380,13 +410,13 @@ void npc_fight(void)
         DISPLAY_OFF;
         sprite_clean();
         LETTER_COUNT = 0;
-        print("hit!", 72, 80);
+        print("hit!\0", 72, 80);
         clear_screen();
         DISPLAY_ON;
         delay(500);
     }
     /* Asakawa shoots and misses */
-    if(npc_act < 1 && npc_acc < 1)
+    if(npc_act >= 1 && npc_acc < 1)
     {
         enemy_fight_anim();
         for(a = 0; a < 6; ++a)
@@ -399,10 +429,22 @@ void npc_fight(void)
         DISPLAY_OFF;
         sprite_clean();
         LETTER_COUNT = 0;
-        print("miss!", 64, 80);
+        print("miss!\0", 64, 80);
         clear_screen();
         DISPLAY_ON;
         delay(500);
+    }
+    /* Asakawa defends */
+    if(npc_act == 0)
+    {
+        DISPLAY_OFF;
+        clear_screen();
+        sprite_clean();
+        LETTER_COUNT = 0; 
+        print("asakawa\0", 56, 75);
+        print("defends\0", 56, 91);
+        DISPLAY_ON;
+        delay(800);
     }
 }
 
@@ -442,7 +484,7 @@ void damage(UINT8 *fighter_hp)
             {
                 option = GAME_OVER;
                 STATE = DEAD;
-             }
+            }
         }
     }
     else if(npc_acc >= 1 && npc_act >= 1 && choice == PUNCH)

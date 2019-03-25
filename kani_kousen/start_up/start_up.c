@@ -1,5 +1,7 @@
 #include "start_up.h"
 #include "../text/text.h"
+#include "../assets/sprite_palette.h"
+#include "../assets/bkg_palette.h"
 
 /* positions of the arrow */
 UINT8 START_POS = 72;
@@ -10,8 +12,9 @@ UINT8 GAME_OVER = 0;
 /* actions that can be taken and returned */
 UINT8 NOTHING = 0;
 UINT8 START = 1;
-UINT8 NEW_GAME = 2;
-UINT8 QUIT = 3;
+UINT8 LEVEL_2 = 2;
+UINT8 NEW_GAME = 3;
+UINT8 QUIT = 4;
 
 /* option chosen */
 UINT8 option;
@@ -80,13 +83,20 @@ void setup_bkg(void)
     HIDE_WIN;
     HIDE_BKG;
 
+    set_bkg_palette(0, 1, bkg_palette);
     set_bkg_data(0,4,blank_screen_tiles); 
     set_bkg_tiles(0,0,20,18,blank_screen);
+    
+    /* set sprite properties */
+    set_sprite_palette(0, 2, sprite_palette);
 
     /* setup bkg */
     print(">start\0", 72, 72);
     print(" new game\0", 72, 80);
     print(" quit\0", 72, 88);
+
+    for(i = 0; i < LETTER_COUNT; ++i)
+        set_sprite_prop(i, 0);
 
     SHOW_BKG;
     SHOW_SPRITES;

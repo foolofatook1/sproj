@@ -1,6 +1,7 @@
 #include "level_1.h"
 #include "asakawa_battle.h"
 #include "../text/text.h"
+#include "../assets/sprite_palette.h"
 
 /* scene 1 variables */
 UINT8 text_count = 0;
@@ -39,6 +40,8 @@ void level_1_ctrl(void)
         enter_miner();
         wait_vbl_done();
     }
+    sprite_clean();
+    LETTER_COUNT = 0;
     miner_intro_setup();
     while(scene_2 == 0)
     {
@@ -236,6 +239,10 @@ int level_1_sprite_setup(void)
     move_sprite(2, fisherman_pos[0][0], fisherman_pos[0][1]);
     move_sprite(3, fisherman_pos[1][0], fisherman_pos[1][1]);
 
+    /* make correct color for characters */
+    /*for(i = 0; i < 4; ++i)
+        set_sprite_prop(i,2); */
+
     delay(400); /* a pause before appearing at door */
     SHOW_SPRITES;
     start_animate = 1;
@@ -307,6 +314,11 @@ int enter_miner(void)
 
         set_sprite_tile(4, 16+((i&0x1)*4));
         set_sprite_tile(5, 18+((i&0x1)*4));
+        
+        /* make sure miner is correct colors */
+        //set_sprite_prop(4,2);
+        //set_sprite_prop(5,2);
+
         move_sprite(4, miner_pos[0][0], miner_pos[0][1]);
         move_sprite(5, miner_pos[1][0], miner_pos[1][1]);
         delay(80);

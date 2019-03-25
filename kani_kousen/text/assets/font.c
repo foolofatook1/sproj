@@ -14,7 +14,7 @@
 
   Palette colors       : None.
   SGB Palette          : None.
-  CGB Palette          : None.
+  CGB Palette          : Constant per entry.
 
   Convert to metatiles : No.
 

@@ -3,6 +3,9 @@
 #include "level_1/asakawa_battle.h"
 #include "level_1/level_1.h"
 #include "start_up/start_up.h"
+#include "level_2/level_2.h"
+#include "assets/sprite_palette.h"
+#include "assets/bkg_palette.h"
 
 #ifndef GBDK_INCLUDE
 #define GBDK_INCLUDE
@@ -24,6 +27,7 @@ extern UINT8 NEW_GAME_POS;
 extern UINT8 QUIT_POS;
 extern UINT8 NOTHING;
 extern UINT8 START;
+extern UINT8 LEVEL_2;
 extern UINT8 NEW_GAME;
 extern UINT8 QUIT;
 extern UINT8 GAME_OVER;
@@ -136,8 +140,9 @@ void fight(UINT8*, UINT8*);
 void npc_fight(void);
 void hero_fight(UINT8*);
 void hero_fight_anim(void);
-void enemy_fight_anim(void);
 void hero_defend_anim(void);
+void enemy_fight_anim(void);
+void enemy_defend_anim(void);
 void damage(UINT8*);
 void sprite_setup(UINT8, unsigned char*, 
 void choice_handler(UINT8);
