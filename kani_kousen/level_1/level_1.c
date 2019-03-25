@@ -7,10 +7,10 @@
 UINT8 text_count = 0;
 /* scene 2 variables */
 UINT8 start_animate = 0;
-UINT8 scene_2 = 0;
+UINT8 l1_scene_2 = 0;
 /* scene 3 variables */
-UINT8 scene_3_anim = 0;
-UINT8 scene_3_stop = 0;
+UINT8 l1_scene_3_anim = 0;
+UINT8 l1_scene_3_stop = 0;
 
 UINT8 hero_pos[2][2];
 UINT8 fisherman_pos[2][2];
@@ -30,7 +30,7 @@ void level_1_ctrl(void)
 /*    level_1_bkg_start();
     while(start_animate == 0)
     {
-        joypad_check_scene_1();
+        joypad_check_l1_scene_1();
         wait_vbl_done();
     }
     i = 0; // helping with animation
@@ -43,21 +43,21 @@ void level_1_ctrl(void)
     sprite_clean();
     LETTER_COUNT = 0;
     miner_intro_setup();
-    while(scene_2 == 0)
+    while(l1_scene_2 == 0)
     {
-        joypad_check_scene_2();
+        joypad_check_l1_scene_2();
         wait_vbl_done();
     }
-    scene_3_setup();
-    while(scene_3_anim < 3)
+    l1_scene_3_setup();
+    while(l1_scene_3_anim < 3)
     {
-        scene_3_animate();
+        l1_scene_3_animate();
         wait_vbl_done();
     }
-    scene_3_text_setup();
-    while(scene_3_stop == 0)
+    l1_scene_3_text_setup();
+    while(l1_scene_3_stop == 0)
     {
-        joypad_check_scene_3();
+        joypad_check_l1_scene_3();
         wait_vbl_done();
     }*/
     asakawa_battle_ctrl();
@@ -110,15 +110,15 @@ void level_1_bkg_start(void)
     print("you hear!?\0", 24, 48);
 }
 
-void joypad_check_scene_1(void) 
+void joypad_check_l1_scene_1(void) 
 {
     if(joypad() & J_A)
     {
-        scene_1();
+        l1_scene_1();
     }
 }
 
-void scene_1(void) 
+void l1_scene_1(void) 
 {
     delay(100);
     ++text_count;
@@ -280,7 +280,7 @@ void animate(void)
 /**
  * SCENE 2
  */
-void joypad_check_scene_2(void)
+void joypad_check_l1_scene_2(void)
 {
     if(joypad() & J_A)
     {
@@ -474,7 +474,7 @@ int miner_intro(void)
         print("manager!\0", 24, 112);
     } 
     if(text_count == 9)
-        scene_2 = 1;
+        l1_scene_2 = 1;
 }
 
 /**
@@ -484,7 +484,7 @@ int miner_intro(void)
  * first make a line of workers 
  * with backs to the door 
  */
-void scene_3_setup(void)
+void l1_scene_3_setup(void)
 {
     HIDE_WIN;
     HIDE_BKG;
@@ -584,43 +584,43 @@ void scene_3_setup(void)
 }
 
 /* brief animation for scene 3 */
-void scene_3_animate(void)
+void l1_scene_3_animate(void)
 {
-    ++scene_3_anim;
+    ++l1_scene_3_anim;
 
     /* hero */
-    set_sprite_tile(0, 4-((scene_3_anim&0x1)*4));
-    set_sprite_tile(1, 6-((scene_3_anim&0x1)*4));
+    set_sprite_tile(0, 4-((l1_scene_3_anim&0x1)*4));
+    set_sprite_tile(1, 6-((l1_scene_3_anim&0x1)*4));
     move_sprite(0, hero_pos[0][0], hero_pos[0][1]);
     move_sprite(1, hero_pos[1][0], hero_pos[1][1]);
     delay(100);
     /* fisherman */
-    set_sprite_tile(2, 12-((scene_3_anim&0x1)*4));
-    set_sprite_tile(3, 14-((scene_3_anim&0x1)*4));
+    set_sprite_tile(2, 12-((l1_scene_3_anim&0x1)*4));
+    set_sprite_tile(3, 14-((l1_scene_3_anim&0x1)*4));
     move_sprite(0, hero_pos[0][0], hero_pos[0][1]);
     move_sprite(1, hero_pos[1][0], hero_pos[1][1]);
     delay(100);
     /* miner */ 
-    set_sprite_tile(4, 20-((scene_3_anim&0x1)*4));
-    set_sprite_tile(5, 22-((scene_3_anim&0x1)*4));
+    set_sprite_tile(4, 20-((l1_scene_3_anim&0x1)*4));
+    set_sprite_tile(5, 22-((l1_scene_3_anim&0x1)*4));
     move_sprite(0, hero_pos[0][0], hero_pos[0][1]);
     move_sprite(1, hero_pos[1][0], hero_pos[1][1]);
     delay(100);
     /* student */ 
-    set_sprite_tile(6, 28-((scene_3_anim&0x1)*4));
-    set_sprite_tile(7, 30-((scene_3_anim&0x1)*4));
+    set_sprite_tile(6, 28-((l1_scene_3_anim&0x1)*4));
+    set_sprite_tile(7, 30-((l1_scene_3_anim&0x1)*4));
     move_sprite(0, hero_pos[0][0], hero_pos[0][1]);
     move_sprite(1, hero_pos[1][0], hero_pos[1][1]);
     delay(100);
     /* asakawa */ 
-    set_sprite_tile(8, 36-((scene_3_anim&0x1)*4));
-    set_sprite_tile(9, 38-((scene_3_anim&0x1)*4));
+    set_sprite_tile(8, 36-((l1_scene_3_anim&0x1)*4));
+    set_sprite_tile(9, 38-((l1_scene_3_anim&0x1)*4));
     move_sprite(0, hero_pos[0][0], hero_pos[0][1]);
     move_sprite(1, hero_pos[1][0], hero_pos[1][1]);
     delay(400);
 }
 /* scene_3 dialogue setup first */
-void scene_3_text_setup(void)
+void l1_scene_3_text_setup(void)
 {
     DISPLAY_OFF;
     hide_sprites();
@@ -637,16 +637,16 @@ void scene_3_text_setup(void)
 }
 
 /* asakawa give his message */
-void joypad_check_scene_3(void) 
+void joypad_check_l1_scene_3(void) 
 {
     if(joypad() & J_A)
     {
-        scene_3();
+        l1_scene_3();
     }
 }
 
 /* asakawa's message */
-void scene_3(void)
+void l1_scene_3(void)
 {
     delay(100);
     ++text_count;
@@ -802,7 +802,7 @@ void scene_3(void)
     }
     if(text_count == 14)
     {
-        scene_3_setup();
+        l1_scene_3_setup();
         asakawa_shoots_anim();
 
         DISPLAY_OFF;
@@ -886,7 +886,7 @@ void scene_3(void)
         delay(300);
         sprite_clean();
         LETTER_COUNT = 0;
-        scene_3_stop = 1;
+        l1_scene_3_stop = 1;
     }
 }
 

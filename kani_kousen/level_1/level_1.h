@@ -34,18 +34,18 @@
 void level_1_ctrl(void);
 void level_1_bkg_start(void);
 int level_1_sprite_setup(void);
-void joypad_check_scene_1(void);
-void joypad_check_scene_2(void);
-void scene_1(void);
+void joypad_check_l1_scene_1(void);
+void joypad_check_l1_scene_2(void);
+void l1_scene_1(void);
 void animate(void);
 int enter_miner(void);
 void miner_intro_setup(void);
 int miner_intro(void);
-void scene_3_setup(void);
-void scene_3_animate(void);
-void scene_3_text_setup(void);
-void joypad_check_scene_3(void);
-void scene_3(void);
+void l1_scene_3_setup(void);
+void l1_scene_3_animate(void);
+void l1_scene_3_text_setup(void);
+void joypad_check_l1_scene_3(void);
+void l1_scene_3(void);
 void asakawa_shoots_anim(void);
 void asakawa_battle1_setup(void);
 
@@ -54,10 +54,10 @@ void asakawa_battle1_setup(void);
 extern UINT8 text_count;
 /* scene 2 variables */
 extern UINT8 start_animate;
-extern UINT8 scene_2;
+extern UINT8 l1_scene_2;
 /* scene 3 variables */
-extern UINT8 scene_3_anim;
-extern UINT8 scene_3_stop;
+extern UINT8 l1_scene_3_anim;
+extern UINT8 l1_scene_3_stop;
 
 extern UINT8 **hero_pos;
 extern UINT8 **fisherman_pos;
