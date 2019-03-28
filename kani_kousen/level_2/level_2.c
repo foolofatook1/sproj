@@ -9,7 +9,7 @@ UINT8 talking = 1;
 void level_2_ctrl(void)
 {
     wait_vbl_done();
-    //    level_2_bkg_start();
+    level_2_bkg_start();
     l2_scene_1();
     while(talking > 0)
         joypad_check_l2_scene_1();
@@ -163,8 +163,8 @@ void l2_scene_1_fisherman_enter(void)
         bkg_clean();
         DISPLAY_ON;
         print("fisherman:\0", 24, 32);
-        print("now lets\0", 24, 48);
-        print("get going!\0", 24, 80);
+        print("now let's\0", 24, 48);
+        print("get going!\0", 24, 64);
     }
     if(talking == 6)
         talking = 0;
