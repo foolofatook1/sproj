@@ -6,6 +6,7 @@
 #include "level_2/level_2.h"
 #include "assets/sprite_palette.h"
 #include "assets/bkg_palette.h"
+#include "assets/level_assets/level_assets.h"
 
 #ifndef GBDK_INCLUDE
 #define GBDK_INCLUDE

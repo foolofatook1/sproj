@@ -71,6 +71,11 @@ void l2_scene_1(void)
     sprite_clean();
     LETTER_COUNT = 0;
     hide_sprites();
+
+
+    hero_posx = 80;
+    hero_posy = 75;
+
     /* reset sprite properties back to normal */
     for(i = 0; i < MAX_SPRITES; ++i)
         set_sprite_prop(i, 0);
@@ -81,8 +86,8 @@ void l2_scene_1(void)
     set_sprite_data(4, 4, hero_front_idle);
     set_sprite_tile(0, 0);
     set_sprite_tile(1, 2);
-    move_sprite(0, 80, 75);
-    move_sprite(1, 88, 75);
+    move_sprite(0, hero_posx, hero_posy);//80, 75);
+    move_sprite(1, hero_posx+sprite_width, hero_posy);//88, 75);
     /* hero stands up */
     delay(500);
     set_sprite_tile(0, 4);

@@ -4,22 +4,11 @@
 #include "../text/text.h"
 #include "../assets/sprite_palette.h"
 
-/* scene 1 variables */
-//UINT8 text_count = 0;
 /* scene 2 variables */
-//UINT8 start_animate = 0;
 UINT8 l1_scene_2 = 0;
 /* scene 3 variables */
 UINT8 l1_scene_3_anim = 0;
 UINT8 l1_scene_3_stop = 0;
-
-/*UINT8 hero_pos[2][2];
-UINT8 fisherman_pos[2][2];
-UINT8 miner_pos[2][2];
-UINT8 student_pos[2][2];
-UINT8 asakawa_pos[2][2];
-
-UINT8 sprite_width = 8;*/
 
 UINT8 anim_1 = 32;
 UINT8 anim_2 = 34;
@@ -195,28 +184,16 @@ void l1_scene_1(void)
 int level_1_sprite_setup(void) 
 {
     /* hero on screen at door */
-    /* left half */
-    hero_pos[0][0] = 70; 
-    hero_pos[0][1] = 65;
-    /* right half */
-    hero_pos[1][0] = hero_pos[0][0]+sprite_width; 
-    hero_pos[1][1] = hero_pos[0][1];
-
+    hero_posx = 70;
+    hero_posy = 65;
+    
     /* fisherman on screen at door */
-    /* left half */
-    fisherman_pos[0][0] = 86;
-    fisherman_pos[0][1] = 65;
-    /* right half */
-    fisherman_pos[1][0] = fisherman_pos[0][0]+sprite_width;
-    fisherman_pos[1][1] = fisherman_pos[0][1];
+    fisherman_posx = 86;
+    fisherman_posy = 65;
 
     /* miner positioning for the coming scene */
-    /* left half */
-    miner_pos[0][0] = 150;
-    miner_pos[0][1] = 100;
-    /* right half */
-    miner_pos[1][0] = miner_pos[0][0]+sprite_width;
-    miner_pos[1][1] = miner_pos[0][1];
+    miner_posx = 150;
+    miner_posy = 100;
 
     SPRITES_8x16;
     /* hero */
@@ -232,15 +209,11 @@ int level_1_sprite_setup(void)
     set_sprite_data(16, 8, miner_walk_left);
 
     /* display the hero */
-    move_sprite(0, hero_pos[0][0], hero_pos[0][1]);
-    move_sprite(1, hero_pos[1][0], hero_pos[1][1]);
+    move_sprite(0, hero_posx, hero_posy);
+    move_sprite(1, hero_posx+sprite_width, hero_posy);
     /* display the fisherman */
-    move_sprite(2, fisherman_pos[0][0], fisherman_pos[0][1]);
-    move_sprite(3, fisherman_pos[1][0], fisherman_pos[1][1]);
-
-    /* make correct color for characters */
-    /*for(i = 0; i < 4; ++i)
-        set_sprite_prop(i,2); */
+    move_sprite(2, fisherman_posx, fisherman_posy);
+    move_sprite(3, fisherman_posx+sprite_width, fisherman_posy);
 
     delay(400); /* a pause before appearing at door */
     SHOW_SPRITES;
@@ -252,26 +225,26 @@ void animate(void)
 {
     set_sprite_tile(0, 4);
     set_sprite_tile(1, 6);
-    move_sprite(0, hero_pos[0][0], hero_pos[0][1]);
-    move_sprite(1, hero_pos[1][0], hero_pos[1][1]);
+    move_sprite(0, hero_posx, hero_posy);
+    move_sprite(1, hero_posx+sprite_width, hero_posy);
     delay(100);
 
     set_sprite_tile(2, 12);
     set_sprite_tile(3, 14);
-    move_sprite(2, fisherman_pos[0][0], fisherman_pos[0][1]); 
-    move_sprite(3, fisherman_pos[1][0], fisherman_pos[1][1]);
+    move_sprite(2, fisherman_posx, fisherman_posy);
+    move_sprite(3, fisherman_posx+sprite_width, fisherman_posy);
     delay(100);
 
     set_sprite_tile(0, 0);
     set_sprite_tile(1, 2);
-    move_sprite(0, hero_pos[0][0], hero_pos[0][1]);
-    move_sprite(1, hero_pos[1][0], hero_pos[1][1]);
+    move_sprite(0, hero_posx, hero_posy);
+    move_sprite(1, hero_posx+sprite_width, hero_posy);
     delay(100);
 
     set_sprite_tile(2, 8);
     set_sprite_tile(3, 10);
-    move_sprite(2, fisherman_pos[0][0], fisherman_pos[0][1]);
-    move_sprite(3, fisherman_pos[1][0], fisherman_pos[1][1]);
+    move_sprite(2, fisherman_posx, fisherman_posy);
+    move_sprite(3, fisherman_posx+sprite_width, fisherman_posy);
     delay(100);
 }
 
@@ -292,12 +265,12 @@ int enter_miner(void)
     UINT8 step_x = 4;
     UINT8 step_y = 0;
 
-    if(miner_pos[0][0] <= 80) /* if we are far enough to the left */
+    if(miner_posx <= 80) /* if we are far enough to the left */
     {
         step_y = 4;
         step_x = 0;
         set_sprite_data(16, 8, miner_walk_up); 
-        if(miner_pos[0][1] <= 90) /* stop walking */
+        if(miner_posy <= 90)
         {
             step_y = 0;
             set_sprite_data(16, 8, miner_idle_back);
@@ -306,33 +279,25 @@ int enter_miner(void)
             return 1; /* we're done */
         }
 
-        miner_pos[0][0] -= step_x;
-        miner_pos[0][1] -= step_y;
-        miner_pos[1][0] -= step_x;
-        miner_pos[1][1] -= step_y;
+        miner_posx -= step_x;
+        miner_posy -= step_y;
 
         set_sprite_tile(4, 16+((i&0x1)*4));
         set_sprite_tile(5, 18+((i&0x1)*4));
-        
-        /* make sure miner is correct colors */
-        //set_sprite_prop(4,2);
-        //set_sprite_prop(5,2);
 
-        move_sprite(4, miner_pos[0][0], miner_pos[0][1]);
-        move_sprite(5, miner_pos[1][0], miner_pos[1][1]);
+        move_sprite(4, miner_posx, miner_posy);
+        move_sprite(5, miner_posx+sprite_width, miner_posy);
         delay(80);
     }
 
     /* start by walking left */
-    miner_pos[0][0] -= step_x;
-    miner_pos[0][1] -= step_y;
-    miner_pos[1][0] -= step_x;
-    miner_pos[1][1] -= step_y;
+    miner_posx -= step_x;
+    miner_posy -= step_y;
 
     set_sprite_tile(4, 16+((i&0x1)*4));
     set_sprite_tile(5, 18+((i&0x1)*4));
-    move_sprite(4, miner_pos[0][0], miner_pos[0][1]);
-    move_sprite(5, miner_pos[1][0], miner_pos[1][1]);
+    move_sprite(4, miner_posx, miner_posy);
+    move_sprite(5, miner_posx+sprite_width, miner_posy);
     delay(80);
 
     ++i;
@@ -498,43 +463,24 @@ void l1_scene_3_setup(void)
     hide_sprites();
 
     /* hero back faced to the screen */
-    /* left half */
-    hero_pos[0][0] = 100; 
-    hero_pos[0][1] = 100;
-    /* right half */
-    hero_pos[1][0] = hero_pos[0][0]+sprite_width; 
-    hero_pos[1][1] = hero_pos[0][1];
+    hero_posx = 100;
+    hero_posy = 100;
 
     /* fisherman back faced to the screen */
-    /* left half */
-    fisherman_pos[0][0] = 120;
-    fisherman_pos[0][1] = 100;
-    /* right half */
-    fisherman_pos[1][0] = fisherman_pos[0][0]+sprite_width;
-    fisherman_pos[1][1] = fisherman_pos[0][1];
+    fisherman_posx = 120;
+    fisherman_posy = 100;
 
     /* miner back faced to the screen */
-    /* left half */
-    miner_pos[0][0] = 80;
-    miner_pos[0][1] = 100;
-    /* right half */
-    miner_pos[1][0] = miner_pos[0][0]+sprite_width;
-    miner_pos[1][1] = miner_pos[0][1];
+    miner_posx = 80;
+    miner_posy = 100;
 
     /* student back faced to the screen */
-    /* left half */
-    student_pos[0][0] = 60;
-    student_pos[0][1] = 100;
-    /* right half */
-    student_pos[1][0] = student_pos[0][0]+sprite_width;
-    student_pos[1][1] = student_pos[0][1];
+    student_posx = 60;
+    student_posy = 100;
 
     /* asakawa front in doorway */
-    /* left half */
-    asakawa_pos[0][0] = 75;
-    asakawa_pos[0][1] = 65;
-    asakawa_pos[1][0] = asakawa_pos[0][0]+sprite_width;
-    asakawa_pos[1][1] = asakawa_pos[0][1];
+    asakawa_posx = 75;
+    asakawa_posy = 65;
 
     SPRITES_8x16;
     /* hero */
@@ -559,17 +505,17 @@ void l1_scene_3_setup(void)
     set_sprite_tile(9, 34);
 
     /* display the hero */
-    move_sprite(0, hero_pos[0][0], hero_pos[0][1]);
-    move_sprite(1, hero_pos[1][0], hero_pos[1][1]);
+    move_sprite(0, hero_posx, hero_posy);
+    move_sprite(1, hero_posx+sprite_width, hero_posy);
     /* display the fisherman */
-    move_sprite(2, fisherman_pos[0][0], fisherman_pos[0][1]);
-    move_sprite(3, fisherman_pos[1][0], fisherman_pos[1][1]);
+    move_sprite(2, fisherman_posx, fisherman_posy);
+    move_sprite(3, fisherman_posx+sprite_width, fisherman_posy);
     /* display the miner */
-    move_sprite(4, miner_pos[0][0], miner_pos[0][1]);
-    move_sprite(5, miner_pos[1][0], miner_pos[1][1]);
+    move_sprite(4, miner_posx, miner_posy);
+    move_sprite(5, miner_posx+sprite_width, miner_posy);
     /* display the student */
-    move_sprite(6, student_pos[0][0], student_pos[0][1]);
-    move_sprite(7, student_pos[1][0], student_pos[1][1]);
+    move_sprite(6, student_posx, student_posy);
+    move_sprite(7, student_posx+sprite_width, student_posy);
 
     delay(400); /* a pause before appearing at door */
     SHOW_SPRITES;
@@ -578,8 +524,8 @@ void l1_scene_3_setup(void)
 
     /* after a little wait, asakawa appears in door way */
     delay(400);
-    move_sprite(8, asakawa_pos[0][0], asakawa_pos[0][1]);
-    move_sprite(9, asakawa_pos[1][0], asakawa_pos[1][1]);
+    move_sprite(8, asakawa_posx, asakawa_posy);
+    move_sprite(9, asakawa_posx+sprite_width, asakawa_posy);
 }
 
 /* brief animation for scene 3 */
@@ -590,32 +536,32 @@ void l1_scene_3_animate(void)
     /* hero */
     set_sprite_tile(0, 4-((l1_scene_3_anim&0x1)*4));
     set_sprite_tile(1, 6-((l1_scene_3_anim&0x1)*4));
-    move_sprite(0, hero_pos[0][0], hero_pos[0][1]);
-    move_sprite(1, hero_pos[1][0], hero_pos[1][1]);
+    move_sprite(0, hero_posx, hero_posy);
+    move_sprite(1, hero_posx+sprite_width, hero_posy);
     delay(100);
     /* fisherman */
     set_sprite_tile(2, 12-((l1_scene_3_anim&0x1)*4));
     set_sprite_tile(3, 14-((l1_scene_3_anim&0x1)*4));
-    move_sprite(0, hero_pos[0][0], hero_pos[0][1]);
-    move_sprite(1, hero_pos[1][0], hero_pos[1][1]);
+    move_sprite(0, hero_posx, hero_posy);
+    move_sprite(1, hero_posx+sprite_width, hero_posy);
     delay(100);
     /* miner */ 
     set_sprite_tile(4, 20-((l1_scene_3_anim&0x1)*4));
     set_sprite_tile(5, 22-((l1_scene_3_anim&0x1)*4));
-    move_sprite(0, hero_pos[0][0], hero_pos[0][1]);
-    move_sprite(1, hero_pos[1][0], hero_pos[1][1]);
+    move_sprite(0, hero_posx, hero_posy);
+    move_sprite(1, hero_posx+sprite_width, hero_posy);
     delay(100);
     /* student */ 
     set_sprite_tile(6, 28-((l1_scene_3_anim&0x1)*4));
     set_sprite_tile(7, 30-((l1_scene_3_anim&0x1)*4));
-    move_sprite(0, hero_pos[0][0], hero_pos[0][1]);
-    move_sprite(1, hero_pos[1][0], hero_pos[1][1]);
+    move_sprite(0, hero_posx, hero_posy);
+    move_sprite(1, hero_posx+sprite_width, hero_posy);
     delay(100);
     /* asakawa */ 
     set_sprite_tile(8, 36-((l1_scene_3_anim&0x1)*4));
     set_sprite_tile(9, 38-((l1_scene_3_anim&0x1)*4));
-    move_sprite(0, hero_pos[0][0], hero_pos[0][1]);
-    move_sprite(1, hero_pos[1][0], hero_pos[1][1]);
+    move_sprite(0, hero_posx, hero_posy);
+    move_sprite(1, hero_posx+sprite_width, hero_posy);
     delay(400);
 }
 /* scene_3 dialogue setup first */
