@@ -5,21 +5,21 @@
 #include "../assets/sprite_palette.h"
 
 /* scene 1 variables */
-UINT8 text_count = 0;
+//UINT8 text_count = 0;
 /* scene 2 variables */
-UINT8 start_animate = 0;
+//UINT8 start_animate = 0;
 UINT8 l1_scene_2 = 0;
 /* scene 3 variables */
 UINT8 l1_scene_3_anim = 0;
 UINT8 l1_scene_3_stop = 0;
 
-UINT8 hero_pos[2][2];
+/*UINT8 hero_pos[2][2];
 UINT8 fisherman_pos[2][2];
 UINT8 miner_pos[2][2];
 UINT8 student_pos[2][2];
 UINT8 asakawa_pos[2][2];
 
-UINT8 sprite_width = 8;
+UINT8 sprite_width = 8;*/
 
 UINT8 anim_1 = 32;
 UINT8 anim_2 = 34;
@@ -28,7 +28,7 @@ UINT8 anim_2 = 34;
 void level_1_ctrl(void) 
 {
     wait_vbl_done();
-/*    level_1_bkg_start();
+    level_1_bkg_start();
     while(start_animate == 0)
     {
         joypad_check_l1_scene_1();
@@ -60,7 +60,7 @@ void level_1_ctrl(void)
     {
         joypad_check_l1_scene_3();
         wait_vbl_done();
-    }*/
+    }
     asakawa_battle_ctrl();
 }
 

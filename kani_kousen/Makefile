@@ -6,7 +6,7 @@ LEVEL_1_INCLUDE = level_1/assets/shit_pot.o assets/sprites/hero_front_idle.o ass
 
 LEVEL_2_INCLUDE = level_2/level_2.o assets/sprites/hero_lie_down.o assets/sprites/hero_walk_sideways.o assets/sprites/fisherman_walk_sideways.o
 
-#LEVEL_ASSETS = assets/level_assets/level_assets.o
+LEVEL_ASSETS = assets/level_assets/level_assets.o
 
 START_UP_INCLUDE = start_up/start_up.o
 
@@ -21,13 +21,13 @@ BINS = main.gb
 all: $(BINS)
 
 clean: 
-	rm -f .*.swp *.o *.lst *.map *.gb *~ *.rel *.cdb *.ihx *.lnk *.sym *.asm text/assets/*.lst text/assets/*.lst text/*.o text/*.lst text/.*.swp $(TEXT_INCLUDE) assets/sprites/*.lst level_1/assets/*.lst assets/sprites/.*.swp $(LEVEL_1_INCLUDE) start_up/assets/*.lst start_up/assets/.*.swp start_up/assets/*.o start_up/.*.swp start_up/*.lst $(START_UP_INCLUDE) level_1/.*.swp level_1/*.lst $(BATTLE_INCLUDE) battle/*.lst battle/*.map battle/.*.swp $(LEVEL_2_INCLUDE) level_2/*.lst level_2/*.map level_2/.*.swp $(SPRITE_PROPS) $(BKG_PROPS) assets/*.lst assets/*.map assets/.*.swp #$(LEVEL_ASSETS) assets/level_assets/*.lst assets/level_assets/*.map assets/level_assets/.*.swp
+	rm -f .*.swp *.o *.lst *.map *.gb *~ *.rel *.cdb *.ihx *.lnk *.sym *.asm text/assets/*.lst text/assets/*.lst text/*.o text/*.lst text/.*.swp $(TEXT_INCLUDE) assets/sprites/*.lst level_1/assets/*.lst assets/sprites/.*.swp $(LEVEL_1_INCLUDE) start_up/assets/*.lst start_up/assets/.*.swp start_up/assets/*.o start_up/.*.swp start_up/*.lst $(START_UP_INCLUDE) level_1/.*.swp level_1/*.lst $(BATTLE_INCLUDE) battle/*.lst battle/*.map battle/.*.swp $(LEVEL_2_INCLUDE) level_2/*.lst level_2/*.map level_2/.*.swp $(SPRITE_PROPS) $(BKG_PROPS) assets/*.lst assets/*.map assets/.*.swp $(LEVEL_ASSETS) assets/level_assets/*.lst assets/level_assets/*.map assets/level_assets/.*.swp
 
 %.o : %.c
 	$(CC) -c -o $@ $<
 
-main.gb: main.o $(START_UP_INCLUDE) $(TEXT_INCLUDE) $(LEVEL_1_INCLUDE) $(BATTLE_INCLUDE) $(LEVEL_2_INCLUDE) $(SPRITE_PROPS) $(BKG_PROPS) #$(LEVEL_ASSETS)
-	$(CC) -o $@ main.o $(START_UP_INCLUDE) $(TEXT_INCLUDE) $(LEVEL_1_INCLUDE) $(BATTLE_INCLUDE) $(LEVEL_2_INCLUDE) $(SPRITE_PROPS) $(BKG_PROPS) #$(LEVEL_ASSETS)
+main.gb: main.o $(START_UP_INCLUDE) $(TEXT_INCLUDE) $(LEVEL_1_INCLUDE) $(BATTLE_INCLUDE) $(LEVEL_2_INCLUDE) $(SPRITE_PROPS) $(BKG_PROPS) $(LEVEL_ASSETS)
+	$(CC) -o $@ main.o $(START_UP_INCLUDE) $(TEXT_INCLUDE) $(LEVEL_1_INCLUDE) $(BATTLE_INCLUDE) $(LEVEL_2_INCLUDE) $(SPRITE_PROPS) $(BKG_PROPS) $(LEVEL_ASSETS)
 
 play:
 	../bgb/bgb.exe *.gb
