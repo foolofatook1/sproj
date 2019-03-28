@@ -1,15 +1,21 @@
-#include <gb/gb.h>
-#include <gb/cgb.h>
 #include "level_2.h"
+#include "../assets/level_assets/level_assets.h"
 #include "../text/text.h"
 #include "../battle/battle.h"
 #include "../level_1/assets/shit_pot.h"
 
+UINT8 talking = 1;
+
 void level_2_ctrl(void)
 {
     wait_vbl_done();
-//    level_2_bkg_start();
+    level_2_bkg_start();
     l2_scene_1();
+
+    /*while(talking)
+    {
+        joypad_check_l2_scene_1();
+    }*/
 }
 
 void level_2_bkg_start(void)
@@ -35,10 +41,12 @@ void level_2_bkg_start(void)
     delay(2500);
 }
 
-/*void joypad_check_l2_scene_1(void)
+void joypad_check_l2_scene_1(void)
 {
-    
-}*/
+    if(joypad() & J_A)
+        return;
+        //l2_scene_1_fisherman_enter();
+}
 
 /**
  * Should probably make hero_pos and fisherman_pos 
@@ -92,8 +100,6 @@ void l2_scene_1(void)
     set_sprite_data(8, 8, fisherman_walk_side);
     set_sprite_tile(2, 8);
     set_sprite_tile(3, 10);
-    /*move_sprite(2, 160, 75);
-    move_sprite(3, 168, 75);*/
     /** 
      * enter fisherman (the -5 adds a little extra distance) 
      * i = 160 is the right side of the screen.
@@ -110,6 +116,10 @@ void l2_scene_1(void)
     set_sprite_data(0, 4, hero_walk_sideways);
     set_sprite_tile(0, 0);
     set_sprite_tile(1, 2);
+
+    delay(500);
+    bkg_clean();
+    sprite_clean();
+    LETTER_COUNT = 0;
+    print("wassup!?\0", 56, 75);
 }
-
-

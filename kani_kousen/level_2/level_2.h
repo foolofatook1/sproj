@@ -1,6 +1,8 @@
 #ifndef LEVEL_2_INCLUDE
 #define LEVEL_2_INCLUDE
 
+#include <gb/gb.h>
+#include <gb/cgb.h>
 #include "../text/assets/black_screen.h"
 #include "../assets/sprite_palette.h"
 #include "../assets/bkg_palette.h"
@@ -13,7 +15,11 @@
 void level_2_ctrl(void);
 void level_2_bkg_start(void);
 
-/*void joypad_check_l2_scene_1(void);*/
 void l2_scene_1(void);
+
+void joypad_check_l2_scene_1(void);
+//void l2_scene_1_fisherman_enter(void);
+
+extern UINT8 talking;
 
 #endif /* LEVEL_2_INCLUDE */
