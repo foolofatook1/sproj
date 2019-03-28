@@ -24,15 +24,11 @@ of the research leading up to this point.
 
 ## Some notes on things that I should consider moving forward: ##
 
-	* Memory is layed out differently when banking
-		* must do further research into those differences
-	* should also look deeper into the compiling differences 
-	  between when compiling a game with ROM and RAM banks 
-	  as opposed to the normal setup that I've been using thus far.
+* Memory is layed out differently when banking
+	* must do further research into those differences
+* should also look deeper into the compiling differences between when compiling a game with ROM and RAM banks as opposed to the normal setup that I've been using thus far.
 
-	* until then, the game can continue to be developed by making
-	  little "games" within, which will then be configured to match
-	  the memory layout later.
+* until then, the game can continue to be developed by making little "games" within, which will then be configured to match the memory layout later.
 
 
 ## Installing and Downloading Beta Game ##
@@ -63,6 +59,13 @@ Regardless of what emulator you choose, read its documentation to figure out how
 properly Download it, and play games on it. 
 
 ### Quick TODO-List: ###
-Markup : * bullet list?
-			* is it working?
+* use sprite positions in level 2
+* make animation of fisherman walking away
+* follow fisherman upstairs. (should we make door a ladder?)
+* begin adding texture to "shit-pot" background
+* jump into working mini-game
+	* when beaten storm comes
+* if you talk to the right person, you hear that a ship has gone missing
+* go to bed
+* wake up, and level 3 starts
 	
