@@ -61,3 +61,8 @@ There are many other options as well, you can find those options
 
 Regardless of what emulator you choose, read its documentation to figure out how to 
 properly Download it, and play games on it. 
+
+### Quick TODO-List: ###
+Markup : * bullet list?
+			* is it working?
+	
