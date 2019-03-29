@@ -5,7 +5,8 @@
 
 UINT8 talking = 1;
 UINT8 moving = 1;
-UINT8 left = -1;
+UINT8 left = 0;
+UINT8 screen_y = 96;
 
 void level_2_ctrl(void)
 {
@@ -22,8 +23,15 @@ void level_2_ctrl(void)
     {
         wait_vbl_done();
         hero_walk(); 
+        pos_check_shit_pot();
     }
-    deck_walk();
+    deck_enter();
+    moving = 1;
+    while(moving)
+    {
+        wait_vbl_done();
+        hero_scroll_walk();
+    }
 }
 
 void level_2_bkg_start(void)
@@ -269,15 +277,9 @@ void hero_walk(void)
             move_sprite(0, hero_posx, hero_posy);
             move_sprite(1, hero_posx+sprite_width, hero_posy);
         }
-        left = -1;
+        left = 0;
         delay(50);
         --hero_posy;
-        if(hero_posy <= 56)
-        {
-            hero_posy = 56;
-            if(hero_posx >= 48 && hero_posx <= 108)
-                moving = 0;
-        }
     }
     if(joypad() & J_DOWN)
     {
@@ -290,7 +292,7 @@ void hero_walk(void)
             set_sprite_prop(1, S_FLIPX&0x0);
             move_sprite(0, hero_posx, hero_posy);
             move_sprite(1, hero_posx+sprite_width, hero_posy);
-            left = -1;
+            left = 0;
         }
         if((hero_posx+hero_posy)&0x1)
         {
@@ -306,16 +308,14 @@ void hero_walk(void)
             move_sprite(0, hero_posx, hero_posy);
             move_sprite(1, hero_posx+sprite_width, hero_posy);
         }
-        left = -1;
+        left = 0;
         delay(50);
         ++hero_posy;
-        if(hero_posy >= 144)
-            hero_posy = 144;
     }
     if(joypad() & J_LEFT)
     {
         set_sprite_data(0, 8, hero_walk_sideways);
-        if(left == -1)
+        if(!left)
         {
             set_sprite_prop(0, S_FLIPX);
             set_sprite_prop(1, S_FLIPX);
@@ -335,8 +335,6 @@ void hero_walk(void)
         left = 1;
         delay(50);
         --hero_posx;
-        if(hero_posx <= 8)
-            hero_posx = 8;
     }
     if(joypad() & J_RIGHT)
     {
@@ -358,25 +356,196 @@ void hero_walk(void)
         }
         move_sprite(0, hero_posx, hero_posy);
         move_sprite(1, hero_posx+sprite_width, hero_posy);
-        left = -1;
+        left = 0;
         delay(50);
         ++hero_posx;
-        if(hero_posx >= 152)
-            hero_posx = 152;
     }
 }
 
-void deck_walk(void)
+void hero_scroll_walk(void)
+{
+    /**
+     * need: hero_walk down
+     */
+    if(joypad() & J_UP)
+    {
+        set_sprite_data(0, 4, hero_walk_up);
+        set_sprite_tile(0, 0);
+        set_sprite_tile(1, 2);
+        if(left)
+        {
+            set_sprite_prop(0, S_FLIPX&0x0);
+            set_sprite_prop(1, S_FLIPX&0x0);
+            move_sprite(0, hero_posx, hero_posy);
+            move_sprite(1, hero_posx+sprite_width, hero_posy);
+        }
+        if((hero_posy+hero_posx)&0x1)
+        {
+            set_sprite_prop(0, S_FLIPX);
+            set_sprite_prop(1, S_FLIPX);
+            move_sprite(0, hero_posx+sprite_width, hero_posy);
+            move_sprite(1, hero_posx, hero_posy);
+        }
+        else
+        {
+            set_sprite_prop(0, S_FLIPX&0x0);
+            set_sprite_prop(1, S_FLIPX&0x0);
+            move_sprite(0, hero_posx, hero_posy);
+            move_sprite(1, hero_posx+sprite_width, hero_posy);
+        }
+        left = 0;
+        delay(50);
+        --hero_posy;
+        
+    }
+    if(joypad() & J_DOWN)
+    {
+        set_sprite_data(0, 4, hero_walk_down);
+        set_sprite_tile(0, 0);
+        set_sprite_tile(1, 2);
+        if(left)
+        {
+            set_sprite_prop(0, S_FLIPX&0x0);
+            set_sprite_prop(1, S_FLIPX&0x0);
+            move_sprite(0, hero_posx, hero_posy);
+            move_sprite(1, hero_posx+sprite_width, hero_posy);
+            left = 0;
+        }
+        if((hero_posx+hero_posy)&0x1)
+        {
+            set_sprite_prop(0, S_FLIPX);
+            set_sprite_prop(1, S_FLIPX);
+            move_sprite(0, hero_posx+sprite_width, hero_posy);
+            move_sprite(1, hero_posx, hero_posy);
+        }
+        else
+        {
+            set_sprite_prop(0, S_FLIPX&0x0);
+            set_sprite_prop(1, S_FLIPY&0x0);
+            move_sprite(0, hero_posx, hero_posy);
+            move_sprite(1, hero_posx+sprite_width, hero_posy);
+        }
+        left = 0;
+        delay(50);
+        ++hero_posy;
+    }
+    if(joypad() & J_LEFT)
+    {
+        set_sprite_data(0, 8, hero_walk_sideways);
+        if(!left)
+        {
+            set_sprite_prop(0, S_FLIPX);
+            set_sprite_prop(1, S_FLIPX);
+        }
+        if((hero_posx+hero_posy)&0x1)
+        {
+            set_sprite_tile(0, 4);
+            set_sprite_tile(1, 6);
+        }
+        else
+        {
+            set_sprite_tile(0, 0);
+            set_sprite_tile(1, 2);
+        }
+        if(hero_posx > 72)
+        {
+            move_sprite(0, hero_posx+sprite_width, hero_posy);
+            move_sprite(1, hero_posx, hero_posy);
+        }
+        else if(hero_posx <= 72)
+        {
+            move_sprite(0, 72+sprite_width, hero_posy);
+            move_sprite(1, 72, hero_posy);
+            --hero_posx;
+            /**
+             * when we're done with this we'll have to reset 
+             * hero_posx to 72.
+             */
+        }
+        left = 1;
+        delay(50);
+        if(hero_posx > 72)// || screen_y <= 0)
+            --hero_posx;
+        else if(hero_posx <= 72)
+        {
+            scroll_bkg(-1, 0);
+            --screen_y;
+        }
+    }
+    if(joypad() & J_RIGHT)
+    {
+        set_sprite_data(0, 8, hero_walk_sideways);
+        if(left)
+        {
+            set_sprite_prop(0, S_FLIPX&0x0);
+            set_sprite_prop(1, S_FLIPX&0x0);
+        }
+        if((hero_posx+hero_posy)&0x1)
+        {
+            set_sprite_tile(0, 4);
+            set_sprite_tile(1, 6);
+        }
+        else
+        {
+            set_sprite_tile(0, 0);
+            set_sprite_tile(1, 2);
+        }
+        if(hero_posx < 72)
+            hero_posx = 72;
+
+        move_sprite(0, hero_posx, hero_posy);
+        move_sprite(1, hero_posx+sprite_width, hero_posy);
+        left = 0;
+        delay(50);
+
+        if(hero_posx < 86)// || screen_y <= 0)
+            ++hero_posx;
+        else if(hero_posx >= 86)
+        {
+            scroll_bkg(1, 0);
+            ++screen_y;
+        }
+    }
+
+}
+
+void deck_enter(void)
 {
     DISPLAY_OFF;
     set_bkg_data(0, 4, blank_screen_tiles);        
     set_bkg_tiles(0, 0, 32, 18, deck);
-    scroll_bkg(96, 0);
+    scroll_bkg(screen_y, 0);
     HIDE_SPRITES;
-    hero_posx = 148;
-    hero_posy = 120;
+
+    hero_posx = 140;
+    hero_posy = 128;
+
+    set_sprite_data(0, 8, hero_walk_sideways);
+    set_sprite_tile(0, 2);
+    set_sprite_tile(1, 0);
+    set_sprite_prop(0, S_FLIPX);
+    set_sprite_prop(1, S_FLIPX);
     move_sprite(0, hero_posx, hero_posy); 
     move_sprite(1, hero_posx+sprite_width, hero_posy);
     SHOW_SPRITES;
     DISPLAY_ON;
 }
+
+void pos_check_shit_pot(void)
+{
+
+    if(hero_posy <= 56)
+    {
+        hero_posy = 56;
+        if(hero_posx >= 48 && hero_posx <= 108)
+            moving = 0;
+    }
+    if(hero_posx <= 8)
+        hero_posx = 8;
+    if(hero_posy >= 144)
+        hero_posy = 144;
+    if(hero_posx >= 152)
+        hero_posx = 152;
+}
+
+//void pos_check_deck(void);

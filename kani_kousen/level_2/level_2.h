@@ -30,11 +30,17 @@ void l2_scene_1_fisherman_enter(void);
 void fisherman_walk_away(void);
 
 void hero_walk(void);
+void hero_scroll_walk(void);
 
-void deck_walk(void);
+void deck_enter(void);
+
+void pos_check_shit_pot(void);
+//void pos_check_deck(void);
 
 extern UINT8 talking;
 extern UINT8 moving;
 extern UINT8 left;
+
+extern UINT8 screen_y;
 
 #endif /* LEVEL_2_INCLUDE */
