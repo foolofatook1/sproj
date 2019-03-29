@@ -1,6 +1,6 @@
 /*
 
- HERO_WALK_SIDEWAYS.H
+ HERO_WALK_DOWN.H
 
  Include File.
 
@@ -10,7 +10,7 @@
   Compression          : None.
   Counter              : None.
   Tile size            : 8 x 8
-  Tiles                : 0 to 7
+  Tiles                : 0 to 3
 
   Palette colors       : None.
   SGB Palette          : None.
@@ -24,8 +24,8 @@
 
 
 /* Bank of tiles. */
-#define hero_walk_sidewaysBank 0
+#define hero_walk_downBank 0
 /* Start of tile array. */
-extern unsigned char hero_walk_sideways[];
+extern unsigned char hero_walk_down[];
 
-/* End of HERO_WALK_SIDEWAYS.H */
+/* End of HERO_WALK_DOWN.H */

@@ -13,22 +13,22 @@ UINT8 HERO_HP = 10;
 
 void asakawa_battle_ctrl(void)
 {
-    choice = 0;
+/*    choice = 0;
     sprite_clean();
     LETTER_COUNT = 0;
     battle_menu();
     while(STATE != DEAD)
     {
         wait_vbl_done();
-        battle_toggle_ctrl();
+        battle_toggle_ctrl();*/
         /*  */
-        while(STATE == FIGHTING)
+        /*while(STATE == FIGHTING)
         {
             choice_handler(arrow_y);
             fight(&HERO_HP, &ASAKAWA_HP);
-            delay(400);
+            delay(400);*/
             /* basically does back but only when everything is done */
-            if(STATE != DEAD)
+            /*if(STATE != DEAD)
             {
                 DISPLAY_OFF;
                 battle_menu();
@@ -38,6 +38,6 @@ void asakawa_battle_ctrl(void)
                 battle_menu();
             }
         }
-    }
+    }*/
     option = LEVEL_2;
 }
