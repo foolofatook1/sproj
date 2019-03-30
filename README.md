@@ -49,9 +49,6 @@ Regardless of what emulator you choose, read its documentation to figure out how
 properly Download it, and play games on it. 
 
 ### Quick TODO-List: ###
-* use sprite positions in level 2
-* make animation of fisherman walking away
-* follow fisherman upstairs. (should we make door a ladder?)
 * begin adding texture to "shit-pot" background
 * jump into working mini-game
 	* when beaten storm comes
