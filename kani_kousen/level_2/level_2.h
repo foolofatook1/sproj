@@ -18,6 +18,9 @@
 
 #include "../assets/sprites/fisherman_walk_sideways.h"
 #include "../assets/sprites/fisherman_walk_up.h"
+
+#include "../assets/sprites/asakawa_walk_sideways.h"
+
 #include "../assets/bkgs/deck.h"
 
 void level_2_ctrl(void);
@@ -34,6 +37,7 @@ void hero_scroll_walk(void);
 
 void deck_enter(void);
 void deck_enter_intro_scene(void);
+void asakawa_enters_deck(void);
 
 void pos_check_shit_pot(void);
 void pos_check_deck(void);

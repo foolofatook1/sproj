@@ -72,6 +72,7 @@ void sprite_clean(void)
     for(i = 0; i < MAX_SPRITES; ++i)
     {
         set_sprite_tile(i, 40);
+        set_sprite_prop(i, S_FLIPX&0x0);
     }
 }
 

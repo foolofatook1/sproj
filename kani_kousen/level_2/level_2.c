@@ -33,7 +33,10 @@ void level_2_ctrl(void)
         wait_vbl_done();
         hero_scroll_walk();
         pos_check_deck();
+        if(screen_x <= 0)
+            moving = 0;
     }
+    asakawa_enters_deck();
 }
 
 void level_2_bkg_start(void)
@@ -530,15 +533,15 @@ void deck_enter_intro_scene(void)
     fisherman_posx -= 60;
     delay(500);
     /* fisherman walk in */
-    while(fisherman_posx+40 <= 130)
+    while(fisherman_posx+40 <= 120)
     {
-        delay(100);
+        delay(50);
         for(i = 2; i < 7; i+=2)
         {
             set_sprite_tile(i, 10+(4*(fisherman_posx&0x1)));
             set_sprite_tile(i+1, 8+(4*(fisherman_posx&0x1)));
         }
-        fisherman_posx++;
+        ++fisherman_posx;
         move_sprite(2, fisherman_posx, fisherman_posy);
         move_sprite(3, fisherman_posx+sprite_width, fisherman_posy);
         move_sprite(4, fisherman_posx+20, fisherman_posy);
@@ -546,6 +549,119 @@ void deck_enter_intro_scene(void)
         move_sprite(6, fisherman_posx+40, fisherman_posy);
         move_sprite(7, fisherman_posx+40+sprite_width, fisherman_posy);
     }
+    DISPLAY_OFF;
+    bkg_clean();
+    move_bkg(0, 0);
+    DISPLAY_ON;
+    sprite_clean();
+    LETTER_COUNT = 0;
+    print("fishermen:\0", 24, 32);
+    print("follow us!\0", 24, 48);
+    talking = 1;
+    while(talking)
+    {
+        if(joypad() & J_A)
+            talking = 0;
+    }
+    DISPLAY_OFF;
+    hide_sprites();
+    sprite_clean();
+    LETTER_COUNT = 0;
+    set_bkg_data(0, 4, blank_screen_tiles);        
+    set_bkg_tiles(0, 0, 32, 18, deck);
+    move_bkg(95, 0);
+    DISPLAY_ON;
+
+    SPRITES_8x16;
+    set_sprite_data(0, 8, hero_walk_sideways);
+    set_sprite_tile(0,2);
+    set_sprite_tile(1,0);
+    set_sprite_prop(0, S_FLIPX);
+    set_sprite_prop(1, S_FLIPX);
+    move_sprite(0, hero_posx, hero_posy);
+    move_sprite(1, hero_posx+sprite_width, hero_posy);
+    set_sprite_data(8, 8, fisherman_walk_side);
+    /* init fisherman */
+    for(i = 2; i < 7; i+=2)
+    {
+        set_sprite_tile(i, 8);
+        set_sprite_tile(i+1, 10);
+        move_sprite(i, fisherman_posx, fisherman_posy);
+        move_sprite(i+1, fisherman_posx+sprite_width, fisherman_posy);
+        fisherman_posx-=20;
+    }
+    fisherman_posx += 60;
+    delay(500);
+    while(fisherman_posx+60 >= 16)
+    {
+        delay(50);
+        for(i = 2; i < 7; i+=2)
+        {
+            set_sprite_tile(i, 8+(4*(fisherman_posx&0x1)));
+            set_sprite_tile(i+1, 10+(4*(fisherman_posx&0x1)));
+        }
+        --fisherman_posx;
+        move_sprite(2, fisherman_posx, fisherman_posy);
+        move_sprite(3, fisherman_posx+sprite_width, fisherman_posy);
+        move_sprite(4, fisherman_posx-20, fisherman_posy);
+        move_sprite(5, fisherman_posx-20+sprite_width, fisherman_posy);
+        move_sprite(6, fisherman_posx-40, fisherman_posy);
+        move_sprite(7, fisherman_posx-40+sprite_width, fisherman_posy);
+    }
+}
+
+void asakawa_enters_deck(void)
+{
+    sprite_clean();
+    LETTER_COUNT = 0;
+    set_sprite_data(0, 8, hero_walk_sideways);
+    set_sprite_tile(0, 0);
+    set_sprite_tile(1, 2);
+    set_sprite_prop(0, S_FLIPX&0x0);
+    set_sprite_prop(1, S_FLIPX&0x0);
+    move_sprite(0, hero_posx, hero_posy);
+    move_sprite(1, hero_posx+sprite_width, hero_posy);
+
+    fisherman_posx = 48;
+    fisherman_posy = 128;
+    for(i = 2; i < 7; i+=2)
+    {
+        set_sprite_tile(i, 10);
+        set_sprite_tile(i+1, 8);
+        set_sprite_prop(i, S_FLIPX);
+        set_sprite_prop(i+1, S_FLIPX);
+    }
+    move_sprite(2, fisherman_posx, fisherman_posy);
+    move_sprite(3, fisherman_posx+sprite_width, fisherman_posy);
+    move_sprite(4, fisherman_posx-20, fisherman_posy);
+    move_sprite(5, fisherman_posx-20+sprite_width, fisherman_posy);
+    move_sprite(6, fisherman_posx-40, fisherman_posy);
+    move_sprite(7, fisherman_posx-40+sprite_width, fisherman_posy);
+
+    /* asakawa */
+    asakawa_posx = 156;
+    asakawa_posy = 116;
+    set_sprite_data(16, 8, asakawa_walk_side);
+    set_sprite_tile(8, 16);
+    set_sprite_tile(9, 18);
+    move_sprite(8, asakawa_posx, asakawa_posy);
+    move_sprite(9, asakawa_posx+sprite_width, asakawa_posy);
+    while(asakawa_posx > 120)
+    {
+        delay(50);
+        --asakawa_posx;
+        set_sprite_tile(8, 16+(4*(asakawa_posx&0x1)));
+        set_sprite_tile(9, 18+(4*(asakawa_posx&0x1)));
+        move_sprite(8, asakawa_posx, asakawa_posy);
+        move_sprite(9, asakawa_posx+sprite_width, asakawa_posy);
+    }
+    delay(500);
+    DISPLAY_OFF;
+    bkg_clean();
+    sprite_clean();
+    LETTER_COUNT = 0;
+    DISPLAY_ON;
+    print("wassuuuuup!?\0", 24, 32);
 }
 
 void pos_check_shit_pot(void)
