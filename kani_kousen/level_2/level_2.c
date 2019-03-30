@@ -11,7 +11,7 @@ UINT8 screen_x = 95;
 void level_2_ctrl(void)
 {
     wait_vbl_done();
-    /*    level_2_bkg_start();*/
+    //    level_2_bkg_start();
     l2_scene_1();
     while(talking > 0)
     {
@@ -26,6 +26,7 @@ void level_2_ctrl(void)
         pos_check_shit_pot();
     }
     deck_enter();
+    deck_enter_intro_scene();
     moving = 1;
     while(moving)
     {
@@ -388,7 +389,7 @@ void hero_scroll_walk(void)
         left = 0;
         delay(50);
         --hero_posy;
-        
+
     }
     if(joypad() & J_DOWN)
     {
@@ -442,7 +443,7 @@ void hero_scroll_walk(void)
         left = 1;
         delay(50);
         if((hero_posx > 72 || screen_x <= 0) && 
-            hero_posx+screen_x >= 16)
+                hero_posx+screen_x >= 16)
             --hero_posx;
         if(hero_posx <= 72 && screen_x > 0)
             move_bkg(--screen_x, 0);
@@ -469,7 +470,7 @@ void hero_scroll_walk(void)
         left = 0;
         delay(50);
         if((hero_posx < 86 || screen_x+160 >= 255) && 
-            hero_posx+sprite_width+screen_x <= 250)
+                hero_posx+sprite_width+screen_x <= 250)
             ++hero_posx;
         if(hero_posx >= 86 && (screen_x+160) < 255)
             move_bkg(++screen_x, 0);
@@ -497,6 +498,54 @@ void deck_enter(void)
     move_sprite(1, hero_posx+sprite_width, hero_posy);
     SHOW_SPRITES;
     DISPLAY_ON;
+}
+
+void deck_enter_intro_scene(void)
+{
+    /* make sure the hero is facing left */
+    set_sprite_data(0, 8, hero_walk_sideways);
+    set_sprite_tile(0,2);
+    set_sprite_tile(1,0);
+    set_sprite_prop(0, S_FLIPX);
+    set_sprite_prop(1, S_FLIPX);
+    move_sprite(0, hero_posx, hero_posy);
+    move_sprite(1, hero_posx+sprite_width, hero_posy);
+
+    fisherman_posx = 8;
+    fisherman_posy = 128;
+    set_sprite_data(8, 8, fisherman_walk_side);
+
+    /* init fisherman */
+    for(i = 2; i < 7; i+=2)
+    {
+        set_sprite_tile(i, 10);
+        set_sprite_tile(i+1, 8);
+        set_sprite_prop(i, S_FLIPX);
+        set_sprite_prop(i+1, S_FLIPX);
+        move_sprite(i, fisherman_posx, fisherman_posy);
+        move_sprite(i+1, fisherman_posx+sprite_width, fisherman_posy);
+        fisherman_posx += 20;
+    }
+    /* have to reset the fisherman's position */
+    fisherman_posx -= 60;
+    delay(500);
+    /* fisherman walk in */
+    while(fisherman_posx+40 <= 130)
+    {
+        delay(100);
+        for(i = 2; i < 7; i+=2)
+        {
+            set_sprite_tile(i, 10+(4*(fisherman_posx&0x1)));
+            set_sprite_tile(i+1, 8+(4*(fisherman_posx&0x1)));
+        }
+        fisherman_posx++;
+        move_sprite(2, fisherman_posx, fisherman_posy);
+        move_sprite(3, fisherman_posx+sprite_width, fisherman_posy);
+        move_sprite(4, fisherman_posx+20, fisherman_posy);
+        move_sprite(5, fisherman_posx+20+sprite_width, fisherman_posy);
+        move_sprite(6, fisherman_posx+40, fisherman_posy);
+        move_sprite(7, fisherman_posx+40+sprite_width, fisherman_posy);
+    }
 }
 
 void pos_check_shit_pot(void)

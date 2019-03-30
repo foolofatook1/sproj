@@ -33,6 +33,7 @@ void hero_walk(void);
 void hero_scroll_walk(void);
 
 void deck_enter(void);
+void deck_enter_intro_scene(void);
 
 void pos_check_shit_pot(void);
 void pos_check_deck(void);
