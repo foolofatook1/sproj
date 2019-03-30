@@ -35,12 +35,13 @@ void hero_scroll_walk(void);
 void deck_enter(void);
 
 void pos_check_shit_pot(void);
-//void pos_check_deck(void);
+void pos_check_deck(void);
 
 extern UINT8 talking;
 extern UINT8 moving;
 extern UINT8 left;
 
-extern UINT8 screen_y;
+extern UINT8 screen_x;
+
 
 #endif /* LEVEL_2_INCLUDE */
