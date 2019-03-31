@@ -37,6 +37,7 @@ void level_2_ctrl(void)
             moving = 0;
     }
     asakawa_enters_deck();
+    //crab_catching();
 }
 
 void level_2_bkg_start(void)
@@ -661,7 +662,43 @@ void asakawa_enters_deck(void)
     sprite_clean();
     LETTER_COUNT = 0;
     DISPLAY_ON;
-    print("wassuuuuup!?\0", 24, 32);
+    talking = 1;
+    print("asakawa:\0", 24, 32);
+    print("get these\0", 24, 48);
+    print("crabs\0", 24, 64);
+    print("ready to\0", 24, 80);
+    print("can!\0", 24, 96);
+    /* asakawa's instructions on how to play */
+    while(talking)
+    {
+        if(joypad() & J_A)
+        {
+            ++talking;
+            if(talking == 2)
+            {
+                sprite_clean();
+                LETTER_COUNT = 0;
+                print("asakawa:\0", 24, 32);
+                print("catch them\0", 24, 48);
+                print("with your\0", 24, 64);
+                print("net!\0", 24, 80);
+            }
+            if(talking == 3)
+            {
+                sprite_clean();
+                LETTER_COUNT = 0;
+                print("asakawa:\0", 24, 32);
+                print("then bash\0", 24, 48);
+                print("their\0", 24, 64);
+                print("shells\0", 24, 80);
+                print("with the\0", 24, 96);
+                print("club!\0", 24, 112);
+            }
+            if(talking == 4)
+                talking = 0;
+        }
+    }
+
 }
 
 void pos_check_shit_pot(void)
