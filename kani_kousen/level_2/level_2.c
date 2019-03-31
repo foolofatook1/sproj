@@ -359,6 +359,27 @@ void hero_walk(void)
         delay(50);
         ++hero_posx;
     }
+    if(check_items())
+    {
+        /* set things back to normal */
+        DISPLAY_OFF;
+        set_bkg_data(0,4,blank_screen_tiles);
+        set_bkg_tiles(0,0,20,18,shit_pot);
+        hide_sprites();
+        sprite_clean();
+        LETTER_COUNT = 0;
+        SPRITES_8x16;
+        set_sprite_data(0, 4, hero_walk_down);
+        set_sprite_tile(0, 0);
+        set_sprite_tile(1, 2);
+        /* make sure sprites aren't flipped */
+        set_sprite_prop(0, S_FLIPX&0x0);
+        set_sprite_prop(1, S_FLIPX&0x0);
+        move_sprite(0, hero_posx, hero_posy);
+        move_sprite(1, hero_posx+sprite_width, hero_posy);
+        DISPLAY_ON;
+    }
+    
 }
 
 void hero_scroll_walk(void)
@@ -478,6 +499,27 @@ void hero_scroll_walk(void)
             ++hero_posx;
         if(hero_posx >= 86 && (screen_x+160) < 255)
             move_bkg(++screen_x, 0);
+    }
+    if(check_items())
+    {
+        /* set things back to normal */
+        DISPLAY_OFF;
+        set_bkg_data(0,4,blank_screen_tiles);
+        set_bkg_tiles(0,0,32,18,deck);
+        move_bkg(screen_x, 0);
+        hide_sprites();
+        sprite_clean();
+        LETTER_COUNT = 0;
+        SPRITES_8x16;
+        set_sprite_data(0, 4, hero_walk_down);
+        set_sprite_tile(0, 0);
+        set_sprite_tile(1, 2);
+        /* make sure sprites aren't flipped */
+        set_sprite_prop(0, S_FLIPX&0x0);
+        set_sprite_prop(1, S_FLIPX&0x0);
+        move_sprite(0, hero_posx, hero_posy);
+        move_sprite(1, hero_posx+sprite_width, hero_posy);
+        DISPLAY_ON;
     }
 
 }

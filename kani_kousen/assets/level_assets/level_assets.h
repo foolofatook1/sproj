@@ -3,7 +3,7 @@
 
 #include <gb/gb.h>
 
-//void setup_sprite_loc(void);
+UINT8 check_items(void);
 
 extern UINT8 text_count;
 extern UINT8 start_animate;
@@ -28,6 +28,5 @@ extern UINT8 **fisherman_pos;
 extern UINT8 **miner_pos;
 extern UINT8 **student_pos;
 extern UINT8 **asakawa_pos;
-
 
 #endif /* LEVEL_ASSETS */
