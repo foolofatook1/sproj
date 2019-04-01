@@ -40,6 +40,8 @@ void clear_screen(void);
 void game_over_screen(void);
 
 extern UINT8 PUNCH;
+extern UINT8 NET;
+extern UINT8 CLUB;
 extern UINT8 DEFEND;
 extern UINT8 SHOOT;
 
@@ -71,6 +73,8 @@ extern UBYTE npc_acc;
 extern UBYTE hero_acc;
 
 extern UBYTE first_fighter;
+
+extern UINT8 ITEMS;
 
 extern UINT8 BATTLE_CHOICE;
 extern UINT8 FIGHT_CHOICE;

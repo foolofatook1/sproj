@@ -15,7 +15,11 @@ UINT8 ITEM_CHOICE = 3;
 UINT8 FIGHTING = 4;
 UINT8 DEAD = 5;
 
+UINT8 ITEMS = 0;
+
 UINT8 PUNCH = 1;
+UINT8 CLUB = 3;
+UINT8 NET = 2;
 UINT8 DEFEND = 2;
 UINT8 SHOOT = 5;
 
@@ -99,11 +103,20 @@ void item_opt(void)
     sprite_clean();
     LETTER_COUNT = 0;
     battle_bkg_clean();
-    battle_print(" empty", 18, 32);
-    battle_print("a select", 16, 130);
-    battle_print("b back", 16, 142);
+    if(ITEMS == 0)
+    {
+        battle_print(" empty", 18, 32);
+        battle_print("a select", 16, 130);
+        battle_print("b back", 16, 142);
+    }
+    if(ITEMS == 2)
+    {
+        battle_print("club\0", 24, 32);
+        battle_print("net\0", 24, 48);
+        battle_print("a select\0", 16, 130);
+        battle_print("b back\0", 16, 142);
+    }
     show_fighter_stats();
-
 }
 
 void battle_menu(void)

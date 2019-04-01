@@ -6,6 +6,8 @@ LEVEL_1_INCLUDE = level_1/assets/shit_pot.o assets/sprites/hero_front_idle.o ass
 
 LEVEL_2_INCLUDE = level_2/level_2.o assets/sprites/hero_lie_down.o assets/sprites/hero_walk_sideways.o assets/sprites/fisherman_walk_sideways.o assets/sprites/fisherman_walk_up.o assets/sprites/hero_walk_down.o assets/sprites/hero_walk_up.o assets/bkgs/deck.o assets/sprites/asakawa_walk_sideways.o
 
+CRAB_CATCH_INCLUDE = level_2/crab_catch.o assets/sprites/norm_crab.o assets/sprites/king_crab.o
+
 LEVEL_ASSETS = assets/level_assets/level_assets.o
 
 START_UP_INCLUDE = start_up/start_up.o
@@ -26,8 +28,8 @@ clean:
 %.o : %.c
 	$(CC) -c -o $@ $<
 
-main.gb: main.o $(START_UP_INCLUDE) $(TEXT_INCLUDE) $(LEVEL_1_INCLUDE) $(BATTLE_INCLUDE) $(LEVEL_2_INCLUDE) $(SPRITE_PROPS) $(BKG_PROPS) $(LEVEL_ASSETS)
-	$(CC) -o $@ main.o $(START_UP_INCLUDE) $(TEXT_INCLUDE) $(LEVEL_1_INCLUDE) $(BATTLE_INCLUDE) $(LEVEL_2_INCLUDE) $(SPRITE_PROPS) $(BKG_PROPS) $(LEVEL_ASSETS)
+main.gb: main.o $(START_UP_INCLUDE) $(TEXT_INCLUDE) $(LEVEL_1_INCLUDE) $(BATTLE_INCLUDE) $(LEVEL_2_INCLUDE) $(SPRITE_PROPS) $(BKG_PROPS) $(LEVEL_ASSETS) $(CRAB_CATCH_INCLUDE)
+	$(CC) -o $@ main.o $(START_UP_INCLUDE) $(TEXT_INCLUDE) $(LEVEL_1_INCLUDE) $(BATTLE_INCLUDE) $(LEVEL_2_INCLUDE) $(SPRITE_PROPS) $(BKG_PROPS) $(LEVEL_ASSETS) $(CRAB_CATCH_INCLUDE)
 
 play:
 	../bgb/bgb.exe *.gb

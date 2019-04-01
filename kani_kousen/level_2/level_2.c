@@ -1,4 +1,5 @@
 #include "level_2.h"
+#include "crab_catch.h"
 #include "../assets/level_assets/level_assets.h"
 #include "../text/text.h"
 #include "../battle/battle.h"
@@ -11,7 +12,7 @@ UINT8 screen_x = 95;
 void level_2_ctrl(void)
 {
     wait_vbl_done();
-    //    level_2_bkg_start();
+//    level_2_bkg_start();
     l2_scene_1();
     while(talking > 0)
     {
@@ -37,7 +38,7 @@ void level_2_ctrl(void)
             moving = 0;
     }
     asakawa_enters_deck();
-    //crab_catching();
+    crab_catch_ctrl();
 }
 
 void level_2_bkg_start(void)
@@ -181,6 +182,7 @@ void l2_scene_1_fisherman_enter(void)
         print("club and\0", 52, 64);
         print("fishing\0", 56, 80);
         print("net\0", 72, 96);
+        ITEMS += 2;
     }
     if(talking == 5)
     {
@@ -359,10 +361,10 @@ void hero_walk(void)
         delay(50);
         ++hero_posx;
     }
-    if(check_items())
-    {
+    /*if(check_items())
+    {*/
         /* set things back to normal */
-        DISPLAY_OFF;
+      /*  DISPLAY_OFF;
         set_bkg_data(0,4,blank_screen_tiles);
         set_bkg_tiles(0,0,20,18,shit_pot);
         hide_sprites();
@@ -371,15 +373,14 @@ void hero_walk(void)
         SPRITES_8x16;
         set_sprite_data(0, 4, hero_walk_down);
         set_sprite_tile(0, 0);
-        set_sprite_tile(1, 2);
+        set_sprite_tile(1, 2);*/
         /* make sure sprites aren't flipped */
-        set_sprite_prop(0, S_FLIPX&0x0);
+        /*set_sprite_prop(0, S_FLIPX&0x0);
         set_sprite_prop(1, S_FLIPX&0x0);
         move_sprite(0, hero_posx, hero_posy);
         move_sprite(1, hero_posx+sprite_width, hero_posy);
         DISPLAY_ON;
-    }
-    
+    }*/
 }
 
 void hero_scroll_walk(void)
@@ -500,10 +501,10 @@ void hero_scroll_walk(void)
         if(hero_posx >= 86 && (screen_x+160) < 255)
             move_bkg(++screen_x, 0);
     }
-    if(check_items())
-    {
+    /*if(check_items())
+    {*/
         /* set things back to normal */
-        DISPLAY_OFF;
+      /*  DISPLAY_OFF;
         set_bkg_data(0,4,blank_screen_tiles);
         set_bkg_tiles(0,0,32,18,deck);
         move_bkg(screen_x, 0);
@@ -513,15 +514,14 @@ void hero_scroll_walk(void)
         SPRITES_8x16;
         set_sprite_data(0, 4, hero_walk_down);
         set_sprite_tile(0, 0);
-        set_sprite_tile(1, 2);
+        set_sprite_tile(1, 2);*/
         /* make sure sprites aren't flipped */
-        set_sprite_prop(0, S_FLIPX&0x0);
+        /*set_sprite_prop(0, S_FLIPX&0x0);
         set_sprite_prop(1, S_FLIPX&0x0);
         move_sprite(0, hero_posx, hero_posy);
         move_sprite(1, hero_posx+sprite_width, hero_posy);
         DISPLAY_ON;
-    }
-
+    }*/
 }
 
 void deck_enter(void)
