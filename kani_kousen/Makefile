@@ -23,7 +23,7 @@ BINS = main.gb
 all: $(BINS)
 
 clean: 
-	rm -f .*.swp *.o *.lst *.map *.gb *~ *.rel *.cdb *.ihx *.lnk *.sym *.asm *.sn1 text/assets/*.lst text/assets/*.lst text/*.o text/*.lst text/.*.swp $(TEXT_INCLUDE) assets/sprites/*.lst level_1/assets/*.lst assets/sprites/.*.swp $(LEVEL_1_INCLUDE) start_up/assets/*.lst start_up/assets/.*.swp start_up/assets/*.o start_up/.*.swp start_up/*.lst $(START_UP_INCLUDE) level_1/.*.swp level_1/*.lst $(BATTLE_INCLUDE) battle/*.lst battle/*.map battle/.*.swp $(LEVEL_2_INCLUDE) level_2/*.lst level_2/*.map level_2/.*.swp $(SPRITE_PROPS) $(BKG_PROPS) assets/*.lst assets/*.map assets/.*.swp $(LEVEL_ASSETS) assets/level_assets/*.lst assets/level_assets/*.map assets/level_assets/.*.swp
+	rm -f .*.swp *.o *.lst *.map *.gb *~ *.rel *.cdb *.ihx *.lnk *.sym *.asm *.sn1 text/assets/*.lst text/assets/*.lst text/*.o text/*.lst text/.*.swp $(TEXT_INCLUDE) assets/sprites/*.lst level_1/assets/*.lst assets/sprites/.*.swp $(LEVEL_1_INCLUDE) start_up/assets/*.lst start_up/assets/.*.swp start_up/assets/*.o start_up/.*.swp start_up/*.lst $(START_UP_INCLUDE) level_1/.*.swp level_1/*.lst $(BATTLE_INCLUDE) battle/*.lst battle/*.map battle/.*.swp $(LEVEL_2_INCLUDE) level_2/*.lst level_2/*.map level_2/.*.swp $(SPRITE_PROPS) $(BKG_PROPS) assets/*.lst assets/*.map assets/.*.swp $(LEVEL_ASSETS) assets/level_assets/*.lst assets/level_assets/*.map assets/level_assets/.*.swp $(CRAB_CATCH_INCLUDE)
 
 %.o : %.c
 	$(CC) -c -o $@ $<
