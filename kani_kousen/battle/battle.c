@@ -11,16 +11,21 @@
 UINT8 BATTLE_CHOICE = 0;
 UINT8 FIGHT_CHOICE = 1;
 UINT8 RUN_CHOICE = 2;
+UINT8 CAN_RUN = 0;
+UINT8 ESCAPED = 0;
 UINT8 ITEM_CHOICE = 3;
 UINT8 FIGHTING = 4;
 UINT8 DEAD = 5;
 
 UINT8 ITEMS = 0;
+UINT8 CHOSEN_ITEM = 0;
+UINT8 CHOOSING = 0;
 
 UINT8 PUNCH = 1;
-UINT8 CLUB = 3;
 UINT8 NET = 2;
+UINT8 CLUB = 3;
 UINT8 DEFEND = 2;
+
 UINT8 SHOOT = 5;
 
 UINT8 PUNCH_LOC = 32;
@@ -68,12 +73,36 @@ void run(void)
     sprite_clean();
     LETTER_COUNT = 0;
     battle_bkg_clean();
-    battle_print("you", 18, 32);
-    battle_print("can't", 18, 48);
-    battle_print("escape!", 18, 64); 
-    show_fighter_stats();
-    delay(300);
-    back();
+    if(!CAN_RUN)
+    {
+        battle_print("you", 18, 32);
+        battle_print("can't", 18, 48);
+        battle_print("escape!", 18, 64); 
+        show_fighter_stats();
+        delay(300);
+        back();
+    }
+    if(CAN_RUN)
+    {
+        seed = DIV_REG;
+        seed |= (UWORD)DIV_REG << 8;
+        initarand(seed);
+        ESCAPED = rand()&0x1;
+        if(ESCAPED == 0)
+        {
+            battle_print("you fail", 18, 32);
+            battle_print("to escape!", 18, 48);
+            show_fighter_stats();
+            delay(300);
+            back();
+        }
+        if(ESCAPED == 1)
+        {
+            battle_print("you", 18, 32);
+            battle_print("escape!", 18, 48);
+            show_fighter_stats();
+        }
+    }
 }
 
 void back(void)
@@ -111,12 +140,56 @@ void item_opt(void)
     }
     if(ITEMS == 2)
     {
-        battle_print("club\0", 24, 32);
-        battle_print("net\0", 24, 48);
+        CHOOSING = 1;
+        arrow_x = 24;
+        arrow_y = 32;
+        battle_print(">\0", arrow_x, arrow_y);
+        battle_print(" club\0", 24, 32);
+        battle_print(" net\0", 24, 48);
         battle_print("a select\0", 16, 130);
         battle_print("b back\0", 16, 142);
+        show_fighter_stats();
+        arrow_y = 32;
+        while(CHOOSING)
+           choose_item_toggle();
     }
-    show_fighter_stats();
+}
+
+void choose_item_toggle(void)
+{
+    if(joypad() & J_UP)
+    {
+        if(arrow_y <= 32)
+            arrow_y = 64;
+        delay(100);
+        move_sprite(0, arrow_x, arrow_y-=16);
+    }
+    if(joypad() & J_DOWN)
+    {
+        if(arrow_y >= 48)
+            arrow_y = 16;
+        delay(100);
+        move_sprite(0, arrow_x, arrow_y+=16);
+    }
+    if(joypad() & J_A)
+    {
+        if(arrow_y == 32)
+        {
+            CHOSEN_ITEM = CLUB;
+            STATE = FIGHTING;
+        }
+        if(arrow_y == 48)
+        {
+            CHOSEN_ITEM = NET;
+            STATE = FIGHTING;
+        }
+        CHOOSING = 0;
+    }
+    if(joypad() & J_B)
+    {
+        CHOOSING = 0;
+        back();
+    }
 }
 
 void battle_menu(void)
@@ -202,8 +275,12 @@ void battle_toggle_ctrl(void)
 
 void choice_handler(UINT8 arrow_y) 
 {
-    if(arrow_y == PUNCH_LOC)
+    if(arrow_y == PUNCH_LOC)// && CHOSEN_ITEM != 0)
         choice = PUNCH;
+    if(CHOSEN_ITEM == CLUB)
+        choice = CLUB;
+    if(CHOSEN_ITEM == NET)
+        choice = NET;
 }
 
 void hero_fight(UINT8 *enemy_hp)
@@ -512,7 +589,6 @@ void damage(UINT8 *fighter_hp)
             }
         }
     }
-
 }
 
 /**

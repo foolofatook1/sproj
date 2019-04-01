@@ -16,6 +16,7 @@ void battle_toggle_ctrl(void);
 void battle_nav(void);
 void fight_opt(void);
 void item_opt(void);
+void choose_item_toggle(void);
 void run(void);
 void back(void);
 
@@ -75,10 +76,14 @@ extern UBYTE hero_acc;
 extern UBYTE first_fighter;
 
 extern UINT8 ITEMS;
+extern UINT8 CHOSEN_ITEM;
+extern UINT8 CHOOSING;
 
 extern UINT8 BATTLE_CHOICE;
 extern UINT8 FIGHT_CHOICE;
 extern UINT8 RUN_CHOICE;
+extern UINT8 CAN_RUN;
+extern UINT8 ESCAPED;
 extern UINT8 ITEM_CHOICE;
 extern UINT8 FIGHTING;
 extern UINT8 DEAD;

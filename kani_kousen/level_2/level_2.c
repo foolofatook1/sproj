@@ -12,7 +12,8 @@ UINT8 screen_x = 95;
 void level_2_ctrl(void)
 {
     wait_vbl_done();
-//    level_2_bkg_start();
+    level_2_bkg_start();
+    /* something odd is happening between these two functions */
     l2_scene_1();
     while(talking > 0)
     {
