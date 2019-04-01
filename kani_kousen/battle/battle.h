@@ -31,6 +31,7 @@ void enemy_fight_anim(void);
 void enemy_defend_anim(void);
 
 void damage(UINT8*);
+void enemy_damage(UINT8*);
 
 void sprite_setup(UINT8, unsigned char*, 
                   UINT8, unsigned char*);
@@ -40,11 +41,15 @@ void clear_screen(void);
 
 void game_over_screen(void);
 
+extern UINT8 ENEMY;
+
 extern UINT8 PUNCH;
 extern UINT8 NET;
 extern UINT8 CLUB;
 extern UINT8 DEFEND;
 extern UINT8 SHOOT;
+extern UINT8 CLAW;
+extern UINT8 KING_CLAW;
 
 extern UINT8 PUNCH_LOC;
 
@@ -75,6 +80,7 @@ extern UBYTE hero_acc;
 
 extern UBYTE first_fighter;
 
+extern UINT8 ITEM;
 extern UINT8 ITEMS;
 extern UINT8 CHOSEN_ITEM;
 extern UINT8 CHOOSING;
@@ -87,6 +93,7 @@ extern UINT8 ESCAPED;
 extern UINT8 ITEM_CHOICE;
 extern UINT8 FIGHTING;
 extern UINT8 DEAD;
+extern UINT8 BATTLE_WIN;
 
 extern UINT8 STATE;
 #endif /* BATTLE_INCLUDE */

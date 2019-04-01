@@ -14,6 +14,7 @@ void level_2_ctrl(void)
     wait_vbl_done();
     level_2_bkg_start();
     /* something odd is happening between these two functions */
+    wait_vbl_done();
     l2_scene_1();
     while(talking > 0)
     {
@@ -74,24 +75,27 @@ void l2_scene_1(void)
     /* waking up the hero */
     sprite_clean();
     LETTER_COUNT = 0;
+    delay(500);
+    print("wake up!\0", 56, 75);
+    for(i = 0; i < LETTER_COUNT; ++i)
+        set_sprite_prop(i,1);
+    delay(1000);
+    HIDE_SPRITES;
+    delay(500);
+    SHOW_SPRITES;
+    delay(500);
+    HIDE_SPRITES;
+    delay(500);
+    SHOW_SPRITES;
     delay(800);
-    print("wake up!\0", 56, 75);
-    delay(1000);
-    sprite_clean();
-    LETTER_COUNT = 0;
-    delay(500);
-    print("wake up!\0", 56, 75);
-    delay(1000);
-    sprite_clean();
-    LETTER_COUNT = 0;
-    delay(500);
-    print("wake up!\0", 56, 75);
-    delay(1000);
+
     sprite_clean();
     LETTER_COUNT = 0;
     print("we have to\0", 48, 75);
     print("get\0", 72, 91);
     print("to work!\0", 56, 107);
+    for(i = 0; i < LETTER_COUNT; ++i)
+        set_sprite_prop(i, 1);
     /* start the next part */
     delay(1000);
     sprite_clean();

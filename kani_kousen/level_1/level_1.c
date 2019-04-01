@@ -17,7 +17,7 @@ UINT8 anim_2 = 34;
 void level_1_ctrl(void) 
 {
     wait_vbl_done();
-    level_1_bkg_start();
+/*    level_1_bkg_start();
     while(start_animate == 0)
     {
         joypad_check_l1_scene_1();
@@ -49,7 +49,7 @@ void level_1_ctrl(void)
     {
         joypad_check_l1_scene_3();
         wait_vbl_done();
-    }
+    }*/
     asakawa_battle_ctrl();
 }
 
