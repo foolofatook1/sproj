@@ -1,4 +1,5 @@
 #include <rand.h>
+#include <stdlib.h>
 #include "crab_catch.h"
 #include "../level_1/asakawa_battle.h"
 #include "../assets/level_assets/level_assets.h"
@@ -8,6 +9,7 @@
 #include "../battle/battle.h"
 
 UINT8 crab = 0;
+UINT8 caught_crabs = 0;
 UINT8 CRAB_CAUGHT = 0;
 UINT8 CRAB_HP = 5;
 
@@ -16,6 +18,11 @@ UINT8 CRAB_HP = 5;
  */
 void crab_catch_ctrl(void)
 {
+    // delete this ITEMS thing later
+    UWORD crab_num[4];
+    ITEMS = 2;
+    CAN_RUN = 0;
+    BATTLE_NUM = 1;
     /**
      * 1. opening screen chooses between two types of crabs & anounces
      *    their coming
@@ -27,35 +34,55 @@ void crab_catch_ctrl(void)
      *      * if that sequence is not followed, it's a miss 
      * 3. repeat 10 times.
      */
-    HERO_HP = 10;
-    crab_catch_setup();
-    delay(500);
-    battle_menu();
-    while(STATE != DEAD)
+    while(caught_crabs < 1 && STATE != DEAD)
     {
-        wait_vbl_done();
-        battle_toggle_ctrl();
-        while(STATE == FIGHTING)
+        HERO_HP = 10;
+        crab_catch_setup();
+        delay(500);
+        battle_menu();
+        while(STATE != DEAD && STATE != BATTLE_WIN)// && !ESCAPED)
         {
-            choice_handler(arrow_y);
-            fight(&HERO_HP, &CRAB_HP);
-            delay(400);
-            if(STATE != DEAD)
+            wait_vbl_done();
+            battle_toggle_ctrl();
+            while(STATE == FIGHTING)
             {
-                DISPLAY_OFF;
-                battle_menu();
-                STATE = BATTLE_CHOICE;
-                choice = 0;
-                DISPLAY_ON;
-                battle_menu();
+                choice_handler(arrow_y);
+                fight(&HERO_HP, &CRAB_HP);
+                delay(400);
+                if(STATE != DEAD && STATE != BATTLE_WIN)// && !ESCAPED)
+                {
+                    DISPLAY_OFF;
+                    battle_menu();
+                    STATE = BATTLE_CHOICE;
+                    choice = 0;
+                    DISPLAY_ON;
+                    battle_menu();
+                }
             }
         }
+        if(STATE == BATTLE_WIN)
+        {
+            clear_screen();
+            sprite_clean();
+            LETTER_COUNT = 0;
+            print("you win!", 56, 80);
+            delay(500);
+            CRAB_CAUGHT = 0;
+            ++caught_crabs;
+            STATE = BATTLE_CHOICE;
+        }
     }
-    CRAB_CAUGHT = 0;
+    DISPLAY_OFF;
     clear_screen();
     sprite_clean();
     LETTER_COUNT = 0;
-    print("you die!\0", 56, 80);
+    itoa((caught_crabs-1), crab_num);
+    print("you have\0", 24, 32);
+    print("caught \0", 24, 48);
+    print(crab_num, 80, 48);
+    print("crabs\0", 24, 64);
+    DISPLAY_ON;
+    delay(1000);
 }
 
 void crab_catch_setup(void)

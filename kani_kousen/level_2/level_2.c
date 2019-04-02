@@ -12,9 +12,9 @@ UINT8 screen_x = 95;
 void level_2_ctrl(void)
 {
     wait_vbl_done();
-    level_2_bkg_start();
+//    level_2_bkg_start();
     /* something odd is happening between these two functions */
-    wait_vbl_done();
+ /*   wait_vbl_done();
     l2_scene_1();
     while(talking > 0)
     {
@@ -39,8 +39,9 @@ void level_2_ctrl(void)
         if(screen_x <= 0)
             moving = 0;
     }
-    asakawa_enters_deck();
+    asakawa_enters_deck();*/
     crab_catch_ctrl();
+    deck_enter();
 }
 
 void level_2_bkg_start(void)
@@ -531,6 +532,9 @@ void hero_scroll_walk(void)
 
 void deck_enter(void)
 {
+    sprite_clean();
+    LETTER_COUNT = 0;
+    hide_sprites();
     DISPLAY_OFF;
     set_bkg_data(0, 4, blank_screen_tiles);        
     set_bkg_tiles(0, 0, 32, 18, deck);
@@ -539,7 +543,7 @@ void deck_enter(void)
 
     hero_posx = 140;
     hero_posy = 128;
-
+    SPRITES_8x16;
     set_sprite_data(0, 8, hero_walk_sideways);
     set_sprite_tile(0, 2);
     set_sprite_tile(1, 0);

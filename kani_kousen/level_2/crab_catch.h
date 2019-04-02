@@ -11,5 +11,6 @@ void crab_catch_setup(void);
 extern UINT8 crab;
 extern UINT8 CRAB_HP;
 extern UINT8 CRAB_CAUGHT;
+extern UINT8 caught_crabs;
 
 #endif /* CRAB_CATCH_INCLUDE */

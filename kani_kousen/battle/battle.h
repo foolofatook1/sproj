@@ -24,7 +24,7 @@ void fight_config(void);
 void fight(UINT8*, UINT8*);
 void npc_fight(void);
 
-void hero_fight(UINT8*);
+void hero_fight(void);//UINT8*);
 void hero_fight_anim(void);
 void hero_defend_anim(void);
 void enemy_fight_anim(void);
@@ -32,6 +32,7 @@ void enemy_defend_anim(void);
 
 void damage(UINT8*);
 void enemy_damage(UINT8*);
+void lower_hp(UINT8*, UINT8, UINT8*);
 
 void sprite_setup(UINT8, unsigned char*, 
                   UINT8, unsigned char*);
@@ -42,6 +43,7 @@ void clear_screen(void);
 void game_over_screen(void);
 
 extern UINT8 ENEMY;
+extern UINT8 BATTLE_NUM;
 
 extern UINT8 PUNCH;
 extern UINT8 NET;
@@ -58,6 +60,7 @@ extern UINT8 ASAKAWA_HP;
 extern UINT8 HERO_HP;
 
 extern UWORD *h_hp;
+extern UWORD *e_hp;
 
 //extern UINT8 choice;
 extern UINT8 enemy_choice;
