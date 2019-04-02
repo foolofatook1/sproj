@@ -12,9 +12,8 @@ UINT8 screen_x = 95;
 void level_2_ctrl(void)
 {
     wait_vbl_done();
-//    level_2_bkg_start();
-    /* something odd is happening between these two functions */
- /*   wait_vbl_done();
+    /*level_2_bkg_start();
+    wait_vbl_done();
     l2_scene_1();
     while(talking > 0)
     {
@@ -39,9 +38,17 @@ void level_2_ctrl(void)
         if(screen_x <= 0)
             moving = 0;
     }
-    asakawa_enters_deck();*/
+    asakawa_enters_deck();
+    asakawa_before_work();*/
     crab_catch_ctrl();
-    deck_enter();
+    asakawa_enters_deck();
+    asakawa_after_work();
+    delay(500);
+    DISPLAY_OFF;
+    shit_pot_setup();
+    delay(500);
+    DISPLAY_ON;
+
 }
 
 void level_2_bkg_start(void)
@@ -65,6 +72,15 @@ void level_2_bkg_start(void)
     for(i = 0; i < LETTER_COUNT; ++i)
         set_sprite_prop(i,1);
     delay(2500);
+}
+
+void shit_pot_setup(void)
+{
+    sprite_clean();
+    LETTER_COUNT = 0;
+    hide_sprites();
+    set_bkg_data(0, 4, blank_screen_tiles);
+    set_bkg_tiles(0,0,20,18,shit_pot);
 }
 
 /**
@@ -113,7 +129,7 @@ void l2_scene_1(void)
     for(i = 0; i < MAX_SPRITES; ++i)
         set_sprite_prop(i, 0);
     /* hero lying down in shit pot */
-    set_bkg_tiles(0,0,20,18,shit_pot);
+    shit_pot_setup();
     SPRITES_8x16;
     set_sprite_data(0, 4, hero_lie_down);
     set_sprite_data(4, 4, hero_front_idle);
@@ -666,6 +682,10 @@ void asakawa_enters_deck(void)
 {
     sprite_clean();
     LETTER_COUNT = 0;
+    hide_sprites();
+    set_bkg_data(0,4,blank_screen_tiles);
+    set_bkg_tiles(0,0,32,18,deck);
+    SPRITES_8x16;
     set_sprite_data(0, 8, hero_walk_sideways);
     set_sprite_tile(0, 0);
     set_sprite_tile(1, 2);
@@ -676,6 +696,8 @@ void asakawa_enters_deck(void)
 
     fisherman_posx = 48;
     fisherman_posy = 128;
+    
+    set_sprite_data(8, 8, fisherman_walk_side);
     for(i = 2; i < 7; i+=2)
     {
         set_sprite_tile(i, 10);
@@ -708,6 +730,10 @@ void asakawa_enters_deck(void)
         move_sprite(9, asakawa_posx+sprite_width, asakawa_posy);
     }
     delay(500);
+}
+
+void asakawa_before_work(void)
+{
     DISPLAY_OFF;
     bkg_clean();
     sprite_clean();
@@ -749,7 +775,21 @@ void asakawa_enters_deck(void)
                 talking = 0;
         }
     }
+}
 
+void asakawa_after_work(void)
+{
+    DISPLAY_OFF;
+    bkg_clean();
+    sprite_clean();
+    LETTER_COUNT = 0;
+    DISPLAY_ON;
+    print("asakawa:\0", 24, 32);
+    print("now back\0", 24, 48);
+    print("down to\0", 24, 64);
+    print("the shit\0", 24, 80);
+    print("pot!\0", 24, 96);
+    delay(1000);
 }
 
 void pos_check_shit_pot(void)

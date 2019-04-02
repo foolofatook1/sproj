@@ -38,7 +38,10 @@ void hero_scroll_walk(void);
 void deck_enter(void);
 void deck_enter_intro_scene(void);
 void asakawa_enters_deck(void);
+void asakawa_before_work(void);
+void asakawa_after_work(void);
 
+void shit_pot_setup(void);
 void pos_check_shit_pot(void);
 void pos_check_deck(void);
 

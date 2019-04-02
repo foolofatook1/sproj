@@ -76,7 +76,7 @@ void crab_catch_ctrl(void)
     clear_screen();
     sprite_clean();
     LETTER_COUNT = 0;
-    itoa((caught_crabs-1), crab_num);
+    itoa(caught_crabs, crab_num);
     print("you have\0", 24, 32);
     print("caught \0", 24, 48);
     print(crab_num, 80, 48);
