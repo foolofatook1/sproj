@@ -6,6 +6,6 @@
 #include <gb/gb.h>
 #include <gb/drawing.h>
 
-#endif 
+void hello(void);
 
-#include "text.h"
+#endif 

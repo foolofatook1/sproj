@@ -1,11 +1,13 @@
 CC = lcc -Wa-l -Wl-m -Wl-j 
 
+ASSETS = assets/chain_border_tiles.o assets/small_chain_border.o assets/font.o assets/chain_border.o text.o
+
 BINS = banks.gb
 
 all: $(BINS)
 
 clean:
-	rm -f assets/*.o *.o assets/*.lst *.lst assets/*.map *.map *.gb *~ *.rel *.cdb *.ihx *.lnk *.sym *.asm
+	rm -f assets/*.o *.o assets/*.lst *.lst assets/*.map *.map *.gb *~ *.rel *.cdb *.ihx *.lnk *.sym *.asm .*.swp
 ############################################################
 # Lets just start by trying to compile to a single memory 
 # bank for the battle stuff.
@@ -14,9 +16,9 @@ clean:
 #		ROM bank 2 : -Wf-bo2
 #		RAM bank 2 : -Wf-ba2
 #
-text.o: text.c
-	$(CC) -DUSE_SFT_FOR_REG -c -o $@ $<
 
+$(ASSETS): %.o: %.c
+	$(CC) -DUSE_SFT_FOR_REG -c -o $@ $<
 bank2.o: bank2.c
 	$(CC) -DUSE_SFT_FOR_REG -Wf-bo2 -Wf-ba2 -c -o $@ $<
 
@@ -29,8 +31,8 @@ bank2.o: bank2.c
 #	4 ROM banks  : -Wl-yo4
 #	4 RAM banks  : -Wl-ya4
 #
-banks.gb: banks.o text.o bank2.o
-	$(CC) -DUSE_SFT_FOR_REG -Wl-yt2 -Wl-yo4 -Wl-ya4 -o $@ banks.o text.o bank2.o
+banks.gb: banks.o $(ASSETS) bank2.o
+	$(CC) -DUSE_SFT_FOR_REG -Wl-yt2 -Wl-yo4 -Wl-ya4 -o $@ banks.o $(ASSETS) bank2.o 
 
 play:
 	../bgb/*.exe *.gb

@@ -1,9 +1,24 @@
 #include "level_2.h"
+#include <stdio.h>
+#include <stdlib.h>
 #include "crab_catch.h"
 #include "../assets/level_assets/level_assets.h"
 #include "../text/text.h"
 #include "../battle/battle.h"
 
+/* save this for later when checking collisions with sprites */
+UINT8 sprite_positions[] = {
+    48,
+    64,
+    64,
+    64,
+    148,
+    124,
+    132,
+    64
+};
+
+UINT8 GOT_INFO = 0;
 UINT8 talking = 1;
 UINT8 moving = 1;
 UINT8 left = 0;
@@ -12,8 +27,8 @@ UINT8 screen_x = 95;
 void level_2_ctrl(void)
 {
     wait_vbl_done();
-    /*level_2_bkg_start();
-    wait_vbl_done();
+    level_2_bkg_start();
+
     l2_scene_1();
     while(talking > 0)
     {
@@ -27,28 +42,24 @@ void level_2_ctrl(void)
         hero_walk(); 
         pos_check_shit_pot();
     }
-    deck_enter();
-    deck_enter_intro_scene();
-    moving = 1;
-    while(moving)
-    {
-        wait_vbl_done();
-        hero_scroll_walk();
-        pos_check_deck();
-        if(screen_x <= 0)
-            moving = 0;
-    }
     asakawa_enters_deck();
-    asakawa_before_work();*/
+    asakawa_before_work();
     crab_catch_ctrl();
     asakawa_enters_deck();
     asakawa_after_work();
     delay(500);
     DISPLAY_OFF;
     shit_pot_setup();
+    shit_pot_sprites();
     delay(500);
     DISPLAY_ON;
-
+    moving = 1;
+    while(moving)
+    {
+        hero_walk();
+        pos_check_shit_pot();
+        conv_check();
+    }
 }
 
 void level_2_bkg_start(void)
@@ -81,6 +92,167 @@ void shit_pot_setup(void)
     hide_sprites();
     set_bkg_data(0, 4, blank_screen_tiles);
     set_bkg_tiles(0,0,20,18,shit_pot);
+}
+
+void shit_pot_sprites(void)
+{
+    hero_posx = 80;
+    hero_posy = 80;
+    student_posx = 48;
+    student_posy = 64;
+    fisherman_posx = 64;
+    fisherman_posy = 64;
+    student2_posx = 148;
+    student2_posy = 124;
+    miner_posx = 132;
+    miner_posy = 64;
+
+    SPRITES_8x16;
+    set_sprite_data(0, 8, hero_front_idle);
+    set_sprite_data(8, 4, student_front_idle);
+    set_sprite_data(12, 4, fisherman_front_idle);
+    set_sprite_data(16, 4, miner_front_idle);
+    /* hero */
+    set_sprite_tile(0, 0);
+    set_sprite_tile(1, 2);
+    move_sprite(0, hero_posx, hero_posy);
+    move_sprite(1, hero_posx+sprite_width, hero_posy);
+    /* student */
+    set_sprite_tile(2, 8);
+    set_sprite_tile(3, 8);
+    set_sprite_prop(3, S_FLIPX);
+    move_sprite(2, student_posx, student_posy);
+    move_sprite(3, student_posx+sprite_width, student_posy);
+    /* student2 */
+    set_sprite_tile(4, 8);
+    set_sprite_tile(5, 8);
+    set_sprite_prop(5, S_FLIPX);
+    move_sprite(4, student2_posx, student2_posy);
+    move_sprite(5, student2_posx+sprite_width, student2_posy);
+    /* fisherman */
+    set_sprite_tile(6, 12);
+    set_sprite_tile(7, 12);
+    set_sprite_prop(7, S_FLIPX);
+    move_sprite(6, fisherman_posx, fisherman_posy);
+    move_sprite(7, fisherman_posx+sprite_width, fisherman_posy);
+    /* miner */
+    set_sprite_tile(8, 16);
+    set_sprite_tile(9, 16);
+    set_sprite_prop(9, S_FLIPX);
+    move_sprite(8, miner_posx, miner_posy);
+    move_sprite(9, miner_posx+sprite_width, miner_posy);
+}
+
+UINT8 sprite_collide_shit_pot(UINT8 *sprite_pos)
+{
+    for(i = 0; i < 7; i+=2)
+    {
+        if((hero_posx < (sprite_pos[i]+sprite_width)) &&
+                ((hero_posx+sprite_width) > sprite_pos[i]) &&
+                (hero_posy < (sprite_pos[i+1]+sprite_width)) &&
+                ((hero_posy+sprite_width) > sprite_pos[i+1]))
+        {
+            hero_posx = sprite_pos[i]-16;
+            hero_posy = sprite_pos[i+1]+16;
+            move_sprite(0, hero_posx, hero_posy);
+            move_sprite(1, hero_posx+sprite_width, hero_posy);
+            return sprite_pos[i];
+        }
+    }
+    return 0;
+}
+
+void conv_check(void)
+{
+    UINT8 sprite;
+    UINT8 old_hero_posx;
+    UINT8 old_hero_posy;
+    if((sprite=sprite_collide_shit_pot(sprite_positions)) > 0)
+    {
+        bkg_clean();
+        old_hero_posx = hero_posx;
+        old_hero_posy = hero_posy;
+        /* student in top left corner */
+        if(sprite == student_posx || sprite == fisherman_posx)
+        {
+            sprite_clean();
+            LETTER_COUNT = 0;
+            hide_sprites();
+            print("workers:\0", 24, 32);
+            print("did you\0", 24, 48);
+            print("hear!?\0", 24, 64);
+            delay(1000);
+            sprite_clean();
+            LETTER_COUNT = 0;
+            print("workers:\0", 24, 32);
+            print("we lost a\0", 24, 48);
+            print("fishing\0", 24, 64);
+            print("boat\0", 24, 80);
+            print("today!\0", 24, 96);
+            delay(1000);
+            sprite_clean();
+            LETTER_COUNT = 0;
+            print("workers:\0", 24, 32);
+            print("damn that\0", 24, 48);
+            print("asakawa!\0", 24, 64);
+            delay(1000);
+            sprite_clean();
+            LETTER_COUNT = 0;
+            print("workers:\0", 24, 32);
+            print("should'nt\0", 24, 48);
+            print("have made\0", 24, 64);
+            print("them go\0", 24, 80);
+            print("out today\0", 24, 96);
+            print("...\0", 24, 112);
+            GOT_INFO = 1;
+        }
+        /* student in bottom right corner */
+        else if(sprite == student2_posx)
+        {
+            sprite_clean();
+            LETTER_COUNT = 0;
+            hide_sprites();
+            print("student:\0", 24, 32);
+            print("i don't\0", 24, 48);
+            print("want to\0", 24, 64);
+            print("die in\0", 24, 80);
+            print("kamchatka\0", 24, 96);
+            print("...\0",24,112);
+        } 
+        else if(sprite == miner_posx)
+        {
+            sprite_clean();
+            LETTER_COUNT = 0;
+            hide_sprites();
+            print("miner:\0", 24, 32);
+            print("damn\0", 24, 48);
+            print("asakawa!\0", 24, 64);
+            delay(1000);
+            sprite_clean();
+            LETTER_COUNT = 0;
+            print("miner:\0", 24, 32);
+            print("i should\0", 24, 48);
+            print("have just\0", 24, 64);
+            print("stayed in\0", 24, 80);
+            print("the mines!\0", 24, 96);
+        }
+        talking = 1;
+        while(talking)
+        {
+
+            if(joypad() & J_A)
+            {
+                shit_pot_setup();
+                shit_pot_sprites();
+                hero_posx = old_hero_posx;
+                move_sprite(0, hero_posx, hero_posy);
+                move_sprite(1, hero_posx+sprite_width, hero_posy);
+                hero_posy = old_hero_posy;
+                talking = 0;
+            }
+
+        }
+    }
 }
 
 /**
@@ -383,303 +555,12 @@ void hero_walk(void)
         delay(50);
         ++hero_posx;
     }
-    /*if(check_items())
-    {*/
-        /* set things back to normal */
-      /*  DISPLAY_OFF;
-        set_bkg_data(0,4,blank_screen_tiles);
-        set_bkg_tiles(0,0,20,18,shit_pot);
-        hide_sprites();
-        sprite_clean();
-        LETTER_COUNT = 0;
-        SPRITES_8x16;
-        set_sprite_data(0, 4, hero_walk_down);
-        set_sprite_tile(0, 0);
-        set_sprite_tile(1, 2);*/
-        /* make sure sprites aren't flipped */
-        /*set_sprite_prop(0, S_FLIPX&0x0);
-        set_sprite_prop(1, S_FLIPX&0x0);
-        move_sprite(0, hero_posx, hero_posy);
-        move_sprite(1, hero_posx+sprite_width, hero_posy);
-        DISPLAY_ON;
-    }*/
-}
-
-void hero_scroll_walk(void)
-{
-    /**
-     * need: hero_walk down
-     */
-    if(joypad() & J_UP)
-    {
-        set_sprite_data(0, 4, hero_walk_up);
-        set_sprite_tile(0, 0);
-        set_sprite_tile(1, 2);
-        /* make sure sprites aren't flipped */
-        set_sprite_prop(0, S_FLIPX&0x0);
-        set_sprite_prop(1, S_FLIPX&0x0);
-        move_sprite(0, hero_posx, hero_posy);
-        move_sprite(1, hero_posx+sprite_width, hero_posy);
-        if((hero_posx+screen_x+hero_posy)&0x1)
-        {
-            set_sprite_prop(0, S_FLIPX);
-            set_sprite_prop(1, S_FLIPX);
-            move_sprite(0, hero_posx+sprite_width, hero_posy);
-            move_sprite(1, hero_posx, hero_posy);
-        }
-        else
-        {
-            set_sprite_prop(0, S_FLIPX&0x0);
-            set_sprite_prop(1, S_FLIPX&0x0);
-            move_sprite(0, hero_posx, hero_posy);
-            move_sprite(1, hero_posx+sprite_width, hero_posy);
-        }
-        left = 0;
-        delay(50);
-        --hero_posy;
-
-    }
-    if(joypad() & J_DOWN)
-    {
-        set_sprite_data(0, 4, hero_walk_down);
-        set_sprite_tile(0, 0);
-        set_sprite_tile(1, 2);
-        /* make sure sprites aren't flipped */
-        set_sprite_prop(0, S_FLIPX&0x0);
-        set_sprite_prop(1, S_FLIPX&0x0);
-        move_sprite(0, hero_posx, hero_posy);
-        move_sprite(1, hero_posx+sprite_width, hero_posy);
-        if((hero_posx+screen_x+hero_posy)&0x1)
-        {
-            set_sprite_prop(0, S_FLIPX);
-            set_sprite_prop(1, S_FLIPX);
-            move_sprite(0, hero_posx+sprite_width, hero_posy);
-            move_sprite(1, hero_posx, hero_posy);
-        }
-        else
-        {
-            set_sprite_prop(0, S_FLIPX&0x0);
-            set_sprite_prop(1, S_FLIPY&0x0);
-            move_sprite(0, hero_posx, hero_posy);
-            move_sprite(1, hero_posx+sprite_width, hero_posy);
-        }
-        left = 0;
-        delay(50);
-        ++hero_posy;
-    }
-    if(joypad() & J_LEFT)
-    {
-        set_sprite_data(0, 8, hero_walk_sideways);
-        if(!left)
-        {
-            set_sprite_prop(0, S_FLIPX);
-            set_sprite_prop(1, S_FLIPX);
-        }
-        if((hero_posx+screen_x+hero_posy)&0x1)
-        {
-            set_sprite_tile(0, 4);
-            set_sprite_tile(1, 6);
-        }
-        else
-        {
-            set_sprite_tile(0, 0);
-            set_sprite_tile(1, 2);
-        }
-        move_sprite(0, hero_posx+sprite_width, hero_posy);
-        move_sprite(1, hero_posx, hero_posy);
-
-        left = 1;
-        delay(50);
-        if((hero_posx > 72 || screen_x <= 0) && 
-                hero_posx+screen_x >= 16)
-            --hero_posx;
-        if(hero_posx <= 72 && screen_x > 0)
-            move_bkg(--screen_x, 0);
-    }
-    if(joypad() & J_RIGHT)
-    {
-        set_sprite_data(0, 8, hero_walk_sideways);
-        /* make sure the sprites aren't flipped */
-        set_sprite_prop(0, S_FLIPX&0x0);
-        set_sprite_prop(1, S_FLIPX&0x0);
-        if((hero_posx+screen_x+hero_posy)&0x1)
-        {
-            set_sprite_tile(0, 4);
-            set_sprite_tile(1, 6);
-        }
-        else
-        {
-            set_sprite_tile(0, 0);
-            set_sprite_tile(1, 2);
-        }
-        move_sprite(0, hero_posx, hero_posy);
-        move_sprite(1, hero_posx+sprite_width, hero_posy);
-
-        left = 0;
-        delay(50);
-        if((hero_posx < 86 || screen_x+160 >= 255) && 
-                hero_posx+sprite_width+screen_x <= 250)
-            ++hero_posx;
-        if(hero_posx >= 86 && (screen_x+160) < 255)
-            move_bkg(++screen_x, 0);
-    }
-    /*if(check_items())
-    {*/
-        /* set things back to normal */
-      /*  DISPLAY_OFF;
-        set_bkg_data(0,4,blank_screen_tiles);
-        set_bkg_tiles(0,0,32,18,deck);
-        move_bkg(screen_x, 0);
-        hide_sprites();
-        sprite_clean();
-        LETTER_COUNT = 0;
-        SPRITES_8x16;
-        set_sprite_data(0, 4, hero_walk_down);
-        set_sprite_tile(0, 0);
-        set_sprite_tile(1, 2);*/
-        /* make sure sprites aren't flipped */
-        /*set_sprite_prop(0, S_FLIPX&0x0);
-        set_sprite_prop(1, S_FLIPX&0x0);
-        move_sprite(0, hero_posx, hero_posy);
-        move_sprite(1, hero_posx+sprite_width, hero_posy);
-        DISPLAY_ON;
-    }*/
-}
-
-void deck_enter(void)
-{
-    sprite_clean();
-    LETTER_COUNT = 0;
-    hide_sprites();
-    DISPLAY_OFF;
-    set_bkg_data(0, 4, blank_screen_tiles);        
-    set_bkg_tiles(0, 0, 32, 18, deck);
-    move_bkg(screen_x, 0);
-    HIDE_SPRITES;
-
-    hero_posx = 140;
-    hero_posy = 128;
-    SPRITES_8x16;
-    set_sprite_data(0, 8, hero_walk_sideways);
-    set_sprite_tile(0, 2);
-    set_sprite_tile(1, 0);
-    set_sprite_prop(0, S_FLIPX);
-    set_sprite_prop(1, S_FLIPX);
-    move_sprite(0, hero_posx, hero_posy); 
-    move_sprite(1, hero_posx+sprite_width, hero_posy);
-    SHOW_SPRITES;
-    DISPLAY_ON;
-}
-
-void deck_enter_intro_scene(void)
-{
-    /* make sure the hero is facing left */
-    set_sprite_data(0, 8, hero_walk_sideways);
-    set_sprite_tile(0,2);
-    set_sprite_tile(1,0);
-    set_sprite_prop(0, S_FLIPX);
-    set_sprite_prop(1, S_FLIPX);
-    move_sprite(0, hero_posx, hero_posy);
-    move_sprite(1, hero_posx+sprite_width, hero_posy);
-
-    fisherman_posx = 8;
-    fisherman_posy = 128;
-    set_sprite_data(8, 8, fisherman_walk_side);
-
-    /* init fisherman */
-    for(i = 2; i < 7; i+=2)
-    {
-        set_sprite_tile(i, 10);
-        set_sprite_tile(i+1, 8);
-        set_sprite_prop(i, S_FLIPX);
-        set_sprite_prop(i+1, S_FLIPX);
-        move_sprite(i, fisherman_posx, fisherman_posy);
-        move_sprite(i+1, fisherman_posx+sprite_width, fisherman_posy);
-        fisherman_posx += 20;
-    }
-    /* have to reset the fisherman's position */
-    fisherman_posx -= 60;
-    delay(500);
-    /* fisherman walk in */
-    while(fisherman_posx+40 <= 120)
-    {
-        delay(50);
-        for(i = 2; i < 7; i+=2)
-        {
-            set_sprite_tile(i, 10+(4*(fisherman_posx&0x1)));
-            set_sprite_tile(i+1, 8+(4*(fisherman_posx&0x1)));
-        }
-        ++fisherman_posx;
-        move_sprite(2, fisherman_posx, fisherman_posy);
-        move_sprite(3, fisherman_posx+sprite_width, fisherman_posy);
-        move_sprite(4, fisherman_posx+20, fisherman_posy);
-        move_sprite(5, fisherman_posx+20+sprite_width, fisherman_posy);
-        move_sprite(6, fisherman_posx+40, fisherman_posy);
-        move_sprite(7, fisherman_posx+40+sprite_width, fisherman_posy);
-    }
-    DISPLAY_OFF;
-    bkg_clean();
-    move_bkg(0, 0);
-    DISPLAY_ON;
-    sprite_clean();
-    LETTER_COUNT = 0;
-    print("fishermen:\0", 24, 32);
-    print("follow us!\0", 24, 48);
-    talking = 1;
-    while(talking)
-    {
-        if(joypad() & J_A)
-            talking = 0;
-    }
-    DISPLAY_OFF;
-    hide_sprites();
-    sprite_clean();
-    LETTER_COUNT = 0;
-    set_bkg_data(0, 4, blank_screen_tiles);        
-    set_bkg_tiles(0, 0, 32, 18, deck);
-    move_bkg(95, 0);
-    DISPLAY_ON;
-
-    SPRITES_8x16;
-    set_sprite_data(0, 8, hero_walk_sideways);
-    set_sprite_tile(0,2);
-    set_sprite_tile(1,0);
-    set_sprite_prop(0, S_FLIPX);
-    set_sprite_prop(1, S_FLIPX);
-    move_sprite(0, hero_posx, hero_posy);
-    move_sprite(1, hero_posx+sprite_width, hero_posy);
-    set_sprite_data(8, 8, fisherman_walk_side);
-    /* init fisherman */
-    for(i = 2; i < 7; i+=2)
-    {
-        set_sprite_tile(i, 8);
-        set_sprite_tile(i+1, 10);
-        move_sprite(i, fisherman_posx, fisherman_posy);
-        move_sprite(i+1, fisherman_posx+sprite_width, fisherman_posy);
-        fisherman_posx-=20;
-    }
-    fisherman_posx += 60;
-    delay(500);
-    while(fisherman_posx+60 >= 16)
-    {
-        delay(50);
-        for(i = 2; i < 7; i+=2)
-        {
-            set_sprite_tile(i, 8+(4*(fisherman_posx&0x1)));
-            set_sprite_tile(i+1, 10+(4*(fisherman_posx&0x1)));
-        }
-        --fisherman_posx;
-        move_sprite(2, fisherman_posx, fisherman_posy);
-        move_sprite(3, fisherman_posx+sprite_width, fisherman_posy);
-        move_sprite(4, fisherman_posx-20, fisherman_posy);
-        move_sprite(5, fisherman_posx-20+sprite_width, fisherman_posy);
-        move_sprite(6, fisherman_posx-40, fisherman_posy);
-        move_sprite(7, fisherman_posx-40+sprite_width, fisherman_posy);
-    }
 }
 
 void asakawa_enters_deck(void)
 {
+    hero_posx = 80;
+    hero_posy = 116;
     sprite_clean();
     LETTER_COUNT = 0;
     hide_sprites();
@@ -696,7 +577,7 @@ void asakawa_enters_deck(void)
 
     fisherman_posx = 48;
     fisherman_posy = 128;
-    
+
     set_sprite_data(8, 8, fisherman_walk_side);
     for(i = 2; i < 7; i+=2)
     {

@@ -21,8 +21,8 @@ void crab_catch_ctrl(void)
     // delete this ITEMS thing later
     UWORD crab_num[4];
     ITEMS = 2;
-    CAN_RUN = 0;
     BATTLE_NUM = 1;
+    STATE = BATTLE_CHOICE;
     /**
      * 1. opening screen chooses between two types of crabs & anounces
      *    their coming

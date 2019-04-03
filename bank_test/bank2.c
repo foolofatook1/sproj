@@ -1,4 +1,5 @@
 #include "bank2.h"
+#include "text.h"
 
 void hello(void)
 {

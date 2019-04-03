@@ -7,10 +7,10 @@
 
 #endif
 
-#include "assets/chain_border_tiles.c"
-#include "assets/small_chain_border.c"
-#include "assets/font.c"
-#include "assets/chain_border.c"
+#include "assets/chain_border_tiles.h"
+#include "assets/small_chain_border.h"
+#include "assets/font.h"
+#include "assets/chain_border.h"
 
 
 extern void hello(void);

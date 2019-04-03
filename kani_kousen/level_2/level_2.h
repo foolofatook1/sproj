@@ -18,6 +18,10 @@
 
 #include "../assets/sprites/fisherman_walk_sideways.h"
 #include "../assets/sprites/fisherman_walk_up.h"
+#include "../assets/sprites/fisherman_front_idle.h"
+
+#include "../assets/sprites/miner_front_idle.h"
+#include "../assets/sprites/student_front_idle.h"
 
 #include "../assets/sprites/asakawa_walk_sideways.h"
 
@@ -33,15 +37,15 @@ void l2_scene_1_fisherman_enter(void);
 void fisherman_walk_away(void);
 
 void hero_walk(void);
-void hero_scroll_walk(void);
 
-void deck_enter(void);
-void deck_enter_intro_scene(void);
 void asakawa_enters_deck(void);
 void asakawa_before_work(void);
 void asakawa_after_work(void);
 
 void shit_pot_setup(void);
+void shit_pot_sprites(void);
+UINT8 sprite_collide_shit_pot(UINT8*);
+void conv_check(void);
 void pos_check_shit_pot(void);
 void pos_check_deck(void);
 
@@ -49,7 +53,9 @@ extern UINT8 talking;
 extern UINT8 moving;
 extern UINT8 left;
 
-extern UINT8 screen_x;
+extern UINT8 *sprite_positions;
 
+extern UINT8 screen_x;
+extern UINT8 GOT_INFO;
 
 #endif /* LEVEL_2_INCLUDE */
