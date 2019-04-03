@@ -318,67 +318,67 @@ void choice_handler(UINT8 arrow_y)
 
 void hero_fight(void)//UINT8 *enemy_hp)
 {
-        
-        if(choice == PUNCH || choice == ITEM)
+
+    if(choice == PUNCH || choice == ITEM)
+    {
+        /* figher chooses punch and hits */
+        hero_fight_anim();
+        for(a = 0; a < 6; ++a)
         {
-            /* figher chooses punch and hits */
-            hero_fight_anim();
-            for(a = 0; a < 6; ++a)
-            {
-                delay(100);
-                DISPLAY_OFF;
-                delay(100);
-                DISPLAY_ON;
-            }
+            delay(100);
+            DISPLAY_OFF;
+            delay(100);
+            DISPLAY_ON;
+        }
+        sprite_clean();
+        LETTER_COUNT = 0;
+        if(choice == PUNCH && (ENEMY == 1 || ENEMY == 2))
+        {
+            print(" no use\0", 56, 56);
+            print("punching\0", 56, 72);
+            print(" a crab!\0", 56, 88);
+            delay(500);
+        }
+        if(choice == PUNCH && ENEMY == 0 && hero_acc >= 3)
+        {
+            print("hit!\0", 72, 80);
+            delay(500);
+        }
+        if((choice == ITEM) && (CHOSEN_ITEM == NET) && 
+                (hero_acc > 0))
+        {
+            print("caught!\0", 72, 80);
+            CRAB_CAUGHT = 1;
+            delay(500);
+        }
+        if((choice == ITEM) && (CHOSEN_ITEM == CLUB) && 
+                (CRAB_CAUGHT) && (hero_acc > 0))
+        {
+            print("crushed!\0", 72, 80);
+            delay(500);
+        }
+        if((choice == ITEM) && (CHOSEN_ITEM == CLUB) && 
+                (!CRAB_CAUGHT))
+        {
+            print("you need\0", 72, 64);
+            print("to catch\0", 72, 80);
+            print("the crab!\0", 72, 96);
+            delay(500);
+        }
+        /* fighter chooses punch and misses */
+        else if(((choice == PUNCH) && (hero_acc < 3)) || 
+                ((choice == ITEM) && (hero_acc == 0)))
+        {
             sprite_clean();
             LETTER_COUNT = 0;
-            if(choice == PUNCH && (ENEMY == 1 || ENEMY == 2))
-            {
-                print(" no use\0", 56, 56);
-                print("punching\0", 56, 72);
-                print(" a crab!\0", 56, 88);
-                delay(500);
-            }
-            if(choice == PUNCH && ENEMY == 0 && hero_acc >= 3)
-            {
-                print("hit!\0", 72, 80);
-                delay(500);
-            }
-            if((choice == ITEM) && (CHOSEN_ITEM == NET) && 
-                    (hero_acc > 0))
-            {
-                print("caught!\0", 72, 80);
-                CRAB_CAUGHT = 1;
-                delay(500);
-            }
-            if((choice == ITEM) && (CHOSEN_ITEM == CLUB) && 
-                    (CRAB_CAUGHT) && (hero_acc > 0))
-            {
-                print("crushed!\0", 72, 80);
-                delay(500);
-            }
-            if((choice == ITEM) && (CHOSEN_ITEM == CLUB) && 
-                    (!CRAB_CAUGHT))
-            {
-                print("you need\0", 72, 64);
-                print("to catch\0", 72, 80);
-                print("the crab!\0", 72, 96);
-                delay(500);
-            }
-            /* fighter chooses punch and misses */
-            else if(((choice == PUNCH) && (hero_acc < 3)) || 
-                    ((choice == ITEM) && (hero_acc == 0)))
-            {
-                sprite_clean();
-                LETTER_COUNT = 0;
-                print("miss!", 64, 80);
-                delay(500);
-                clear_screen();
-            }
+            print("miss!", 64, 80);
+            delay(500);
+            clear_screen();
         }
-        /* fighter defends */
-        if(choice == DEFEND)
-            hero_defend_anim();
+    }
+    /* fighter defends */
+    if(choice == DEFEND)
+        hero_defend_anim();
 }
 
 void hero_defend_anim(void) 
@@ -464,30 +464,30 @@ void hero_fight_anim(void)
 
 void enemy_fight_anim(void)
 {
-        if(ENEMY == 0)
-            sprite_setup(8, hero_back_idle, 8, asakawa_front_idle);
-        if(ENEMY == 1)
-            sprite_setup(8, hero_back_idle, 8, norm_crab);
-        if(ENEMY == 2)
-            sprite_setup(8, hero_back_idle, 8, king_crab);
-        delay(300);
-        /* essentially hiding one sprite */
-        for(i = 0; i < 4; ++i)
-            move_sprite(i, 200, 200);
+    if(ENEMY == 0)
+        sprite_setup(8, hero_back_idle, 8, asakawa_front_idle);
+    if(ENEMY == 1)
+        sprite_setup(8, hero_back_idle, 8, norm_crab);
+    if(ENEMY == 2)
+        sprite_setup(8, hero_back_idle, 8, king_crab);
+    delay(300);
+    /* essentially hiding one sprite */
+    for(i = 0; i < 4; ++i)
+        move_sprite(i, 200, 200);
 
-        delay(300);
-        move_sprite(0, 77, 52);
-        move_sprite(1, 77, 60);
-        move_sprite(2, 84, 52);
-        move_sprite(3, 84, 60);
-        for(a = 0; a < 21; a+=3)
-        {
-            delay(100);
-            set_sprite_tile(0, (0+(a&0x4)));
-            set_sprite_tile(1, (1+(a&0x4)));
-            set_sprite_tile(2, (2+(a&0x4)));
-            set_sprite_tile(3, (3+(a&0x4)));
-        }
+    delay(300);
+    move_sprite(0, 77, 52);
+    move_sprite(1, 77, 60);
+    move_sprite(2, 84, 52);
+    move_sprite(3, 84, 60);
+    for(a = 0; a < 21; a+=3)
+    {
+        delay(100);
+        set_sprite_tile(0, (0+(a&0x4)));
+        set_sprite_tile(1, (1+(a&0x4)));
+        set_sprite_tile(2, (2+(a&0x4)));
+        set_sprite_tile(3, (3+(a&0x4)));
+    }
 }
 
 void clear_screen(void) 
@@ -733,11 +733,14 @@ void lower_hp(UINT8 *hit, UINT8 defended, UINT8 *enemy_hp)
     }
     else
     {
-        for(i = (*hit); i > 0; --i)
+        if(ENEMY == 0 || CRAB_CAUGHT)
         {
-            --(*enemy_hp);
-            if((*enemy_hp) == 0)
-                STATE = BATTLE_WIN;
+            for(i = (*hit); i > 0; --i)
+            {
+                --(*enemy_hp);
+                if((*enemy_hp) == 0)
+                    STATE = BATTLE_WIN;
+            }
         }
     }
 }
@@ -764,22 +767,22 @@ void enemy_damage(UINT8 *enemy_hp)
     }
 
     /*if(npc_act == 0 && choice == ITEM && CHOSEN_ITEM == CLUB)
-    {
-        for(i = ((CLUB)-DEFEND); i > 0; --i)
-        {
-            --(*enemy_hp);
-            if((*enemy_hp) == 0)
-                STATE = BATTLE_WIN;
-        }
-    }
-    if(
-    else
-    {
-        for(i = (*damage_amnt); i > 0; --i)
-            --(*enemy_hp);
-        if((*enemy_hp) == 0)
-            STATE = BATTLE_WIN;
-    }*/
+      {
+      for(i = ((CLUB)-DEFEND); i > 0; --i)
+      {
+      --(*enemy_hp);
+      if((*enemy_hp) == 0)
+      STATE = BATTLE_WIN;
+      }
+      }
+      if(
+      else
+      {
+      for(i = (*damage_amnt); i > 0; --i)
+      --(*enemy_hp);
+      if((*enemy_hp) == 0)
+      STATE = BATTLE_WIN;
+      }*/
 }
 
 /**
@@ -830,13 +833,13 @@ void show_fighter_stats(void)
      * try cleaning sprites and setting LETTER_COUNT to 0. 
      */
     /*itoa(CRAB_HP, e_hp);
-    battle_print(e_hp, 96, 104);
-    if(ENEMY == 0)
-        battle_print("100\0", 122, 104);
-    if(crab == 0)
-        battle_print("/5\0", 122, 104);
-    if(crab == 1)
-        battle_print("/10\0", 122, 104);*/
+      battle_print(e_hp, 96, 104);
+      if(ENEMY == 0)
+      battle_print("100\0", 122, 104);
+      if(crab == 0)
+      battle_print("/5\0", 122, 104);
+      if(crab == 1)
+      battle_print("/10\0", 122, 104);*/
 }
 
 void game_over_screen(void)

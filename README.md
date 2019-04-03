@@ -50,8 +50,8 @@ properly Download it, and play games on it.
 
 ### Quick TODO-List: ###
 * begin adding texture to "shit-pot" background
-* jump into working mini-game
-	* when beaten storm comes
-* if you talk to the right person, you hear that a ship has gone missing
-* go to bed
+* Add Lenin or Marx quote. Suggested readings:
+	* Chapter I of "Capital"
+	* Imperialism?
+	* "Wage, Labor and Capital" <-- this is probably best
 * wake up, and level 3 starts

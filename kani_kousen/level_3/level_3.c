@@ -1,5 +1,6 @@
 #include "level_3.h"
 #include "../text/text.h"
+#include "../battle/battle.h"
 
 void level_3_ctrl(void)
 {

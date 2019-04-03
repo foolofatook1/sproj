@@ -1,9 +1,9 @@
                               1 ;--------------------------------------------------------
                               2 ; File Created by SDCC : FreeWare ANSI-C Compiler
-                              3 ; Version 2.3.1 Wed Apr  3 00:24:51 2019
+                              3 ; Version 2.3.1 Wed Apr  3 14:05:13 2019
                               4 
                               5 ;--------------------------------------------------------
-                              6 	.module lcc4080
+                              6 	.module lcc230170
                               7 	
                               8 ;--------------------------------------------------------
                               9 ; Public variables in this module
@@ -50,7 +50,7 @@
                              50 ; code
                              51 ;--------------------------------------------------------
                              52 	.area _CODE
-                             53 ;	level_3/level_3.c 4
+                             53 ;	level_3/level_3.c 5
                              54 ;	genLabel
                              55 ;	genFunction
                              56 ;	---------------------------------
@@ -59,76 +59,90 @@
    0000                      59 ___level_3_ctrl_start:
    0000                      60 _level_3_ctrl:
                              61 	
-                             62 ;	level_3/level_3.c 6
+                             62 ;	level_3/level_3.c 7
                              63 ;	genCall
                              64 ; _saveRegsForCall: sendSetSize: 0 deInUse: 0 bcInUse: 0 deSending: 0
-   0000 CD 00 00             65 	call	_sprite_clean
-                             66 ;	level_3/level_3.c 7
-                             67 ;	genAssign
-                             68 ;	AOP_HL for _LETTER_COUNT
-   0003 21 00 00             69 	ld	hl,#_LETTER_COUNT
-   0006 36 00                70 	ld	(hl),#0x00
-                             71 ;	level_3/level_3.c 8
-                             72 ;	genIpush
-                             73 ; _saveRegsForCall: sendSetSize: 0 deInUse: 0 bcInUse: 0 deSending: 0
-   0008 21 18 20             74 	ld	hl,#0x2018
-   000B E5                   75 	push	hl
-                             76 ;	genIpush
-   000C 21 30 00             77 	ld	hl,#__str_0
-   000F E5                   78 	push	hl
-                             79 ;	genCall
-   0010 CD 00 00             80 	call	_print
-   0013 E8 04                81 	lda	sp,4(sp)
-                             82 ;	level_3/level_3.c 9
-                             83 ;	genIpush
-                             84 ; _saveRegsForCall: sendSetSize: 0 deInUse: 0 bcInUse: 0 deSending: 0
-   0015 21 18 30             85 	ld	hl,#0x3018
-   0018 E5                   86 	push	hl
-                             87 ;	genIpush
-   0019 21 37 00             88 	ld	hl,#__str_1
-   001C E5                   89 	push	hl
-                             90 ;	genCall
-   001D CD 00 00             91 	call	_print
-   0020 E8 04                92 	lda	sp,4(sp)
-                             93 ;	level_3/level_3.c 10
-                             94 ;	genIpush
-                             95 ; _saveRegsForCall: sendSetSize: 0 deInUse: 0 bcInUse: 0 deSending: 0
-   0022 21 18 40             96 	ld	hl,#0x4018
-   0025 E5                   97 	push	hl
-                             98 ;	genIpush
-   0026 21 41 00             99 	ld	hl,#__str_2
-   0029 E5                  100 	push	hl
-                            101 ;	genCall
-   002A CD 00 00            102 	call	_print
-   002D E8 04               103 	lda	sp,4(sp)
-                            104 ;	genLabel
-   002F                     105 00101$:
-                            106 ;	genEndFunction
-                            107 	
-   002F C9                  108 	ret
-   0030                     109 ___level_3_ctrl_end:
-   0030                     110 __str_0:
-   0030 68 65 6C 6C 6F 21   111 	.ascii "hello!"
-   0036 00                  112 	.db 0x00
-   0037                     113 __str_1:
-   0037 79 6F 75 27 72 65   114 	.ascii "you're in"
+   0000 CD 00 00             65 	call	_clear_screen
+                             66 ;	level_3/level_3.c 8
+                             67 ;	genIpush
+                             68 ; _saveRegsForCall: sendSetSize: 0 deInUse: 0 bcInUse: 0 deSending: 0
+   0003 21 F4 01             69 	ld	hl,#0x01F4
+   0006 E5                   70 	push	hl
+                             71 ;	genCall
+   0007 CD 00 00             72 	call	_delay
+   000A E8 02                73 	lda	sp,2(sp)
+                             74 ;	level_3/level_3.c 9
+                             75 ;	genCall
+                             76 ; _saveRegsForCall: sendSetSize: 0 deInUse: 0 bcInUse: 0 deSending: 0
+   000C CD 00 00             77 	call	_sprite_clean
+                             78 ;	level_3/level_3.c 10
+                             79 ;	genAssign
+                             80 ;	AOP_HL for _LETTER_COUNT
+   000F 21 00 00             81 	ld	hl,#_LETTER_COUNT
+   0012 36 00                82 	ld	(hl),#0x00
+                             83 ;	level_3/level_3.c 11
+                             84 ;	genIpush
+                             85 ; _saveRegsForCall: sendSetSize: 0 deInUse: 0 bcInUse: 0 deSending: 0
+   0014 21 18 20             86 	ld	hl,#0x2018
+   0017 E5                   87 	push	hl
+                             88 ;	genIpush
+   0018 21 3C 00             89 	ld	hl,#__str_0
+   001B E5                   90 	push	hl
+                             91 ;	genCall
+   001C CD 00 00             92 	call	_print
+   001F E8 04                93 	lda	sp,4(sp)
+                             94 ;	level_3/level_3.c 12
+                             95 ;	genIpush
+                             96 ; _saveRegsForCall: sendSetSize: 0 deInUse: 0 bcInUse: 0 deSending: 0
+   0021 21 18 30             97 	ld	hl,#0x3018
+   0024 E5                   98 	push	hl
+                             99 ;	genIpush
+   0025 21 43 00            100 	ld	hl,#__str_1
+   0028 E5                  101 	push	hl
+                            102 ;	genCall
+   0029 CD 00 00            103 	call	_print
+   002C E8 04               104 	lda	sp,4(sp)
+                            105 ;	level_3/level_3.c 13
+                            106 ;	genIpush
+                            107 ; _saveRegsForCall: sendSetSize: 0 deInUse: 0 bcInUse: 0 deSending: 0
+   002E 21 18 40            108 	ld	hl,#0x4018
+   0031 E5                  109 	push	hl
+                            110 ;	genIpush
+   0032 21 4D 00            111 	ld	hl,#__str_2
+   0035 E5                  112 	push	hl
+                            113 ;	genCall
+   0036 CD 00 00            114 	call	_print
+   0039 E8 04               115 	lda	sp,4(sp)
+                            116 ;	genLabel
+   003B                     117 00101$:
+                            118 ;	genEndFunction
+                            119 	
+   003B C9                  120 	ret
+   003C                     121 ___level_3_ctrl_end:
+   003C                     122 __str_0:
+   003C 68 65 6C 6C 6F 21   123 	.ascii "hello!"
+   0042 00                  124 	.db 0x00
+   0043                     125 __str_1:
+   0043 79 6F 75 27 72 65   126 	.ascii "you're in"
         20 69 6E
-   0040 00                  115 	.db 0x00
-   0041                     116 __str_2:
-   0041 6C 65 76 65 6C 20   117 	.ascii "level 3!"
+   004C 00                  127 	.db 0x00
+   004D                     128 __str_2:
+   004D 6C 65 76 65 6C 20   129 	.ascii "level 3!"
         33 21
-   0049 00                  118 	.db 0x00
-                            119 	.area _CODE
+   0055 00                  130 	.db 0x00
+                            131 	.area _CODE
 ASxxxx Assembler V01.75  (GameBoy Z80-like CPU), page 1.
 
 Symbol Table
 
     _LETTER_COUNT                      **** GX
-  0 ___level_3_ctrl_end                0030 R
+  0 ___level_3_ctrl_end                003C R
   0 ___level_3_ctrl_start              0000 R
-  0 __str_0                            0030 R
-  0 __str_1                            0037 R
-  0 __str_2                            0041 R
+  0 __str_0                            003C R
+  0 __str_1                            0043 R
+  0 __str_2                            004D R
+    _clear_screen                      **** GX
+    _delay                             **** GX
   0 _level_3_ctrl                      0000 GR
     _print                             **** GX
     _sprite_clean                      **** GX
@@ -137,7 +151,7 @@ Symbol Table
 
 Area Table
 
-   0 _CODE                              size   4A   flags 0
+   0 _CODE                              size   56   flags 0
    1 _DATA                              size    0   flags 0
    2 _OVERLAY                           size    0   flags 0
    3 _ISEG                              size    0   flags 0

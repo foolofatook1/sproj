@@ -40,7 +40,7 @@ void crab_catch_ctrl(void)
         crab_catch_setup();
         delay(500);
         battle_menu();
-        while(STATE != DEAD && STATE != BATTLE_WIN)// && !ESCAPED)
+        while(STATE != DEAD && STATE != BATTLE_WIN)
         {
             wait_vbl_done();
             battle_toggle_ctrl();
@@ -49,7 +49,7 @@ void crab_catch_ctrl(void)
                 choice_handler(arrow_y);
                 fight(&HERO_HP, &CRAB_HP);
                 delay(400);
-                if(STATE != DEAD && STATE != BATTLE_WIN)// && !ESCAPED)
+                if(STATE != DEAD && STATE != BATTLE_WIN)
                 {
                     DISPLAY_OFF;
                     battle_menu();

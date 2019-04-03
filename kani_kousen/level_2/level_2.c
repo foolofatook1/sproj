@@ -30,7 +30,7 @@ UINT8 screen_x = 95;
 void level_2_ctrl(void)
 {
     wait_vbl_done();
-/*    level_2_bkg_start();
+    /*level_2_bkg_start();
 
     l2_scene_1();
     while(talking > 0)
@@ -44,25 +44,30 @@ void level_2_ctrl(void)
         wait_vbl_done();
         hero_walk(); 
         pos_check_shit_pot();
-    }
-    asakawa_enters_deck();
-    asakawa_before_work();
-    crab_catch_ctrl();
-    asakawa_enters_deck();
-    asakawa_after_work();
-    delay(500);*/
-    DISPLAY_OFF;
-    shit_pot_setup();
-    shit_pot_sprites();
-    delay(500);
-    DISPLAY_ON;
-    moving = 1;
-    while(moving && option != LEVEL_3)
-    {
-        hero_walk();
-        pos_check_shit_pot();
-        conv_check();
-    }
+    }*/
+    /*while(option != LEVEL_3 && option != GAME_OVER)
+    {*/
+        asakawa_enters_deck();
+        asakawa_before_work();
+        crab_catch_ctrl();
+        /*if(STATE == DEAD || option == GAME_OVER)
+            break;*/
+        asakawa_enters_deck();
+        asakawa_after_work();
+        delay(500);
+        DISPLAY_OFF;
+        shit_pot_setup();
+        shit_pot_sprites();
+        delay(500);
+        DISPLAY_ON;
+        moving = 1;
+        while(moving && option != LEVEL_3)
+        {
+            hero_walk();
+            pos_check_shit_pot();
+            conv_check();
+        }
+    //}
 }
 
 void level_2_bkg_start(void)
@@ -243,7 +248,7 @@ void conv_check(void)
             print("miner:\0", 24, 32);
             print("i should\0", 24, 48);
             print("have just\0", 24, 64);
-            print("kept\0", 24, 80);
+            print("stayed\0", 24, 80);
             print("mining!\0", 24, 96);
         }
         else if(sprite == bed_posx)
