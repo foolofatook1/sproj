@@ -371,7 +371,7 @@ void hero_fight(void)//UINT8 *enemy_hp)
         {
             sprite_clean();
             LETTER_COUNT = 0;
-            print("miss!", 64, 80);
+            print("you miss!", 64, 80);
             delay(500);
             clear_screen();
         }
@@ -626,7 +626,7 @@ void fight_config(void)
     /* enemies accuracy */
     npc_acc = rand()%5;
     /* hero's accuracy */
-    hero_acc = rand()%5;
+    hero_acc = rand()%10;
     /* enemies action */
     first_fighter = rand()%5;
 }

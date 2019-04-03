@@ -6,6 +6,7 @@
 #include "../text/text.h"
 #include "../battle/battle.h"
 #include "../start_up/start_up.h"
+#include "crab_catch.h"
 
 /* save this for later when checking collisions with sprites */
 UINT8 sprite_positions[] = {
@@ -45,13 +46,11 @@ void level_2_ctrl(void)
         hero_walk(); 
         pos_check_shit_pot();
     }*/
-    /*while(option != LEVEL_3 && option != GAME_OVER)
-    {*/
+    while(option != LEVEL_3 && option != GAME_OVER)
+    {
         asakawa_enters_deck();
         asakawa_before_work();
         crab_catch_ctrl();
-        /*if(STATE == DEAD || option == GAME_OVER)
-            break;*/
         asakawa_enters_deck();
         asakawa_after_work();
         delay(500);
@@ -61,13 +60,18 @@ void level_2_ctrl(void)
         delay(500);
         DISPLAY_ON;
         moving = 1;
-        while(moving && option != LEVEL_3)
+        if(option != LEVEL_3)
         {
-            hero_walk();
-            pos_check_shit_pot();
-            conv_check();
+            while(moving && option != LEVEL_3)
+            {
+                hero_walk();
+                pos_check_shit_pot();
+                if(conv_check())
+                    break;
+            }
         }
-    //}
+        caught_crabs = 0;
+    }
 }
 
 void level_2_bkg_start(void)
@@ -178,7 +182,7 @@ UINT8 sprite_collide_shit_pot(UINT8 *sprite_pos)
     return 0;
 }
 
-void conv_check(void)
+UINT8 conv_check(void)
 {
     UINT8 sprite;
     UINT8 old_hero_posx;
@@ -275,7 +279,10 @@ void conv_check(void)
             for(i = 0; i < LETTER_COUNT; ++i)
                 set_sprite_prop(i, 1);
             if(GOT_INFO)
+            {
                 option = LEVEL_3;
+                return 1;
+            }
         }
         talking = 1;
         while(talking)
@@ -294,6 +301,7 @@ void conv_check(void)
 
         }
     }
+    return 0;
 }
 
 /**

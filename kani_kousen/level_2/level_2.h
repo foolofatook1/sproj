@@ -46,7 +46,7 @@ void asakawa_after_work(void);
 void shit_pot_setup(void);
 void shit_pot_sprites(void);
 UINT8 sprite_collide_shit_pot(UINT8*);
-void conv_check(void);
+UINT8 conv_check(void);
 void pos_check_shit_pot(void);
 void pos_check_deck(void);
 
