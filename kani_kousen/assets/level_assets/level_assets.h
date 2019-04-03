@@ -23,5 +23,7 @@ extern UINT8 student2_posx;
 extern UINT8 student2_posy;
 extern UINT8 asakawa_posx;
 extern UINT8 asakawa_posy;
+extern UINT8 bed_posx;
+extern UINT8 bed_posy;
 
 #endif /* LEVEL_ASSETS */

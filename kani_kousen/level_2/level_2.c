@@ -5,6 +5,7 @@
 #include "../assets/level_assets/level_assets.h"
 #include "../text/text.h"
 #include "../battle/battle.h"
+#include "../start_up/start_up.h"
 
 /* save this for later when checking collisions with sprites */
 UINT8 sprite_positions[] = {
@@ -15,7 +16,9 @@ UINT8 sprite_positions[] = {
     148,
     124,
     132,
-    64
+    64,
+    16,
+    132
 };
 
 UINT8 GOT_INFO = 0;
@@ -27,7 +30,7 @@ UINT8 screen_x = 95;
 void level_2_ctrl(void)
 {
     wait_vbl_done();
-    level_2_bkg_start();
+/*    level_2_bkg_start();
 
     l2_scene_1();
     while(talking > 0)
@@ -47,14 +50,14 @@ void level_2_ctrl(void)
     crab_catch_ctrl();
     asakawa_enters_deck();
     asakawa_after_work();
-    delay(500);
+    delay(500);*/
     DISPLAY_OFF;
     shit_pot_setup();
     shit_pot_sprites();
     delay(500);
     DISPLAY_ON;
     moving = 1;
-    while(moving)
+    while(moving && option != LEVEL_3)
     {
         hero_walk();
         pos_check_shit_pot();
@@ -106,12 +109,15 @@ void shit_pot_sprites(void)
     student2_posy = 124;
     miner_posx = 132;
     miner_posy = 64;
+    bed_posx = 16;
+    bed_posy = 132;
 
     SPRITES_8x16;
     set_sprite_data(0, 8, hero_front_idle);
     set_sprite_data(8, 4, student_front_idle);
     set_sprite_data(12, 4, fisherman_front_idle);
     set_sprite_data(16, 4, miner_front_idle);
+    set_sprite_data(20, 4, bed);
     /* hero */
     set_sprite_tile(0, 0);
     set_sprite_tile(1, 2);
@@ -141,11 +147,16 @@ void shit_pot_sprites(void)
     set_sprite_prop(9, S_FLIPX);
     move_sprite(8, miner_posx, miner_posy);
     move_sprite(9, miner_posx+sprite_width, miner_posy);
+    /* bed */
+    set_sprite_tile(10, 20);
+    set_sprite_tile(11, 22);
+    move_sprite(10, bed_posx, bed_posy);
+    move_sprite(11, bed_posx+sprite_width, bed_posy);
 }
 
 UINT8 sprite_collide_shit_pot(UINT8 *sprite_pos)
 {
-    for(i = 0; i < 7; i+=2)
+    for(i = 0; i < 9; i+=2)
     {
         if((hero_posx < (sprite_pos[i]+sprite_width)) &&
                 ((hero_posx+sprite_width) > sprite_pos[i]) &&
@@ -202,8 +213,7 @@ void conv_check(void)
             print("should'nt\0", 24, 48);
             print("have made\0", 24, 64);
             print("them go\0", 24, 80);
-            print("out today\0", 24, 96);
-            print("...\0", 24, 112);
+            print("out...\0", 24, 96);
             GOT_INFO = 1;
         }
         /* student in bottom right corner */
@@ -233,8 +243,34 @@ void conv_check(void)
             print("miner:\0", 24, 32);
             print("i should\0", 24, 48);
             print("have just\0", 24, 64);
-            print("stayed in\0", 24, 80);
-            print("the mines!\0", 24, 96);
+            print("kept\0", 24, 80);
+            print("mining!\0", 24, 96);
+        }
+        else if(sprite == bed_posx)
+        {
+            sprite_clean();
+            LETTER_COUNT = 0;
+            hide_sprites();
+            set_bkg_data(0, 4, blank_screen_tiles);
+            set_bkg_tiles(0, 0, 20, 18, black_screen);
+            print("sleeping\0", 56, 56);
+            for(i = 0; i < LETTER_COUNT+3; ++i)
+                set_sprite_prop(i, 1);
+            delay(500);
+            print(".\0", 75, 72);
+            delay(500);
+            print(".\0", 84, 72);
+            delay(500);
+            print(".\0", 92, 72);
+            delay(800);
+            sprite_clean();
+            LETTER_COUNT = 0;
+            print("press a\0", 56, 88);
+            print("to wake\0", 56, 104);
+            for(i = 0; i < LETTER_COUNT; ++i)
+                set_sprite_prop(i, 1);
+            if(GOT_INFO)
+                option = LEVEL_3;
         }
         talking = 1;
         while(talking)
@@ -290,7 +326,6 @@ void l2_scene_1(void)
     sprite_clean();
     LETTER_COUNT = 0;
     hide_sprites();
-
 
     hero_posx = 80;
     hero_posy = 75;

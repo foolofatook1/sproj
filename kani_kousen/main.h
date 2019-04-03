@@ -8,6 +8,7 @@
 #include "assets/sprite_palette.h"
 #include "assets/bkg_palette.h"
 #include "assets/level_assets/level_assets.h"
+#include "level_3/level_3.h"
 
 #ifndef GBDK_INCLUDE
 #define GBDK_INCLUDE
@@ -30,6 +31,7 @@ extern UINT8 QUIT_POS;
 extern UINT8 NOTHING;
 extern UINT8 START;
 extern UINT8 LEVEL_2;
+extern UINT8 LEVEL_3;
 extern UINT8 NEW_GAME;
 extern UINT8 QUIT;
 extern UINT8 GAME_OVER;

@@ -18,6 +18,10 @@ void main(void)
     {
        level_2_ctrl();
     }
+    if(option == LEVEL_3)
+    {
+        level_3_ctrl();
+    }
     if(option == GAME_OVER)
     {
         /* for when you die in game */

@@ -24,6 +24,7 @@
 #include "../assets/sprites/student_front_idle.h"
 
 #include "../assets/sprites/asakawa_walk_sideways.h"
+#include "../assets/sprites/bed.h"
 
 #include "../assets/bkgs/deck.h"
 

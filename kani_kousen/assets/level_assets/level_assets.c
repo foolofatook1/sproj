@@ -18,6 +18,8 @@ UINT8 student2_posx = 200;
 UINT8 student2_posy = 200;
 UINT8 asakawa_posx = 200;
 UINT8 asakawa_posy = 200;
+UINT8 bed_posx = 200;
+UINT8 bed_posy = 200;
 
 //UINT8 sprite_positions[8];
 

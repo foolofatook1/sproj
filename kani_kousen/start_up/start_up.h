@@ -20,6 +20,7 @@ extern UINT8 GAME_OVER;
 extern UINT8 NOTHING;
 extern UINT8 START;
 extern UINT8 LEVEL_2;
+extern UINT8 LEVEL_3;
 extern UINT8 NEW_GAME;
 extern UINT8 QUIT;
 extern UINT8 GAME_OVER;
