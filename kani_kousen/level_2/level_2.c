@@ -9,7 +9,9 @@
 #include "crab_catch.h"
 
 /* save this for later when checking collisions with sprites */
-UINT8 sprite_positions[] = {
+UINT8 sprite_positions[12] = {
+    96, 
+    104,
     48,
     64,
     64,
@@ -31,7 +33,7 @@ UINT8 screen_x = 95;
 void level_2_ctrl(void)
 {
     wait_vbl_done();
-/*    level_2_bkg_start();
+    level_2_bkg_start();
     l2_scene_1();
     while(talking > 0)
     {
@@ -70,7 +72,7 @@ void level_2_ctrl(void)
             }
         }
         caught_crabs = 0;
-    }*/
+    }
     option = LEVEL_3;
 }
 
@@ -114,7 +116,7 @@ void shit_pot_sprites(void)
     student_posy = 64;
     fisherman_posx = 64;
     fisherman_posy = 64;
-    fisherman2_posx = 24;
+    fisherman2_posx = 96;
     fisherman2_posy = 104;
     student2_posx = 148;
     student2_posy = 124;
@@ -317,6 +319,13 @@ UINT8 conv_check(void)
             }
             else if(option == LEVEL_3 && GOT_INFO)
                 return 1;
+        }
+        else if(sprite == fisherman2_posx)
+        {
+            sprite_clean();
+            LETTER_COUNT = 0;
+            print("fisherman:\0", 24, 32);
+            print("wassup!?\0", 24, 48);
         }
         talking = 1;
         while(talking)
