@@ -114,6 +114,8 @@ void shit_pot_sprites(void)
     student_posy = 64;
     fisherman_posx = 64;
     fisherman_posy = 64;
+    fisherman2_posx = 24;
+    fisherman2_posy = 104;
     student2_posx = 148;
     student2_posy = 124;
     miner_posx = 132;
@@ -559,7 +561,7 @@ void hero_walk(void)
         }
         left = 0;
         delay(50);
-        --hero_posy;
+        hero_posy-=3;
     }
     if(joypad() & J_DOWN)
     {
@@ -587,7 +589,7 @@ void hero_walk(void)
         }
         left = 0;
         delay(50);
-        ++hero_posy;
+        hero_posy+=3;
     }
     if(joypad() & J_LEFT)
     {
@@ -611,7 +613,7 @@ void hero_walk(void)
         move_sprite(1, hero_posx, hero_posy);
         left = 1;
         delay(50);
-        --hero_posx;
+        hero_posx-=3;
     }
     if(joypad() & J_RIGHT)
     {
@@ -633,7 +635,7 @@ void hero_walk(void)
         move_sprite(1, hero_posx+sprite_width, hero_posy);
         left = 0;
         delay(50);
-        ++hero_posx;
+        hero_posx+=3;
     }
 }
 

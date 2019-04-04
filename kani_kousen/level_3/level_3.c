@@ -3,6 +3,7 @@
 #include "../battle/battle.h"
 #include "../level_2/level_2.h"
 #include "../level_2/crab_catch.h"
+#include "../assets/level_assets/level_assets.h"
 
 void level_3_ctrl(void)
 {
@@ -48,4 +49,10 @@ void level_3_ctrl(void)
     }
     shit_pot_setup();
     shit_pot_sprites();
+    /* now we need to add a fisherman */
+    set_sprite_tile(12, 12);
+    set_sprite_tile(13, 12);
+    set_sprite_prop(13, S_FLIPX);
+    move_sprite(12, fisherman2_posx, fisherman2_posy);
+    move_sprite(13, fisherman2_posx+sprite_width, fisherman2_posy);
 }

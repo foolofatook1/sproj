@@ -15,6 +15,8 @@ extern UINT8 hero_posx;
 extern UINT8 hero_posy;
 extern UINT8 fisherman_posx;
 extern UINT8 fisherman_posy;
+extern UINT8 fisherman2_posx;
+extern UINT8 fisherman2_posy;
 extern UINT8 miner_posx;
 extern UINT8 miner_posy;
 extern UINT8 student_posx;
