@@ -20,9 +20,8 @@ void asakawa_battle_ctrl(void)
     while(STATE != DEAD)
     {
         wait_vbl_done();
-        battle_toggle_ctrl();*/
-        /*  */
-        /*while(STATE == FIGHTING)
+        battle_toggle_ctrl();
+        while(STATE == FIGHTING)
         {
             choice_handler(arrow_y);
             fight(&HERO_HP, &ASAKAWA_HP);

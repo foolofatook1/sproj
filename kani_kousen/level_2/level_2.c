@@ -31,8 +31,7 @@ UINT8 screen_x = 95;
 void level_2_ctrl(void)
 {
     wait_vbl_done();
-    /*level_2_bkg_start();
-
+/*    level_2_bkg_start();
     l2_scene_1();
     while(talking > 0)
     {
@@ -45,7 +44,7 @@ void level_2_ctrl(void)
         wait_vbl_done();
         hero_walk(); 
         pos_check_shit_pot();
-    }*/
+    }
     while(option != LEVEL_3 && option != GAME_OVER)
     {
         asakawa_enters_deck();
@@ -71,7 +70,8 @@ void level_2_ctrl(void)
             }
         }
         caught_crabs = 0;
-    }
+    }*/
+    option = LEVEL_3;
 }
 
 void level_2_bkg_start(void)
@@ -195,35 +195,47 @@ UINT8 conv_check(void)
         /* student in top left corner */
         if(sprite == student_posx || sprite == fisherman_posx)
         {
-            sprite_clean();
-            LETTER_COUNT = 0;
-            hide_sprites();
-            print("workers:\0", 24, 32);
-            print("did you\0", 24, 48);
-            print("hear!?\0", 24, 64);
-            delay(1000);
-            sprite_clean();
-            LETTER_COUNT = 0;
-            print("workers:\0", 24, 32);
-            print("we lost a\0", 24, 48);
-            print("fishing\0", 24, 64);
-            print("boat\0", 24, 80);
-            print("today!\0", 24, 96);
-            delay(1000);
-            sprite_clean();
-            LETTER_COUNT = 0;
-            print("workers:\0", 24, 32);
-            print("damn that\0", 24, 48);
-            print("asakawa!\0", 24, 64);
-            delay(1000);
-            sprite_clean();
-            LETTER_COUNT = 0;
-            print("workers:\0", 24, 32);
-            print("should'nt\0", 24, 48);
-            print("have made\0", 24, 64);
-            print("them go\0", 24, 80);
-            print("out...\0", 24, 96);
-            GOT_INFO = 1;
+            if(option == LEVEL_2)
+            {
+                sprite_clean();
+                LETTER_COUNT = 0;
+                hide_sprites();
+                print("workers:\0", 24, 32);
+                print("did you\0", 24, 48);
+                print("hear!?\0", 24, 64);
+                delay(1000);
+                sprite_clean();
+                LETTER_COUNT = 0;
+                print("workers:\0", 24, 32);
+                print("we lost a\0", 24, 48);
+                print("fishing\0", 24, 64);
+                print("boat\0", 24, 80);
+                print("today!\0", 24, 96);
+                delay(1000);
+                sprite_clean();
+                LETTER_COUNT = 0;
+                print("workers:\0", 24, 32);
+                print("damn that\0", 24, 48);
+                print("asakawa!\0", 24, 64);
+                delay(1000);
+                sprite_clean();
+                LETTER_COUNT = 0;
+                print("workers:\0", 24, 32);
+                print("should'nt\0", 24, 48);
+                print("have made\0", 24, 64);
+                print("them go\0", 24, 80);
+                print("out...\0", 24, 96);
+                GOT_INFO = 1;
+            }
+            if(option == LEVEL_3)
+            {
+                sprite_clean();
+                LETTER_COUNT = 0;
+                hide_sprites();
+                print("workers:\0", 24, 32);
+                print("did you\0", 24, 48);
+                print("hear!?\0", 24, 64);
+            }
         }
         /* student in bottom right corner */
         else if(sprite == student2_posx)
@@ -240,20 +252,38 @@ UINT8 conv_check(void)
         } 
         else if(sprite == miner_posx)
         {
-            sprite_clean();
-            LETTER_COUNT = 0;
-            hide_sprites();
-            print("miner:\0", 24, 32);
-            print("damn\0", 24, 48);
-            print("asakawa!\0", 24, 64);
-            delay(1000);
-            sprite_clean();
-            LETTER_COUNT = 0;
-            print("miner:\0", 24, 32);
-            print("i should\0", 24, 48);
-            print("have just\0", 24, 64);
-            print("stayed\0", 24, 80);
-            print("mining!\0", 24, 96);
+            if(option == LEVEL_2)
+            {
+                sprite_clean();
+                LETTER_COUNT = 0;
+                hide_sprites();
+                print("miner:\0", 24, 32);
+                print("damn\0", 24, 48);
+                print("asakawa!\0", 24, 64);
+                delay(1000);
+                sprite_clean();
+                LETTER_COUNT = 0;
+                print("miner:\0", 24, 32);
+                print("i should\0", 24, 48);
+                print("have just\0", 24, 64);
+                print("stayed\0", 24, 80);
+                print("mining!\0", 24, 96);
+            }
+            if(option == LEVEL_3)
+            {
+                sprite_clean();
+                LETTER_COUNT = 0;
+                hide_sprites();
+                print("miner:\0", 24, 32);
+                print("you hear!?\0", 24, 48);
+                delay(500);
+                sprite_clean();
+                LETTER_COUNT = 0;
+                print("miner:\0", 24, 32);
+                print("the boat's\0", 24, 48);
+                print("back!\0", 24, 64);
+                GOT_INFO = 1;
+            }
         }
         else if(sprite == bed_posx)
         {
@@ -278,11 +308,13 @@ UINT8 conv_check(void)
             print("to wake\0", 56, 104);
             for(i = 0; i < LETTER_COUNT; ++i)
                 set_sprite_prop(i, 1);
-            if(GOT_INFO)
+            if(option == LEVEL_2 && GOT_INFO)
             {
                 option = LEVEL_3;
                 return 1;
             }
+            else if(option == LEVEL_3 && GOT_INFO)
+                return 1;
         }
         talking = 1;
         while(talking)
@@ -723,12 +755,14 @@ void asakawa_after_work(void)
 
 void pos_check_shit_pot(void)
 {
-
     if(hero_posy <= 56)
     {
         hero_posy = 56;
         if(hero_posx >= 48 && hero_posx <= 108)
-            moving = 0;
+        {
+            if(option != LEVEL_3 || GOT_INFO == 0)
+                moving = 0;
+        }
     }
     if(hero_posx <= 8)
         hero_posx = 8;
