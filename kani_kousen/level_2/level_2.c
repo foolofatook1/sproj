@@ -9,19 +9,14 @@
 #include "crab_catch.h"
 
 /* save this for later when checking collisions with sprites */
-UINT8 sprite_positions[12] = {
-    96, 
-    104,
-    48,
-    64,
-    64,
-    64,
-    148,
-    124,
-    132,
-    64,
-    16,
-    132
+UINT8 arr_size = 9;
+UINT8 sprite_positions[] = {
+    48, 64,
+    64, 64,
+    148,124,
+    132, 64,
+    16, 132,
+    96,104 /* fisherman2_posx & fisherman2_posy */
 };
 
 UINT8 GOT_INFO = 0;
@@ -169,7 +164,7 @@ void shit_pot_sprites(void)
 
 UINT8 sprite_collide_shit_pot(UINT8 *sprite_pos)
 {
-    for(i = 0; i < 9; i+=2)
+    for(i = 0; i < arr_size; i+=2)
     {
         if((hero_posx < (sprite_pos[i]+sprite_width)) &&
                 ((hero_posx+sprite_width) > sprite_pos[i]) &&
@@ -325,7 +320,8 @@ UINT8 conv_check(void)
             sprite_clean();
             LETTER_COUNT = 0;
             print("fisherman:\0", 24, 32);
-            print("wassup!?\0", 24, 48);
+            print("\0", 24, 48);
+            GOT_INFO = 1;
         }
         talking = 1;
         while(talking)

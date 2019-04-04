@@ -54,7 +54,8 @@ extern UINT8 talking;
 extern UINT8 moving;
 extern UINT8 left;
 
-extern UINT8 *sprite_positions;
+extern UINT8 sprite_positions[];
+extern UINT8 arr_size;
 
 extern UINT8 screen_x;
 extern UINT8 GOT_INFO;
