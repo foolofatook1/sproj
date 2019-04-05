@@ -37,7 +37,6 @@ int level_1_sprite_setup(void);
 void joypad_check_l1_scene_1(void);
 void joypad_check_l1_scene_2(void);
 void l1_scene_1(void);
-void animate(void);
 int enter_miner(void);
 void miner_intro_setup(void);
 int miner_intro(void);
@@ -50,21 +49,6 @@ void asakawa_shoots_anim(void);
 void asakawa_battle1_setup(void);
 
 
-/* scene 1 variables */
-//extern UINT8 text_count;
-/* scene 2 variables */
-//extern UINT8 start_animate;
-extern UINT8 l1_scene_2;
-/* scene 3 variables */
 extern UINT8 l1_scene_3_anim;
-extern UINT8 l1_scene_3_stop;
-
-/*extern UINT8 **hero_pos;
-extern UINT8 **fisherman_pos;
-extern UINT8 **miner_pos;
-extern UINT8 **student_pos;
-extern UINT8 **asakawa_pos;
-
-extern UINT8 sprite_width;*/
 
 #endif /* LEVEL_1_INCLUDE */

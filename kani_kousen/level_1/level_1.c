@@ -4,11 +4,8 @@
 #include "../text/text.h"
 #include "../assets/sprite_palette.h"
 
-/* scene 2 variables */
-UINT8 l1_scene_2 = 0;
 /* scene 3 variables */
 UINT8 l1_scene_3_anim = 0;
-UINT8 l1_scene_3_stop = 0;
 
 UINT8 anim_1 = 32;
 UINT8 anim_2 = 34;
@@ -19,26 +16,16 @@ void level_1_ctrl(void)
     wait_vbl_done();
     level_1_bkg_start();
     l1_scene_1();
-//    while(start_animate == 0)
- //   {
-  ///      joypad_check_l1_scene_1();
-        wait_vbl_done();
-   // }
     i = 0; // helping with animation
     while(enter_miner() == 0)
     {
-        animate();
         enter_miner();
         wait_vbl_done();
     }
     sprite_clean();
     LETTER_COUNT = 0;
     miner_intro_setup();
-    while(l1_scene_2 == 0)
-    {
-        joypad_check_l1_scene_2();
-        wait_vbl_done();
-    }
+    miner_intro();
     l1_scene_3_setup();
     while(l1_scene_3_anim < 3)
     {
@@ -46,18 +33,13 @@ void level_1_ctrl(void)
         wait_vbl_done();
     }
     l1_scene_3_text_setup();
-    while(l1_scene_3_stop == 0)
-    {
-        joypad_check_l1_scene_3();
-        wait_vbl_done();
-    }
+    l1_scene_3();
     asakawa_battle_ctrl();
 }
 
 /**
  * SCENE 1
  */
-
 /* setup the background for the opening screen. */
 void level_1_bkg_start(void) 
 {
@@ -101,89 +83,61 @@ void level_1_bkg_start(void)
     print("you hear!?\0", 24, 48);
 }
 
-/*void joypad_check_l1_scene_1(void) 
-{
-    if(joypad() & J_A)
-        l1_scene_1();
-}*/
-
 void l1_scene_1(void) 
 {
-    //delay(100);
-    //++text_count;
-    //delay(100);
-    //if(text_count == 1)
-    //{
-        sprite_clean();
-        LETTER_COUNT = 0;
-        bkg_clean();
-        print("fisherman:\0", 24, 32);
-        print("4 months\0", 24, 48);
-        print("on\0", 24, 64);
-        delay(1000);
-        sprite_clean();
-        LETTER_COUNT = 0;
-        print("fisherman:\0", 24, 32);
-        print("kamchatkas\0", 24, 48);
-        print("northern\0", 24, 64);
-        print("waters.\0", 24, 80);
-    //}
-    //if(text_count == 2)
-    //{
-     //   bkg_clean();
-     delay(1000);
-        sprite_clean();
-        LETTER_COUNT = 0;
-        print("fisherman:\0", 24, 32);
-        print("it would\0", 24, 48);
-        print("be a cold\0", 24, 64);
-        print("death\0", 24, 80);
-        print("indeed...\0", 24, 96);
-    //}
-    //if(text_count == 3)
-    //{
-     //   bkg_clean();
-     delay(1000);
-        sprite_clean();
-        LETTER_COUNT = 0;
-        print("fisherman:\0", 24, 32);
-        print("i see we\0", 24, 48);
-        print("have a\0", 24, 64);
-        print("quiet\0", 24, 80);
-        print("one.\0", 24, 96);
-    //}
-    //if(text_count == 4)
-    //{
-     //   bkg_clean();
-     delay(1000);
-        sprite_clean();
-        LETTER_COUNT = 0;
-        print("fisherman:\0", 24, 32);
-        print("c'mon\0", 24, 48);
-        print("i'll take\0", 24, 64);
-        print("you down\0", 24, 80);
-        delay(1000);
-        sprite_clean();
-        LETTER_COUNT = 0;
-        print("fisherman:\0", 24, 32);
-        print("to the\0", 24, 48);
-        print("shit pot.\0", 24, 64);
-        delay(1000);
-    //}
-    //if(text_count == 5)
-    //{
-        DISPLAY_OFF;
-
-        /* center on the door */
-        set_bkg_data(0,4,blank_screen_tiles);
-        set_bkg_tiles(0,0,20,18,shit_pot);
-        DISPLAY_ON;
-        HIDE_SPRITES;/* this turns sprites off */
-        sprite_clean();
-        hide_sprites();
-        LETTER_COUNT = 0;
-        level_1_sprite_setup();
-    //}
+    sprite_clean();
+    LETTER_COUNT = 0;
+    bkg_clean();
+    print("fisherman:\0", 24, 32);
+    print("4 months\0", 24, 48);
+    print("on\0", 24, 64);
+    delay(1000);
+    sprite_clean();
+    LETTER_COUNT = 0;
+    print("fisherman:\0", 24, 32);
+    print("kamchatkas\0", 24, 48);
+    print("northern\0", 24, 64);
+    print("waters.\0", 24, 80);
+    delay(1000);
+    sprite_clean();
+    LETTER_COUNT = 0;
+    print("fisherman:\0", 24, 32);
+    print("it would\0", 24, 48);
+    print("be a cold\0", 24, 64);
+    print("death\0", 24, 80);
+    print("indeed...\0", 24, 96);
+    delay(1000);
+    sprite_clean();
+    LETTER_COUNT = 0;
+    print("fisherman:\0", 24, 32);
+    print("i see we\0", 24, 48);
+    print("have a\0", 24, 64);
+    print("quiet\0", 24, 80);
+    print("one.\0", 24, 96);
+    delay(1000);
+    sprite_clean();
+    LETTER_COUNT = 0;
+    print("fisherman:\0", 24, 32);
+    print("c'mon\0", 24, 48);
+    print("i'll take\0", 24, 64);
+    print("you down\0", 24, 80);
+    delay(1000);
+    sprite_clean();
+    LETTER_COUNT = 0;
+    print("fisherman:\0", 24, 32);
+    print("to the\0", 24, 48);
+    print("shit pot.\0", 24, 64);
+    delay(1000);
+    DISPLAY_OFF;
+    /* center on the door */
+    set_bkg_data(0,4,blank_screen_tiles);
+    set_bkg_tiles(0,0,20,18,shit_pot);
+    DISPLAY_ON;
+    HIDE_SPRITES;/* this turns sprites off */
+    sprite_clean();
+    hide_sprites();
+    LETTER_COUNT = 0;
+    level_1_sprite_setup();
 }
 
 int level_1_sprite_setup(void) 
@@ -191,7 +145,7 @@ int level_1_sprite_setup(void)
     /* hero on screen at door */
     hero_posx = 70;
     hero_posy = 65;
-    
+
     /* fisherman on screen at door */
     fisherman_posx = 86;
     fisherman_posy = 65;
@@ -222,49 +176,11 @@ int level_1_sprite_setup(void)
 
     delay(400); /* a pause before appearing at door */
     SHOW_SPRITES;
-    //start_animate = 1;
 }
-
-/* a helper function to animate the sprites when they appear */
-void animate(void) 
-{
-    set_sprite_tile(0, 4);
-    set_sprite_tile(1, 6);
-    move_sprite(0, hero_posx, hero_posy);
-    move_sprite(1, hero_posx+sprite_width, hero_posy);
-    delay(100);
-
-    set_sprite_tile(2, 12);
-    set_sprite_tile(3, 14);
-    move_sprite(2, fisherman_posx, fisherman_posy);
-    move_sprite(3, fisherman_posx+sprite_width, fisherman_posy);
-    delay(100);
-
-    set_sprite_tile(0, 0);
-    set_sprite_tile(1, 2);
-    move_sprite(0, hero_posx, hero_posy);
-    move_sprite(1, hero_posx+sprite_width, hero_posy);
-    delay(100);
-
-    set_sprite_tile(2, 8);
-    set_sprite_tile(3, 10);
-    move_sprite(2, fisherman_posx, fisherman_posy);
-    move_sprite(3, fisherman_posx+sprite_width, fisherman_posy);
-    delay(100);
-}
-
 
 /**
  * SCENE 2
  */
-void joypad_check_l1_scene_2(void)
-{
-    if(joypad() & J_A)
-    {
-        miner_intro();
-    }
-}
-
 int enter_miner(void) 
 {
     UINT8 step_x = 4;
@@ -324,8 +240,6 @@ void miner_intro_setup(void)
     SHOW_SPRITES;
     DISPLAY_ON;
 
-    text_count = 0;
-
     sprite_clean();
     LETTER_COUNT = 0;
     print("miner:\0", 24, 32);
@@ -339,111 +253,83 @@ void miner_intro_setup(void)
 /* setting up the miners dialogue / introduction */
 int miner_intro(void)
 {
-    delay(100);
-    ++text_count;
-    delay(100);
+    bkg_clean();
+    sprite_clean();
+    LETTER_COUNT = 0;
+    print("miner:\0", 24, 32);
+    print("worked\0", 24, 48);
+    print("there for\0", 24, 64);
+    print("seven\0", 24, 80);
+    print("years.\0", 24, 96);
 
-    if(text_count == 1)
-    {
-        bkg_clean();
-        sprite_clean();
-        LETTER_COUNT = 0;
-        print("miner:\0", 24, 32);
-        print("worked\0", 24, 48);
-        print("there for\0", 24, 64);
-        print("seven\0", 24, 80);
-        print("years.\0", 24, 96);
-
-        DISPLAY_ON;
-    }
-    if(text_count == 2)
-    {
-        bkg_clean();
-        sprite_clean();
-        LETTER_COUNT = 0;
-        print("fisherman:\0", 24, 32);
-        print("a miner,\0", 24, 48);
-        print("huh?\0", 24, 64);
-    }
-    if(text_count == 3)
-    {
-        bkg_clean();
-        sprite_clean();
-        LETTER_COUNT = 0;
-        print("fisherman:\0", 24, 32);
-        print("must've\0", 24, 48);
-        print("been no\0", 24, 64);
-        print("money in\0", 24, 80);
-        print("mining?\0", 24, 96);
-    }
-    if(text_count == 4)
-    {
-        bkg_clean();
-        sprite_clean();
-        LETTER_COUNT = 0;
-        print("miner:\0", 24, 32);
-        print("...there\0", 24, 48);
-        print("was an\0", 24, 64);
-        print("explosion\0", 24, 80);
-        delay(1000);
-        sprite_clean();
-        LETTER_COUNT = 0;
-        print("miner:\0", 24, 32);
-        print("...\0", 24, 48);
-        print("from the\0", 24, 64);
-        print("gas...\0", 24, 80);
-    }
-    if(text_count == 5)
-    {
-        bkg_clean();
-        sprite_clean();
-        LETTER_COUNT = 0;
-        print("miner:\0", 24, 32);
-        print("good lives\0", 24, 48);
-        print("were lost\0", 24, 64);
-        delay(1000);
-        sprite_clean();
-        LETTER_COUNT = 0;
-        print("miner:\0", 24, 32);
-        print("that can't\0", 24, 48);
-        print("be\0", 24, 64);
-        print("returned\0", 24, 80);
-        print("...\0", 24, 96);
-    }
-    if(text_count == 6)
-    {
-        bkg_clean();
-        sprite_clean();
-        LETTER_COUNT = 0;
-        print("fisherman:\0", 24, 32);
-        print("we better\0", 24, 48);
-        print("go!\0", 24, 64);
-        delay(1000);
-        sprite_clean();
-        LETTER_COUNT = 0;
-        print("fisherman:\0", 24, 32);
-        print("i think\0", 24, 48);
-        print("i hear\0", 24, 64);
-        print("asakawa\0", 24, 80);
-        print("coming!\0", 24, 96);
-    }
-    if(text_count == 7)
-    {
-        bkg_clean();
-        sprite_clean();
-        LETTER_COUNT = 0;
-        print("miner:\0", 24, 32);
-        print("who's that\0", 24, 48);
-        print("???\0", 24, 64);
-    }
-    if(text_count == 8)
-    {
-        print("fisherman:\0", 24, 80);
-        print("the\0", 24, 96);
-        print("manager!\0", 24, 112);
-    } 
-    if(text_count == 9)
-        l1_scene_2 = 1;
+    DISPLAY_ON;
+    delay(1000);
+    sprite_clean();
+    LETTER_COUNT = 0;
+    print("fisherman:\0", 24, 32);
+    print("a miner,\0", 24, 48);
+    print("huh?\0", 24, 64);
+    delay(1000);
+    sprite_clean();
+    LETTER_COUNT = 0;
+    print("fisherman:\0", 24, 32);
+    print("must've\0", 24, 48);
+    print("been no\0", 24, 64);
+    print("money in\0", 24, 80);
+    print("mining?\0", 24, 96);
+    delay(1000);
+    sprite_clean();
+    LETTER_COUNT = 0;
+    print("miner:\0", 24, 32);
+    print("...there\0", 24, 48);
+    print("was an\0", 24, 64);
+    print("explosion\0", 24, 80);
+    delay(1000);
+    sprite_clean();
+    LETTER_COUNT = 0;
+    print("miner:\0", 24, 32);
+    print("...\0", 24, 48);
+    print("from the\0", 24, 64);
+    print("gas...\0", 24, 80);
+    delay(1000);
+    sprite_clean();
+    LETTER_COUNT = 0;
+    print("miner:\0", 24, 32);
+    print("good lives\0", 24, 48);
+    print("were lost\0", 24, 64);
+    delay(1000);
+    sprite_clean();
+    LETTER_COUNT = 0;
+    print("miner:\0", 24, 32);
+    print("that can't\0", 24, 48);
+    print("be\0", 24, 64);
+    print("returned\0", 24, 80);
+    print("...\0", 24, 96);
+    delay(1000);
+    sprite_clean();
+    LETTER_COUNT = 0;
+    print("fisherman:\0", 24, 32);
+    print("we better\0", 24, 48);
+    print("go!\0", 24, 64);
+    delay(1000);
+    sprite_clean();
+    LETTER_COUNT = 0;
+    print("fisherman:\0", 24, 32);
+    print("i think\0", 24, 48);
+    print("i hear\0", 24, 64);
+    print("asakawa\0", 24, 80);
+    print("coming!\0", 24, 96);
+    delay(1000);
+    sprite_clean();
+    LETTER_COUNT = 0;
+    print("miner:\0", 24, 32);
+    print("who's that\0", 24, 48);
+    print("???\0", 24, 64);
+    delay(1000);
+    print("fisherman:\0", 24, 80);
+    print("the\0", 24, 96);
+    print("manager!\0", 24, 112);
+    delay(1000);
 }
 
 /**
@@ -537,37 +423,32 @@ void l1_scene_3_setup(void)
 void l1_scene_3_animate(void)
 {
     ++l1_scene_3_anim;
-
     /* hero */
-    set_sprite_tile(0, 4-((l1_scene_3_anim&0x1)*4));
-    set_sprite_tile(1, 6-((l1_scene_3_anim&0x1)*4));
+    set_sprite_tile(0, 0);
+    set_sprite_tile(1, 2);
     move_sprite(0, hero_posx, hero_posy);
     move_sprite(1, hero_posx+sprite_width, hero_posy);
-    delay(100);
     /* fisherman */
-    set_sprite_tile(2, 12-((l1_scene_3_anim&0x1)*4));
-    set_sprite_tile(3, 14-((l1_scene_3_anim&0x1)*4));
+    set_sprite_tile(2, 8);
+    set_sprite_tile(3, 10);
     move_sprite(0, hero_posx, hero_posy);
     move_sprite(1, hero_posx+sprite_width, hero_posy);
-    delay(100);
     /* miner */ 
-    set_sprite_tile(4, 20-((l1_scene_3_anim&0x1)*4));
-    set_sprite_tile(5, 22-((l1_scene_3_anim&0x1)*4));
+    set_sprite_tile(4, 16);
+    set_sprite_tile(5, 18);
     move_sprite(0, hero_posx, hero_posy);
     move_sprite(1, hero_posx+sprite_width, hero_posy);
-    delay(100);
     /* student */ 
-    set_sprite_tile(6, 28-((l1_scene_3_anim&0x1)*4));
-    set_sprite_tile(7, 30-((l1_scene_3_anim&0x1)*4));
+    set_sprite_tile(6, 24);
+    set_sprite_tile(7, 26);
     move_sprite(0, hero_posx, hero_posy);
     move_sprite(1, hero_posx+sprite_width, hero_posy);
-    delay(100);
     /* asakawa */ 
     set_sprite_tile(8, 36-((l1_scene_3_anim&0x1)*4));
     set_sprite_tile(9, 38-((l1_scene_3_anim&0x1)*4));
     move_sprite(0, hero_posx, hero_posy);
     move_sprite(1, hero_posx+sprite_width, hero_posy);
-    delay(400);
+    delay(500);
 }
 /* scene_3 dialogue setup first */
 void l1_scene_3_text_setup(void)
@@ -575,7 +456,6 @@ void l1_scene_3_text_setup(void)
     DISPLAY_OFF;
     hide_sprites();
     bkg_clean();
-    text_count = 0; // just making sure that this is zero
     DISPLAY_ON;
     sprite_clean();
     LETTER_COUNT = 0;
@@ -583,261 +463,205 @@ void l1_scene_3_text_setup(void)
     print("listen up\0", 24, 48);
     print("you\0", 24, 64);
     print("maggots!\0", 24, 80);
-
+    delay(1000);
 }
 
 /* asakawa give his message */
-void joypad_check_l1_scene_3(void) 
-{
-    if(joypad() & J_A)
-    {
-        l1_scene_3();
-    }
-}
+/*void joypad_check_l1_scene_3(void) 
+  {
+  if(joypad() & J_A)
+  {
+  l1_scene_3();
+  }
+  }*/
 
 /* asakawa's message */
 void l1_scene_3(void)
 {
+    bkg_clean();
+    sprite_clean();
+    LETTER_COUNT = 0;
+    print("asakawa:\0", 24, 32);
+    print("needless\0", 24, 48);
+    print("to say,\0", 24, 64);
+    delay(1000);
+    sprite_clean();
+    LETTER_COUNT = 0;
+    print("asakawa:\0", 24, 32);
+    print("this ship\0", 24, 48);
+    print("is no\0", 24, 64);
+    delay(1000);
+    sprite_clean();
+    LETTER_COUNT = 0;
+    print("asakawa:\0", 24, 32);
+    print("simple\0", 24, 48);
+    print("source of\0", 24, 64);
+    print("income!\0", 24, 80);
+    delay(1000);
+    sprite_clean();
+    LETTER_COUNT = 0;
+    print("asakawa:\0", 24, 32);
+    print("but rather\0", 24, 48);
+    print("of the\0", 24, 64);
+    print("utmost\0", 24, 80);
+    print("concern\0", 24, 96);
+    delay(1000);
+    sprite_clean();
+    LETTER_COUNT = 0;
+    print("asakawa:\0", 24, 32);
+    print("for our\0", 24, 48);
+    print("nation!\0", 24, 64);
+    delay(1000);
+    sprite_clean();
+    LETTER_COUNT = 0;
+    print("asakawa:\0", 24, 32);
+    print("as\0", 24, 48);
+    print("peoples\0", 24, 64);
+    print("of\0", 24, 80);
+    print("imperial\0", 24, 96);
+    print("japan,\0", 24, 112);
+    delay(1000);
+    sprite_clean();
+    LETTER_COUNT = 0;
+    print("asakawa:\0", 24, 32);
+    print("we are\0", 24, 48);
+    print("proud\0", 24, 64);
+    print("rivals\0", 24, 80);
+    print("of russia!\0", 24, 96);
+    delay(1000);
+    sprite_clean();
+    LETTER_COUNT = 0;
+    print("asakawa:\0", 24, 32);
+    print("that is\0", 24, 48);
+    print("why you\0", 24, 64);
+    print("fisherman\0", 24, 80);
+    print("are not\0", 24, 96);
+    delay(1000);
+    sprite_clean();
+    LETTER_COUNT = 0;
+    print("asakawa:\0", 24, 32);
+    print("only\0", 24, 48);
+    print("canning\0", 24, 64);
+    print("crabs,\0", 24, 80);
+    delay(1000);
+    bkg_clean();
+    sprite_clean();
+    LETTER_COUNT = 0;
+    print("asakawa:\0", 24, 32);
+    print("but\0", 24, 48);
+    print("salmon and\0", 24, 64);
+    print("tuna\0", 24, 80);
+    print("as well!\0", 24, 96);
+    delay(1000);
+    sprite_clean();
+    LETTER_COUNT = 0;
+    print("asakawa:\0", 24, 32);
+    print("as a\0", 24, 48);
+    print("nation of\0", 24, 64);
+    print("excellence\0", 24, 80);
+    print("...", 24, 96);
+    delay(1000);
+    bkg_clean();
+    sprite_clean();
+    LETTER_COUNT = 0;
+    print("asakawa:\0", 24, 32);
+    print("we are\0", 24, 48);
+    print("unmatched\0", 24, 64);
+    delay(1000);
+    sprite_clean();
+    LETTER_COUNT = 0;
+    print("asakawa:\0", 24, 32);
+    print("when\0", 24, 48);
+    print("compared\0", 24, 64);
+    print("to others!\0", 24, 80);
+    delay(1000);
+    sprite_clean();
+    LETTER_COUNT = 0;
+    print("from the\0", 24, 32);
+    print("crowd\0", 24, 48);
+    print("someone\0", 24, 64);
+    print("murmurs,\0", 24, 80);
+    delay(1000);
+    sprite_clean();
+    LETTER_COUNT = 0;
+    print("that's\0", 24, 32);
+    print("a little\0", 24, 48);
+    print("exagerated\0", 24, 64);
+    print("don't you\0", 24, 80);
+    print("think?\0", 24, 96);
+    delay(1000);
+    l1_scene_3_setup();
+    asakawa_shoots_anim();
+
+    DISPLAY_OFF;
+    bkg_clean();
+    sprite_clean();
+    LETTER_COUNT = 0;
+    DISPLAY_ON;
+
+    print("asakawa:\0", 24, 32);
+    print("this kind\0", 24, 48);
+    print("of talk is\0", 24, 64);
+    print("not\0", 24, 80);
+    print("tolerable!\0", 24, 96);
+    delay(1000);
+    sprite_clean();
+    LETTER_COUNT = 0;
+    print("asakawa:\0", 24, 32);
+    print("this\0", 24, 48);
+    print("attitude\0", 24, 64);
+    print("is not\0", 24, 80);
+    print("only\0", 24, 96);
+    print("mutinous,\0", 24, 112);
+    delay(1000);
+    sprite_clean();
+    LETTER_COUNT = 0;
+    print("asakawa:\0", 24, 32);
+    print("but will\0", 24, 48);
+    print("be\0", 24, 64);
+    print("considered\0", 24, 80);
+    delay(1000);
+    sprite_clean();
+    LETTER_COUNT = 0;
+    print("asakawa:\0", 24, 32);
+    print("treason as\0", 24, 48);
+    print("well!\0", 24, 64);
+    delay(1000);
+    sprite_clean();
+    LETTER_COUNT = 0;
+    print("asakawa:\0", 24, 32);
+    print("this job\0", 24, 48);
+    print("is within\0", 24, 64);
+    print("the realm\0", 24, 80);
+    delay(1000);
+    sprite_clean();
+    LETTER_COUNT = 0;
+    print("asakawa:\0", 24, 32);
+    print("of\0", 24, 48);
+    print("'national\0", 24, 64);
+    print("policy!'\0", 24, 80);
+    delay(1000);
+    /* Battle prompt */
+    DISPLAY_OFF;
+    set_bkg_data(0,4, blank_screen_tiles);
+    set_bkg_tiles(0,0,20,18,blank_screen);
+    sprite_clean();
+    LETTER_COUNT = 0;
+    print("fight\0", 64, 32);
+    print("asakawa\0", 56, 48);
+
+    DISPLAY_ON;
     delay(100);
-    ++text_count;
+    DISPLAY_OFF;
     delay(100);
-
-    if(text_count == 1)
-    {
-        bkg_clean();
-        sprite_clean();
-        LETTER_COUNT = 0;
-        print("asakawa:\0", 24, 32);
-        print("needless\0", 24, 48);
-        print("to say,\0", 24, 64);
-    }
-    if(text_count == 2)
-    {
-        bkg_clean();
-        sprite_clean();
-        LETTER_COUNT = 0;
-        print("asakawa:\0", 24, 32);
-        print("this ship\0", 24, 48);
-        print("is no\0", 24, 64);
-        delay(1000);
-        sprite_clean();
-        LETTER_COUNT = 0;
-        print("asakawa:\0", 24, 32);
-        print("simple\0", 24, 48);
-        print("source of\0", 24, 64);
-        print("income!\0", 24, 80);
-    }
-    if(text_count == 3)
-    {
-        bkg_clean();
-        sprite_clean();
-        LETTER_COUNT = 0;
-        print("asakawa:\0", 24, 32);
-        print("but rather\0", 24, 48);
-        print("of the\0", 24, 64);
-        print("utmost\0", 24, 80);
-        print("concern\0", 24, 96);
-    }
-    if(text_count == 4)
-    {
-        bkg_clean();
-        sprite_clean();
-        LETTER_COUNT = 0;
-        print("asakawa:\0", 24, 32);
-        print("for our\0", 24, 48);
-        print("nation!\0", 24, 64);
-    }
-    if(text_count == 5)
-    {
-        bkg_clean();
-        sprite_clean();
-        LETTER_COUNT = 0;
-        print("asakawa:\0", 24, 32);
-        print("as\0", 24, 48);
-        print("peoples\0", 24, 64);
-        print("of\0", 24, 80);
-        print("imperial\0", 24, 96);
-        print("japan,\0", 24, 112);
-    }
-    if(text_count == 6)
-    {
-        bkg_clean();
-        sprite_clean();
-        LETTER_COUNT = 0;
-        print("asakawa:\0", 24, 32);
-        print("we are\0", 24, 48);
-        print("proud\0", 24, 64);
-        print("rivals\0", 24, 80);
-        print("of russia!\0", 24, 96);
-    }
-    if(text_count == 7)
-    {
-        bkg_clean();
-        sprite_clean();
-        LETTER_COUNT = 0;
-        print("asakawa:\0", 24, 32);
-        print("that is\0", 24, 48);
-        print("why you\0", 24, 64);
-        print("fisherman\0", 24, 80);
-        print("are not\0", 24, 96);
-    }
-    if(text_count == 8)
-    {
-        bkg_clean();
-        sprite_clean();
-        LETTER_COUNT = 0;
-        print("asakawa:\0", 24, 32);
-        print("only\0", 24, 48);
-        print("canning\0", 24, 64);
-        print("crabs,\0", 24, 80);
-    }
-    if(text_count == 9)
-    {
-        bkg_clean();
-        sprite_clean();
-        LETTER_COUNT = 0;
-        print("asakawa:\0", 24, 32);
-        print("but\0", 24, 48);
-        print("salmon and\0", 24, 64);
-        print("tuna\0", 24, 80);
-        print("as well!\0", 24, 96);
-    }
-    if(text_count == 10)
-    {
-        bkg_clean();
-        sprite_clean();
-        LETTER_COUNT = 0;
-        print("asakawa:\0", 24, 32);
-        print("as a\0", 24, 48);
-        print("nation of\0", 24, 64);
-        print("excellence\0", 24, 80);
-        print("...", 24, 96);
-    }
-    if(text_count == 11)
-    {
-        bkg_clean();
-        sprite_clean();
-        LETTER_COUNT = 0;
-        print("asakawa:\0", 24, 32);
-        print("we are\0", 24, 48);
-        print("unmatched\0", 24, 64);
-        delay(1000);
-        sprite_clean();
-        LETTER_COUNT = 0;
-        print("asakawa:\0", 24, 32);
-        print("when\0", 24, 48);
-        print("compared\0", 24, 64);
-        print("to others!\0", 24, 80);
-    }
-    if(text_count == 12)
-    {
-        bkg_clean();
-        sprite_clean();
-        LETTER_COUNT = 0;
-        print("from the\0", 24, 32);
-        print("crowd\0", 24, 48);
-        print("someone\0", 24, 64);
-        print("murmurs,\0", 24, 80);
-    }
-    if(text_count == 13)
-    {
-        bkg_clean();
-        sprite_clean();
-        LETTER_COUNT = 0;
-        print("that's\0", 24, 32);
-        print("a little\0", 24, 48);
-        print("exagerated\0", 24, 64);
-        print("don't you\0", 24, 80);
-        print("think?\0", 24, 96);
-    }
-    if(text_count == 14)
-    {
-        l1_scene_3_setup();
-        asakawa_shoots_anim();
-
-        DISPLAY_OFF;
-        bkg_clean();
-        sprite_clean();
-        LETTER_COUNT = 0;
-        DISPLAY_ON;
-
-        print("asakawa:\0", 24, 32);
-        print("this kind\0", 24, 48);
-        print("of talk is\0", 24, 64);
-        print("not\0", 24, 80);
-        print("tolerable!\0", 24, 96);
-    }
-    if(text_count == 15)
-    {
-        bkg_clean();
-        sprite_clean();
-        LETTER_COUNT = 0;
-        print("asakawa:\0", 24, 32);
-        print("this\0", 24, 48);
-        print("attitude\0", 24, 64);
-        print("is not\0", 24, 80);
-        print("only\0", 24, 96);
-        print("mutinous,\0", 24, 112);
-    }
-    if(text_count == 16)
-    {
-        bkg_clean();
-        sprite_clean();
-        LETTER_COUNT = 0;
-        print("asakawa:\0", 24, 32);
-        print("but will\0", 24, 48);
-        print("be\0", 24, 64);
-        print("considered\0", 24, 80);
-        delay(1000);
-        sprite_clean();
-        LETTER_COUNT = 0;
-        print("asakawa:\0", 24, 32);
-        print("treason as\0", 24, 48);
-        print("well!\0", 24, 64);
-    }
-    if(text_count == 17)
-    {
-        bkg_clean();
-        sprite_clean();
-        LETTER_COUNT = 0;
-        print("asakawa:\0", 24, 32);
-        print("this job\0", 24, 48);
-        print("is within\0", 24, 64);
-        print("the realm\0", 24, 80);
-    }
-    if(text_count == 18)
-    {
-        bkg_clean();
-        sprite_clean();
-        LETTER_COUNT = 0;
-        print("asakawa:\0", 24, 32);
-        print("of\0", 24, 48);
-        print("'national\0", 24, 64);
-        print("policy!'\0", 24, 80);
-        delay(1000);
-        /* Battle prompt */
-        DISPLAY_OFF;
-        set_bkg_data(0,4, blank_screen_tiles);
-        set_bkg_tiles(0,0,20,18,blank_screen);
-        sprite_clean();
-        LETTER_COUNT = 0;
-        print("fight\0", 64, 32);
-        print("asakawa\0", 56, 48);
-
-        DISPLAY_ON;
-        delay(100);
-        DISPLAY_OFF;
-        delay(100);
-        DISPLAY_ON;
-        delay(100);
-        DISPLAY_OFF;
-        delay(100);
-        DISPLAY_ON;
-        delay(300);
-        sprite_clean();
-        LETTER_COUNT = 0;
-        l1_scene_3_stop = 1;
-    }
+    DISPLAY_ON;
+    delay(100);
+    DISPLAY_OFF;
+    delay(100);
+    DISPLAY_ON;
+    delay(300);
+    sprite_clean();
+    LETTER_COUNT = 0;
 }
 
 void asakawa_shoots_anim(void)
@@ -850,5 +674,5 @@ void asakawa_shoots_anim(void)
         set_sprite_tile(9, anim_2+=4);
         delay(500);
     }
-    delay(800);
+    delay(500);
 }

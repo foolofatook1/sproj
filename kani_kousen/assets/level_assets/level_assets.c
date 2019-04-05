@@ -2,8 +2,8 @@
 #include "../../level_2/level_2.h"
 #include "../../text/text.h"
 
-UINT8 text_count = 0;
-UINT8 start_animate = 0;
+//UINT8 text_count = 0;
+//UINT8 start_animate = 0;
 UINT8 sprite_width = 8;
 
 UINT8 SLEPT = 0;

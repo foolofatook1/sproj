@@ -3,10 +3,10 @@
 
 #include <gb/gb.h>
 
-UINT8 check_items(void);
+//UINT8 check_items(void);
 
-extern UINT8 text_count;
-extern UINT8 start_animate;
+//extern UINT8 text_count;
+//extern UINT8 start_animate;
 extern UINT8 sprite_width;
 
 extern UINT8 SLEPT;
