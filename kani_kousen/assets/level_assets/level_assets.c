@@ -10,6 +10,8 @@ UINT8 SLEPT = 0;
 UINT8 revolt = 0;
 UINT8 REVOLUTION_1 = 0;
 UINT8 APPEARED = 0;
+UINT8 crabs_to_catch = 1;
+UINT8 health_loss = 0;
 
 UINT8 hero_posx = 200;
 UINT8 hero_posy = 200;

@@ -32,11 +32,11 @@ void crab_catch_ctrl(void)
      *      * battle relies on your ability to first catch, 
      *      * then batter the crab. 
      *      * if that sequence is not followed, it's a miss 
-     * 3. repeat 10 times.
+     * 3. repeat crabs_to_catch many times.
      */
-    while(caught_crabs < 1 && STATE != DEAD)
+    while(caught_crabs < crabs_to_catch && STATE != DEAD)
     {
-        HERO_HP = 10;
+        HERO_HP=(10-health_loss);
         crab_catch_setup();
         delay(500);
         battle_menu();

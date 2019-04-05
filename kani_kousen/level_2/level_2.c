@@ -421,6 +421,8 @@ UINT8 conv_check(void)
                 {
                     revolt = 1;
                     REVOLUTION_1 = 0;
+                    health_loss = 0;
+                    crabs_to_catch = 1;
                     return 1;
                 }
                 if(joypad() & J_B)
@@ -431,8 +433,9 @@ UINT8 conv_check(void)
                     print("that's too\0", 24, 48);
                     print("bad...\0", 24, 64);
                     revolt = 0;
-                    //talking = 0;
                     REVOLUTION_1 = 0;
+                    ++health_loss;
+                    crabs_to_catch+=2;
                     delay(500);
                 }
             }

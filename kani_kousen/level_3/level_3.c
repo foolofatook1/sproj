@@ -34,10 +34,18 @@ void level_3_ctrl(void)
         if(!revolt)
             leaves_shit_pot();
     }
-    sprite_clean();
-    LETTER_COUNT = 0;
-    clear_screen();
-    print("revolution\0", 24, 32);
+    /* first attempt at revolution is ready */
+    /**
+     * Add follow up for if you say yes,
+     * where the fisherman gives you a game plan
+     * where you try and gather people up.
+     * if you say no, increase the amount of crabs necessary to catch,
+     * and lower HP by one, and keep doing that every time you say no.
+     */
+     /**
+      * So the following is if you say yes, and "no,"
+      * response is in conv_check()
+      */
 }
 
 void leaves_shit_pot(void)
