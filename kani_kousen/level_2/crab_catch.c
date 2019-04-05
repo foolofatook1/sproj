@@ -18,7 +18,7 @@ UINT8 CRAB_HP = 5;
  */
 void crab_catch_ctrl(void)
 {
-    // delete this ITEMS thing later
+    // delete this ITEMS thing later?
     UWORD crab_num[4];
     ITEMS = 2;
     BATTLE_NUM = 1;

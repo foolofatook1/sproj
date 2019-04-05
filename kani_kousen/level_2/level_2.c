@@ -29,46 +29,46 @@ UINT8 screen_x = 95;
 void level_2_ctrl(void)
 {
     wait_vbl_done();
-    /*    level_2_bkg_start();
-          l2_scene_1();
-          while(talking > 0)
-          {
-          wait_vbl_done();
-          joypad_check_l2_scene_1();
-          }
-          fisherman_walk_away();
-          while(moving)
-          {
-          wait_vbl_done();
-          hero_walk(); 
-          pos_check_shit_pot();
-          }
-          while(option != LEVEL_3 && option != GAME_OVER)
-          {
-          asakawa_enters_deck();
-          asakawa_before_work();
-          crab_catch_ctrl();
-          asakawa_enters_deck();
-          asakawa_after_work();
-          delay(500);
-          DISPLAY_OFF;
-          shit_pot_setup();
-          shit_pot_sprites();
-          delay(500);
-          DISPLAY_ON;
-          moving = 1;
-          if(option != LEVEL_3)
-          {
-          while(moving && option != LEVEL_3)
-          {
-          hero_walk();
-          pos_check_shit_pot();
-          if(conv_check())
-          break;
-          }
-          }
-          caught_crabs = 0;
-          }*/
+    level_2_bkg_start();
+    l2_scene_1();
+    while(talking > 0)
+    {
+        wait_vbl_done();
+        joypad_check_l2_scene_1();
+    }
+    fisherman_walk_away();
+    while(moving)
+    {
+        wait_vbl_done();
+        hero_walk(); 
+        pos_check_shit_pot();
+    }
+    while(option != LEVEL_3 && option != GAME_OVER)
+    {
+        asakawa_enters_deck();
+        asakawa_before_work();
+        crab_catch_ctrl();
+        asakawa_enters_deck();
+        asakawa_after_work();
+        delay(500);
+        DISPLAY_OFF;
+        shit_pot_setup();
+        shit_pot_sprites();
+        delay(500);
+        DISPLAY_ON;
+        moving = 1;
+        if(option != LEVEL_3)
+        {
+            while(moving && option != LEVEL_3)
+            {
+                hero_walk();
+                pos_check_shit_pot();
+                if(conv_check())
+                    break;
+            }
+        }
+        caught_crabs = 0;
+    }
     option = LEVEL_3;
 }
 
