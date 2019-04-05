@@ -22,7 +22,7 @@ void level_3_ctrl(void)
     shit_pot_sprites();
     DISPLAY_ON;
     moving = 1;
-    while(!GOT_INFO)
+    while(!revolt)
     {
         while(moving)
         {
@@ -31,27 +31,8 @@ void level_3_ctrl(void)
             if(conv_check())
                 break;
         }
-        if(!GOT_INFO)
-            leaves_shit_pot();
-    }
-    GOT_INFO = 0;
-    while(!revolt)
-    {
-        shit_pot_setup();
-        shit_pot_sprites();
-        /* 1344 bits */
-        /* now we need to add a fisherman */
-        arr_size+=2;
-        moving = 1;
-        while(moving)
-        {
-            hero_walk();
-            pos_check_shit_pot();
-            conv_check();
-        }
         if(!revolt)
             leaves_shit_pot();
-        /* 1275 bits */
     }
     sprite_clean();
     LETTER_COUNT = 0;

@@ -13,7 +13,7 @@ UINT8 anim_2 = 34;
 /* The big control function */
 void level_1_ctrl(void) 
 {
-    wait_vbl_done();
+/*    wait_vbl_done();
     level_1_bkg_start();
     l1_scene_1();
     i = 0; // helping with animation
@@ -33,7 +33,7 @@ void level_1_ctrl(void)
         wait_vbl_done();
     }
     l1_scene_3_text_setup();
-    l1_scene_3();
+    l1_scene_3();*/
     asakawa_battle_ctrl();
 }
 

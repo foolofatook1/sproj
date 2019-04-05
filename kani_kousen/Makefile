@@ -54,4 +54,4 @@ main.gb: main.o $(START_UP_INCLUDE) $(TEXT_INCLUDE) $(LEVEL_1_INCLUDE) $(BATTLE_
 	$(CC) -o $@ main.o $(START_UP_INCLUDE) $(TEXT_INCLUDE) $(LEVEL_1_INCLUDE) $(BATTLE_INCLUDE) $(LEVEL_2_INCLUDE) $(SPRITE_PROPS) $(BKG_PROPS) $(LEVEL_ASSETS) $(CRAB_CATCH_INCLUDE) $(LEVEL_3_INCLUDE)
 
 play:
-	../bgb/bgb.exe *.gb
+	~/bgb/bgb.exe *.gb

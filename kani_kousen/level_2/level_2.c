@@ -29,46 +29,46 @@ UINT8 screen_x = 95;
 void level_2_ctrl(void)
 {
     wait_vbl_done();
-    level_2_bkg_start();
-    l2_scene_1();
-    while(talking > 0)
-    {
-        wait_vbl_done();
-        joypad_check_l2_scene_1();
-    }
-    fisherman_walk_away();
-    while(moving)
-    {
-        wait_vbl_done();
-        hero_walk(); 
-        pos_check_shit_pot();
-    }
-    while(option != LEVEL_3 && option != GAME_OVER)
-    {
-        asakawa_enters_deck();
-        asakawa_before_work();
-        crab_catch_ctrl();
-        asakawa_enters_deck();
-        asakawa_after_work();
-        delay(500);
-        DISPLAY_OFF;
-        shit_pot_setup();
-        shit_pot_sprites();
-        delay(500);
-        DISPLAY_ON;
-        moving = 1;
-        if(option != LEVEL_3)
-        {
-            while(moving && option != LEVEL_3)
-            {
-                hero_walk();
-                pos_check_shit_pot();
-                if(conv_check())
-                    break;
-            }
-        }
-        caught_crabs = 0;
-    }
+    /*    level_2_bkg_start();
+          l2_scene_1();
+          while(talking > 0)
+          {
+          wait_vbl_done();
+          joypad_check_l2_scene_1();
+          }
+          fisherman_walk_away();
+          while(moving)
+          {
+          wait_vbl_done();
+          hero_walk(); 
+          pos_check_shit_pot();
+          }
+          while(option != LEVEL_3 && option != GAME_OVER)
+          {
+          asakawa_enters_deck();
+          asakawa_before_work();
+          crab_catch_ctrl();
+          asakawa_enters_deck();
+          asakawa_after_work();
+          delay(500);
+          DISPLAY_OFF;
+          shit_pot_setup();
+          shit_pot_sprites();
+          delay(500);
+          DISPLAY_ON;
+          moving = 1;
+          if(option != LEVEL_3)
+          {
+          while(moving && option != LEVEL_3)
+          {
+          hero_walk();
+          pos_check_shit_pot();
+          if(conv_check())
+          break;
+          }
+          }
+          caught_crabs = 0;
+          }*/
     option = LEVEL_3;
 }
 
@@ -162,7 +162,7 @@ void shit_pot_sprites(void)
     move_sprite(10, bed_posx, bed_posy);
     move_sprite(11, bed_posx+sprite_width, bed_posy);
 
-    if(option == LEVEL_3 && GOT_INFO)
+    if((option == LEVEL_3) && (GOT_INFO) && (SLEPT))
     {
         /* fisherman2 */
         set_sprite_tile(12, 12);
@@ -170,6 +170,8 @@ void shit_pot_sprites(void)
         set_sprite_prop(13, S_FLIPX);
         move_sprite(12, fisherman2_posx, fisherman2_posy);
         move_sprite(13, fisherman2_posx+sprite_width, fisherman2_posy);
+        APPEARED = 1;
+        arr_size += 2;
     }
 
 }
@@ -319,15 +321,16 @@ UINT8 conv_check(void)
             print("to wake\0", 56, 104);
             for(i = 0; i < LETTER_COUNT; ++i)
                 set_sprite_prop(i, 1);
-            if(option == LEVEL_2 && GOT_INFO)
+            SLEPT = 1;
+            if((option == LEVEL_2) && (GOT_INFO))
             {
                 option = LEVEL_3;
                 return 1;
             }
-            else if(option == LEVEL_3 && GOT_INFO)
-                return 1;
+            else if((option == LEVEL_3) && GOT_INFO)
+                SLEPT = 1;
         }
-        else if(sprite == fisherman2_posx && GOT_INFO)
+        else if((sprite == fisherman2_posx) && (APPEARED))
         {
             sprite_clean();
             LETTER_COUNT = 0;
@@ -418,6 +421,7 @@ UINT8 conv_check(void)
                 {
                     revolt = 1;
                     REVOLUTION_1 = 0;
+                    return 1;
                 }
                 if(joypad() & J_B)
                 {
@@ -427,6 +431,7 @@ UINT8 conv_check(void)
                     print("that's too\0", 24, 48);
                     print("bad...\0", 24, 64);
                     revolt = 0;
+                    //talking = 0;
                     REVOLUTION_1 = 0;
                     delay(500);
                 }
@@ -859,10 +864,7 @@ void pos_check_shit_pot(void)
     {
         hero_posy = 56;
         if(hero_posx >= 48 && hero_posx <= 108)
-        {
-            if(option != LEVEL_3 || GOT_INFO == 0)
-                moving = 0;
-        }
+            moving = 0;
     }
     if(hero_posx <= 8)
         hero_posx = 8;

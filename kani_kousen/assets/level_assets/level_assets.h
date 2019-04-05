@@ -12,6 +12,7 @@ extern UINT8 sprite_width;
 extern UINT8 SLEPT;
 extern UINT8 revolt;
 extern UINT8 REVOLUTION_1;
+extern UINT8 APPEARED;
 
 extern UINT8 hero_posx;
 extern UINT8 hero_posy;
