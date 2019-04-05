@@ -18,11 +18,12 @@ void level_1_ctrl(void)
 {
     wait_vbl_done();
     level_1_bkg_start();
-    while(start_animate == 0)
-    {
-        joypad_check_l1_scene_1();
+    l1_scene_1();
+//    while(start_animate == 0)
+ //   {
+  ///      joypad_check_l1_scene_1();
         wait_vbl_done();
-    }
+   // }
     i = 0; // helping with animation
     while(enter_miner() == 0)
     {
@@ -100,19 +101,19 @@ void level_1_bkg_start(void)
     print("you hear!?\0", 24, 48);
 }
 
-void joypad_check_l1_scene_1(void) 
+/*void joypad_check_l1_scene_1(void) 
 {
     if(joypad() & J_A)
         l1_scene_1();
-}
+}*/
 
 void l1_scene_1(void) 
 {
-    delay(100);
-    ++text_count;
-    delay(100);
-    if(text_count == 1)
-    {
+    //delay(100);
+    //++text_count;
+    //delay(100);
+    //if(text_count == 1)
+    //{
         sprite_clean();
         LETTER_COUNT = 0;
         bkg_clean();
@@ -126,10 +127,11 @@ void l1_scene_1(void)
         print("kamchatkas\0", 24, 48);
         print("northern\0", 24, 64);
         print("waters.\0", 24, 80);
-    }
-    if(text_count == 2)
-    {
-        bkg_clean();
+    //}
+    //if(text_count == 2)
+    //{
+     //   bkg_clean();
+     delay(1000);
         sprite_clean();
         LETTER_COUNT = 0;
         print("fisherman:\0", 24, 32);
@@ -137,10 +139,11 @@ void l1_scene_1(void)
         print("be a cold\0", 24, 64);
         print("death\0", 24, 80);
         print("indeed...\0", 24, 96);
-    }
-    if(text_count == 3)
-    {
-        bkg_clean();
+    //}
+    //if(text_count == 3)
+    //{
+     //   bkg_clean();
+     delay(1000);
         sprite_clean();
         LETTER_COUNT = 0;
         print("fisherman:\0", 24, 32);
@@ -148,10 +151,11 @@ void l1_scene_1(void)
         print("have a\0", 24, 64);
         print("quiet\0", 24, 80);
         print("one.\0", 24, 96);
-    }
-    if(text_count == 4)
-    {
-        bkg_clean();
+    //}
+    //if(text_count == 4)
+    //{
+     //   bkg_clean();
+     delay(1000);
         sprite_clean();
         LETTER_COUNT = 0;
         print("fisherman:\0", 24, 32);
@@ -164,9 +168,10 @@ void l1_scene_1(void)
         print("fisherman:\0", 24, 32);
         print("to the\0", 24, 48);
         print("shit pot.\0", 24, 64);
-    }
-    if(text_count == 5)
-    {
+        delay(1000);
+    //}
+    //if(text_count == 5)
+    //{
         DISPLAY_OFF;
 
         /* center on the door */
@@ -178,7 +183,7 @@ void l1_scene_1(void)
         hide_sprites();
         LETTER_COUNT = 0;
         level_1_sprite_setup();
-    }
+    //}
 }
 
 int level_1_sprite_setup(void) 
@@ -217,7 +222,7 @@ int level_1_sprite_setup(void)
 
     delay(400); /* a pause before appearing at door */
     SHOW_SPRITES;
-    start_animate = 1;
+    //start_animate = 1;
 }
 
 /* a helper function to animate the sprites when they appear */

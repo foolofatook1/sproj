@@ -26,7 +26,7 @@ void asakawa_battle_ctrl(void)
             choice_handler(arrow_y);
             fight(&HERO_HP, &ASAKAWA_HP);
             delay(400);
-            /* basically does back but only when everything is done */
+            // basically does back but only when everything is done 
             if(STATE != DEAD)
             {
                 DISPLAY_OFF;

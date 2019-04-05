@@ -6,6 +6,7 @@
 #include "../text/text.h"
 #include "../battle/battle.h"
 #include "../start_up/start_up.h"
+#include "../level_3/level_3.h"
 #include "crab_catch.h"
 
 /* save this for later when checking collisions with sprites */
@@ -160,6 +161,17 @@ void shit_pot_sprites(void)
     set_sprite_tile(11, 22);
     move_sprite(10, bed_posx, bed_posy);
     move_sprite(11, bed_posx+sprite_width, bed_posy);
+
+    if(option == LEVEL_3 && GOT_INFO)
+    {
+        /* fisherman2 */
+        set_sprite_tile(12, 12);
+        set_sprite_tile(13, 12);
+        set_sprite_prop(13, S_FLIPX);
+        move_sprite(12, fisherman2_posx, fisherman2_posy);
+        move_sprite(13, fisherman2_posx+sprite_width, fisherman2_posy);
+    }
+
 }
 
 UINT8 sprite_collide_shit_pot(UINT8 *sprite_pos)
@@ -315,29 +327,110 @@ UINT8 conv_check(void)
             else if(option == LEVEL_3 && GOT_INFO)
                 return 1;
         }
-        else if(sprite == fisherman2_posx)
+        else if(sprite == fisherman2_posx && GOT_INFO)
         {
             sprite_clean();
             LETTER_COUNT = 0;
             print("fisherman:\0", 24, 32);
-            print("\0", 24, 48);
-            GOT_INFO = 1;
+            print("we were\0", 24, 48);
+            print("lost at\0", 24, 64);
+            print("sea,\0", 24, 80);
+            delay(1300);
+            sprite_clean();
+            LETTER_COUNT = 0;
+            print("fisherman:\0", 24, 32);
+            print("but then\0", 24, 48);
+            print("we washed\0", 24, 64);
+            print("in russia!\0", 24, 80);
+            delay(1300);
+            sprite_clean();
+            LETTER_COUNT = 0;
+            print("fisherman:\0", 24, 32);
+            print("those\0", 24, 48);
+            print("russkies\0", 24, 64);
+            print("are on to\0",24, 80);
+            print("something.\0", 24, 96);
+            delay(1300);
+            sprite_clean();
+            LETTER_COUNT = 0;
+            print("fisherman:\0", 24, 32);
+            print("they\0", 24, 48);
+            print("talked to\0",24, 64);
+            print("us about\0", 24, 80);
+            print("rxvxlxtxxn\0", 24, 96);
+            delay(1300);
+            sprite_clean();
+            LETTER_COUNT = 0;
+            print("fisherman:\0",24, 32);
+            print("we should\0", 24, 48);
+            print("organize\0", 24, 64);
+            print("too!\0", 24, 80);
+            delay(1300);
+            sprite_clean();
+            LETTER_COUNT = 0;
+            print("fisherman:\0", 24, 32);
+            print("me, you,\0", 24, 48);
+            print("and a\0",24, 64);
+            print("couple\0",24, 80);
+            print("others!\0", 24, 96);
+            delay(1300);
+            sprite_clean();
+            LETTER_COUNT = 0;
+            print("fisherman:\0", 24, 32);
+            print("we could\0", 24, 48);
+            print("organize\0", 24, 64);
+            print("the crew!\0", 24, 80);
+            delay(1300);
+            sprite_clean();
+            LETTER_COUNT = 0;
+            print("fisherman:\0", 24, 32);
+            print("what d'you\0", 24, 48);
+            print("think?\0", 24, 64);
+            delay(1000);
+            sprite_clean();
+            LETTER_COUNT = 0;
+            print("fisherman:\0",24, 32);
+            print("will you\0", 24, 48);
+            print("join us?\0", 24, 64);
+            print("a yes!\0", 24, 88);
+            print("b no...\0", 24, 104);
+            REVOLUTION_1 = 1;
         }
         talking = 1;
         while(talking)
         {
-
-            if(joypad() & J_A)
+            if(!REVOLUTION_1)
             {
-                shit_pot_setup();
-                shit_pot_sprites();
-                hero_posx = old_hero_posx;
-                move_sprite(0, hero_posx, hero_posy);
-                move_sprite(1, hero_posx+sprite_width, hero_posy);
-                hero_posy = old_hero_posy;
-                talking = 0;
+                if(joypad() & J_A)
+                {
+                    shit_pot_setup();
+                    shit_pot_sprites();
+                    hero_posx = old_hero_posx;
+                    move_sprite(0, hero_posx, hero_posy);
+                    move_sprite(1, hero_posx+sprite_width, hero_posy);
+                    hero_posy = old_hero_posy;
+                    talking = 0;
+                }
             }
-
+            if(REVOLUTION_1)
+            {
+                if(joypad() & J_A)
+                {
+                    revolt = 1;
+                    REVOLUTION_1 = 0;
+                }
+                if(joypad() & J_B)
+                {
+                    sprite_clean();
+                    LETTER_COUNT = 0;
+                    print("fisherman:\0", 24, 32);
+                    print("that's too\0", 24, 48);
+                    print("bad...\0", 24, 64);
+                    revolt = 0;
+                    REVOLUTION_1 = 0;
+                    delay(500);
+                }
+            }
         }
     }
     return 0;
