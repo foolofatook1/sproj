@@ -3,6 +3,7 @@
 #include "../text/text.h"
 #include "../battle/battle.h"
 #include "asakawa_battle.h"
+#include "../assets/level_assets/level_assets.h"
 #include "../start_up/start_up.h"
 
 UINT8 STATE = BATTLE_CHOICE;
@@ -10,7 +11,14 @@ UINT8 STATE = BATTLE_CHOICE;
 /* hp settings for this level */
 UINT8 ASAKAWA_HP = 100;
 UINT8 HERO_HP = 10;
+UINT8 start_hp = 10;
 
+/**
+ * If level is:
+ *  0) run first battle
+ *  1) run second battle
+ *  2) run third battle
+ */
 void asakawa_battle_ctrl(void)
 {
     choice = 0;
@@ -38,5 +46,6 @@ void asakawa_battle_ctrl(void)
             }
         }
     }
-    option = LEVEL_2;
+    if(!revolt)
+        option = LEVEL_2;
 }

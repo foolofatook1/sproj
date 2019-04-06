@@ -316,7 +316,10 @@ void choice_handler(UINT8 arrow_y)
     delay(500);
 }
 
-void hero_fight(void)//UINT8 *enemy_hp)
+/**
+ * need to refine this logic 
+ */
+void hero_fight(void)
 {
 
     if(choice == PUNCH || choice == ITEM)
@@ -332,39 +335,53 @@ void hero_fight(void)//UINT8 *enemy_hp)
         }
         sprite_clean();
         LETTER_COUNT = 0;
-        if(choice == PUNCH && (ENEMY == 1 || ENEMY == 2))
-        {
-            print(" no use\0", 56, 56);
-            print("punching\0", 56, 72);
-            print(" a crab!\0", 56, 88);
-            delay(500);
-        }
-        if(choice == PUNCH && ENEMY == 0 && hero_acc >= 3)
-        {
-            print("hit!\0", 72, 80);
-            delay(500);
-        }
-        if((choice == ITEM) && (CHOSEN_ITEM == NET) && 
-                (hero_acc > 0))
-        {
-            print("caught!\0", 72, 80);
-            CRAB_CAUGHT = 1;
-            delay(500);
-        }
         if((choice == ITEM) && (CHOSEN_ITEM == CLUB) && 
-                (CRAB_CAUGHT) && (hero_acc > 0))
-        {
-            print("crushed!\0", 72, 80);
-            delay(500);
-        }
-        if((choice == ITEM) && (CHOSEN_ITEM == CLUB) && 
-                (!CRAB_CAUGHT))
+            (ENEMY > 0) && (!CRAB_CAUGHT))
         {
             print("you need\0", 72, 64);
             print("to catch\0", 72, 80);
             print("the crab!\0", 72, 96);
             delay(500);
         }
+        else if((choice == ITEM) && (CHOSEN_ITEM == NET) && 
+                (hero_acc > 0))
+        {
+            print("caught!\0", 72, 80);
+            CRAB_CAUGHT = 1;
+            delay(500);
+        }
+        else if(((choice == PUNCH) && (hero_acc >= 3)) || 
+           ((choice == ITEM) && hero_acc > 0))
+        {
+            print("you hit\0", 56, 72);
+            if(ENEMY == 0)
+                print("asakawa\0", 56, 88);
+            if(ENEMY == 1)
+                print("crab\0", 56, 88);
+            if(ENEMY == 2)
+                print("king crab\0", 56, 88);
+            delay(500);
+        }
+/*        if(choice == PUNCH && (ENEMY == 1 || ENEMY == 2))
+        {
+            print(" no use\0", 56, 56);
+            print("punching\0", 56, 72);
+            print(" a crab!\0", 56, 88);
+            delay(500);
+        };
+        if(choice == PUNCH && ENEMY == 0 && hero_acc >= 3)
+        {
+            print("hit!\0", 72, 80);
+            delay(500);
+        }
+        
+        if((choice == ITEM) && (CHOSEN_ITEM == CLUB) && 
+                (CRAB_CAUGHT) && (hero_acc > 0))
+        {
+            print("crushed!\0", 72, 80);
+            delay(500);
+        }
+        */
         /* fighter chooses punch and misses */
         else if(((choice == PUNCH) && (hero_acc < 3)) || 
                 ((choice == ITEM) && (hero_acc == 0)))
@@ -555,7 +572,7 @@ void npc_fight(void)
         DISPLAY_OFF;
         sprite_clean();
         LETTER_COUNT = 0;
-        print("hit!\0", 72, 80);
+        print("you're hit\0", 72, 80);
         clear_screen();
         DISPLAY_ON;
         delay(500);
@@ -574,7 +591,7 @@ void npc_fight(void)
         DISPLAY_OFF;
         sprite_clean();
         LETTER_COUNT = 0;
-        print("miss!\0", 64, 80);
+        print("they miss\0", 64, 80);
         clear_screen();
         DISPLAY_ON;
         delay(500);
@@ -649,7 +666,8 @@ void damage(UINT8 *fighter_hp)
                 }
             }
         }
-        else if(npc_acc >= 1 && npc_act >= 1 && choice == PUNCH)
+        else if(npc_acc >= 1 && npc_act >= 1 && choice == PUNCH || 
+                choice == ITEM)
         {
             for(i = SHOOT; i > 0; --i)
             {
@@ -722,6 +740,10 @@ void damage(UINT8 *fighter_hp)
 
 void lower_hp(UINT8 *hit, UINT8 defended, UINT8 *enemy_hp)
 {
+    if(start_hp == 50)
+        (*hit) = 3;
+    if(start_hp == 100)
+        (*hit) *= 10;
     if(defended)
     {
         for(i = ((*hit)-DEFEND); i > 0; --i)
@@ -821,25 +843,40 @@ void fight(UINT8 *fighter_hp, UINT8 *enemy_hp)
 
 void show_fighter_stats(void)
 {
-    /* HP */
-    battle_print("hero\0", 88, 40);
     battle_print("hp\0", 88, 56);
-
     itoa(HERO_HP, h_hp);
     battle_print(h_hp, 96, 72);
-    battle_print("/10\0", 122, 72);
+    /* HP */
+    /* this currently makes it so when you lose HP everything breaks */
+    if(start_hp == 10)
+    {
+        battle_print("worker\0", 88, 40);
+        battle_print("/10\0", 122, 72);
+    }
+    if(start_hp == 50)
+    {
+        battle_print("leaders\0", 88, 40);
+        battle_print("/50\0", 122, 72);
+    }
+    if(start_hp == 100)
+    {
+        battle_print("workers\0", 88, 40);
+        battle_print("/100\0", 122, 72);
+    }
     /**
      * if you're experiencing problems, 
      * try cleaning sprites and setting LETTER_COUNT to 0. 
      */
-    /*itoa(CRAB_HP, e_hp);
-      battle_print(e_hp, 96, 104);
-      if(ENEMY == 0)
-      battle_print("100\0", 122, 104);
-      if(crab == 0)
-      battle_print("/5\0", 122, 104);
-      if(crab == 1)
-      battle_print("/10\0", 122, 104);*/
+    
+    if(ENEMY == 0)
+    {
+        itoa(CRAB_HP, e_hp);
+        battle_print(e_hp, 96, 104);
+    }
+    /*if(crab == 0)
+        battle_print("/5\0", 122, 104);
+    else if(crab == 1)
+        battle_print("/10\0", 122, 104);*/
 }
 
 void game_over_screen(void)

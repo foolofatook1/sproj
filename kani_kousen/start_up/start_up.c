@@ -1,5 +1,6 @@
 #include "start_up.h"
 #include "../text/text.h"
+#include "../battle/battle.h"
 #include "../assets/sprite_palette.h"
 #include "../assets/bkg_palette.h"
 

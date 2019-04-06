@@ -15,6 +15,9 @@ UINT8 APPEARED = 0;
 UINT8 crabs_to_catch = 1;
 UINT8 health_loss = 0;
 
+UINT8 anim_1 = 32;
+UINT8 anim_2 = 34;
+
 UINT8 hero_posx = 200;
 UINT8 hero_posy = 200;
 UINT8 fisherman_posx = 200;

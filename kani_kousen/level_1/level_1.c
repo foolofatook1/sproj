@@ -1,14 +1,13 @@
 #include "level_1.h"
 #include "../assets/level_assets/level_assets.h"
+#include "../battle/battle.h"
 #include "asakawa_battle.h"
 #include "../text/text.h"
+#include "../start_up/start_up.h"
 #include "../assets/sprite_palette.h"
 
 /* scene 3 variables */
 UINT8 l1_scene_3_anim = 0;
-
-UINT8 anim_1 = 32;
-UINT8 anim_2 = 34;
 
 /* The big control function */
 void level_1_ctrl(void) 
@@ -579,7 +578,7 @@ void l1_scene_3(void)
     print("this\0", 24, 48);
     print("attitude\0", 24, 64);
     print("is\0", 24, 80);
-    print("mutinous,\0", 24, 112);
+    print("mutinous,\0", 24, 94);
     delay(1000);
     sprite_clean();
     LETTER_COUNT = 0;
@@ -588,49 +587,17 @@ void l1_scene_3(void)
     print("be\0", 24, 64);
     print("considered\0", 24, 80);
     print("treason!\0", 24, 96);
-    /*delay(1000);
-    sprite_clean();
-    LETTER_COUNT = 0;
-    print("asakawa:\0", 24, 32);
-    print("treason as\0", 24, 48);
-    print("well!\0", 24, 64);
     delay(1000);
-    sprite_clean();
-    LETTER_COUNT = 0;
-    print("asakawa:\0", 24, 32);
-    print("this job\0", 24, 48);
-    print("is within\0", 24, 64);
-    print("the realm\0", 24, 80);
-    delay(1000);
-    sprite_clean();
-    LETTER_COUNT = 0;
-    print("asakawa:\0", 24, 32);
-    print("of\0", 24, 48);
-    print("'national\0", 24, 64);
-    print("policy!'\0", 24, 80);
-    delay(1000);*/
     /* Battle prompt */
     DISPLAY_OFF;
-    set_bkg_data(0,4, blank_screen_tiles);
-    set_bkg_tiles(0,0,20,18,blank_screen);
+    //set_bkg_data(0,4, blank_screen_tiles);
+    //set_bkg_tiles(0,0,20,18,blank_screen);
+    clear_screen();
     sprite_clean();
     LETTER_COUNT = 0;
     print("fight\0", 64, 32);
     print("asakawa\0", 56, 48);
     DISPLAY_ON;
-    /*delay(500);
-    DISPLAY_ON;
-    delay(100);
-    DISPLAY_OFF;
-    delay(100);
-    DISPLAY_ON;
-    delay(100);
-    DISPLAY_OFF;
-    delay(100);
-    DISPLAY_ON;
-    delay(300);
-    sprite_clean();
-    LETTER_COUNT = 0;*/
 }
 
 void asakawa_shoots_anim(void)

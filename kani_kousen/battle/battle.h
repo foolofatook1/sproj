@@ -24,7 +24,7 @@ void fight_config(void);
 void fight(UINT8*, UINT8*);
 void npc_fight(void);
 
-void hero_fight(void);//UINT8*);
+void hero_fight(void);
 void hero_fight_anim(void);
 void hero_defend_anim(void);
 void enemy_fight_anim(void);
@@ -58,6 +58,7 @@ extern UINT8 PUNCH_LOC;
 /* what do i do about this stuff? */
 extern UINT8 ASAKAWA_HP;
 extern UINT8 HERO_HP;
+extern UINT8 start_hp;
 
 extern UWORD *h_hp;
 extern UWORD *e_hp;

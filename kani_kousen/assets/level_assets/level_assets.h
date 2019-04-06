@@ -18,6 +18,9 @@ extern UINT8 APPEARED;
 extern UINT8 crabs_to_catch;
 extern UINT8 health_loss;
 
+extern UINT8 anim_1;
+extern UINT8 anim_2;
+
 extern UINT8 hero_posx;
 extern UINT8 hero_posy;
 extern UINT8 hero_posx;
