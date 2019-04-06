@@ -4,12 +4,12 @@
 #include "../assets/bkg_palette.h"
 
 /* positions of the arrow */
-UINT8 START_POS = 72;
+/*UINT8 START_POS = 72;
 UINT8 NEW_GAME_POS = 80;
-UINT8 QUIT_POS = 88;
-UINT8 GAME_OVER = 0;
+UINT8 QUIT_POS = 88;*/
 
 /* actions that can be taken and returned */
+UINT8 GAME_OVER = 0;
 UINT8 NOTHING = 0;
 UINT8 START = 1;
 UINT8 LEVEL_2 = 2;
@@ -25,7 +25,29 @@ UINT8 choice = NOTHING;
 
 void opening(void)
 {
-    arrow_x = 72;
+    DISPLAY_OFF;
+    // set bkg property
+    set_bkg_palette(0, 1, bkg_palette);
+    // set sprite properties 
+    set_sprite_palette(0, 2, sprite_palette);
+
+    clear_screen();
+    print("press a\0", 24, 32);
+    print("to start\0", 24, 48);
+    for(i = 0; i < LETTER_COUNT; ++i)
+        set_sprite_prop(i, 0);
+    SHOW_BKG;
+    SHOW_SPRITES;
+    DISPLAY_ON;
+    while(1)
+    {
+        if(joypad() & J_A)
+        {
+            option = START;
+            break;
+        }
+    }
+/*    arrow_x = 72;
     arrow_y = 72;
     
     setup_bkg();
@@ -33,13 +55,13 @@ void opening(void)
     {
         start_up();        
         wait_vbl_done();
-    }
+    }*/
 }
 
 /* toggle between start, new game and quit */
-void start_up(void)
+/*void start_up(void)
 {
-    /* sprite 0 is the '>' */
+    // sprite 0 is the '>' 
     delay(100);
     if(joypad() & J_DOWN)
     {
@@ -56,7 +78,7 @@ void start_up(void)
     {
         if(arrow_y < START_POS+8)
         {
-            arrow_y = QUIT_POS+8; /* actual location of QUIT */
+            arrow_y = QUIT_POS+8; // actual location of QUIT 
             move_sprite(0, arrow_x, arrow_y);
         }
         arrow_y-=8;
@@ -65,10 +87,10 @@ void start_up(void)
 
     if(joypad() & J_A)
         option = check_pos();
-}
+}*/
 
 /* checks the position of the arrow */
-int check_pos(void)
+/*int check_pos(void)
 {
     if(arrow_y == START_POS)
         return START;
@@ -76,10 +98,10 @@ int check_pos(void)
         return NEW_GAME;
     if(arrow_y == QUIT_POS)
         return QUIT;
-}
+}*/
 
 /* setup the background for the opening screen. */
-void setup_bkg(void)
+/*void setup_bkg(void)
 {
     HIDE_WIN;
     HIDE_BKG;
@@ -88,10 +110,10 @@ void setup_bkg(void)
     set_bkg_data(0,4,blank_screen_tiles); 
     set_bkg_tiles(0,0,20,18,blank_screen);
     
-    /* set sprite properties */
+    // set sprite properties 
     set_sprite_palette(0, 2, sprite_palette);
 
-    /* setup bkg */
+    // setup bkg 
     print(">start\0", 72, 72);
     print(" new game\0", 72, 80);
     print(" quit\0", 72, 88);
@@ -102,4 +124,4 @@ void setup_bkg(void)
     SHOW_BKG;
     SHOW_SPRITES;
     DISPLAY_ON;
-}
+}*/

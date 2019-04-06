@@ -14,7 +14,7 @@ UINT8 anim_2 = 34;
 void level_1_ctrl(void) 
 {
     wait_vbl_done();
-    level_1_bkg_start();
+/*    level_1_bkg_start();
     l1_scene_1();
     i = 0; // helping with animation
     while(enter_miner() == 0)
@@ -33,7 +33,7 @@ void level_1_ctrl(void)
         wait_vbl_done();
     }
     l1_scene_3_text_setup();
-    l1_scene_3();
+    l1_scene_3();*/
     asakawa_battle_ctrl();
 }
 
@@ -81,6 +81,7 @@ void level_1_bkg_start(void)
     LETTER_COUNT = 0;
     print("fisherman:\0", 24, 32);
     print("you hear!?\0", 24, 48);
+    delay(500);
 }
 
 void l1_scene_1(void) 
@@ -248,6 +249,7 @@ void miner_intro_setup(void)
     print("yubari\0", 24, 80);
     print("coal\0", 24, 96);
     print("mines.\0", 24, 112);
+    delay(1000);
 }
 
 /* setting up the miners dialogue / introduction */
@@ -466,15 +468,6 @@ void l1_scene_3_text_setup(void)
     delay(1000);
 }
 
-/* asakawa give his message */
-/*void joypad_check_l1_scene_3(void) 
-  {
-  if(joypad() & J_A)
-  {
-  l1_scene_3();
-  }
-  }*/
-
 /* asakawa's message */
 void l1_scene_3(void)
 {
@@ -489,20 +482,7 @@ void l1_scene_3(void)
     LETTER_COUNT = 0;
     print("asakawa:\0", 24, 32);
     print("this ship\0", 24, 48);
-    print("is no\0", 24, 64);
-    delay(1000);
-    sprite_clean();
-    LETTER_COUNT = 0;
-    print("asakawa:\0", 24, 32);
-    print("simple\0", 24, 48);
-    print("source of\0", 24, 64);
-    print("income!\0", 24, 80);
-    delay(1000);
-    sprite_clean();
-    LETTER_COUNT = 0;
-    print("asakawa:\0", 24, 32);
-    print("but rather\0", 24, 48);
-    print("of the\0", 24, 64);
+    print("is of the\0", 24, 64);
     print("utmost\0", 24, 80);
     print("concern\0", 24, 96);
     delay(1000);
@@ -511,7 +491,7 @@ void l1_scene_3(void)
     print("asakawa:\0", 24, 32);
     print("for our\0", 24, 48);
     print("nation!\0", 24, 64);
-    delay(1000);
+    delay(500);
     sprite_clean();
     LETTER_COUNT = 0;
     print("asakawa:\0", 24, 32);
@@ -532,26 +512,15 @@ void l1_scene_3(void)
     sprite_clean();
     LETTER_COUNT = 0;
     print("asakawa:\0", 24, 32);
-    print("that is\0", 24, 48);
-    print("why you\0", 24, 64);
-    print("fisherman\0", 24, 80);
-    print("are not\0", 24, 96);
+    print("there is an\0", 24, 48);
+    print("imperial\0", 24, 64);
+    print("ship\0", 24, 80);
     delay(1000);
     sprite_clean();
     LETTER_COUNT = 0;
     print("asakawa:\0", 24, 32);
-    print("only\0", 24, 48);
-    print("canning\0", 24, 64);
-    print("crabs,\0", 24, 80);
-    delay(1000);
-    bkg_clean();
-    sprite_clean();
-    LETTER_COUNT = 0;
-    print("asakawa:\0", 24, 32);
-    print("but\0", 24, 48);
-    print("salmon and\0", 24, 64);
-    print("tuna\0", 24, 80);
-    print("as well!\0", 24, 96);
+    print("to\0", 24, 48);
+    print("protect us\0", 24, 64);
     delay(1000);
     sprite_clean();
     LETTER_COUNT = 0;
@@ -559,7 +528,6 @@ void l1_scene_3(void)
     print("as a\0", 24, 48);
     print("nation of\0", 24, 64);
     print("excellence\0", 24, 80);
-    print("...", 24, 96);
     delay(1000);
     bkg_clean();
     sprite_clean();
@@ -610,17 +578,17 @@ void l1_scene_3(void)
     print("asakawa:\0", 24, 32);
     print("this\0", 24, 48);
     print("attitude\0", 24, 64);
-    print("is not\0", 24, 80);
-    print("only\0", 24, 96);
+    print("is\0", 24, 80);
     print("mutinous,\0", 24, 112);
     delay(1000);
     sprite_clean();
     LETTER_COUNT = 0;
     print("asakawa:\0", 24, 32);
-    print("but will\0", 24, 48);
+    print("and will\0", 24, 48);
     print("be\0", 24, 64);
     print("considered\0", 24, 80);
-    delay(1000);
+    print("treason!\0", 24, 96);
+    /*delay(1000);
     sprite_clean();
     LETTER_COUNT = 0;
     print("asakawa:\0", 24, 32);
@@ -640,7 +608,7 @@ void l1_scene_3(void)
     print("of\0", 24, 48);
     print("'national\0", 24, 64);
     print("policy!'\0", 24, 80);
-    delay(1000);
+    delay(1000);*/
     /* Battle prompt */
     DISPLAY_OFF;
     set_bkg_data(0,4, blank_screen_tiles);
@@ -649,7 +617,8 @@ void l1_scene_3(void)
     LETTER_COUNT = 0;
     print("fight\0", 64, 32);
     print("asakawa\0", 56, 48);
-
+    DISPLAY_ON;
+    /*delay(500);
     DISPLAY_ON;
     delay(100);
     DISPLAY_OFF;
@@ -661,7 +630,7 @@ void l1_scene_3(void)
     DISPLAY_ON;
     delay(300);
     sprite_clean();
-    LETTER_COUNT = 0;
+    LETTER_COUNT = 0;*/
 }
 
 void asakawa_shoots_anim(void)

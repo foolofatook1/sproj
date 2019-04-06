@@ -10,7 +10,9 @@
 extern UINT8 sprite_width;
 
 extern UINT8 SLEPT;
+extern UINT8 talked;
 extern UINT8 revolt;
+extern UINT8 striking;
 extern UINT8 REVOLUTION_1;
 extern UINT8 APPEARED;
 extern UINT8 crabs_to_catch;

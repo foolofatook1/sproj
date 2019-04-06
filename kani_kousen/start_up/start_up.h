@@ -4,17 +4,17 @@
 #include <gb/gb.h>
 
 /* functions */
-void setup_bkg(void);
+/*void setup_bkg(void);
 void start_up(void);
-int check_pos(void);
+int check_pos(void);*/
 void opening(void);
 
 /* positions of the arrow */
-extern UINT8 START_POS;
+/*extern UINT8 START_POS;
 extern UINT8 NEW_GAME_POS;
-extern UINT8 QUIT_POS;
+extern UINT8 QUIT_POS;*/
 /* this is if you die */
-extern UINT8 GAME_OVER;
+//extern UINT8 GAME_OVER;
 
 /* actions that can be taken and returned */
 extern UINT8 NOTHING;
