@@ -28,6 +28,7 @@ void level_3_ctrl(void)
     {
         while(moving)
         {
+            option = LEVEL_3;
             hero_walk();
             pos_check_shit_pot();
             if(conv_check())
@@ -36,23 +37,23 @@ void level_3_ctrl(void)
         if(!striking)
             leaves_shit_pot();
     }
-    /* first attempt at revolution is ready */
+    clear_screen();
+    sprite_clean();
+    LETTER_COUNT = 0;
+    print("made it!\0", 24, 32);
     /**
-     * Add follow up for if you say yes,
-     * where the fisherman gives you a game plan
-     * where you try and gather people up.
-     * if you say no, increase the amount of crabs necessary to catch,
-     * and lower HP by one, and keep doing that every time you say no.
+     * Now we need to:
+     *  1) have battle with asakawa and imperial army
+     *  2) lose battle
+     *  3) have another battle with different tactic
+     *  4) win battle
      */
-     /**
-      * So the following is if you say yes, and "no,"
-      * response is in conv_check()
-      */
-
 }
 
 void leaves_shit_pot(void)
 {
+    sprite_clean();
+    LETTER_COUNT = 0;
     asakawa_enters_deck();
     asakawa_before_work();
     crab_catch_ctrl();

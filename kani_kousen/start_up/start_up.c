@@ -10,7 +10,7 @@ UINT8 QUIT_POS = 88;*/
 
 /* actions that can be taken and returned */
 UINT8 GAME_OVER = 0;
-UINT8 NOTHING = 0;
+//UINT8 NOTHING = 0;
 UINT8 START = 1;
 UINT8 LEVEL_2 = 2;
 UINT8 LEVEL_3 = 3;
@@ -21,7 +21,7 @@ UINT8 QUIT = 5;
 UINT8 option;
 
 /* chosen decision */
-UINT8 choice = NOTHING;
+UINT8 choice = 0;
 
 void opening(void)
 {
@@ -44,6 +44,7 @@ void opening(void)
         if(joypad() & J_A)
         {
             option = START;
+//            choice = START;
             break;
         }
     }

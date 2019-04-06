@@ -17,7 +17,7 @@ extern UINT8 QUIT_POS;*/
 //extern UINT8 GAME_OVER;
 
 /* actions that can be taken and returned */
-extern UINT8 NOTHING;
+//extern UINT8 NOTHING;
 extern UINT8 START;
 extern UINT8 LEVEL_2;
 extern UINT8 LEVEL_3;

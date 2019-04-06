@@ -10,13 +10,13 @@
 #include "assets/level_assets/level_assets.h"
 #include "level_3/level_3.h"
 
-#ifndef GBDK_INCLUDE
+/*#ifndef GBDK_INCLUDE
 #define GBDK_INCLUDE
 
 #include <gb/gb.h>
 #include <gb/drawing.h>
 
-#endif /* GBDK_INCLUDE */
+#endif // GBDK_INCLUDE 
 
 #ifndef START_UP_INCLUDE
 #define START_UP_INCLUDE
@@ -41,11 +41,8 @@ extern UINT8 arrow_y;
 extern UINT8 option;
 extern UINT8 choice;
 
-#endif /* START_UP_INCLUDE */
+#endif // START_UP_INCLUDE 
 
-/**
- * Things needed for text
- */
 #ifndef TEXT_INCLUDE
 #define TEXT_INCLUDE
 
@@ -65,11 +62,8 @@ extern UINT8 j;
 extern UINT8 cushion;
 extern UINT8 LETTER_COUNT;
 
-#endif /* TEXT_INCLUDE */
+#endif // TEXT_INCLUDE 
 
-/**
- * Things needed for level_1
- */
 #ifndef LEVEL_1_INLCUDE
 #define LEVEL_1_INCLUDE
 
@@ -114,7 +108,7 @@ extern UINT8 **student_pos;
 extern UINT8 **asakawa_pos;
 extern UINT8 sprite_width;
 
-#endif /* LEVEL_1_INCLUDE */
+#endif // LEVEL_1_INCLUDE 
 
 #ifndef LEVEL_2_INCLUDE
 #define LEVEL_2_INCLUDE
@@ -126,14 +120,14 @@ extern UINT8 sprite_width;
 void level_2_ctrl(void);
 void level_2_bkg_start(void);
 
-#endif /* LEVEL_2_INCLUDE */
+#endif // LEVEL_2_INCLUDE 
 
 #ifndef ASAKAWA_BATTLE_INCLUDE
 #define ASAKAWA_BATTLE_INCLUDE
 
 void asakawa_battle_ctrl(void);
 
-#endif /* ASAKAKAWA_BATTLE_INCLUDE */
+#endif // ASAKAKAWA_BATTLE_INCLUDE 
 
 #ifndef BATTLE_INCLUDE
 #define BATTLE_INCLUDE
@@ -169,15 +163,15 @@ extern UINT8 PUNCH;
 extern UINT8 DEFEND;
 extern UINT8 SHOOT;
 extern UINT8 PUNCH_LOC;
-/* what do i do about this stuff? */
+// what do i do about this stuff? 
 extern UINT8 ASAKAWA_HP;
 extern UINT8 HERO_HP;
 extern UWORD *h_hp;
 extern UINT8 enemy_choice;
 extern UWORD seed;
-/* a stepping variable for character animations */
+// a stepping variable for character animations 
 extern UINT8 y;
-/* another animation counter */
+// another animation counter 
 extern UINT8 a;
 extern UINT8 arrow_x;
 extern UINT8 arrow_y;
@@ -193,6 +187,4 @@ extern UINT8 FIGHTING;
 extern UINT8 DEAD;
 extern UINT8 STATE;
 
-#endif /* BATTLE_INCLUDE */
-
-
+#endif // BATTLE_INCLUDE */
