@@ -44,6 +44,7 @@ void level_2_ctrl(void)
     }
     while(option != LEVEL_3 && option != GAME_OVER)
     {
+        GOT_INFO = 0;
         asakawa_enters_deck();
         asakawa_before_work();
         crab_catch_ctrl();
@@ -184,8 +185,8 @@ UINT8 sprite_collide_shit_pot(UINT8 *sprite_pos)
                 (hero_posy < (sprite_pos[i+1]+sprite_width)) &&
                 ((hero_posy+sprite_width) > sprite_pos[i+1]))
         {
-            hero_posx = sprite_pos[i]-16;
-            hero_posy = sprite_pos[i+1]+16;
+            hero_posx = sprite_pos[i]-8;
+            hero_posy = sprite_pos[i+1]+8;
             move_sprite(0, hero_posx, hero_posy);
             move_sprite(1, hero_posx+sprite_width, hero_posy);
             return sprite_pos[i];
@@ -305,7 +306,7 @@ UINT8 conv_check(void)
                 print("back!\0", 24, 64);
                 GOT_INFO = 1;
             }
-            if(revolt)
+            else if(option == LEVEL_3 && revolt)
             {
                 sprite_clean();
                 LETTER_COUNT = 0;
@@ -340,13 +341,30 @@ UINT8 conv_check(void)
             for(i = 0; i < LETTER_COUNT; ++i)
                 set_sprite_prop(i, 1);
             SLEPT = 1;
-            if((option == LEVEL_2) && (GOT_INFO))
+            /*if(option  == LEVEL_2)
             {
+                clear_screen();
+                sprite_clean();
+                LETTER_COUNT = 0;
+                print("2", 24, 32);
+            }*/
+            /*if(GOT_INFO)
+            {
+                clear_screen();
+                sprite_clean();
+                LETTER_COUNT = 0;
+                print("got info", 24, 32);
+            }*/
+            if(option == LEVEL_2 && (!GOT_INFO));
+            else if((option == LEVEL_2) && (GOT_INFO))
+            {
+                clear_screen();
+                sprite_clean();
+                LETTER_COUNT = 0;
+                print("next\0", 24, 32);
                 option = LEVEL_3;
                 return 1;
             }
-            else if((option == LEVEL_3) && GOT_INFO)
-                SLEPT = 1;
         }
         else if((sprite == fisherman2_posx) && (APPEARED))
         {
@@ -965,7 +983,15 @@ void pos_check_shit_pot(void)
     {
         hero_posy = 56;
         if(hero_posx >= 48 && hero_posx <= 108)
-            moving = 0;
+        {
+            if(revolt)
+            {
+                hero_posy = 56;
+                hero_posx = hero_posx;
+            }
+            else
+                moving = 0;
+        }
     }
     if(hero_posx <= 8)
         hero_posx = 8;
@@ -975,10 +1001,10 @@ void pos_check_shit_pot(void)
         hero_posx = 152;
 }
 
-void pos_check_deck(void)
+/*void pos_check_deck(void)
 {
     if(hero_posy <= 116)
         hero_posy = 116;
     if(hero_posy >= 144)
         hero_posy = 144;
-}
+}*/

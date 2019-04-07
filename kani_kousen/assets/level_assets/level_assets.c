@@ -35,6 +35,9 @@ UINT8 asakawa_posy = 200;
 UINT8 bed_posx = 200;
 UINT8 bed_posy = 200;
 
+UINT8 HERO_HP = 10;
+UINT16 ASAKAWA_HP = 100;
+
 //UINT8 sprite_positions[8];
 
 /*UINT8 check_items(void)

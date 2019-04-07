@@ -28,6 +28,7 @@ void level_3_ctrl(void)
     moving = 1;
     while(!striking)
     {
+        option = LEVEL_3;
         while(moving)
         {
             option = LEVEL_3;
@@ -39,6 +40,7 @@ void level_3_ctrl(void)
         if(!striking)
             leaves_shit_pot();
     }
+//    revolt = 1; // this is just for running tests;
     delay(1000);
     DISPLAY_OFF;
     sprite_clean();
@@ -63,6 +65,7 @@ void level_3_ctrl(void)
         set_sprite_tile(15, anim_2+=4);
         delay(500);
     }
+    //STATE = FIGHT_CHOICE; // this is for tests
     delay(500);
     DISPLAY_OFF;
     bkg_clean();
@@ -94,6 +97,7 @@ void level_3_ctrl(void)
     ASAKAWA_HP = 200; /* this will later go back down to 100 */
     start_hp = 50;
     asakawa_battle_ctrl();
+    option = LEVEL_3;
     /* third time around can increase HERO_HP to 100 */
     clear_screen();
     sprite_clean();

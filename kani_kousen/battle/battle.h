@@ -3,10 +3,6 @@
 
 #include <gb/gb.h>
 
-#include "../assets/sprites/asakawa_front_idle.h"
-#include "../assets/sprites/hero_back_idle.h"
-#include "../assets/sprites/asakawa_air_shot.h"
-
 void show_fighter_stats(void);
 
 void battle_menu(void);
@@ -56,8 +52,6 @@ extern UINT8 KING_CLAW;
 extern UINT8 PUNCH_LOC;
 
 /* what do i do about this stuff? */
-extern UINT8 ASAKAWA_HP;
-extern UINT8 HERO_HP;
 extern UINT8 start_hp;
 
 extern UWORD *h_hp;

@@ -19,7 +19,7 @@ UINT8 CRAB_HP = 5;
 void crab_catch_ctrl(void)
 {
     // delete this ITEMS thing later?
-    UWORD crab_num[4];
+    //UWORD crab_num[4];
     ITEMS = 2;
     BATTLE_NUM = 1;
     STATE = BATTLE_CHOICE;
@@ -72,7 +72,7 @@ void crab_catch_ctrl(void)
             STATE = BATTLE_CHOICE;
         }
     }
-    DISPLAY_OFF;
+/*    DISPLAY_OFF;
     clear_screen();
     sprite_clean();
     LETTER_COUNT = 0;
@@ -81,7 +81,7 @@ void crab_catch_ctrl(void)
     print("caught \0", 24, 48);
     print(crab_num, 80, 48);
     print("crabs\0", 24, 64);
-    DISPLAY_ON;
+    DISPLAY_ON;*/
     delay(1000);
 }
 
@@ -101,13 +101,13 @@ void crab_catch_setup(void)
         LETTER_COUNT = 0;
         clear_screen();
         print("a crab!\0", 56, 80);
-        DISPLAY_OFF;
+        /*DISPLAY_OFF;
         delay(500);
         DISPLAY_ON;
         delay(500);
         DISPLAY_OFF;
         delay(500);
-        DISPLAY_ON;
+        DISPLAY_ON;*/
         sprite_setup(8, hero_back_idle, 8, norm_crab);
         CRAB_HP = 5;
         ENEMY = 1;
@@ -120,13 +120,13 @@ void crab_catch_setup(void)
         clear_screen();
         print("a king\0", 56, 80);
         print("crab!\0", 60, 96);
-        DISPLAY_OFF;
+        /*DISPLAY_OFF;
         delay(500);
         DISPLAY_ON;
         delay(500);
         DISPLAY_OFF;
         delay(500);
-        DISPLAY_ON;
+        DISPLAY_ON;*/
         sprite_setup(8, hero_back_idle, 8, king_crab);
         CRAB_HP = 10;
         ENEMY = 2;

@@ -12,7 +12,7 @@ CRAB_CATCH_INCLUDE = level_2/crab_catch.o
 
 # level_2_include starts at assets/sprites/hero_lie_down.o
 # crab_catch_include starts after student_front_idle.o
-LEVEL_ASSETS = assets/level_assets/level_assets.o assets/sprites/hero_lie_down.o assets/sprites/hero_walk_sideways.o assets/sprites/fisherman_walk_sideways.o assets/sprites/fisherman_walk_up.o assets/sprites/hero_walk_down.o assets/sprites/hero_walk_up.o assets/bkgs/deck.o assets/sprites/asakawa_walk_sideways.o assets/sprites/miner_front_idle.o assets/sprites/student_front_idle.o assets/sprites/norm_crab.o assets/sprites/king_crab.o assets/sprites/bed.o
+LEVEL_ASSETS = assets/level_assets/level_assets.o assets/sprites/hero_lie_down.o assets/sprites/hero_walk_sideways.o assets/sprites/fisherman_walk_sideways.o assets/sprites/fisherman_walk_up.o assets/sprites/hero_walk_down.o assets/sprites/hero_walk_up.o assets/bkgs/deck.o assets/sprites/asakawa_walk_sideways.o assets/sprites/miner_front_idle.o assets/sprites/student_front_idle.o assets/sprites/norm_crab.o assets/sprites/king_crab.o assets/sprites/bed.o assets/sprites/soldier.o
 
 START_UP_INCLUDE = start_up/start_up.o
 

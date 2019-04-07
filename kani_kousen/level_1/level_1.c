@@ -162,7 +162,8 @@ int level_1_sprite_setup(void)
     /* fisherman */
     set_sprite_data(8, 8, fisherman_front_idle);
     set_sprite_tile(2, 8);
-    set_sprite_tile(3, 10);
+    set_sprite_tile(3, 8);
+    set_sprite_prop(3, S_FLIPX);
 
     /* miner */
     set_sprite_data(16, 8, miner_walk_left);

@@ -9,8 +9,6 @@
 UINT8 STATE = BATTLE_CHOICE;
 
 /* hp settings for this level */
-UINT8 ASAKAWA_HP = 100;
-UINT8 HERO_HP = 10;
 UINT8 start_hp = 10;
 
 /**

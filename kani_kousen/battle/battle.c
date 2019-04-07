@@ -8,6 +8,13 @@
 #include "../text/text.h"
 #include "../start_up/start_up.h"
 #include "../level_2/crab_catch.h"
+#include "../assets/level_assets/level_assets.h"
+#include "../assets/sprites/soldier.h"
+#include "../assets/sprites/asakawa_front_idle.h"
+#include "../assets/sprites/hero_back_idle.h"
+#include "../assets/sprites/fisherman_idle_back.h"
+#include "../assets/sprites/student_idle_back.h"
+#include "../assets/sprites/asakawa_air_shot.h"
 
 /**
  * 0 = asakawa;
@@ -16,6 +23,7 @@
  * 3 = beriberi
  * 4 = lice
  */
+
 UINT8 ENEMY = 0;
 UINT8 BATTLE_NUM = 0;
 
@@ -294,7 +302,7 @@ void choice_handler(UINT8 arrow_y)
     if(CHOSEN_ITEM == NET)
         choice = ITEM;
 
-    if(choice == ITEM)
+    /*if(choice == ITEM)
     {
         clear_screen();
         sprite_clean();
@@ -313,7 +321,7 @@ void choice_handler(UINT8 arrow_y)
         LETTER_COUNT = 0;
         print("punching\0", 24, 32);
     }
-    delay(500);
+    delay(500);*/
 }
 
 /**
@@ -551,6 +559,60 @@ void sprite_setup(UINT8 hnb, unsigned char *hero_data,
     move_sprite(5, 77, 80);
     move_sprite(6, 84, 72);
     move_sprite(7, 84, 80);
+
+    if(striking)
+    {
+        set_sprite_data(16, 2, soldier);
+        set_sprite_data(18, 2, fisherman_idle_back);
+        set_sprite_data(20, 2, student_idle_back);
+      
+        /* soldiers */
+        set_sprite_tile(8, 16); // two on the left
+        set_sprite_tile(9, 17);
+        set_sprite_tile(10, 16); // two on the right
+        set_sprite_tile(11, 17);
+        set_sprite_tile(12, 16); 
+        set_sprite_tile(13, 17);
+        set_sprite_tile(14, 16);
+        set_sprite_tile(15, 17);
+        set_sprite_prop(14, S_FLIPX);
+        set_sprite_prop(15, S_FLIPX);
+        set_sprite_prop(10, S_FLIPX);
+        set_sprite_prop(11, S_FLIPX);
+
+        /* fisherman && student */
+        set_sprite_tile(16, 18);
+        set_sprite_tile(17, 19);
+        set_sprite_tile(18, 18);
+        set_sprite_tile(19, 19);
+        set_sprite_tile(20, 20);
+        set_sprite_tile(21, 21);
+        set_sprite_tile(22, 20);
+        set_sprite_tile(23, 21);
+        set_sprite_prop(18, S_FLIPX);
+        set_sprite_prop(19, S_FLIPX);
+        set_sprite_prop(22, S_FLIPX);
+        set_sprite_prop(23, S_FLIPX);
+
+        /* soldiers */
+        move_sprite(8, 51, 40);
+        move_sprite(9, 51, 48);
+        move_sprite(10,51+sprite_width, 40);
+        move_sprite(11,51+sprite_width, 48);
+        move_sprite(12,99, 40);
+        move_sprite(13,99, 48);
+        move_sprite(14,99+sprite_width, 40);
+        move_sprite(15,99+sprite_width, 48);
+        /* fisherman && student */
+        move_sprite(16, 51, 72);
+        move_sprite(17, 51, 80);
+        move_sprite(18, 51+sprite_width, 72);
+        move_sprite(19, 51+sprite_width, 80);
+        move_sprite(20, 99, 72);
+        move_sprite(21, 99, 80);
+        move_sprite(22, 99+sprite_width, 72);
+        move_sprite(23, 99+sprite_width, 80);
+    }
 }
 
 /**
@@ -606,20 +668,13 @@ void npc_fight(void)
         sprite_clean();
         LETTER_COUNT = 0; 
         if(ENEMY == 0)
-        {
             print("asakawa\0", 56, 75);
-            print("defends\0", 56, 91);
-        }
         if(ENEMY == 1)
-        {
             print("the crab\0", 56, 75);
-            print("defends\0", 56, 91);
-        }
         if(ENEMY == 2)
-        {
             print("king crab\0", 56, 75);
-            print("defends\0", 56, 91);
-        }
+
+        print("defends\0", 56, 91);
         DISPLAY_ON;
         delay(800);
     }
@@ -652,6 +707,8 @@ void fight_config(void)
 /* checking to see if you're dead */
 void damage(UINT8 *fighter_hp)
 {
+    if(start_hp == 50)
+        SHOOT = 30; // going to need to set this back to 10 later.
     if(ENEMY == 0)
     {
         if(choice == DEFEND && npc_acc >= 1 && npc_act >= 1)
@@ -868,15 +925,11 @@ void show_fighter_stats(void)
      * try cleaning sprites and setting LETTER_COUNT to 0. 
      */
     
-    if(ENEMY == 0)
+/*    if(ENEMY == 0)
     {
-        itoa(CRAB_HP, e_hp);
+        itoa(ASAKAWA_HP, e_hp);
         battle_print(e_hp, 96, 104);
-    }
-    /*if(crab == 0)
-        battle_print("/5\0", 122, 104);
-    else if(crab == 1)
-        battle_print("/10\0", 122, 104);*/
+    }*/
 }
 
 void game_over_screen(void)

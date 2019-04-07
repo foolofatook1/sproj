@@ -40,4 +40,6 @@ extern UINT8 asakawa_posy;
 extern UINT8 bed_posx;
 extern UINT8 bed_posy;
 
+extern UINT8 HERO_HP;
+extern UINT16 ASAKAWA_HP;
 #endif /* LEVEL_ASSETS */
