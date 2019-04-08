@@ -79,9 +79,9 @@ void level_3_ctrl(void)
     print("talk of a\0", 24, 64);
     print("strike!\0", 24, 80);
     delay(1000);
-    sprite_clean(0);
-    LETTER_COUNT = 0;
-    print("asakawa:\0", 24, 32);
+    sprite_clean(8);
+    LETTER_COUNT = 8;
+    //print("asakawa:\0", 24, 32);
     print("show me\0", 24, 48);
     print("your\0", 24, 64);
     print("leaders!\0", 24, 80);

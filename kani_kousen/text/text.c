@@ -1,6 +1,9 @@
 #include "text.h"
+#include <stdio.h>
+#include <stdlib.h>
 
 char chars[40] = "abcdefghijklmnopqrstuvwxyz0123456789.,:/";
+//char ints[] = "0123456789.,:/";
 UINT8 i;
 UINT8 j;
 UINT8 cushion;
@@ -15,10 +18,60 @@ UINT8 arrow_y = 200;
 void print(char *arr, UINT8 x, UINT8 y) 
 {
     SPRITES_8x8;
-
-    set_sprite_data(0, 46, font);
-
     cushion = LETTER_COUNT;
+    set_sprite_data(0, 46, font);
+    /*for(i = 0; arr[i] != '\0'; ++i)
+      {
+    // check for integers 
+    for(j = 0; j < 14; ++j)
+    {
+    if(ints[j] == arr[i])
+    {
+    set_sprite_tile((i+cushion), (26+j));
+    move_sprite((i+cushion), x, y);
+    continue;
+    }
+    }
+    if(arr[i] == ' ')
+    {
+    set_sprite_tile((i+cushion), 40);
+    move_sprite((i+cushion), x, y);
+    }
+    if(arr[i] == '>')
+    {
+    set_sprite_tile((i+cushion), 41);
+    move_sprite((i+cushion), x, y);
+    }
+    if(arr[i] == '\'')
+    {
+    set_sprite_tile((i+cushion), 42);
+    move_sprite((i+cushion), x, y);
+    }
+    if(arr[i] == '!')
+    {
+    set_sprite_tile((i+cushion), 43);
+    move_sprite((i+cushion), x, y);
+    }
+    if(arr[i] == '"')
+    {
+    set_sprite_tile((i+cushion), 44);
+    move_sprite((i+cushion), x, y);
+    }
+    if(arr[i] == '?')
+    {
+    set_sprite_tile((i+cushion), 45);
+    move_sprite((i+cushion), x, y);
+    }
+    else
+    {
+    set_sprite_tile((i+cushion), (arr[i]-97));
+    move_sprite((i+cushion), x, y);
+    }
+    ++LETTER_COUNT;
+    x+=8;
+    }*/
+
+
     for(i=0; arr[i] != '\0'; ++i)
     {
         for(j=0; j < 48; ++j)
