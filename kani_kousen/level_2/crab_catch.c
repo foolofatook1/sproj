@@ -63,7 +63,7 @@ void crab_catch_ctrl(void)
         if(STATE == BATTLE_WIN)
         {
             clear_screen();
-            sprite_clean();
+            sprite_clean(0);
             LETTER_COUNT = 0;
             print("you win!", 56, 80);
             delay(500);
@@ -97,7 +97,7 @@ void crab_catch_setup(void)
     /* normal crab is chosen */
     if(crab == 0)
     {
-        sprite_clean();
+        sprite_clean(0);
         LETTER_COUNT = 0;
         clear_screen();
         print("a crab!\0", 56, 80);
@@ -115,7 +115,7 @@ void crab_catch_setup(void)
     /* king crab is chosen */
     if(crab == 1)
     {
-        sprite_clean();
+        sprite_clean(0);
         LETTER_COUNT = 0;
         clear_screen();
         print("a king\0", 56, 80);

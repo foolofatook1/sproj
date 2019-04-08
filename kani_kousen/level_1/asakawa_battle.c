@@ -20,7 +20,7 @@ UINT8 start_hp = 10;
 void asakawa_battle_ctrl(void)
 {
     choice = 0;
-    sprite_clean();
+    sprite_clean(0);
     LETTER_COUNT = 0;
     battle_menu();
     back();

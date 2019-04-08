@@ -33,7 +33,7 @@ void battle_bkg_clean(void); // dash for pt. 1
 /**
  * Clears all the old sprites. 
  */
-void sprite_clean(void);
+void sprite_clean(UINT8);
 
 
 /**

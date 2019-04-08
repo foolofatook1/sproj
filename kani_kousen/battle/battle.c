@@ -93,7 +93,7 @@ void battle_nav(void)
 
 void run(void)
 {
-    sprite_clean();
+    sprite_clean(0);
     LETTER_COUNT = 0;
     battle_bkg_clean();
     if(BATTLE_NUM == 1)
@@ -104,10 +104,10 @@ void run(void)
         battle_print("leave!\0", 18, 80); 
         show_fighter_stats();
         delay(500);
-        sprite_clean();
-        LETTER_COUNT = 0;
+        sprite_clean(8);
+        LETTER_COUNT = 8;
         battle_bkg_clean();
-        battle_print("asakawa:\0", 18, 32);
+        //battle_print("asakawa:\0", 18, 32);
         battle_print("not 'til\0", 16, 48);
         battle_print("you're\0", 18, 64);
         battle_print("done!\0", 18, 80);
@@ -137,7 +137,7 @@ void back(void)
 
 void fight_opt(void)
 {
-    sprite_clean();
+    sprite_clean(0);
     LETTER_COUNT = 0;
     battle_bkg_clean();
     battle_print(">", 18, 32);
@@ -149,7 +149,7 @@ void fight_opt(void)
 
 void item_opt(void)
 {
-    sprite_clean();
+    sprite_clean(0);
     LETTER_COUNT = 0;
     battle_bkg_clean();
     if(ITEMS == 0)
@@ -221,7 +221,7 @@ void battle_menu(void)
     set_bkg_data(0,10, chain_border_tiles);
     set_bkg_tiles(0,0,20,18,small_chain_border);
 
-    sprite_clean();
+    sprite_clean(0);
     LETTER_COUNT = 0;
     hide_sprites();
     /* selection menu */
@@ -301,27 +301,6 @@ void choice_handler(UINT8 arrow_y)
         choice = ITEM;
     if(CHOSEN_ITEM == NET)
         choice = ITEM;
-
-    /*if(choice == ITEM)
-    {
-        clear_screen();
-        sprite_clean();
-        LETTER_COUNT = 0;
-        print("item:\0", 24, 32);
-        if(CHOSEN_ITEM == CLUB)
-            print("club\0", 24, 48);
-        if(CHOSEN_ITEM == NET)
-            print("net\0", 24, 48);
-        delay(500);
-    }
-    if(choice == PUNCH)
-    {
-        clear_screen();
-        sprite_clean();
-        LETTER_COUNT = 0;
-        print("punching\0", 24, 32);
-    }
-    delay(500);*/
 }
 
 /**
@@ -341,7 +320,7 @@ void hero_fight(void)
             delay(100);
             DISPLAY_ON;
         }
-        sprite_clean();
+        sprite_clean(0);
         LETTER_COUNT = 0;
         if((choice == ITEM) && (CHOSEN_ITEM == CLUB) && 
             (ENEMY > 0) && (!CRAB_CAUGHT))
@@ -394,7 +373,7 @@ void hero_fight(void)
         else if(((choice == PUNCH) && (hero_acc < 3)) || 
                 ((choice == ITEM) && (hero_acc == 0)))
         {
-            sprite_clean();
+            sprite_clean(0);
             LETTER_COUNT = 0;
             print("you miss!", 64, 80);
             delay(500);
@@ -530,7 +509,7 @@ void clear_screen(void)
 void sprite_setup(UINT8 hnb, unsigned char *hero_data,
         UINT8 enb, unsigned char *enemy_data) 
 {
-    sprite_clean();
+    sprite_clean(0);
     LETTER_COUNT = 0;
     clear_screen();
 
@@ -632,7 +611,7 @@ void npc_fight(void)
             DISPLAY_ON;
         }
         DISPLAY_OFF;
-        sprite_clean();
+        sprite_clean(0);
         LETTER_COUNT = 0;
         print("you're hit\0", 72, 80);
         clear_screen();
@@ -651,7 +630,7 @@ void npc_fight(void)
             DISPLAY_ON;
         }
         DISPLAY_OFF;
-        sprite_clean();
+        sprite_clean(0);
         LETTER_COUNT = 0;
         print("they miss\0", 64, 80);
         clear_screen();
@@ -665,7 +644,7 @@ void npc_fight(void)
     {
         DISPLAY_OFF;
         clear_screen();
-        sprite_clean();
+        sprite_clean(0);
         LETTER_COUNT = 0; 
         if(ENEMY == 0)
             print("asakawa\0", 56, 75);
@@ -934,7 +913,7 @@ void show_fighter_stats(void)
 
 void game_over_screen(void)
 {
-    sprite_clean();
+    sprite_clean(0);
     LETTER_COUNT = 0;
     clear_screen();
     print("game over", 44, 72);

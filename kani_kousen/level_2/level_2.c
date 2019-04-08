@@ -75,7 +75,7 @@ void level_2_ctrl(void)
 
 void level_2_bkg_start(void)
 {
-    sprite_clean();
+    sprite_clean(0);
     LETTER_COUNT = 0;
     HIDE_SPRITES;
     HIDE_BKG;
@@ -97,7 +97,7 @@ void level_2_bkg_start(void)
 
 void shit_pot_setup(void)
 {
-    sprite_clean();
+    sprite_clean(0);
     LETTER_COUNT = 0;
     hide_sprites();
     set_bkg_data(0, 4, blank_screen_tiles);
@@ -211,7 +211,7 @@ UINT8 conv_check(void)
             old_hero_posy = hero_posy;
             if(!revolt)
             {
-                sprite_clean();
+                sprite_clean(0);
                 LETTER_COUNT = 0;
                 hide_sprites();
                 print("workers:\0", 24, 32);
@@ -219,16 +219,16 @@ UINT8 conv_check(void)
                 delay(1000);
                 if(option == LEVEL_2)
                 {
-                    sprite_clean();
-                    LETTER_COUNT = 0;
-                    print("workers:\0", 24, 32);
+                    sprite_clean(8);
+                    LETTER_COUNT = 8;
+                    //print("workers:\0", 24, 32);
                     print("a fishing\0", 24, 48);
                     print("boat was\0", 24, 64);
                     print("lost!\0", 24, 80);
                     delay(1000);
-                    sprite_clean();
-                    LETTER_COUNT = 0;
-                    print("workers:\0", 24, 32);
+                    sprite_clean(8);
+                    LETTER_COUNT = 8;
+                    //print("workers:\0", 24, 32);
                     print("damn that\0", 24, 48);
                     print("asakawa!\0", 24, 64);
                     GOT_INFO = 1;
@@ -236,14 +236,12 @@ UINT8 conv_check(void)
             }
             if(revolt)
             {
-                sprite_clean();
+                sprite_clean(0);
                 LETTER_COUNT = 0;
                 hide_sprites();
                 print("workers:\0", 24, 32);
                 print("keep us\0",24, 48);
                 print("out of it!\0", 24, 64);
-                /*print("to do with\0", 24, 80);
-                print("this!\0", 24, 96);*/
             }
         }
         /* student in bottom right corner */
@@ -254,7 +252,7 @@ UINT8 conv_check(void)
             old_hero_posy = hero_posy;
             if(!revolt)
             {
-                sprite_clean();
+                sprite_clean(0);
                 LETTER_COUNT = 0;
                 hide_sprites();
                 print("student:\0", 24, 32);
@@ -266,7 +264,7 @@ UINT8 conv_check(void)
             }
             if(revolt)
             {
-                sprite_clean();
+                sprite_clean(0);
                 LETTER_COUNT = 0;
                 hide_sprites();
                 print("student:\0", 24, 32);
@@ -281,7 +279,7 @@ UINT8 conv_check(void)
             old_hero_posy = hero_posy;
             if(option == LEVEL_2)
             {
-                sprite_clean();
+                sprite_clean(0);
                 LETTER_COUNT = 0;
                 hide_sprites();
                 print("miner:\0", 24, 32);
@@ -291,22 +289,22 @@ UINT8 conv_check(void)
             }
             if(option == LEVEL_3 && !revolt)
             {
-                sprite_clean();
+                sprite_clean(0);
                 LETTER_COUNT = 0;
                 hide_sprites();
                 print("miner:\0", 24, 32);
                 print("you hear!?\0", 24, 48);
                 delay(500);
-                sprite_clean();
-                LETTER_COUNT = 0;
-                print("miner:\0", 24, 32);
+                sprite_clean(6);
+                LETTER_COUNT = 6;
+                //print("miner:\0", 24, 32);
                 print("the boat's\0", 24, 48);
                 print("back!\0", 24, 64);
                 GOT_INFO = 1;
             }
             else if(option == LEVEL_3 && revolt)
             {
-                sprite_clean();
+                sprite_clean(0);
                 LETTER_COUNT = 0;
                 print("miner:\0", 24, 32);
                 print("of course\0", 24, 48);
@@ -317,7 +315,7 @@ UINT8 conv_check(void)
         }
         else if(sprite == bed_posx)
         {
-            sprite_clean();
+            sprite_clean(0);
             LETTER_COUNT = 0;
             hide_sprites();
             set_bkg_data(0, 4, blank_screen_tiles);
@@ -332,7 +330,7 @@ UINT8 conv_check(void)
             delay(500);
             print(".\0", 92, 72);
             delay(800);
-            sprite_clean();
+            sprite_clean(0);
             LETTER_COUNT = 0;
             print("press a\0", 56, 88);
             print("to wake\0", 56, 104);
@@ -343,7 +341,7 @@ UINT8 conv_check(void)
             else if((option == LEVEL_2) && (GOT_INFO))
             {
                 clear_screen();
-                sprite_clean();
+                sprite_clean(0);
                 LETTER_COUNT = 0;
                 print("next\0", 24, 32);
                 option = LEVEL_3;
@@ -357,121 +355,113 @@ UINT8 conv_check(void)
             old_hero_posy = hero_posy;
             if(!revolt)
             {
-                sprite_clean();
+                sprite_clean(0);
                 LETTER_COUNT = 0;
                 print("fisherman:\0", 24, 32);
                 print("we were\0", 24, 48);
                 print("lost at\0", 24, 64);
                 print("sea,\0", 24, 80);
                 delay(1300);
-                sprite_clean();
-                LETTER_COUNT = 0;
-                print("fisherman:\0", 24, 32);
-                print("we washed\0", 24, 48);
+                sprite_clean(10);
+                LETTER_COUNT = 10;
+                //print("fisherman:\0", 24, 32);
+                print("and washed\0", 24, 48);
                 print("ashore in\0", 24, 64);
                 print("russia!\0", 24, 80);
                 delay(1300);
-                sprite_clean();
-                LETTER_COUNT = 0;
-                print("fisherman:\0", 24, 32);
+                sprite_clean(10);
+                LETTER_COUNT = 10;
+                //print("fisherman:\0", 24, 32);
                 print("those\0", 24, 48);
                 print("russkies\0", 24, 64);
                 print("are on to\0",24, 80);
                 print("something.\0", 24, 96);
                 delay(1300);
-                sprite_clean();
-                LETTER_COUNT = 0;
-                print("fisherman:\0", 24, 32);
-                print("they\0", 24, 48);
-                print("talked to\0",24, 64);
-                print("us about\0", 24, 80);
-                print("rxvxlxtxxn\0", 24, 96);
+                sprite_clean(10);
+                LETTER_COUNT = 10;
+                //print("fisherman:\0", 24, 32);
+                print("with their\0", 24, 48);
+                print("talk about\0",24, 64);
+                print("xxxxxxxxxx\0", 24, 96);
                 delay(1300);
-                sprite_clean();
-                LETTER_COUNT = 0;
-                print("fisherman:\0",24, 32);
-                print("we should\0", 24, 48);
+                sprite_clean(10);
+                LETTER_COUNT = 10;
+                //print("fisherman:\0",24, 32);
+                print("we can\0", 24, 48);
                 print("organize\0", 24, 64);
                 print("too!\0", 24, 80);
                 delay(1300);
-                sprite_clean();
-                LETTER_COUNT = 0;
-                print("fisherman:\0", 24, 32);
-                print("me, you,\0", 24, 48);
+                sprite_clean(10);
+                LETTER_COUNT = 10;
+                //print("fisherman:\0", 24, 32);
+                print("you, i,\0", 24, 48);
                 print("and a\0",24, 64);
                 print("couple\0",24, 80);
                 print("others!\0", 24, 96);
                 delay(1300);
-                sprite_clean();
-                LETTER_COUNT = 0;
-                print("fisherman:\0", 24, 32);
+                sprite_clean(10);
+                LETTER_COUNT = 10;
+                //print("fisherman:\0", 24, 32);
                 print("we could\0", 24, 48);
                 print("organize\0", 24, 64);
                 print("the crew!\0", 24, 80);
                 delay(1300);
-                sprite_clean();
-                LETTER_COUNT = 0;
-                print("fisherman:\0", 24, 32);
+                sprite_clean(10);
+                LETTER_COUNT = 10;
+                //print("fisherman:\0", 24, 32);
                 print("what d'you\0", 24, 48);
                 print("think?\0", 24, 64);
-                delay(1000);
+                /*delay(1000);
                 sprite_clean();
                 LETTER_COUNT = 0;
                 print("fisherman:\0",24, 32);
                 print("will you\0", 24, 48);
-                print("join us?\0", 24, 64);
+                print("join us?\0", 24, 64);*/
                 print("a yes!\0", 24, 88);
                 print("b no...\0", 24, 104);
                 REVOLUTION_1 = 1;
             }
             if(revolt && !talked)
             {
-                sprite_clean();
+                sprite_clean(0);
                 LETTER_COUNT = 0;
                 print("fisherman:\0", 24, 32);
                 print("there's\0", 24, 48);
                 print("not enough\0", 24, 64);
-                print("talk to\0", 24, 80);
-                delay(800);
-                sprite_clean();
-                LETTER_COUNT = 0;
-                print("fisherman:\0", 24, 32);
-                print("strike yet.\0", 24, 48);
-                print("keep\0", 24, 64);
-                print("talking\0", 24, 80);
+                print("talk yet!\0", 24, 80);
             }
             if(revolt && talked)
                 REVOLUTION_1 = 1;
 
             if(talked)
             {
-                sprite_clean();
+                sprite_clean(0);
                 LETTER_COUNT = 0;
                 print("fisherman:\0", 24, 32);
                 print("we've got\0", 24, 48);
                 print("the\0", 24, 64);
                 print("numbers!\0", 24, 80);
                 delay(1000);
-                sprite_clean();
+                sprite_clean(0);
                 LETTER_COUNT = 0;
                 print("fisherman:\0", 24, 32);
                 print("without\0", 24, 48);
                 print("us\0", 24, 64);
                 delay(800);
-                sprite_clean();
+                sprite_clean(0);
                 LETTER_COUNT = 0;
                 print("fisherman:\0", 24, 32);
                 print("ships\0", 24, 48);
                 print("wouldn't\0", 24, 64);
                 print("budge.\0", 24, 80);
                 delay(800);
-                sprite_clean();
+                sprite_clean(0);
                 LETTER_COUNT = 0;
                 print("fisherman:\0", 24, 32);
                 print("without\0", 24, 48);
                 print("us,\0", 24, 64);
                 delay(500);
-                sprite_clean();
+                sprite_clean(0);
                 LETTER_COUNT = 0;
                 print("fisherman:\0", 24, 32);
                 print("the rich\0", 24, 48);
@@ -479,7 +469,7 @@ UINT8 conv_check(void)
                 print("make a\0", 24, 80);
                 print("dime!\0", 24, 96);
                 delay(1000);
-                sprite_clean();
+                sprite_clean(0);
                 LETTER_COUNT = 0;
                 print("fisherman:\0",24, 32);
                 print("let's give\0", 24, 48);
@@ -527,12 +517,12 @@ UINT8 conv_check(void)
                         return 1;
                     if(!revolt)
                     {
-                        sprite_clean();
+                        sprite_clean(0);
                         LETTER_COUNT = 0;
                         print("fisherman:\0", 24, 32);
                         print("good!\0", 24, 48);
                         delay(500);
-                        sprite_clean();
+                        sprite_clean(0);
                         LETTER_COUNT = 0;
                         print("fisherman:\0", 24, 32);
                         print("go see who\0", 24, 48);
@@ -543,7 +533,7 @@ UINT8 conv_check(void)
                 }
                 if(joypad() & J_B)
                 {
-                    sprite_clean();
+                    sprite_clean(0);
                     LETTER_COUNT = 0;
                     print("fisherman:\0", 24, 32);
                     print("that's too\0", 24, 48);
@@ -569,7 +559,7 @@ UINT8 conv_check(void)
 void l2_scene_1(void)
 {
     /* waking up the hero */
-    sprite_clean();
+    sprite_clean(0);
     LETTER_COUNT = 0;
     delay(500);
     print("wake up!\0", 56, 75);
@@ -581,7 +571,7 @@ void l2_scene_1(void)
         set_sprite_prop(i, 1);
     /* start the next part */
     delay(1000);
-    sprite_clean();
+    sprite_clean(0);
     LETTER_COUNT = 0;
     hide_sprites();
 
@@ -631,36 +621,23 @@ void l2_scene_1(void)
     DISPLAY_OFF;
     bkg_clean();
     DISPLAY_ON;
-    sprite_clean();
+    sprite_clean(0);
     LETTER_COUNT = 0;
     print("fisherman:\0", 24, 32);
-    print("we've got\0", 24, 48);
-    print("to get to\0", 24, 64);
-    print("work!\0", 24, 80);
+    print("let's get\0", 24, 48);
+    print("to work!\0", 24, 64);
 }
-
-/*void joypad_check_l2_scene_1(void)
-{
-    if(joypad() & J_A)
-        l2_scene_1_fisherman_enter();
-}*/
 
 void l2_scene_1_fisherman_enter(void)
 {
-    //++talking;
-    //if(talking == 3)
-    //{
         delay(1000);
-        sprite_clean();
+        sprite_clean(0);
         LETTER_COUNT = 0;
         print("fisherman:\0", 24, 32);
         print("you'll\0", 24, 48);
         print("need these\0", 24, 64);
-    //}
-    //if(talking == 4)
-    //{
         delay(1000);
-        sprite_clean();
+        sprite_clean(0);
         LETTER_COUNT = 0;
         DISPLAY_OFF;
         set_bkg_tiles(0,0,20,18,blank_screen);
@@ -671,11 +648,8 @@ void l2_scene_1_fisherman_enter(void)
         print("fishing\0", 56, 80);
         print("net\0", 72, 96);
         ITEMS += 2;
-    /*}
-    if(talking == 5)
-    {*/
-    delay(1000);
-        sprite_clean();
+        delay(1000);
+        sprite_clean(0);
         LETTER_COUNT = 0;
         DISPLAY_OFF;
         bkg_clean();
@@ -692,7 +666,7 @@ void l2_scene_1_fisherman_enter(void)
 
 void fisherman_walk_away(void)
 {
-    sprite_clean();
+    sprite_clean(0);
     LETTER_COUNT = 0;
     hide_sprites();
     set_bkg_data(0, 4, blank_screen_tiles);
@@ -707,7 +681,6 @@ void fisherman_walk_away(void)
     set_sprite_tile(1, 2);
     set_sprite_tile(2, 4);
     set_sprite_tile(3, 6);
-
 
     move_sprite(0, hero_posx, hero_posy);
     move_sprite(1, hero_posx+sprite_width, hero_posy);
@@ -858,7 +831,7 @@ void asakawa_enters_deck(void)
 {
     hero_posx = 80;
     hero_posy = 116;
-    sprite_clean();
+    sprite_clean(0);
     LETTER_COUNT = 0;
     hide_sprites();
     set_bkg_data(0,4,blank_screen_tiles);
@@ -914,7 +887,7 @@ void asakawa_before_work(void)
 {
     DISPLAY_OFF;
     bkg_clean();
-    sprite_clean();
+    sprite_clean(0);
     LETTER_COUNT = 0;
     DISPLAY_ON;
     talking = 1;
@@ -931,23 +904,21 @@ void asakawa_before_work(void)
             ++talking;
             if(talking == 2)
             {
-                sprite_clean();
-                LETTER_COUNT = 0;
-                print("asakawa:\0", 24, 32);
-                print("catch them\0", 24, 48);
-                print("with your\0", 24, 64);
-                print("net!\0", 24, 80);
+                sprite_clean(8);
+                LETTER_COUNT = 8;
+                //print("asakawa:\0", 24, 32);
+                print("catch with\0", 24, 48);
+                print("your net!\0", 24, 64);
             }
             if(talking == 3)
             {
-                sprite_clean();
-                LETTER_COUNT = 0;
-                print("asakawa:\0", 24, 32);
-                print("then bash\0", 24, 48);
-                print("their\0", 24, 64);
-                print("shells\0", 24, 80);
-                print("with the\0", 24, 96);
-                print("club!\0", 24, 112);
+                sprite_clean(8);
+                LETTER_COUNT = 8;
+                //print("asakawa:\0", 24, 32);
+                print("and crush\0", 24, 48);
+                print("shells\0", 24, 64);
+                print("with the\0", 24, 80);
+                print("club!\0", 24, 96);
             }
             if(talking == 4)
                 talking = 0;
@@ -959,14 +930,13 @@ void asakawa_after_work(void)
 {
     DISPLAY_OFF;
     bkg_clean();
-    sprite_clean();
+    sprite_clean(0);
     LETTER_COUNT = 0;
     DISPLAY_ON;
     print("asakawa:\0", 24, 32);
-    print("now back\0", 24, 48);
-    print("down to\0", 24, 64);
-    print("the shit\0", 24, 80);
-    print("pot!\0", 24, 96);
+    print("back down\0", 24, 48);
+    print("to the\0", 24, 64);
+    print("shit pot!\0", 24, 80);
     delay(1000);
 }
 
@@ -993,11 +963,3 @@ void pos_check_shit_pot(void)
     if(hero_posx >= 152)
         hero_posx = 152;
 }
-
-/*void pos_check_deck(void)
-{
-    if(hero_posy <= 116)
-        hero_posy = 116;
-    if(hero_posy >= 144)
-        hero_posy = 144;
-}*/

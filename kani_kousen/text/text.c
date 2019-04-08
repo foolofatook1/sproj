@@ -67,9 +67,13 @@ void bkg_clean(void)
     set_bkg_tiles(0,0,20,18,chain_border);
 }
 
-void sprite_clean(void) 
+void sprite_clean(UINT8 start) 
 {
-    for(i = 0; i < MAX_SPRITES; ++i)
+    /**
+     * could also try making this letter 
+     * count instead of MAX SPRITES 
+     */
+    for(i = start; i < MAX_SPRITES; ++i)
     {
         set_sprite_tile(i, 40);
         set_sprite_prop(i, S_FLIPX&0x0);

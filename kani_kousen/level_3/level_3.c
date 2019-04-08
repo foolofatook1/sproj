@@ -16,7 +16,7 @@ void level_3_ctrl(void)
     DISPLAY_OFF;
     clear_screen();
     delay(500);
-    sprite_clean();
+    sprite_clean(0);
     LETTER_COUNT = 0;
     print("chapter 3\0", 48, 56);
     print("rxvxlxtxxn\0", 44, 72);
@@ -45,7 +45,7 @@ void level_3_ctrl(void)
     //STATE = FIGHT_CHOICE;
     delay(1000);
     DISPLAY_OFF;
-    sprite_clean();
+    sprite_clean(0);
     LETTER_COUNT = 0;
     shit_pot_setup();
     shit_pot_sprites();
@@ -71,7 +71,7 @@ void level_3_ctrl(void)
     delay(500);
     DISPLAY_OFF;
     bkg_clean();
-    sprite_clean();
+    sprite_clean(0);
     LETTER_COUNT = 0;
     DISPLAY_ON;
     print("asakawa:\0", 24, 32);
@@ -79,7 +79,7 @@ void level_3_ctrl(void)
     print("talk of a\0", 24, 64);
     print("strike!\0", 24, 80);
     delay(1000);
-    sprite_clean();
+    sprite_clean(0);
     LETTER_COUNT = 0;
     print("asakawa:\0", 24, 32);
     print("show me\0", 24, 48);
@@ -88,7 +88,7 @@ void level_3_ctrl(void)
     delay(1000);
     DISPLAY_OFF;
     clear_screen();
-    sprite_clean();
+    sprite_clean(0);
     LETTER_COUNT = 0;
     print("fight\0", 64, 32);
     print("asakawa\0", 56, 48);
@@ -106,7 +106,7 @@ void level_3_ctrl(void)
     /* for some reason this is ending way too soon */
 
     bkg_clean();
-    sprite_clean();
+    sprite_clean(0);
     LETTER_COUNT = 0;
     print("asakawa:\0", 24, 32);
     print("now take\0", 24, 48);
@@ -163,7 +163,7 @@ void level_3_ctrl(void)
 
 void leaves_shit_pot(void)
 {
-    sprite_clean();
+    sprite_clean(0);
     LETTER_COUNT = 0;
     asakawa_enters_deck();
     asakawa_before_work();
