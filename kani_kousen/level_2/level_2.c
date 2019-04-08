@@ -215,18 +215,16 @@ UINT8 conv_check(void)
                 LETTER_COUNT = 0;
                 hide_sprites();
                 print("workers:\0", 24, 32);
-                print("did you\0", 24, 48);
-                print("hear!?\0", 24, 64);
+                print("you hear!?\0", 24, 48);
                 delay(1000);
                 if(option == LEVEL_2)
                 {
                     sprite_clean();
                     LETTER_COUNT = 0;
                     print("workers:\0", 24, 32);
-                    print("we lost a\0", 24, 48);
-                    print("fishing\0", 24, 64);
-                    print("boat\0", 24, 80);
-                    print("today!\0", 24, 96);
+                    print("a fishing\0", 24, 48);
+                    print("boat was\0", 24, 64);
+                    print("lost!\0", 24, 80);
                     delay(1000);
                     sprite_clean();
                     LETTER_COUNT = 0;
@@ -242,10 +240,10 @@ UINT8 conv_check(void)
                 LETTER_COUNT = 0;
                 hide_sprites();
                 print("workers:\0", 24, 32);
-                print("we want\0",24, 48);
-                print("nothing\0", 24, 64);
-                print("to do with\0", 24, 80);
-                print("this!\0", 24, 96);
+                print("keep us\0",24, 48);
+                print("out of it!\0", 24, 64);
+                /*print("to do with\0", 24, 80);
+                print("this!\0", 24, 96);*/
             }
         }
         /* student in bottom right corner */
@@ -341,20 +339,6 @@ UINT8 conv_check(void)
             for(i = 0; i < LETTER_COUNT; ++i)
                 set_sprite_prop(i, 1);
             SLEPT = 1;
-            /*if(option  == LEVEL_2)
-            {
-                clear_screen();
-                sprite_clean();
-                LETTER_COUNT = 0;
-                print("2", 24, 32);
-            }*/
-            /*if(GOT_INFO)
-            {
-                clear_screen();
-                sprite_clean();
-                LETTER_COUNT = 0;
-                print("got info", 24, 32);
-            }*/
             if(option == LEVEL_2 && (!GOT_INFO));
             else if((option == LEVEL_2) && (GOT_INFO))
             {
@@ -506,7 +490,17 @@ UINT8 conv_check(void)
                 REVOLUTION_1 = 1;
             }
         }
-        talking = 1;
+        /* double check that we didn't mistakenly collide */
+        for(i = 0; i < 12; i+=2)
+        {
+            if(sprite_positions[i] == sprite)
+            {
+                talking = 1;
+                break;
+            }
+            else
+                talking = 0;
+        }
         while(talking)
         {
             if(!REVOLUTION_1)
@@ -541,9 +535,8 @@ UINT8 conv_check(void)
                         sprite_clean();
                         LETTER_COUNT = 0;
                         print("fisherman:\0", 24, 32);
-                        print("now lets\0", 24, 48);
-                        print("go see who\0", 24, 64);
-                        print("can help!\0", 24, 80);
+                        print("go see who\0", 24, 48);
+                        print("can help!\0", 24, 64);
                         delay(1000);
                         revolt = 1;
                     }

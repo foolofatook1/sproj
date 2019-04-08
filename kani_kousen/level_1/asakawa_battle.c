@@ -23,6 +23,7 @@ void asakawa_battle_ctrl(void)
     sprite_clean();
     LETTER_COUNT = 0;
     battle_menu();
+    back();
     while(STATE != DEAD)
     {
         wait_vbl_done();
