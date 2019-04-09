@@ -98,7 +98,8 @@ void run(void)
     battle_bkg_clean();
     if(BATTLE_NUM == 1)
     {
-        battle_print("asakawa:\0", 18, 32);
+        asakawa();
+        //        battle_print("asakawa:\0", 18, 32);
         battle_print("you\0", 18, 48);
         battle_print("can't\0", 18, 64);
         battle_print("leave!\0", 18, 80); 
@@ -323,7 +324,7 @@ void hero_fight(void)
         sprite_clean(0);
         LETTER_COUNT = 0;
         if((choice == ITEM) && (CHOSEN_ITEM == CLUB) && 
-            (ENEMY > 0) && (!CRAB_CAUGHT))
+                (ENEMY > 0) && (!CRAB_CAUGHT))
         {
             print("you need\0", 72, 64);
             print("to catch\0", 72, 80);
@@ -338,7 +339,7 @@ void hero_fight(void)
             delay(500);
         }
         else if(((choice == PUNCH) && (hero_acc >= 3)) || 
-           ((choice == ITEM) && hero_acc > 0))
+                ((choice == ITEM) && hero_acc > 0))
         {
             print("you hit\0", 56, 72);
             if(ENEMY == 0)
@@ -349,36 +350,36 @@ void hero_fight(void)
                 print("king crab\0", 56, 88);
             delay(500);
         }
-/*        if(choice == PUNCH && (ENEMY == 1 || ENEMY == 2))
-        {
-            print(" no use\0", 56, 56);
-            print("punching\0", 56, 72);
-            print(" a crab!\0", 56, 88);
-            delay(500);
-        };
-        if(choice == PUNCH && ENEMY == 0 && hero_acc >= 3)
-        {
-            print("hit!\0", 72, 80);
-            delay(500);
-        }
-        
-        if((choice == ITEM) && (CHOSEN_ITEM == CLUB) && 
-                (CRAB_CAUGHT) && (hero_acc > 0))
-        {
-            print("crushed!\0", 72, 80);
-            delay(500);
-        }
-        */
+        /*        if(choice == PUNCH && (ENEMY == 1 || ENEMY == 2))
+                  {
+                  print(" no use\0", 56, 56);
+                  print("punching\0", 56, 72);
+                  print(" a crab!\0", 56, 88);
+                  delay(500);
+                  };
+                  if(choice == PUNCH && ENEMY == 0 && hero_acc >= 3)
+                  {
+                  print("hit!\0", 72, 80);
+                  delay(500);
+                  }
+
+                  if((choice == ITEM) && (CHOSEN_ITEM == CLUB) && 
+                  (CRAB_CAUGHT) && (hero_acc > 0))
+                  {
+                  print("crushed!\0", 72, 80);
+                  delay(500);
+                  }
+         */
         /* fighter chooses punch and misses */
-        else if(((choice == PUNCH) && (hero_acc < 3)) || 
-                ((choice == ITEM) && (hero_acc == 0)))
-        {
-            sprite_clean(0);
-            LETTER_COUNT = 0;
-            print("you miss!", 64, 80);
-            delay(500);
-            clear_screen();
-        }
+                  else if(((choice == PUNCH) && (hero_acc < 3)) || 
+                          ((choice == ITEM) && (hero_acc == 0)))
+                  {
+                      sprite_clean(0);
+                      LETTER_COUNT = 0;
+                      print("you miss!", 64, 80);
+                      delay(500);
+                      clear_screen();
+                  }
     }
     /* fighter defends */
     if(choice == DEFEND)
@@ -539,25 +540,38 @@ void sprite_setup(UINT8 hnb, unsigned char *hero_data,
     move_sprite(6, 84, 72);
     move_sprite(7, 84, 80);
 
-    if(striking)
+    if(striking && !REVOLUTION_2)
     {
-        set_sprite_data(16, 2, soldier);
-        set_sprite_data(18, 2, fisherman_idle_back);
-        set_sprite_data(20, 2, student_idle_back);
-      
-        /* soldiers */
-        set_sprite_tile(8, 16); // two on the left
-        set_sprite_tile(9, 17);
-        set_sprite_tile(10, 16); // two on the right
-        set_sprite_tile(11, 17);
-        set_sprite_tile(12, 16); 
-        set_sprite_tile(13, 17);
-        set_sprite_tile(14, 16);
-        set_sprite_tile(15, 17);
-        set_sprite_prop(14, S_FLIPX);
-        set_sprite_prop(15, S_FLIPX);
-        set_sprite_prop(10, S_FLIPX);
-        set_sprite_prop(11, S_FLIPX);
+        if(!REVOLUTION_2)
+        {
+            set_sprite_data(16, 2, soldier);
+            set_sprite_data(18, 2, fisherman_idle_back);
+            set_sprite_data(20, 2, student_idle_back);
+
+            /* soldiers */
+            set_sprite_tile(8, 16); // two on the left
+            set_sprite_tile(9, 17);
+            set_sprite_tile(10, 16); // two on the right
+            set_sprite_tile(11, 17);
+            set_sprite_tile(12, 16); 
+            set_sprite_tile(13, 17);
+            set_sprite_tile(14, 16);
+            set_sprite_tile(15, 17);
+            set_sprite_prop(14, S_FLIPX);
+            set_sprite_prop(15, S_FLIPX);
+            set_sprite_prop(10, S_FLIPX);
+            set_sprite_prop(11, S_FLIPX);
+
+            /* soldiers */
+            move_sprite(8, 51, 40);
+            move_sprite(9, 51, 48);
+            move_sprite(10,51+sprite_width, 40);
+            move_sprite(11,51+sprite_width, 48);
+            move_sprite(12,99, 40);
+            move_sprite(13,99, 48);
+            move_sprite(14,99+sprite_width, 40);
+            move_sprite(15,99+sprite_width, 48);
+        }
 
         /* fisherman && student */
         set_sprite_tile(16, 18);
@@ -573,15 +587,6 @@ void sprite_setup(UINT8 hnb, unsigned char *hero_data,
         set_sprite_prop(22, S_FLIPX);
         set_sprite_prop(23, S_FLIPX);
 
-        /* soldiers */
-        move_sprite(8, 51, 40);
-        move_sprite(9, 51, 48);
-        move_sprite(10,51+sprite_width, 40);
-        move_sprite(11,51+sprite_width, 48);
-        move_sprite(12,99, 40);
-        move_sprite(13,99, 48);
-        move_sprite(14,99+sprite_width, 40);
-        move_sprite(15,99+sprite_width, 48);
         /* fisherman && student */
         move_sprite(16, 51, 72);
         move_sprite(17, 51, 80);
@@ -903,12 +908,12 @@ void show_fighter_stats(void)
      * if you're experiencing problems, 
      * try cleaning sprites and setting LETTER_COUNT to 0. 
      */
-    
-/*    if(ENEMY == 0)
+
+    if(ENEMY == 0)
     {
         itoa(ASAKAWA_HP, e_hp);
         battle_print(e_hp, 96, 104);
-    }*/
+    }
 }
 
 void game_over_screen(void)

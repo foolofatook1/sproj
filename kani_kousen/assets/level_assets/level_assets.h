@@ -14,6 +14,7 @@ extern UINT8 talked;
 extern UINT8 revolt;
 extern UINT8 striking;
 extern UINT8 REVOLUTION_1;
+extern UINT8 REVOLUTION_2;
 extern UINT8 APPEARED;
 extern UINT8 crabs_to_catch;
 extern UINT8 health_loss;

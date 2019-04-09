@@ -12,7 +12,7 @@ UINT8 l1_scene_3_anim = 0;
 /* The big control function */
 void level_1_ctrl(void) 
 {
-    wait_vbl_done();
+/*    wait_vbl_done();
     level_1_bkg_start();
     l1_scene_1();
     i = 0; // helping with animation
@@ -32,7 +32,7 @@ void level_1_ctrl(void)
         wait_vbl_done();
     }
     l1_scene_3_text_setup();
-    l1_scene_3();
+    l1_scene_3();*/
     asakawa_battle_ctrl();
 }
 
@@ -71,7 +71,8 @@ void level_1_bkg_start(void)
 
     /* setting up first set of text */
     bkg_clean();
-    print("fisherman:\0", 24, 32);
+    fisherman();
+    //print("fisherman:\0", 24, 32);
     print("we're all\0", 24, 48);
     print("goin' to\0", 24, 64);
     print("hell!\0", 24, 80);
@@ -243,7 +244,8 @@ void miner_intro_setup(void)
 
     //sprite_clean();
     //LETTER_COUNT = 0;
-    print("miner:\0", 24, 32);
+    miner();
+    //print("miner:\0", 24, 32);
     print("i come\0", 24, 48);
     print("from the\0", 24, 64);
     print("yubari\0", 24, 80);
@@ -310,6 +312,7 @@ int miner_intro(void)
     delay(1000);
     sprite_clean(0);
     LETTER_COUNT = 0;
+    fisherman();
     print("fisherman:\0", 24, 32);
     print("we better\0", 24, 48);
     print("go!\0", 24, 64);
@@ -324,7 +327,9 @@ int miner_intro(void)
     delay(1000);
     sprite_clean(0);
     LETTER_COUNT = 0;
-    print("miner:\0", 24, 32);
+
+    miner();
+    //print("miner:\0", 24, 32);
     print("who's that\0", 24, 48);
     print("???\0", 24, 64);
     delay(1000);
@@ -461,7 +466,8 @@ void l1_scene_3_text_setup(void)
     DISPLAY_ON;
     sprite_clean(0);
     LETTER_COUNT = 0;
-    print("asakawa:\0", 24, 32);
+    asakawa();
+    //print("asakawa:\0", 24, 32);
     print("listen up\0", 24, 48);
     print("you\0", 24, 64);
     print("maggots!\0", 24, 80);
@@ -471,16 +477,13 @@ void l1_scene_3_text_setup(void)
 /* asakawa's message */
 void l1_scene_3(void)
 {
-    //bkg_clean();
     sprite_clean(8);
     LETTER_COUNT = 8;
-    //print("asakawa:\0", 24, 32);
     print("needless\0", 24, 48);
     print("to say,\0", 24, 64);
     delay(1000);
     sprite_clean(8);
     LETTER_COUNT = 8;
-    //print("asakawa:\0", 24, 32);
     print("this ship\0", 24, 48);
     print("is of the\0", 24, 64);
     print("utmost\0", 24, 80);
@@ -488,13 +491,11 @@ void l1_scene_3(void)
     delay(1000);
     sprite_clean(8);
     LETTER_COUNT = 8;
-    //print("asakawa:\0", 24, 32);
     print("for our\0", 24, 48);
     print("nation!\0", 24, 64);
     delay(500);
     sprite_clean(8);
     LETTER_COUNT = 8;
-    //print("asakawa:\0", 24, 32);
     print("as\0", 24, 48);
     print("peoples\0", 24, 64);
     print("of\0", 24, 80);
@@ -503,7 +504,6 @@ void l1_scene_3(void)
     delay(1000);
     sprite_clean(8);
     LETTER_COUNT = 8;
-    //print("asakawa:\0", 24, 32);
     print("we are\0", 24, 48);
     print("proud\0", 24, 64);
     print("rivals\0", 24, 80);
@@ -511,34 +511,28 @@ void l1_scene_3(void)
     delay(1000);
     sprite_clean(8);
     LETTER_COUNT = 8;
-    //print("asakawa:\0", 24, 32);
     print("there is an\0", 24, 48);
     print("imperial\0", 24, 64);
     print("ship\0", 24, 80);
     delay(1000);
     sprite_clean(8);
     LETTER_COUNT = 8;
-    //print("asakawa:\0", 24, 32);
     print("to\0", 24, 48);
     print("protect us\0", 24, 64);
     delay(1000);
     sprite_clean(8);
     LETTER_COUNT = 8;
-    //print("asakawa:\0", 24, 32);
     print("as a\0", 24, 48);
     print("nation of\0", 24, 64);
     print("excellence\0", 24, 80);
     delay(1000);
-    //bkg_clean();
     sprite_clean(8);
     LETTER_COUNT = 8;
-    //print("asakawa:\0", 24, 32);
     print("we are\0", 24, 48);
     print("unmatched\0", 24, 64);
     delay(1000);
     sprite_clean(8);
     LETTER_COUNT = 8;
-    //print("asakawa:\0", 24, 32);
     print("when\0", 24, 48);
     print("compared\0", 24, 64);
     print("to others!\0", 24, 80);
@@ -567,7 +561,8 @@ void l1_scene_3(void)
     LETTER_COUNT = 0;
     DISPLAY_ON;
 
-    print("asakawa:\0", 24, 32);
+    //print("asakawa:\0", 24, 32);
+    asakawa();
     print("this kind\0", 24, 48);
     print("of talk is\0", 24, 64);
     print("not\0", 24, 80);
@@ -575,7 +570,6 @@ void l1_scene_3(void)
     delay(1000);
     sprite_clean(8);
     LETTER_COUNT = 8;
-    //print("asakawa:\0", 24, 32);
     print("this\0", 24, 48);
     print("attitude\0", 24, 64);
     print("is\0", 24, 80);
@@ -583,7 +577,6 @@ void l1_scene_3(void)
     delay(1000);
     sprite_clean(8);
     LETTER_COUNT = 8;
-    //print("asakawa:\0", 24, 32);
     print("and will\0", 24, 48);
     print("be\0", 24, 64);
     print("considered\0", 24, 80);

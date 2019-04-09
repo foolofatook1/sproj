@@ -28,7 +28,7 @@ UINT8 screen_x = 95;
 
 void level_2_ctrl(void)
 {
-    wait_vbl_done();
+/*    wait_vbl_done();
     level_2_bkg_start();
     l2_scene_1();
     talking = 1;
@@ -69,7 +69,7 @@ void level_2_ctrl(void)
             }
         }
         caught_crabs = 0;
-    }
+    }*/
     option = LEVEL_3;
 }
 
@@ -214,23 +214,19 @@ UINT8 conv_check(void)
                 sprite_clean(0);
                 LETTER_COUNT = 0;
                 hide_sprites();
-                print("workers:\0", 24, 32);
+                workers();
+                //print("workers:\0", 24, 32);
                 print("you hear!?\0", 24, 48);
                 delay(1000);
                 if(option == LEVEL_2)
                 {
                     sprite_clean(8);
                     LETTER_COUNT = 8;
-                    //print("workers:\0", 24, 32);
                     print("a fishing\0", 24, 48);
                     print("boat was\0", 24, 64);
                     print("lost!\0", 24, 80);
                     delay(1000);
-                    sprite_clean(8);
-                    LETTER_COUNT = 8;
-                    //print("workers:\0", 24, 32);
-                    print("damn that\0", 24, 48);
-                    print("asakawa!\0", 24, 64);
+                    damn_that_asakawa();
                     GOT_INFO = 1;
                 }
             }
@@ -239,7 +235,8 @@ UINT8 conv_check(void)
                 sprite_clean(0);
                 LETTER_COUNT = 0;
                 hide_sprites();
-                print("workers:\0", 24, 32);
+                workers();
+                //print("workers:\0", 24, 32);
                 print("keep us\0",24, 48);
                 print("out of it!\0", 24, 64);
             }
@@ -255,7 +252,8 @@ UINT8 conv_check(void)
                 sprite_clean(0);
                 LETTER_COUNT = 0;
                 hide_sprites();
-                print("student:\0", 24, 32);
+                student();
+                //print("student:\0", 24, 32);
                 print("i don't\0", 24, 48);
                 print("want to\0", 24, 64);
                 print("die in\0", 24, 80);
@@ -267,7 +265,8 @@ UINT8 conv_check(void)
                 sprite_clean(0);
                 LETTER_COUNT = 0;
                 hide_sprites();
-                print("student:\0", 24, 32);
+                student();
+                //print("student:\0", 24, 32);
                 print("i'm too\0", 24, 48);
                 print("weak!\0", 24, 64);
             }
@@ -282,7 +281,8 @@ UINT8 conv_check(void)
                 sprite_clean(0);
                 LETTER_COUNT = 0;
                 hide_sprites();
-                print("miner:\0", 24, 32);
+                miner();
+               // print("miner:\0", 24, 32);
                 print("it was the\0", 24, 48);
                 print("same at\0", 24, 64);
                 print("the mines!\0", 24, 80);
@@ -292,7 +292,8 @@ UINT8 conv_check(void)
                 sprite_clean(0);
                 LETTER_COUNT = 0;
                 hide_sprites();
-                print("miner:\0", 24, 32);
+                miner();
+                //print("miner:\0", 24, 32);
                 print("you hear!?\0", 24, 48);
                 delay(500);
                 sprite_clean(6);
@@ -306,7 +307,8 @@ UINT8 conv_check(void)
             {
                 sprite_clean(0);
                 LETTER_COUNT = 0;
-                print("miner:\0", 24, 32);
+                miner();
+                //print("miner:\0", 24, 32);
                 print("of course\0", 24, 48);
                 print("i'll join\0", 24, 64);
                 print("the fight!\0", 24, 80);
@@ -357,7 +359,8 @@ UINT8 conv_check(void)
             {
                 sprite_clean(0);
                 LETTER_COUNT = 0;
-                print("fisherman:\0", 24, 32);
+                fisherman();
+                //print("fisherman:\0", 24, 32);
                 print("we were\0", 24, 48);
                 print("lost at\0", 24, 64);
                 print("sea,\0", 24, 80);
@@ -425,7 +428,8 @@ UINT8 conv_check(void)
             {
                 sprite_clean(0);
                 LETTER_COUNT = 0;
-                print("fisherman:\0", 24, 32);
+                fisherman();
+                //print("fisherman:\0", 24, 32);
                 print("there's\0", 24, 48);
                 print("not enough\0", 24, 64);
                 print("talk yet!\0", 24, 80);
@@ -437,7 +441,8 @@ UINT8 conv_check(void)
             {
                 sprite_clean(0);
                 LETTER_COUNT = 0;
-                print("fisherman:\0", 24, 32);
+                fisherman();
+                //print("fisherman:\0", 24, 32);
                 print("we've got\0", 24, 48);
                 print("the\0", 24, 64);
                 print("numbers!\0", 24, 80);
@@ -519,7 +524,8 @@ UINT8 conv_check(void)
                     {
                         sprite_clean(0);
                         LETTER_COUNT = 0;
-                        print("fisherman:\0", 24, 32);
+                        fisherman();
+                        //print("fisherman:\0", 24, 32);
                         print("good!\0", 24, 48);
                         delay(500);
                         sprite_clean(10);
@@ -535,7 +541,8 @@ UINT8 conv_check(void)
                 {
                     sprite_clean(0);
                     LETTER_COUNT = 0;
-                    print("fisherman:\0", 24, 32);
+                    fisherman();
+                    //print("fisherman:\0", 24, 32);
                     print("that's too\0", 24, 48);
                     print("bad...\0", 24, 64);
                     revolt = 0;
@@ -623,7 +630,8 @@ void l2_scene_1(void)
     DISPLAY_ON;
     sprite_clean(0);
     LETTER_COUNT = 0;
-    print("fisherman:\0", 24, 32);
+    fisherman();
+    //print("fisherman:\0", 24, 32);
     print("let's get\0", 24, 48);
     print("to work!\0", 24, 64);
 }
@@ -631,9 +639,9 @@ void l2_scene_1(void)
 void l2_scene_1_fisherman_enter(void)
 {
         delay(1000);
-        sprite_clean(0);
-        LETTER_COUNT = 0;
-        print("fisherman:\0", 24, 32);
+        sprite_clean(10);
+        LETTER_COUNT = 10;
+        //print("fisherman:\0", 24, 32);
         print("you'll\0", 24, 48);
         print("need these\0", 24, 64);
         delay(1000);
@@ -654,7 +662,8 @@ void l2_scene_1_fisherman_enter(void)
         DISPLAY_OFF;
         bkg_clean();
         DISPLAY_ON;
-        print("fisherman:\0", 24, 32);
+        //print("fisherman:\0", 24, 32);
+        fisherman();
         print("now let's\0", 24, 48);
         print("get going!\0", 24, 64);
     while(talking)
@@ -891,7 +900,8 @@ void asakawa_before_work(void)
     LETTER_COUNT = 0;
     DISPLAY_ON;
     talking = 1;
-    print("asakawa:\0", 24, 32);
+    asakawa();
+    //print("asakawa:\0", 24, 32);
     print("get these\0", 24, 48);
     print("crabs\0", 24, 64);
     print("ready to\0", 24, 80);
@@ -933,11 +943,20 @@ void asakawa_after_work(void)
     sprite_clean(0);
     LETTER_COUNT = 0;
     DISPLAY_ON;
-    print("asakawa:\0", 24, 32);
+    asakawa();
+    //print("asakawa:\0", 24, 32);
     print("back down\0", 24, 48);
     print("to the\0", 24, 64);
     print("shit pot!\0", 24, 80);
     delay(1000);
+}
+
+void damn_that_asakawa(void)
+{
+    sprite_clean(8);
+    LETTER_COUNT = 8;
+    print("damn that\0", 24, 48);
+    print("asakawa!\0", 24, 64);
 }
 
 void pos_check_shit_pot(void)

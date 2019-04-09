@@ -10,6 +10,7 @@ UINT8 SLEPT = 0;
 UINT8 talked = 0;
 UINT8 revolt = 0;
 UINT8 REVOLUTION_1 = 0;
+UINT8 REVOLUTION_2 = 0;
 UINT8 striking = 0;
 UINT8 APPEARED = 0;
 UINT8 crabs_to_catch = 1;

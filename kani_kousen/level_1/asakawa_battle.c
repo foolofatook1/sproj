@@ -45,6 +45,8 @@ void asakawa_battle_ctrl(void)
             }
         }
     }
-    if(!revolt)
+    if(!revolt && !REVOLUTION_2)
         option = LEVEL_2;
+
+    /* if REVOLUTION_2? */
 }
