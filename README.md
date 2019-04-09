@@ -50,8 +50,6 @@ properly Download it, and play games on it.
 
 ### Quick TODO-List: ###
 * begin adding texture to "shit-pot" background
-* Add Lenin or Marx quote. Suggested readings:
-	* Chapter I of "Capital"
-	* Imperialism?
-	* "Wage, Labor and Capital" <-- this is probably best
-* wake up, and level 3 starts
+* Add final credits and speech with marx quote
+* Add save points so that you don't have to start the whole game over
+* Add game over screen with option to continue or start over. 

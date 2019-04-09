@@ -32,7 +32,7 @@ void asakawa_battle_ctrl(void)
             fight(&HERO_HP, &ASAKAWA_HP);
             delay(400);
             // basically does back but only when everything is done 
-            if(STATE == BATTLE_WIN & REVOLUTION_2)
+            if(STATE == BATTLE_WIN && REVOLUTION_2)
                 break;
             if(STATE != DEAD)
             {
@@ -44,9 +44,18 @@ void asakawa_battle_ctrl(void)
                 battle_menu();
             }
         }
+        if(STATE == BATTLE_WIN && REVOLUTION_2)
+            break;
     }
     if(!revolt && !REVOLUTION_2)
         option = LEVEL_2;
 
-    /* if REVOLUTION_2? */
+    if(REVOLUTION_2)
+    {
+        clear_screen();
+        sprite_clean(0);
+        LETTER_COUNT = 0;
+        print("you win!\0" ,24, 32);
+        delay(1000);
+    }
 }

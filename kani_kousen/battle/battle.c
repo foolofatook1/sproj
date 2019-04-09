@@ -639,7 +639,6 @@ void npc_fight(void)
         delay(500);
     }
 
-
     /* enemy defends */
     if(npc_act == 0)
     {
@@ -907,11 +906,11 @@ void show_fighter_stats(void)
      * try cleaning sprites and setting LETTER_COUNT to 0. 
      */
     /* this will bug out but it's okay */
-    if(ENEMY == 0)
+    /*if(ENEMY == 0)
     {
         itoa(ASAKAWA_HP, e_hp);
         battle_print(e_hp, 96, 104);
-    }
+    }*/
 }
 
 void game_over_screen(void)

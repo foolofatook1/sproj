@@ -28,7 +28,7 @@ UINT8 screen_x = 95;
 
 void level_2_ctrl(void)
 {
-/*    wait_vbl_done();
+    wait_vbl_done();
     level_2_bkg_start();
     l2_scene_1();
     talking = 1;
@@ -69,7 +69,7 @@ void level_2_ctrl(void)
             }
         }
         caught_crabs = 0;
-    }*/
+    }
     option = LEVEL_3;
 }
 
