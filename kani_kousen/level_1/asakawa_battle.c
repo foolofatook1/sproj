@@ -19,11 +19,9 @@ UINT8 start_hp = 10;
  */
 void asakawa_battle_ctrl(void)
 {
+    STATE = BATTLE_CHOICE;
     choice = 0;
-    sprite_clean(0);
-    LETTER_COUNT = 0;
     battle_menu();
-    back();
     while(STATE != DEAD)
     {
         wait_vbl_done();
@@ -34,6 +32,8 @@ void asakawa_battle_ctrl(void)
             fight(&HERO_HP, &ASAKAWA_HP);
             delay(400);
             // basically does back but only when everything is done 
+            if(STATE == BATTLE_WIN & REVOLUTION_2)
+                break;
             if(STATE != DEAD)
             {
                 DISPLAY_OFF;

@@ -141,10 +141,10 @@ void fight_opt(void)
     sprite_clean(0);
     LETTER_COUNT = 0;
     battle_bkg_clean();
-    battle_print(">", 18, 32);
-    battle_print(" punch", 18, 32);
-    battle_print("a select", 16, 130);
-    battle_print("b back", 16, 142);
+    battle_print(">\0", 18, 32);
+    battle_print(" punch\0", 18, 32);
+    battle_print("a select\0", 16, 130);
+    battle_print("b back\0", 16, 142);
     show_fighter_stats();
 }
 
@@ -155,9 +155,9 @@ void item_opt(void)
     battle_bkg_clean();
     if(ITEMS == 0)
     {
-        battle_print(" empty", 18, 32);
-        battle_print("a select", 16, 130);
-        battle_print("b back", 16, 142);
+        battle_print(" empty\0", 18, 32);
+        battle_print("a select\0", 16, 130);
+        battle_print("b back\0", 16, 142);
     }
     if(ITEMS == 2)
     {
@@ -216,21 +216,22 @@ void choose_item_toggle(void)
 void battle_menu(void)
 {
 
+    sprite_clean(0);
+    LETTER_COUNT = 0;
+
     arrow_x = 20;
     arrow_y = 32;
     /* setup the bkg */
     set_bkg_data(0,10, chain_border_tiles);
     set_bkg_tiles(0,0,20,18,small_chain_border);
 
-    sprite_clean(0);
-    LETTER_COUNT = 0;
     hide_sprites();
     /* selection menu */
-    battle_print(">", arrow_x, arrow_y);
-    battle_print(" fight", 18, 32);
-    battle_print(" defend", 18, 48);
-    battle_print(" run", 18, 64);
-    battle_print(" item", 18, 80);
+    battle_print(">\0", arrow_x, arrow_y);
+    battle_print(" fight\0", 18, 32);
+    battle_print(" defend\0", 18, 48);
+    battle_print(" run\0", 18, 64);
+    battle_print(" item\0", 18, 80);
     show_fighter_stats();
 }
 
@@ -376,7 +377,7 @@ void hero_fight(void)
                   {
                       sprite_clean(0);
                       LETTER_COUNT = 0;
-                      print("you miss!", 64, 80);
+                      print("you miss!\0", 64, 80);
                       delay(500);
                       clear_screen();
                   }
@@ -540,14 +541,11 @@ void sprite_setup(UINT8 hnb, unsigned char *hero_data,
     move_sprite(6, 84, 72);
     move_sprite(7, 84, 80);
 
-    if(striking && !REVOLUTION_2)
+    if(striking)
     {
         if(!REVOLUTION_2)
         {
             set_sprite_data(16, 2, soldier);
-            set_sprite_data(18, 2, fisherman_idle_back);
-            set_sprite_data(20, 2, student_idle_back);
-
             /* soldiers */
             set_sprite_tile(8, 16); // two on the left
             set_sprite_tile(9, 17);
@@ -561,8 +559,6 @@ void sprite_setup(UINT8 hnb, unsigned char *hero_data,
             set_sprite_prop(15, S_FLIPX);
             set_sprite_prop(10, S_FLIPX);
             set_sprite_prop(11, S_FLIPX);
-
-            /* soldiers */
             move_sprite(8, 51, 40);
             move_sprite(9, 51, 48);
             move_sprite(10,51+sprite_width, 40);
@@ -574,6 +570,8 @@ void sprite_setup(UINT8 hnb, unsigned char *hero_data,
         }
 
         /* fisherman && student */
+        set_sprite_data(18, 2, fisherman_idle_back);
+        set_sprite_data(20, 2, student_idle_back);
         set_sprite_tile(16, 18);
         set_sprite_tile(17, 19);
         set_sprite_tile(18, 18);
@@ -586,8 +584,6 @@ void sprite_setup(UINT8 hnb, unsigned char *hero_data,
         set_sprite_prop(19, S_FLIPX);
         set_sprite_prop(22, S_FLIPX);
         set_sprite_prop(23, S_FLIPX);
-
-        /* fisherman && student */
         move_sprite(16, 51, 72);
         move_sprite(17, 51, 80);
         move_sprite(18, 51+sprite_width, 72);
@@ -693,6 +689,8 @@ void damage(UINT8 *fighter_hp)
 {
     if(start_hp == 50)
         SHOOT = 30; // going to need to set this back to 10 later.
+    if(start_hp == 100)
+        SHOOT = 10;
     if(ENEMY == 0)
     {
         if(choice == DEFEND && npc_acc >= 1 && npc_act >= 1)
@@ -784,7 +782,7 @@ void lower_hp(UINT8 *hit, UINT8 defended, UINT8 *enemy_hp)
     if(start_hp == 50)
         (*hit) = 3;
     if(start_hp == 100)
-        (*hit) *= 10;
+        (*hit) = 10;
     if(defended)
     {
         for(i = ((*hit)-DEFEND); i > 0; --i)
@@ -817,7 +815,7 @@ void enemy_damage(UINT8 *enemy_hp)
         if(choice == ITEM && CHOSEN_ITEM == CLUB && hero_acc > 0)
             lower_hp(&CLUB, 1, enemy_hp);
         if(choice == PUNCH && ENEMY == 0 && hero_acc >= 3)
-            return;
+            lower_hp(&PUNCH, 1, enemy_hp);
     }
     if(npc_act > 0)
     {
@@ -901,14 +899,14 @@ void show_fighter_stats(void)
     }
     if(start_hp == 100)
     {
-        battle_print("workers\0", 88, 40);
+        battle_print("everyone\0", 88, 40);
         battle_print("/100\0", 122, 72);
     }
     /**
      * if you're experiencing problems, 
      * try cleaning sprites and setting LETTER_COUNT to 0. 
      */
-
+    /* this will bug out but it's okay */
     if(ENEMY == 0)
     {
         itoa(ASAKAWA_HP, e_hp);

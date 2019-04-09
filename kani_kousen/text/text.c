@@ -19,6 +19,11 @@ UINT8 MAX_SPRITES = 40;
 UINT8 arrow_x = 200; 
 UINT8 arrow_y = 200;
 
+/**
+ * make it so that numbers {0...9} and characters {'.'...'?'}
+ * are just changed so they match differently.
+ */
+
 void print(char *arr, UINT8 x, UINT8 y) 
 {
     SPRITES_8x8;

@@ -41,7 +41,7 @@ void level_3_ctrl(void)
         if(!striking)
             leaves_shit_pot();
     }
-//    revolt = 1; // this is just for running tests;
+   // revolt = 1; // this is just for running tests;
     //STATE = FIGHT_CHOICE;
     delay(1000);
     DISPLAY_OFF;
@@ -67,7 +67,7 @@ void level_3_ctrl(void)
         set_sprite_tile(15, anim_2+=4);
         delay(500);
     }
-    STATE = FIGHT_CHOICE; // this is for tests
+    STATE = BATTLE_CHOICE; // this is for tests
     delay(500);
     DISPLAY_OFF;
     bkg_clean();
@@ -99,9 +99,20 @@ void level_3_ctrl(void)
     ASAKAWA_HP = 200; /* this will later go back down to 100 */
     start_hp = 50;
 
+    sprite_clean(0);
+    LETTER_COUNT = 0;
+    STATE = BATTLE_CHOICE;
+    option = LEVEL_3;
+
+    /** 
+     * battle mechanics are working. 
+     * the bkg screen is just looking
+     * a bit scrambled for some reason. 
+     */
+
     asakawa_battle_ctrl();
     
-    STATE = FIGHT_CHOICE;
+    STATE = BATTLE_CHOICE;
     option = LEVEL_3;
 
     /* for some reason this is ending way too soon */
@@ -125,27 +136,6 @@ void level_3_ctrl(void)
 
     team_battle_show();
 
-    /*hero_posx = 200;
-    hero_posy = 200;
-    fisherman2_posx = 200;
-    fisherman2_posy = 200;
-    miner_posx = 200;
-    miner_posy = 200;
-    move_sprite(0, hero_posx, hero_posy);
-    move_sprite(1, hero_posx+sprite_width, hero_posy);
-    move_sprite(8, miner_posx, miner_posy);
-    move_sprite(9, miner_posx+sprite_width, miner_posy);
-    move_sprite(12, fisherman2_posx, fisherman2_posy);
-    move_sprite(13, fisherman2_posx+sprite_width, fisherman2_posy);
-    fisherman_posy = student2_posy-20;
-    student_posy = fisherman_posy;
-    fisherman_posx = student2_posx;
-    student_posx = student2_posx-20;
-    move_sprite(2, student_posx, student_posy);
-    move_sprite(3, student_posx+sprite_width, student_posy);
-    move_sprite(6, fisherman_posx, fisherman_posy);
-    move_sprite(7, fisherman_posx+sprite_width, fisherman_posy);*/
-
     set_sprite_data(24, 4, student_lie_down);
     set_sprite_tile(4, 24);
     set_sprite_tile(5, 26);
@@ -153,13 +143,18 @@ void level_3_ctrl(void)
     move_sprite(5, student2_posx+sprite_width, student2_posy);
     DISPLAY_ON;
 
+
+    /** 
+     * the bug that's ruining the battle 
+     * menu display is in here.
+     */
     delay(1000);
     bkg_clean();
     sprite_clean(0);
     LETTER_COUNT = 0;
     workers();
-    print("it's the\n", 24, 48);
-    print("beriberi.\n", 24, 64);
+    print("it's the\0", 24, 48);
+    print("beriberi.\0", 24, 64);
     delay(1000);
     sprite_clean(8);
     LETTER_COUNT = 8;
@@ -167,44 +162,44 @@ void level_3_ctrl(void)
     delay(1000);
     sprite_clean(8);
     LETTER_COUNT = 8;
-    print("nobody's\n", 24, 48);
-    print("on our\n", 24, 64);
-    print("side,\n", 24, 80);
+    print("nobody's\0", 24, 48);
+    print("on our\0", 24, 64);
+    print("side,\0", 24, 80);
     delay(1000);
     sprite_clean(8);
     LETTER_COUNT = 8;
-    print("except our\n", 24, 48);
-    print("own selves.\n", 24, 64);
+    print("except our\0", 24, 48);
+    print("own selves.\0", 24, 64);
     delay(1000);
     sprite_clean(8);
     LETTER_COUNT = 8;
-    print("we all\n", 24, 48);
-    print("should've\n", 24, 64);
-    print("acted\n", 24, 80);
-    print("together!\n", 24, 96);
+    print("we all\0", 24, 48);
+    print("should've\0", 24, 64);
+    print("acted\0", 24, 80);
+    print("together!\0", 24, 96);
     delay(1000);
     sprite_clean(8);
     LETTER_COUNT = 8;
-    print("there'd be\n", 24, 48);
-    print("no one to\n", 24, 64);
-    print("work if\n", 24, 80);
-    print("they took\n", 24, 96);
+    print("there'd be\0", 24, 48);
+    print("no one to\0", 24, 64);
+    print("work\0", 24, 80);
+    delay(1000);
+    sprite_clean(8);
+    LETTER_COUNT= 8;
+    print("if\0", 24, 48);
+    print("they took\0", 24, 64);
+    print("us all!\0", 24, 80);
     delay(1000);
     sprite_clean(8);
     LETTER_COUNT = 8;
-    print("us all\n", 24, 48);
-    print("away!\n", 24, 64);
+    print("let's\0", 24, 48);
+    print("do it\0", 24, 64);
+    print("again,\0", 24, 80);
     delay(1000);
     sprite_clean(8);
     LETTER_COUNT = 8;
-    print("let's\n", 24, 48);
-    print("do it\n", 24, 64);
-    print("again,\n", 24, 80);
-    delay(1000);
-    sprite_clean(8);
-    LETTER_COUNT = 8;
-    print("one more\n", 24, 48);
-    print("time!\n", 24, 64);
+    print("one more\0", 24, 48);
+    print("time!\0", 24, 64);
 
     REVOLUTION_2 = 1;
     ENEMY = 0;
@@ -213,11 +208,12 @@ void level_3_ctrl(void)
     ASAKAWA_HP = 100; /* this will later go back down to 100 */
     start_hp = 100;
     option = LEVEL_3;
-    STATE = FIGHT_CHOICE;
+    STATE = BATTLE_CHOICE;
+    
     asakawa_battle_ctrl();
     
-    //STATE = FIGHT_CHOICE;
-    //option = LEVEL_3;
+    STATE = BATTLE_CHOICE;
+    option = LEVEL_3;
 
 
 
