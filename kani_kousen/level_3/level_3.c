@@ -212,8 +212,8 @@ void level_3_ctrl(void)
     
     asakawa_battle_ctrl();
     
-    STATE = BATTLE_CHOICE;
-    option = LEVEL_3;
+    //STATE = BATTLE_CHOICE;
+    //option = LEVEL_3;
 
 
 

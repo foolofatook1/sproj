@@ -53,3 +53,6 @@ properly Download it, and play games on it.
 * Add final credits and speech with marx quote
 * Add save points so that you don't have to start the whole game over
 * Add game over screen with option to continue or start over. 
+* swich yes and no text to be more interesting
+* after first loss, give a little narrative filler
+* a little extra work to reform the party if possible
