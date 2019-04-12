@@ -2,6 +2,7 @@
 #include <gb/drawing.h>
 #include <stdlib.h>
 #include <stdio.h>
+#include <string.h>
 #include <rand.h>
 #include "../level_1/asakawa_battle.h"
 #include "battle.h"
@@ -15,6 +16,7 @@
 #include "../assets/sprites/fisherman_idle_back.h"
 #include "../assets/sprites/student_idle_back.h"
 #include "../assets/sprites/asakawa_air_shot.h"
+#include "../assets/kani_kousen_palette.h"
 
 /**
  * 0 = asakawa;
@@ -99,30 +101,29 @@ void run(void)
     if(BATTLE_NUM == 1)
     {
         asakawa();
-        //        battle_print("asakawa:\0", 18, 32);
-        battle_print("you\0", 18, 48);
-        battle_print("can't\0", 18, 64);
-        battle_print("leave!\0", 18, 80); 
+        battle_print("YOU\0", 18, 48);
+        battle_print("CANkT\0", 18, 64);
+        battle_print("LEAVEl\0", 18, 80); 
         show_fighter_stats();
         delay(500);
         sprite_clean(8);
         LETTER_COUNT = 8;
         battle_bkg_clean();
-        //battle_print("asakawa:\0", 18, 32);
-        battle_print("not 'til\0", 16, 48);
-        battle_print("you're\0", 18, 64);
-        battle_print("done!\0", 18, 80);
+        battle_print("NOTikTIL\0", 16, 48);
+        battle_print("YOUkRE\0", 18, 64);
+        battle_print("DONEl\0", 18, 80);
         show_fighter_stats();
         delay(1000);
         back();
     }
     else 
     {
-        battle_print("you\0", 18, 32);
-        battle_print("can't\0", 18, 48);
-        battle_print("escape!\0", 18, 64); 
+        battle_print("YOU\0", 18, 32);
+        battle_print("CANkT\0", 18, 48);
+        battle_print("ESCAPEl\0", 18, 64); 
         show_fighter_stats();
         delay(500);
+        back();
     }
 }
 
@@ -141,10 +142,10 @@ void fight_opt(void)
     sprite_clean(0);
     LETTER_COUNT = 0;
     battle_bkg_clean();
-    battle_print(">\0", 18, 32);
-    battle_print(" punch\0", 18, 32);
-    battle_print("a select\0", 16, 130);
-    battle_print("b back\0", 16, 142);
+    battle_print("j\0", 18, 32);
+    battle_print("iPUNCH\0", 18, 32);
+    battle_print("AiSELECT\0", 16, 130);
+    battle_print("BiBACK\0", 16, 142);
     show_fighter_stats();
 }
 
@@ -155,20 +156,20 @@ void item_opt(void)
     battle_bkg_clean();
     if(ITEMS == 0)
     {
-        battle_print(" empty\0", 18, 32);
-        battle_print("a select\0", 16, 130);
-        battle_print("b back\0", 16, 142);
+        battle_print("iEMPTY\0", 18, 32);
+        battle_print("AiSELECT\0", 16, 130);
+        battle_print("BiBACK\0", 16, 142);
     }
     if(ITEMS == 2)
     {
         CHOOSING = 1;
         arrow_x = 24;
         arrow_y = 32;
-        battle_print(">\0", arrow_x, arrow_y);
-        battle_print(" club\0", 24, 32);
-        battle_print(" net\0", 24, 48);
-        battle_print("a select\0", 16, 130);
-        battle_print("b back\0", 16, 142);
+        battle_print("j\0", arrow_x, arrow_y);
+        battle_print("iCLUB\0", 24, 32);
+        battle_print("iNET\0", 24, 48);
+        battle_print("AiSELECT\0", 16, 130);
+        battle_print("BiBACK\0", 16, 142);
         show_fighter_stats();
         arrow_y = 32;
         while(CHOOSING)
@@ -227,11 +228,11 @@ void battle_menu(void)
 
     hide_sprites();
     /* selection menu */
-    battle_print(">\0", arrow_x, arrow_y);
-    battle_print(" fight\0", 18, 32);
-    battle_print(" defend\0", 18, 48);
-    battle_print(" run\0", 18, 64);
-    battle_print(" item\0", 18, 80);
+    battle_print("j\0", arrow_x, arrow_y);
+    battle_print("iFIGHT\0", 18, 32);
+    battle_print("iDEFEND\0", 18, 48);
+    battle_print("iRUN\0", 18, 64);
+    battle_print("iITEM\0", 18, 80);
     show_fighter_stats();
 }
 
@@ -327,57 +328,37 @@ void hero_fight(void)
         if((choice == ITEM) && (CHOSEN_ITEM == CLUB) && 
                 (ENEMY > 0) && (!CRAB_CAUGHT))
         {
-            print("you need\0", 72, 64);
-            print("to catch\0", 72, 80);
-            print("the crab!\0", 72, 96);
+            print("YOUiNEED\0", 72, 64);
+            print("TOiCATCH\0", 72, 80);
+            print("THEiCRABl\0", 72, 96);
             delay(500);
         }
         else if((choice == ITEM) && (CHOSEN_ITEM == NET) && 
                 (hero_acc > 0))
         {
-            print("caught!\0", 72, 80);
+            print("CAUGHTl\0", 72, 80);
             CRAB_CAUGHT = 1;
             delay(500);
         }
         else if(((choice == PUNCH) && (hero_acc >= 3)) || 
                 ((choice == ITEM) && hero_acc > 0))
         {
-            print("you hit\0", 56, 72);
+            print("YOUiHIT\0", 56, 72);
             if(ENEMY == 0)
-                print("asakawa\0", 56, 88);
+                print("ASAKAWA\0", 56, 88);
             if(ENEMY == 1)
-                print("crab\0", 56, 88);
+                print("CRAB\0", 56, 88);
             if(ENEMY == 2)
-                print("king crab\0", 56, 88);
+                print("KINGiCRAB\0", 56, 88);
             delay(500);
         }
-        /*        if(choice == PUNCH && (ENEMY == 1 || ENEMY == 2))
-                  {
-                  print(" no use\0", 56, 56);
-                  print("punching\0", 56, 72);
-                  print(" a crab!\0", 56, 88);
-                  delay(500);
-                  };
-                  if(choice == PUNCH && ENEMY == 0 && hero_acc >= 3)
-                  {
-                  print("hit!\0", 72, 80);
-                  delay(500);
-                  }
-
-                  if((choice == ITEM) && (CHOSEN_ITEM == CLUB) && 
-                  (CRAB_CAUGHT) && (hero_acc > 0))
-                  {
-                  print("crushed!\0", 72, 80);
-                  delay(500);
-                  }
-         */
         /* fighter chooses punch and misses */
                   else if(((choice == PUNCH) && (hero_acc < 3)) || 
                           ((choice == ITEM) && (hero_acc == 0)))
                   {
                       sprite_clean(0);
                       LETTER_COUNT = 0;
-                      print("you miss!\0", 64, 80);
+                      print("YOUiMISSl\0", 64, 80);
                       delay(500);
                       clear_screen();
                   }
@@ -499,7 +480,7 @@ void enemy_fight_anim(void)
 void clear_screen(void) 
 {
     /* clear the bkg */
-    set_bkg_data(0,4, blank_screen_tiles);
+    set_bkg_data(0,4, kani_kousen_palette);
     set_bkg_tiles(0,0,20,18,blank_screen);
 }
 
@@ -614,7 +595,7 @@ void npc_fight(void)
         DISPLAY_OFF;
         sprite_clean(0);
         LETTER_COUNT = 0;
-        print("you're hit\0", 72, 80);
+        print("YOUkREiHIT\0", 72, 80);
         clear_screen();
         DISPLAY_ON;
         delay(500);
@@ -633,7 +614,7 @@ void npc_fight(void)
         DISPLAY_OFF;
         sprite_clean(0);
         LETTER_COUNT = 0;
-        print("they miss\0", 64, 80);
+        print("THEYiMISS\0", 64, 80);
         clear_screen();
         DISPLAY_ON;
         delay(500);
@@ -647,13 +628,13 @@ void npc_fight(void)
         sprite_clean(0);
         LETTER_COUNT = 0; 
         if(ENEMY == 0)
-            print("asakawa\0", 56, 75);
+            print("ASAKAWA\0", 56, 75);
         if(ENEMY == 1)
-            print("the crab\0", 56, 75);
+            print("THEiCRAB\0", 56, 75);
         if(ENEMY == 2)
-            print("king crab\0", 56, 75);
+            print("KINGiCRAB\0", 56, 75);
 
-        print("defends\0", 56, 91);
+        print("DEFENDS\0", 56, 91);
         DISPLAY_ON;
         delay(800);
     }
@@ -825,24 +806,6 @@ void enemy_damage(UINT8 *enemy_hp)
         if(choice == PUNCH && ENEMY == 0 && hero_acc >= 3)
             lower_hp(&PUNCH, 0, enemy_hp);
     }
-
-    /*if(npc_act == 0 && choice == ITEM && CHOSEN_ITEM == CLUB)
-      {
-      for(i = ((CLUB)-DEFEND); i > 0; --i)
-      {
-      --(*enemy_hp);
-      if((*enemy_hp) == 0)
-      STATE = BATTLE_WIN;
-      }
-      }
-      if(
-      else
-      {
-      for(i = (*damage_amnt); i > 0; --i)
-      --(*enemy_hp);
-      if((*enemy_hp) == 0)
-      STATE = BATTLE_WIN;
-      }*/
 }
 
 /**
@@ -857,13 +820,13 @@ void fight(UINT8 *fighter_hp, UINT8 *enemy_hp)
         damage(fighter_hp);
         if(STATE != DEAD)
         {
-            hero_fight();//enemy_hp);
+            hero_fight();
             enemy_damage(enemy_hp);
         }
     }
     else
     {
-        hero_fight();//enemy_hp);
+        hero_fight();
         enemy_damage(enemy_hp);
         if(STATE != BATTLE_WIN)
         {
@@ -881,25 +844,33 @@ void fight(UINT8 *fighter_hp, UINT8 *enemy_hp)
 
 void show_fighter_stats(void)
 {
-    battle_print("hp\0", 88, 56);
-    itoa(HERO_HP, h_hp);
+    battle_print("HP\0", 88, 56);
+    itoa(HERO_HP, h_hp); // need to do a conversion on this
+
+    for(i = 0; i < 2; ++i)
+    {
+        if(h_hp[i] == '1')
+            h_hp[i] = '\\';
+        else
+            h_hp[i] = (h_hp[i]+139);
+    }
     battle_print(h_hp, 96, 72);
     /* HP */
     /* this currently makes it so when you lose HP everything breaks */
     if(start_hp == 10)
     {
-        battle_print("worker\0", 88, 40);
-        battle_print("/10\0", 122, 72);
+        battle_print("WORKER\0", 88, 40);
+        battle_print("h\\[\0", 122, 72);
     }
     if(start_hp == 50)
     {
-        battle_print("leaders\0", 88, 40);
-        battle_print("/50\0", 122, 72);
+        battle_print("LEADERS\0", 88, 40);
+        battle_print("h`[\0", 122, 72);
     }
     if(start_hp == 100)
     {
-        battle_print("everyone\0", 88, 40);
-        battle_print("/100\0", 122, 72);
+        battle_print("EVERYONE\0", 88, 40);
+        battle_print("h\\[[\0", 122, 72);
     }
     /**
      * if you're experiencing problems, 
@@ -918,5 +889,5 @@ void game_over_screen(void)
     sprite_clean(0);
     LETTER_COUNT = 0;
     clear_screen();
-    print("game over", 44, 72);
+    print("GAMEiOVER", 44, 72);
 }

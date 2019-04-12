@@ -65,7 +65,7 @@ void crab_catch_ctrl(void)
             clear_screen();
             sprite_clean(0);
             LETTER_COUNT = 0;
-            print("you win!", 56, 80);
+            print("YOUiWINl", 56, 80);
             delay(500);
             CRAB_CAUGHT = 0;
             ++caught_crabs;
