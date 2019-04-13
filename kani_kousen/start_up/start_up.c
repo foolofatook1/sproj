@@ -2,7 +2,7 @@
 #include "../text/text.h"
 #include "../battle/battle.h"
 #include "../assets/sprite_palette.h"
-#include "../assets/kani_kousen_palette.h"
+#include "../assets/bkg_palette.h"
 #include "../assets/sickle_hammer.h"
 
 /* positions of the arrow */
@@ -28,7 +28,7 @@ UINT8 choice = 0;
 void opening(void)
 {
     DISPLAY_OFF;
-    set_bkg_palette(0, 1, kani_kousen_palette);
+    set_bkg_palette(0, 1, bkg_palette);
     set_sprite_palette(0, 2, sprite_palette);
 
     clear_screen();

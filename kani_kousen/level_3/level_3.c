@@ -103,18 +103,10 @@ void level_3_ctrl(void)
     STATE = BATTLE_CHOICE;
     option = LEVEL_3;
 
-    /** 
-     * battle mechanics are working. 
-     * the bkg screen is just looking
-     * a bit scrambled for some reason. 
-     */
-
     asakawa_battle_ctrl();
     
     STATE = BATTLE_CHOICE;
     option = LEVEL_3;
-
-    /* for some reason this is ending way too soon */
 
     bkg_clean();
     sprite_clean(0);

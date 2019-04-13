@@ -1,6 +1,6 @@
 /*
 
- KANI_KOUSEN_PALATTE.H
+ KANI_KOUSEN_PALETTE.H
 
  Include File.
 
@@ -24,8 +24,8 @@
 
 
 /* Bank of tiles. */
-#define kani_kousen_palatteBank 0
+#define kani_kousen_paletteBank 0
 /* Start of tile array. */
 extern unsigned char kani_kousen_palette[];
 
-/* End of KANI_KOUSEN_PALATTE.H */
+/* End of KANI_KOUSEN_PALETTE.H */

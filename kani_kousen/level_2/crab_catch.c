@@ -19,7 +19,7 @@ UINT8 CRAB_HP = 5;
 void crab_catch_ctrl(void)
 {
     // delete this ITEMS thing later?
-    //UWORD crab_num[4];
+    UWORD crab_num[4];
     ITEMS = 2;
     BATTLE_NUM = 1;
     STATE = BATTLE_CHOICE;
@@ -72,7 +72,7 @@ void crab_catch_ctrl(void)
             STATE = BATTLE_CHOICE;
         }
     }
-/*    DISPLAY_OFF;
+    /*DISPLAY_OFF;
     clear_screen();
     sprite_clean();
     LETTER_COUNT = 0;
@@ -82,7 +82,7 @@ void crab_catch_ctrl(void)
     print(crab_num, 80, 48);
     print("crabs\0", 24, 64);
     DISPLAY_ON;*/
-    delay(1000);
+    //delay(1000);
 }
 
 void crab_catch_setup(void)

@@ -847,28 +847,31 @@ void show_fighter_stats(void)
     battle_print("HP\0", 88, 56);
     itoa(HERO_HP, h_hp); // need to do a conversion on this
 
-    for(i = 0; i < 2; ++i)
-    {
-        if(h_hp[i] == '1')
-            h_hp[i] = '\\';
-        else
-            h_hp[i] = (h_hp[i]+139);
-    }
-    battle_print(h_hp, 96, 72);
+    /* quick conversion. problem with numbers proceeding 1 though. */
+    for(i = 0; i < 4; ++i)
+        h_hp[i] = (h_hp[i]+43);
+
+    battle_print(h_hp, 88, 72);
     /* HP */
     /* this currently makes it so when you lose HP everything breaks */
     if(start_hp == 10)
     {
+        if(HERO_HP == start_hp)
+            battle_print("\\[\0", 88, 72);
         battle_print("WORKER\0", 88, 40);
         battle_print("h\\[\0", 122, 72);
     }
     if(start_hp == 50)
     {
+        if(HERO_HP == start_hp)
+            battle_print("h`[\0", 88, 72);
         battle_print("LEADERS\0", 88, 40);
         battle_print("h`[\0", 122, 72);
     }
     if(start_hp == 100)
     {
+        if(HERO_HP == start_hp)
+            battle_print("h\\[[\0", 88, 72);
         battle_print("EVERYONE\0", 88, 40);
         battle_print("h\\[[\0", 122, 72);
     }
