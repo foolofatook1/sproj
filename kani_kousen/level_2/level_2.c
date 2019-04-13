@@ -101,7 +101,7 @@ void shit_pot_setup(void)
     sprite_clean(0);
     LETTER_COUNT = 0;
     hide_sprites();
-    set_bkg_data(0, 4, kani_kousen_palette);
+    set_bkg_data(0, 12, kani_kousen_palette);
     set_bkg_tiles(0,0,20,18,shit_pot);
 }
 
@@ -293,7 +293,7 @@ UINT8 conv_check(void)
                 delay(500);
                 sprite_clean(6);
                 LETTER_COUNT = 6;
-                print("THEiBOATks\0", 24, 48);
+                print("THEiBOATkS\0", 24, 48);
                 print("BACKl\0", 24, 64);
                 GOT_INFO = 1;
             }
@@ -303,7 +303,7 @@ UINT8 conv_check(void)
                 LETTER_COUNT = 0;
                 miner();
                 print("OFiCOURSE\0", 24, 48);
-                print("IklliJOIN\0", 24, 64);
+                print("IkLLiJOIN\0", 24, 64);
                 print("THEiFIGHTl\0", 24, 80);
                 talked = 1;
             }
@@ -356,45 +356,45 @@ UINT8 conv_check(void)
                 print("WEiWERE\0", 24, 48);
                 print("LOSTiAT\0", 24, 64);
                 print("SEAk\0", 24, 80);
-                delay(1300);
+                delay(1000);
                 sprite_clean(10);
                 LETTER_COUNT = 10;
                 print("ANDiWASHED\0", 24, 48);
                 print("ASHOREiIN\0", 24, 64);
                 print("RUSSIAl\0", 24, 80);
-                delay(1300);
+                delay(1000);
                 sprite_clean(10);
                 LETTER_COUNT = 10;
                 print("THOSE\0", 24, 48);
                 print("RUSSKIES\0", 24, 64);
                 print("AREiONiTO\0",24, 80);
                 print("SOMETHINGe\0", 24, 96);
-                delay(1300);
+                delay(1000);
                 sprite_clean(10);
                 LETTER_COUNT = 10;
                 print("WITHiTHEIR\0", 24, 48);
                 print("TALKiABOUT\0",24, 64);
                 print("XXXXXXXXXX\0", 24, 80);
-                delay(1300);
+                delay(1000);
                 sprite_clean(10);
                 LETTER_COUNT = 10;
                 print("WEiCAN\0", 24, 48);
                 print("ORGANIZE\0", 24, 64);
                 print("TOOl\0", 24, 80);
-                delay(1300);
+                delay(1000);
                 sprite_clean(10);
                 LETTER_COUNT = 10;
                 print("YOUfiIf\0", 24, 48);
                 print("ANDiA\0",24, 64);
                 print("COUPLE\0",24, 80);
                 print("OTHERSl\0", 24, 96);
-                delay(1300);
+                delay(1000);
                 sprite_clean(10);
                 LETTER_COUNT = 10;
                 print("WEiCOULD\0", 24, 48);
                 print("ORGANIZE\0", 24, 64);
                 print("THEiCREW!\0", 24, 80);
-                delay(1300);
+                delay(1000);
                 sprite_clean(10);
                 LETTER_COUNT = 10;
                 print("WHATiDkYOU\0", 24, 48);
@@ -428,18 +428,18 @@ UINT8 conv_check(void)
                 LETTER_COUNT = 10;
                 print("WITHOUT\0", 24, 48);
                 print("US\0", 24, 64);
-                delay(800);
+                delay(1000);
                 sprite_clean(10);
                 LETTER_COUNT = 10;
                 print("SHIPS\0", 24, 48);
                 print("WOULDNkT\0", 24, 64);
                 print("BUDGEe\0", 24, 80);
-                delay(800);
+                delay(1000);
                 sprite_clean(10);
                 LETTER_COUNT = 10;
                 print("WITHOUT\0", 24, 48);
                 print("USf\0", 24, 64);
-                delay(500);
+                delay(1000);
                 sprite_clean(10);
                 LETTER_COUNT = 10;
                 print("THEiRICH\0", 24, 48);
@@ -630,7 +630,7 @@ void l2_scene_1_fisherman_enter(void)
         bkg_clean();
         DISPLAY_ON;
         fisherman();
-        print("NOWiLETks\0", 24, 48);
+        print("NOWiLETkS\0", 24, 48);
         print("GETiGOINGl\0", 24, 64);
     while(talking)
     {
@@ -644,7 +644,7 @@ void fisherman_walk_away(void)
     sprite_clean(0);
     LETTER_COUNT = 0;
     hide_sprites();
-    set_bkg_data(0, 4, kani_kousen_palette);
+    set_bkg_data(0, 12, kani_kousen_palette);
     set_bkg_tiles(0,0,20,18,shit_pot);
 
     /* setting up fisherman data for his walk in */
@@ -809,7 +809,7 @@ void asakawa_enters_deck(void)
     sprite_clean(0);
     LETTER_COUNT = 0;
     hide_sprites();
-    set_bkg_data(0,4,kani_kousen_palette);
+    set_bkg_data(0,12,kani_kousen_palette);
     set_bkg_tiles(0,0,32,18,deck);
     SPRITES_8x16;
     set_sprite_data(0, 8, hero_walk_sideways);
@@ -918,7 +918,7 @@ void damn_that_asakawa(void)
     sprite_clean(8);
     LETTER_COUNT = 8;
     print("DAMNiTHAT\0", 24, 48);
-    print("ASAkAWAl\0", 24, 64);
+    print("ASAKAWAl\0", 24, 64);
 }
 
 void pos_check_shit_pot(void)

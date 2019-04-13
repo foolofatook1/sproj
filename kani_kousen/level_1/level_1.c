@@ -80,7 +80,7 @@ void level_1_bkg_start(void)
     sprite_clean(10);
     LETTER_COUNT = 10;
     print("YOUiHEARln\0", 24, 48);
-    delay(500);
+    delay(1000);
 }
 
 void l1_scene_1(void) 
@@ -98,32 +98,26 @@ void l1_scene_1(void)
     delay(1000);
     sprite_clean(10);
     LETTER_COUNT = 10;
-    print("ITiWOULD\0", 24, 48);
+    print("ITiWILL\0", 24, 48);
     print("BEiAiCOLD\0", 24, 64);
     print("DEATH\0", 24, 80);
     print("INDEEDeee\0", 24, 96);
     delay(1000);
     sprite_clean(10);
     LETTER_COUNT = 10;
-    print("IiSEEiWE\0", 24, 48);
-    print("HAVEiA\0", 24, 64);
-    print("QUIET\0", 24, 80);
-    print("ONEe\0", 24, 96);
+    print("AiQUIET\0", 24, 48);
+    print("ONEln\0", 24, 64);
     delay(1000);
     sprite_clean(10);
     LETTER_COUNT = 10;
     print("CkMON\0", 24, 48);
-    print("IkLLiTAKE\0", 24, 64);
-    print("YOUiDOWN\0", 24, 80);
-    delay(1000);
-    sprite_clean(10);
-    LETTER_COUNT = 10;
-    print("TOiTHE\0", 24, 48);
-    print("SHITiPOTe\0", 24, 64);
+    print("DOWN\0", 24, 64);
+    print("TOiTHE\0", 24, 80);
+    print("SHITiPOTe\0", 24, 96);
     delay(1000);
     DISPLAY_OFF;
     /* center on the door */
-    set_bkg_data(0,4,kani_kousen_palette);
+    set_bkg_data(0,12,kani_kousen_palette);
     set_bkg_tiles(0,0,20,18,shit_pot);
     DISPLAY_ON;
     HIDE_SPRITES;/* this turns sprites off */
@@ -168,7 +162,7 @@ int level_1_sprite_setup(void)
     move_sprite(2, fisherman_posx, fisherman_posy);
     move_sprite(3, fisherman_posx+sprite_width, fisherman_posy);
 
-    delay(400); /* a pause before appearing at door */
+    delay(1000); /* a pause before appearing at door */
     SHOW_SPRITES;
 }
 
@@ -334,7 +328,7 @@ void l1_scene_3_setup(void)
     DISPLAY_OFF;
 
     /* set bkg up */
-    set_bkg_data(0,4,kani_kousen_palette);
+    set_bkg_data(0,12,kani_kousen_palette);
     set_bkg_tiles(0,0,20,18,shit_pot);
 
     /* hide unused sprites first */
@@ -435,7 +429,7 @@ void l1_scene_3_animate(void)
     set_sprite_tile(9, 38-((l1_scene_3_anim&0x1)*4));
     move_sprite(0, hero_posx, hero_posy);
     move_sprite(1, hero_posx+sprite_width, hero_posy);
-    delay(500);
+    delay(1000);
 }
 /* scene_3 dialogue setup first */
 void l1_scene_3_text_setup(void)
@@ -447,10 +441,8 @@ void l1_scene_3_text_setup(void)
     sprite_clean(0);
     LETTER_COUNT = 0;
     asakawa();
-    //print("asakawa:\0", 24, 32);
     print("LISTENiUP\0", 24, 48);
-    print("YOU\0", 24, 64);
-    print("MAGGOTSl\0", 24, 80);
+    print("MAGGOTSl\0", 24, 64);
     delay(1000);
 }
 
@@ -460,7 +452,7 @@ void l1_scene_3(void)
     sprite_clean(8);
     LETTER_COUNT = 8;
     print("NEEDLESS\0", 24, 48);
-    print("TOiSAY,\0", 24, 64);
+    print("TOiSAYf\0", 24, 64);
     delay(1000);
     sprite_clean(8);
     LETTER_COUNT = 8;
@@ -473,7 +465,7 @@ void l1_scene_3(void)
     LETTER_COUNT = 8;
     print("FORiOUR\0", 24, 48);
     print("NATIONl\0", 24, 64);
-    delay(500);
+    delay(1000);
     sprite_clean(8);
     LETTER_COUNT = 8;
     print("AS\0", 24, 48);
@@ -499,12 +491,6 @@ void l1_scene_3(void)
     LETTER_COUNT = 8;
     print("TO\0", 24, 48);
     print("PROTECTiUS\0", 24, 64);
-    delay(1000);
-    sprite_clean(8);
-    LETTER_COUNT = 8;
-    print("ASiA\0", 24, 48);
-    print("NATIONiOF\0", 24, 64);
-    print("EXCELLENCE\0", 24, 80);
     delay(1000);
     sprite_clean(8);
     LETTER_COUNT = 8;
@@ -542,17 +528,14 @@ void l1_scene_3(void)
     DISPLAY_ON;
 
     asakawa();
-    print("THISiKIND\0", 24, 48);
-    print("OFiTALKiIS\0", 24, 64);
-    print("NOT\0", 24, 80);
-    print("TOLERABLEl\0", 24, 96);
+    print("THISiTALK\0", 24, 48);
+    print("ISiNOT\0", 24, 64);
+    print("TOLERABLEl\0", 24, 80);
     delay(1000);
     sprite_clean(8);
     LETTER_COUNT = 8;
-    print("THIS\0", 24, 48);
-    print("ATTITUDE\0", 24, 64);
-    print("IS\0", 24, 80);
-    print("MUTINOUSf\0", 24, 94);
+    print("ITiIS\0", 24, 48);
+    print("MUTINOUSf\0", 24, 64);
     delay(1000);
     sprite_clean(8);
     LETTER_COUNT = 8;

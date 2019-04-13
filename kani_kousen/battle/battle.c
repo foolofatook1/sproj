@@ -95,36 +95,12 @@ void battle_nav(void)
 
 void run(void)
 {
-    sprite_clean(0);
-    LETTER_COUNT = 0;
-    battle_bkg_clean();
-    if(BATTLE_NUM == 1)
-    {
-        asakawa();
-        battle_print("YOU\0", 18, 48);
-        battle_print("CANkT\0", 18, 64);
-        battle_print("LEAVEl\0", 18, 80); 
-        show_fighter_stats();
-        delay(500);
-        sprite_clean(8);
-        LETTER_COUNT = 8;
-        battle_bkg_clean();
-        battle_print("NOTikTIL\0", 16, 48);
-        battle_print("YOUkRE\0", 18, 64);
-        battle_print("DONEl\0", 18, 80);
-        show_fighter_stats();
-        delay(1000);
-        back();
-    }
-    else 
-    {
-        battle_print("YOU\0", 18, 32);
-        battle_print("CANkT\0", 18, 48);
-        battle_print("ESCAPEl\0", 18, 64); 
-        show_fighter_stats();
-        delay(500);
-        back();
-    }
+    battle_print("YOU\0", 18, 32);
+    battle_print("CANkT\0", 18, 48);
+    battle_print("ESCAPEl\0", 18, 64); 
+    show_fighter_stats();
+    delay(1000);
+    back();
 }
 
 void back(void)
@@ -353,15 +329,15 @@ void hero_fight(void)
             delay(500);
         }
         /* fighter chooses punch and misses */
-                  else if(((choice == PUNCH) && (hero_acc < 3)) || 
-                          ((choice == ITEM) && (hero_acc == 0)))
-                  {
-                      sprite_clean(0);
-                      LETTER_COUNT = 0;
-                      print("YOUiMISSl\0", 64, 80);
-                      delay(500);
-                      clear_screen();
-                  }
+        else if(((choice == PUNCH) && (hero_acc < 3)) || 
+                ((choice == ITEM) && (hero_acc == 0)))
+        {
+            sprite_clean(0);
+            LETTER_COUNT = 0;
+            print("YOUiMISSl\0", 64, 80);
+            delay(500);
+            clear_screen();
+        }
     }
     /* fighter defends */
     if(choice == DEFEND)
@@ -848,7 +824,7 @@ void show_fighter_stats(void)
     itoa(HERO_HP, h_hp); // need to do a conversion on this
 
     /* quick conversion. problem with numbers proceeding 1 though. */
-    for(i = 0; i < 4; ++i)
+    for(i = 0; h_hp[i] != '\0'; ++i)
         h_hp[i] = (h_hp[i]+43);
 
     battle_print(h_hp, 88, 72);
@@ -857,22 +833,31 @@ void show_fighter_stats(void)
     if(start_hp == 10)
     {
         if(HERO_HP == start_hp)
-            battle_print("\\[\0", 88, 72);
+            battle_print("[\0", 96, 72);
         battle_print("WORKER\0", 88, 40);
         battle_print("h\\[\0", 122, 72);
     }
+    /**
+     * for this battle life loss is by 10, 
+     * so we can just hard print a 0 at the end.
+     */
     if(start_hp == 50)
     {
-        if(HERO_HP == start_hp)
-            battle_print("h`[\0", 88, 72);
-        battle_print("LEADERS\0", 88, 40);
+        //if(HERO_HP == start_hp)
+        battle_print("LEADERS\0", 96, 40);
+        battle_print("[\0", 96, 72);
         battle_print("h`[\0", 122, 72);
     }
+    /**
+     * and same for this battle 
+     */ 
     if(start_hp == 100)
     {
-        if(HERO_HP == start_hp)
-            battle_print("h\\[[\0", 88, 72);
         battle_print("EVERYONE\0", 88, 40);
+        if(HERO_HP == start_hp)
+            battle_print("[[\0", 96, 72);
+        else
+            battle_print("[\0", 96, 72);
         battle_print("h\\[[\0", 122, 72);
     }
     /**
@@ -881,10 +866,10 @@ void show_fighter_stats(void)
      */
     /* this will bug out but it's okay */
     /*if(ENEMY == 0)
-    {
-        itoa(ASAKAWA_HP, e_hp);
-        battle_print(e_hp, 96, 104);
-    }*/
+      {
+      itoa(ASAKAWA_HP, e_hp);
+      battle_print(e_hp, 96, 104);
+      }*/
 }
 
 void game_over_screen(void)

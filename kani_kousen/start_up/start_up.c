@@ -4,6 +4,7 @@
 #include "../assets/sprite_palette.h"
 #include "../assets/bkg_palette.h"
 #include "../assets/sickle_hammer.h"
+#include "../assets/kani_kousen_palette.h"
 
 /* positions of the arrow */
 /*UINT8 START_POS = 72;
@@ -31,9 +32,10 @@ void opening(void)
     set_bkg_palette(0, 1, bkg_palette);
     set_sprite_palette(0, 2, sprite_palette);
 
-    clear_screen();
-    print("PRESSiA\0", 24, 32);
-    print("TOiSTART\0", 24, 48);
+//    clear_screen();
+    sick_ham();
+    print("PRESSiA\0", 54, 72);
+    print("TOiSTART\0",52, 88);
     for(i = 0; i < LETTER_COUNT; ++i)
         set_sprite_prop(i, 0);
     SHOW_BKG;
@@ -47,4 +49,10 @@ void opening(void)
             break;
         }
     }
+}
+
+void sick_ham(void)
+{
+    set_bkg_data(0, 28, kani_kousen_palette);
+    set_bkg_tiles(0, 0, 20, 18, sickle_hammer);
 }

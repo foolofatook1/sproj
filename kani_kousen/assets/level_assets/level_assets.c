@@ -5,6 +5,7 @@
 //UINT8 text_count = 0;
 //UINT8 start_animate = 0;
 UINT8 sprite_width = 8;
+//UINT16 dt = 1500; // delay time
 
 UINT8 SLEPT = 0;
 UINT8 talked = 0;

@@ -102,7 +102,6 @@ void level_3_ctrl(void)
     LETTER_COUNT = 0;
     STATE = BATTLE_CHOICE;
     option = LEVEL_3;
-
     asakawa_battle_ctrl();
     
     STATE = BATTLE_CHOICE;

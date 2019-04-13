@@ -8,6 +8,7 @@
 void start_up(void);
 int check_pos(void);*/
 void opening(void);
+void sick_ham(void);
 
 /* positions of the arrow */
 /*extern UINT8 START_POS;
