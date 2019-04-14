@@ -65,14 +65,14 @@ void crab_catch_ctrl(void)
             clear_screen();
             sprite_clean(0);
             LETTER_COUNT = 0;
-            print("YOUiWINl", 56, 80);
+            print("you win!", 56, 80);
             delay(500);
             CRAB_CAUGHT = 0;
             ++caught_crabs;
             STATE = BATTLE_CHOICE;
         }
     }
-    /*DISPLAY_OFF;
+/*    DISPLAY_OFF;
     clear_screen();
     sprite_clean();
     LETTER_COUNT = 0;
@@ -82,7 +82,7 @@ void crab_catch_ctrl(void)
     print(crab_num, 80, 48);
     print("crabs\0", 24, 64);
     DISPLAY_ON;*/
-    //delay(1000);
+    delay(1000);
 }
 
 void crab_catch_setup(void)

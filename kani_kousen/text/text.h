@@ -6,7 +6,7 @@
 #include "assets/chain_border.h"
 #include "assets/font.h"
 #include "assets/chain_border_tiles.h"
-//#include "assets/blank_screen_tiles.h"
+#include "assets/blank_screen_tiles.h"
 #include "assets/blank_screen.h"
 #include "assets/small_chain_border.h"  // dash this out to play pt. 1
 
