@@ -860,16 +860,6 @@ void show_fighter_stats(void)
             battle_print("[\0", 96, 72);
         battle_print("h\\[[\0", 122, 72);
     }
-    /**
-     * if you're experiencing problems, 
-     * try cleaning sprites and setting LETTER_COUNT to 0. 
-     */
-    /* this will bug out but it's okay */
-    /*if(ENEMY == 0)
-      {
-      itoa(ASAKAWA_HP, e_hp);
-      battle_print(e_hp, 96, 104);
-      }*/
 }
 
 void game_over_screen(void)
@@ -878,4 +868,20 @@ void game_over_screen(void)
     LETTER_COUNT = 0;
     clear_screen();
     print("GAMEiOVER", 44, 72);
+    delay(1000);
+    sprite_clean(0);
+    LETTER_COUNT = 0;
+    print("AiCONTINUE\0", 40, 64);
+    print("BiQUIT\0", 56, 80);
+    while(1)
+    {
+        if(joypad() & J_A)
+            break;
+        if(joypad() & J_B)
+        {
+            SAVE = 1;
+            option == START;
+            break;
+        }
+    }
 }

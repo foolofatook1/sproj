@@ -13,6 +13,7 @@
 void level_3_ctrl(void)
 {
     option = LEVEL_3;
+    SAVE = 3;
     GOT_INFO = 0;
     DISPLAY_OFF;
     clear_screen();

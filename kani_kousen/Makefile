@@ -22,12 +22,14 @@ SPRITE_PROPS = assets/sprite_palette.o
 
 BKG_PROPS = assets/bkg_palette.o
 
+ENDING_INCLUDE = ending/ending.o
+
 BINS = main.gb
 
 all: $(BINS)
 
 clean: 
-	rm -f .*.swp *.o *.lst *.map *.gb *~ *.rel *.cdb .swp *.ihx *.lnk *.sym *.asm *.sn1 text/assets/*.lst text/assets/*.lst text/*.o text/*.lst text/.*.swp $(TEXT_INCLUDE) assets/sprites/*.lst level_1/assets/*.lst assets/sprites/.*.swp $(LEVEL_1_INCLUDE) start_up/assets/*.lst start_up/assets/.*.swp start_up/assets/*.o start_up/.*.swp start_up/*.lst start_up/*.map start_up/*.sym start_up/*.rel $(START_UP_INCLUDE) level_1/.*.swp level_1/*.lst $(BATTLE_INCLUDE) battle/*.lst battle/*.map battle/.*.swp $(LEVEL_2_INCLUDE) level_2/*.lst level_2/*.map level_2/.*.swp level_2/*.o $(SPRITE_PROPS) $(BKG_PROPS) assets/*.lst assets/*.map assets/.*.swp $(LEVEL_ASSETS) assets/level_assets/*.lst assets/level_assets/*.map assets/level_assets/.*.swp $(CRAB_CATCH_INCLUDE) level_3/*.o level_3/.*.swp level_3/*.map level_3/*.rel level_3/*.lst level_3/*.asm $(LEVEL_3_INCLUDE)
+	rm -f .*.swp *.o *.lst *.map *.gb *~ *.rel *.cdb .swp *.ihx *.lnk *.sym *.asm *.sn1 text/assets/*.lst text/assets/*.lst text/*.o text/*.lst text/.*.swp $(TEXT_INCLUDE) assets/sprites/*.lst level_1/assets/*.lst assets/sprites/.*.swp $(LEVEL_1_INCLUDE) start_up/assets/*.lst start_up/assets/.*.swp start_up/assets/*.o start_up/.*.swp start_up/*.lst start_up/*.map start_up/*.sym start_up/*.rel $(START_UP_INCLUDE) level_1/.*.swp level_1/*.lst $(BATTLE_INCLUDE) battle/*.lst battle/*.map battle/.*.swp $(LEVEL_2_INCLUDE) level_2/*.lst level_2/*.map level_2/.*.swp level_2/*.o $(SPRITE_PROPS) $(BKG_PROPS) assets/*.lst assets/*.map assets/.*.swp $(LEVEL_ASSETS) assets/level_assets/*.lst assets/level_assets/*.map assets/level_assets/.*.swp $(CRAB_CATCH_INCLUDE) level_3/*.o level_3/.*.swp level_3/*.map level_3/*.rel level_3/*.lst level_3/*.asm $(LEVEL_3_INCLUDE) ending/*.o ending/.*.swp ending/*.map ending/*.rel ending/*.lst ending/*.asm ending/.swp 
 
 $(TEXT_INCLUDE):%.o : %.c
 	$(CC) -c -o $@ $<
@@ -49,9 +51,11 @@ $(CRAB_CATCH_INCLUDE):%.o : %.c
 	$(CC) -c -o $@ $<
 $(LEVEL_3_INCLUDE):%.o : %.c
 	$(CC) -c -o $@ $<
+$(ENDING_INCLUDE):%.o : %.c
+	$(CC) -c -o $@ $<
 
-main.gb: main.o $(START_UP_INCLUDE) $(TEXT_INCLUDE) $(LEVEL_1_INCLUDE) $(BATTLE_INCLUDE) $(LEVEL_2_INCLUDE) $(SPRITE_PROPS) $(BKG_PROPS) $(LEVEL_ASSETS) $(CRAB_CATCH_INCLUDE) $(LEVEL_3_INCLUDE)
-	$(CC) -o $@ main.o $(START_UP_INCLUDE) $(TEXT_INCLUDE) $(LEVEL_1_INCLUDE) $(BATTLE_INCLUDE) $(LEVEL_2_INCLUDE) $(SPRITE_PROPS) $(BKG_PROPS) $(LEVEL_ASSETS) $(CRAB_CATCH_INCLUDE) $(LEVEL_3_INCLUDE)
+main.gb: main.o $(START_UP_INCLUDE) $(TEXT_INCLUDE) $(LEVEL_1_INCLUDE) $(BATTLE_INCLUDE) $(LEVEL_2_INCLUDE) $(SPRITE_PROPS) $(BKG_PROPS) $(LEVEL_ASSETS) $(CRAB_CATCH_INCLUDE) $(LEVEL_3_INCLUDE) $(ENDING_INCLUDE)
+	$(CC) -o $@ main.o $(START_UP_INCLUDE) $(TEXT_INCLUDE) $(LEVEL_1_INCLUDE) $(BATTLE_INCLUDE) $(LEVEL_2_INCLUDE) $(SPRITE_PROPS) $(BKG_PROPS) $(LEVEL_ASSETS) $(CRAB_CATCH_INCLUDE) $(LEVEL_3_INCLUDE) $(ENDING_INCLUDE)
 
 play:
 	~/bgb/bgb.exe *.gb

@@ -5,15 +5,10 @@
 #include "../assets/bkg_palette.h"
 #include "../assets/sickle_hammer.h"
 #include "../assets/kani_kousen_palette.h"
-
-/* positions of the arrow */
-/*UINT8 START_POS = 72;
-UINT8 NEW_GAME_POS = 80;
-UINT8 QUIT_POS = 88;*/
+#include "../assets/level_assets/level_assets.h"
 
 /* actions that can be taken and returned */
 UINT8 GAME_OVER = 0;
-//UINT8 NOTHING = 0;
 UINT8 START = 1;
 UINT8 LEVEL_2 = 2;
 UINT8 LEVEL_3 = 3;
@@ -32,7 +27,6 @@ void opening(void)
     set_bkg_palette(0, 1, bkg_palette);
     set_sprite_palette(0, 2, sprite_palette);
 
-//    clear_screen();
     sick_ham();
     print("PRESSiA\0", 54, 72);
     print("TOiSTART\0",52, 88);
@@ -46,6 +40,7 @@ void opening(void)
         if(joypad() & J_A)
         {
             option = START;
+            SAVE = 1;
             break;
         }
     }
