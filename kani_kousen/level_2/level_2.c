@@ -30,7 +30,6 @@ UINT8 screen_x = 95;
 void level_2_ctrl(void)
 {
     wait_vbl_done();
-    SAVE = 2;
     level_2_bkg_start();
     l2_scene_1();
     talking = 1;
@@ -44,8 +43,10 @@ void level_2_ctrl(void)
         hero_walk(); 
         pos_check_shit_pot();
     }
-    while(option != LEVEL_3 && option != GAME_OVER)
+    option = LEVEL_2;
+    while(option != LEVEL_3)
     {
+        option = LEVEL_2;
         GOT_INFO = 0;
         asakawa_enters_deck();
         asakawa_before_work();
@@ -59,7 +60,7 @@ void level_2_ctrl(void)
         delay(500);
         DISPLAY_ON;
         moving = 1;
-        if(option != LEVEL_3)
+        if(option != LEVEL_3 && option != GAME_OVER)
         {
             while(moving && option != LEVEL_3)
             {
@@ -218,7 +219,7 @@ UINT8 conv_check(void)
                 LETTER_COUNT = 0;
                 hide_sprites();
                 workers();
-                print("YOUiHEARln\0", 24, 48);
+                you_hear();
                 delay(1000);
                 if(option == LEVEL_2)
                 {
@@ -248,8 +249,8 @@ UINT8 conv_check(void)
             bkg_clean();
             old_hero_posx = hero_posx;
             old_hero_posy = hero_posy;
-            if(!revolt)
-            {
+            /*if(!revolt)
+            {*/
                 sprite_clean(0);
                 LETTER_COUNT = 0;
                 hide_sprites();
@@ -259,8 +260,8 @@ UINT8 conv_check(void)
                 print("DIEiIN\0", 24, 80);
                 print("KAMCHATKA\0", 24, 96);
                 print("eee\0",24,112);
-            }
-            if(revolt)
+            //}
+/*            if(revolt)
             {
                 sprite_clean(0);
                 LETTER_COUNT = 0;
@@ -268,7 +269,7 @@ UINT8 conv_check(void)
                 student();
                 print("IkMiTOO\0", 24, 48);
                 print("WEAKl\0", 24, 64);
-            }
+            }*/
         } 
         else if(sprite == miner_posx)
         {
@@ -291,7 +292,7 @@ UINT8 conv_check(void)
                 LETTER_COUNT = 0;
                 hide_sprites();
                 miner();
-                print("YOUiHEARln\0", 24, 48);
+                you_hear();
                 delay(500);
                 sprite_clean(6);
                 LETTER_COUNT = 6;
@@ -921,6 +922,11 @@ void damn_that_asakawa(void)
     LETTER_COUNT = 8;
     print("DAMNiTHAT\0", 24, 48);
     print("ASAKAWAl\0", 24, 64);
+}
+
+void you_hear(void)
+{
+    print("YOUiHEARln\0", 24, 48);
 }
 
 void pos_check_shit_pot(void)

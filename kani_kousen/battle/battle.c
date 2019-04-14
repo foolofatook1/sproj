@@ -869,7 +869,7 @@ void game_over_screen(void)
     clear_screen();
     print("GAMEiOVER", 44, 72);
     delay(1000);
-    sprite_clean(0);
+/*    sprite_clean(0);
     LETTER_COUNT = 0;
     print("AiCONTINUE\0", 40, 64);
     print("BiQUIT\0", 56, 80);
@@ -883,5 +883,5 @@ void game_over_screen(void)
             option == START;
             break;
         }
-    }
+    }*/
 }

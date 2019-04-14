@@ -1,4 +1,5 @@
 #include "level_1.h"
+#include "../level_2/level_2.h"
 #include "../assets/level_assets/level_assets.h"
 #include "../battle/battle.h"
 #include "asakawa_battle.h"
@@ -35,6 +36,7 @@ void level_1_ctrl(void)
     l1_scene_3_text_setup();
     l1_scene_3();
     asakawa_battle_ctrl();
+    option = LEVEL_2;
 }
 
 /**
@@ -79,7 +81,7 @@ void level_1_bkg_start(void)
     delay(1000);
     sprite_clean(10);
     LETTER_COUNT = 10;
-    print("YOUiHEARln\0", 24, 48);
+    you_hear();
     delay(1000);
 }
 
@@ -483,14 +485,14 @@ void l1_scene_3(void)
     delay(1000);
     sprite_clean(8);
     LETTER_COUNT = 8;
-    print("THEREiISiAN\0", 24, 48);
+    print("WITHiAN\0", 24, 48);
     print("IMPERIAL\0", 24, 64);
     print("SHIP\0", 24, 80);
     delay(1000);
     sprite_clean(8);
     LETTER_COUNT = 8;
-    print("TO\0", 24, 48);
-    print("PROTECTiUS\0", 24, 64);
+    print("PROTECTING\0", 24, 48);
+    print("US\0", 24, 64);
     delay(1000);
     sprite_clean(8);
     LETTER_COUNT = 8;

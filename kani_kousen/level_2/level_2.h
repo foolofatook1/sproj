@@ -51,6 +51,7 @@ void pos_check_shit_pot(void);
 void pos_check_deck(void);
 
 void damn_that_asakawa(void);
+void you_hear(void);
 
 extern UINT8 talking;
 extern UINT8 moving;

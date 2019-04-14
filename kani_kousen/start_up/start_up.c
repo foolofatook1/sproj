@@ -13,7 +13,7 @@ UINT8 START = 1;
 UINT8 LEVEL_2 = 2;
 UINT8 LEVEL_3 = 3;
 UINT8 NEW_GAME = 4;
-UINT8 QUIT = 5;
+//UINT8 QUIT = 5;
 
 /* option chosen */
 UINT8 option;
@@ -40,7 +40,7 @@ void opening(void)
         if(joypad() & J_A)
         {
             option = START;
-            SAVE = 1;
+//            SAVE = 1;
             break;
         }
     }

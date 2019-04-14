@@ -13,7 +13,7 @@
 void level_3_ctrl(void)
 {
     option = LEVEL_3;
-    SAVE = 3;
+    //SAVE = 3;
     GOT_INFO = 0;
     DISPLAY_OFF;
     clear_screen();
@@ -29,7 +29,7 @@ void level_3_ctrl(void)
     shit_pot_sprites();
     DISPLAY_ON;
     moving = 1;
-    while(!striking)
+    while(!striking && option != GAME_OVER)
     {
         option = LEVEL_3;
         while(moving)
@@ -43,6 +43,8 @@ void level_3_ctrl(void)
         if(!striking)
             leaves_shit_pot();
     }
+    if(option == GAME_OVER)
+        return;
     delay(1000);
     DISPLAY_OFF;
     sprite_clean(0);
@@ -221,7 +223,6 @@ void level_3_ctrl(void)
     STATE = BATTLE_CHOICE;
     
     asakawa_battle_ctrl();
-    
     //STATE = BATTLE_CHOICE;
     //option = LEVEL_3;
 }
