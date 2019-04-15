@@ -33,8 +33,8 @@ void opening(void)
     set_sprite_palette(0, 2, sprite_palette);
 
     clear_screen();
-    print("press a\0", 24, 32);
-    print("to start\0", 24, 48);
+    print("PRESSiA\0", 24, 32);
+    print("TOiSTART\0", 24, 48);
     for(i = 0; i < LETTER_COUNT; ++i)
         set_sprite_prop(i, 0);
     SHOW_BKG;

@@ -37,6 +37,11 @@ void battle_print(char* arr, UINT8 x, UINT8 y); // dash for pt.1
 void bkg_clean(void); 
 void battle_bkg_clean(void); // dash for pt. 1
 
+/** 
+ * some catch phrases 
+ */
+void damn_that_asakawa(void);
+void you_hear(void);
 /**
  * character titles 
  */

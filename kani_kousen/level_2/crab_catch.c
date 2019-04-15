@@ -65,7 +65,7 @@ void crab_catch_ctrl(void)
             clear_screen();
             sprite_clean(0);
             LETTER_COUNT = 0;
-            print("you win!", 56, 80);
+            print("YOUiWINl", 56, 80);
             delay(500);
             CRAB_CAUGHT = 0;
             ++caught_crabs;
@@ -100,7 +100,7 @@ void crab_catch_setup(void)
         sprite_clean(0);
         LETTER_COUNT = 0;
         clear_screen();
-        print("a crab!\0", 56, 80);
+        print("AiCRABl\0", 56, 80);
         /*DISPLAY_OFF;
         delay(500);
         DISPLAY_ON;
@@ -118,8 +118,8 @@ void crab_catch_setup(void)
         sprite_clean(0);
         LETTER_COUNT = 0;
         clear_screen();
-        print("a king\0", 56, 80);
-        print("crab!\0", 60, 96);
+        print("AiKING\0", 56, 80);
+        print("CRABl\0", 60, 96);
         /*DISPLAY_OFF;
         delay(500);
         DISPLAY_ON;

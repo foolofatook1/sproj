@@ -7,7 +7,7 @@
  * there'd be\n no one to\n work if\n they took\n * us all\n away! * well let's\n do it\n again,\n * one more\n
  * time!\0";*/
 
-unsigned char ints[] = "0123456789.,:/";
+//unsigned char ints[] = "0123456789.,:/";
 UINT8 i;
 UINT8 j;
 UINT8 cushion;
@@ -20,10 +20,19 @@ UINT8 arrow_x = 200;
 UINT8 arrow_y = 200;
 
 /**
- * make it so that numbers {0...9} and characters {'.'...'?'}
- * are just changed so they match differently.
+ * 0 = [    . = e
+ * 1 = \    , = f
+ * 2 = ]    : = g
+ * 3 = ^    / = h
+ * 4 = _   ' '= i
+ * 5 = `    > = j
+ * 6 = a    ' = k
+ * 7 = b    ! = l
+ * 8 = c    " = m
+ * 9 = d    ? = n
+ *
+ * {A...Z} = {A...Z}
  */
-
 void print(char *arr, UINT8 x, UINT8 y) 
 {
     SPRITES_8x8;
@@ -32,42 +41,42 @@ void print(char *arr, UINT8 x, UINT8 y)
 
     for(i = 0; arr[i] != '\0'; ++i)
     {
-        set_sprite_tile((i+cushion), (arr[i]-97));
-        for(j = 0; j < 14; ++j)
-        {
-            if(arr[i] == ' ')
-            {
-                set_sprite_tile((i+cushion), 40);
-                break;
-            }
-            if(arr[i] == '>')
-            {
-                set_sprite_tile((i+cushion), 41);
-                break;
-            }
-            if(arr[i] == '\'')
-            {
-                set_sprite_tile((i+cushion), 42);
-                break;
-            }
-            if(arr[i] == '!')
-            {
-                set_sprite_tile((i+cushion), 43);
-                break;
-            }
-            if(arr[i] == '"')
-            {
-                set_sprite_tile((i+cushion), 44);
-                break;
-            }
-            if(arr[i] == '?')
-            {
-                set_sprite_tile((i+cushion), 45);
-                break;
-            }
-            else if(arr[i] == ints[j])
-                set_sprite_tile((i+cushion), j+26);
-        }
+        set_sprite_tile((i+cushion), (arr[i]-65));
+        /*    for(j = 0; j < 14; ++j)
+              {
+              if(arr[i] == ' ')
+              {
+              set_sprite_tile((i+cushion), 40);
+              break;
+              }
+              if(arr[i] == '>')
+              {
+              set_sprite_tile((i+cushion), 41);
+              break;
+              }
+              if(arr[i] == '\'')
+              {
+              set_sprite_tile((i+cushion), 42);
+              break;
+              }
+              if(arr[i] == '!')
+              {
+              set_sprite_tile((i+cushion), 43);
+              break;
+              }
+              if(arr[i] == '"')
+              {
+              set_sprite_tile((i+cushion), 44);
+              break;
+              }
+              if(arr[i] == '?')
+              {
+              set_sprite_tile((i+cushion), 45);
+              break;
+              }
+              else if(arr[i] == ints[j])
+              set_sprite_tile((i+cushion), j+26);
+              }*/
         move_sprite((i+cushion), x, y);
         ++LETTER_COUNT;
         x+=8;
@@ -115,46 +124,59 @@ void battle_print(char *arr, UINT8 x, UINT8 y)
 
     for(i = 0; arr[i] != '\0'; ++i)
     {
-        set_sprite_tile((i+cushion), (arr[i]-97));
-        for(j = 0; j < 14; ++j)
-        {
-            if(arr[i] == ' ')
-            {
-                set_sprite_tile((i+cushion), 40);
-                break;
-            }
-            if(arr[i] == '>')
-            {
-                set_sprite_tile((i+cushion), 41);
-                break;
-            }
-            if(arr[i] == '\'')
-            {
-                set_sprite_tile((i+cushion), 42);
-                break;
-            }
-            if(arr[i] == '!')
-            {
-                set_sprite_tile((i+cushion), 43);
-                break;
-            }
-            if(arr[i] == '"')
-            {
-                set_sprite_tile((i+cushion), 44);
-                break;
-            }
-            if(arr[i] == '?')
-            {
-                set_sprite_tile((i+cushion), 45);
-                break;
-            }
-            else if(arr[i] == ints[j])
-                set_sprite_tile((i+cushion), j+26);
-        }
+        set_sprite_tile((i+cushion), (arr[i]-65));
+        /*for(j = 0; j < 14; ++j)
+          {
+          if(arr[i] == ' ')
+          {
+          set_sprite_tile((i+cushion), 40);
+          break;
+          }
+          if(arr[i] == '>')
+          {
+          set_sprite_tile((i+cushion), 41);
+          break;
+          }
+          if(arr[i] == '\'')
+          {
+          set_sprite_tile((i+cushion), 42);
+          break;
+          }
+          if(arr[i] == '!')
+          {
+          set_sprite_tile((i+cushion), 43);
+          break;
+          }
+          if(arr[i] == '"')
+          {
+          set_sprite_tile((i+cushion), 44);
+          break;
+          }
+          if(arr[i] == '?')
+          {
+          set_sprite_tile((i+cushion), 45);
+          break;
+          }
+          else if(arr[i] == ints[j])
+          set_sprite_tile((i+cushion), j+26);
+          }*/
         move_sprite((i+cushion), x, y);
         ++LETTER_COUNT;
         x+=8;
     }
+}
+
+void damn_that_asakawa(void)
+{
+    sprite_clean(8);
+    LETTER_COUNT = 8;
+    print("DAMNiTHAT\0", 24, 48);
+    print("ASAKAWAl\0", 24, 64);
+}
+
+void you_hear(void)
+{
+    print("YOUiHEARln\0", 24, 48);
 }
 
 /**
@@ -163,27 +185,27 @@ void battle_print(char *arr, UINT8 x, UINT8 y)
  */
 void asakawa(void)
 {
-    print("asakawa:\0", 24, 32);
+    print("ASAKAWAg\0", 24, 32);
 }
 
 void fisherman(void)
 {
-    print("fisherman:\0", 24, 32);
+    print("FISHERMANg\0", 24, 32);
 }
 
 void student(void)
 {
-    print("student:\0", 24, 32);
+    print("STUDENTg\0", 24, 32);
 }
 
 void miner(void)
 {
-    print("miner:\0", 24, 32);
+    print("MINERg\0", 24, 32);
 }
 
 void workers(void)
 {
-    print("workers:\0", 24, 32);
+    print("WORKERSg\0", 24, 32);
 }
 
 void battle_bkg_clean(void)

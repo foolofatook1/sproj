@@ -55,7 +55,7 @@ void asakawa_battle_ctrl(void)
         clear_screen();
         sprite_clean(0);
         LETTER_COUNT = 0;
-        print("you win!\0" ,24, 32);
+        print("YOUiWINl\0" ,24, 32);
         delay(1000);
     }
 }

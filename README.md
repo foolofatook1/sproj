@@ -49,7 +49,7 @@ Regardless of what emulator you choose, read its documentation to figure out how
 properly Download it, and play games on it. 
 
 ### Quick TODO-List: ###
-* begin adding texture to "shit-pot" background
 * Add final credits and speech with marx quote
 * Add save points so that you don't have to start the whole game over
 * Add game over screen with option to continue or start over. 
+* Add something a little bit more interesting to "yes" v. "no" part
