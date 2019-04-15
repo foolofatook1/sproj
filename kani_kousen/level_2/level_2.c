@@ -48,6 +48,8 @@ void level_2_ctrl(void)
         asakawa_enters_deck();
         asakawa_before_work();
         crab_catch_ctrl();
+        if(STATE == DEAD)
+            break;
         asakawa_enters_deck();
         asakawa_after_work();
         delay(500);
@@ -70,7 +72,8 @@ void level_2_ctrl(void)
         }
         caught_crabs = 0;
     }
-    option = LEVEL_3;
+    if(option != GAME_OVER)
+        option = LEVEL_3;
 }
 
 void level_2_bkg_start(void)
@@ -246,26 +249,26 @@ UINT8 conv_check(void)
             old_hero_posx = hero_posx;
             old_hero_posy = hero_posy;
             /*if(!revolt)
-            {*/
-                sprite_clean(0);
-                LETTER_COUNT = 0;
-                hide_sprites();
-                student();
-                print("IiDONkT\0", 24, 48);
-                print("WANTiTO\0", 24, 64);
-                print("DIEiIN\0", 24, 80);
-                print("KAMCHATKA\0", 24, 96);
-                print("...\0",24,112);
+              {*/
+            sprite_clean(0);
+            LETTER_COUNT = 0;
+            hide_sprites();
+            student();
+            print("IiDONkT\0", 24, 48);
+            print("WANTiTO\0", 24, 64);
+            print("DIEiIN\0", 24, 80);
+            print("KAMCHATKA\0", 24, 96);
+            print("...\0",24,112);
             /*}
-            if(revolt)
-            {
-                sprite_clean(0);
-                LETTER_COUNT = 0;
-                hide_sprites();
-                student();
-                //print("student:\0", 24, 32);
-                print("i'm too\0", 24, 48);
-                print("weak!\0", 24, 64);
+              if(revolt)
+              {
+              sprite_clean(0);
+              LETTER_COUNT = 0;
+              hide_sprites();
+              student();
+            //print("student:\0", 24, 32);
+            print("i'm too\0", 24, 48);
+            print("weak!\0", 24, 64);
             }*/
         } 
         else if(sprite == miner_posx)
@@ -399,7 +402,7 @@ UINT8 conv_check(void)
                 LETTER_COUNT = 10;
                 print("WHATiDkYOU\0", 24, 48);
                 print("THINKn\0", 24, 64);
-                
+
                 print("AiYESl\0", 24, 88);
                 print("BiNOeee\0", 24, 104);
                 REVOLUTION_1 = 1;
@@ -607,32 +610,32 @@ void l2_scene_1(void)
 
 void l2_scene_1_fisherman_enter(void)
 {
-        delay(1000);
-        sprite_clean(10);
-        LETTER_COUNT = 10;
-        print("YOUkLL\0", 24, 48);
-        print("NEEDiTHESE\0", 24, 64);
-        delay(1000);
-        sprite_clean(0);
-        LETTER_COUNT = 0;
-        DISPLAY_OFF;
-        set_bkg_tiles(0,0,20,18,blank_screen);
-        DISPLAY_ON;
-        print("YOU\0", 72, 32);
-        print("ACQUIREiA\0", 48, 48);
-        print("CLUBiAND\0", 52, 64);
-        print("FISHING\0", 56, 80);
-        print("NET\0", 72, 96);
-        ITEMS += 2;
-        delay(1000);
-        sprite_clean(0);
-        LETTER_COUNT = 0;
-        DISPLAY_OFF;
-        bkg_clean();
-        DISPLAY_ON;
-        fisherman();
-        print("NOWiLETkS\0", 24, 48);
-        print("GETiGOINGl\0", 24, 64);
+    delay(1000);
+    sprite_clean(10);
+    LETTER_COUNT = 10;
+    print("YOUkLL\0", 24, 48);
+    print("NEEDiTHESE\0", 24, 64);
+    delay(1000);
+    sprite_clean(0);
+    LETTER_COUNT = 0;
+    DISPLAY_OFF;
+    set_bkg_tiles(0,0,20,18,blank_screen);
+    DISPLAY_ON;
+    print("YOU\0", 72, 32);
+    print("ACQUIREiA\0", 48, 48);
+    print("CLUBiAND\0", 52, 64);
+    print("FISHING\0", 56, 80);
+    print("NET\0", 72, 96);
+    ITEMS += 2;
+    delay(1000);
+    sprite_clean(0);
+    LETTER_COUNT = 0;
+    DISPLAY_OFF;
+    bkg_clean();
+    DISPLAY_ON;
+    fisherman();
+    print("NOWiLETkS\0", 24, 48);
+    print("GETiGOINGl\0", 24, 64);
     while(talking)
     {
         if(joypad() & J_A)
@@ -878,6 +881,7 @@ void asakawa_before_work(void)
         if(joypad() & J_A)
         {
             ++talking;
+            delay(200);
             if(talking == 2)
             {
                 sprite_clean(8);
@@ -890,7 +894,7 @@ void asakawa_before_work(void)
                 sprite_clean(8);
                 LETTER_COUNT = 8;
                 print("ANDiCRUSH\0", 24, 48);
-                print("SHELL\0", 24, 64);
+                print("SHELLS\0", 24, 64);
                 print("WITHiTHE\0", 24, 80);
                 print("CLUBl\0", 24, 96);
             }

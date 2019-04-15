@@ -311,7 +311,7 @@ int miner_intro(void)
     sprite_clean(10);
     LETTER_COUNT = 10;
     print("IiTHINK\0", 24, 48);
-    print("IlHEAR\0", 24, 64);
+    print("IiHEAR\0", 24, 64);
     print("ASAKAWA\0", 24, 80);
     print("COMINGl\0", 24, 96);
     delay(1000);

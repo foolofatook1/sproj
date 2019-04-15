@@ -40,7 +40,11 @@ void level_3_ctrl(void)
         }
         if(!striking)
             leaves_shit_pot();
+        if(STATE == DEAD)
+            break;
     }
+    if(STATE == DEAD)
+        return;
    // revolt = 1; // this is just for running tests;
     //STATE = FIGHT_CHOICE;
     delay(1000);
@@ -104,6 +108,7 @@ void level_3_ctrl(void)
     LETTER_COUNT = 0;
     STATE = BATTLE_CHOICE;
     option = LEVEL_3;
+    SAVE = 3;
 
     /** 
      * battle mechanics are working. 
@@ -261,6 +266,8 @@ void leaves_shit_pot(void)
     asakawa_enters_deck();
     asakawa_before_work();
     crab_catch_ctrl();
+    if(STATE == DEAD)
+        return;
     asakawa_enters_deck();
     asakawa_after_work();
     delay(500);

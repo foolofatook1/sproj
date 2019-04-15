@@ -9,7 +9,7 @@
 #include "../battle/battle.h"
 
 UINT8 crab = 0;
-UINT8 caught_crabs = 0;
+UINT8 caught_crabs = 0; 
 UINT8 CRAB_CAUGHT = 0;
 UINT8 CRAB_HP = 5;
 
@@ -34,21 +34,25 @@ void crab_catch_ctrl(void)
      *      * if that sequence is not followed, it's a miss 
      * 3. repeat crabs_to_catch many times.
      */
-    while(caught_crabs < crabs_to_catch && STATE != DEAD)
+    while(caught_crabs < crabs_to_catch && STATE != DEAD && 
+            option != GAME_OVER)
     {
         HERO_HP=(10-health_loss);
         crab_catch_setup();
         delay(500);
         battle_menu();
-        while(STATE != DEAD && STATE != BATTLE_WIN)
+        while(STATE != DEAD && STATE != BATTLE_WIN &&
+                option != GAME_OVER)
         {
             wait_vbl_done();
             battle_toggle_ctrl();
-            while(STATE == FIGHTING)
+            while(STATE == FIGHTING && option != GAME_OVER)
             {
                 choice_handler(arrow_y);
                 fight(&HERO_HP, &CRAB_HP);
                 delay(400);
+                if(option == GAME_OVER || STATE == DEAD)
+                    break;
                 if(STATE != DEAD && STATE != BATTLE_WIN)
                 {
                     DISPLAY_OFF;
@@ -58,9 +62,12 @@ void crab_catch_ctrl(void)
                     DISPLAY_ON;
                     battle_menu();
                 }
+
             }
+            if(option == GAME_OVER || STATE == DEAD)
+                break;
         }
-        if(STATE == BATTLE_WIN)
+        if(STATE == BATTLE_WIN && option != GAME_OVER)
         {
             clear_screen();
             sprite_clean(0);
@@ -72,16 +79,16 @@ void crab_catch_ctrl(void)
             STATE = BATTLE_CHOICE;
         }
     }
-/*    DISPLAY_OFF;
-    clear_screen();
-    sprite_clean();
-    LETTER_COUNT = 0;
-    itoa(caught_crabs, crab_num);
-    print("you have\0", 24, 32);
-    print("caught \0", 24, 48);
-    print(crab_num, 80, 48);
-    print("crabs\0", 24, 64);
-    DISPLAY_ON;*/
+   /*    DISPLAY_OFF;
+          clear_screen();
+          sprite_clean();
+          LETTER_COUNT = 0;
+          itoa(caught_crabs, crab_num);
+          print("you have\0", 24, 32);
+          print("caught \0", 24, 48);
+          print(crab_num, 80, 48);
+          print("crabs\0", 24, 64);
+          DISPLAY_ON;*/
     delay(1000);
 }
 
@@ -102,12 +109,12 @@ void crab_catch_setup(void)
         clear_screen();
         print("AiCRABl\0", 56, 80);
         /*DISPLAY_OFF;
-        delay(500);
-        DISPLAY_ON;
-        delay(500);
-        DISPLAY_OFF;
-        delay(500);
-        DISPLAY_ON;*/
+          delay(500);
+          DISPLAY_ON;
+          delay(500);
+          DISPLAY_OFF;
+          delay(500);
+          DISPLAY_ON;*/
         sprite_setup(8, hero_back_idle, 8, norm_crab);
         CRAB_HP = 5;
         ENEMY = 1;
@@ -121,12 +128,12 @@ void crab_catch_setup(void)
         print("AiKING\0", 56, 80);
         print("CRABl\0", 60, 96);
         /*DISPLAY_OFF;
-        delay(500);
-        DISPLAY_ON;
-        delay(500);
-        DISPLAY_OFF;
-        delay(500);
-        DISPLAY_ON;*/
+          delay(500);
+          DISPLAY_ON;
+          delay(500);
+          DISPLAY_OFF;
+          delay(500);
+          DISPLAY_ON;*/
         sprite_setup(8, hero_back_idle, 8, king_crab);
         CRAB_HP = 10;
         ENEMY = 2;

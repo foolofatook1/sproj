@@ -7,6 +7,8 @@
 
 //extern UINT8 text_count;
 //extern UINT8 start_animate;
+extern UINT8 SAVE;
+
 extern UINT8 sprite_width;
 
 extern UINT8 SLEPT;

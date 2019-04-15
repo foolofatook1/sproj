@@ -613,7 +613,7 @@ void npc_fight(void)
         DISPLAY_OFF;
         sprite_clean(0);
         LETTER_COUNT = 0;
-        print("YOUkREiHITl\0", 72, 80);
+        print("YOUkREiHITl\0", 60, 80);
         clear_screen();
         DISPLAY_ON;
         delay(500);
@@ -632,8 +632,8 @@ void npc_fight(void)
         DISPLAY_OFF;
         sprite_clean(0);
         LETTER_COUNT = 0;
-        print("THEYiMISSl\0", 64, 80);
         clear_screen();
+        print("THEYiMISSl\0", 60, 80);
         DISPLAY_ON;
         delay(500);
     }
@@ -899,4 +899,27 @@ void game_over_screen(void)
     LETTER_COUNT = 0;
     clear_screen();
     print("GAMEiOVER", 44, 72);
+    delay(1000);
+    sprite_clean(0);
+    LETTER_COUNT = 0;
+    clear_screen();
+    print("AiCONTINUE\0", 44, 72);
+    print("BiQUIT\0", 60, 88);
+    while(1)
+    {
+        if(joypad() & J_A)
+        {
+            option = SAVE;
+            HERO_HP = start_hp;
+            break;
+        }
+        if(joypad() & J_B)
+        {
+            ENEMY = 0;
+            SAVE = 1;
+            option = START;
+            HERO_HP = 10;
+            break;
+        }
+    }
 }
