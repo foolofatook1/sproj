@@ -24,21 +24,6 @@
  * 4 = lice
  */
 
-UINT8 ENEMY = 0;
-UINT8 BATTLE_NUM = 0;
-
-UINT8 BATTLE_CHOICE = 0;
-UINT8 FIGHT_CHOICE = 1;
-UINT8 RUN_CHOICE = 2;
-UINT8 ITEM_CHOICE = 3;
-UINT8 FIGHTING = 4;
-UINT8 DEAD = 5;
-UINT8 BATTLE_WIN = 6;
-
-UBYTE ITEMS = 0;
-UINT8 CHOSEN_ITEM = 0;
-UINT8 CHOOSING = 0;
-
 UINT8 PUNCH = 1;
 UINT8 DEFEND = 2;
 UINT8 ITEM = 3;
@@ -51,6 +36,22 @@ UINT8 CLAW = 2;
 UINT8 KING_CLAW = 3;
 
 UINT8 PUNCH_LOC = 32;
+
+/** change above to define **/
+UINT8 BATTLE_CHOICE = 0;
+UINT8 FIGHT_CHOICE = 1;
+UINT8 RUN_CHOICE = 2;
+UINT8 ITEM_CHOICE = 3;
+UINT8 FIGHTING = 4;
+UINT8 DEAD = 5;
+UINT8 BATTLE_WIN = 6;
+
+UINT8 ENEMY = 0;
+UINT8 BATTLE_NUM = 0;
+
+UBYTE ITEMS = 0;
+UINT8 CHOSEN_ITEM = 0;
+UINT8 CHOOSING = 0;
 
 UINT8 enemy_choice;
 
@@ -884,7 +885,7 @@ void show_fighter_stats(void)
     }
     if(start_hp == 100)
     {
-        battle_print("EVERYONE\0", 88, 40);
+        battle_print("EVRY\\\0", 88, 40);
         if(HERO_HP == start_hp)
             battle_print("[[\0", 96, 72);
         else
@@ -898,9 +899,11 @@ void game_over_screen(void)
     sprite_clean(0);
     LETTER_COUNT = 0;
     clear_screen();
-    print("GAMEiOVER", 44, 72);
+    print("AiCRUSHING", 48, 72);
+    print("DAY", 72, 88);
+    //print("GAMEiOVER", 44, 72);
     delay(1000);
-    sprite_clean(0);
+    /*sprite_clean(0);
     LETTER_COUNT = 0;
     clear_screen();
     print("AiCONTINUE\0", 44, 72);
@@ -916,10 +919,10 @@ void game_over_screen(void)
         if(joypad() & J_B)
         {
             ENEMY = 0;
-            SAVE = 1;
+            SAVE = 0;
             option = START;
             HERO_HP = 10;
             break;
         }
-    }
+    }*/
 }

@@ -11,6 +11,7 @@
 
 void level_3_ctrl(void)
 {
+    //SAVE = 3;
     option = LEVEL_3;
     GOT_INFO = 0;
     DISPLAY_OFF;
@@ -40,11 +41,11 @@ void level_3_ctrl(void)
         }
         if(!striking)
             leaves_shit_pot();
-        if(STATE == DEAD)
-            break;
+      /*  if(STATE == DEAD)
+            break;*/
     }
-    if(STATE == DEAD)
-        return;
+    /*&if(STATE == DEAD)
+        return;*/
    // revolt = 1; // this is just for running tests;
     //STATE = FIGHT_CHOICE;
     delay(1000);
@@ -108,21 +109,19 @@ void level_3_ctrl(void)
     LETTER_COUNT = 0;
     STATE = BATTLE_CHOICE;
     option = LEVEL_3;
-    SAVE = 3;
+    //SAVE = 3;
 
     /** 
      * battle mechanics are working. 
      * the bkg screen is just looking
      * a bit scrambled for some reason. 
      */
-
     asakawa_battle_ctrl();
     
     STATE = BATTLE_CHOICE;
     option = LEVEL_3;
 
     /* for some reason this is ending way too soon */
-
     bkg_clean();
     sprite_clean(0);
     LETTER_COUNT = 0;
@@ -150,10 +149,7 @@ void level_3_ctrl(void)
     DISPLAY_ON;
 
 
-    /** 
-     * the bug that's ruining the battle 
-     * menu display is in here.
-     */
+    
     delay(1000);
     bkg_clean();
     sprite_clean(0);
@@ -215,24 +211,30 @@ void level_3_ctrl(void)
     start_hp = 100;
     option = LEVEL_3;
     STATE = BATTLE_CHOICE;
-    
-    asakawa_battle_ctrl();
-    
-    STATE = BATTLE_CHOICE;
-    option = LEVEL_3;
 
+    while(1)
+    {
+        asakawa_battle_ctrl();
+        if(STATE == BATTLE_WIN)
+            break;
+        if(option == GAME_OVER || STATE == DEAD)
+        {
+            option = LEVEL_3;
+            STATE = BATTLE_CHOICE;
+            HERO_HP = 100;
+        }
 
+    }
 
-    /* third time around can increase HERO_HP to 100 */
-/*    clear_screen();
-    sprite_clean();
+    clear_screen();
+    sprite_clean(0);
     LETTER_COUNT = 0;
-    print("made it!\0", 24, 32);*/
-    /**
-     *  Q: what incites the coming battle?
-     *  1) have another battle with different tactic
-     *  2) win battle
-     */
+    print("THATkS\0", 24, 32);
+    print("ALL\0", 24, 48);
+    print("FOLKS\0", 24, 64);
+
+/*    STATE = BATTLE_CHOICE;
+    option = LEVEL_3;*/
 }
 
 void team_battle_show(void)

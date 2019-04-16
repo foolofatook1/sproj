@@ -26,6 +26,7 @@
  * print_ln = what number line is being printed
  * print_ln starts at 0
  */
+//void fancy_print(char* arr, UINT8 x, UINT8 y, UINT8 clean);
 void print(char* arr, UINT8 x, UINT8 y);
 void battle_print(char* arr, UINT8 x, UINT8 y); // dash for pt.1
 

@@ -15,6 +15,8 @@ UINT8 LETTER_COUNT = 0;
 /* MAX number of sprites that can be on screen at once */
 UINT8 MAX_SPRITES = 40; 
 
+UINT8 START_X = 0;
+
 /* hide arrow off screen */
 UINT8 arrow_x = 200; 
 UINT8 arrow_y = 200;
@@ -33,55 +35,58 @@ UINT8 arrow_y = 200;
  *
  * {A...Z} = {A...Z}
  */
-void print(char *arr, UINT8 x, UINT8 y) 
+void print(char *arr, UINT8 x, UINT8 y)
 {
     SPRITES_8x8;
     cushion = LETTER_COUNT;
     set_sprite_data(0, 46, font);
-
+    START_X = x;
     for(i = 0; arr[i] != '\0'; ++i)
     {
-        set_sprite_tile((i+cushion), (arr[i]-65));
-        /*    for(j = 0; j < 14; ++j)
+        if(arr[i] == '\n')
+        {
+            y+=16;
+            x=START_X;
+            continue;
+        }
+        /*    if(arr[i] == '{')
               {
-              if(arr[i] == ' ')
-              {
-              set_sprite_tile((i+cushion), 40);
-              break;
-              }
-              if(arr[i] == '>')
-              {
-              set_sprite_tile((i+cushion), 41);
-              break;
-              }
-              if(arr[i] == '\'')
-              {
-              set_sprite_tile((i+cushion), 42);
-              break;
-              }
-              if(arr[i] == '!')
-              {
-              set_sprite_tile((i+cushion), 43);
-              break;
-              }
-              if(arr[i] == '"')
-              {
-              set_sprite_tile((i+cushion), 44);
-              break;
-              }
-              if(arr[i] == '?')
-              {
-              set_sprite_tile((i+cushion), 45);
-              break;
-              }
-              else if(arr[i] == ints[j])
-              set_sprite_tile((i+cushion), j+26);
+              delay(1000);
+              sprite_clean(0);
+              LETTER_COUNT = 0;
               }*/
+        set_sprite_tile((i+cushion), (arr[i]-65));
         move_sprite((i+cushion), x, y);
         ++LETTER_COUNT;
         x+=8;
     }
 }
+
+/*void fancy_print(char *arr, UINT8 x, UINT8 y, UINT8 clean) 
+  {
+  SPRITES_8x8;
+  cushion = LETTER_COUNT;
+  set_sprite_data(0, 46, font);
+  START_X = x;
+  for(i = 0; arr[i] != '\0'; ++i)
+  {
+  if(arr[i] == '\n')
+  {
+  y+=16;
+  x=START_X-8;
+  }
+  if(arr[i] == '{')
+  {
+  delay(1000);
+  sprite_clean(clean);
+  LETTER_COUNT = clean;
+  }
+  set_sprite_tile((i+cushion), (arr[i]-65));
+  move_sprite((i+cushion), x, y);
+  ++LETTER_COUNT;
+  x+=8;
+  }
+  }*/
 
 void bkg_clean(void)
 {

@@ -22,7 +22,7 @@ void asakawa_battle_ctrl(void)
     STATE = BATTLE_CHOICE;
     choice = 0;
     battle_menu();
-    while(STATE != DEAD && option != GAME_OVER)
+    while(STATE != DEAD || option != GAME_OVER)
     {
         wait_vbl_done();
         battle_toggle_ctrl();
@@ -49,17 +49,15 @@ void asakawa_battle_ctrl(void)
     }
     /* the battle that leads to level 2 */
     if(!revolt && !REVOLUTION_2)
-    {
-        option = LEVEL_2;
-        SAVE = 2;
-    }
+        //option = LEVEL_2;
+        option = LEVEL_3;
     /* this would be the end of the game */
-    if(REVOLUTION_2)
+    /*if(REVOLUTION_2)
     {
         clear_screen();
         sprite_clean(0);
         LETTER_COUNT = 0;
         print("YOUiWINl\0" ,24, 32);
         delay(1000);
-    }
+    }*/
 }
