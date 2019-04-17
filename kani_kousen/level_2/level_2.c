@@ -29,7 +29,6 @@ UINT8 screen_x = 95;
 void level_2_ctrl(void)
 {
     wait_vbl_done();
-    //SAVE = 2;
     level_2_bkg_start();
     l2_scene_1();
     talking = 1;
@@ -43,7 +42,7 @@ void level_2_ctrl(void)
         hero_walk(); 
         pos_check_shit_pot();
     }
-    while(option != LEVEL_3)// && option != GAME_OVER)
+    while(option != LEVEL_3)
     {
         GOT_INFO = 0;
         asakawa_enters_deck();
@@ -71,7 +70,6 @@ void level_2_ctrl(void)
         }
         caught_crabs = 0;
     }
-    //if(option != GAME_OVER)
     option = LEVEL_3;
 }
 
@@ -247,8 +245,6 @@ UINT8 conv_check(void)
             bkg_clean();
             old_hero_posx = hero_posx;
             old_hero_posy = hero_posy;
-            /*if(!revolt)
-              {*/
             sprite_clean(0);
             LETTER_COUNT = 0;
             hide_sprites();
@@ -258,17 +254,6 @@ UINT8 conv_check(void)
             print("DIEiIN\0", 24, 80);
             print("KAMCHATKA\0", 24, 96);
             print("...\0",24,112);
-            /*}
-              if(revolt)
-              {
-              sprite_clean(0);
-              LETTER_COUNT = 0;
-              hide_sprites();
-              student();
-            //print("student:\0", 24, 32);
-            print("i'm too\0", 24, 48);
-            print("weak!\0", 24, 64);
-            }*/
         } 
         else if(sprite == miner_posx)
         {

@@ -8,10 +8,10 @@
 #include "../assets/level_assets/level_assets.h"
 #include "../start_up/start_up.h"
 #include "../assets/sprites/student_lie_down.h"
+#include "../end/end.h"
 
 void level_3_ctrl(void)
 {
-    //SAVE = 3;
     option = LEVEL_3;
     GOT_INFO = 0;
     DISPLAY_OFF;
@@ -41,13 +41,7 @@ void level_3_ctrl(void)
         }
         if(!striking)
             leaves_shit_pot();
-      /*  if(STATE == DEAD)
-            break;*/
     }
-    /*&if(STATE == DEAD)
-        return;*/
-   // revolt = 1; // this is just for running tests;
-    //STATE = FIGHT_CHOICE;
     delay(1000);
     DISPLAY_OFF;
     sprite_clean(0);
@@ -92,7 +86,7 @@ void level_3_ctrl(void)
     print("LEADERSl\0", 24, 80);
     delay(1000);
     DISPLAY_OFF;
-    /* I should make this a function. Happens in level 1 too */
+    /* happens in level 1 too */
     clear_screen();
     sprite_clean(0);
     LETTER_COUNT = 0;
@@ -104,24 +98,13 @@ void level_3_ctrl(void)
     HERO_HP = 50;
     ASAKAWA_HP = 200; /* this will later go back down to 100 */
     start_hp = 50;
-
     sprite_clean(0);
     LETTER_COUNT = 0;
     STATE = BATTLE_CHOICE;
     option = LEVEL_3;
-    //SAVE = 3;
-
-    /** 
-     * battle mechanics are working. 
-     * the bkg screen is just looking
-     * a bit scrambled for some reason. 
-     */
     asakawa_battle_ctrl();
-    
     STATE = BATTLE_CHOICE;
     option = LEVEL_3;
-
-    /* for some reason this is ending way too soon */
     bkg_clean();
     sprite_clean(0);
     LETTER_COUNT = 0;
@@ -202,6 +185,7 @@ void level_3_ctrl(void)
     LETTER_COUNT = 8;
     print("ONEiMORE\0", 24, 48);
     print("TIMEl\0", 24, 64);
+    delay(1500);
 
     REVOLUTION_2 = 1;
     ENEMY = 0;
@@ -226,15 +210,13 @@ void level_3_ctrl(void)
 
     }
 
-    clear_screen();
+    /*clear_screen();
     sprite_clean(0);
     LETTER_COUNT = 0;
     print("THATkS\0", 24, 32);
     print("ALL\0", 24, 48);
-    print("FOLKS\0", 24, 64);
-
-/*    STATE = BATTLE_CHOICE;
-    option = LEVEL_3;*/
+    print("FOLKS\0", 24, 64);*/
+    ending();
 }
 
 void team_battle_show(void)

@@ -36,12 +36,7 @@ simple to unzip (decompress or extract) the file, which should be in your Downlo
 In linux it's a command like:
 	cd ~/Downloads; unzip *.zip
 
-**Step 3: Download and emulator**
-
-You'll want to download an emulator to play the gameboy game on your
-computer. I would recommend bgb, which you can find [here](http://bgb.bircd.org/). 
-There are many other options as well, you can find those options 
-[here](https://github.com/gbdev/awesome-gbdev#emulators). 
+**Step 3: Read the README.txt File**
 
 **Step 4: Enjoy!**
 
@@ -49,7 +44,11 @@ Regardless of what emulator you choose, read its documentation to figure out how
 properly Download it, and play games on it. 
 
 ### Quick TODO-List: ###
-* Add final credits and speech with marx quote
-* Add save points so that you don't have to start the whole game over
-* Add game over screen with option to continue or start over. 
 * Add something a little bit more interesting to "yes" v. "no" part
+* Improve print() function if there's time, and add the texture with leftover memory.
+* slow down text pace
+
+### To Those Who Play: ###
+If you find your self playing the game, and thinking of any technical 
+improvements that could be made. Please contact me! I'm more than willing
+to consider your ideas, and probably made a mistake anyway. Thanks!:)

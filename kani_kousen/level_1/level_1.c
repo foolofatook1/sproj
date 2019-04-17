@@ -474,7 +474,7 @@ void l1_scene_3(void)
     delay(1000);
     sprite_clean(8);
     LETTER_COUNT = 8;
-    print("THEREiISiAN\0", 24, 48);//IMPERIAL\nSHIP\0", 24, 48);
+    print("THEREkSiAN\0", 24, 48);//IMPERIAL\nSHIP\0", 24, 48);
     print("IMPERIAL\0", 24, 64);
     print("SHIP\0", 24, 80);
     delay(1000);

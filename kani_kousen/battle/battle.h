@@ -36,7 +36,7 @@ void choice_handler(UINT8);
 
 void clear_screen(void);
 
-void game_over_screen(void);
+//void game_over_screen(void);
 
 extern UINT8 ENEMY;
 extern UINT8 BATTLE_NUM;

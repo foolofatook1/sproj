@@ -1,6 +1,6 @@
 /*
 
- KANI_KOUSEN_PALETTE.H
+ SH_TILES.H
 
  Include File.
 
@@ -10,7 +10,7 @@
   Compression          : None.
   Counter              : None.
   Tile size            : 8 x 8
-  Tiles                : 0 to 27
+  Tiles                : 0 to 17
 
   Palette colors       : None.
   SGB Palette          : None.
@@ -24,8 +24,8 @@
 
 
 /* Bank of tiles. */
-#define kani_kousen_paletteBank 0
+#define sh_tilesBank 0
 /* Start of tile array. */
-extern unsigned char kani_kousen_palette[];
+extern const unsigned char sh_tiles[];
 
-/* End of KANI_KOUSEN_PALETTE.H */
+/* End of SH_TILES.H */

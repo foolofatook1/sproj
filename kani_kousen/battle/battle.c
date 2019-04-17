@@ -96,34 +96,13 @@ void run(void)
 {
     sprite_clean(0);
     LETTER_COUNT = 0;
-    battle_bkg_clean();
-    /*if(BATTLE_NUM == 1)
-    {
-        asakawa();
-        battle_print("YOU\0", 18, 48);
-        battle_print("CANkT\0", 18, 64);
-        battle_print("LEAVEl\0", 18, 80); 
-        show_fighter_stats();
-        delay(500);
-        sprite_clean(8);
-        LETTER_COUNT = 8;
-        battle_bkg_clean();
-        //battle_print("asakawa:\0", 18, 32);
-        battle_print("not 'til\0", 16, 48);
-        battle_print("you're\0", 18, 64);
-        battle_print("done!\0", 18, 80);
-        show_fighter_stats();
-        delay(1000);
-        back();
-    }
-    else 
-    {*/
-        battle_print("YOU\0", 18, 32);
-        battle_print("CANkT\0", 18, 48);
-        battle_print("ESCAPEl\0", 18, 64); 
-        show_fighter_stats();
-        delay(500);
-    //}
+    //battle_bkg_clean();
+    battle_print("YOU\0", 18, 32);
+    battle_print("CANkT\0", 18, 48);
+    battle_print("ESCAPEl\0", 18, 64); 
+    show_fighter_stats();
+    delay(1000);
+    back();
 }
 
 void back(void)
@@ -894,7 +873,7 @@ void show_fighter_stats(void)
     }
 }
 
-void game_over_screen(void)
+/*void game_over_screen(void)
 {
     sprite_clean(0);
     LETTER_COUNT = 0;
@@ -903,7 +882,7 @@ void game_over_screen(void)
     print("DAY", 72, 88);
     //print("GAMEiOVER", 44, 72);
     delay(1000);
-    /*sprite_clean(0);
+    sprite_clean(0);
     LETTER_COUNT = 0;
     clear_screen();
     print("AiCONTINUE\0", 44, 72);
@@ -924,5 +903,5 @@ void game_over_screen(void)
             HERO_HP = 10;
             break;
         }
-    }*/
-}
+    }
+}*/
