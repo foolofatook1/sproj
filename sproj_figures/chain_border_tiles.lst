@@ -1,14 +1,14 @@
                               1 ;--------------------------------------------------------
                               2 ; File Created by SDCC : FreeWare ANSI-C Compiler
-                              3 ; Version 2.3.1 Mon Apr 22 13:20:58 2019
+                              3 ; Version 2.3.1 Thu Apr 18 19:52:42 2019
                               4 
                               5 ;--------------------------------------------------------
-                              6 	.module lcc104990
+                              6 	.module lcc290970
                               7 	
                               8 ;--------------------------------------------------------
                               9 ; Public variables in this module
                              10 ;--------------------------------------------------------
-                             11 	.globl _deck
+                             11 	.globl _chain_border_tiles
                              12 ;--------------------------------------------------------
                              13 ; special function registers
                              14 ;--------------------------------------------------------
@@ -19,8 +19,8 @@
                              19 ; internal ram data
                              20 ;--------------------------------------------------------
                              21 	.area _DATA
-   0000                      22 _deck::
-   0000                      23 	.ds 576
+   0000                      22 _chain_border_tiles::
+   0000                      23 	.ds 160
                              24 ;--------------------------------------------------------
                              25 ; overlayable items in internal ram 
                              26 ;--------------------------------------------------------
@@ -43,50 +43,80 @@
                              43 	.area _GSINIT
                              44 	.area _GSFINAL
                              45 	.area _GSINIT
-                             46 ;	assets/bkgs/deck.c 25
-                             47 ;	assets/bkgs/deck.c 86
+                             46 ;	chain_border_tiles.c 26
+                             47 ;	chain_border_tiles.c 49
                              48 ;	genArrayInit
                              49 ; _saveRegsForCall: sendSetSize: 0 deInUse: 0 bcInUse: 0 deSending: 0
-   0000 21 00 00             50 	ld	hl,#_deck
+   0000 21 00 00             50 	ld	hl,#_chain_border_tiles
    0003 CD 00 00             51 	call	__initrleblock
-   0006 81 00                52 	.db	-127,0x00
-   0008 81 00                53 	.db	-127,0x00
-   000A 81 00                54 	.db	-127,0x00
-   000C 03                   55 	.db	3
-   000D 00 00 00             56 	.db	0x00, 0x00, 0x00
-   0010 C0 02                57 	.db	-64,0x02
-   0012 A4 01                58 	.db	-92,0x01
-   0014 03                   59 	.db	3
-   0015 02 02 02             60 	.db	0x02, 0x02, 0x02
-   0018 DF 01                61 	.db	-33,0x01
-   001A 00                   62 	.db	0
-                             63 ;--------------------------------------------------------
-                             64 ; Home
-                             65 ;--------------------------------------------------------
-                             66 	.area _HOME
-                             67 	.area _CODE
-                             68 ;--------------------------------------------------------
-                             69 ; code
-                             70 ;--------------------------------------------------------
-                             71 	.area _CODE
-                             72 	.area _CODE
+   0006 F0 00                52 	.db	-16,0x00
+   0008 7F                   53 	.db	127
+   0009 18 18 7E 7E DB DB    54 	.db	0x18, 0x18, 0x7E, 0x7E, 0xDB, 0xDB, 0xC3, 0xC3
+        C3 C3
+   0011 C3 C3 DB DB 7E 7E    55 	.db	0xC3, 0xC3, 0xDB, 0xDB, 0x7E, 0x7E, 0x18, 0x18
+        18 18
+   0019 3C 3C 7E 7E 43 43    56 	.db	0x3C, 0x3C, 0x7E, 0x7E, 0x43, 0x43, 0xE3, 0xE3
+        E3 E3
+   0021 E3 E3 5B 5B 7E 7E    57 	.db	0xE3, 0xE3, 0x5B, 0x5B, 0x7E, 0x7E, 0x18, 0x18
+        18 18
+   0029 18 18 7E 7E 5B 5B    58 	.db	0x18, 0x18, 0x7E, 0x7E, 0x5B, 0x5B, 0xE3, 0xE3
+        E3 E3
+   0031 E3 E3 43 43 7E 7E    59 	.db	0xE3, 0xE3, 0x43, 0x43, 0x7E, 0x7E, 0x3C, 0x3C
+        3C 3C
+   0039 3C 3C 7E 7E C2 C2    60 	.db	0x3C, 0x3C, 0x7E, 0x7E, 0xC2, 0xC2, 0xC7, 0xC7
+        C7 C7
+   0041 C7 C7 DA DA 7E 7E    61 	.db	0xC7, 0xC7, 0xDA, 0xDA, 0x7E, 0x7E, 0x18, 0x18
+        18 18
+   0049 18 18 7E 7E DA DA    62 	.db	0x18, 0x18, 0x7E, 0x7E, 0xDA, 0xDA, 0xC7, 0xC7
+        C7 C7
+   0051 C7 C7 C2 C2 7E 7E    63 	.db	0xC7, 0xC7, 0xC2, 0xC2, 0x7E, 0x7E, 0x3C, 0x3C
+        3C 3C
+   0059 3C 3C 7E 7E 42 42    64 	.db	0x3C, 0x3C, 0x7E, 0x7E, 0x42, 0x42, 0xE7, 0xE7
+        E7 E7
+   0061 E7 E7 42 42 7E 7E    65 	.db	0xE7, 0xE7, 0x42, 0x42, 0x7E, 0x7E, 0x3C, 0x3C
+        3C 3C
+   0069 7E 7E 81 81 99 99    66 	.db	0x7E, 0x7E, 0x81, 0x81, 0x99, 0x99, 0xA5, 0xA5
+        A5 A5
+   0071 BD BD A5 A5 81 81    67 	.db	0xBD, 0xBD, 0xA5, 0xA5, 0x81, 0x81, 0x7E, 0x7E
+        7E 7E
+   0079 04 04 06 06 7D 7D    68 	.db	0x04, 0x04, 0x06, 0x06, 0x7D, 0x7D, 0x40, 0x40
+        40 40
+   0081 40 40 7D 7D 06 06    69 	.db	0x40, 0x40, 0x7D, 0x7D, 0x06, 0x06, 0x04
+        04
+   0088 01                   70 	.db	1
+   0089 04                   71 	.db	0x04
+   008A FA 00                72 	.db	-6,0x00
+   008C 04                   73 	.db	4
+   008D 80 80 80 80          74 	.db	0x80, 0x80, 0x80, 0x80
+   0091 FA 00                75 	.db	-6,0x00
+   0093 00                   76 	.db	0
+                             77 ;--------------------------------------------------------
+                             78 ; Home
+                             79 ;--------------------------------------------------------
+                             80 	.area _HOME
+                             81 	.area _CODE
+                             82 ;--------------------------------------------------------
+                             83 ; code
+                             84 ;--------------------------------------------------------
+                             85 	.area _CODE
+                             86 	.area _CODE
 ASxxxx Assembler V01.75  (GameBoy Z80-like CPU), page 1.
 
 Symbol Table
 
     __initrleblock                     **** GX
-  1 _deck                              0000 GR
+  1 _chain_border_tiles                0000 GR
 
 ASxxxx Assembler V01.75  (GameBoy Z80-like CPU), page 2.
 
 Area Table
 
    0 _CODE                              size    0   flags 0
-   1 _DATA                              size  240   flags 0
+   1 _DATA                              size   A0   flags 0
    2 _OVERLAY                           size    0   flags 0
    3 _ISEG                              size    0   flags 0
    4 _BSEG                              size    0   flags 0
    5 _XSEG                              size    0   flags 0
-   6 _GSINIT                            size   1B   flags 0
+   6 _GSINIT                            size   94   flags 0
    7 _GSFINAL                           size    0   flags 0
    8 _HOME                              size    0   flags 0

@@ -1,0 +1,327 @@
+AREA .  .ABS.
+	RADIX HEX
+	BASE 0000
+	SIZE 0000
+	ATTRIB ABS OVR
+	GLOBALS
+		l__HEAP	0000
+		l__BSEG	0000
+		l_.  .ABS.	0000
+		l__GSFINAL	0000
+		l__ISEG	0000
+		s_.  .ABS.	0000
+		s__HEADER	0000
+		l__XSEG	0000
+		.init	0000
+		l__OVERLAY	0000
+		l__LIT	0000
+		l__GSINITTAIL	0001
+		l__BSS	0059
+		l__BASE	00EA
+		l__HOME	01D3
+		l__HEADER	01E1
+		s__CODE	0200
+		l__CODE	03F0
+		s__HOME	05F0
+		s__BASE	07C3
+		s__LIT	08AD
+		s__GSINIT	08AD
+		l__GSINIT	0E58
+		l__DATA	10C8
+		s__GSINITTAIL	1705
+		s__GSFINAL	1706
+		.OAM	C000
+		s__DATA	C0A0
+		s__BSS	D168
+		s__HEAP	D1C1
+		s__BSEG	D1C1
+		s__ISEG	D1C1
+		s__XSEG	D1C1
+		s__OVERLAY	D1C1
+		.STACK	E000
+		.refresh_OAM	FF80
+AREA _CODE
+	RADIX HEX
+	BASE 0200
+	SIZE 03F0
+	ATTRIB REL CON
+	GLOBALS
+		_main	0200
+		_sh_tiles	027D
+		_print	039D
+		_sprite_clean	0444
+		_hide_sprites	047C
+		_battle_print	04A3
+		_damn_that_asakawa	0528
+		_you_hear	0564
+		_asakawa	057D
+		_fisherman	0594
+		_student	05AD
+		_miner	05C4
+		_workers	05D9
+AREA _HEADER
+	RADIX HEX
+	BASE 0000
+	SIZE 01E1
+	ATTRIB ABS OVR
+	GLOBALS
+		_exit	01D2
+AREA _HOME
+	RADIX HEX
+	BASE 05F0
+	SIZE 01D3
+	ATTRIB REL CON
+	GLOBALS
+		.set_mode	05F0
+		.remove_VBL	0600
+		.remove_LCD	0606
+		.remove_TIM	060C
+		.remove_SIO	0612
+		.remove_JOY	0618
+		.add_VBL	061E
+		.add_LCD	0624
+		.add_TIM	062A
+		.add_SIO	0630
+		.add_JOY	0636
+		.remove_int	063C
+		.add_int	065C
+		.wait_vbl_done	0678
+		_wait_vbl_done	0678
+		_display_off	068F
+		.display_off	068F
+		.serial_IO	06B0
+		_mode	06DF
+		_get_mode	06E8
+		_enable_interrupts	06ED
+		_disable_interrupts	06EF
+		_reset	06F1
+		.reset	06F1
+		_set_interrupts	06F7
+		_remove_VBL	0702
+		_remove_LCD	070D
+		_remove_TIM	0718
+		_remove_SIO	0723
+		_remove_JOY	072E
+		_add_VBL	0739
+		_add_LCD	0744
+		_add_TIM	074F
+		_add_SIO	075A
+		_add_JOY	0765
+		_clock	0770
+		__printTStates	0779
+		banked_call	077A
+		banked_ret	0793
+		__initrleblock	079C
+AREA _BASE
+	RADIX HEX
+	BASE 07C3
+	SIZE 00EA
+	ATTRIB REL CON
+	GLOBALS
+		.set_sprite_prop	07C3
+		_set_sprite_prop	07D0
+		.mv_sprite	07DB
+		_move_sprite	07EA
+		_set_win_data	07F7
+		_set_bkg_data	07F7
+		_set_sprite_data	0844
+		.set_sprite_tile	0873
+		_set_sprite_tile	0880
+		.copy_vram	088B
+		_get_data	089A
+		_set_data	089A
+AREA _LIT
+	RADIX HEX
+	BASE 08AD
+	SIZE 0000
+	ATTRIB REL CON
+AREA _GSINIT
+	RADIX HEX
+	BASE 08AD
+	SIZE 0E58
+	ATTRIB REL CON
+	GLOBALS
+		gsinit	08AD
+AREA _GSINITTAIL
+	RADIX HEX
+	BASE 1705
+	SIZE 0001
+	ATTRIB REL CON
+AREA _GSFINAL
+	RADIX HEX
+	BASE 1706
+	SIZE 0000
+	ATTRIB REL CON
+AREA _DATA
+	RADIX HEX
+	BASE C0A0
+	SIZE 10C8
+	ATTRIB REL CON
+	GLOBALS
+		_asakawa_air_shot	C0A0
+		_asakawa_front_idle	C2A0
+		_asakawa_walk_side	C320
+		_bed	C3A0
+		_fisherman_front_idle	C4A0
+		_fisherman_idle_back	C4E0
+		_fisherman_walk_side	C560
+		_fisherman_walk_up	C5E0
+		_hero_back_idle	C620
+		_hero_front_idle	C6A0
+		_hero_lie_down	C720
+		_hero_walk_down	C820
+		_hero_walk_sideways	C860
+		_hero_walk_up	C8E0
+		_king_crab	C960
+		_miner_front_idle	C9E0
+		_miner_idle_back	CA60
+		_miner_walk_left	CAE0
+		_miner_walk_up	CB60
+		_norm_crab	CBE0
+		_soldier	CC60
+		_student_front_idle	CCA0
+		_student_idle_back	CCE0
+		_student_lie_down	CD60
+		_blank_screen_tiles	CDA0
+		_chain_border_tiles	CDE0
+		_font	CE80
+		_i	D160
+		_j	D161
+		_cushion	D162
+		_LETTER_COUNT	D163
+		_MAX_SPRITES	D164
+		_START_X	D165
+		_arrow_x	D166
+		_arrow_y	D167
+AREA _BSS
+	RADIX HEX
+	BASE D168
+	SIZE 0059
+	ATTRIB REL CON
+	GLOBALS
+		__cpu	D168
+		.mode	D169
+		__io_out	D16A
+		__io_in	D16B
+		__io_status	D16C
+		.vbl_done	D16D
+		__current_bank	D16E
+		_sys_time	D16F
+		.sys_time	D16F
+		.int_0x40	D171
+		.int_0x48	D181
+		.int_0x50	D191
+		.int_0x58	D1A1
+		.int_0x60	D1B1
+AREA _HEAP
+	RADIX HEX
+	BASE D1C1
+	SIZE 0000
+	ATTRIB REL CON
+	GLOBALS
+		_malloc_heap_start	D1C1
+AREA _OVERLAY
+	RADIX HEX
+	BASE D1C1
+	SIZE 0000
+	ATTRIB REL CON
+AREA _ISEG
+	RADIX HEX
+	BASE D1C1
+	SIZE 0000
+	ATTRIB REL CON
+AREA _BSEG
+	RADIX HEX
+	BASE D1C1
+	SIZE 0000
+	ATTRIB REL CON
+AREA _XSEG
+	RADIX HEX
+	BASE D1C1
+	SIZE 0000
+	ATTRIB REL CON
+MODULES
+	FILE /opt/gbdk/lib/small/asxxxx/gb/crt0.o
+		NAME Runtime
+	FILE main.o
+		NAME lcc289930
+	FILE asakawa_air_shot.o
+		NAME lcc289970
+	FILE asakawa_front_idle.o
+		NAME lcc290010
+	FILE asakawa_walk_sideways.o
+		NAME lcc290050
+	FILE bed.o
+		NAME lcc290090
+	FILE fisherman_front_idle.o
+		NAME lcc290130
+	FILE fisherman_idle_back.o
+		NAME lcc290170
+	FILE fisherman_walk_sideways.o
+		NAME lcc290210
+	FILE fisherman_walk_up.o
+		NAME lcc290250
+	FILE hero_back_idle.o
+		NAME lcc290290
+	FILE hero_front_idle.o
+		NAME lcc290330
+	FILE hero_lie_down.o
+		NAME lcc290370
+	FILE hero_walk_down.o
+		NAME lcc290410
+	FILE hero_walk_sideways.o
+		NAME lcc290450
+	FILE hero_walk_up.o
+		NAME lcc290490
+	FILE king_crab.o
+		NAME lcc290530
+	FILE miner_front_idle.o
+		NAME lcc290570
+	FILE miner_idle_back.o
+		NAME lcc290610
+	FILE miner_walk_left.o
+		NAME lcc290650
+	FILE miner_walk_up.o
+		NAME lcc290690
+	FILE norm_crab.o
+		NAME lcc290730
+	FILE soldier.o
+		NAME lcc290770
+	FILE student_front_idle.o
+		NAME lcc290810
+	FILE student_idle_back.o
+		NAME lcc290850
+	FILE student_lie_down.o
+		NAME lcc290890
+	FILE blank_screen_tiles.o
+		NAME lcc290930
+	FILE chain_border_tiles.o
+		NAME lcc290970
+	FILE font.o
+		NAME lcc291010
+	FILE sh_tiles.o
+		NAME lcc291050
+	FILE text.o
+		NAME lcc291090
+LIBRARIES
+	LIBRARY /opt/gbdk/lib/small/asxxxx/gbz80/gbz80.lib
+		MODULE crt0_rle.o
+	LIBRARY /opt/gbdk/lib/small/asxxxx/gb/gb.lib
+		MODULE set_prop.o
+	LIBRARY /opt/gbdk/lib/small/asxxxx/gb/gb.lib
+		MODULE mv_spr.o
+	LIBRARY /opt/gbdk/lib/small/asxxxx/gb/gb.lib
+		MODULE set_data.o
+	LIBRARY /opt/gbdk/lib/small/asxxxx/gb/gb.lib
+		MODULE set_spr.o
+	LIBRARY /opt/gbdk/lib/small/asxxxx/gb/gb.lib
+		MODULE cpy_data.o
+USERBASEDEF
+	_CODE=0x0200
+	_DATA=0xC0A0
+	_CODE_1=0x4000
+USERGLOBALDEF
+	.OAM=0xC000
+	.STACK=0xE000
+	.refresh_OAM=0xFF80
+	.init=0x0000

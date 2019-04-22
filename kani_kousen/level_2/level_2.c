@@ -92,7 +92,7 @@ void level_2_bkg_start(void)
     print("ATiSEA\0", 56, 96);
     for(i = 0; i < LETTER_COUNT; ++i)
         set_sprite_prop(i,1);
-    delay(1000);
+    delay(1500);
 }
 
 void shit_pot_setup(void)
@@ -216,7 +216,7 @@ UINT8 conv_check(void)
                 hide_sprites();
                 workers();
                 you_hear();
-                delay(1000);
+                delay(1500);
                 if(option == LEVEL_2)
                 {
                     sprite_clean(8);
@@ -224,7 +224,7 @@ UINT8 conv_check(void)
                     print("AiFISHING\0", 24, 48);
                     print("BOATiWAS\0", 24, 64);
                     print("LOSTl\0", 24, 80);
-                    delay(1000);
+                    delay(1500);
                     damn_that_asakawa();
                     GOT_INFO = 1;
                 }
@@ -411,7 +411,7 @@ UINT8 conv_check(void)
                 print("WEkVEiGOT\0", 24, 48);
                 print("THE\0", 24, 64);
                 print("NUMBERSl\0", 24, 80);
-                delay(1000);
+                delay(1500);
                 sprite_clean(10);
                 LETTER_COUNT = 10;
                 print("WITHOUT\0", 24, 48);
@@ -434,13 +434,13 @@ UINT8 conv_check(void)
                 print("WOULDNkT\0", 24, 64);
                 print("MAKEiA\0", 24, 80);
                 print("DIMEl\0", 24, 96);
-                delay(1000);
+                delay(1500);
                 sprite_clean(10);
                 LETTER_COUNT = 10;
                 print("LETkSiGIVE\0", 24, 48);
                 print("kEMiHELL\0", 24, 64);
                 print("TOGETHERl\0", 24, 80);
-                delay(1000);
+                delay(1500);
                 striking = 1;
                 REVOLUTION_1 = 1;
             }
@@ -491,7 +491,7 @@ UINT8 conv_check(void)
                         LETTER_COUNT = 10;
                         print("GOiSEEiWHO\0", 24, 48);
                         print("CANiHELPl\0", 24, 64);
-                        delay(1000);
+                        delay(1500);
                         revolt = 1;
                     }
                 }
@@ -534,7 +534,7 @@ void l2_scene_1(void)
     for(i = 0; i < LETTER_COUNT; ++i)
         set_sprite_prop(i, 1);
     /* start the next part */
-    delay(1000);
+    delay(1500);
     sprite_clean(0);
     LETTER_COUNT = 0;
     hide_sprites();
@@ -594,12 +594,12 @@ void l2_scene_1(void)
 
 void l2_scene_1_fisherman_enter(void)
 {
-    delay(1000);
+    delay(1500);
     sprite_clean(10);
     LETTER_COUNT = 10;
     print("YOUkLL\0", 24, 48);
     print("NEEDiTHESE\0", 24, 64);
-    delay(1000);
+    delay(1500);
     sprite_clean(0);
     LETTER_COUNT = 0;
     DISPLAY_OFF;
@@ -611,7 +611,7 @@ void l2_scene_1_fisherman_enter(void)
     print("FISHING\0", 56, 80);
     print("NET\0", 72, 96);
     ITEMS += 2;
-    delay(1000);
+    delay(1500);
     sprite_clean(0);
     LETTER_COUNT = 0;
     DISPLAY_OFF;
@@ -899,7 +899,7 @@ void asakawa_after_work(void)
     print("BACKiDOWN\0", 24, 48);
     print("TOiTHE\0", 24, 64);
     print("SHITiPOTl\0", 24, 80);
-    delay(1000);
+    delay(1500);
 }
 
 void pos_check_shit_pot(void)

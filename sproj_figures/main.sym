@@ -1,0 +1,154 @@
+; no$gmb format .sym file
+; Generated automagically by ASxxxx linker V01.75 (SDK 3.0.0)
+; Area: .  .ABS.
+00:0000 s__HEADER
+00:0000 .init
+00:0200 s__CODE
+00:05F0 s__HOME
+00:07C3 s__BASE
+00:08AD s__LIT
+00:08AD s__GSINIT
+00:1705 s__GSINITTAIL
+00:1706 s__GSFINAL
+00:C000 .OAM
+00:C0A0 s__DATA
+00:D168 s__BSS
+00:D1C1 s__HEAP
+00:D1C1 s__BSEG
+00:D1C1 s__ISEG
+00:D1C1 s__XSEG
+00:D1C1 s__OVERLAY
+00:E000 .STACK
+00:FF80 .refresh_OAM
+; Area: _CODE
+00:0200 _main
+00:027D _sh_tiles
+00:039D _print
+00:0444 _sprite_clean
+00:047C _hide_sprites
+00:04A3 _battle_print
+00:0528 _damn_that_asakawa
+00:0564 _you_hear
+00:057D _asakawa
+00:0594 _fisherman
+00:05AD _student
+00:05C4 _miner
+00:05D9 _workers
+; Area: _HEADER
+00:01D2 _exit
+; Area: _HOME
+00:05F0 .set_mode
+00:0600 .remove_VBL
+00:0606 .remove_LCD
+00:060C .remove_TIM
+00:0612 .remove_SIO
+00:0618 .remove_JOY
+00:061E .add_VBL
+00:0624 .add_LCD
+00:062A .add_TIM
+00:0630 .add_SIO
+00:0636 .add_JOY
+00:063C .remove_int
+00:065C .add_int
+00:0678 .wait_vbl_done
+00:0678 _wait_vbl_done
+00:068F _display_off
+00:068F .display_off
+00:06B0 .serial_IO
+00:06DF _mode
+00:06E8 _get_mode
+00:06ED _enable_interrupts
+00:06EF _disable_interrupts
+00:06F1 _reset
+00:06F1 .reset
+00:06F7 _set_interrupts
+00:0702 _remove_VBL
+00:070D _remove_LCD
+00:0718 _remove_TIM
+00:0723 _remove_SIO
+00:072E _remove_JOY
+00:0739 _add_VBL
+00:0744 _add_LCD
+00:074F _add_TIM
+00:075A _add_SIO
+00:0765 _add_JOY
+00:0770 _clock
+00:0779 __printTStates
+00:077A banked_call
+00:0793 banked_ret
+00:079C __initrleblock
+; Area: _BASE
+00:07C3 .set_sprite_prop
+00:07D0 _set_sprite_prop
+00:07DB .mv_sprite
+00:07EA _move_sprite
+00:07F7 _set_win_data
+00:07F7 _set_bkg_data
+00:0844 _set_sprite_data
+00:0873 .set_sprite_tile
+00:0880 _set_sprite_tile
+00:088B .copy_vram
+00:089A _get_data
+00:089A _set_data
+; Area: _LIT
+; Area: _GSINIT
+00:08AD gsinit
+; Area: _GSINITTAIL
+; Area: _GSFINAL
+; Area: _DATA
+00:C0A0 _asakawa_air_shot
+00:C2A0 _asakawa_front_idle
+00:C320 _asakawa_walk_side
+00:C3A0 _bed
+00:C4A0 _fisherman_front_idle
+00:C4E0 _fisherman_idle_back
+00:C560 _fisherman_walk_side
+00:C5E0 _fisherman_walk_up
+00:C620 _hero_back_idle
+00:C6A0 _hero_front_idle
+00:C720 _hero_lie_down
+00:C820 _hero_walk_down
+00:C860 _hero_walk_sideways
+00:C8E0 _hero_walk_up
+00:C960 _king_crab
+00:C9E0 _miner_front_idle
+00:CA60 _miner_idle_back
+00:CAE0 _miner_walk_left
+00:CB60 _miner_walk_up
+00:CBE0 _norm_crab
+00:CC60 _soldier
+00:CCA0 _student_front_idle
+00:CCE0 _student_idle_back
+00:CD60 _student_lie_down
+00:CDA0 _blank_screen_tiles
+00:CDE0 _chain_border_tiles
+00:CE80 _font
+00:D160 _i
+00:D161 _j
+00:D162 _cushion
+00:D163 _LETTER_COUNT
+00:D164 _MAX_SPRITES
+00:D165 _START_X
+00:D166 _arrow_x
+00:D167 _arrow_y
+; Area: _BSS
+00:D168 __cpu
+00:D169 .mode
+00:D16A __io_out
+00:D16B __io_in
+00:D16C __io_status
+00:D16D .vbl_done
+00:D16E __current_bank
+00:D16F _sys_time
+00:D16F .sys_time
+00:D171 .int_0x40
+00:D181 .int_0x48
+00:D191 .int_0x50
+00:D1A1 .int_0x58
+00:D1B1 .int_0x60
+; Area: _HEAP
+00:D1C1 _malloc_heap_start
+; Area: _OVERLAY
+; Area: _ISEG
+; Area: _BSEG
+; Area: _XSEG

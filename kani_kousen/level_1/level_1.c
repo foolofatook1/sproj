@@ -55,7 +55,7 @@ void level_1_bkg_start(void)
     DISPLAY_ON;
     /* opening screen */
     print("CHAPTERi\\\nWELCOME\nTOiHELL\0", 48, 64);
-    delay(1000);
+    delay(1500);
     sprite_clean(0);
     LETTER_COUNT = 0;
 
@@ -72,7 +72,7 @@ void level_1_bkg_start(void)
     bkg_clean();
     fisherman();
     print("WEkREiALL\nGOINkiTO\nHELLl\0", 24, 48);
-    delay(1000);
+    delay(1500);
     sprite_clean(10);
     LETTER_COUNT = 10;
     you_hear();
@@ -84,27 +84,27 @@ void l1_scene_1(void)
     sprite_clean(10);
     LETTER_COUNT = 10;
     print("_iMONTHS\nON\0", 24, 48);
-    delay(1000);
+    delay(1500);
     sprite_clean(10);
     LETTER_COUNT = 10;
     print("KAMCHATKAS\nNORTHERN\nWATERSe\0", 24, 48);
-    delay(1000);
+    delay(1500);
     sprite_clean(10);
     LETTER_COUNT = 10;
     print("ITiWOULD\nBEiAiCOLD\nDEATH\neee\0", 24, 48);
-    delay(1000);
+    delay(1500);
     sprite_clean(10);
     LETTER_COUNT = 10;
     print("IiSEEiWE\nHAVEiA\nQUIETiONEe\0", 24, 48);
-    delay(1000);
+    delay(1500);
     sprite_clean(10);
     LETTER_COUNT = 10;
     print("CkMON\nIkLLiTAKE\nYOUiDOWN\0", 24, 48);
-    delay(1000);
+    delay(1500);
     sprite_clean(10);
     LETTER_COUNT = 10;
     print("TOiTHE\nSHITiPOTe\0", 24, 48);
-    delay(1000);
+    delay(1500);
     DISPLAY_OFF;
     /* center on the door */
     set_bkg_data(0,4,blank_screen_tiles);
@@ -224,7 +224,7 @@ void miner_intro_setup(void)
     print("YUBARI\0", 24, 80);
     print("COAL\0", 24, 96);
     print("MINESe\0", 24, 112);
-    delay(1000);
+    delay(1500);
 }
 
 /* setting up the miners dialogue / introduction */
@@ -238,69 +238,69 @@ int miner_intro(void)
     print("YEARSe\0", 24, 96);
 
     DISPLAY_ON;
-    delay(1000);
+    delay(1500);
     sprite_clean(0);
     LETTER_COUNT = 0;
     fisherman();
     print("AiMINERf\0", 24, 48);//HUHn\0", 24, 48);
     print("HUHn\0", 24, 64);
-    delay(1000);
+    delay(1500);
     sprite_clean(10);
     LETTER_COUNT = 10;
     print("MUSTkVE\0", 24, 48);//BEENiNO\nMONEYiIN\nITeee\0", 24, 48);
     print("BEENiNO\0", 24, 64);
     print("MONEYiIN\0", 24, 80);
     print("MININGn\0", 24, 96);
-    delay(1000);
+    delay(1500);
     sprite_clean(0);
     LETTER_COUNT = 0;
     miner();
     print("eeeTHERE\0", 24, 48);//WASiAN\nEXPLOSION\0", 24, 48);
     print("WASiAN\0", 24, 64);
     print("EXPLOSION\0", 24, 80);
-    delay(1000);
+    delay(1500);
     sprite_clean(6);
     LETTER_COUNT = 6;
     print("eee\0", 24, 48);//FROMiTHE\nGASeee\0", 24, 48);
     print("FROMiTHE\0", 24, 64);
     print("GASeee\0", 24, 80);
-    delay(1000);
+    delay(1500);
     sprite_clean(6);
     LETTER_COUNT = 6;
     print("GOODiLIVES\0", 24, 48);//WEREiLOST\0", 24, 48);
     print("WEREiLOST\0", 24, 64);
-    delay(1000);
+    delay(1500);
     sprite_clean(6);
     LETTER_COUNT = 6;
     print("THATiCANkT\0", 24, 48);//BE\nRETURNED\neee\0", 24, 48);
     print("BE\0", 24, 64);
     print("RETURNED\0", 24, 80);
     print("eee\0", 24, 96);
-    delay(1000);
+    delay(1500);
     sprite_clean(0);
     LETTER_COUNT = 0;
     fisherman();
     print("WEiBETTER\0", 24, 48);//GOl\0", 24, 48);
     print("GOl\0", 24, 64);
-    delay(1000);
+    delay(1500);
     sprite_clean(10);
     LETTER_COUNT = 10;
     print("IiTHINK\0", 24, 48);//IiHEAR\nASAKAWA\nCOMINGl\0", 24, 48);
     print("IiHEAR\0", 24, 64);
     print("ASAKAWA\0", 24, 80);
     print("COMINGl\0", 24, 96);
-    delay(1000);
+    delay(1500);
     sprite_clean(0);
     LETTER_COUNT = 0;
 
     miner();
     print("WHOkSiTHAT\0", 24, 48);//nnn\0", 24, 48);
     print("nnn\0", 24, 64);
-    delay(1000);
+    delay(1500);
     print("FISHERMANg\0", 24, 80);//THE\nMANAGERl\0", 24, 80);
     print("THE\0", 24, 96);
     print("MANAGERl\0", 24, 112);
-    delay(1000);
+    delay(1500);
 }
 
 /**
@@ -434,7 +434,7 @@ void l1_scene_3_text_setup(void)
     print("LISTENiUP\0", 24, 48);//YOU\nMAGGOTSl\0", 24, 48);
     print("YOU\0", 24, 64);
     print("MAGGOTSl\0", 24, 80);
-    delay(1000);
+    delay(1500);
 }
 
 /* asakawa's message */
@@ -444,14 +444,14 @@ void l1_scene_3(void)
     LETTER_COUNT = 8;
     print("NEEDLESS\0", 24, 48);//TOiSAYf\0", 24, 48);
     print("TOiSAYf\0", 24, 64);
-    delay(1000);
+    delay(1500);
     sprite_clean(8);
     LETTER_COUNT = 8;
     print("THISiSHIP\0", 24, 48);//ISiOFiTHE\nUTMOST\nCONCERN\0", 24, 48);
     print("ISiOFiTHE\0", 24, 64);
     print("UTMOST\0", 24, 80);
     print("CONCERN\0", 24, 96);
-    delay(1000);
+    delay(1500);
     sprite_clean(8);
     LETTER_COUNT = 8;
     print("FORiOUR\0", 24, 48);//NATIONl\0", 24, 48);
@@ -464,49 +464,49 @@ void l1_scene_3(void)
     print("OF\0", 24, 80);
     print("IMPERIAL\0", 24, 96);
     print("JAPANf\0", 24, 112);
-    delay(1000);
+    delay(1500);
     sprite_clean(8);
     LETTER_COUNT = 8;
     print("WEiARE\0",24, 48);//PROUD\nRIVALS\nOFiRUSSIAl\0", 24, 48);
     print("PROUD\0", 24, 64);
     print("RIVALS\0", 24, 80);
     print("OFiRUSSIAl\0", 24, 96);
-    delay(1000);
+    delay(1500);
     sprite_clean(8);
     LETTER_COUNT = 8;
     print("THEREkSiAN\0", 24, 48);//IMPERIAL\nSHIP\0", 24, 48);
     print("IMPERIAL\0", 24, 64);
     print("SHIP\0", 24, 80);
-    delay(1000);
+    delay(1500);
     sprite_clean(8);
     LETTER_COUNT = 8;
     print("TO\0", 24, 48);//PROTECTiUS\0", 24, 48);
     print("PROTECTiUS\0", 24, 64);
-    delay(1000);
+    delay(1500);
     sprite_clean(8);
     LETTER_COUNT = 8;
     print("ASiA\0", 24, 48);//NATIONiOF\nEXCELLENCE\0", 24, 48);
     print("NATIONiOF\0", 24, 64);
     print("EXCELLENCE\0", 24, 80);
-    delay(1000);
+    delay(1500);
     sprite_clean(8);
     LETTER_COUNT = 8;
     print("WEiARE\0", 24, 48);//UNMATCHED\0", 24, 48);
     print("UNMATCHED\0", 24, 64);
-    delay(1000);
+    delay(1500);
     sprite_clean(8);
     LETTER_COUNT = 8;
     print("WHEN\0", 24, 48);//COMPARED\nTOiOTHERSl\0", 24, 48);
     print("COMPARED\0", 24, 64);
     print("TOiOTHERSl\0", 24, 80);
-    delay(1000);
+    delay(1500);
     sprite_clean(0);
     LETTER_COUNT = 0;
     print("FROMiTHE\0", 24, 32);//CROWD\nSOMEONE\nMURMURSf\0", 24, 32);
     print("CROWD\0", 24, 48);
     print("SOMEONE\0", 24, 64);
     print("MURMURSf\0", 24, 80);
-    delay(1000);
+    delay(1500);
     sprite_clean(0);
     LETTER_COUNT = 0;
     print("THATkS\0", 24, 32);//;AiLITTLE\nEXAGERATED\nDONkTiYOU\nTHINKn\0", 24, 32);
@@ -514,7 +514,7 @@ void l1_scene_3(void)
     print("EXAGERATED\0", 24, 64);
     print("DONkTiYOU\0", 24, 80);
     print("THINKn\0", 24, 96);
-    delay(1000);
+    delay(1500);
     l1_scene_3_setup();
     asakawa_shoots_anim();
 
@@ -529,21 +529,21 @@ void l1_scene_3(void)
     print("OFiTALKiIS\0", 24, 64);
     print("NOT\0", 24, 80);
     print("TOLERABLEl\0", 24, 96);
-    delay(1000);
+    delay(1500);
     sprite_clean(8);
     LETTER_COUNT = 8;
     print("THIS\0", 24, 48);
     print("ATTITUDE\0", 24, 64);
     print("IS\0", 24, 80);
     print("MUTINOUSf\0", 24, 94);
-    delay(1000);
+    delay(1500);
     sprite_clean(8);
     LETTER_COUNT = 8;
     print("ANDiWILL\0", 24, 48);
     print("BE\0", 24, 64);
     print("CONSIDERED\0", 24, 80);
     print("TREASONl\0", 24, 96);
-    delay(1000);
+    delay(1500);
     /* Battle prompt */
     DISPLAY_OFF;
     clear_screen();

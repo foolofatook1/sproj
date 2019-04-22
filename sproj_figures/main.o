@@ -1,0 +1,38 @@
+XL
+H 9 areas 8 global symbols
+M lcc289930
+S _blank_screen_tiles Ref0000
+S _print Ref0000
+S _font Ref0000
+S _set_sprite_data Ref0000
+S _set_bkg_data Ref0000
+S _sh_tiles Ref0000
+S _chain_border_tiles Ref0000
+A _CODE size 7D flags 0
+S _main Def0000
+A _DATA size 0 flags 0
+A _OVERLAY size 0 flags 0
+A _ISEG size 0 flags 0
+A _BSEG size 0 flags 0
+A _XSEG size 0 flags 0
+A _GSINIT size 0 flags 0
+A _GSFINAL size 0 flags 0
+A _HOME size 0 flags 0
+T 00 00 E8 FD 21 00 00 E5 21 00 2E E5 CD 00 00 E8
+R 00 00 00 00 02 05 02 00 02 0D 03 00
+T 0E 00 04 21 18 20 E5 21 71 00 E5 CD 00 00 E8 04
+R 00 00 00 00 00 08 00 00 02 0C 01 00
+T 1C 00 01 40 FF F8 01 36 40 23 36 FF 2B 5E 23 56
+R 00 00 00 00
+T 2A 00 1A 2B 2B 77 7F F6 80 02 01 40 FF 23 36 40
+R 00 00 00 00
+T 38 00 23 36 FF 2B 5E 23 56 1A 2B 2B 77 7F F6 02
+R 00 00 00 00
+T 46 00 02 21 00 00 E5 21 00 04 E5 CD 00 00 E8 04
+R 00 00 00 00 02 04 00 00 02 0C 04 00
+T 54 00 21 00 00 E5 21 04 0A E5 CD 00 00 E8 04 21
+R 00 00 00 00 02 03 06 00 02 0B 04 00
+T 62 00 00 00 E5 21 0E 12 E5 CD 00 00 E8 04 E8 03
+R 00 00 00 00 02 02 05 00 02 0A 04 00
+T 70 00 C9 48 45 4C 4C 4F 0A 57 4F 52 4C 44 00
+R 00 00 00 00

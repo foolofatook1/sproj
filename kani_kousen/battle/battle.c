@@ -101,7 +101,7 @@ void run(void)
     battle_print("CANkT\0", 18, 48);
     battle_print("ESCAPEl\0", 18, 64); 
     show_fighter_stats();
-    delay(1000);
+    delay(1500);
     back();
 }
 

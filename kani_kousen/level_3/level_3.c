@@ -22,7 +22,7 @@ void level_3_ctrl(void)
     print("CHAPTERi^\0", 48, 56);
     print("RXVXLXTXXN\0", 44, 72);
     DISPLAY_ON;
-    delay(1000);
+    delay(2500);
     DISPLAY_OFF;
     shit_pot_setup();
     shit_pot_sprites();
@@ -42,7 +42,7 @@ void level_3_ctrl(void)
         if(!striking)
             leaves_shit_pot();
     }
-    delay(1000);
+    delay(1500);
     DISPLAY_OFF;
     sprite_clean(0);
     LETTER_COUNT = 0;
@@ -77,14 +77,14 @@ void level_3_ctrl(void)
     print("IkVEiHEARD\0", 24, 48);
     print("TALKiOFiA\0", 24, 64);
     print("STRIKEl\0", 24, 80);
-    delay(1000);
+    delay(1500);
     sprite_clean(8);
     LETTER_COUNT = 8;
     asakawa();
     print("SHOWiME\0", 24, 48);
     print("YOUR\0", 24, 64);
     print("LEADERSl\0", 24, 80);
-    delay(1000);
+    delay(1500);
     DISPLAY_OFF;
     /* happens in level 1 too */
     clear_screen();
@@ -111,7 +111,7 @@ void level_3_ctrl(void)
     asakawa();
     print("NOWiTAKE\0", 24, 48);
     print("THEMiAWAYl\0", 24, 64);
-    delay(1000);
+    delay(1500);
     DISPLAY_OFF;
     set_bkg_data(0, 4, blank_screen_tiles);
     set_bkg_tiles(0, 0, 20, 18, black_screen);
@@ -133,54 +133,54 @@ void level_3_ctrl(void)
 
 
     
-    delay(1000);
+    delay(1500);
     bkg_clean();
     sprite_clean(0);
     LETTER_COUNT = 0;
     workers();
     print("ITkSi\0", 24, 48);
     print("BERIBERIe\0", 24, 64);
-    delay(1000);
+    delay(1500);
     sprite_clean(8);
     LETTER_COUNT = 8;
     damn_that_asakawa();
-    delay(1000);
+    delay(1500);
     sprite_clean(8);
     LETTER_COUNT = 8;
     print("NOBODYkS\0", 24, 48);
     print("ONiOUR\0", 24, 64);
     print("SIDEf\0", 24, 80);
-    delay(1000);
+    delay(1500);
     sprite_clean(8);
     LETTER_COUNT = 8;
     print("EXCEPTiOUR\0", 24, 48);
     print("OWNiSELVESe\0", 24, 64);
-    delay(1000);
+    delay(1500);
     sprite_clean(8);
     LETTER_COUNT = 8;
     print("WEiALL\0", 24, 48);
     print("SHOULDkVE\0", 24, 64);
     print("ACTED\0", 24, 80);
     print("TOGETHERl\0", 24, 96);
-    delay(1000);
+    delay(1500);
     sprite_clean(8);
     LETTER_COUNT = 8;
     print("THEREkDiBE\0", 24, 48);
     print("NOiONEiTO\0", 24, 64);
     print("WORK\0", 24, 80);
-    delay(1000);
+    delay(1500);
     sprite_clean(8);
     LETTER_COUNT= 8;
     print("IF\0", 24, 48);
     print("THEYiTOOK\0", 24, 64);
     print("USiALLl\0", 24, 80);
-    delay(1000);
+    delay(1500);
     sprite_clean(8);
     LETTER_COUNT = 8;
     print("LETkS\0", 24, 48);
     print("DOiIT\0", 24, 64);
     print("AGAINf\0", 24, 80);
-    delay(1000);
+    delay(1500);
     sprite_clean(8);
     LETTER_COUNT = 8;
     print("ONEiMORE\0", 24, 48);
