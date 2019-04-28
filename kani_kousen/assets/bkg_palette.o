@@ -1,0 +1,18 @@
+XL
+H 9 areas 2 global symbols
+M lcc27050
+S __initrleblock Ref0000
+A _CODE size 0 flags 0
+A _DATA size 8 flags 0
+S _bkg_palette Def0000
+A _OVERLAY size 0 flags 0
+A _ISEG size 0 flags 0
+A _BSEG size 0 flags 0
+A _XSEG size 0 flags 0
+A _GSINIT size 10 flags 0
+A _GSFINAL size 0 flags 0
+A _HOME size 0 flags 0
+T 00 00 21 00 00 CD 00 00 08 FF 7F B5 56 4A 29 00
+R 00 00 06 00 00 03 01 00 02 06 00 00
+T 0E 00 00 00
+R 00 00 06 00

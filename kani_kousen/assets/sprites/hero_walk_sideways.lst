@@ -1,14 +1,14 @@
                               1 ;--------------------------------------------------------
                               2 ; File Created by SDCC : FreeWare ANSI-C Compiler
-                              3 ; Version 2.3.1 Sun Apr 28 14:10:27 2019
+                              3 ; Version 2.3.1 Sun Apr 28 14:10:26 2019
                               4 
                               5 ;--------------------------------------------------------
-                              6 	.module lcc27370
+                              6 	.module lcc27170
                               7 	
                               8 ;--------------------------------------------------------
                               9 ; Public variables in this module
                              10 ;--------------------------------------------------------
-                             11 	.globl _deck
+                             11 	.globl _hero_walk_sideways
                              12 ;--------------------------------------------------------
                              13 ; special function registers
                              14 ;--------------------------------------------------------
@@ -19,8 +19,8 @@
                              19 ; internal ram data
                              20 ;--------------------------------------------------------
                              21 	.area _DATA
-   0000                      22 _deck::
-   0000                      23 	.ds 576
+   0000                      22 _hero_walk_sideways::
+   0000                      23 	.ds 128
                              24 ;--------------------------------------------------------
                              25 ; overlayable items in internal ram 
                              26 ;--------------------------------------------------------
@@ -43,50 +43,76 @@
                              43 	.area _GSINIT
                              44 	.area _GSFINAL
                              45 	.area _GSINIT
-                             46 ;	assets/bkgs/deck.c 25
-                             47 ;	assets/bkgs/deck.c 86
+                             46 ;	assets/sprites/hero_walk_sideways.c 26
+                             47 ;	assets/sprites/hero_walk_sideways.c 45
                              48 ;	genArrayInit
                              49 ; _saveRegsForCall: sendSetSize: 0 deInUse: 0 bcInUse: 0 deSending: 0
-   0000 21 00 00             50 	ld	hl,#_deck
+   0000 21 00 00             50 	ld	hl,#_hero_walk_sideways
    0003 CD 00 00             51 	call	__initrleblock
-   0006 81 00                52 	.db	-127,0x00
-   0008 81 00                53 	.db	-127,0x00
-   000A 81 00                54 	.db	-127,0x00
-   000C 03                   55 	.db	3
-   000D 00 00 00             56 	.db	0x00, 0x00, 0x00
-   0010 C0 02                57 	.db	-64,0x02
-   0012 A4 01                58 	.db	-92,0x01
-   0014 03                   59 	.db	3
-   0015 02 02 02             60 	.db	0x02, 0x02, 0x02
-   0018 DF 01                61 	.db	-33,0x01
-   001A 00                   62 	.db	0
-                             63 ;--------------------------------------------------------
-                             64 ; Home
-                             65 ;--------------------------------------------------------
-                             66 	.area _HOME
-                             67 	.area _CODE
-                             68 ;--------------------------------------------------------
-                             69 ; code
-                             70 ;--------------------------------------------------------
-                             71 	.area _CODE
-                             72 	.area _CODE
+   0006 FB 0F                52 	.db	-5,0x0F
+   0008 1B                   53 	.db	27
+   0009 00 0F 0F 0E 0F 0C    54 	.db	0x00, 0x0F, 0x0F, 0x0E, 0x0F, 0x0C, 0x0F, 0x04
+        0F 04
+   0011 07 07 00 0F 00 0E    55 	.db	0x07, 0x07, 0x00, 0x0F, 0x00, 0x0E, 0x01, 0x0E
+        01 0E
+   0019 01 0E 01 1C 1F 0C    56 	.db	0x01, 0x0E, 0x01, 0x1C, 0x1F, 0x0C, 0x0B, 0x0F
+        0B 0F
+   0021 00 0F 0F             57 	.db	0x00, 0x0F, 0x0F
+   0024 FB F0                58 	.db	-5,0xF0
+   0026 1B                   59 	.db	27
+   0027 00 20 F0 00 F0 10    60 	.db	0x00, 0x20, 0xF0, 0x00, 0xF0, 0x10, 0xF0, 0x00
+        F0 00
+   002F C0 E0 00 F0 00 F0    61 	.db	0xC0, 0xE0, 0x00, 0xF0, 0x00, 0xF0, 0x00, 0xF0
+        00 F0
+   0037 00 F0 00 F0 F0 F0    62 	.db	0x00, 0xF0, 0x00, 0xF0, 0xF0, 0xF0, 0x00, 0xF8
+        00 F8
+   003F F8 80 80             63 	.db	0xF8, 0x80, 0x80
+   0042 FB 0F                64 	.db	-5,0x0F
+   0044 1B                   65 	.db	27
+   0045 00 0F 0F 0E 0F 0C    66 	.db	0x00, 0x0F, 0x0F, 0x0E, 0x0F, 0x0C, 0x0F, 0x07
+        0F 07
+   004D 00 0F 00 0E 01 0E    67 	.db	0x00, 0x0F, 0x00, 0x0E, 0x01, 0x0E, 0x01, 0x0E
+        01 0E
+   0055 01 1C 1F 0C 0B 0F    68 	.db	0x01, 0x1C, 0x1F, 0x0C, 0x0B, 0x0F, 0x00, 0x0F
+        00 0F
+   005D 0F 00 00             69 	.db	0x0F, 0x00, 0x00
+   0060 FB F0                70 	.db	-5,0xF0
+   0062 1B                   71 	.db	27
+   0063 00 20 F0 00 F0 10    72 	.db	0x00, 0x20, 0xF0, 0x00, 0xF0, 0x10, 0xF0, 0x80
+        F0 80
+   006B 40 E0 00 F0 00 F0    73 	.db	0x40, 0xE0, 0x00, 0xF0, 0x00, 0xF0, 0x00, 0xF0
+        00 F0
+   0073 00 F0 F0 F0 00 F0    74 	.db	0x00, 0xF0, 0xF0, 0xF0, 0x00, 0xF0, 0x00, 0xF0
+        00 F0
+   007B 80 F8 F8             75 	.db	0x80, 0xF8, 0xF8
+   007E 00                   76 	.db	0
+                             77 ;--------------------------------------------------------
+                             78 ; Home
+                             79 ;--------------------------------------------------------
+                             80 	.area _HOME
+                             81 	.area _CODE
+                             82 ;--------------------------------------------------------
+                             83 ; code
+                             84 ;--------------------------------------------------------
+                             85 	.area _CODE
+                             86 	.area _CODE
 ASxxxx Assembler V01.75  (GameBoy Z80-like CPU), page 1.
 
 Symbol Table
 
     __initrleblock                     **** GX
-  1 _deck                              0000 GR
+  1 _hero_walk_sideways                0000 GR
 
 ASxxxx Assembler V01.75  (GameBoy Z80-like CPU), page 2.
 
 Area Table
 
    0 _CODE                              size    0   flags 0
-   1 _DATA                              size  240   flags 0
+   1 _DATA                              size   80   flags 0
    2 _OVERLAY                           size    0   flags 0
    3 _ISEG                              size    0   flags 0
    4 _BSEG                              size    0   flags 0
    5 _XSEG                              size    0   flags 0
-   6 _GSINIT                            size   1B   flags 0
+   6 _GSINIT                            size   7F   flags 0
    7 _GSFINAL                           size    0   flags 0
    8 _HOME                              size    0   flags 0

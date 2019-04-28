@@ -1,0 +1,216 @@
+                              1 ;--------------------------------------------------------
+                              2 ; File Created by SDCC : FreeWare ANSI-C Compiler
+                              3 ; Version 2.3.1 Sun Apr 28 14:10:26 2019
+                              4 
+                              5 ;--------------------------------------------------------
+                              6 	.module lcc26810
+                              7 	
+                              8 ;--------------------------------------------------------
+                              9 ; Public variables in this module
+                             10 ;--------------------------------------------------------
+                             11 	.globl _asakawa_air_shot
+                             12 ;--------------------------------------------------------
+                             13 ; special function registers
+                             14 ;--------------------------------------------------------
+                             15 ;--------------------------------------------------------
+                             16 ; special function bits 
+                             17 ;--------------------------------------------------------
+                             18 ;--------------------------------------------------------
+                             19 ; internal ram data
+                             20 ;--------------------------------------------------------
+                             21 	.area _DATA
+   0000                      22 _asakawa_air_shot::
+   0000                      23 	.ds 512
+                             24 ;--------------------------------------------------------
+                             25 ; overlayable items in internal ram 
+                             26 ;--------------------------------------------------------
+                             27 	.area _OVERLAY
+                             28 ;--------------------------------------------------------
+                             29 ; indirectly addressable internal ram data
+                             30 ;--------------------------------------------------------
+                             31 	.area _ISEG
+                             32 ;--------------------------------------------------------
+                             33 ; bit data
+                             34 ;--------------------------------------------------------
+                             35 	.area _BSEG
+                             36 ;--------------------------------------------------------
+                             37 ; external ram data
+                             38 ;--------------------------------------------------------
+                             39 	.area _XSEG
+                             40 ;--------------------------------------------------------
+                             41 ; global & static initialisations
+                             42 ;--------------------------------------------------------
+                             43 	.area _GSINIT
+                             44 	.area _GSFINAL
+                             45 	.area _GSINIT
+                             46 ;	assets/sprites/asakawa_air_shot.c 26
+                             47 ;	assets/sprites/asakawa_air_shot.c 93
+                             48 ;	genArrayInit
+                             49 ; _saveRegsForCall: sendSetSize: 0 deInUse: 0 bcInUse: 0 deSending: 0
+   0000 21 00 00             50 	ld	hl,#_asakawa_air_shot
+   0003 CD 00 00             51 	call	__initrleblock
+   0006 7F                   52 	.db	127
+   0007 03 03 07 07 07 04    53 	.db	0x03, 0x03, 0x07, 0x07, 0x07, 0x04, 0x07, 0x01
+        07 01
+   000F 07 00 03 00 03 00    54 	.db	0x07, 0x00, 0x03, 0x00, 0x03, 0x00, 0x00, 0x00
+        00 00
+   0017 00 07 00 07 00 07    55 	.db	0x00, 0x07, 0x00, 0x07, 0x00, 0x07, 0x00, 0x07
+        00 07
+   001F 0C 03 0C 03 00 03    56 	.db	0x0C, 0x03, 0x0C, 0x03, 0x00, 0x03, 0x07, 0x07
+        07 07
+   0027 FC FC FE FE FE 62    57 	.db	0xFC, 0xFC, 0xFE, 0xFE, 0xFE, 0x62, 0xFE, 0x08
+        FE 08
+   002F FE 00 FE 00 FC 00    58 	.db	0xFE, 0x00, 0xFE, 0x00, 0xFC, 0x00, 0xF0, 0xF0
+        F0 F0
+   0037 60 6E 00 FE 00 FE    59 	.db	0x60, 0x6E, 0x00, 0xFE, 0x00, 0xFE, 0x00, 0xFE
+        00 FE
+   003F 03 FC 03 FC 00 FC    60 	.db	0x03, 0xFC, 0x03, 0xFC, 0x00, 0xFC, 0xFE, 0xFE
+        FE FE
+   0047 03 03 07 07 07 04    61 	.db	0x03, 0x03, 0x07, 0x07, 0x07, 0x04, 0x07, 0x01
+        07 01
+   004F 07 00 03 00 03 00    62 	.db	0x07, 0x00, 0x03, 0x00, 0x03, 0x00, 0x00, 0x00
+        00 00
+   0057 00 07 00 07 00 07    63 	.db	0x00, 0x07, 0x00, 0x07, 0x00, 0x07, 0x00, 0x07
+        00 07
+   005F 0C 13 0C 13 00 13    64 	.db	0x0C, 0x13, 0x0C, 0x13, 0x00, 0x13, 0x07, 0x17
+        07 17
+   0067 FC FC FE FE FE 62    65 	.db	0xFC, 0xFC, 0xFE, 0xFE, 0xFE, 0x62, 0xFE, 0x08
+        FE 08
+   006F FE 00 FE 00 FC 00    66 	.db	0xFE, 0x00, 0xFE, 0x00, 0xFC, 0x00, 0xF0, 0xF0
+        F0 F0
+   0077 60 6E 00 FE 00 FE    67 	.db	0x60, 0x6E, 0x00, 0xFE, 0x00, 0xFE, 0x00, 0xFE
+        00 FE
+   007F 03 FC 03 FC 00 FC    68 	.db	0x03, 0xFC, 0x03, 0xFC, 0x00, 0xFC, 0xFE
+        FE
+   0086 7F                   69 	.db	127
+   0087 FE 03 03 07 07 07    70 	.db	0xFE, 0x03, 0x03, 0x07, 0x07, 0x07, 0x04, 0x07
+        04 07
+   008F 21 07 20 1B 20 1B    71 	.db	0x21, 0x07, 0x20, 0x1B, 0x20, 0x1B, 0x24, 0x00
+        24 00
+   0097 18 00 1F 00 1F 00    72 	.db	0x18, 0x00, 0x1F, 0x00, 0x1F, 0x00, 0x03, 0x00
+        03 00
+   009F 03 00 03 00 03 00    73 	.db	0x03, 0x00, 0x03, 0x00, 0x03, 0x00, 0x03, 0x07
+        03 07
+   00A7 07 FC FC FE FE FE    74 	.db	0x07, 0xFC, 0xFC, 0xFE, 0xFE, 0xFE, 0x62, 0xFE
+        62 FE
+   00AF 08 FE 00 FE 00 FC    75 	.db	0x08, 0xFE, 0x00, 0xFE, 0x00, 0xFC, 0x00, 0xF0
+        00 F0
+   00B7 F0 60 6E 00 FE 00    76 	.db	0xF0, 0x60, 0x6E, 0x00, 0xFE, 0x00, 0xFE, 0x00
+        FE 00
+   00BF FE 03 FC 03 FC 00    77 	.db	0xFE, 0x03, 0xFC, 0x03, 0xFC, 0x00, 0xFC, 0xFE
+        FC FE
+   00C7 FE 03 03 07 07 27    78 	.db	0xFE, 0x03, 0x03, 0x07, 0x07, 0x27, 0x04, 0x07
+        04 07
+   00CF 21 07 20 1B 20 1B    79 	.db	0x21, 0x07, 0x20, 0x1B, 0x20, 0x1B, 0x24, 0x00
+        24 00
+   00D7 18 00 1F 00 1F 00    80 	.db	0x18, 0x00, 0x1F, 0x00, 0x1F, 0x00, 0x03, 0x00
+        03 00
+   00DF 03 00 03 00 03 00    81 	.db	0x03, 0x00, 0x03, 0x00, 0x03, 0x00, 0x03, 0x07
+        03 07
+   00E7 07 FC FC FE FE FE    82 	.db	0x07, 0xFC, 0xFC, 0xFE, 0xFE, 0xFE, 0x62, 0xFE
+        62 FE
+   00EF 08 FE 00 FE 00 FC    83 	.db	0x08, 0xFE, 0x00, 0xFE, 0x00, 0xFC, 0x00, 0xF0
+        00 F0
+   00F7 F0 60 6E 00 FE 00    84 	.db	0xF0, 0x60, 0x6E, 0x00, 0xFE, 0x00, 0xFE, 0x00
+        FE 00
+   00FF FE 03 FC 03 FC 00    85 	.db	0xFE, 0x03, 0xFC, 0x03, 0xFC, 0x00, 0xFC
+        FC
+   0106 7F                   86 	.db	127
+   0107 FE FE 03 03 57 07    87 	.db	0xFE, 0xFE, 0x03, 0x03, 0x57, 0x07, 0x27, 0x04
+        27 04
+   010F 07 21 07 20 1B 20    88 	.db	0x07, 0x21, 0x07, 0x20, 0x1B, 0x20, 0x1B, 0x24
+        1B 24
+   0117 00 18 00 1F 00 1F    89 	.db	0x00, 0x18, 0x00, 0x1F, 0x00, 0x1F, 0x00, 0x03
+        00 03
+   011F 00 03 00 03 00 03    90 	.db	0x00, 0x03, 0x00, 0x03, 0x00, 0x03, 0x00, 0x03
+        00 03
+   0127 07 07 FC FC FE FE    91 	.db	0x07, 0x07, 0xFC, 0xFC, 0xFE, 0xFE, 0xFE, 0x62
+        FE 62
+   012F FE 08 FE 00 FE 00    92 	.db	0xFE, 0x08, 0xFE, 0x00, 0xFE, 0x00, 0xFC, 0x00
+        FC 00
+   0137 F0 F0 60 6E 00 FE    93 	.db	0xF0, 0xF0, 0x60, 0x6E, 0x00, 0xFE, 0x00, 0xFE
+        00 FE
+   013F 00 FE 03 FC 03 FC    94 	.db	0x00, 0xFE, 0x03, 0xFC, 0x03, 0xFC, 0x00, 0xFC
+        00 FC
+   0147 FE FE AB 03 57 07    95 	.db	0xFE, 0xFE, 0xAB, 0x03, 0x57, 0x07, 0x27, 0x04
+        27 04
+   014F 07 21 07 20 1B 20    96 	.db	0x07, 0x21, 0x07, 0x20, 0x1B, 0x20, 0x1B, 0x24
+        1B 24
+   0157 00 18 00 1F 00 1F    97 	.db	0x00, 0x18, 0x00, 0x1F, 0x00, 0x1F, 0x00, 0x03
+        00 03
+   015F 00 03 00 03 00 03    98 	.db	0x00, 0x03, 0x00, 0x03, 0x00, 0x03, 0x00, 0x03
+        00 03
+   0167 07 07 FC FC FE FE    99 	.db	0x07, 0x07, 0xFC, 0xFC, 0xFE, 0xFE, 0xFE, 0x62
+        FE 62
+   016F FE 08 FE 00 FE 00   100 	.db	0xFE, 0x08, 0xFE, 0x00, 0xFE, 0x00, 0xFC, 0x00
+        FC 00
+   0177 F0 F0 60 6E 00 FE   101 	.db	0xF0, 0xF0, 0x60, 0x6E, 0x00, 0xFE, 0x00, 0xFE
+        00 FE
+   017F 00 FE 03 FC 03 FC   102 	.db	0x00, 0xFE, 0x03, 0xFC, 0x03, 0xFC, 0x00
+        00
+   0186 7F                  103 	.db	127
+   0187 FC FE FE 03 03 07   104 	.db	0xFC, 0xFE, 0xFE, 0x03, 0x03, 0x07, 0x07, 0x07
+        07 07
+   018F 04 07 21 07 20 1B   105 	.db	0x04, 0x07, 0x21, 0x07, 0x20, 0x1B, 0x20, 0x1B
+        20 1B
+   0197 24 00 18 00 1F 00   106 	.db	0x24, 0x00, 0x18, 0x00, 0x1F, 0x00, 0x1F, 0x00
+        1F 00
+   019F 03 00 03 00 03 00   107 	.db	0x03, 0x00, 0x03, 0x00, 0x03, 0x00, 0x03, 0x00
+        03 00
+   01A7 03 07 07 FC FC FE   108 	.db	0x03, 0x07, 0x07, 0xFC, 0xFC, 0xFE, 0xFE, 0xFE
+        FE FE
+   01AF 62 FE 08 FE 00 FE   109 	.db	0x62, 0xFE, 0x08, 0xFE, 0x00, 0xFE, 0x00, 0xFC
+        00 FC
+   01B7 00 F0 F0 60 6E 00   110 	.db	0x00, 0xF0, 0xF0, 0x60, 0x6E, 0x00, 0xFE, 0x00
+        FE 00
+   01BF FE 00 FE 03 FC 03   111 	.db	0xFE, 0x00, 0xFE, 0x03, 0xFC, 0x03, 0xFC, 0x00
+        FC 00
+   01C7 FC FE FE 03 03 07   112 	.db	0xFC, 0xFE, 0xFE, 0x03, 0x03, 0x07, 0x07, 0x07
+        07 07
+   01CF 04 07 01 07 00 03   113 	.db	0x04, 0x07, 0x01, 0x07, 0x00, 0x03, 0x00, 0x03
+        00 03
+   01D7 00 00 00 00 07 00   114 	.db	0x00, 0x00, 0x00, 0x00, 0x07, 0x00, 0x07, 0x00
+        07 00
+   01DF 07 00 07 0C 13 0C   115 	.db	0x07, 0x00, 0x07, 0x0C, 0x13, 0x0C, 0x13, 0x00
+        13 00
+   01E7 13 07 17 FC FC FE   116 	.db	0x13, 0x07, 0x17, 0xFC, 0xFC, 0xFE, 0xFE, 0xFE
+        FE FE
+   01EF 62 FE 08 FE 00 FE   117 	.db	0x62, 0xFE, 0x08, 0xFE, 0x00, 0xFE, 0x00, 0xFC
+        00 FC
+   01F7 00 F0 F0 60 6E 00   118 	.db	0x00, 0xF0, 0xF0, 0x60, 0x6E, 0x00, 0xFE, 0x00
+        FE 00
+   01FF FE 00 FE 03 FC 03   119 	.db	0xFE, 0x00, 0xFE, 0x03, 0xFC, 0x03, 0xFC
+        FC
+   0206 04                  120 	.db	4
+   0207 00 FC FE FE         121 	.db	0x00, 0xFC, 0xFE, 0xFE
+   020B 00                  122 	.db	0
+                            123 ;--------------------------------------------------------
+                            124 ; Home
+                            125 ;--------------------------------------------------------
+                            126 	.area _HOME
+                            127 	.area _CODE
+                            128 ;--------------------------------------------------------
+                            129 ; code
+                            130 ;--------------------------------------------------------
+                            131 	.area _CODE
+                            132 	.area _CODE
+ASxxxx Assembler V01.75  (GameBoy Z80-like CPU), page 1.
+
+Symbol Table
+
+    __initrleblock                     **** GX
+  1 _asakawa_air_shot                  0000 GR
+
+ASxxxx Assembler V01.75  (GameBoy Z80-like CPU), page 2.
+
+Area Table
+
+   0 _CODE                              size    0   flags 0
+   1 _DATA                              size  200   flags 0
+   2 _OVERLAY                           size    0   flags 0
+   3 _ISEG                              size    0   flags 0
+   4 _BSEG                              size    0   flags 0
+   5 _XSEG                              size    0   flags 0
+   6 _GSINIT                            size  20C   flags 0
+   7 _GSFINAL                           size    0   flags 0
+   8 _HOME                              size    0   flags 0

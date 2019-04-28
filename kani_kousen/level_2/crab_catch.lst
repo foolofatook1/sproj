@@ -1,0 +1,838 @@
+                              1 ;--------------------------------------------------------
+                              2 ; File Created by SDCC : FreeWare ANSI-C Compiler
+                              3 ; Version 2.3.1 Sun Apr 28 14:10:27 2019
+                              4 
+                              5 ;--------------------------------------------------------
+                              6 	.module lcc27810
+                              7 	
+                              8 ;--------------------------------------------------------
+                              9 ; Public variables in this module
+                             10 ;--------------------------------------------------------
+                             11 	.globl _CRAB_HP
+                             12 	.globl _CRAB_CAUGHT
+                             13 	.globl _caught_crabs
+                             14 	.globl _crab
+                             15 	.globl _crab_catch_ctrl
+                             16 	.globl _crab_catch_setup
+                             17 ;--------------------------------------------------------
+                             18 ; special function registers
+                             19 ;--------------------------------------------------------
+                             20 ;--------------------------------------------------------
+                             21 ; special function bits 
+                             22 ;--------------------------------------------------------
+                             23 ;--------------------------------------------------------
+                             24 ; internal ram data
+                             25 ;--------------------------------------------------------
+                             26 	.area _DATA
+   0000                      27 _crab::
+   0000                      28 	.ds 1
+   0001                      29 _caught_crabs::
+   0001                      30 	.ds 1
+   0002                      31 _CRAB_CAUGHT::
+   0002                      32 	.ds 1
+   0003                      33 _CRAB_HP::
+   0003                      34 	.ds 1
+                             35 ;--------------------------------------------------------
+                             36 ; overlayable items in internal ram 
+                             37 ;--------------------------------------------------------
+                             38 	.area _OVERLAY
+                             39 ;--------------------------------------------------------
+                             40 ; indirectly addressable internal ram data
+                             41 ;--------------------------------------------------------
+                             42 	.area _ISEG
+                             43 ;--------------------------------------------------------
+                             44 ; bit data
+                             45 ;--------------------------------------------------------
+                             46 	.area _BSEG
+                             47 ;--------------------------------------------------------
+                             48 ; external ram data
+                             49 ;--------------------------------------------------------
+                             50 	.area _XSEG
+                             51 ;--------------------------------------------------------
+                             52 ; global & static initialisations
+                             53 ;--------------------------------------------------------
+                             54 	.area _GSINIT
+                             55 	.area _GSFINAL
+                             56 	.area _GSINIT
+                             57 ;	level_2/crab_catch.c 11
+                             58 ;	genAssign
+                             59 ;	AOP_HL for _crab
+   0000 21 00 00             60 	ld	hl,#_crab
+   0003 36 00                61 	ld	(hl),#0x00
+                             62 ;	level_2/crab_catch.c 12
+                             63 ;	genAssign
+                             64 ;	AOP_HL for _caught_crabs
+   0005 21 01 00             65 	ld	hl,#_caught_crabs
+   0008 36 00                66 	ld	(hl),#0x00
+                             67 ;	level_2/crab_catch.c 13
+                             68 ;	genAssign
+                             69 ;	AOP_HL for _CRAB_CAUGHT
+   000A 21 02 00             70 	ld	hl,#_CRAB_CAUGHT
+   000D 36 00                71 	ld	(hl),#0x00
+                             72 ;	level_2/crab_catch.c 14
+                             73 ;	genAssign
+                             74 ;	AOP_HL for _CRAB_HP
+   000F 21 03 00             75 	ld	hl,#_CRAB_HP
+   0012 36 05                76 	ld	(hl),#0x05
+                             77 ;--------------------------------------------------------
+                             78 ; Home
+                             79 ;--------------------------------------------------------
+                             80 	.area _HOME
+                             81 	.area _CODE
+                             82 ;--------------------------------------------------------
+                             83 ; code
+                             84 ;--------------------------------------------------------
+                             85 	.area _CODE
+                             86 ;	level_2/crab_catch.c 19
+                             87 ;	genLabel
+                             88 ;	genFunction
+                             89 ;	---------------------------------
+                             90 ; Function crab_catch_ctrl
+                             91 ; ---------------------------------
+   0000                      92 ___crab_catch_ctrl_start:
+   0000                      93 _crab_catch_ctrl:
+   0000 E8 FA                94 	lda	sp,-6(sp)
+                             95 ;	level_2/crab_catch.c 23
+                             96 ;	genAssign
+                             97 ;	AOP_HL for _ITEMS
+   0002 21 00 00             98 	ld	hl,#_ITEMS
+   0005 36 02                99 	ld	(hl),#0x02
+                            100 ;	level_2/crab_catch.c 24
+                            101 ;	genAssign
+                            102 ;	AOP_HL for _BATTLE_NUM
+   0007 21 00 00            103 	ld	hl,#_BATTLE_NUM
+   000A 36 01               104 	ld	(hl),#0x01
+                            105 ;	level_2/crab_catch.c 25
+                            106 ;	genAssign
+                            107 ;	AOP_HL for _BATTLE_CHOICE
+                            108 ;	AOP_HL for _STATE
+   000C 21 00 00            109 	ld	hl,#_BATTLE_CHOICE
+   000F 7E                  110 	ld	a,(hl)
+   0010 21 00 00            111 	ld	hl,#_STATE
+   0013 77                  112 	ld	(hl),a
+                            113 ;	level_2/crab_catch.c 37
+                            114 ;	genLabel
+   0014                     115 00124$:
+                            116 ;	genCmpLt
+                            117 ;	AOP_HL for _caught_crabs
+                            118 ;	AOP_HL for _crabs_to_catch
+   0014 21 01 00            119 	ld	hl,#_caught_crabs
+   0017 7E                  120 	ld	a,(hl)
+   0018 21 00 00            121 	ld	hl,#_crabs_to_catch
+   001B 96                  122 	sub	a,(hl)
+   001C D2 AB 01            123 	jp	nc,00126$
+                            124 ;	genCmpEq
+                            125 ;	AOP_HL for _STATE
+                            126 ;	AOP_HL for _DEAD
+                            127 ;	AOP_STK for _crab_catch_ctrl_sloc0_1_0
+                            128 ; genCmpEq: left 1, right 1, result 1
+   001F 21 00 00            129 	ld	hl,#_DEAD
+   0022 7E                  130 	ld	a,(hl)
+   0023 21 00 00            131 	ld	hl,#_STATE
+   0026 BE                  132 	cp	(hl)
+   0027 20 04               133 	jr	nz,00147$
+   0029 3E 01               134 	ld	a,#0x01
+   002B 18 01               135 	jr	00148$
+   002D                     136 00147$:
+   002D AF                  137 	xor	a,a
+   002E                     138 00148$:
+   002E F8 05               139 	lda	hl,5(sp)
+   0030 77                  140 	ld	(hl),a
+                            141 ;	genIfx
+                            142 ;	AOP_STK for _crab_catch_ctrl_sloc0_1_0
+   0031 AF                  143 	xor	a,a
+   0032 B6                  144 	or	a,(hl)
+   0033 C2 AB 01            145 	jp	nz,00126$
+                            146 ;	level_2/crab_catch.c 38
+                            147 ;	genCmpEq
+                            148 ;	AOP_HL for _option
+                            149 ;	AOP_HL for _GAME_OVER
+                            150 ; genCmpEq: left 1, right 1, result 1
+   0036 21 00 00            151 	ld	hl,#_GAME_OVER
+   0039 7E                  152 	ld	a,(hl)
+   003A 21 00 00            153 	ld	hl,#_option
+   003D BE                  154 	cp	(hl)
+   003E 20 04               155 	jr	nz,00149$
+   0040 3E 01               156 	ld	a,#0x01
+   0042 18 01               157 	jr	00150$
+   0044                     158 00149$:
+   0044 AF                  159 	xor	a,a
+   0045                     160 00150$:
+   0045 47                  161 	ld	b,a
+                            162 ;	genIfx
+   0046 AF                  163 	xor	a,a
+   0047 B0                  164 	or	a,b
+   0048 C2 AB 01            165 	jp	nz,00126$
+                            166 ;	level_2/crab_catch.c 40
+                            167 ;	genMinus
+                            168 ;	AOP_HL for _health_loss
+                            169 ;	AOP_HL for _HERO_HP
+   004B 3E 0A               170 	ld	a,#0x0A
+   004D 21 00 00            171 	ld	hl,#_health_loss
+   0050 96                  172 	sub	a,(hl)
+   0051 21 00 00            173 	ld	hl,#_HERO_HP
+   0054 77                  174 	ld	(hl),a
+                            175 ;	level_2/crab_catch.c 41
+                            176 ;	genCall
+                            177 ; _saveRegsForCall: sendSetSize: 0 deInUse: 0 bcInUse: 1 deSending: 0
+   0055 C5                  178 	push	bc
+   0056 CD C0 01            179 	call	_crab_catch_setup
+   0059 E1                  180 	pop	hl
+   005A 44                  181 	ld	b,h
+                            182 ;	level_2/crab_catch.c 42
+                            183 ;	genIpush
+                            184 ; _saveRegsForCall: sendSetSize: 0 deInUse: 0 bcInUse: 1 deSending: 0
+   005B C5                  185 	push	bc
+   005C 21 F4 01            186 	ld	hl,#0x01F4
+   005F E5                  187 	push	hl
+                            188 ;	genCall
+   0060 CD 00 00            189 	call	_delay
+   0063 E8 02               190 	lda	sp,2(sp)
+   0065 E1                  191 	pop	hl
+   0066 44                  192 	ld	b,h
+                            193 ;	level_2/crab_catch.c 43
+                            194 ;	genCall
+                            195 ; _saveRegsForCall: sendSetSize: 0 deInUse: 0 bcInUse: 1 deSending: 0
+   0067 C5                  196 	push	bc
+   0068 CD 00 00            197 	call	_battle_menu
+   006B E1                  198 	pop	hl
+   006C 44                  199 	ld	b,h
+                            200 ;	level_2/crab_catch.c 44
+                            201 ;	genLabel
+   006D                     202 00116$:
+                            203 ;	genIfx
+                            204 ;	AOP_STK for _crab_catch_ctrl_sloc0_1_0
+   006D AF                  205 	xor	a,a
+   006E F8 05               206 	lda	hl,5(sp)
+   0070 B6                  207 	or	a,(hl)
+   0071 C2 5C 01            208 	jp	nz,00118$
+                            209 ;	genCmpEq
+                            210 ;	AOP_HL for _STATE
+                            211 ;	AOP_HL for _BATTLE_WIN
+                            212 ; genCmpEq: left 1, right 1, result 1
+   0074 21 00 00            213 	ld	hl,#_BATTLE_WIN
+   0077 7E                  214 	ld	a,(hl)
+   0078 21 00 00            215 	ld	hl,#_STATE
+   007B BE                  216 	cp	(hl)
+   007C 20 04               217 	jr	nz,00151$
+   007E 3E 01               218 	ld	a,#0x01
+   0080 18 01               219 	jr	00152$
+   0082                     220 00151$:
+   0082 AF                  221 	xor	a,a
+   0083                     222 00152$:
+                            223 ;	genIfx
+   0083 B7                  224 	or	a,a
+   0084 C2 5C 01            225 	jp	nz,00118$
+                            226 ;	level_2/crab_catch.c 45
+                            227 ;	genIfx
+   0087 AF                  228 	xor	a,a
+   0088 B0                  229 	or	a,b
+   0089 C2 5C 01            230 	jp	nz,00118$
+                            231 ;	level_2/crab_catch.c 47
+                            232 ;	genCall
+                            233 ; _saveRegsForCall: sendSetSize: 0 deInUse: 0 bcInUse: 1 deSending: 0
+   008C C5                  234 	push	bc
+   008D CD 00 00            235 	call	_wait_vbl_done
+   0090 E1                  236 	pop	hl
+   0091 44                  237 	ld	b,h
+                            238 ;	level_2/crab_catch.c 48
+                            239 ;	genCall
+                            240 ; _saveRegsForCall: sendSetSize: 0 deInUse: 0 bcInUse: 1 deSending: 0
+   0092 C5                  241 	push	bc
+   0093 CD 00 00            242 	call	_battle_toggle_ctrl
+   0096 E1                  243 	pop	hl
+   0097 44                  244 	ld	b,h
+                            245 ;	level_2/crab_catch.c 49
+                            246 ;	genLabel
+   0098                     247 00108$:
+                            248 ;	genCmpEq
+                            249 ;	AOP_HL for _STATE
+                            250 ;	AOP_HL for _FIGHTING
+                            251 ; genCmpEq: left 1, right 1, result 1
+   0098 21 00 00            252 	ld	hl,#_FIGHTING
+   009B 7E                  253 	ld	a,(hl)
+   009C 21 00 00            254 	ld	hl,#_STATE
+   009F BE                  255 	cp	(hl)
+   00A0 20 04               256 	jr	nz,00153$
+   00A2 3E 01               257 	ld	a,#0x01
+   00A4 18 01               258 	jr	00154$
+   00A6                     259 00153$:
+   00A6 AF                  260 	xor	a,a
+   00A7                     261 00154$:
+                            262 ;	genIfx
+   00A7 B7                  263 	or	a,a
+   00A8 CA 48 01            264 	jp	z,00110$
+                            265 ;	genIfx
+   00AB AF                  266 	xor	a,a
+   00AC B0                  267 	or	a,b
+   00AD C2 48 01            268 	jp	nz,00110$
+                            269 ;	level_2/crab_catch.c 51
+                            270 ;	genIpush
+                            271 ; _saveRegsForCall: sendSetSize: 0 deInUse: 0 bcInUse: 1 deSending: 0
+   00B0 C5                  272 	push	bc
+                            273 ;	AOP_HL for _arrow_y
+   00B1 21 00 00            274 	ld	hl,#_arrow_y
+   00B4 7E                  275 	ld	a,(hl)
+   00B5 F5                  276 	push	af
+   00B6 33                  277 	inc	sp
+                            278 ;	genCall
+   00B7 CD 00 00            279 	call	_choice_handler
+   00BA E8 01               280 	lda	sp,1(sp)
+   00BC E1                  281 	pop	hl
+   00BD 44                  282 	ld	b,h
+                            283 ;	level_2/crab_catch.c 52
+                            284 ;	genIpush
+                            285 ; _saveRegsForCall: sendSetSize: 0 deInUse: 0 bcInUse: 1 deSending: 0
+   00BE C5                  286 	push	bc
+   00BF 21 03 00            287 	ld	hl,#_CRAB_HP
+   00C2 E5                  288 	push	hl
+                            289 ;	genIpush
+   00C3 21 00 00            290 	ld	hl,#_HERO_HP
+   00C6 E5                  291 	push	hl
+                            292 ;	genCall
+   00C7 CD 00 00            293 	call	_fight
+   00CA E8 04               294 	lda	sp,4(sp)
+   00CC E1                  295 	pop	hl
+   00CD 44                  296 	ld	b,h
+                            297 ;	level_2/crab_catch.c 53
+                            298 ;	genIpush
+                            299 ; _saveRegsForCall: sendSetSize: 0 deInUse: 0 bcInUse: 1 deSending: 0
+   00CE C5                  300 	push	bc
+   00CF 21 90 01            301 	ld	hl,#0x0190
+   00D2 E5                  302 	push	hl
+                            303 ;	genCall
+   00D3 CD 00 00            304 	call	_delay
+   00D6 E8 02               305 	lda	sp,2(sp)
+   00D8 E1                  306 	pop	hl
+   00D9 44                  307 	ld	b,h
+                            308 ;	level_2/crab_catch.c 54
+                            309 ;	genIfx
+   00DA AF                  310 	xor	a,a
+   00DB B0                  311 	or	a,b
+   00DC C2 48 01            312 	jp	nz,00110$
+                            313 ;	genCmpEq
+                            314 ;	AOP_HL for _STATE
+                            315 ;	AOP_HL for _DEAD
+                            316 ; genCmpEq: left 1, right 1, result 1
+   00DF 21 00 00            317 	ld	hl,#_DEAD
+   00E2 7E                  318 	ld	a,(hl)
+   00E3 21 00 00            319 	ld	hl,#_STATE
+   00E6 BE                  320 	cp	(hl)
+   00E7 20 04               321 	jr	nz,00155$
+   00E9 3E 01               322 	ld	a,#0x01
+   00EB 18 01               323 	jr	00156$
+   00ED                     324 00155$:
+   00ED AF                  325 	xor	a,a
+   00EE                     326 00156$:
+                            327 ;	genIfx
+   00EE B7                  328 	or	a,a
+   00EF C2 48 01            329 	jp	nz,00110$
+                            330 ;	level_2/crab_catch.c 56
+                            331 ;	genIfx
+   00F2 B7                  332 	or	a,a
+   00F3 C2 98 00            333 	jp	nz,00108$
+                            334 ;	genCmpEq
+                            335 ;	AOP_HL for _STATE
+                            336 ;	AOP_HL for _BATTLE_WIN
+                            337 ; genCmpEq: left 1, right 1, result 1
+   00F6 21 00 00            338 	ld	hl,#_BATTLE_WIN
+   00F9 7E                  339 	ld	a,(hl)
+   00FA 21 00 00            340 	ld	hl,#_STATE
+   00FD BE                  341 	cp	(hl)
+   00FE 20 04               342 	jr	nz,00157$
+   0100 3E 01               343 	ld	a,#0x01
+   0102 18 01               344 	jr	00158$
+   0104                     345 00157$:
+   0104 AF                  346 	xor	a,a
+   0105                     347 00158$:
+                            348 ;	genIfx
+   0105 B7                  349 	or	a,a
+   0106 C2 98 00            350 	jp	nz,00108$
+                            351 ;	level_2/crab_catch.c 58
+                            352 ;	genCall
+                            353 ; _saveRegsForCall: sendSetSize: 0 deInUse: 0 bcInUse: 1 deSending: 0
+   0109 C5                  354 	push	bc
+   010A CD 00 00            355 	call	_display_off
+   010D E1                  356 	pop	hl
+   010E 44                  357 	ld	b,h
+                            358 ;	level_2/crab_catch.c 59
+                            359 ;	genCall
+                            360 ; _saveRegsForCall: sendSetSize: 0 deInUse: 0 bcInUse: 1 deSending: 0
+   010F C5                  361 	push	bc
+   0110 CD 00 00            362 	call	_battle_menu
+   0113 E1                  363 	pop	hl
+   0114 44                  364 	ld	b,h
+                            365 ;	level_2/crab_catch.c 60
+                            366 ;	genAssign
+                            367 ;	AOP_HL for _BATTLE_CHOICE
+   0115 21 00 00            368 	ld	hl,#_BATTLE_CHOICE
+   0118 4E                  369 	ld	c,(hl)
+                            370 ;	genAssign
+                            371 ;	AOP_HL for _STATE
+   0119 21 00 00            372 	ld	hl,#_STATE
+   011C 71                  373 	ld	(hl),c
+                            374 ;	level_2/crab_catch.c 61
+                            375 ;	genAssign
+                            376 ;	AOP_HL for _choice
+   011D 21 00 00            377 	ld	hl,#_choice
+   0120 36 00               378 	ld	(hl),#0x00
+                            379 ;	level_2/crab_catch.c 62
+                            380 ;	genAssign
+                            381 ;	AOP_STK for _crab_catch_ctrl_sloc1_1_0
+   0122 F8 03               382 	lda	hl,3(sp)
+   0124 36 40               383 	ld	(hl),#0x40
+   0126 23                  384 	inc	hl
+   0127 36 FF               385 	ld	(hl),#0xFF
+                            386 ;	genAssign
+                            387 ;	AOP_STK for _crab_catch_ctrl_sloc2_1_0
+   0129 F8 01               388 	lda	hl,1(sp)
+   012B 36 40               389 	ld	(hl),#0x40
+   012D 23                  390 	inc	hl
+   012E 36 FF               391 	ld	(hl),#0xFF
+                            392 ;	genPointerGet
+                            393 ;	AOP_STK for _crab_catch_ctrl_sloc2_1_0
+                            394 ;	AOP_STK for _crab_catch_ctrl_sloc3_1_0
+   0130 2B                  395 	dec	hl
+   0131 5E                  396 	ld	e,(hl)
+   0132 23                  397 	inc	hl
+   0133 56                  398 	ld	d,(hl)
+   0134 1A                  399 	ld	a,(de)
+   0135 2B                  400 	dec	hl
+   0136 2B                  401 	dec	hl
+                            402 ;	genOr
+                            403 ;	AOP_STK for _crab_catch_ctrl_sloc3_1_0
+   0137 77                  404 	ld      (hl),a
+                            405 ; Removed redundent load
+   0138 F6 80               406 	or	a,#0x80
+                            407 ;	genAssign (pointer)
+                            408 ;	AOP_STK for _crab_catch_ctrl_sloc1_1_0
+   013A F8 03               409 	lda	hl,3(sp)
+   013C 5E                  410 	ld	e,(hl)
+   013D 23                  411 	inc	hl
+   013E 56                  412 	ld	d,(hl)
+   013F 12                  413 	ld	(de),a
+                            414 ;	level_2/crab_catch.c 63
+                            415 ;	genCall
+                            416 ; _saveRegsForCall: sendSetSize: 0 deInUse: 0 bcInUse: 1 deSending: 0
+   0140 C5                  417 	push	bc
+   0141 CD 00 00            418 	call	_battle_menu
+   0144 C1                  419 	pop	bc
+                            420 ;	genGoto
+   0145 C3 98 00            421 	jp	00108$
+                            422 ;	genLabel
+   0148                     423 00110$:
+                            424 ;	level_2/crab_catch.c 67
+                            425 ;	genIfx
+   0148 AF                  426 	xor	a,a
+   0149 B0                  427 	or	a,b
+   014A C2 5C 01            428 	jp	nz,00118$
+                            429 ;	genCmpEq
+                            430 ;	AOP_HL for _STATE
+                            431 ;	AOP_HL for _DEAD
+                            432 ; genCmpEq: left 1, right 1, result 0
+   014D 21 00 00            433 	ld	hl,#_DEAD
+   0150 7E                  434 	ld	a,(hl)
+   0151 21 00 00            435 	ld	hl,#_STATE
+   0154 BE                  436 	cp	(hl)
+   0155 20 02               437 	jr	nz,00159$
+   0157 18 03               438 	jr	00160$
+   0159                     439 00159$:
+   0159 C3 6D 00            440 	jp	00116$
+   015C                     441 00160$:
+                            442 ;	level_2/crab_catch.c 68
+                            443 ;	genLabel
+   015C                     444 00118$:
+                            445 ;	level_2/crab_catch.c 70
+                            446 ;	genCmpEq
+                            447 ;	AOP_HL for _STATE
+                            448 ;	AOP_HL for _BATTLE_WIN
+                            449 ; genCmpEq: left 1, right 1, result 0
+   015C 21 00 00            450 	ld	hl,#_BATTLE_WIN
+   015F 7E                  451 	ld	a,(hl)
+   0160 21 00 00            452 	ld	hl,#_STATE
+   0163 BE                  453 	cp	(hl)
+   0164 20 02               454 	jr	nz,00161$
+   0166 18 03               455 	jr	00162$
+   0168                     456 00161$:
+   0168 C3 14 00            457 	jp	00124$
+   016B                     458 00162$:
+                            459 ;	genIfx
+   016B AF                  460 	xor	a,a
+   016C B0                  461 	or	a,b
+   016D C2 14 00            462 	jp	nz,00124$
+                            463 ;	level_2/crab_catch.c 72
+                            464 ;	genCall
+                            465 ; _saveRegsForCall: sendSetSize: 0 deInUse: 0 bcInUse: 0 deSending: 0
+   0170 CD 00 00            466 	call	_clear_screen
+                            467 ;	level_2/crab_catch.c 73
+                            468 ;	genIpush
+                            469 ; _saveRegsForCall: sendSetSize: 0 deInUse: 0 bcInUse: 0 deSending: 0
+   0173 3E 00               470 	ld	a,#0x00
+   0175 F5                  471 	push	af
+   0176 33                  472 	inc	sp
+                            473 ;	genCall
+   0177 CD 00 00            474 	call	_sprite_clean
+   017A E8 01               475 	lda	sp,1(sp)
+                            476 ;	level_2/crab_catch.c 74
+                            477 ;	genAssign
+                            478 ;	AOP_HL for _LETTER_COUNT
+   017C 21 00 00            479 	ld	hl,#_LETTER_COUNT
+   017F 36 00               480 	ld	(hl),#0x00
+                            481 ;	level_2/crab_catch.c 75
+                            482 ;	genIpush
+                            483 ; _saveRegsForCall: sendSetSize: 0 deInUse: 0 bcInUse: 0 deSending: 0
+   0181 21 38 50            484 	ld	hl,#0x5038
+   0184 E5                  485 	push	hl
+                            486 ;	genIpush
+   0185 21 B7 01            487 	ld	hl,#__str_0
+   0188 E5                  488 	push	hl
+                            489 ;	genCall
+   0189 CD 00 00            490 	call	_print
+   018C E8 04               491 	lda	sp,4(sp)
+                            492 ;	level_2/crab_catch.c 76
+                            493 ;	genIpush
+                            494 ; _saveRegsForCall: sendSetSize: 0 deInUse: 0 bcInUse: 0 deSending: 0
+   018E 21 F4 01            495 	ld	hl,#0x01F4
+   0191 E5                  496 	push	hl
+                            497 ;	genCall
+   0192 CD 00 00            498 	call	_delay
+   0195 E8 02               499 	lda	sp,2(sp)
+                            500 ;	level_2/crab_catch.c 77
+                            501 ;	genAssign
+                            502 ;	AOP_HL for _CRAB_CAUGHT
+   0197 21 02 00            503 	ld	hl,#_CRAB_CAUGHT
+   019A 36 00               504 	ld	(hl),#0x00
+                            505 ;	level_2/crab_catch.c 78
+                            506 ;	genPlus
+                            507 ;	AOP_HL for _caught_crabs
+                            508 ;	genPlusIncr
+   019C 21 01 00            509 	ld	hl,#_caught_crabs
+   019F 34                  510 	inc	(hl)
+                            511 ;	level_2/crab_catch.c 79
+                            512 ;	genAssign
+                            513 ;	AOP_HL for _BATTLE_CHOICE
+                            514 ;	AOP_HL for _STATE
+   01A0 21 00 00            515 	ld	hl,#_BATTLE_CHOICE
+   01A3 7E                  516 	ld	a,(hl)
+   01A4 21 00 00            517 	ld	hl,#_STATE
+   01A7 77                  518 	ld	(hl),a
+                            519 ;	genGoto
+   01A8 C3 14 00            520 	jp	00124$
+                            521 ;	genLabel
+   01AB                     522 00126$:
+                            523 ;	level_2/crab_catch.c 93
+                            524 ;	genIpush
+                            525 ; _saveRegsForCall: sendSetSize: 0 deInUse: 0 bcInUse: 0 deSending: 0
+   01AB 21 E8 03            526 	ld	hl,#0x03E8
+   01AE E5                  527 	push	hl
+                            528 ;	genCall
+   01AF CD 00 00            529 	call	_delay
+   01B2 E8 02               530 	lda	sp,2(sp)
+                            531 ;	genLabel
+   01B4                     532 00127$:
+                            533 ;	genEndFunction
+   01B4 E8 06               534 	lda	sp,6(sp)
+   01B6 C9                  535 	ret
+   01B7                     536 ___crab_catch_ctrl_end:
+   01B7                     537 __str_0:
+   01B7 59 4F 55 69 57 49   538 	.ascii "YOUiWINl"
+        4E 6C
+   01BF 00                  539 	.db 0x00
+                            540 ;	level_2/crab_catch.c 96
+                            541 ;	genLabel
+                            542 ;	genFunction
+                            543 ;	---------------------------------
+                            544 ; Function crab_catch_setup
+                            545 ; ---------------------------------
+   01C0                     546 ___crab_catch_setup_start:
+   01C0                     547 _crab_catch_setup:
+                            548 	
+                            549 ;	level_2/crab_catch.c 98
+                            550 ;	genAssign
+   01C0 01 04 FF            551 	ld	bc,#0xFF04
+                            552 ;	genPointerGet
+   01C3 0A                  553 	ld	a,(bc)
+   01C4 4F                  554 	ld	c,a
+                            555 ;	genCast
+                            556 ;	AOP_HL for _seed
+   01C5 21 00 00            557 	ld	hl,#_seed
+   01C8 71                  558 	ld	(hl),c
+   01C9 23                  559 	inc	hl
+   01CA 36 00               560 	ld	(hl),#0x00
+                            561 ;	level_2/crab_catch.c 99
+                            562 ;	genAssign
+   01CC 01 04 FF            563 	ld	bc,#0xFF04
+                            564 ;	genPointerGet
+   01CF 0A                  565 	ld	a,(bc)
+   01D0 4F                  566 	ld	c,a
+                            567 ;	genCast
+                            568 ; Removed redundent load
+   01D1 06 00               569 	ld	b,#0x00
+                            570 ;	genLeftShift
+   01D3 41                  571 	ld	b,c
+   01D4 0E 00               572 	ld	c,#0x00
+                            573 ;	genOr
+                            574 ;	AOP_HL for _seed
+   01D6 2B                  575 	dec	hl
+   01D7 7E                  576 	ld	a,(hl)
+   01D8 B1                  577 	or	a,c
+   01D9 22                  578 	ld	(hl+),a
+   01DA 7E                  579 	ld	a,(hl)
+   01DB B0                  580 	or	a,b
+                            581 ;	level_2/crab_catch.c 100
+                            582 ;	genIpush
+                            583 ; _saveRegsForCall: sendSetSize: 0 deInUse: 0 bcInUse: 0 deSending: 0
+                            584 ;	AOP_HL for _seed
+   01DC 32                  585 	ld      (hl-),a
+   01DD 2A                  586 	ld	a,(hl+)
+   01DE 66                  587 	ld	h,(hl)
+   01DF 6F                  588 	ld	l,a
+   01E0 E5                  589 	push	hl
+                            590 ;	genCall
+   01E1 CD 00 00            591 	call	_initarand
+   01E4 E8 02               592 	lda	sp,2(sp)
+                            593 ;	level_2/crab_catch.c 103
+                            594 ;	genCall
+                            595 ; _saveRegsForCall: sendSetSize: 0 deInUse: 0 bcInUse: 0 deSending: 0
+   01E6 CD 00 00            596 	call	_rand
+   01E9 4B                  597 	ld	c,e
+                            598 ;	genAnd
+                            599 ;	AOP_HL for _crab
+   01EA 79                  600 	ld	a,c
+   01EB E6 01               601 	and	a,#0x01
+   01ED 21 00 00            602 	ld	hl,#_crab
+                            603 ;	level_2/crab_catch.c 106
+                            604 ;	genCmpEq
+                            605 ;	AOP_HL for _crab
+                            606 ; genCmpEq: left 1, right 1, result 0
+   01F0 77                  607 	ld      (hl),a
+                            608 ; Removed redundent load
+   01F1 B7                  609 	or	a,a
+   01F2 C2 37 02            610 	jp	nz,00102$
+   01F5 18 03               611 	jr	00110$
+   01F7                     612 00109$:
+   01F7 C3 37 02            613 	jp	00102$
+   01FA                     614 00110$:
+                            615 ;	level_2/crab_catch.c 108
+                            616 ;	genIpush
+                            617 ; _saveRegsForCall: sendSetSize: 0 deInUse: 0 bcInUse: 0 deSending: 0
+   01FA 3E 00               618 	ld	a,#0x00
+   01FC F5                  619 	push	af
+   01FD 33                  620 	inc	sp
+                            621 ;	genCall
+   01FE CD 00 00            622 	call	_sprite_clean
+   0201 E8 01               623 	lda	sp,1(sp)
+                            624 ;	level_2/crab_catch.c 109
+                            625 ;	genAssign
+                            626 ;	AOP_HL for _LETTER_COUNT
+   0203 21 00 00            627 	ld	hl,#_LETTER_COUNT
+   0206 36 00               628 	ld	(hl),#0x00
+                            629 ;	level_2/crab_catch.c 110
+                            630 ;	genCall
+                            631 ; _saveRegsForCall: sendSetSize: 0 deInUse: 0 bcInUse: 0 deSending: 0
+   0208 CD 00 00            632 	call	_clear_screen
+                            633 ;	level_2/crab_catch.c 111
+                            634 ;	genIpush
+                            635 ; _saveRegsForCall: sendSetSize: 0 deInUse: 0 bcInUse: 0 deSending: 0
+   020B 21 38 50            636 	ld	hl,#0x5038
+   020E E5                  637 	push	hl
+                            638 ;	genIpush
+   020F 21 90 02            639 	ld	hl,#__str_1
+   0212 E5                  640 	push	hl
+                            641 ;	genCall
+   0213 CD 00 00            642 	call	_print
+   0216 E8 04               643 	lda	sp,4(sp)
+                            644 ;	level_2/crab_catch.c 119
+                            645 ;	genIpush
+                            646 ; _saveRegsForCall: sendSetSize: 0 deInUse: 0 bcInUse: 0 deSending: 0
+   0218 21 00 00            647 	ld	hl,#_norm_crab
+   021B E5                  648 	push	hl
+                            649 ;	genIpush
+   021C 3E 08               650 	ld	a,#0x08
+   021E F5                  651 	push	af
+   021F 33                  652 	inc	sp
+                            653 ;	genIpush
+   0220 21 00 00            654 	ld	hl,#_hero_back_idle
+   0223 E5                  655 	push	hl
+                            656 ;	genIpush
+   0224 3E 08               657 	ld	a,#0x08
+   0226 F5                  658 	push	af
+   0227 33                  659 	inc	sp
+                            660 ;	genCall
+   0228 CD 00 00            661 	call	_sprite_setup
+   022B E8 06               662 	lda	sp,6(sp)
+                            663 ;	level_2/crab_catch.c 120
+                            664 ;	genAssign
+                            665 ;	AOP_HL for _CRAB_HP
+   022D 21 03 00            666 	ld	hl,#_CRAB_HP
+   0230 36 05               667 	ld	(hl),#0x05
+                            668 ;	level_2/crab_catch.c 121
+                            669 ;	genAssign
+                            670 ;	AOP_HL for _ENEMY
+   0232 21 00 00            671 	ld	hl,#_ENEMY
+   0235 36 01               672 	ld	(hl),#0x01
+                            673 ;	genLabel
+   0237                     674 00102$:
+                            675 ;	level_2/crab_catch.c 124
+                            676 ;	genCmpEq
+                            677 ;	AOP_HL for _crab
+                            678 ; genCmpEq: left 1, right 1, result 0
+   0237 21 00 00            679 	ld	hl,#_crab
+   023A 7E                  680 	ld	a,(hl)
+   023B FE 01               681 	cp	a,#0x01
+   023D C2 8F 02            682 	jp	nz,00105$
+   0240 18 03               683 	jr	00112$
+   0242                     684 00111$:
+   0242 C3 8F 02            685 	jp	00105$
+   0245                     686 00112$:
+                            687 ;	level_2/crab_catch.c 126
+                            688 ;	genIpush
+                            689 ; _saveRegsForCall: sendSetSize: 0 deInUse: 0 bcInUse: 0 deSending: 0
+   0245 3E 00               690 	ld	a,#0x00
+   0247 F5                  691 	push	af
+   0248 33                  692 	inc	sp
+                            693 ;	genCall
+   0249 CD 00 00            694 	call	_sprite_clean
+   024C E8 01               695 	lda	sp,1(sp)
+                            696 ;	level_2/crab_catch.c 127
+                            697 ;	genAssign
+                            698 ;	AOP_HL for _LETTER_COUNT
+   024E 21 00 00            699 	ld	hl,#_LETTER_COUNT
+   0251 36 00               700 	ld	(hl),#0x00
+                            701 ;	level_2/crab_catch.c 128
+                            702 ;	genCall
+                            703 ; _saveRegsForCall: sendSetSize: 0 deInUse: 0 bcInUse: 0 deSending: 0
+   0253 CD 00 00            704 	call	_clear_screen
+                            705 ;	level_2/crab_catch.c 129
+                            706 ;	genIpush
+                            707 ; _saveRegsForCall: sendSetSize: 0 deInUse: 0 bcInUse: 0 deSending: 0
+   0256 21 38 50            708 	ld	hl,#0x5038
+   0259 E5                  709 	push	hl
+                            710 ;	genIpush
+   025A 21 98 02            711 	ld	hl,#__str_2
+   025D E5                  712 	push	hl
+                            713 ;	genCall
+   025E CD 00 00            714 	call	_print
+   0261 E8 04               715 	lda	sp,4(sp)
+                            716 ;	level_2/crab_catch.c 130
+                            717 ;	genIpush
+                            718 ; _saveRegsForCall: sendSetSize: 0 deInUse: 0 bcInUse: 0 deSending: 0
+   0263 21 3C 60            719 	ld	hl,#0x603C
+   0266 E5                  720 	push	hl
+                            721 ;	genIpush
+   0267 21 9F 02            722 	ld	hl,#__str_3
+   026A E5                  723 	push	hl
+                            724 ;	genCall
+   026B CD 00 00            725 	call	_print
+   026E E8 04               726 	lda	sp,4(sp)
+                            727 ;	level_2/crab_catch.c 138
+                            728 ;	genIpush
+                            729 ; _saveRegsForCall: sendSetSize: 0 deInUse: 0 bcInUse: 0 deSending: 0
+   0270 21 00 00            730 	ld	hl,#_king_crab
+   0273 E5                  731 	push	hl
+                            732 ;	genIpush
+   0274 3E 08               733 	ld	a,#0x08
+   0276 F5                  734 	push	af
+   0277 33                  735 	inc	sp
+                            736 ;	genIpush
+   0278 21 00 00            737 	ld	hl,#_hero_back_idle
+   027B E5                  738 	push	hl
+                            739 ;	genIpush
+   027C 3E 08               740 	ld	a,#0x08
+   027E F5                  741 	push	af
+   027F 33                  742 	inc	sp
+                            743 ;	genCall
+   0280 CD 00 00            744 	call	_sprite_setup
+   0283 E8 06               745 	lda	sp,6(sp)
+                            746 ;	level_2/crab_catch.c 139
+                            747 ;	genAssign
+                            748 ;	AOP_HL for _CRAB_HP
+   0285 21 03 00            749 	ld	hl,#_CRAB_HP
+   0288 36 0A               750 	ld	(hl),#0x0A
+                            751 ;	level_2/crab_catch.c 140
+                            752 ;	genAssign
+                            753 ;	AOP_HL for _ENEMY
+   028A 21 00 00            754 	ld	hl,#_ENEMY
+   028D 36 02               755 	ld	(hl),#0x02
+                            756 ;	genLabel
+   028F                     757 00105$:
+                            758 ;	genEndFunction
+                            759 	
+   028F C9                  760 	ret
+   0290                     761 ___crab_catch_setup_end:
+   0290                     762 __str_1:
+   0290 41 69 43 52 41 42   763 	.ascii "AiCRABl"
+        6C
+   0297 00                  764 	.db 0x00
+   0298                     765 __str_2:
+   0298 41 69 4B 49 4E 47   766 	.ascii "AiKING"
+   029E 00                  767 	.db 0x00
+   029F                     768 __str_3:
+   029F 43 52 41 42 6C      769 	.ascii "CRABl"
+   02A4 00                  770 	.db 0x00
+                            771 	.area _CODE
+ASxxxx Assembler V01.75  (GameBoy Z80-like CPU), page 1.
+
+Symbol Table
+
+    _BATTLE_CHOICE                     **** GX
+    _BATTLE_NUM                        **** GX
+    _BATTLE_WIN                        **** GX
+  1 _CRAB_CAUGHT                       0002 GR
+  1 _CRAB_HP                           0003 GR
+    _DEAD                              **** GX
+    _ENEMY                             **** GX
+    _FIGHTING                          **** GX
+    _GAME_OVER                         **** GX
+    _HERO_HP                           **** GX
+    _ITEMS                             **** GX
+    _LETTER_COUNT                      **** GX
+    _STATE                             **** GX
+  0 ___crab_catch_ctrl_end             01B7 R
+  0 ___crab_catch_ctrl_start           0000 R
+  0 ___crab_catch_setup_end            0290 R
+  0 ___crab_catch_setup_start          01C0 R
+  0 __str_0                            01B7 R
+  0 __str_1                            0290 R
+  0 __str_2                            0298 R
+  0 __str_3                            029F R
+    _arrow_y                           **** GX
+    _battle_menu                       **** GX
+    _battle_toggle_ctrl                **** GX
+  1 _caught_crabs                      0001 GR
+    _choice                            **** GX
+    _choice_handler                    **** GX
+    _clear_screen                      **** GX
+  1 _crab                              0000 GR
+  0 _crab_catch_ctrl                   0000 GR
+  0 _crab_catch_setup                  01C0 GR
+    _crabs_to_catch                    **** GX
+    _delay                             **** GX
+    _display_off                       **** GX
+    _fight                             **** GX
+    _health_loss                       **** GX
+    _hero_back_idle                    **** GX
+    _initarand                         **** GX
+    _king_crab                         **** GX
+    _norm_crab                         **** GX
+    _option                            **** GX
+    _print                             **** GX
+    _rand                              **** GX
+    _seed                              **** GX
+    _sprite_clean                      **** GX
+    _sprite_setup                      **** GX
+    _wait_vbl_done                     **** GX
+
+ASxxxx Assembler V01.75  (GameBoy Z80-like CPU), page 2.
+
+Area Table
+
+   0 _CODE                              size  2A5   flags 0
+   1 _DATA                              size    4   flags 0
+   2 _OVERLAY                           size    0   flags 0
+   3 _ISEG                              size    0   flags 0
+   4 _BSEG                              size    0   flags 0
+   5 _XSEG                              size    0   flags 0
+   6 _GSINIT                            size   14   flags 0
+   7 _GSFINAL                           size    0   flags 0
+   8 _HOME                              size    0   flags 0

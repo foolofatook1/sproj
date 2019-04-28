@@ -1,0 +1,364 @@
+                              1 ;--------------------------------------------------------
+                              2 ; File Created by SDCC : FreeWare ANSI-C Compiler
+                              3 ; Version 2.3.1 Sun Apr 28 14:10:27 2019
+                              4 
+                              5 ;--------------------------------------------------------
+                              6 	.module lcc27890
+                              7 	
+                              8 ;--------------------------------------------------------
+                              9 ; Public variables in this module
+                             10 ;--------------------------------------------------------
+                             11 	.globl _ending
+                             12 ;--------------------------------------------------------
+                             13 ; special function registers
+                             14 ;--------------------------------------------------------
+                             15 ;--------------------------------------------------------
+                             16 ; special function bits 
+                             17 ;--------------------------------------------------------
+                             18 ;--------------------------------------------------------
+                             19 ; internal ram data
+                             20 ;--------------------------------------------------------
+                             21 	.area _DATA
+                             22 ;--------------------------------------------------------
+                             23 ; overlayable items in internal ram 
+                             24 ;--------------------------------------------------------
+                             25 	.area _OVERLAY
+                             26 ;--------------------------------------------------------
+                             27 ; indirectly addressable internal ram data
+                             28 ;--------------------------------------------------------
+                             29 	.area _ISEG
+                             30 ;--------------------------------------------------------
+                             31 ; bit data
+                             32 ;--------------------------------------------------------
+                             33 	.area _BSEG
+                             34 ;--------------------------------------------------------
+                             35 ; external ram data
+                             36 ;--------------------------------------------------------
+                             37 	.area _XSEG
+                             38 ;--------------------------------------------------------
+                             39 ; global & static initialisations
+                             40 ;--------------------------------------------------------
+                             41 	.area _GSINIT
+                             42 	.area _GSFINAL
+                             43 	.area _GSINIT
+                             44 ;--------------------------------------------------------
+                             45 ; Home
+                             46 ;--------------------------------------------------------
+                             47 	.area _HOME
+                             48 	.area _CODE
+                             49 ;--------------------------------------------------------
+                             50 ; code
+                             51 ;--------------------------------------------------------
+                             52 	.area _CODE
+                             53 ;	end/end.c 8
+                             54 ;	genLabel
+                             55 ;	genFunction
+                             56 ;	---------------------------------
+                             57 ; Function ending
+                             58 ; ---------------------------------
+   0000                      59 ___ending_start:
+   0000                      60 _ending:
+                             61 	
+                             62 ;	end/end.c 10
+                             63 ;	genIpush
+                             64 ; _saveRegsForCall: sendSetSize: 0 deInUse: 0 bcInUse: 0 deSending: 0
+   0000 3E 00                65 	ld	a,#0x00
+   0002 F5                   66 	push	af
+   0003 33                   67 	inc	sp
+                             68 ;	genCall
+   0004 CD 00 00             69 	call	_sprite_clean
+   0007 E8 01                70 	lda	sp,1(sp)
+                             71 ;	end/end.c 11
+                             72 ;	genAssign
+                             73 ;	AOP_HL for _LETTER_COUNT
+   0009 21 00 00             74 	ld	hl,#_LETTER_COUNT
+   000C 36 00                75 	ld	(hl),#0x00
+                             76 ;	end/end.c 12
+                             77 ;	genCall
+                             78 ; _saveRegsForCall: sendSetSize: 0 deInUse: 0 bcInUse: 0 deSending: 0
+   000E CD 00 00             79 	call	_bkg_clean
+                             80 ;	end/end.c 13
+                             81 ;	genIpush
+                             82 ; _saveRegsForCall: sendSetSize: 0 deInUse: 0 bcInUse: 0 deSending: 0
+   0011 21 F4 01             83 	ld	hl,#0x01F4
+   0014 E5                   84 	push	hl
+                             85 ;	genCall
+   0015 CD 00 00             86 	call	_delay
+   0018 E8 02                87 	lda	sp,2(sp)
+                             88 ;	end/end.c 14
+                             89 ;	genAssign
+                             90 ;	AOP_HL for _talking
+   001A 21 00 00             91 	ld	hl,#_talking
+   001D 36 01                92 	ld	(hl),#0x01
+                             93 ;	end/end.c 15
+                             94 ;	genIpush
+                             95 ; _saveRegsForCall: sendSetSize: 0 deInUse: 0 bcInUse: 0 deSending: 0
+   001F 21 18 20             96 	ld	hl,#0x2018
+   0022 E5                   97 	push	hl
+                             98 ;	genIpush
+   0023 21 F5 00             99 	ld	hl,#__str_0
+   0026 E5                  100 	push	hl
+                            101 ;	genCall
+   0027 CD 00 00            102 	call	_print
+   002A E8 04               103 	lda	sp,4(sp)
+                            104 ;	end/end.c 16
+                            105 ;	genLabel
+   002C                     106 00105$:
+                            107 ;	genIfx
+                            108 ;	AOP_HL for _talking
+   002C AF                  109 	xor	a,a
+   002D 21 00 00            110 	ld	hl,#_talking
+   0030 B6                  111 	or	a,(hl)
+   0031 CA F4 00            112 	jp	z,00108$
+                            113 ;	end/end.c 18
+                            114 ;	genCall
+                            115 ; _saveRegsForCall: sendSetSize: 0 deInUse: 0 bcInUse: 0 deSending: 0
+   0034 CD 00 00            116 	call	_joypad
+   0037 4B                  117 	ld	c,e
+                            118 ;	genAnd
+   0038 79                  119 	ld	a,c
+   0039 E6 10               120 	and	a,#0x10
+   003B 20 03               121 	jr	nz,00114$
+   003D C3 2C 00            122 	jp	00105$
+   0040                     123 00114$:
+                            124 ;	end/end.c 20
+                            125 ;	genPlus
+                            126 ;	AOP_HL for _talking
+                            127 ;	genPlusIncr
+   0040 21 00 00            128 	ld	hl,#_talking
+   0043 34                  129 	inc	(hl)
+                            130 ;	end/end.c 21
+                            131 ;	genIpush
+                            132 ; _saveRegsForCall: sendSetSize: 0 deInUse: 0 bcInUse: 0 deSending: 0
+   0044 21 C8 00            133 	ld	hl,#0x00C8
+   0047 E5                  134 	push	hl
+                            135 ;	genCall
+   0048 CD 00 00            136 	call	_delay
+   004B E8 02               137 	lda	sp,2(sp)
+                            138 ;	end/end.c 22
+                            139 ;	genCmpEq
+                            140 ;	AOP_HL for _talking
+                            141 ; genCmpEq: left 1, right 1, result 0
+   004D 21 00 00            142 	ld	hl,#_talking
+   0050 7E                  143 	ld	a,(hl)
+   0051 FE 02               144 	cp	a,#0x02
+   0053 C2 76 00            145 	jp	nz,00102$
+   0056 18 03               146 	jr	00116$
+   0058                     147 00115$:
+   0058 C3 76 00            148 	jp	00102$
+   005B                     149 00116$:
+                            150 ;	end/end.c 24
+                            151 ;	genIpush
+                            152 ; _saveRegsForCall: sendSetSize: 0 deInUse: 0 bcInUse: 0 deSending: 0
+   005B 3E 00               153 	ld	a,#0x00
+   005D F5                  154 	push	af
+   005E 33                  155 	inc	sp
+                            156 ;	genCall
+   005F CD 00 00            157 	call	_sprite_clean
+   0062 E8 01               158 	lda	sp,1(sp)
+                            159 ;	end/end.c 25
+                            160 ;	genAssign
+                            161 ;	AOP_HL for _LETTER_COUNT
+   0064 21 00 00            162 	ld	hl,#_LETTER_COUNT
+   0067 36 00               163 	ld	(hl),#0x00
+                            164 ;	end/end.c 26
+                            165 ;	genIpush
+                            166 ; _saveRegsForCall: sendSetSize: 0 deInUse: 0 bcInUse: 0 deSending: 0
+   0069 21 18 20            167 	ld	hl,#0x2018
+   006C E5                  168 	push	hl
+                            169 ;	genIpush
+   006D 21 18 01            170 	ld	hl,#__str_1
+   0070 E5                  171 	push	hl
+                            172 ;	genCall
+   0071 CD 00 00            173 	call	_print
+   0074 E8 04               174 	lda	sp,4(sp)
+                            175 ;	genLabel
+   0076                     176 00102$:
+                            177 ;	end/end.c 28
+                            178 ;	genIpush
+                            179 ; _saveRegsForCall: sendSetSize: 0 deInUse: 0 bcInUse: 0 deSending: 0
+   0076 21 E8 03            180 	ld	hl,#0x03E8
+   0079 E5                  181 	push	hl
+                            182 ;	genCall
+   007A CD 00 00            183 	call	_delay
+   007D E8 02               184 	lda	sp,2(sp)
+                            185 ;	end/end.c 29
+                            186 ;	genCall
+                            187 ; _saveRegsForCall: sendSetSize: 0 deInUse: 0 bcInUse: 0 deSending: 0
+   007F CD 00 00            188 	call	_clear_screen
+                            189 ;	end/end.c 30
+                            190 ;	genIpush
+                            191 ; _saveRegsForCall: sendSetSize: 0 deInUse: 0 bcInUse: 0 deSending: 0
+   0082 21 64 00            192 	ld	hl,#0x0064
+   0085 E5                  193 	push	hl
+                            194 ;	genCall
+   0086 CD 00 00            195 	call	_delay
+   0089 E8 02               196 	lda	sp,2(sp)
+                            197 ;	end/end.c 31
+                            198 ;	genCall
+                            199 ; _saveRegsForCall: sendSetSize: 0 deInUse: 0 bcInUse: 0 deSending: 0
+   008B CD 00 00            200 	call	_bkg_clean
+                            201 ;	end/end.c 32
+                            202 ;	genIpush
+                            203 ; _saveRegsForCall: sendSetSize: 0 deInUse: 0 bcInUse: 0 deSending: 0
+   008E 21 64 00            204 	ld	hl,#0x0064
+   0091 E5                  205 	push	hl
+                            206 ;	genCall
+   0092 CD 00 00            207 	call	_delay
+   0095 E8 02               208 	lda	sp,2(sp)
+                            209 ;	end/end.c 33
+                            210 ;	genCall
+                            211 ; _saveRegsForCall: sendSetSize: 0 deInUse: 0 bcInUse: 0 deSending: 0
+   0097 CD 00 00            212 	call	_clear_screen
+                            213 ;	end/end.c 34
+                            214 ;	genIpush
+                            215 ; _saveRegsForCall: sendSetSize: 0 deInUse: 0 bcInUse: 0 deSending: 0
+   009A 21 64 00            216 	ld	hl,#0x0064
+   009D E5                  217 	push	hl
+                            218 ;	genCall
+   009E CD 00 00            219 	call	_delay
+   00A1 E8 02               220 	lda	sp,2(sp)
+                            221 ;	end/end.c 35
+                            222 ;	genCall
+                            223 ; _saveRegsForCall: sendSetSize: 0 deInUse: 0 bcInUse: 0 deSending: 0
+   00A3 CD 00 00            224 	call	_bkg_clean
+                            225 ;	end/end.c 36
+                            226 ;	genIpush
+                            227 ; _saveRegsForCall: sendSetSize: 0 deInUse: 0 bcInUse: 0 deSending: 0
+   00A6 21 64 00            228 	ld	hl,#0x0064
+   00A9 E5                  229 	push	hl
+                            230 ;	genCall
+   00AA CD 00 00            231 	call	_delay
+   00AD E8 02               232 	lda	sp,2(sp)
+                            233 ;	end/end.c 37
+                            234 ;	genCall
+                            235 ; _saveRegsForCall: sendSetSize: 0 deInUse: 0 bcInUse: 0 deSending: 0
+   00AF CD 00 00            236 	call	_clear_screen
+                            237 ;	end/end.c 38
+                            238 ;	genIpush
+                            239 ; _saveRegsForCall: sendSetSize: 0 deInUse: 0 bcInUse: 0 deSending: 0
+   00B2 21 D0 07            240 	ld	hl,#0x07D0
+   00B5 E5                  241 	push	hl
+                            242 ;	genCall
+   00B6 CD 00 00            243 	call	_delay
+   00B9 E8 02               244 	lda	sp,2(sp)
+                            245 ;	end/end.c 39
+                            246 ;	genIpush
+                            247 ; _saveRegsForCall: sendSetSize: 0 deInUse: 0 bcInUse: 0 deSending: 0
+   00BB 3E 00               248 	ld	a,#0x00
+   00BD F5                  249 	push	af
+   00BE 33                  250 	inc	sp
+                            251 ;	genCall
+   00BF CD 00 00            252 	call	_sprite_clean
+   00C2 E8 01               253 	lda	sp,1(sp)
+                            254 ;	end/end.c 40
+                            255 ;	genAssign
+                            256 ;	AOP_HL for _LETTER_COUNT
+   00C4 21 00 00            257 	ld	hl,#_LETTER_COUNT
+   00C7 36 00               258 	ld	(hl),#0x00
+                            259 ;	end/end.c 41
+                            260 ;	genIpush
+                            261 ; _saveRegsForCall: sendSetSize: 0 deInUse: 0 bcInUse: 0 deSending: 0
+   00C9 21 3C 60            262 	ld	hl,#0x603C
+   00CC E5                  263 	push	hl
+                            264 ;	genIpush
+   00CD 21 2A 01            265 	ld	hl,#__str_2
+   00D0 E5                  266 	push	hl
+                            267 ;	genCall
+   00D1 CD 00 00            268 	call	_print
+   00D4 E8 04               269 	lda	sp,4(sp)
+                            270 ;	end/end.c 42
+                            271 ;	genIpush
+                            272 ; _saveRegsForCall: sendSetSize: 0 deInUse: 0 bcInUse: 0 deSending: 0
+   00D6 21 00 00            273 	ld	hl,#_sh_tiles
+   00D9 E5                  274 	push	hl
+                            275 ;	genIpush
+   00DA 21 00 12            276 	ld	hl,#0x1200
+   00DD E5                  277 	push	hl
+                            278 ;	genCall
+   00DE CD 00 00            279 	call	_set_bkg_data
+   00E1 E8 04               280 	lda	sp,4(sp)
+                            281 ;	end/end.c 43
+                            282 ;	genIpush
+                            283 ; _saveRegsForCall: sendSetSize: 0 deInUse: 0 bcInUse: 0 deSending: 0
+   00E3 21 00 00            284 	ld	hl,#_sickle_hammer
+   00E6 E5                  285 	push	hl
+                            286 ;	genIpush
+   00E7 21 14 12            287 	ld	hl,#0x1214
+   00EA E5                  288 	push	hl
+                            289 ;	genIpush
+   00EB 21 00 00            290 	ld	hl,#0x0000
+   00EE E5                  291 	push	hl
+                            292 ;	genCall
+   00EF CD 00 00            293 	call	_set_bkg_tiles
+   00F2 E8 06               294 	lda	sp,6(sp)
+                            295 ;	end/end.c 44
+                            296 ;	genLabel
+   00F4                     297 00108$:
+                            298 ;	genEndFunction
+                            299 	
+   00F4 C9                  300 	ret
+   00F5                     301 ___ending_end:
+   00F5                     302 __str_0:
+   00F5 54 48 45            303 	.ascii "THE"
+   00F8 0A                  304 	.db 0x0A
+   00F9 50 52 4F 4C 45 54   305 	.ascii "PROLETARO"
+        41 52 4F
+   0102 0A                  306 	.db 0x0A
+   0103 48 41 56 45         307 	.ascii "HAVE"
+   0107 0A                  308 	.db 0x0A
+   0108 4E 4F 54 48 49 4E   309 	.ascii "NOTHING"
+        47
+   010F 0A                  310 	.db 0x0A
+   0110 54 4F 69 4C 4F 53   311 	.ascii "TOiLOSE"
+        45
+   0117 00                  312 	.db 0x00
+   0118                     313 __str_1:
+   0118 42 55 54 69 54 48   314 	.ascii "BUTiTHEIR"
+        45 49 52
+   0121 0A                  315 	.db 0x0A
+   0122 43 48 41 49 4E 53   316 	.ascii "CHAINSe"
+        65
+   0129 00                  317 	.db 0x00
+   012A                     318 __str_2:
+   012A 4B 41 4E 49         319 	.ascii "KANI"
+   012E 0A                  320 	.db 0x0A
+   012F 4B 4F 55 53 45 4E   321 	.ascii "KOUSEN"
+   0135 00                  322 	.db 0x00
+                            323 	.area _CODE
+ASxxxx Assembler V01.75  (GameBoy Z80-like CPU), page 1.
+
+Symbol Table
+
+    _LETTER_COUNT                      **** GX
+  0 ___ending_end                      00F5 R
+  0 ___ending_start                    0000 R
+  0 __str_0                            00F5 R
+  0 __str_1                            0118 R
+  0 __str_2                            012A R
+    _bkg_clean                         **** GX
+    _clear_screen                      **** GX
+    _delay                             **** GX
+  0 _ending                            0000 GR
+    _joypad                            **** GX
+    _print                             **** GX
+    _set_bkg_data                      **** GX
+    _set_bkg_tiles                     **** GX
+    _sh_tiles                          **** GX
+    _sickle_hammer                     **** GX
+    _sprite_clean                      **** GX
+    _talking                           **** GX
+
+ASxxxx Assembler V01.75  (GameBoy Z80-like CPU), page 2.
+
+Area Table
+
+   0 _CODE                              size  136   flags 0
+   1 _DATA                              size    0   flags 0
+   2 _OVERLAY                           size    0   flags 0
+   3 _ISEG                              size    0   flags 0
+   4 _BSEG                              size    0   flags 0
+   5 _XSEG                              size    0   flags 0
+   6 _GSINIT                            size    0   flags 0
+   7 _GSFINAL                           size    0   flags 0
+   8 _HOME                              size    0   flags 0

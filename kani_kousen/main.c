@@ -2,7 +2,7 @@
 
 void main(void)
 {
-    play:
+//    play:
     /* this poses the OPTIONS: START, NEW GAME, and QUIT. */
     opening();
     /* if you've gotten as far as level 1 */
@@ -14,7 +14,7 @@ void main(void)
     if(option == LEVEL_3)
         level_3_ctrl();
 
-    while(1)
+  /*  while(1)
     {
         if(joypad() & J_A)
         {
@@ -25,6 +25,6 @@ void main(void)
             ENEMY = 0;
             break;
         }
-    }
-    goto play;
+    }*/
+ //   goto play;
 }    

@@ -1,0 +1,26 @@
+XL
+H 9 areas 2 global symbols
+M lcc27450
+S __initrleblock Ref0000
+A _CODE size 0 flags 0
+A _DATA size 80 flags 0
+S _miner_front_idle Def0000
+A _OVERLAY size 0 flags 0
+A _ISEG size 0 flags 0
+A _BSEG size 0 flags 0
+A _XSEG size 0 flags 0
+A _GSINIT size 4A flags 0
+A _GSFINAL size 0 flags 0
+A _HOME size 0 flags 0
+T 00 00 21 00 00 CD 00 00 40 07 07 0F 0F 2F 2F 0F
+R 00 00 06 00 00 03 01 00 02 06 00 00
+T 0E 00 0F 0A 0F 00 0F 41 47 0A 10 04 10 02 10 00
+R 00 00 06 00
+T 1C 00 10 0F 3F 08 30 0C 00 0F 0F 1F 1F 07 07 0F
+R 00 00 06 00
+T 2A 00 0F 88 8F 02 0F 00 0F 11 17 80 87 0C 10 06
+R 00 00 06 00
+T 38 00 10 00 10 00 10 0F 3F 00 30 0C 00 0F 0F 1F
+R 00 00 06 00
+T 46 00 1F C0 00 00
+R 00 00 06 00
