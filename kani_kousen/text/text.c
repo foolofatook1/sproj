@@ -41,7 +41,7 @@ void print(char *arr, UINT8 x, UINT8 y)
     cushion = LETTER_COUNT;
     set_sprite_data(0, 46, font);
     START_X = x;
-    for(i = 0; arr[i] != '\0'; ++i)
+    for(i = 0; arr[i] != '\0'; i++)
     {
         if(arr[i] == '\n')
         {
@@ -49,16 +49,13 @@ void print(char *arr, UINT8 x, UINT8 y)
             x=START_X;
             continue;
         }
-        /*    if(arr[i] == '{')
-              {
-              delay(1000);
-              sprite_clean(0);
-              LETTER_COUNT = 0;
-              }*/
-        set_sprite_tile((i+cushion), (arr[i]-65));
-        move_sprite((i+cushion), x, y);
-        ++LETTER_COUNT;
-        x+=8;
+        else
+        {
+            set_sprite_tile((i+cushion), (arr[i]-65));
+            move_sprite((i+cushion), x, y);
+            ++LETTER_COUNT;
+            x+=8;
+        }
     }
 }
 
@@ -130,41 +127,6 @@ void battle_print(char *arr, UINT8 x, UINT8 y)
     for(i = 0; arr[i] != '\0'; ++i)
     {
         set_sprite_tile((i+cushion), (arr[i]-65));
-        /*for(j = 0; j < 14; ++j)
-          {
-          if(arr[i] == ' ')
-          {
-          set_sprite_tile((i+cushion), 40);
-          break;
-          }
-          if(arr[i] == '>')
-          {
-          set_sprite_tile((i+cushion), 41);
-          break;
-          }
-          if(arr[i] == '\'')
-          {
-          set_sprite_tile((i+cushion), 42);
-          break;
-          }
-          if(arr[i] == '!')
-          {
-          set_sprite_tile((i+cushion), 43);
-          break;
-          }
-          if(arr[i] == '"')
-          {
-          set_sprite_tile((i+cushion), 44);
-          break;
-          }
-          if(arr[i] == '?')
-          {
-          set_sprite_tile((i+cushion), 45);
-          break;
-          }
-          else if(arr[i] == ints[j])
-          set_sprite_tile((i+cushion), j+26);
-          }*/
         move_sprite((i+cushion), x, y);
         ++LETTER_COUNT;
         x+=8;
@@ -175,8 +137,7 @@ void damn_that_asakawa(void)
 {
     sprite_clean(8);
     LETTER_COUNT = 8;
-    print("DAMNiTHAT\0", 24, 48);
-    print("ASAKAWAl\0", 24, 64);
+    print("DAMNiTHAT\nASAKAWA\0", 24, 48);
 }
 
 void you_hear(void)

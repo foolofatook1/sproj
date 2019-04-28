@@ -8,6 +8,7 @@ UINT8 sprite_width = 8;
 
 UINT8 SAVE = 0;
 
+UINT8 talking = 1;
 UINT8 SLEPT = 0;
 UINT8 talked = 0;
 UINT8 revolt = 0;

@@ -11,6 +11,7 @@ extern UINT8 SAVE;
 
 extern UINT8 sprite_width;
 
+extern UINT8 talking;
 extern UINT8 SLEPT;
 extern UINT8 talked;
 extern UINT8 revolt;

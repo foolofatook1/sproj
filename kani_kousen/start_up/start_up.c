@@ -36,14 +36,13 @@ void opening(void)
     sprite_clean(0);
     LETTER_COUNT = 0;
     clear_screen();
-
     print("PRESSiA\nTOiSTART\0", 56, 54);
-    //print("TOiSTART\0", 52, 70);
     for(i = 0; i < LETTER_COUNT; ++i)
         set_sprite_prop(i, 0);
     SHOW_BKG;
     SHOW_SPRITES;
     DISPLAY_ON;
+    delay(2000);
     while(1)
     {
         if(joypad() & J_A)

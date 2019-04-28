@@ -89,7 +89,8 @@ void crab_catch_ctrl(void)
           print(crab_num, 80, 48);
           print("crabs\0", 24, 64);
           DISPLAY_ON;*/
-    delay(1500);
+
+    delay(1000);
 }
 
 void crab_catch_setup(void)

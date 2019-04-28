@@ -9,15 +9,6 @@
 #include "assets/blank_screen_tiles.h"
 #include "assets/blank_screen.h"
 #include "assets/small_chain_border.h"  // dash this out to play pt. 1
-
-/*#define SUB 	26
-#define ESC 	27
-#define FS  	28
-#define GS  	29
-#define RS  	30
-#define US  	31
-#define SPACE	32*/
-
 /**
  * prints array of characters; max size = 10
  * arr = array of characters
@@ -26,7 +17,6 @@
  * print_ln = what number line is being printed
  * print_ln starts at 0
  */
-//void fancy_print(char* arr, UINT8 x, UINT8 y, UINT8 clean);
 void print(char* arr, UINT8 x, UINT8 y);
 void battle_print(char* arr, UINT8 x, UINT8 y); // dash for pt.1
 

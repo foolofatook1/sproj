@@ -51,7 +51,6 @@ void pos_check_shit_pot(void);
 void pos_check_deck(void);
 
 
-extern UINT8 talking;
 extern UINT8 moving;
 extern UINT8 left;
 

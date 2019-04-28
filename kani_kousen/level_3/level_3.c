@@ -19,10 +19,9 @@ void level_3_ctrl(void)
     delay(500);
     sprite_clean(0);
     LETTER_COUNT = 0;
-    print("CHAPTERi^\0", 48, 56);
-    print("RXVXLXTXXN\0", 44, 72);
+    print("CHAPTERi^\nREVOLUTION\0", 48, 56);
     DISPLAY_ON;
-    delay(2500);
+    delay(2000);
     DISPLAY_OFF;
     shit_pot_setup();
     shit_pot_sprites();
@@ -42,14 +41,14 @@ void level_3_ctrl(void)
         if(!striking)
             leaves_shit_pot();
     }
-    delay(1500);
+    delay(1000);
     DISPLAY_OFF;
     sprite_clean(0);
     LETTER_COUNT = 0;
     shit_pot_setup();
     shit_pot_sprites();
     DISPLAY_ON;
-    
+
     /* asakawa shooting */
     anim_1 = 32;
     anim_2 = 34;
@@ -77,14 +76,14 @@ void level_3_ctrl(void)
     print("IkVEiHEARD\0", 24, 48);
     print("TALKiOFiA\0", 24, 64);
     print("STRIKEl\0", 24, 80);
-    delay(1500);
+    delay(1000);
     sprite_clean(8);
     LETTER_COUNT = 8;
     asakawa();
     print("SHOWiME\0", 24, 48);
     print("YOUR\0", 24, 64);
     print("LEADERSl\0", 24, 80);
-    delay(1500);
+    delay(1000);
     DISPLAY_OFF;
     /* happens in level 1 too */
     clear_screen();
@@ -111,12 +110,12 @@ void level_3_ctrl(void)
     asakawa();
     print("NOWiTAKE\0", 24, 48);
     print("THEMiAWAYl\0", 24, 64);
-    delay(1500);
+    delay(1000);
     DISPLAY_OFF;
     set_bkg_data(0, 4, blank_screen_tiles);
     set_bkg_tiles(0, 0, 20, 18, black_screen);
     DISPLAY_ON;
-    delay(500);
+    delay(2000);
     DISPLAY_OFF;
     SPRITES_8x16;
     shit_pot_setup();
@@ -131,71 +130,82 @@ void level_3_ctrl(void)
     move_sprite(5, student2_posx+sprite_width, student2_posy);
     DISPLAY_ON;
 
-
-    
-    delay(1500);
+    delay(2000);
     bkg_clean();
     sprite_clean(0);
     LETTER_COUNT = 0;
     workers();
-    print("ITkSi\0", 24, 48);
-    print("BERIBERIe\0", 24, 64);
-    delay(1500);
-    sprite_clean(8);
-    LETTER_COUNT = 8;
-    damn_that_asakawa();
-    delay(1500);
-    sprite_clean(8);
-    LETTER_COUNT = 8;
-    print("NOBODYkS\0", 24, 48);
-    print("ONiOUR\0", 24, 64);
-    print("SIDEf\0", 24, 80);
-    delay(1500);
-    sprite_clean(8);
-    LETTER_COUNT = 8;
-    print("EXCEPTiOUR\0", 24, 48);
-    print("OWNiSELVESe\0", 24, 64);
-    delay(1500);
-    sprite_clean(8);
-    LETTER_COUNT = 8;
-    print("WEiALL\0", 24, 48);
-    print("SHOULDkVE\0", 24, 64);
-    print("ACTED\0", 24, 80);
-    print("TOGETHERl\0", 24, 96);
-    delay(1500);
-    sprite_clean(8);
-    LETTER_COUNT = 8;
-    print("THEREkDiBE\0", 24, 48);
-    print("NOiONEiTO\0", 24, 64);
-    print("WORK\0", 24, 80);
-    delay(1500);
-    sprite_clean(8);
-    LETTER_COUNT= 8;
-    print("IF\0", 24, 48);
-    print("THEYiTOOK\0", 24, 64);
-    print("USiALLl\0", 24, 80);
-    delay(1500);
-    sprite_clean(8);
-    LETTER_COUNT = 8;
-    print("LETkS\0", 24, 48);
-    print("DOiIT\0", 24, 64);
-    print("AGAINf\0", 24, 80);
-    delay(1500);
-    sprite_clean(8);
-    LETTER_COUNT = 8;
-    print("ONEiMORE\0", 24, 48);
-    print("TIMEl\0", 24, 64);
-    delay(1500);
-
-    REVOLUTION_2 = 1;
-    ENEMY = 0;
-    ITEMS = 2;
-    HERO_HP = 100;
-    ASAKAWA_HP = 100; /* this will later go back down to 100 */
-    start_hp = 100;
-    option = LEVEL_3;
-    STATE = BATTLE_CHOICE;
-
+    print("ITkSi\nBERIBERIe\0", 24, 48);
+    talking = 1;
+    while(talking)
+    {
+        if(joypad() & J_A)
+        {
+            ++talking;
+            delay(200);
+            if(talking == 2)
+            {
+                sprite_clean(8);
+                LETTER_COUNT = 8;
+                damn_that_asakawa();
+            }
+            if(talking == 3)
+            {
+                sprite_clean(8);
+                LETTER_COUNT = 8;
+                print("NOBODYkS\nONiOUR\nSIDEf\0", 24, 48);
+            }
+            if(talking == 4)
+            {
+                sprite_clean(8);
+                LETTER_COUNT = 8;
+                print("EXCEPTiOUR\nSELVESe\0", 24, 48);
+            }
+            if(talking == 5)
+            {
+                sprite_clean(8);
+                LETTER_COUNT = 8;
+                print("WEiALL\nSHOULDkVE\nACTED\nTOGETHERl\0", 24, 48);
+            }
+            if(talking == 6)
+            {
+                sprite_clean(8);
+                LETTER_COUNT = 8;
+                print("THEREkDiBE\nNOiONEiTO\nWORK\0", 24, 48);
+            }
+            if(talking == 7)
+            {
+                sprite_clean(8);
+                LETTER_COUNT= 8;
+                print("IF\nTHEYiTOOK\nUSiALLl\0", 24, 48);
+            }
+            if(talking == 8)
+            {
+                sprite_clean(8);
+                LETTER_COUNT = 8;
+                print("LETS\nDOiIT\nAGAINf\0", 24, 48);
+            }
+            if(talking == 9)
+            {
+                sprite_clean(8);
+                LETTER_COUNT = 8;
+                print("ONEiMORE\nTIMEl\0", 24, 48);
+            }
+            if(talking == 10)
+            {
+                REVOLUTION_2 = 1;
+                ENEMY = 0;
+                ITEMS = 2;
+                HERO_HP = 100;
+                /* this will later go back down to 100 */
+                ASAKAWA_HP = 100; 
+                start_hp = 100;
+                option = LEVEL_3;
+                STATE = BATTLE_CHOICE;
+                break;
+            }
+        }
+    }
     while(1)
     {
         asakawa_battle_ctrl();
@@ -209,13 +219,6 @@ void level_3_ctrl(void)
         }
 
     }
-
-    /*clear_screen();
-    sprite_clean(0);
-    LETTER_COUNT = 0;
-    print("THATkS\0", 24, 32);
-    print("ALL\0", 24, 48);
-    print("FOLKS\0", 24, 64);*/
     ending();
 }
 

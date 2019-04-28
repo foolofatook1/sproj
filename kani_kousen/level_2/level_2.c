@@ -21,7 +21,6 @@ UINT8 sprite_positions[] = {
 };
 
 UINT8 GOT_INFO = 0;
-UINT8 talking = 1;
 UINT8 moving = 1;
 UINT8 left = 0;
 UINT8 screen_x = 95;
@@ -86,13 +85,13 @@ void level_2_bkg_start(void)
 
     SHOW_SPRITES;
     SHOW_BKG;
-
-    print("CHAPTERi]\0", 48, 64);
-    print("LOST\0", 64, 80);
-    print("ATiSEA\0", 56, 96);
+    delay(2000);
+    print("CHAPTERi]\0", 48, 64); 
+    print("LOST\0", 48, 80);
+    print("ATiSEA\0", 48, 96);
     for(i = 0; i < LETTER_COUNT; ++i)
         set_sprite_prop(i,1);
-    delay(1500);
+    delay(2000);
 }
 
 void shit_pot_setup(void)
@@ -127,36 +126,36 @@ void shit_pot_sprites(void)
     set_sprite_data(12, 4, fisherman_front_idle);
     set_sprite_data(16, 4, miner_front_idle);
     set_sprite_data(20, 4, bed);
-    /* hero */
+    // hero 
     set_sprite_tile(0, 0);
     set_sprite_tile(1, 2);
     move_sprite(0, hero_posx, hero_posy);
     move_sprite(1, hero_posx+sprite_width, hero_posy);
-    /* student */
+    // student 
     set_sprite_tile(2, 8);
     set_sprite_tile(3, 8);
     set_sprite_prop(3, S_FLIPX);
     move_sprite(2, student_posx, student_posy);
     move_sprite(3, student_posx+sprite_width, student_posy);
-    /* student2 */
+    // student2 
     set_sprite_tile(4, 8);
     set_sprite_tile(5, 8);
     set_sprite_prop(5, S_FLIPX);
     move_sprite(4, student2_posx, student2_posy);
     move_sprite(5, student2_posx+sprite_width, student2_posy);
-    /* fisherman */
+    // fisherman 
     set_sprite_tile(6, 12);
     set_sprite_tile(7, 12);
     set_sprite_prop(7, S_FLIPX);
     move_sprite(6, fisherman_posx, fisherman_posy);
     move_sprite(7, fisherman_posx+sprite_width, fisherman_posy);
-    /* miner */
+    // miner 
     set_sprite_tile(8, 16);
     set_sprite_tile(9, 16);
     set_sprite_prop(9, S_FLIPX);
     move_sprite(8, miner_posx, miner_posy);
     move_sprite(9, miner_posx+sprite_width, miner_posy);
-    /* bed */
+    // bed 
     set_sprite_tile(10, 20);
     set_sprite_tile(11, 22);
     move_sprite(10, bed_posx, bed_posy);
@@ -164,7 +163,7 @@ void shit_pot_sprites(void)
 
     if(((option == LEVEL_3) && (GOT_INFO) && (SLEPT)) || APPEARED)
     {
-        /* fisherman2 */
+        // fisherman2 
         set_sprite_tile(12, 12);
         set_sprite_tile(13, 12);
         set_sprite_prop(13, S_FLIPX);
@@ -203,7 +202,7 @@ UINT8 conv_check(void)
     if((sprite=sprite_collide_shit_pot(sprite_positions)) > 0)
     {
 
-        /* student in top left corner */
+        // student in top left corner 
         if(sprite == student_posx || sprite == fisherman_posx)
         {
             bkg_clean();
@@ -216,7 +215,7 @@ UINT8 conv_check(void)
                 hide_sprites();
                 workers();
                 you_hear();
-                delay(1500);
+                delay(1000);
                 if(option == LEVEL_2)
                 {
                     sprite_clean(8);
@@ -224,7 +223,7 @@ UINT8 conv_check(void)
                     print("AiFISHING\0", 24, 48);
                     print("BOATiWAS\0", 24, 64);
                     print("LOSTl\0", 24, 80);
-                    delay(1500);
+                    delay(1000);
                     damn_that_asakawa();
                     GOT_INFO = 1;
                 }
@@ -239,7 +238,7 @@ UINT8 conv_check(void)
                 print("OUTiOFiITl\0", 24, 64);
             }
         }
-        /* student in bottom right corner */
+        // student in bottom right corner 
         else if(sprite == student2_posx)
         {
             bkg_clean();
@@ -337,59 +336,77 @@ UINT8 conv_check(void)
             old_hero_posy = hero_posy;
             if(!revolt)
             {
+                talking = 1;
                 sprite_clean(0);
                 LETTER_COUNT = 0;
                 fisherman();
-                print("WEiWERE\0", 24, 48);
-                print("LOSTiAT\0", 24, 64);
-                print("SEAf\0", 24, 80);
-                delay(1300);
-                sprite_clean(10);
-                LETTER_COUNT = 10;
-                print("ANDiWASHED\0", 24, 48);
-                print("ASHOREiIN\0", 24, 64);
-                print("RUSSIAl\0", 24, 80);
-                delay(1300);
-                sprite_clean(10);
-                LETTER_COUNT = 10;
-                print("THOSE\0", 24, 48);
-                print("RUSSKIES\0", 24, 64);
-                print("AREiONiTO\0",24, 80);
-                print("SOMETHINGe\0", 24, 96);
-                delay(1300);
-                sprite_clean(10);
-                LETTER_COUNT = 10;
-                print("WITHiTHEIR\0", 24, 48);
-                print("TALKiABOUT\0",24, 64);
-                print("XXXXXXXXXX\0", 24, 80);
-                delay(1300);
-                sprite_clean(10);
-                LETTER_COUNT = 10;
-                print("WEiCAN\0", 24, 48);
-                print("ORGANIZE\0", 24, 64);
-                print("TOOl\0", 24, 80);
-                delay(1300);
-                sprite_clean(10);
-                LETTER_COUNT = 10;
-                print("YOUfiIf\0", 24, 48);
-                print("ANDiA\0",24, 64);
-                print("COUPLE\0",24, 80);
-                print("OTHERSl\0", 24, 96);
-                delay(1300);
-                sprite_clean(10);
-                LETTER_COUNT = 10;
-                print("WEiCOULD\0", 24, 48);
-                print("ORGANIZE\0", 24, 64);
-                print("THEiCREWl\0", 24, 80);
-                delay(1300);
-                sprite_clean(10);
-                LETTER_COUNT = 10;
-                print("WHATiDkYOU\0", 24, 48);
-                print("THINKn\0", 24, 64);
+                print("WEiWERE\nLOSTiAT\nSEAf\0", 24, 48);
+                while(talking)
+                {
+                    if(joypad() & J_A)
+                    {
+                        ++talking;
+                        delay(200);
+                        if(talking == 2)
+                        {
+                            sprite_clean(10);
+                            LETTER_COUNT = 10;
+                            print("ANDiWASHED\nASHOREiIN\nRUSSIAl\0", 24, 48);
+                        }
+                        if(talking == 3)
+                        {
+                            sprite_clean(10);
+                            LETTER_COUNT = 10;
+                            print("THOSE\nRUSSKIES\0", 24, 48);
+                        }
+                        if(talking == 4)
+                        {
+                            sprite_clean(10);
+                            LETTER_COUNT = 10;
+                            print("AREiONiTO\nSOMETHINGe\0", 24, 48);
+                        }
+                        if(talking == 5)
+                        {
+                            sprite_clean(10);
+                            LETTER_COUNT = 10;
+                            print("WITHiTHEIR\nTALK\0", 24, 48);
+                        }
+                        if(talking == 6)
+                        {
+                            sprite_clean(10);
+                            LETTER_COUNT = 10;
+                            print("ABOUT\nREVOLUTION\0", 24, 48);
+                        }
+                        if(talking == 7)
+                        {
+                            sprite_clean(10);
+                            LETTER_COUNT = 10;
+                            print("WEiCAN\nORGANIZE\nTOOl\0", 24, 48);
+                        }
+                        if(talking == 8)
+                        {
+                            sprite_clean(10);
+                            LETTER_COUNT = 10;
+                            print("YOUfiIf\nANDiA\nCOUPLE\nOTHERSl\0", 24, 48);
+                        }
+                        if(talking == 9)
+                        {
+                            sprite_clean(10);
+                            LETTER_COUNT = 10;
+                            print("WEiCOULD\nORGANIZE\nTHEiCREWl\0", 24, 48);
+                        }
+                        if(talking == 10)
+                        {
+                            sprite_clean(10);
+                            LETTER_COUNT = 10;
+                            print("WHATiDkYOU\nTHINKn\0", 24, 48);
 
-                print("AiYESl\0", 24, 88);
-                print("BiNOeee\0", 24, 104);
-                REVOLUTION_1 = 1;
+                            print("AiYESl\nBiNOeee\0", 24, 88);
+                            REVOLUTION_1 = 1;
+                            break;
+                        }
+                    }
+                }
             }
             if(revolt && !talked)
             {
@@ -405,47 +422,55 @@ UINT8 conv_check(void)
 
             if(talked)
             {
+                talking = 1;
                 sprite_clean(0);
                 LETTER_COUNT = 0;
                 fisherman();
-                print("WEkVEiGOT\0", 24, 48);
-                print("THE\0", 24, 64);
-                print("NUMBERSl\0", 24, 80);
-                delay(1500);
-                sprite_clean(10);
-                LETTER_COUNT = 10;
-                print("WITHOUT\0", 24, 48);
-                print("US\0", 24, 64);
-                delay(800);
-                sprite_clean(10);
-                LETTER_COUNT = 10;
-                print("SHIPS\0", 24, 48);
-                print("WOULDNkT\0", 24, 64);
-                print("BUDGEe\0", 24, 80);
-                delay(800);
-                sprite_clean(10);
-                LETTER_COUNT = 10;
-                print("WITHOUT\0", 24, 48);
-                print("USf\0", 24, 64);
-                delay(500);
-                sprite_clean(10);
-                LETTER_COUNT = 10;
-                print("THEiRICH\0", 24, 48);
-                print("WOULDNkT\0", 24, 64);
-                print("MAKEiA\0", 24, 80);
-                print("DIMEl\0", 24, 96);
-                delay(1500);
-                sprite_clean(10);
-                LETTER_COUNT = 10;
-                print("LETkSiGIVE\0", 24, 48);
-                print("kEMiHELL\0", 24, 64);
-                print("TOGETHERl\0", 24, 80);
-                delay(1500);
-                striking = 1;
-                REVOLUTION_1 = 1;
+                print("WEkVEiGOT\nTHE\nNUMBERSl\0", 24, 48);
+                while(talking)
+                {
+                    if(joypad() & J_A)
+                    {
+                        ++talking;
+                        delay(200);
+                        if(talking == 2)
+                        {
+                            sprite_clean(10);
+                            LETTER_COUNT = 10;
+                            print("WITHOUT\nUS\0", 24, 48);
+                        }
+                        if(talking == 3)
+                        {
+                            sprite_clean(10);
+                            LETTER_COUNT = 10;
+                            print("SHIPS\nWOULDNkT\nBUDGEe\0", 24, 48);
+                        }
+                        if(talking == 4)
+                        {
+                            sprite_clean(10);
+                            LETTER_COUNT = 10;
+                            print("WITHOUT\nUSf\0", 24, 48);
+                        }
+                        if(talking == 5)
+                        {
+                            sprite_clean(10);
+                            LETTER_COUNT = 10;
+                            print("THEiRICH\nWOULDNkT\nMAKEiA\nDIMEl\0", 24, 48);
+                        }
+                        if(talking == 6)
+                        {
+                            sprite_clean(10);
+                            LETTER_COUNT = 10;
+                            print("LETkSiGIVE\nkEMiHELL\nTOGETHERl\0", 24, 48);
+                            striking = 1;
+                            REVOLUTION_1 = 1;
+                            break;
+                        }
+                    }
+                }
             }
         }
-        /* double check that we didn't mistakenly collide */
+        // double check that we didn't mistakenly collide 
         for(i = 0; i < 12; i+=2)
         {
             if(sprite_positions[i] == sprite)
@@ -471,7 +496,7 @@ UINT8 conv_check(void)
                     talking = 0;
                 }
             }
-            if(REVOLUTION_1) /* prompt for revolution 1 */
+            if(REVOLUTION_1) // prompt for revolution 1 
             {
                 if(joypad() & J_A)
                 {
@@ -491,7 +516,7 @@ UINT8 conv_check(void)
                         LETTER_COUNT = 10;
                         print("GOiSEEiWHO\0", 24, 48);
                         print("CANiHELPl\0", 24, 64);
-                        delay(1500);
+                        delay(1000);
                         revolt = 1;
                     }
                 }
@@ -522,7 +547,7 @@ UINT8 conv_check(void)
  */
 void l2_scene_1(void)
 {
-    /* waking up the hero */
+    // waking up the hero 
     sprite_clean(0);
     LETTER_COUNT = 0;
     delay(500);
@@ -533,8 +558,8 @@ void l2_scene_1(void)
     // reset sprite properties
     for(i = 0; i < LETTER_COUNT; ++i)
         set_sprite_prop(i, 1);
-    /* start the next part */
-    delay(1500);
+    // start the next part 
+    delay(1000);
     sprite_clean(0);
     LETTER_COUNT = 0;
     hide_sprites();
@@ -544,10 +569,10 @@ void l2_scene_1(void)
     fisherman_posx = 160;
     fisherman_posy = 75;
 
-    /* reset sprite properties back to normal */
+    // reset sprite properties back to normal 
     for(i = 0; i < MAX_SPRITES; ++i)
         set_sprite_prop(i, 0);
-    /* hero lying down in shit pot */
+    // hero lying down in shit pot 
     shit_pot_setup();
     SPRITES_8x16;
     set_sprite_data(0, 4, hero_lie_down);
@@ -556,11 +581,11 @@ void l2_scene_1(void)
     set_sprite_tile(1, 2);
     move_sprite(0, hero_posx, hero_posy);//80, 75);
     move_sprite(1, hero_posx+sprite_width, hero_posy);//88, 75);
-    /* hero stands up */
+    // hero stands up 
     delay(500);
     set_sprite_tile(0, 4);
     set_sprite_tile(1, 6);
-    /* setting up fisherman data for his walk in */
+    // setting up fisherman data for his walk in 
     set_sprite_data(8, 8, fisherman_walk_side);
     set_sprite_tile(2, 8);
     set_sprite_tile(3, 10);
@@ -594,12 +619,12 @@ void l2_scene_1(void)
 
 void l2_scene_1_fisherman_enter(void)
 {
-    delay(1500);
+    delay(1000);
     sprite_clean(10);
     LETTER_COUNT = 10;
     print("YOUkLL\0", 24, 48);
     print("NEEDiTHESE\0", 24, 64);
-    delay(1500);
+    delay(1000);
     sprite_clean(0);
     LETTER_COUNT = 0;
     DISPLAY_OFF;
@@ -611,7 +636,7 @@ void l2_scene_1_fisherman_enter(void)
     print("FISHING\0", 56, 80);
     print("NET\0", 72, 96);
     ITEMS += 2;
-    delay(1500);
+    delay(1000);
     sprite_clean(0);
     LETTER_COUNT = 0;
     DISPLAY_OFF;
@@ -635,7 +660,7 @@ void fisherman_walk_away(void)
     set_bkg_data(0, 4, blank_screen_tiles);
     set_bkg_tiles(0,0,20,18,shit_pot);
 
-    /* setting up fisherman data for his walk in */
+    // setting up fisherman data for his walk in 
     SPRITES_8x16;
     set_sprite_data(0, 4, hero_walk_sideways);
     set_sprite_data(4, 4, fisherman_walk_up);
@@ -674,7 +699,7 @@ void fisherman_walk_away(void)
         }
         --fisherman_posy;
     }
-    /* fisherman disappears */
+    // fisherman disappears 
     fisherman_posx = 200;
     fisherman_posy = 200;
     move_sprite(2, fisherman_posx, fisherman_posy);
@@ -691,7 +716,7 @@ void hero_walk(void)
         set_sprite_data(0, 4, hero_walk_up);
         set_sprite_tile(0, 0);
         set_sprite_tile(1, 2);
-        /* make sure sprites aren't flipped */
+        // make sure sprites aren't flipped 
         set_sprite_prop(0, S_FLIPX&0x0);
         set_sprite_prop(1, S_FLIPX&0x0);
         move_sprite(0, hero_posx, hero_posy);
@@ -719,7 +744,7 @@ void hero_walk(void)
         set_sprite_data(0, 4, hero_walk_down);
         set_sprite_tile(0, 0);
         set_sprite_tile(1, 2);
-        /* make sure sprites aren't flipped */
+        // make sure sprites aren't flipped 
         set_sprite_prop(0, S_FLIPX&0x0);
         set_sprite_prop(1, S_FLIPX&0x0);
         move_sprite(0, hero_posx, hero_posy);
@@ -769,7 +794,7 @@ void hero_walk(void)
     if(joypad() & J_RIGHT)
     {
         set_sprite_data(0, 8, hero_walk_sideways);
-        /* make sure the sprites aren't flipped */
+        // make sure the sprites aren't flipped 
         set_sprite_prop(0, S_FLIPX&0x0);
         set_sprite_prop(1, S_FLIPX&0x0);
         if((hero_posx+hero_posy)&0x1)
@@ -826,7 +851,7 @@ void asakawa_enters_deck(void)
     move_sprite(6, fisherman_posx-40, fisherman_posy);
     move_sprite(7, fisherman_posx-40+sprite_width, fisherman_posy);
 
-    /* asakawa */
+    // asakawa 
     asakawa_posx = 156;
     asakawa_posy = 116;
     set_sprite_data(16, 8, asakawa_walk_side);
@@ -859,7 +884,7 @@ void asakawa_before_work(void)
     print("CRABS\0", 24, 64);
     print("READYiTO\0", 24, 80);
     print("CANl\0", 24, 96);
-    /* asakawa's instructions on how to play */
+    // asakawa's instructions on how to play 
     while(talking)
     {
         if(joypad() & J_A)
@@ -899,7 +924,7 @@ void asakawa_after_work(void)
     print("BACKiDOWN\0", 24, 48);
     print("TOiTHE\0", 24, 64);
     print("SHITiPOTl\0", 24, 80);
-    delay(1500);
+    delay(1000);
 }
 
 void pos_check_shit_pot(void)

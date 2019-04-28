@@ -101,7 +101,7 @@ void run(void)
     battle_print("CANkT\0", 18, 48);
     battle_print("ESCAPEl\0", 18, 64); 
     show_fighter_stats();
-    delay(1500);
+    delay(1000);
     back();
 }
 
@@ -305,18 +305,12 @@ void hero_fight(void)
         LETTER_COUNT = 0;
         if((choice == ITEM) && (CHOSEN_ITEM == CLUB) && 
                 (ENEMY > 0) && (!CRAB_CAUGHT))
-        {
-            print("YOUiNEED\0", 72, 64);
-            print("TOiCATCH\0", 72, 80);
-            print("THEiCRABl\0", 72, 96);
-            delay(500);
-        }
+            print("YOUiNEED\nTOiCATCH\nTHEiCRABl\0", 72, 64);
         else if((choice == ITEM) && (CHOSEN_ITEM == NET) && 
                 (hero_acc > 0))
         {
             print("CAUGHTl\0", 72, 80);
             CRAB_CAUGHT = 1;
-            delay(500);
         }
         else if(((choice == PUNCH) && (hero_acc >= 3)) || 
                 ((choice == ITEM) && hero_acc > 0))
@@ -330,26 +324,6 @@ void hero_fight(void)
                 print("KINGiCRAB\0", 56, 88);
             delay(500);
         }
-        /*        if(choice == PUNCH && (ENEMY == 1 || ENEMY == 2))
-                  {
-                  print(" no use\0", 56, 56);
-                  print("punching\0", 56, 72);
-                  print(" a crab!\0", 56, 88);
-                  delay(500);
-                  };
-                  if(choice == PUNCH && ENEMY == 0 && hero_acc >= 3)
-                  {
-                  print("hit!\0", 72, 80);
-                  delay(500);
-                  }
-
-                  if((choice == ITEM) && (CHOSEN_ITEM == CLUB) && 
-                  (CRAB_CAUGHT) && (hero_acc > 0))
-                  {
-                  print("crushed!\0", 72, 80);
-                  delay(500);
-                  }
-         */
         /* fighter chooses punch and misses */
                   else if(((choice == PUNCH) && (hero_acc < 3)) || 
                           ((choice == ITEM) && (hero_acc == 0)))
