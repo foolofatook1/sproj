@@ -1,3 +1,10 @@
+/**
+ * battle.c
+ *
+ * All functions necessary for 
+ * controlling battles.
+ */
+
 #include <rand.h>
 #include <gb/drawing.h>
 #include <stdlib.h>
@@ -46,12 +53,12 @@ UINT8 FIGHTING = 4;
 UINT8 DEAD = 5;
 UINT8 BATTLE_WIN = 6;
 
-UINT8 ENEMY = 0;
-UINT8 BATTLE_NUM = 0;
+UINT8 enemy = 0;
+UINT8 battle_num = 0;
 
-UBYTE ITEMS = 0;
-UINT8 CHOSEN_ITEM = 0;
-UINT8 CHOOSING = 0;
+UBYTE items = 0;
+UINT8 chosen_item = 0;
+UINT8 choosing = 0;
 
 UINT8 enemy_choice;
 
@@ -72,22 +79,22 @@ void battle_nav(void)
 {
     if(arrow_y == 32)
     {
-        STATE = FIGHT_CHOICE;
+        state = FIGHT_CHOICE;
         fight_opt();
     }
     if(arrow_y == 48)
     {
         choice = DEFEND;
-        STATE = FIGHTING;
+        state = FIGHTING;
     }
     if(arrow_y == 64)
     {
-        STATE = RUN_CHOICE;
+        state = RUN_CHOICE;
         run();
     }
     if(arrow_y == 80)
     {
-        STATE = ITEM_CHOICE;
+        state = ITEM_CHOICE;
         item_opt();
     }
 }
@@ -96,7 +103,6 @@ void run(void)
 {
     sprite_clean(0);
     LETTER_COUNT = 0;
-    //battle_bkg_clean();
     battle_print("YOU\0", 18, 32);
     battle_print("CANkT\0", 18, 48);
     battle_print("ESCAPEl\0", 18, 64); 
@@ -107,10 +113,10 @@ void run(void)
 
 void back(void)
 {
-    if(STATE < FIGHTING)
+    if(state < FIGHTING)
     {
         battle_menu();
-        STATE = BATTLE_CHOICE;
+        state = BATTLE_CHOICE;
         choice = 0;
     }
 }
@@ -132,15 +138,15 @@ void item_opt(void)
     sprite_clean(0);
     LETTER_COUNT = 0;
     battle_bkg_clean();
-    if(ITEMS == 0)
+    if(items == 0)
     {
         battle_print("iEMPTY\0", 18, 32);
         battle_print("AiSELECT\0", 16, 130);
         battle_print("BiBACK\0", 16, 142);
     }
-    if(ITEMS == 2)
+    if(items == 2)
     {
-        CHOOSING = 1;
+        choosing = 1;
         arrow_x = 24;
         arrow_y = 32;
         battle_print("j\0", arrow_x, arrow_y);
@@ -150,7 +156,7 @@ void item_opt(void)
         battle_print("BiBACK\0", 16, 142);
         show_fighter_stats();
         arrow_y = 32;
-        while(CHOOSING)
+        while(choosing)
             choose_item_toggle();
     }
 }
@@ -175,19 +181,19 @@ void choose_item_toggle(void)
     {
         if(arrow_y == 32)
         {
-            CHOSEN_ITEM = CLUB;
-            STATE = FIGHTING;
+            chosen_item = CLUB;
+            state = FIGHTING;
         }
         if(arrow_y == 48)
         {
-            CHOSEN_ITEM = NET;
-            STATE = FIGHTING;
+            chosen_item = NET;
+            state = FIGHTING;
         }
-        CHOOSING = 0;
+        choosing = 0;
     }
     if(joypad() & J_B)
     {
-        CHOOSING = 0;
+        choosing = 0;
         back();
     }
 }
@@ -256,8 +262,8 @@ void battle_toggle_ctrl(void)
 
     if(joypad() & J_A)
     {
-        if(STATE == FIGHT_CHOICE)
-            STATE = FIGHTING;
+        if(state == FIGHT_CHOICE)
+            state = FIGHTING;
         else
             battle_nav();
     }
@@ -266,11 +272,11 @@ void battle_toggle_ctrl(void)
         back();
 
     /* toggle down options */
-    if(joypad() & J_DOWN && STATE == BATTLE_CHOICE)
+    if(joypad() & J_DOWN && state == BATTLE_CHOICE)
         battle_toggle_down();
 
     /* toggle up options */
-    if(joypad() & J_UP && STATE == BATTLE_CHOICE)
+    if(joypad() & J_UP && state == BATTLE_CHOICE)
         battle_toggle_up();
 }
 
@@ -278,9 +284,9 @@ void choice_handler(UINT8 arrow_y)
 {
     if(arrow_y == PUNCH_LOC && choice != ITEM)
         choice = PUNCH;
-    if(CHOSEN_ITEM == CLUB)
+    if(chosen_item == CLUB)
         choice = ITEM;
-    if(CHOSEN_ITEM == NET)
+    if(chosen_item == NET)
         choice = ITEM;
 }
 
@@ -303,10 +309,10 @@ void hero_fight(void)
         }
         sprite_clean(0);
         LETTER_COUNT = 0;
-        if((choice == ITEM) && (CHOSEN_ITEM == CLUB) && 
-                (ENEMY > 0) && (!CRAB_CAUGHT))
+        if((choice == ITEM) && (chosen_item == CLUB) && 
+                (enemy > 0) && (!CRAB_CAUGHT))
             print("YOUiNEED\nTOiCATCH\nTHEiCRABl\0", 72, 64);
-        else if((choice == ITEM) && (CHOSEN_ITEM == NET) && 
+        else if((choice == ITEM) && (chosen_item == NET) && 
                 (hero_acc > 0))
         {
             print("CAUGHTl\0", 72, 80);
@@ -316,11 +322,11 @@ void hero_fight(void)
                 ((choice == ITEM) && hero_acc > 0))
         {
             print("YOUiHIT\0", 56, 72);
-            if(ENEMY == 0)
+            if(enemy == 0)
                 print("ASAKAWA\0", 56, 88);
-            if(ENEMY == 1)
+            if(enemy == 1)
                 print("AiCRAB\0", 56, 88);
-            if(ENEMY == 2)
+            if(enemy == 2)
                 print("KINGiCRAB\0", 56, 88);
             delay(500);
         }
@@ -342,11 +348,11 @@ void hero_fight(void)
 
 void hero_defend_anim(void) 
 {
-    if(ENEMY == 0)
+    if(enemy == 0)
         sprite_setup(8, hero_back_idle, 8, asakawa_front_idle);
-    if(ENEMY == 1)
+    if(enemy == 1)
         sprite_setup(8, hero_back_idle, 8, norm_crab);
-    if(ENEMY == 2)
+    if(enemy == 2)
         sprite_setup(8, hero_back_idle, 8, king_crab);
     for(a = 0; a < 21; a+=3)
     {
@@ -395,11 +401,11 @@ void enemy_defend_anim(void)
 
 void hero_fight_anim(void) 
 {
-    if(ENEMY == 0)
+    if(enemy == 0)
         sprite_setup(8, hero_back_idle, 8, asakawa_front_idle);
-    if(ENEMY == 1)
+    if(enemy == 1)
         sprite_setup(8, hero_back_idle, 8, norm_crab);
-    if(ENEMY == 2)
+    if(enemy == 2)
         sprite_setup(8, hero_back_idle, 8, king_crab);
     delay(300);
     /* essentially hiding one sprite */
@@ -423,11 +429,11 @@ void hero_fight_anim(void)
 
 void enemy_fight_anim(void)
 {
-    if(ENEMY == 0)
+    if(enemy == 0)
         sprite_setup(8, hero_back_idle, 8, asakawa_front_idle);
-    if(ENEMY == 1)
+    if(enemy == 1)
         sprite_setup(8, hero_back_idle, 8, norm_crab);
-    if(ENEMY == 2)
+    if(enemy == 2)
         sprite_setup(8, hero_back_idle, 8, king_crab);
     delay(300);
     /* essentially hiding one sprite */
@@ -599,11 +605,11 @@ void npc_fight(void)
         clear_screen();
         sprite_clean(0);
         LETTER_COUNT = 0; 
-        if(ENEMY == 0)
+        if(enemy == 0)
             print("ASAKAWA\0", 56, 75);
-        if(ENEMY == 1)
+        if(enemy == 1)
             print("THEiCRAB\0", 56, 75);
-        if(ENEMY == 2)
+        if(enemy == 2)
             print("KINGiCRAB\0", 56, 75);
 
         print("DEFENDS\0", 56, 91);
@@ -643,7 +649,7 @@ void damage(UINT8 *fighter_hp)
         SHOOT = 30; // going to need to set this back to 10 later.
     if(start_hp == 100)
         SHOOT = 10;
-    if(ENEMY == 0)
+    if(enemy == 0)
     {
         if(choice == DEFEND && npc_acc >= 1 && npc_act >= 1)
         {
@@ -653,7 +659,7 @@ void damage(UINT8 *fighter_hp)
                 if((*fighter_hp) == 0)
                 {
                     option = GAME_OVER;
-                    STATE = DEAD;
+                    state = DEAD;
                 }
             }
         }
@@ -666,12 +672,12 @@ void damage(UINT8 *fighter_hp)
                 if((*fighter_hp) == 0)
                 {
                     option = GAME_OVER;
-                    STATE = DEAD;
+                    state = DEAD;
                 }
             }
         }
     }
-    if(ENEMY == 1)
+    if(enemy == 1)
     {
         if(choice == DEFEND && npc_acc >= 1 && npc_act >= 1)
         {
@@ -681,7 +687,7 @@ void damage(UINT8 *fighter_hp)
                 if((*fighter_hp) == 0)
                 {
                     option = GAME_OVER;
-                    STATE = DEAD;
+                    state = DEAD;
                 }
             }
         }
@@ -694,12 +700,12 @@ void damage(UINT8 *fighter_hp)
                 if((*fighter_hp) == 0)
                 {
                     option = GAME_OVER;
-                    STATE = DEAD;
+                    state = DEAD;
                 }
             }
         }
     }
-    if(ENEMY == 2)
+    if(enemy == 2)
     {
         if(choice == DEFEND && npc_acc >= 1 && npc_act >= 1)
         {
@@ -709,7 +715,7 @@ void damage(UINT8 *fighter_hp)
                 if((*fighter_hp) == 0)
                 {
                     option = GAME_OVER;
-                    STATE = DEAD;
+                    state = DEAD;
                 }
             }
         }
@@ -722,7 +728,7 @@ void damage(UINT8 *fighter_hp)
                 if((*fighter_hp) == 0)
                 {
                     option = GAME_OVER;
-                    STATE = DEAD;
+                    state = DEAD;
                 }
             }
         }
@@ -741,18 +747,18 @@ void lower_hp(UINT8 *hit, UINT8 defended, UINT8 *enemy_hp)
         {
             --(*enemy_hp);
             if((*enemy_hp) == 0)
-                STATE = BATTLE_WIN;
+                state = BATTLE_WIN;
         }
     }
     else
     {
-        if(ENEMY == 0 || CRAB_CAUGHT)
+        if(enemy == 0 || CRAB_CAUGHT)
         {
             for(i = (*hit); i > 0; --i)
             {
                 --(*enemy_hp);
                 if((*enemy_hp) == 0)
-                    STATE = BATTLE_WIN;
+                    state = BATTLE_WIN;
             }
         }
     }
@@ -762,20 +768,20 @@ void enemy_damage(UINT8 *enemy_hp)
 {
     if(npc_act == 0)
     {
-        if(choice == ITEM && CHOSEN_ITEM == NET && hero_acc > 0)
+        if(choice == ITEM && chosen_item == NET && hero_acc > 0)
             return;
-        if(choice == ITEM && CHOSEN_ITEM == CLUB && hero_acc > 0)
+        if(choice == ITEM && chosen_item == CLUB && hero_acc > 0)
             lower_hp(&CLUB, 1, enemy_hp);
-        if(choice == PUNCH && ENEMY == 0 && hero_acc >= 3)
+        if(choice == PUNCH && enemy == 0 && hero_acc >= 3)
             lower_hp(&PUNCH, 1, enemy_hp);
     }
     if(npc_act > 0)
     {
-        if(choice == ITEM && CHOSEN_ITEM == NET && hero_acc > 0)
+        if(choice == ITEM && chosen_item == NET && hero_acc > 0)
             lower_hp(&NET, 0, enemy_hp);
-        if(choice == ITEM && CHOSEN_ITEM == CLUB && hero_acc > 0)
+        if(choice == ITEM && chosen_item == CLUB && hero_acc > 0)
             lower_hp(&CLUB, 0, enemy_hp);
-        if(choice == PUNCH && ENEMY == 0 && hero_acc >= 3)
+        if(choice == PUNCH && enemy == 0 && hero_acc >= 3)
             lower_hp(&PUNCH, 0, enemy_hp);
     }
 }
@@ -790,7 +796,7 @@ void fight(UINT8 *fighter_hp, UINT8 *enemy_hp)
     {
         npc_fight();
         damage(fighter_hp);
-        if(STATE != DEAD)
+        if(state != DEAD)
         {
             hero_fight();
             enemy_damage(enemy_hp);
@@ -800,7 +806,7 @@ void fight(UINT8 *fighter_hp, UINT8 *enemy_hp)
     {
         hero_fight();
         enemy_damage(enemy_hp);
-        if(STATE != BATTLE_WIN)
+        if(state != BATTLE_WIN)
         {
             npc_fight();
             damage(fighter_hp);
@@ -810,14 +816,14 @@ void fight(UINT8 *fighter_hp, UINT8 *enemy_hp)
     npc_acc = 0;
     hero_acc = 0;
     choice = 0;
-    CHOSEN_ITEM = 0;
+    chosen_item = 0;
     first_fighter = 0;
 }
 
 void show_fighter_stats(void)
 {
     battle_print("HP\0", 88, 56);
-    itoa(HERO_HP, h_hp);
+    itoa(hero_hp, h_hp);
     
     for(i = 0; h_hp[i] != '\0'; ++i)
         h_hp[i] = (h_hp[i]+43);
@@ -825,7 +831,7 @@ void show_fighter_stats(void)
     /* HP */
     if(start_hp == 10)
     {
-        if(HERO_HP == start_hp)
+        if(hero_hp == start_hp)
             battle_print("[\0", 96, 72);
         battle_print("WORKER\0", 88, 40);
         battle_print("h\\[\0", 122, 72);
@@ -839,43 +845,10 @@ void show_fighter_stats(void)
     if(start_hp == 100)
     {
         battle_print("EVRY\\\0", 88, 40);
-        if(HERO_HP == start_hp)
+        if(hero_hp == start_hp)
             battle_print("[[\0", 96, 72);
         else
             battle_print("[\0", 96, 72);
         battle_print("h\\[[\0", 122, 72);
     }
 }
-
-/*void game_over_screen(void)
-{
-    sprite_clean(0);
-    LETTER_COUNT = 0;
-    clear_screen();
-    print("AiCRUSHING", 48, 72);
-    print("DAY", 72, 88);
-    //print("GAMEiOVER", 44, 72);
-    delay(1000);
-    sprite_clean(0);
-    LETTER_COUNT = 0;
-    clear_screen();
-    print("AiCONTINUE\0", 44, 72);
-    print("BiQUIT\0", 60, 88);
-    while(1)
-    {
-        if(joypad() & J_A)
-        {
-            option = SAVE;
-            HERO_HP = start_hp;
-            break;
-        }
-        if(joypad() & J_B)
-        {
-            ENEMY = 0;
-            SAVE = 0;
-            option = START;
-            HERO_HP = 10;
-            break;
-        }
-    }
-}*/

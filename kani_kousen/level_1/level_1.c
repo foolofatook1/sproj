@@ -1,3 +1,7 @@
+/**
+ * level_1.c
+ */
+
 #include "level_1.h"
 #include "../assets/level_assets/level_assets.h"
 #include "../battle/battle.h"
@@ -42,7 +46,7 @@ void level_1_ctrl(void)
     }
     l1_scene_3_text_setup();
     l1_scene_3();
-    ENEMY = 0;
+    enemy = 0;
     asakawa_battle_ctrl();
 }
 

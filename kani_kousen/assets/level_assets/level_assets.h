@@ -3,22 +3,16 @@
 
 #include <gb/gb.h>
 
-//UINT8 check_items(void);
-
-//extern UINT8 text_count;
-//extern UINT8 start_animate;
-extern UINT8 SAVE;
-
 extern UINT8 sprite_width;
 
 extern UINT8 talking;
-extern UINT8 SLEPT;
+extern UINT8 slept;
 extern UINT8 talked;
 extern UINT8 revolt;
 extern UINT8 striking;
 extern UINT8 REVOLUTION_1;
 extern UINT8 REVOLUTION_2;
-extern UINT8 APPEARED;
+extern UINT8 appeared;
 extern UINT8 crabs_to_catch;
 extern UINT8 health_loss;
 
@@ -44,6 +38,6 @@ extern UINT8 asakawa_posy;
 extern UINT8 bed_posx;
 extern UINT8 bed_posy;
 
-extern UINT8 HERO_HP;
-extern UINT16 ASAKAWA_HP;
+extern UINT8 hero_hp;
+extern UINT16 asakawa_hp;
 #endif /* LEVEL_ASSETS */

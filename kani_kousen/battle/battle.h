@@ -36,10 +36,8 @@ void choice_handler(UINT8);
 
 void clear_screen(void);
 
-//void game_over_screen(void);
-
-extern UINT8 ENEMY;
-extern UINT8 BATTLE_NUM;
+extern UINT8 enemy;
+extern UINT8 battle_num;
 
 extern UINT8 PUNCH;
 extern UINT8 NET;
@@ -79,9 +77,9 @@ extern UBYTE hero_acc;
 extern UBYTE first_fighter;
 
 extern UINT8 ITEM;
-extern UINT8 ITEMS;
-extern UINT8 CHOSEN_ITEM;
-extern UINT8 CHOOSING;
+extern UINT8 items;
+extern UINT8 chosen_item;
+extern UINT8 choosing;
 
 extern UINT8 BATTLE_CHOICE;
 extern UINT8 FIGHT_CHOICE;
@@ -91,5 +89,5 @@ extern UINT8 FIGHTING;
 extern UINT8 DEAD;
 extern UINT8 BATTLE_WIN;
 
-extern UINT8 STATE;
+extern UINT8 state;
 #endif /* BATTLE_INCLUDE */

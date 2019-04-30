@@ -1,3 +1,7 @@
+/**
+ * level_3.c
+ */
+
 #include "level_3.h"
 #include "../text/text.h"
 #include "../level_1/asakawa_battle.h"
@@ -65,7 +69,7 @@ void level_3_ctrl(void)
         set_sprite_tile(15, anim_2+=4);
         delay(500);
     }
-    STATE = BATTLE_CHOICE; // this is for tests
+    state = BATTLE_CHOICE; // this is for tests
     delay(500);
     DISPLAY_OFF;
     bkg_clean();
@@ -92,17 +96,17 @@ void level_3_ctrl(void)
     print("FIGHT\0", 64, 32);
     print("ASAKAWA\0", 56, 48);
     DISPLAY_ON;
-    ENEMY = 0;
-    ITEMS = 2;
-    HERO_HP = 50;
-    ASAKAWA_HP = 200; /* this will later go back down to 100 */
+    enemy = 0;
+    items = 2;
+    hero_hp = 50;
+    asakawa_hp = 200; /* this will later go back down to 100 */
     start_hp = 50;
     sprite_clean(0);
     LETTER_COUNT = 0;
-    STATE = BATTLE_CHOICE;
+    state = BATTLE_CHOICE;
     option = LEVEL_3;
     asakawa_battle_ctrl();
-    STATE = BATTLE_CHOICE;
+    state = BATTLE_CHOICE;
     option = LEVEL_3;
     bkg_clean();
     sprite_clean(0);
@@ -194,14 +198,14 @@ void level_3_ctrl(void)
             if(talking == 10)
             {
                 REVOLUTION_2 = 1;
-                ENEMY = 0;
-                ITEMS = 2;
-                HERO_HP = 100;
+                enemy = 0;
+                items = 2;
+                hero_hp = 100;
                 /* this will later go back down to 100 */
-                ASAKAWA_HP = 100; 
+                asakawa_hp = 100; 
                 start_hp = 100;
                 option = LEVEL_3;
-                STATE = BATTLE_CHOICE;
+                state = BATTLE_CHOICE;
                 break;
             }
         }
@@ -209,13 +213,13 @@ void level_3_ctrl(void)
     while(1)
     {
         asakawa_battle_ctrl();
-        if(STATE == BATTLE_WIN)
+        if(state == BATTLE_WIN)
             break;
-        if(option == GAME_OVER || STATE == DEAD)
+        if(option == GAME_OVER || state == DEAD)
         {
             option = LEVEL_3;
-            STATE = BATTLE_CHOICE;
-            HERO_HP = 100;
+            state = BATTLE_CHOICE;
+            hero_hp = 100;
         }
 
     }
@@ -253,7 +257,7 @@ void leaves_shit_pot(void)
     asakawa_enters_deck();
     asakawa_before_work();
     crab_catch_ctrl();
-    if(STATE == DEAD)
+    if(state == DEAD)
         return;
     asakawa_enters_deck();
     asakawa_after_work();
@@ -266,6 +270,6 @@ void leaves_shit_pot(void)
 
     moving = 1;
     GOT_INFO = 0;
-    SLEPT = 0;
+    slept = 0;
     caught_crabs = 0;
 }

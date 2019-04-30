@@ -1,3 +1,9 @@
+/**
+ * asakawa_battle.c
+ *
+ * methods for handling battles with asakawa
+ */
+
 #include <stdio.h>
 #include <stdlib.h>
 #include "../text/text.h"
@@ -6,7 +12,7 @@
 #include "../assets/level_assets/level_assets.h"
 #include "../start_up/start_up.h"
 
-UINT8 STATE = BATTLE_CHOICE;
+UINT8 state = BATTLE_CHOICE;
 
 /* hp settings for this level */
 UINT8 start_hp = 10;
@@ -19,32 +25,32 @@ UINT8 start_hp = 10;
  */
 void asakawa_battle_ctrl(void)
 {
-    STATE = BATTLE_CHOICE;
+    state = BATTLE_CHOICE;
     choice = 0;
     battle_menu();
-    while(STATE != DEAD || option != GAME_OVER)
+    while(state != DEAD || option != GAME_OVER)
     {
         wait_vbl_done();
         battle_toggle_ctrl();
-        while(STATE == FIGHTING)
+        while(state == FIGHTING)
         {
             choice_handler(arrow_y);
-            fight(&HERO_HP, &ASAKAWA_HP);
+            fight(&hero_hp, &asakawa_hp);
             delay(400);
             // basically does back but only when everything is done 
-            if(STATE == BATTLE_WIN && REVOLUTION_2)
+            if(state == BATTLE_WIN && REVOLUTION_2)
                 break;
-            if(STATE != DEAD)
+            if(state != DEAD)
             {
                 DISPLAY_OFF;
                 battle_menu();
-                STATE = BATTLE_CHOICE;
+                state = BATTLE_CHOICE;
                 choice = 0;
                 DISPLAY_ON;
                 battle_menu();
             }
         }
-        if((STATE == BATTLE_WIN) && REVOLUTION_2)
+        if((state == BATTLE_WIN) && REVOLUTION_2)
             break;
     }
     /* the battle that leads to level 2 */

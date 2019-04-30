@@ -64,6 +64,4 @@ extern UINT8 arrow_y;
 
 extern UINT8 MAX_SPRITES;
 
-//extern unsigned char speech[];
-
 #endif /* TEXT_INCLUDE */

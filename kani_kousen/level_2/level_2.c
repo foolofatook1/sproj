@@ -1,3 +1,7 @@
+/**
+ * level_2.c
+ */
+
 #include "level_2.h"
 #include <stdio.h>
 #include <stdlib.h>
@@ -161,7 +165,7 @@ void shit_pot_sprites(void)
     move_sprite(10, bed_posx, bed_posy);
     move_sprite(11, bed_posx+sprite_width, bed_posy);
 
-    if(((option == LEVEL_3) && (GOT_INFO) && (SLEPT)) || APPEARED)
+    if(((option == LEVEL_3) && (GOT_INFO) && (slept)) || appeared)
     {
         // fisherman2 
         set_sprite_tile(12, 12);
@@ -169,7 +173,7 @@ void shit_pot_sprites(void)
         set_sprite_prop(13, S_FLIPX);
         move_sprite(12, fisherman2_posx, fisherman2_posy);
         move_sprite(13, fisherman2_posx+sprite_width, fisherman2_posy);
-        APPEARED = 1;
+        appeared = 1;
         arr_size += 2;
     }
 
@@ -317,7 +321,7 @@ UINT8 conv_check(void)
             print("TOiWAKE\0", 56, 104);
             for(i = 0; i < LETTER_COUNT; ++i)
                 set_sprite_prop(i, 1);
-            SLEPT = 1;
+            slept = 1;
             if(option == LEVEL_2 && (!GOT_INFO));
             else if((option == LEVEL_2) && (GOT_INFO))
             {
@@ -329,7 +333,7 @@ UINT8 conv_check(void)
                 return 1;
             }
         }
-        else if((sprite == fisherman2_posx) && (APPEARED))
+        else if((sprite == fisherman2_posx) && (appeared))
         {
             bkg_clean();
             old_hero_posx = hero_posx;
@@ -579,8 +583,8 @@ void l2_scene_1(void)
     set_sprite_data(4, 4, hero_front_idle);
     set_sprite_tile(0, 0);
     set_sprite_tile(1, 2);
-    move_sprite(0, hero_posx, hero_posy);//80, 75);
-    move_sprite(1, hero_posx+sprite_width, hero_posy);//88, 75);
+    move_sprite(0, hero_posx, hero_posy);
+    move_sprite(1, hero_posx+sprite_width, hero_posy);
     // hero stands up 
     delay(500);
     set_sprite_tile(0, 4);
@@ -635,7 +639,7 @@ void l2_scene_1_fisherman_enter(void)
     print("CLUBiAND\0", 52, 64);
     print("FISHING\0", 56, 80);
     print("NET\0", 72, 96);
-    ITEMS += 2;
+    items += 2;
     delay(1000);
     sprite_clean(0);
     LETTER_COUNT = 0;
@@ -679,7 +683,6 @@ void fisherman_walk_away(void)
      * enter fisherman (the -5 adds a little extra distance) 
      * i = 160 is the right side of the screen.
      */
-    /* hero_pos[1][0]-SPRITE_WIDTH+5) */
     for(i = 0; fisherman_posy > 50; ++i)
     {
         delay(50);
@@ -708,9 +711,6 @@ void fisherman_walk_away(void)
 
 void hero_walk(void)
 {
-    /**
-     * need: hero_walk down
-     */
     if(joypad() & J_UP)
     {
         set_sprite_data(0, 4, hero_walk_up);

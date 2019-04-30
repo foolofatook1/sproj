@@ -1,13 +1,14 @@
+/** 
+ * text.c
+ * 
+ * All print functions and methods
+ * concerned with text formatting.
+ */
+
 #include "text.h"
 #include <stdio.h>
 #include <stdlib.h>
 
-/*unsigned char speech[] = "it's the\n beriberi.\n * damn that\n asakawa!\n * nobody's\n * on our * side,\n * except
- * our\n * own selves.\n * they were\n wrong,\n * we were\n wrong!\n * we all\n should\n have acted\n together! *
- * there'd be\n no one to\n work if\n they took\n * us all\n away! * well let's\n do it\n again,\n * one more\n
- * time!\0";*/
-
-//unsigned char ints[] = "0123456789.,:/";
 UINT8 i;
 UINT8 j;
 UINT8 cushion;
@@ -58,32 +59,6 @@ void print(char *arr, UINT8 x, UINT8 y)
         }
     }
 }
-
-/*void fancy_print(char *arr, UINT8 x, UINT8 y, UINT8 clean) 
-  {
-  SPRITES_8x8;
-  cushion = LETTER_COUNT;
-  set_sprite_data(0, 46, font);
-  START_X = x;
-  for(i = 0; arr[i] != '\0'; ++i)
-  {
-  if(arr[i] == '\n')
-  {
-  y+=16;
-  x=START_X-8;
-  }
-  if(arr[i] == '{')
-  {
-  delay(1000);
-  sprite_clean(clean);
-  LETTER_COUNT = clean;
-  }
-  set_sprite_tile((i+cushion), (arr[i]-65));
-  move_sprite((i+cushion), x, y);
-  ++LETTER_COUNT;
-  x+=8;
-  }
-  }*/
 
 void bkg_clean(void)
 {
