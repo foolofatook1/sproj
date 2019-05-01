@@ -9,3 +9,4 @@
 #include "assets/bkg_palette.h"
 #include "assets/level_assets/level_assets.h"
 #include "level_3/level_3.h"
+#include "sound/sound.h"

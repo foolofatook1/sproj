@@ -6,6 +6,7 @@
  */
 
 #include "text.h"
+#include "../sound/sound.h"
 #include <stdio.h>
 #include <stdlib.h>
 
@@ -52,6 +53,7 @@ void print(char *arr, UINT8 x, UINT8 y)
         }
         else
         {
+            text_sound();
             set_sprite_tile((i+cushion), (arr[i]-65));
             move_sprite((i+cushion), x, y);
             ++LETTER_COUNT;

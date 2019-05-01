@@ -12,6 +12,7 @@
 #include <rand.h>
 #include "../level_1/asakawa_battle.h"
 #include "battle.h"
+#include "../sound/sound.h"
 #include "../text/text.h"
 #include "../start_up/start_up.h"
 #include "../level_2/crab_catch.h"
@@ -425,6 +426,7 @@ void hero_fight_anim(void)
         set_sprite_tile(6, (10+(a&0x4)));
         set_sprite_tile(7, (11+(a&0x4)));
     }
+    hit_sound();
 }
 
 void enemy_fight_anim(void)
@@ -453,6 +455,7 @@ void enemy_fight_anim(void)
         set_sprite_tile(2, (2+(a&0x4)));
         set_sprite_tile(3, (3+(a&0x4)));
     }
+    hit_sound();
 }
 
 void clear_screen(void) 
