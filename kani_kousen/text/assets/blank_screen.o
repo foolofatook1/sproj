@@ -1,0 +1,16 @@
+XL
+H 9 areas 2 global symbols
+M lcc139180
+S __initrleblock Ref0000
+A _CODE size 0 flags 0
+A _DATA size 168 flags 0
+S _blank_screen Def0000
+A _OVERLAY size 0 flags 0
+A _ISEG size 0 flags 0
+A _BSEG size 0 flags 0
+A _XSEG size 0 flags 0
+A _GSINIT size D flags 0
+A _GSFINAL size 0 flags 0
+A _HOME size 0 flags 0
+T 00 00 21 00 00 CD 00 00 81 00 81 00 96 00 00
+R 00 00 06 00 00 03 01 00 02 06 00 00

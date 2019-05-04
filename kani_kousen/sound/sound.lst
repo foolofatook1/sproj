@@ -1,0 +1,387 @@
+                              1 ;--------------------------------------------------------
+                              2 ; File Created by SDCC : FreeWare ANSI-C Compiler
+                              3 ; Version 2.3.1 Fri May  3 22:33:58 2019
+                              4 
+                              5 ;--------------------------------------------------------
+                              6 	.module lcc140780
+                              7 	
+                              8 ;--------------------------------------------------------
+                              9 ; Public variables in this module
+                             10 ;--------------------------------------------------------
+                             11 	.globl _q
+                             12 	.globl _freq_a_lo
+                             13 	.globl _freq_a
+                             14 	.globl _text_sound
+                             15 	.globl _hit_sound
+                             16 ;--------------------------------------------------------
+                             17 ; special function registers
+                             18 ;--------------------------------------------------------
+                             19 ;--------------------------------------------------------
+                             20 ; special function bits 
+                             21 ;--------------------------------------------------------
+                             22 ;--------------------------------------------------------
+                             23 ; internal ram data
+                             24 ;--------------------------------------------------------
+                             25 	.area _DATA
+   0000                      26 _freq_a::
+   0000                      27 	.ds 2
+   0002                      28 _freq_a_lo::
+   0002                      29 	.ds 2
+   0004                      30 _q::
+   0004                      31 	.ds 2
+                             32 ;--------------------------------------------------------
+                             33 ; overlayable items in internal ram 
+                             34 ;--------------------------------------------------------
+                             35 	.area _OVERLAY
+                             36 ;--------------------------------------------------------
+                             37 ; indirectly addressable internal ram data
+                             38 ;--------------------------------------------------------
+                             39 	.area _ISEG
+                             40 ;--------------------------------------------------------
+                             41 ; bit data
+                             42 ;--------------------------------------------------------
+                             43 	.area _BSEG
+                             44 ;--------------------------------------------------------
+                             45 ; external ram data
+                             46 ;--------------------------------------------------------
+                             47 	.area _XSEG
+                             48 ;--------------------------------------------------------
+                             49 ; global & static initialisations
+                             50 ;--------------------------------------------------------
+                             51 	.area _GSINIT
+                             52 	.area _GSFINAL
+                             53 	.area _GSINIT
+                             54 ;	sound/sound.c 7
+                             55 ;	genAssign
+                             56 ;	AOP_HL for _freq_a
+   0000 21 00 00             57 	ld	hl,#_freq_a
+   0003 36 D6                58 	ld	(hl),#0xD6
+   0005 23                   59 	inc	hl
+   0006 36 06                60 	ld	(hl),#0x06
+                             61 ;	sound/sound.c 8
+                             62 ;	genAssign
+                             63 ;	AOP_HL for _freq_a_lo
+   0008 21 02 00             64 	ld	hl,#_freq_a_lo
+   000B 36 D9                65 	ld	(hl),#0xD9
+   000D 23                   66 	inc	hl
+   000E 36 01                67 	ld	(hl),#0x01
+                             68 ;--------------------------------------------------------
+                             69 ; Home
+                             70 ;--------------------------------------------------------
+                             71 	.area _HOME
+                             72 	.area _CODE
+                             73 ;--------------------------------------------------------
+                             74 ; code
+                             75 ;--------------------------------------------------------
+                             76 	.area _CODE
+                             77 ;	sound/sound.c 11
+                             78 ;	genLabel
+                             79 ;	genFunction
+                             80 ;	---------------------------------
+                             81 ; Function text_sound
+                             82 ; ---------------------------------
+   0000                      83 ___text_sound_start:
+   0000                      84 _text_sound:
+   0000 E8 FC                85 	lda	sp,-4(sp)
+                             86 ;	sound/sound.c 13
+                             87 ;	genAssign
+                             88 ;	AOP_HL for _q
+   0002 21 04 00             89 	ld	hl,#_q
+   0005 36 00                90 	ld	(hl),#0x00
+   0007 23                   91 	inc	hl
+   0008 36 00                92 	ld	(hl),#0x00
+                             93 ;	sound/sound.c 14
+                             94 ;	genLabel
+   000A                      95 00101$:
+                             96 ;	genCmpLt
+                             97 ;	AOP_HL for _q
+   000A 21 04 00             98 	ld	hl,#_q
+   000D 7E                   99 	ld	a,(hl)
+   000E D6 F4               100 	sub	a,#0xF4
+   0010 23                  101 	inc	hl
+   0011 7E                  102 	ld	a,(hl)
+   0012 DE 01               103 	sbc	a,#0x01
+   0014 D2 67 00            104 	jp	nc,00103$
+                            105 ;	sound/sound.c 16
+                            106 ;	genAssign
+   0017 01 24 FF            107 	ld	bc,#0xFF24
+                            108 ;	genAssign (pointer)
+   001A 3E FF               109 	ld	a,#0xFF
+   001C 02                  110 	ld	(bc),a
+                            111 ;	sound/sound.c 17
+                            112 ;	genAssign
+   001D 01 25 FF            113 	ld	bc,#0xFF25
+                            114 ;	genAssign (pointer)
+   0020 3E FF               115 	ld	a,#0xFF
+   0022 02                  116 	ld	(bc),a
+                            117 ;	sound/sound.c 18
+                            118 ;	genAssign
+   0023 01 26 FF            119 	ld	bc,#0xFF26
+                            120 ;	genAssign (pointer)
+   0026 3E 80               121 	ld	a,#0x80
+   0028 02                  122 	ld	(bc),a
+                            123 ;	sound/sound.c 20
+                            124 ;	genAssign
+   0029 01 10 FF            125 	ld	bc,#0xFF10
+                            126 ;	genAssign (pointer)
+   002C 3E 00               127 	ld	a,#0x00
+   002E 02                  128 	ld	(bc),a
+                            129 ;	sound/sound.c 21
+                            130 ;	genAssign
+   002F 01 11 FF            131 	ld	bc,#0xFF11
+                            132 ;	genAssign (pointer)
+   0032 3E 30               133 	ld	a,#0x30
+   0034 02                  134 	ld	(bc),a
+                            135 ;	sound/sound.c 22
+                            136 ;	genAssign
+   0035 01 12 FF            137 	ld	bc,#0xFF12
+                            138 ;	genAssign (pointer)
+   0038 3E F0               139 	ld	a,#0xF0
+   003A 02                  140 	ld	(bc),a
+                            141 ;	sound/sound.c 23
+                            142 ;	genAssign
+   003B 01 13 FF            143 	ld	bc,#0xFF13
+                            144 ;	genCast
+                            145 ;	AOP_HL for _freq_a
+   003E 21 00 00            146 	ld	hl,#_freq_a
+   0041 7E                  147 	ld	a,(hl)
+                            148 ;	genAssign (pointer)
+   0042 02                  149 	ld	(bc),a
+                            150 ;	sound/sound.c 24
+                            151 ;	genAssign
+   0043 01 14 FF            152 	ld	bc,#0xFF14
+                            153 ;	genRightShift
+                            154 ;	AOP_HL for _freq_a
+                            155 ;	AOP_STK for _text_sound_sloc0_1_0
+   0046 23                  156 	inc	hl
+   0047 7E                  157 	ld	a,(hl)
+   0048 F8 02               158 	lda	hl,2(sp)
+   004A 22                  159 	ld	(hl+),a
+   004B 36 00               160 	ld	(hl),#0x00
+                            161 ;	genOr
+                            162 ;	AOP_STK for _text_sound_sloc0_1_0
+                            163 ;	AOP_STK for _text_sound_sloc1_1_0
+   004D 2B                  164 	dec	hl
+   004E 7E                  165 	ld	a,(hl)
+   004F F6 80               166 	or	a,#0x80
+   0051 2B                  167 	dec	hl
+   0052 2B                  168 	dec	hl
+   0053 77                  169 	ld	(hl),a
+   0054 F8 03               170 	lda	hl,3(sp)
+   0056 7E                  171 	ld	a,(hl)
+   0057 2B                  172 	dec	hl
+   0058 2B                  173 	dec	hl
+                            174 ;	genCast
+                            175 ;	AOP_STK for _text_sound_sloc1_1_0
+   0059 32                  176 	ld      (hl-),a
+   005A 7E                  177 	ld	a,(hl)
+                            178 ;	genAssign (pointer)
+   005B 02                  179 	ld	(bc),a
+                            180 ;	sound/sound.c 25
+                            181 ;	genPlus
+                            182 ;	AOP_HL for _q
+                            183 ;	genPlusIncr
+   005C 21 04 00            184 	ld	hl,#_q
+   005F 34                  185 	inc	(hl)
+   0060 20 02               186 	jr	nz,00108$
+   0062 23                  187 	inc	hl
+   0063 34                  188 	inc	(hl)
+   0064                     189 00108$:
+                            190 ;	genGoto
+   0064 C3 0A 00            191 	jp	00101$
+                            192 ;	genLabel
+   0067                     193 00103$:
+                            194 ;	sound/sound.c 28
+                            195 ;	genAssign
+   0067 01 12 FF            196 	ld	bc,#0xFF12
+                            197 ;	genAssign (pointer)
+   006A 3E 00               198 	ld	a,#0x00
+   006C 02                  199 	ld	(bc),a
+                            200 ;	sound/sound.c 29
+                            201 ;	genAssign
+   006D 01 14 FF            202 	ld	bc,#0xFF14
+                            203 ;	genAssign (pointer)
+   0070 3E 80               204 	ld	a,#0x80
+   0072 02                  205 	ld	(bc),a
+                            206 ;	genLabel
+   0073                     207 00104$:
+                            208 ;	genEndFunction
+   0073 E8 04               209 	lda	sp,4(sp)
+   0075 C9                  210 	ret
+   0076                     211 ___text_sound_end:
+                            212 ;	sound/sound.c 32
+                            213 ;	genLabel
+                            214 ;	genFunction
+                            215 ;	---------------------------------
+                            216 ; Function hit_sound
+                            217 ; ---------------------------------
+   0076                     218 ___hit_sound_start:
+   0076                     219 _hit_sound:
+   0076 E8 FB               220 	lda	sp,-5(sp)
+                            221 ;	sound/sound.c 34
+                            222 ;	genAssign
+                            223 ;	AOP_HL for _q
+   0078 21 04 00            224 	ld	hl,#_q
+   007B 36 00               225 	ld	(hl),#0x00
+   007D 23                  226 	inc	hl
+   007E 36 00               227 	ld	(hl),#0x00
+                            228 ;	sound/sound.c 35
+                            229 ;	genLabel
+   0080                     230 00101$:
+                            231 ;	genCmpLt
+                            232 ;	AOP_HL for _q
+   0080 21 04 00            233 	ld	hl,#_q
+   0083 7E                  234 	ld	a,(hl)
+   0084 D6 64               235 	sub	a,#0x64
+   0086 23                  236 	inc	hl
+   0087 7E                  237 	ld	a,(hl)
+   0088 DE 00               238 	sbc	a,#0x00
+   008A D2 E9 00            239 	jp	nc,00103$
+                            240 ;	sound/sound.c 37
+                            241 ;	genAssign
+   008D 01 24 FF            242 	ld	bc,#0xFF24
+                            243 ;	genAssign (pointer)
+   0090 3E FF               244 	ld	a,#0xFF
+   0092 02                  245 	ld	(bc),a
+                            246 ;	sound/sound.c 38
+                            247 ;	genAssign
+   0093 01 25 FF            248 	ld	bc,#0xFF25
+                            249 ;	genAssign (pointer)
+   0096 3E FF               250 	ld	a,#0xFF
+   0098 02                  251 	ld	(bc),a
+                            252 ;	sound/sound.c 39
+                            253 ;	genAssign
+   0099 01 26 FF            254 	ld	bc,#0xFF26
+                            255 ;	genAssign (pointer)
+   009C 3E 80               256 	ld	a,#0x80
+   009E 02                  257 	ld	(bc),a
+                            258 ;	sound/sound.c 41
+                            259 ;	genAssign
+   009F 01 10 FF            260 	ld	bc,#0xFF10
+                            261 ;	genAssign (pointer)
+   00A2 3E 7F               262 	ld	a,#0x7F
+   00A4 02                  263 	ld	(bc),a
+                            264 ;	sound/sound.c 42
+                            265 ;	genAssign
+   00A5 01 11 FF            266 	ld	bc,#0xFF11
+                            267 ;	genAssign (pointer)
+   00A8 3E 1D               268 	ld	a,#0x1D
+   00AA 02                  269 	ld	(bc),a
+                            270 ;	sound/sound.c 43
+                            271 ;	genAssign
+   00AB 01 12 FF            272 	ld	bc,#0xFF12
+                            273 ;	genCast
+                            274 ;	AOP_HL for _freq_a_lo
+   00AE 21 02 00            275 	ld	hl,#_freq_a_lo
+   00B1 7E                  276 	ld	a,(hl)
+                            277 ;	genAssign (pointer)
+   00B2 02                  278 	ld	(bc),a
+                            279 ;	sound/sound.c 44
+                            280 ;	genAssign
+   00B3 01 13 FF            281 	ld	bc,#0xFF13
+                            282 ;	genAssign (pointer)
+   00B6 3E F0               283 	ld	a,#0xF0
+   00B8 02                  284 	ld	(bc),a
+                            285 ;	sound/sound.c 45
+                            286 ;	genAssign
+   00B9 01 14 FF            287 	ld	bc,#0xFF14
+                            288 ;	genRightShift
+                            289 ;	AOP_HL for _freq_a_lo
+                            290 ;	AOP_STK for _hit_sound_sloc0_1_0
+   00BC 7E                  291 	ld	a,(hl)
+   00BD 3C                  292 	inc	a
+   00BE 18 04               293 	jr	00109$
+   00C0                     294 00108$:
+   00C0 F8 04               295 	lda	hl,4(sp)
+   00C2 CB 3E               296 	srl	(hl)
+   00C4                     297 00109$:
+   00C4 3D                  298 	dec	a
+   00C5 20 F9               299 	jr	nz,00108$
+                            300 ;	genCast
+                            301 ;	AOP_STK for _hit_sound_sloc0_1_0
+                            302 ;	AOP_STK for _hit_sound_sloc1_1_0
+   00C7 F8 04               303 	lda	hl,4(sp)
+   00C9 7E                  304 	ld	a,(hl)
+   00CA 2B                  305 	dec	hl
+   00CB 2B                  306 	dec	hl
+   00CC 22                  307 	ld	(hl+),a
+   00CD 36 00               308 	ld	(hl),#0x00
+                            309 ;	genOr
+                            310 ;	AOP_STK for _hit_sound_sloc1_1_0
+                            311 ;	AOP_STK for _hit_sound_sloc2_1_0
+   00CF 2B                  312 	dec	hl
+   00D0 7E                  313 	ld	a,(hl)
+   00D1 F6 80               314 	or	a,#0x80
+   00D3 2B                  315 	dec	hl
+   00D4 2B                  316 	dec	hl
+   00D5 77                  317 	ld	(hl),a
+   00D6 F8 03               318 	lda	hl,3(sp)
+   00D8 7E                  319 	ld	a,(hl)
+   00D9 2B                  320 	dec	hl
+   00DA 2B                  321 	dec	hl
+                            322 ;	genCast
+                            323 ;	AOP_STK for _hit_sound_sloc2_1_0
+   00DB 32                  324 	ld      (hl-),a
+   00DC 7E                  325 	ld	a,(hl)
+                            326 ;	genAssign (pointer)
+   00DD 02                  327 	ld	(bc),a
+                            328 ;	sound/sound.c 46
+                            329 ;	genPlus
+                            330 ;	AOP_HL for _q
+                            331 ;	genPlusIncr
+   00DE 21 04 00            332 	ld	hl,#_q
+   00E1 34                  333 	inc	(hl)
+   00E2 20 02               334 	jr	nz,00110$
+   00E4 23                  335 	inc	hl
+   00E5 34                  336 	inc	(hl)
+   00E6                     337 00110$:
+                            338 ;	genGoto
+   00E6 C3 80 00            339 	jp	00101$
+                            340 ;	genLabel
+   00E9                     341 00103$:
+                            342 ;	sound/sound.c 49
+                            343 ;	genAssign
+   00E9 01 12 FF            344 	ld	bc,#0xFF12
+                            345 ;	genAssign (pointer)
+   00EC 3E 00               346 	ld	a,#0x00
+   00EE 02                  347 	ld	(bc),a
+                            348 ;	sound/sound.c 50
+                            349 ;	genAssign
+   00EF 01 14 FF            350 	ld	bc,#0xFF14
+                            351 ;	genAssign (pointer)
+   00F2 3E 80               352 	ld	a,#0x80
+   00F4 02                  353 	ld	(bc),a
+                            354 ;	genLabel
+   00F5                     355 00104$:
+                            356 ;	genEndFunction
+   00F5 E8 05               357 	lda	sp,5(sp)
+   00F7 C9                  358 	ret
+   00F8                     359 ___hit_sound_end:
+                            360 	.area _CODE
+ASxxxx Assembler V01.75  (GameBoy Z80-like CPU), page 1.
+
+Symbol Table
+
+  0 ___hit_sound_end                   00F8 R
+  0 ___hit_sound_start                 0076 R
+  0 ___text_sound_end                  0076 R
+  0 ___text_sound_start                0000 R
+  1 _freq_a                            0000 GR
+  1 _freq_a_lo                         0002 GR
+  0 _hit_sound                         0076 GR
+  1 _q                                 0004 GR
+  0 _text_sound                        0000 GR
+
+ASxxxx Assembler V01.75  (GameBoy Z80-like CPU), page 2.
+
+Area Table
+
+   0 _CODE                              size   F8   flags 0
+   1 _DATA                              size    6   flags 0
+   2 _OVERLAY                           size    0   flags 0
+   3 _ISEG                              size    0   flags 0
+   4 _BSEG                              size    0   flags 0
+   5 _XSEG                              size    0   flags 0
+   6 _GSINIT                            size   10   flags 0
+   7 _GSFINAL                           size    0   flags 0
+   8 _HOME                              size    0   flags 0

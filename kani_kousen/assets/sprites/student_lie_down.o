@@ -1,0 +1,22 @@
+XL
+H 9 areas 2 global symbols
+M lcc140540
+S __initrleblock Ref0000
+A _CODE size 0 flags 0
+A _DATA size 40 flags 0
+S _student_lie_down Def0000
+A _OVERLAY size 0 flags 0
+A _ISEG size 0 flags 0
+A _BSEG size 0 flags 0
+A _XSEG size 0 flags 0
+A _GSINIT size 37 flags 0
+A _GSFINAL size 0 flags 0
+A _HOME size 0 flags 0
+T 00 00 21 00 00 CD 00 00 F4 00 14 48 40 CD 80 FE
+R 00 00 06 00 00 03 01 00 02 06 00 00
+T 0E 00 A1 FE A1 FE E1 FE F1 FE F1 FE F9 FC F9 78
+R 00 00 06 00
+T 1C 00 78 F6 00 16 01 01 93 7F 13 FF 13 FF 13 FF
+R 00 00 06 00
+T 2A 00 7B 87 7A 86 1A E6 12 FE 12 FE 12 FE 00
+R 00 00 06 00

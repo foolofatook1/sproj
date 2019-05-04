@@ -3,12 +3,12 @@
                               3 ; Version 2.3.1 Fri May  3 22:33:57 2019
                               4 
                               5 ;--------------------------------------------------------
-                              6 	.module lcc140220
+                              6 	.module lcc140460
                               7 	
                               8 ;--------------------------------------------------------
                               9 ; Public variables in this module
                              10 ;--------------------------------------------------------
-                             11 	.globl _deck
+                             11 	.globl _bed
                              12 ;--------------------------------------------------------
                              13 ; special function registers
                              14 ;--------------------------------------------------------
@@ -19,8 +19,8 @@
                              19 ; internal ram data
                              20 ;--------------------------------------------------------
                              21 	.area _DATA
-   0000                      22 _deck::
-   0000                      23 	.ds 576
+   0000                      22 _bed::
+   0000                      23 	.ds 256
                              24 ;--------------------------------------------------------
                              25 ; overlayable items in internal ram 
                              26 ;--------------------------------------------------------
@@ -43,50 +43,56 @@
                              43 	.area _GSINIT
                              44 	.area _GSFINAL
                              45 	.area _GSINIT
-                             46 ;	assets/bkgs/deck.c 25
-                             47 ;	assets/bkgs/deck.c 86
+                             46 ;	assets/sprites/bed.c 26
+                             47 ;	assets/sprites/bed.c 61
                              48 ;	genArrayInit
                              49 ; _saveRegsForCall: sendSetSize: 0 deInUse: 0 bcInUse: 0 deSending: 0
-   0000 21 00 00             50 	ld	hl,#_deck
+   0000 21 00 00             50 	ld	hl,#_bed
    0003 CD 00 00             51 	call	__initrleblock
-   0006 81 00                52 	.db	-127,0x00
-   0008 81 00                53 	.db	-127,0x00
-   000A 81 00                54 	.db	-127,0x00
-   000C 03                   55 	.db	3
-   000D 00 00 00             56 	.db	0x00, 0x00, 0x00
-   0010 C0 02                57 	.db	-64,0x02
-   0012 A4 01                58 	.db	-92,0x01
-   0014 03                   59 	.db	3
-   0015 02 02 02             60 	.db	0x02, 0x02, 0x02
-   0018 DF 01                61 	.db	-33,0x01
-   001A 00                   62 	.db	0
-                             63 ;--------------------------------------------------------
-                             64 ; Home
+   0006 F6 00                52 	.db	-10,0x00
+   0008 16                   53 	.db	22
+   0009 F8 00 F8 00 80 FF    54 	.db	0xF8, 0x00, 0xF8, 0x00, 0x80, 0xFF, 0x80, 0xFF
+        80 FF
+   0011 80 FF 80 FF 80 FF    55 	.db	0x80, 0xFF, 0x80, 0xFF, 0x80, 0xFF, 0x80, 0xFF
+        80 FF
+   0019 FF 80 FF 80 FF FF    56 	.db	0xFF, 0x80, 0xFF, 0x80, 0xFF, 0xFF
+   001F F2 00                57 	.db	-14,0x00
+   0021 12                   58 	.db	18
+   0022 01 FF 01 FF 01 FF    59 	.db	0x01, 0xFF, 0x01, 0xFF, 0x01, 0xFF, 0x01, 0xFF
+        01 FF
+   002A 01 FF 01 FF FF 01    60 	.db	0x01, 0xFF, 0x01, 0xFF, 0xFF, 0x01, 0xFF, 0x01
+        FF 01
+   0032 FF FF                61 	.db	0xFF, 0xFF
+   0034 81 00                62 	.db	-127,0x00
+   0036 BF 00                63 	.db	-65,0x00
+   0038 00                   64 	.db	0
                              65 ;--------------------------------------------------------
-                             66 	.area _HOME
-                             67 	.area _CODE
-                             68 ;--------------------------------------------------------
-                             69 ; code
+                             66 ; Home
+                             67 ;--------------------------------------------------------
+                             68 	.area _HOME
+                             69 	.area _CODE
                              70 ;--------------------------------------------------------
-                             71 	.area _CODE
-                             72 	.area _CODE
+                             71 ; code
+                             72 ;--------------------------------------------------------
+                             73 	.area _CODE
+                             74 	.area _CODE
 ASxxxx Assembler V01.75  (GameBoy Z80-like CPU), page 1.
 
 Symbol Table
 
     __initrleblock                     **** GX
-  1 _deck                              0000 GR
+  1 _bed                               0000 GR
 
 ASxxxx Assembler V01.75  (GameBoy Z80-like CPU), page 2.
 
 Area Table
 
    0 _CODE                              size    0   flags 0
-   1 _DATA                              size  240   flags 0
+   1 _DATA                              size  100   flags 0
    2 _OVERLAY                           size    0   flags 0
    3 _ISEG                              size    0   flags 0
    4 _BSEG                              size    0   flags 0
    5 _XSEG                              size    0   flags 0
-   6 _GSINIT                            size   1B   flags 0
+   6 _GSINIT                            size   39   flags 0
    7 _GSFINAL                           size    0   flags 0
    8 _HOME                              size    0   flags 0

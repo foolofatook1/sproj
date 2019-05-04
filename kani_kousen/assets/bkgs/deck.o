@@ -1,0 +1,18 @@
+XL
+H 9 areas 2 global symbols
+M lcc140220
+S __initrleblock Ref0000
+A _CODE size 0 flags 0
+A _DATA size 240 flags 0
+S _deck Def0000
+A _OVERLAY size 0 flags 0
+A _ISEG size 0 flags 0
+A _BSEG size 0 flags 0
+A _XSEG size 0 flags 0
+A _GSINIT size 1B flags 0
+A _GSFINAL size 0 flags 0
+A _HOME size 0 flags 0
+T 00 00 21 00 00 CD 00 00 81 00 81 00 81 00 03 00
+R 00 00 06 00 00 03 01 00 02 06 00 00
+T 0E 00 00 00 C0 02 A4 01 03 02 02 02 DF 01 00
+R 00 00 06 00

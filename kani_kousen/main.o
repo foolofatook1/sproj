@@ -1,0 +1,31 @@
+XL
+H 9 areas 9 global symbols
+M lcc138860
+S _LEVEL_2 Ref0000
+S _LEVEL_3 Ref0000
+S _START Ref0000
+S _opening Ref0000
+S _level_1_ctrl Ref0000
+S _level_2_ctrl Ref0000
+S _level_3_ctrl Ref0000
+S _option Ref0000
+A _CODE size 3A flags 0
+S _main Def0000
+A _DATA size 0 flags 0
+A _OVERLAY size 0 flags 0
+A _ISEG size 0 flags 0
+A _BSEG size 0 flags 0
+A _XSEG size 0 flags 0
+A _GSINIT size 0 flags 0
+A _GSFINAL size 0 flags 0
+A _HOME size 0 flags 0
+T 00 00 CD 00 00 21 00 00 7E 21 00 00 BE 20 02 18
+R 00 00 00 00 02 03 03 00 02 06 02 00 02 0A 07 00
+T 0E 00 03 C3 15 00 CD 00 00 21 00 00 7E 21
+R 00 00 00 00 00 04 00 00 02 07 04 00 02 0A 00 00
+T 1A 00 00 00 BE 20 02 18 03 C3 27 00 CD 00 00 21
+R 00 00 00 00 02 02 07 00 00 0A 00 00 02 0D 05 00
+T 28 00 00 00 7E 21 00 00 BE 20 02 18 03 C3 39 00
+R 00 00 00 00 02 02 01 00 02 06 07 00 00 0E 00 00
+T 36 00 CD 00 00 C9
+R 00 00 00 00 02 03 06 00

@@ -1,0 +1,385 @@
+                              1 ;--------------------------------------------------------
+                              2 ; File Created by SDCC : FreeWare ANSI-C Compiler
+                              3 ; Version 2.3.1 Fri May  3 22:33:57 2019
+                              4 
+                              5 ;--------------------------------------------------------
+                              6 	.module lcc139700
+                              7 	
+                              8 ;--------------------------------------------------------
+                              9 ; Public variables in this module
+                             10 ;--------------------------------------------------------
+                             11 	.globl _start_hp
+                             12 	.globl _state
+                             13 	.globl _asakawa_battle_ctrl
+                             14 ;--------------------------------------------------------
+                             15 ; special function registers
+                             16 ;--------------------------------------------------------
+                             17 ;--------------------------------------------------------
+                             18 ; special function bits 
+                             19 ;--------------------------------------------------------
+                             20 ;--------------------------------------------------------
+                             21 ; internal ram data
+                             22 ;--------------------------------------------------------
+                             23 	.area _DATA
+   0000                      24 _state::
+   0000                      25 	.ds 1
+   0001                      26 _start_hp::
+   0001                      27 	.ds 1
+                             28 ;--------------------------------------------------------
+                             29 ; overlayable items in internal ram 
+                             30 ;--------------------------------------------------------
+                             31 	.area _OVERLAY
+                             32 ;--------------------------------------------------------
+                             33 ; indirectly addressable internal ram data
+                             34 ;--------------------------------------------------------
+                             35 	.area _ISEG
+                             36 ;--------------------------------------------------------
+                             37 ; bit data
+                             38 ;--------------------------------------------------------
+                             39 	.area _BSEG
+                             40 ;--------------------------------------------------------
+                             41 ; external ram data
+                             42 ;--------------------------------------------------------
+                             43 	.area _XSEG
+                             44 ;--------------------------------------------------------
+                             45 ; global & static initialisations
+                             46 ;--------------------------------------------------------
+                             47 	.area _GSINIT
+                             48 	.area _GSFINAL
+                             49 	.area _GSINIT
+                             50 ;	level_1/asakawa_battle.c 15
+                             51 ;	genAssign
+                             52 ;	AOP_HL for _BATTLE_CHOICE
+                             53 ;	AOP_HL for _state
+   0000 21 00 00             54 	ld	hl,#_BATTLE_CHOICE
+   0003 7E                   55 	ld	a,(hl)
+   0004 21 00 00             56 	ld	hl,#_state
+   0007 77                   57 	ld	(hl),a
+                             58 ;	level_1/asakawa_battle.c 18
+                             59 ;	genAssign
+                             60 ;	AOP_HL for _start_hp
+   0008 21 01 00             61 	ld	hl,#_start_hp
+   000B 36 0A                62 	ld	(hl),#0x0A
+                             63 ;--------------------------------------------------------
+                             64 ; Home
+                             65 ;--------------------------------------------------------
+                             66 	.area _HOME
+                             67 	.area _CODE
+                             68 ;--------------------------------------------------------
+                             69 ; code
+                             70 ;--------------------------------------------------------
+                             71 	.area _CODE
+                             72 ;	level_1/asakawa_battle.c 26
+                             73 ;	genLabel
+                             74 ;	genFunction
+                             75 ;	---------------------------------
+                             76 ; Function asakawa_battle_ctrl
+                             77 ; ---------------------------------
+   0000                      78 ___asakawa_battle_ctrl_start:
+   0000                      79 _asakawa_battle_ctrl:
+   0000 E8 FD                80 	lda	sp,-3(sp)
+                             81 ;	level_1/asakawa_battle.c 28
+                             82 ;	genAssign
+                             83 ;	AOP_HL for _BATTLE_CHOICE
+                             84 ;	AOP_HL for _state
+   0002 21 00 00             85 	ld	hl,#_BATTLE_CHOICE
+   0005 7E                   86 	ld	a,(hl)
+   0006 21 00 00             87 	ld	hl,#_state
+   0009 77                   88 	ld	(hl),a
+                             89 ;	level_1/asakawa_battle.c 29
+                             90 ;	genAssign
+                             91 ;	AOP_HL for _choice
+   000A 21 00 00             92 	ld	hl,#_choice
+   000D 36 00                93 	ld	(hl),#0x00
+                             94 ;	level_1/asakawa_battle.c 30
+                             95 ;	genCall
+                             96 ; _saveRegsForCall: sendSetSize: 0 deInUse: 0 bcInUse: 0 deSending: 0
+   000F CD 00 00             97 	call	_battle_menu
+                             98 ;	level_1/asakawa_battle.c 31
+                             99 ;	genLabel
+   0012                     100 00113$:
+                            101 ;	genCmpEq
+                            102 ;	AOP_HL for _state
+                            103 ;	AOP_HL for _DEAD
+                            104 ; genCmpEq: left 1, right 1, result 0
+   0012 21 00 00            105 	ld	hl,#_DEAD
+   0015 7E                  106 	ld	a,(hl)
+   0016 21 00 00            107 	ld	hl,#_state
+   0019 BE                  108 	cp	(hl)
+   001A 20 02               109 	jr	nz,00130$
+   001C 18 03               110 	jr	00131$
+   001E                     111 00130$:
+   001E C3 2E 00            112 	jp	00114$
+   0021                     113 00131$:
+                            114 ;	genCmpEq
+                            115 ;	AOP_HL for _option
+                            116 ;	AOP_HL for _GAME_OVER
+                            117 ; genCmpEq: left 1, right 1, result 0
+   0021 21 00 00            118 	ld	hl,#_GAME_OVER
+   0024 7E                  119 	ld	a,(hl)
+   0025 21 00 00            120 	ld	hl,#_option
+   0028 BE                  121 	cp	(hl)
+   0029 20 03               122 	jr	nz,00132$
+   002B C3 E0 00            123 	jp	00115$
+   002E                     124 00132$:
+                            125 ;	genLabel
+   002E                     126 00114$:
+                            127 ;	level_1/asakawa_battle.c 33
+                            128 ;	genCall
+                            129 ; _saveRegsForCall: sendSetSize: 0 deInUse: 0 bcInUse: 0 deSending: 0
+   002E CD 00 00            130 	call	_wait_vbl_done
+                            131 ;	level_1/asakawa_battle.c 34
+                            132 ;	genCall
+                            133 ; _saveRegsForCall: sendSetSize: 0 deInUse: 0 bcInUse: 0 deSending: 0
+   0031 CD 00 00            134 	call	_battle_toggle_ctrl
+                            135 ;	level_1/asakawa_battle.c 35
+                            136 ;	genLabel
+   0034                     137 00106$:
+                            138 ;	genCmpEq
+                            139 ;	AOP_HL for _state
+                            140 ;	AOP_HL for _FIGHTING
+                            141 ; genCmpEq: left 1, right 1, result 1
+   0034 21 00 00            142 	ld	hl,#_FIGHTING
+   0037 7E                  143 	ld	a,(hl)
+   0038 21 00 00            144 	ld	hl,#_state
+   003B BE                  145 	cp	(hl)
+   003C 20 04               146 	jr	nz,00133$
+   003E 3E 01               147 	ld	a,#0x01
+   0040 18 01               148 	jr	00134$
+   0042                     149 00133$:
+   0042 AF                  150 	xor	a,a
+   0043                     151 00134$:
+                            152 ;	genIfx
+   0043 B7                  153 	or	a,a
+   0044 CA C9 00            154 	jp	z,00108$
+                            155 ;	level_1/asakawa_battle.c 37
+                            156 ;	genIpush
+                            157 ; _saveRegsForCall: sendSetSize: 0 deInUse: 0 bcInUse: 0 deSending: 0
+                            158 ;	AOP_HL for _arrow_y
+   0047 21 00 00            159 	ld	hl,#_arrow_y
+   004A 7E                  160 	ld	a,(hl)
+   004B F5                  161 	push	af
+   004C 33                  162 	inc	sp
+                            163 ;	genCall
+   004D CD 00 00            164 	call	_choice_handler
+   0050 E8 01               165 	lda	sp,1(sp)
+                            166 ;	level_1/asakawa_battle.c 38
+                            167 ;	genIpush
+                            168 ; _saveRegsForCall: sendSetSize: 0 deInUse: 0 bcInUse: 0 deSending: 0
+   0052 21 00 00            169 	ld	hl,#_asakawa_hp
+   0055 E5                  170 	push	hl
+                            171 ;	genIpush
+   0056 21 00 00            172 	ld	hl,#_hero_hp
+   0059 E5                  173 	push	hl
+                            174 ;	genCall
+   005A CD 00 00            175 	call	_fight
+   005D E8 04               176 	lda	sp,4(sp)
+                            177 ;	level_1/asakawa_battle.c 39
+                            178 ;	genIpush
+                            179 ; _saveRegsForCall: sendSetSize: 0 deInUse: 0 bcInUse: 0 deSending: 0
+   005F 21 90 01            180 	ld	hl,#0x0190
+   0062 E5                  181 	push	hl
+                            182 ;	genCall
+   0063 CD 00 00            183 	call	_delay
+   0066 E8 02               184 	lda	sp,2(sp)
+                            185 ;	level_1/asakawa_battle.c 41
+                            186 ;	genCmpEq
+                            187 ;	AOP_HL for _state
+                            188 ;	AOP_HL for _BATTLE_WIN
+                            189 ; genCmpEq: left 1, right 1, result 1
+   0068 21 00 00            190 	ld	hl,#_BATTLE_WIN
+   006B 7E                  191 	ld	a,(hl)
+   006C 21 00 00            192 	ld	hl,#_state
+   006F BE                  193 	cp	(hl)
+   0070 20 04               194 	jr	nz,00135$
+   0072 3E 01               195 	ld	a,#0x01
+   0074 18 01               196 	jr	00136$
+   0076                     197 00135$:
+   0076 AF                  198 	xor	a,a
+   0077                     199 00136$:
+                            200 ;	genIfx
+   0077 B7                  201 	or	a,a
+   0078 CA 83 00            202 	jp	z,00102$
+                            203 ;	genIfx
+                            204 ;	AOP_HL for _REVOLUTION_2
+   007B AF                  205 	xor	a,a
+   007C 21 00 00            206 	ld	hl,#_REVOLUTION_2
+   007F B6                  207 	or	a,(hl)
+   0080 C2 C9 00            208 	jp	nz,00108$
+                            209 ;	level_1/asakawa_battle.c 42
+                            210 ;	genLabel
+   0083                     211 00102$:
+                            212 ;	level_1/asakawa_battle.c 43
+                            213 ;	genCmpEq
+                            214 ;	AOP_HL for _state
+                            215 ;	AOP_HL for _DEAD
+                            216 ; genCmpEq: left 1, right 1, result 1
+   0083 21 00 00            217 	ld	hl,#_DEAD
+   0086 7E                  218 	ld	a,(hl)
+   0087 21 00 00            219 	ld	hl,#_state
+   008A BE                  220 	cp	(hl)
+   008B 20 04               221 	jr	nz,00137$
+   008D 3E 01               222 	ld	a,#0x01
+   008F 18 01               223 	jr	00138$
+   0091                     224 00137$:
+   0091 AF                  225 	xor	a,a
+   0092                     226 00138$:
+                            227 ;	genIfx
+   0092 B7                  228 	or	a,a
+   0093 C2 34 00            229 	jp	nz,00106$
+                            230 ;	level_1/asakawa_battle.c 45
+                            231 ;	genCall
+                            232 ; _saveRegsForCall: sendSetSize: 0 deInUse: 0 bcInUse: 0 deSending: 0
+   0096 CD 00 00            233 	call	_display_off
+                            234 ;	level_1/asakawa_battle.c 46
+                            235 ;	genCall
+                            236 ; _saveRegsForCall: sendSetSize: 0 deInUse: 0 bcInUse: 0 deSending: 0
+   0099 CD 00 00            237 	call	_battle_menu
+                            238 ;	level_1/asakawa_battle.c 47
+                            239 ;	genAssign
+                            240 ;	(operands are equal 3)
+                            241 ;	genAssign
+                            242 ;	AOP_HL for _BATTLE_CHOICE
+                            243 ;	AOP_HL for _state
+   009C 21 00 00            244 	ld	hl,#_BATTLE_CHOICE
+   009F 7E                  245 	ld	a,(hl)
+   00A0 21 00 00            246 	ld	hl,#_state
+   00A3 77                  247 	ld	(hl),a
+                            248 ;	level_1/asakawa_battle.c 48
+                            249 ;	genAssign
+                            250 ;	AOP_HL for _choice
+   00A4 21 00 00            251 	ld	hl,#_choice
+   00A7 36 00               252 	ld	(hl),#0x00
+                            253 ;	level_1/asakawa_battle.c 49
+                            254 ;	genAssign
+   00A9 06 40               255 	ld	b,#0x40
+   00AB 0E FF               256 	ld	c,#0xFF
+                            257 ;	genAssign
+                            258 ;	AOP_STK for _asakawa_battle_ctrl_sloc0_1_0
+   00AD F8 01               259 	lda	hl,1(sp)
+   00AF 36 40               260 	ld	(hl),#0x40
+   00B1 23                  261 	inc	hl
+   00B2 36 FF               262 	ld	(hl),#0xFF
+                            263 ;	genPointerGet
+                            264 ;	AOP_STK for _asakawa_battle_ctrl_sloc0_1_0
+                            265 ;	AOP_STK for _asakawa_battle_ctrl_sloc1_1_0
+   00B4 2B                  266 	dec	hl
+   00B5 5E                  267 	ld	e,(hl)
+   00B6 23                  268 	inc	hl
+   00B7 56                  269 	ld	d,(hl)
+   00B8 1A                  270 	ld	a,(de)
+   00B9 2B                  271 	dec	hl
+   00BA 2B                  272 	dec	hl
+                            273 ;	genOr
+                            274 ;	AOP_STK for _asakawa_battle_ctrl_sloc1_1_0
+   00BB 77                  275 	ld      (hl),a
+                            276 ; Removed redundent load
+   00BC F6 80               277 	or	a,#0x80
+                            278 ;	genAssign (pointer)
+   00BE 58                  279 	ld	e,b
+   00BF 51                  280 	ld	d,c
+   00C0 12                  281 	ld	(de),a
+                            282 ;	level_1/asakawa_battle.c 50
+                            283 ;	genCall
+                            284 ; _saveRegsForCall: sendSetSize: 0 deInUse: 0 bcInUse: 1 deSending: 0
+   00C1 C5                  285 	push	bc
+   00C2 CD 00 00            286 	call	_battle_menu
+   00C5 C1                  287 	pop	bc
+                            288 ;	genGoto
+   00C6 C3 34 00            289 	jp	00106$
+                            290 ;	genLabel
+   00C9                     291 00108$:
+                            292 ;	level_1/asakawa_battle.c 53
+                            293 ;	genCmpEq
+                            294 ;	AOP_HL for _state
+                            295 ;	AOP_HL for _BATTLE_WIN
+                            296 ; genCmpEq: left 1, right 1, result 0
+   00C9 21 00 00            297 	ld	hl,#_BATTLE_WIN
+   00CC 7E                  298 	ld	a,(hl)
+   00CD 21 00 00            299 	ld	hl,#_state
+   00D0 BE                  300 	cp	(hl)
+   00D1 20 02               301 	jr	nz,00139$
+   00D3 18 03               302 	jr	00140$
+   00D5                     303 00139$:
+   00D5 C3 12 00            304 	jp	00113$
+   00D8                     305 00140$:
+                            306 ;	genIfx
+                            307 ;	AOP_HL for _REVOLUTION_2
+   00D8 AF                  308 	xor	a,a
+   00D9 21 00 00            309 	ld	hl,#_REVOLUTION_2
+   00DC B6                  310 	or	a,(hl)
+   00DD CA 12 00            311 	jp	z,00113$
+                            312 ;	level_1/asakawa_battle.c 54
+                            313 ;	genLabel
+   00E0                     314 00115$:
+                            315 ;	level_1/asakawa_battle.c 57
+                            316 ;	genIfx
+                            317 ;	AOP_HL for _revolt
+   00E0 AF                  318 	xor	a,a
+   00E1 21 00 00            319 	ld	hl,#_revolt
+   00E4 B6                  320 	or	a,(hl)
+   00E5 C2 F8 00            321 	jp	nz,00119$
+                            322 ;	genIfx
+                            323 ;	AOP_HL for _REVOLUTION_2
+   00E8 AF                  324 	xor	a,a
+   00E9 21 00 00            325 	ld	hl,#_REVOLUTION_2
+   00EC B6                  326 	or	a,(hl)
+   00ED C2 F8 00            327 	jp	nz,00119$
+                            328 ;	level_1/asakawa_battle.c 58
+                            329 ;	genAssign
+                            330 ;	AOP_HL for _LEVEL_2
+                            331 ;	AOP_HL for _option
+   00F0 21 00 00            332 	ld	hl,#_LEVEL_2
+   00F3 7E                  333 	ld	a,(hl)
+   00F4 21 00 00            334 	ld	hl,#_option
+   00F7 77                  335 	ld	(hl),a
+                            336 ;	genLabel
+   00F8                     337 00119$:
+                            338 ;	genEndFunction
+   00F8 E8 03               339 	lda	sp,3(sp)
+   00FA C9                  340 	ret
+   00FB                     341 ___asakawa_battle_ctrl_end:
+                            342 	.area _CODE
+ASxxxx Assembler V01.75  (GameBoy Z80-like CPU), page 1.
+
+Symbol Table
+
+    _BATTLE_CHOICE                     **** GX
+    _BATTLE_WIN                        **** GX
+    _DEAD                              **** GX
+    _FIGHTING                          **** GX
+    _GAME_OVER                         **** GX
+    _LEVEL_2                           **** GX
+    _REVOLUTION_2                      **** GX
+  0 ___asakawa_battle_ctrl_end         00FB R
+  0 ___asakawa_battle_ctrl_start       0000 R
+    _arrow_y                           **** GX
+  0 _asakawa_battle_ctrl               0000 GR
+    _asakawa_hp                        **** GX
+    _battle_menu                       **** GX
+    _battle_toggle_ctrl                **** GX
+    _choice                            **** GX
+    _choice_handler                    **** GX
+    _delay                             **** GX
+    _display_off                       **** GX
+    _fight                             **** GX
+    _hero_hp                           **** GX
+    _option                            **** GX
+    _revolt                            **** GX
+  1 _start_hp                          0001 GR
+  1 _state                             0000 GR
+    _wait_vbl_done                     **** GX
+
+ASxxxx Assembler V01.75  (GameBoy Z80-like CPU), page 2.
+
+Area Table
+
+   0 _CODE                              size   FB   flags 0
+   1 _DATA                              size    2   flags 0
+   2 _OVERLAY                           size    0   flags 0
+   3 _ISEG                              size    0   flags 0
+   4 _BSEG                              size    0   flags 0
+   5 _XSEG                              size    0   flags 0
+   6 _GSINIT                            size    D   flags 0
+   7 _GSFINAL                           size    0   flags 0
+   8 _HOME                              size    0   flags 0

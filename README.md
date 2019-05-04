@@ -21,34 +21,5 @@ candidate for a Sci-fi award. Looking into the kind of development tools
 that will come in handy for programming a GameBoy game has also been a part 
 of the research leading up to this point. 
 
-## Installing and Downloading Beta Game ##
-I've just decided that if one *truly* feels compelled to download a copy of this
-game in its current form, I may as well let them. Here's how it's done:
-
-**Step 1: Download the ZIP**
-
-There is a file on this page called 'kani_kousen_dwnld.zip'; go to this page, and click 'View Raw'
-
-**Step 2: Unzip the ZIP**
-
-Depending on your operating system this may work differently, but it should be pretty
-simple to unzip (decompress or extract) the file, which should be in your Downloads folder.
-In linux it's a command like:
-	cd ~/Downloads; unzip *.zip
-
-**Step 3: Read the README.txt File**
-
-**Step 4: Enjoy!**
-
-Regardless of what emulator you choose, read its documentation to figure out how to 
-properly Download it, and play games on it. 
-
-### Quick TODO-List: ###
-* Add something a little bit more interesting to "yes" v. "no" part
-* Improve print() function if there's time, and add the texture with leftover memory.
-* slow down text pace
-
-### To Those Who Play: ###
-If you find your self playing the game, and thinking of any technical 
-improvements that could be made. Please contact me! I'm more than willing
-to consider your ideas, and probably made a mistake anyway. Thanks!:)
+## Playing the Game ##
+The game can be downloaded and played on an emulator or online at [toastergames.org](https://toastergames.org).

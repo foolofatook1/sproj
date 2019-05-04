@@ -1,0 +1,20 @@
+XL
+H 9 areas 2 global symbols
+M lcc139860
+S __initrleblock Ref0000
+A _CODE size 0 flags 0
+A _DATA size 18 flags 0
+S _sprite_palette Def0000
+A _OVERLAY size 0 flags 0
+A _ISEG size 0 flags 0
+A _BSEG size 0 flags 0
+A _XSEG size 0 flags 0
+A _GSINIT size 1D flags 0
+A _GSFINAL size 0 flags 0
+A _HOME size 0 flags 0
+T 00 00 21 00 00 CD 00 00 06 00 00 FF 7F 4A 29 FA
+R 00 00 06 00 00 03 01 00 02 06 00 00
+T 0E 00 00 0C 4A 29 FF 7F 00 00 E0 00 E0 00 00 00
+R 00 00 06 00
+T 1C 00 00
+R 00 00 06 00

@@ -25,7 +25,7 @@ void level_3_ctrl(void)
     LETTER_COUNT = 0;
     print("CHAPTERi^\nREVOLUTION\0", 48, 56);
     DISPLAY_ON;
-    delay(2000);
+    delay(1500);
     DISPLAY_OFF;
     shit_pot_setup();
     shit_pot_sprites();

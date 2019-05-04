@@ -3,12 +3,12 @@
                               3 ; Version 2.3.1 Fri May  3 22:33:57 2019
                               4 
                               5 ;--------------------------------------------------------
-                              6 	.module lcc140220
+                              6 	.module lcc140300
                               7 	
                               8 ;--------------------------------------------------------
                               9 ; Public variables in this module
                              10 ;--------------------------------------------------------
-                             11 	.globl _deck
+                             11 	.globl _miner_front_idle
                              12 ;--------------------------------------------------------
                              13 ; special function registers
                              14 ;--------------------------------------------------------
@@ -19,8 +19,8 @@
                              19 ; internal ram data
                              20 ;--------------------------------------------------------
                              21 	.area _DATA
-   0000                      22 _deck::
-   0000                      23 	.ds 576
+   0000                      22 _miner_front_idle::
+   0000                      23 	.ds 128
                              24 ;--------------------------------------------------------
                              25 ; overlayable items in internal ram 
                              26 ;--------------------------------------------------------
@@ -43,23 +43,31 @@
                              43 	.area _GSINIT
                              44 	.area _GSFINAL
                              45 	.area _GSINIT
-                             46 ;	assets/bkgs/deck.c 25
-                             47 ;	assets/bkgs/deck.c 86
+                             46 ;	assets/sprites/miner_front_idle.c 26
+                             47 ;	assets/sprites/miner_front_idle.c 45
                              48 ;	genArrayInit
                              49 ; _saveRegsForCall: sendSetSize: 0 deInUse: 0 bcInUse: 0 deSending: 0
-   0000 21 00 00             50 	ld	hl,#_deck
+   0000 21 00 00             50 	ld	hl,#_miner_front_idle
    0003 CD 00 00             51 	call	__initrleblock
-   0006 81 00                52 	.db	-127,0x00
-   0008 81 00                53 	.db	-127,0x00
-   000A 81 00                54 	.db	-127,0x00
-   000C 03                   55 	.db	3
-   000D 00 00 00             56 	.db	0x00, 0x00, 0x00
-   0010 C0 02                57 	.db	-64,0x02
-   0012 A4 01                58 	.db	-92,0x01
-   0014 03                   59 	.db	3
-   0015 02 02 02             60 	.db	0x02, 0x02, 0x02
-   0018 DF 01                61 	.db	-33,0x01
-   001A 00                   62 	.db	0
+   0006 40                   52 	.db	64
+   0007 07 07 0F 0F 2F 2F    53 	.db	0x07, 0x07, 0x0F, 0x0F, 0x2F, 0x2F, 0x0F, 0x0F
+        0F 0F
+   000F 0A 0F 00 0F 41 47    54 	.db	0x0A, 0x0F, 0x00, 0x0F, 0x41, 0x47, 0x0A, 0x10
+        0A 10
+   0017 04 10 02 10 00 10    55 	.db	0x04, 0x10, 0x02, 0x10, 0x00, 0x10, 0x0F, 0x3F
+        0F 3F
+   001F 08 30 0C 00 0F 0F    56 	.db	0x08, 0x30, 0x0C, 0x00, 0x0F, 0x0F, 0x1F, 0x1F
+        1F 1F
+   0027 07 07 0F 0F 88 8F    57 	.db	0x07, 0x07, 0x0F, 0x0F, 0x88, 0x8F, 0x02, 0x0F
+        02 0F
+   002F 00 0F 11 17 80 87    58 	.db	0x00, 0x0F, 0x11, 0x17, 0x80, 0x87, 0x0C, 0x10
+        0C 10
+   0037 06 10 00 10 00 10    59 	.db	0x06, 0x10, 0x00, 0x10, 0x00, 0x10, 0x0F, 0x3F
+        0F 3F
+   003F 00 30 0C 00 0F 0F    60 	.db	0x00, 0x30, 0x0C, 0x00, 0x0F, 0x0F, 0x1F, 0x1F
+        1F 1F
+   0047 C0 00                61 	.db	-64,0x00
+   0049 00                   62 	.db	0
                              63 ;--------------------------------------------------------
                              64 ; Home
                              65 ;--------------------------------------------------------
@@ -75,18 +83,18 @@
 Symbol Table
 
     __initrleblock                     **** GX
-  1 _deck                              0000 GR
+  1 _miner_front_idle                  0000 GR
 
 ASxxxx Assembler V01.75  (GameBoy Z80-like CPU), page 2.
 
 Area Table
 
    0 _CODE                              size    0   flags 0
-   1 _DATA                              size  240   flags 0
+   1 _DATA                              size   80   flags 0
    2 _OVERLAY                           size    0   flags 0
    3 _ISEG                              size    0   flags 0
    4 _BSEG                              size    0   flags 0
    5 _XSEG                              size    0   flags 0
-   6 _GSINIT                            size   1B   flags 0
+   6 _GSINIT                            size   4A   flags 0
    7 _GSFINAL                           size    0   flags 0
    8 _HOME                              size    0   flags 0

@@ -89,13 +89,13 @@ void level_2_bkg_start(void)
 
     SHOW_SPRITES;
     SHOW_BKG;
-    delay(2000);
+    delay(1500);
     print("CHAPTERi]\0", 48, 64); 
     print("LOST\0", 48, 80);
     print("ATiSEA\0", 48, 96);
     for(i = 0; i < LETTER_COUNT; ++i)
         set_sprite_prop(i,1);
-    delay(2000);
+    delay(1500);
 }
 
 void shit_pot_setup(void)
