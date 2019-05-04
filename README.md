@@ -22,4 +22,4 @@ that will come in handy for programming a GameBoy game has also been a part
 of the research leading up to this point. 
 
 ## Playing the Game ##
-The game can be downloaded and played on an emulator or online at [toastergames.org](https://toastergames.org).
+The game can be downloaded and played on an emulator or online at [toastergames.org](toastergames.org).
