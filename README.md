@@ -23,3 +23,7 @@ of the research leading up to this point.
 
 ## Playing the Game ##
 The game can be downloaded and played on an emulator or online at [toastergames](http://toastergames.org/).
+
+## Archived Resources ##
+* [Project Website](https://web.archive.org/web/20200809103036/http://toastergames.org/)
+* [Essay](https://digitalcommons.bard.edu/senproj_s2019/102/)
